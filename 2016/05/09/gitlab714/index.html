@@ -94,7 +94,7 @@
 &amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;">
 <meta property="og:image" content="http://c.isme.pub/WelCome/WelCome/2016/05/09/gitlab714/1.jpg">
 <meta property="og:image" content="http://c.isme.pub/WelCome/WelCome/2016/05/09/gitlab714/2.jpg">
-<meta property="og:updated_time" content="2016-11-14T09:26:36.000Z">
+<meta property="og:updated_time" content="2016-11-14T09:29:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab7.14(中文版|英文版)编译安装部署文档（全）">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
@@ -448,12 +448,12 @@ gitlab7&#x76F8;&#x5BF9;&#x4E8E;6&#x754C;&#x9762;&#x53D8;&#x52A8;&#x5F88;&#x5927;
 <p>15&#x3001;&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su - git &amp;&amp; <span class="built_in">cd</span> ~/gitlab</div><div class="line">bundle <span class="built_in">exec</span> rake assets:precompile RAILS_ENV=production</div><div class="line">sudo service gitlab restart</div><div class="line">sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx</div></pre></td></tr></table></figure>
 <p>16&#x3001;&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;</p>
-<p><img src="/WelCome/2016/05/09/gitlab714/1.jpg" alt="img"></p>
+<p><img src="/WelCome/2016/05/09/gitlab714/1.jpg" alt="logo"></p>
 <p>&#x521D;&#x59CB;&#x7BA1;&#x7406;&#x5458;&#x5E10;&#x53F7;&#x548C;&#x5BC6;&#x7801;&#x4E3A;&#xFF1A;</p>
 <pre><code>root
 5iveL!fe
 </code></pre><p>&#x767B;&#x9646;&#x6210;&#x529F;&#x540E;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><img src="/WelCome/2016/05/09/gitlab714/2.jpg" alt="img"></p>
+<p><img src="/WelCome/2016/05/09/gitlab714/2.jpg" alt="logo"></p>
 <p>17&#x3001;&#x4FEE;&#x6539;&#x90AE;&#x4EF6;&#x53D1;&#x9001;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab/</div><div class="line">vim config/environments/production.rb</div><div class="line"> config.action_mailer.delivery_method = :smtp</div><div class="line"></div><div class="line">cp config/initializers/smtp_settings.rb.sample config/initializers/smtp_settings.rb</div><div class="line"></div><div class="line">vim config/initializers/smtp_settings.rb</div><div class="line"><span class="keyword">if</span> Rails.env.production?</div><div class="line"></div><div class="line">Gitlab::Application.config.action_mailer.delivery_method = :smtp</div><div class="line"></div><div class="line">ActionMailer::Base.smtp_settings = {</div><div class="line">address: <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">port: 25,</div><div class="line">user_name: <span class="string">&quot;xxx@cass.com&quot;</span>,</div><div class="line">password: <span class="string">&quot;password&quot;</span>,</div><div class="line">domain: <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">authentication: :plain,</div><div class="line">enable_starttls_auto: <span class="literal">true</span>,</div><div class="line"><span class="comment">#openssl_verify_mode: &apos;peer&apos; # See ActionMailer documentation for other possible options</span></div><div class="line">}</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>8.x&#x7248;&#x672C;&#x7684;&#x90AE;&#x4EF6;&#x914D;&#x7F6E;&#x548C;7.x&#x6709;&#x6240;&#x4E0D;&#x540C;</p>
