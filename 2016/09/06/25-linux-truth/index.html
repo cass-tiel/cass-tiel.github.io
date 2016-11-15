@@ -1,0 +1,699 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;linux&amp;#x4E2D;&amp;#x56FD;
+
+&amp;#x4ECA;&amp;#x5929;&amp;#xFF0C;Linux &amp;#x7EDF;&amp;#x6CBB;&amp;#x4E86;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x64CD;&amp;#x4F5C;&amp;#x7CFB;&amp;#x7EDF;&amp;#x3002;&amp;#x5B83;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（转）25个你可能不知道的Linux真相">
+<meta property="og:url" content="http://c.isme.pub/2016/09/06/25-linux-truth/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;linux&amp;#x4E2D;&amp;#x56FD;
+
+&amp;#x4ECA;&amp;#x5929;&amp;#xFF0C;Linux &amp;#x7EDF;&amp;#x6CBB;&amp;#x4E86;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x64CD;&amp;#x4F5C;&amp;#x7CFB;&amp;#x7EDF;&amp;#x3002;&amp;#x5B83;&amp;#">
+<meta property="og:image" content="http://c.isme.pub/2016/09/06/25-linux-truth/1.jpg">
+<meta property="og:image" content="http://c.isme.pub/2016/09/06/25-linux-truth/2.jpg">
+<meta property="og:image" content="http://c.isme.pub/2016/09/06/25-linux-truth/3.jpg">
+<meta property="og:image" content="http://c.isme.pub/2016/09/06/25-linux-truth/4.jpg">
+<meta property="og:updated_time" content="2016-11-15T02:38:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（转）25个你可能不知道的Linux真相">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;linux&amp;#x4E2D;&amp;#x56FD;
+
+&amp;#x4ECA;&amp;#x5929;&amp;#xFF0C;Linux &amp;#x7EDF;&amp;#x6CBB;&amp;#x4E86;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x64CD;&amp;#x4F5C;&amp;#x7CFB;&amp;#x7EDF;&amp;#x3002;&amp;#x5B83;&amp;#">
+<meta name="twitter:image" content="http://c.isme.pub/2016/09/06/25-linux-truth/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/09/06/25-linux-truth/"/>
+
+
+  <title> （转）25个你可能不知道的Linux真相 | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                （转）25个你可能不知道的Linux真相
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T11:02:04+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><blockquote>
+<p>&#x672C;&#x6587;&#x8F6C;&#x81EA;<a href="https://linux.cn/article-7730-1.html" target="_blank" rel="external">linux&#x4E2D;&#x56FD;</a></p>
+</blockquote>
+<p>&#x4ECA;&#x5929;&#xFF0C;Linux &#x7EDF;&#x6CBB;&#x4E86;&#x670D;&#x52A1;&#x5668;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x5B83;&#x4E5F;&#x662F; Android &#x7684;&#x57FA;&#x7840;&#x2014;&#x2014;&#x7EDF;&#x6CBB;&#x4E86;&#x624B;&#x673A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x5B83;&#x8FD8;&#x662F; 100% &#x81EA;&#x7531;&#x800C;&#x5F00;&#x6E90;&#x7684;&#x3002; &#x8BA9;&#x6211;&#x4EEC;&#x56DE;&#x6EAF;&#x65F6;&#x5149;&#xFF0C;&#x770B;&#x770B; Linux &#x8FD9; 25 &#x5E74;&#x6765;&#x7684; 25 &#x4E2A;&#x5C11;&#x4E3A;&#x4EBA;&#x77E5;&#x7684;&#x771F;&#x76F8;</p>
+<p><img src="/2016/09/06/25-linux-truth/1.jpg" alt="img"></p>
+<p>25 &#x5E74;&#x524D;&#xFF0C;&#x4E00;&#x4E2A;&#x82AC;&#x5170;&#x7684;&#x5927;&#x5B66;&#x751F;&#x5728;&#x4E00;&#x4E2A;&#x90AE;&#x4EF6;&#x5217;&#x8868;&#x4E2D;&#x5206;&#x4EAB;&#x4E86;&#x4ED6;&#x7684;&#x9879;&#x76EE;&#xFF1A;</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)</div><div class="line">Newsgroups: comp.os.minix</div><div class="line">Subject: What would you like to see most <span class="keyword">in</span> minix?</div><div class="line">Summary: small poll <span class="keyword">for</span> my new operating system</div><div class="line">Message-ID: &lt;1991Aug25.205708.9541@klaava.Helsinki.FI&gt;</div><div class="line">Date: 25 Aug 91 20:57:08 GMT</div><div class="line">Organization: University of Helsinki</div><div class="line">Hello everybody out there using minix &#x2014;</div><div class="line">I&#x2019;m doing a (free) operating system (just a hobby, won&#x2019;t be big and</div><div class="line">professional like gnu) <span class="keyword">for</span> 386(486) AT clones. This has been brewing</div><div class="line">since april, and is starting to get ready. I&#x2019;d like any feedback on</div><div class="line">things people like/dislike <span class="keyword">in</span> minix, as my OS resembles it somewhat</div><div class="line">(same physical layout of the file-system (due to practical reasons)</div><div class="line">among other things).</div><div class="line">I&#x2019;ve currently ported bash(1.08) and gcc(1.40), and things seem to work.</div><div class="line">This implies that I&#x2019;ll get something practical within a few months, and</div><div class="line">I&#x2019;d like to know what features most people would want. Any suggestions</div><div class="line">are welcome, but I won&#x2019;t promise I&#x2019;ll implement them :-)</div><div class="line">Linus (torv&#x2026;@kruuna.helsinki.fi)</div><div class="line">PS. Yes&#x200A;&#x2014;&#x200A;it&#x2019;s free of any minix code, and it has a multi-threaded fs.</div><div class="line">It is NOT protable (uses 386 task switching etc), and it probably never</div><div class="line">will support anything other than AT-harddisks, as that&#x2019;s all I have :-(.</div></pre></td></tr></table></figure>
+<p>&#x201C;&#x5C31;&#x662F;&#x4E2A;&#x4E2A;&#x4EBA;&#x7231;&#x597D;&#x201D;&#xFF0C;&#x4ED6;&#x8BF4;&#xFF0C;&#x201C;&#x4E0D;&#x4F1A;&#x50CF; gnu &#x90A3;&#x6837;&#x5E9E;&#x5927;&#x800C;&#x4E13;&#x4E1A;&#x3002;&#x201D;</p>
+<p>&#x8FD9;&#x4E2A;&#x5B69;&#x5B50;&#x5E76;&#x4E0D;&#x77E5;&#x9053;&#x4ED6;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5C06;&#x6C38;&#x8FDC;&#x7684;&#x6539;&#x53D8;&#x4E86;&#x8F6F;&#x4EF6;&#x4E16;&#x754C;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#xFF0C;Linux &#x7EDF;&#x6CBB;&#x4E86;&#x670D;&#x52A1;&#x5668;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x5B83;&#x4E5F;&#x662F; Android &#x7684;&#x57FA;&#x7840;&#x2014;&#x2014;&#x7EDF;&#x6CBB;&#x4E86;&#x624B;&#x673A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x5B83;&#x8FD8;&#x662F; 100% &#x81EA;&#x7531;&#x800C;&#x5F00;&#x6E90;&#x7684;&#x3002;</p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x56DE;&#x6EAF;&#x65F6;&#x5149;&#xFF0C;&#x770B;&#x770B; Linux &#x8FD9; 25 &#x5E74;&#x6765;&#x7684; 25 &#x4E2A;&#x5C11;&#x4E3A;&#x4EBA;&#x77E5;&#x7684;&#x771F;&#x76F8;&#xFF1A;</p>
+<ul>
+<li><p>&#x771F;&#x76F8; 1&#xFF1A;&#x5728;&#x8FD9;&#x4E2A; Linux &#x57FA;&#x91D1;&#x4F1A;&#x7684;&#x534F;&#x4F5C;&#x9879;&#x76EE;&#x91CC;&#x6709; 1.15 &#x4EBF;&#x884C;&#x4EE3;&#x7801;&#x3002;&#x800C;&#x4E0E;&#x4E4B;&#x76F8;<br>&#x6BD4;&#xFF0C;Windows XP &#x53EA;&#x6709; 0.45 &#x4EBF;&#x884C;&#x4EE3;&#x7801;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 2&#xFF1A;Linux &#x5185;&#x6838;&#x9879;&#x76EE;&#x662F;&#x4E16;&#x754C;&#x4E0A;&#x6700;&#x6D3B;&#x8DC3;&#x7684;&#x5F00;&#x6E90;&#x9879;&#x76EE;&#x3002;&#x5B83;&#x5E73;&#x5747;&#x6BCF;&#x5929;&#x4F1A;&#x63A5;&#x53D7; 185 &#x4E2A;&#x8865;&#x4E01;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 3&#xFF1A;&#x6BCF;&#x5E74;&#x5927;&#x7EA6;&#x6709; 4.1 &#x4E07;&#x4EBA;&#x53C2;&#x4E0E;&#x5F00;&#x53D1; Linux&#xFF0C;&#x5982;&#x679C;&#x8981;&#x7ED9;&#x4ED6;&#x4EEC;&#x53D1;&#x85AA;&#x6C34;&#x7684;&#x8BDD;&#xFF0C;&#x5DEE;&#x4E0D;&#x591A;&#x6BCF;&#x5E74;&#x9700;&#x8981; 50 &#x4EBF;&#x7F8E;&#x91D1;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 4&#xFF1A;Linux &#x57FA;&#x91D1;&#x4F1A;&#x4E3A;&#x4E86;&#x8BA9; Linus Torvalds &#x7EE7;&#x7EED;&#x5F00;&#x53D1; Linux&#xFF0C;&#x6BCF;&#x5E74;&#x7ED9;&#x4ED6;&#x53D1; 1000 &#x4E07;&#x7F8E;&#x91D1;&#x7684;&#x85AA;&#x6C34;&#x3002;&#x4ED6;&#x7684;&#x51C0;&#x8D44;&#x4EA7;&#x5DF2;&#x8FBE; 1.5 &#x4EBF;&#x7F8E;&#x91D1;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 5&#xFF1A;&#x5C3D;&#x7BA1;&#x52A0;&#x8D77;&#x6765;&#x6709;&#x8FD9;&#x4E48;&#x591A;&#x7684;&#x94B1;&#xFF0C;&#x8FD8;&#x6709;&#x90A3;&#x4E48;&#x591A;&#x8FD0;&#x884C;&#x5728; Linux &#x4E0A;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C; &#x4F46;&#x662F; Linus &#x4ECD;&#x7136;&#x5DE5;&#x4F5C;&#x5728;&#x5BB6;&#x91CC;&#xFF0C;&#x54E6;&#xFF0C;&#x8FD8;&#x6709;&#x4ED6;&#x7684;&#x732B;&#x5728;&#x966A;&#x7740;&#x4ED6;&#x3002;&#x4E0B;&#x56FE;&#x662F;&#x4ED6;&#x5728;&#x4ED6;&#x7684;&#x7AD9;&#x7ACB;&#x5F0F;&#x5DE5;&#x4F5C;&#x684C;&#x524D;&#x5DE5;&#x4F5C;&#x7684;&#x7167;&#x7247;&#xFF1A;</p>
+</li>
+</ul>
+<p><img src="/2016/09/06/25-linux-truth/2.jpg" alt="img"></p>
+<ul>
+<li><p>&#x771F;&#x76F8; 6&#xFF1A;&#x5728; Linus &#x8FD8;&#x5728;&#x82AC;&#x5170;&#x519B;&#x961F;&#x670D;&#x5F79;&#x65F6;&#xFF0C;&#x4ED6;&#x90A3;&#x65F6;&#x4ECE;&#x4E8B;&#x5F39;&#x9053;&#x8BA1;&#x7B97;&#xFF0C;&#x4ED6;&#x4E70;&#x4E86;&#x4E00;&#x672C; Andrew Tanenbaum &#x7684;&#x300A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF1A;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;&#x300B;&#x3002;&#x90A3;&#x672C;&#x4E66;&#x4ECB;&#x7ECD;&#x4E86; Minix&#x200A;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x6559;&#x80B2;&#x7528;&#x9014;&#x7684;&#x7B80;&#x5316;&#x7248; Unix&#xFF0C;&#x6B63;&#x662F;&#x8FD9;&#x672C;&#x4E66;&#x5F00;&#x542F;&#x4E86; Linus &#x7684; Unix &#x601D;&#x60F3;&#x4E4B;&#x8DEF;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 7&#xFF1A;&#x867D;&#x7136; Linux &#x7684;&#x7B2C;&#x4E00;&#x7248;&#x5168;&#x662F;&#x7531; Linus &#x5199;&#x5C31;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x6700;&#x521D;&#x7684;&#x8D21;&#x732E;&#x4EC5;&#x5360;&#x4ECA;&#x5929;&#x5168;&#x90E8;&#x7684;&#x4EE3;&#x7801;&#x7684;&#x4E0D;&#x5230; 1%&#x3002;&#x4ED6;&#x8BF4;&#x4ED6;&#x73B0;&#x5728;&#x5FD9;&#x4E8E;&#x5408;&#x5E76;&#x4EE3;&#x7801;&#x800C;&#x6CA1;&#x7A7A;&#x81EA;&#x5DF1;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#x3002;</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x6211;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x4E94;&#x5E74;&#x8BA1;&#x5212;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x767B;&#x6708;&#x8BA1;&#x5212;&#x3002;&#x6211;&#x5F88;&#x9AD8;&#x5174;&#x6211;&#x5468;&#x56F4;&#x7684;&#x4EBA;&#x53EF;&#x4EE5;&#x770B;&#x7740;&#x661F;&#x661F;&#x8BF4;&#x201C;&#x6211;&#x8981;&#x53BB;&#x90A3;&#x91CC;!&#x201D;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4F1A;&#x770B;&#x7740;&#x811A;&#x5E95;&#x4E0B;&#xFF0C;&#x628A;&#x90A3;&#x4E9B;&#x6211;&#x524D;&#x884C;&#x65F6;&#x4F1A;&#x6389;&#x8FDB;&#x53BB;&#x7684;&#x5751;&#x586B;&#x4E0A;&#x3002;</div><div class="line">&#x2014;&#x2014;&#x200A;Linus Torvalds</div></pre></td></tr></table></figure>
+<ul>
+<li><p>&#x771F;&#x76F8; 8&#xFF1A;&#x5176;&#x5B83;&#x7684;&#x8F6F;&#x4EF6;&#x754C;&#x8457;&#x540D;&#x4EBA;&#x7269;&#xFF0C;&#x6BD4;&#x5982;&#x6BD4;&#x5C14;&#x76D6;&#x8328;&#x3001;&#x624E;&#x514B;&#x4F2F;&#x683C;&#x90FD;&#x653E;&#x5F03;&#x4E86;&#x4ED6;&#x4EEC;&#x7684;&#x5B66;&#x4E1A;&#x800C;&#x6295;&#x8EAB;&#x4E8E;&#x4E8B;&#x4E1A;&#x4E4B;&#x4E2D;&#x3002;&#x800C; Linus &#x4E0D;&#x4EC5;&#x5728; Linux &#x53D6;&#x5F97;&#x4E86;&#x4E00;&#x5B9A;&#x6210;&#x529F;&#x4E4B;&#x540E;&#x7EE7;&#x7EED;&#x4E0A;&#x5B66;&#xFF0C;&#x800C;&#x4E14;&#x4E00;&#x76F4;&#x5FF5;&#x5230;&#x4E86;&#x7855;&#x58EB;&#x6BD5;&#x4E1A;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 9&#xFF1A;&#x867D;&#x7136; Linus &#x521B;&#x9020;&#x4E86; Git&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x4ECE;&#x4E0D;&#x901A;&#x8FC7; GitHub &#x63A5;&#x53D7;&#x8865;&#x4E01;&#xFF0C;&#x5373;&#x4FBF; Linux &#x4E5F;&#x653E;&#x5728; GitHub &#x4E0A;&#xFF0C;&#x800C;&#x4E14;&#x6709;&#x591A;&#x8FBE; 35000 &#x4E2A;&#x661F;!</p>
+</li>
+<li><p>&#x771F;&#x76F8; 10&#xFF1A;Linux &#x7684;&#x5409;&#x7965;&#x7269;&#x662F;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; &#x201C;Tux&#x201D; &#x7684;&#x4F01;&#x9E45;&#xFF1A;</p>
+</li>
+</ul>
+<p><img src="/2016/09/06/25-linux-truth/3.jpg" alt="img"></p>
+<ul>
+<li>&#x771F;&#x76F8; 11&#xFF1A;&#x6765;&#x81EA;&#x5404;&#x884C;&#x5404;&#x4E1A;&#x7684;&#x516C;&#x53F8;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x4EEC;&#x7ED9; Linux &#x8D21;&#x732E;&#x4E86;&#x4EE3;&#x7801;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F;&#x6309;&#x8D21;&#x732E;&#x8FDB;&#x884C;&#x7684;&#x6392;&#x540D;&#xFF1A;</li>
+</ul>
+<hr>
+<table border="1" cellpadding="4"><br><tbody><br><tr><br><td width="189"><br><p><strong>&#x516C;&#x53F8;</strong></p><br></td><br><td width="85"><br><p><strong>&#x53D8;&#x66F4;&#x6570;&#x91CF;</strong></p><br></td><br><td width="85"><br><p><strong>&#x5360;&#x603B;&#x6570;&#x6BD4;&#x4F8B;</strong></p><br></td><br></tr><br><tr><br><td width="189">&#x82F1;&#x7279;&#x5C14;</td><br><td width="85"><br><p>14384</p><br></td><br><td width="85">12.9%</td><br></tr><br><tr><br><td width="189">&#x7EA2;&#x5E3D;</td><br><td width="85">8987</td><br><td width="85">8.0%</td><br></tr><br><tr><br><td width="189">&#x201C;&#x65E0;&#x201D;</td><br><td width="85">8571</td><br><td width="85">7.7%</td><br></tr><br><tr><br><td width="189">&#x201C;&#x672A;&#x77E5;&#x201D;</td><br><td width="85">7582</td><br><td width="85">6.8%</td><br></tr><br><tr><br><td width="189">Linaro</td><br><td width="85">4515</td><br><td width="85">4.0%</td><br></tr><br><tr><br><td width="189">&#x4E09;&#x661F;</td><br><td width="85">4338</td><br><td width="85">3.9%</td><br></tr><br><tr><br><td width="189">SUSE</td><br><td width="85">3619</td><br><td width="85">3.2%</td><br></tr><br><tr><br><td width="189">IBM</td><br><td width="85">2995</td><br><td width="85">2.7%</td><br></tr><br><tr><br><td width="189">Consultants</td><br><td width="85">2938</td><br><td width="85">2.6%</td><br></tr><br><tr><br><td width="189">Renesas Electronics&#xA0;</td><br><td width="85">2239</td><br><td width="85">2.0%</td><br></tr><br></tbody><br></table>
+
+
+<hr>
+<ul>
+<li><p>&#x771F;&#x76F8; 12&#xFF1A;&#x4E16;&#x754C;&#x4E0A; 97% &#x7684;&#x8D85;&#x7EA7;&#x8BA1;&#x7B97;&#x673A;&#x8FD0;&#x884C;&#x5728; Linux &#x4E0A;&#xFF0C;&#x5305;&#x62EC; NASA &#x7684;&#x96C6;&#x7FA4;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 13&#xFF1A;SpaceX &#x5728;&#x5176; Merlin &#x706B;&#x7BAD;&#x5F15;&#x64CE;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5BB9;&#x9519;&#x8BBE;&#x8BA1;&#x7684; Linux&#xFF0C;&#x5E2E;&#x52A9;&#x5B8C;&#x6210;&#x4E86; 32 &#x6B21;&#x7A7A;&#x95F4;&#x4EFB;&#x52A1;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 14&#xFF1A;2009 &#x5E74;&#x5FB7;&#x56FD;&#x6155;&#x5C3C;&#x9ED1;&#x653F;&#x5E9C;&#x4ECE; Windows &#x5207;&#x6362;&#x5230;&#x4E86; Linux&#x3002;&#x4ED6;&#x4EEC;&#x58F0;&#x79F0;&#x5728;&#x8F6F;&#x4EF6;&#x8BB8;&#x53EF;&#x8BC1;&#x8D39;&#x7528;&#x4E0A;&#x5927;&#x7EA6;&#x8282;&#x7EA6;&#x4E86; 1000 &#x4E07;&#x6B27;&#x5143;&#x3002;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;&#x5207;&#x6362;&#x8BA9;&#x4ED6;&#x4EEC;&#x5728;&#x751F;&#x4EA7;&#x6548;&#x7387;&#x65B9;&#x9762;&#x635F;&#x5931;&#x4E0D;&#x5C0F;&#x3002;</p>
+</li>
+<li>&#x771F;&#x76F8; 15&#xFF1A;Linux &#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x5728;&#x4EC5;&#x552E; 5 &#x7F8E;&#x5143;&#x7684;&#x5FAE;&#x578B;&#x6811;&#x8393;&#x6D3E;&#x8BA1;&#x7B97;&#x673A;&#x4E0A;&#x3002;</li>
+</ul>
+<p><img src="/2016/09/06/25-linux-truth/4.jpg" alt="img"></p>
+<ul>
+<li><p>&#x771F;&#x76F8; 16&#xFF1A;Linux &#x5DF2;&#x7ECF;&#x6210;&#x4E3A;&#x4E16;&#x754C;&#x4E4B;&#x738B;&#x4E86;&#x5417;?&#x300A;&#x6CF0;&#x5766;&#x5C3C;&#x514B;&#x53F7;&#x300B;&#x662F;&#x9996;&#x90E8;&#x4F7F;&#x7528; Linux &#x670D;&#x52A1;&#x5668;&#x5236;&#x4F5C;&#x7684;&#x5927;&#x7247;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 17&#xFF1A;&#x867D;&#x7136;&#x89C6;&#x9891;&#x6E38;&#x620F;&#x5F00;&#x53D1;&#x5546; Valve &#x7684;&#x521B;&#x59CB;&#x4EBA; Gabe Newell &#x516C;&#x5F00;&#x5BA3;&#x79F0;&#x4ED6;&#x8BA4;&#x4E3A; Linux &#x662F;&#x6E38;&#x620F;&#x7684;&#x672A;&#x6765;&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x7684;&#x516C;&#x53F8;&#x57FA;&#x4E8E; Linux &#x7684; Steam Machine &#x6E38;&#x620F;&#x673A;&#x5374;&#x5931;&#x8D25;&#x4E86;&#x3002;&#x76F8;&#x6BD4; 2010 &#x5E74;&#xFF0C;&#x4F7F;&#x7528; Linux &#x73A9;&#x6E38;&#x620F;&#x7684;&#x4EBA;&#x66F4;&#x5C11;&#x4E86;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 18&#xFF1A;Dronecode &#x662F;&#x4E00;&#x4E2A; Linux &#x65E0;&#x4EBA;&#x673A;&#x9879;&#x76EE;&#x3002;&#x5927;&#x7EA6;&#x6709;&#x4E00;&#x5343;&#x5BB6;&#x516C;&#x53F8;&#x5728;&#x8FD9;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5F00;&#x53D1;&#x4ED6;&#x4EEC;&#x7684;&#x65E0;&#x4EBA;&#x673A;&#x4EA7;&#x54C1;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 19&#xFF1A;&#x4E30;&#x7530;&#x548C;&#x730E;&#x8C79;&#x8BA1;&#x5212;&#x5C06;&#x6765;&#x5728;&#x4ED6;&#x4EEC;&#x7684;&#x6C7D;&#x8F66;&#x4E2D;&#x4F7F;&#x7528; &#x6C7D;&#x8F66;&#x7EA7; Linux(AGL)&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 20&#xFF1A;Linux &#x6709;&#x5F88;&#x591A;&#x53D1;&#x884C;&#x7248;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x53D1;&#x884C;&#x7248;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&#x522B;&#x7684;&#x53D1;&#x884C;&#x7248;&#x7684;&#x3002;&#x6700;&#x6D41;&#x884C;&#x7684;&#x53D1;&#x884C;&#x7248;&#x662F; Ubuntu&#xFF0C;&#x5B83;&#x662F;&#x57FA;&#x4E8E; Debian &#x7684;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 21&#xFF1A;Red Hat &#x662F;&#x4E00;&#x5BB6;&#x5F00;&#x53D1;&#x9488;&#x5BF9;&#x4F01;&#x4E1A;&#x7684; Linux &#x53D1;&#x884C;&#x7248;&#x7684;&#x516C;&#x53F8;&#x3002;&#x5B83;&#x662F;&#x5F00;&#x6E90;&#x8F6F;&#x4EF6;&#x9886;&#x57DF;&#x6700;&#x5927;&#x7684;&#x516C;&#x53F8;&#xFF0C;&#x4ECA;&#x5E74;&#x51C6;&#x5907;&#x8FBE;&#x6210;&#x8425;&#x6536; 50 &#x4EBF;&#x7F8E;&#x5143;&#x7684;&#x76EE;&#x6807;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 22&#xFF1A;Linux &#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x9700;&#x8981;&#x56FE;&#x5F62;&#x754C;&#x9762;&#x3002;&#x8BB8;&#x591A;&#x5F00;&#x53D1;&#x8005;&#x90FD;&#x662F;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x6765;&#x64CD;&#x4F5C;&#x5B83;&#x7684;&#xFF0C;&#x6BD4;&#x5982; Bash&#x3002;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4ECE;&#x5F88;&#x591A;&#x79CD;&#x56FE;&#x5F62;&#x754C;&#x9762;&#x4E2D;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#xFF0C;&#x6BD4;&#x5982; Xfce &#x548C; KDE&#x3002;&#x4F60;&#x53EF;&#x80FD;&#x542C;&#x8BF4;&#x8FC7; &#x201C;Xubuntu&#x201D; &#x8FD9;&#x4E2A;&#x8BCD;&#xFF0C;&#x5B83;&#x7684;&#x610F;&#x601D;&#x662F; &#x201C;Ubuntu with Xfce&#x201D; &#x3002;&#x4F60;&#x60F3;&#x5FC5;&#x80FD;&#x731C;&#x51FA; &#x201C;Kubuntu&#x201D;&#x7684;&#x610F;&#x601D;&#x5427;?</p>
+</li>
+<li><p>&#x771F;&#x76F8; 23&#xFF1A;Linux &#x4F7F;&#x7528;&#x7684;&#x662F; GPL &#x8BB8;&#x53EF;&#x8BC1;&#x3002;</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x201C;&#x5927;&#x591A;&#x6570;&#x8F6F;&#x4EF6;&#x7684;&#x8BB8;&#x53EF;&#x8BC1;&#x90FD;&#x4E3A;&#x4E86;&#x593A;&#x8D70;&#x4F60;&#x5206;&#x4EAB;&#x548C;&#x4FEE;&#x6539;&#x5B83;&#x7684;&#x81EA;&#x7531;&#x3002;&#x76F8;&#x6BD4;&#x4E4B;&#x4E0B;&#xFF0C;GNU GPL &#x8BB8;&#x53EF;&#x8BC1;&#x529B;&#x56FE;&#x634D;&#x536B;&#x4F60;&#x5206;&#x4EAB;&#x548C;&#x4FEE;&#x6539;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#x7684;&#x81EA;&#x7531;&#x2014;&#x2014;&#x4EE5;&#x786E;&#x4FDD;&#x8F6F;&#x4EF6;&#x5BF9;&#x5B83;&#x7684;&#x4EFB;&#x4F55;&#x7528;&#x6237;&#x90FD;&#x662F;&#x81EA;&#x7531;&#x7684;&#x3002;&#x201D;&#x200A;</div><div class="line">&#x2014;&#x2014;&#x200A;GNU GPL &#x5E8F;&#x8A00;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>&#x771F;&#x76F8; 24&#xFF1A;Linux &#x91C7;&#x7528; &#x201C;&#x7C7B; Unix&#x201D;&#x8BBE;&#x8BA1;&#xFF0C;&#x5B83;&#x7684;&#x5355;&#x4F53; Linux &#x5185;&#x6838;&#x63A7;&#x5236;&#x7740;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3001;&#x7F51;&#x7EDC;&#x548C;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x3002;&#x5269;&#x4E0B;&#x7684;&#x529F;&#x80FD;&#x90E8;&#x5206;&#x7531;&#x6A21;&#x5757;&#x6765;&#x63A7;&#x5236;&#x2014;&#x2014;&#x5927;&#x90E8;&#x5206;&#x6765;&#x81EA; GNU &#x9879;&#x76EE;&#x3002;</p>
+</li>
+<li><p>&#x771F;&#x76F8; 25&#xFF1A;&#x5373;&#x4F7F;&#x662F;&#x5FAE;&#x8F6F;&#x7684; Windows&#x200A;&#xFF0C;&#x8FD9;&#x4E2A; Linux &#x7684;&#x6700;&#x5927;&#x7684;&#x7ADE;&#x4E89;&#x5BF9;&#x624B;&#xFF0C;&#x4E5F;&#x5728;&#x62E5;&#x62B1; Linux&#x3002;&#x5B83;&#x6700;&#x8FD1;&#x5C06; Ubuntu Bash &#x96C6;&#x6210;&#x5230;&#x4E86; Windows 10 &#x4E4B;&#x4E2D;&#x3002;<br>&#x8D60;&#x54C1;&#x771F;&#x76F8;&#xFF1A;Linux &#x7684;&#x7075;&#x611F;&#x6765;&#x81EA;&#x4E8E; Richard Stallman &#x7684; GNU &#x9879;&#x76EE;&#xFF0C;&#x5B83;&#x662F;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#x8FD0;&#x52A8;&#x548C;&#x9ED1;&#x5BA2;&#x4F26;&#x7406;&#x3002;&#x4F60;&#x53EF;&#x7528;&#x4ECE; Steven Levy &#x7684;&#x7ECF;&#x5178;&#x8457;&#x4F5C;&#x300A;&#x9ED1;&#x5BA2;&#x300B;&#x4E2D;&#x4E86;&#x89E3;&#x5230;&#x8FD9;&#x4E9B;&#x4EE5;&#x53CA;&#x5176;&#x5B83;&#x6BD4;&#x5982; Apple I &#x8BA1;&#x7B97;&#x673A;&#x7B49;&#x91CD;&#x8981;&#x9879;&#x76EE;&#x7684;&#x5386;&#x53F2;&#x3002;</p>
+</li>
+</ul>
+<p>&#x6B64;&#x5916;&#xFF0C;&#x8FD9;&#x91CC;&#x8FD8;&#x6709;&#x4E00;&#x4EFD;&#x5BF9; Linus &#x7684;&#x7B80;&#x5355;&#x91C7;&#x8BBF;&#xFF0C;&#x4ED6;&#x8C08;&#x53CA;&#x4E86; Linux &#x548C; Git&#xFF0C;&#x4EE5;&#x53CA;&#x4ED6;&#x662F;&#x5982;&#x4F55;&#x521B;&#x9020;&#x4ED6;&#x4EEC;&#x6765;&#x89E3;&#x51B3;&#x4ED6;&#x81EA;&#x5DF1;&#x7684;&#x95EE;&#x9898;&#x7684;&#x3002;</p>
+<p><video width="640" height="360" controls="controls"><br><source src="https://dn-linuxcn.qbox.me/static/video/The%20mind%20behind%20Linux%20_%20Linus%20Torvalds-o8NPllzkFhE.mp4" type="video/mp4"><br></video></p>
+
+
+<p><a href="https://dn-linuxcn.qbox.me/static/video/The%20mind%20behind%20Linux%20_%20Linus%20Torvalds-o8NPllzkFhE.mp4" target="_blank" rel="external">&#x89C6;&#x9891;&#x5730;&#x5740;</a></p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x671F;&#x5F85;&#x63A5;&#x4E0B;&#x6765; 25 &#x5E74;&#x7684; Linux&#x3002;&#x5F00;&#x6E90;&#x8F6F;&#x4EF6;&#x5C06;&#x7EE7;&#x7EED;&#x6253;&#x9020;&#x4E00;&#x4E2A;&#x66F4;&#x5B8C;&#x7F8E;&#x7684;&#x4E16;&#x754C;!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/29/linux-back-process/" rel="next" title="Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen">
+                <i class="fa fa-chevron-left"></i> Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/10/linux-bash-position/" rel="prev" title="Linux Bash Shell 位置变量详解">
+                Linux Bash Shell 位置变量详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
