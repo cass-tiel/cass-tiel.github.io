@@ -1,0 +1,666 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql,随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;&amp;#x6700;&amp;#x8FD1;&amp;#x78B0;&amp;#x5230;&amp;#x5F88;&amp;#x591A;&amp;#x5173;&amp;#x4E8E;mysql&amp;#x6027;&amp;#x80FD;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x5982;&amp;#xFF1A;cpu&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x8DD1;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql性能查询以及简单处理">
+<meta property="og:url" content="http://c.isme.pub/2016/11/17/mysql-performance/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;&amp;#x6700;&amp;#x8FD1;&amp;#x78B0;&amp;#x5230;&amp;#x5F88;&amp;#x591A;&amp;#x5173;&amp;#x4E8E;mysql&amp;#x6027;&amp;#x80FD;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x5982;&amp;#xFF1A;cpu&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x8DD1;">
+<meta property="og:updated_time" content="2016-11-17T08:32:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql性能查询以及简单处理">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;&amp;#x6700;&amp;#x8FD1;&amp;#x78B0;&amp;#x5230;&amp;#x5F88;&amp;#x591A;&amp;#x5173;&amp;#x4E8E;mysql&amp;#x6027;&amp;#x80FD;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x5982;&amp;#xFF1A;cpu&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x8DD1;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/11/17/mysql-performance/"/>
+
+
+  <title> mysql性能查询以及简单处理 | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql性能查询以及简单处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-17T14:15:16+08:00" content="2016-11-17">
+              2016-11-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><p>&#x7531;&#x4E8E;&#x6700;&#x8FD1;&#x78B0;&#x5230;&#x5F88;&#x591A;&#x5173;&#x4E8E;mysql&#x6027;&#x80FD;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5982;&#xFF1A;cpu&#x3001;&#x5185;&#x5B58;&#x8DD1;&#x6EE1;&#xFF0C;&#x6216;&#x8005;&#x8FDE;&#x63A5;&#x6570;&#x8DD1;&#x6EE1;&#xFF08;rds&#xFF09;&#x7B49;&#xFF0C;&#x8BB0;&#x5F55;&#x4E00;&#x4E0B;&#x5728;&#x6392;&#x67E5;&#x8FC7;&#x7A0B;&#x4E2D;&#x7528;&#x5230;&#x7684;&#x4E00;&#x4E9B;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#xFF0C;&#x672C;&#x6587;&#x76EE;&#x524D;&#x5927;&#x90E8;&#x5206;&#x8D44;&#x6599;&#x6458;&#x81EA;&#x7F51;&#x7EDC;&#xFF0C;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x4E0D;&#x592A;&#x5B8C;&#x5584;&#xFF0C;&#x540E;&#x671F;&#x53EF;&#x80FD;&#x4F1A;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF08;&#x770B;&#x5FC3;&#x60C5;&#xFF09;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">full</span> <span class="keyword">processlist</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_scema.processlist;</div><div class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="string">&apos;KILL &apos;</span>,<span class="keyword">id</span>,<span class="string">&apos;;&apos;</span>) <span class="keyword">from</span> information_schema.processlist <span class="keyword">where</span> ...;</div><div class="line"><span class="keyword">show</span> <span class="keyword">open</span> <span class="keyword">tables</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">&apos;%lock%&apos;</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">engine</span> <span class="keyword">innodb</span> <span class="keyword">status</span>\G;</div><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">&apos;%timeout%&apos;</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">status</span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x5927;&#x90E8;&#x5206;&#x8D44;&#x6599;&#x53D6;&#x81EA;&#x7F51;&#x7EDC;</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist;"></a>show processlist;</h2><p>&#x663E;&#x793A;&#x54EA;&#x4E9B;&#x7EBF;&#x7A0B;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x3002;&#x60A8;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;mysqladmin processlist&#x8BED;&#x53E5;&#x5F97;&#x5230;&#x6B64;&#x4FE1;&#x606F;&#x3002;&#x5982;&#x679C;&#x60A8;&#x6709;SUPER&#x6743;&#x9650;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x60A8;&#x53EA;&#x80FD;&#x770B;&#x5230;&#x60A8;&#x81EA;&#x5DF1;&#x7684;&#x7EBF;&#x7A0B;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#xFF0C;&#x4E0E;&#x60A8;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;MySQL&#x8D26;&#x6237;&#x76F8;&#x5173;&#x7684;&#x7EBF;&#x7A0B;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60A8;&#x5F97;&#x5230;&#x201C;too many connections&#x201D;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x60F3;&#x8981;&#x4E86;&#x89E3;&#x6B63;&#x5728;&#x53D1;&#x751F;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x672C;&#x8BED;&#x53E5;&#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x3002;MySQL&#x4FDD;&#x7559;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x8BA9;&#x62E5;&#x6709;SUPER&#x6743;&#x9650;&#x7684; &#x8D26;&#x6237;&#x4F7F;&#x7528;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x7BA1;&#x7406;&#x5458;&#x80FD;&#x591F;&#x968F;&#x65F6;&#x8FDE;&#x63A5;&#x548C;&#x68C0;&#x67E5;&#x7CFB;&#x7EDF;&#xFF08;&#x5047;&#x8BBE;&#x60A8;&#x6CA1;&#x6709;&#x628A;&#x6B64;&#x6743;&#x9650;&#x7ED9;&#x4E88;&#x6240;&#x6709;&#x7684;&#x7528;&#x6237;&#xFF09;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</div><div class="line"></div><div class="line">Id: &#x4F1A;&#x8BDD;id</div><div class="line">User: &#x6267;&#x884C;&#x7528;&#x6237;</div><div class="line">Host: &#x6267;&#x884C;&#x4E3B;&#x673A;</div><div class="line">db: &#x6570;&#x636E;&#x5E93;&#x540D;</div><div class="line">Command: </div><div class="line">Time: &#x6267;&#x884C;&#x65F6;&#x95F4;</div><div class="line">State: &#x6570;&#x636E;&#x5E93;&#x72B6;&#x6001;&#xFF08;&#x91CD;&#x8981;&#xFF09;</div><div class="line">Info: &#x6267;&#x884C;sql&#xFF08;&#x524D;100&#x5B57;&#x7B26;&#xFF09;</div></pre></td></tr></table></figure>
+<p>&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5927;&#x81F4;&#x770B;&#x4E00;&#x4E0B;&#x662F;&#x5426;&#x6709;&#x5927;&#x91CF;&#x7C7B;&#x4F3C;&#x7684;sql&#xFF0C;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5219;&#x5F88;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x5927;&#x91CF;&#x6027;&#x80FD;&#x5F88;&#x5DEE;&#x7684;sql&#x9020;&#x6210;&#x7684;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x67E5;&#x770B;&#x5B8C;&#x6574;sql&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">full</span> <span class="keyword">processlist</span>;</div><div class="line">or</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_scema.processlist;</div></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x80FD;&#x5B9A;&#x4F4D;&#x5230;sql&#xFF0C;&#x5176;&#x5B9E;&#x5C31;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4E0B;&#x4E00;&#x6B65;&#x5904;&#x7406;&#x4E86;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x51FA;&#x73B0;&#x5927;&#x91CF;&#x5F71;&#x54CD;&#x4E0D;&#x5927;&#x7684;sql&#xFF08;&#x5982;select&#xFF0C;&#x4E00;&#x4E9B;&#x4E0D;&#x8981;&#x7D27;&#x3001;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x540E;&#x7EED;&#x91CD;&#x590D;&#x6267;&#x884C;&#x7684;update&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x4E34;&#x65F6;&#x901A;&#x8FC7;&#x6267;&#x884C;kill&#x6740;&#x6389;&#x5F53;&#x524D;&#x4F1A;&#x8BDD;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">kill</span> &#x4F1A;&#x8BDD;<span class="keyword">id</span>&#xFF1B;</div></pre></td></tr></table></figure>
+<p>&#x6279;&#x91CF;kill</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="string">&apos;KILL &apos;</span>,<span class="keyword">id</span>,<span class="string">&apos;;&apos;</span>) <span class="keyword">from</span> information_schema.processlist <span class="keyword">where</span> ...;</div></pre></td></tr></table></figure>
+<p>kill&#x4F1A;&#x8BDD;&#x6BD5;&#x7ADF;&#x53EA;&#x662F;&#x4E34;&#x65F6;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x6CBB;&#x6807;&#x4E0D;&#x6CBB;&#x672C;&#xFF0C;&#x771F;&#x6B63;&#x8981;&#x63D0;&#x9AD8;&#x6027;&#x80FD;&#x8FD8;&#x8981;&#x4ECE;&#x4F18;&#x5316;sql&#x5165;&#x624B;&#xFF08;&#x6CE8;&#xFF1A;sql&#x4F18;&#x5316;&#x8BF7;&#x770B;&#x53E6;&#x4E00;&#x7BC7;sql&#x6267;&#x884C;&#x8BA1;&#x5212;&#xFF09;&#x3002;</p>
+<blockquote>
+<p>&#x4EE5;&#x4E0B;&#x53D6;&#x81EA;&#x7F51;&#x7EDC;</p>
+</blockquote>
+<p>&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x4E2D;&#x6700;&#x5173;&#x952E;&#x7684;&#x5C31;&#x662F;state&#x5217;&#xFF0C;mysql&#x5217;&#x51FA;&#x7684;&#x72B6;&#x6001;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</p>
+<ul>
+<li>Checking table: &#x6B63;&#x5728;&#x68C0;&#x67E5;&#x6570;&#x636E;&#x8868;&#xFF08;&#x8FD9;&#x662F;&#x81EA;&#x52A8;&#x7684;&#xFF09;&#x3002;</li>
+<li>Closing tables: &#x6B63;&#x5728;&#x5C06;&#x8868;&#x4E2D;&#x4FEE;&#x6539;&#x7684;&#x6570;&#x636E;&#x5237;&#x65B0;&#x5230;&#x78C1;&#x76D8;&#x4E2D;&#xFF0C;&#x540C;&#x65F6;&#x6B63;&#x5728;&#x5173;&#x95ED;&#x5DF2;&#x7ECF;&#x7528;&#x5B8C;&#x7684;&#x8868;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x5FEB;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x5E94;&#x8BE5;&#x786E;&#x8BA4;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x6EE1;&#x4E86;&#x6216;&#x8005;&#x78C1;&#x76D8;&#x662F;&#x5426;&#x6B63;&#x5904;&#x4E8E;&#x91CD;&#x8D1F;&#x4E2D;&#x3002;</li>
+<li>Connect Out: &#x590D;&#x5236;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x6B63;&#x5728;&#x8FDE;&#x63A5;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x3002;</li>
+<li>Copying to tmp table on disk: &#x7531;&#x4E8E;&#x4E34;&#x65F6;&#x7ED3;&#x679C;&#x96C6;&#x5927;&#x4E8E;tmp_table_size&#xFF0C;&#x6B63;&#x5728;&#x5C06;&#x4E34;&#x65F6;&#x8868;&#x4ECE;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x8F6C;&#x4E3A;&#x78C1;&#x76D8;&#x5B58;&#x50A8;&#x4EE5;&#x6B64;&#x8282;&#x7701;&#x5185;&#x5B58;&#x3002;</li>
+<li>Creating tmp table: &#x6B63;&#x5728;&#x521B;&#x5EFA;&#x4E34;&#x65F6;&#x8868;&#x4EE5;&#x5B58;&#x653E;&#x90E8;&#x5206;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x3002;</li>
+<li>deleting from main table: &#x670D;&#x52A1;&#x5668;&#x6B63;&#x5728;&#x6267;&#x884C;&#x591A;&#x8868;&#x5220;&#x9664;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x521A;&#x5220;&#x9664;&#x7B2C;&#x4E00;&#x4E2A;&#x8868;&#x3002;</li>
+<li>deleting from reference tables: &#x670D;&#x52A1;&#x5668;&#x6B63;&#x5728;&#x6267;&#x884C;&#x591A;&#x8868;&#x5220;&#x9664;&#x4E2D;&#x7684;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#xFF0C;&#x6B63;&#x5728;&#x5220;&#x9664;&#x5176;&#x4ED6;&#x8868;&#x7684;&#x8BB0;&#x5F55;&#x3002;</li>
+<li>Flushing tables: &#x6B63;&#x5728;&#x6267;&#x884C;FLUSH TABLES&#xFF0C;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5173;&#x95ED;&#x6570;&#x636E;&#x8868;&#x3002;</li>
+<li>Killed: &#x53D1;&#x9001;&#x4E86;&#x4E00;&#x4E2A;kill&#x8BF7;&#x6C42;&#x7ED9;&#x67D0;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C06;&#x4F1A;&#x68C0;&#x67E5;kill&#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x653E;&#x5F03;&#x4E0B;&#x4E00;&#x4E2A;kill&#x8BF7;&#x6C42;&#x3002;MySQL&#x4F1A;&#x5728;&#x6BCF;&#x6B21;&#x7684;&#x4E3B;&#x5FAA;&#x73AF;&#x4E2D;&#x68C0;&#x67E5;kill&#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x4E0D;&#x8FC7;&#x6709;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x8BE5;&#x7EBF;&#x7A0B;&#x53EF;&#x80FD;&#x4F1A;&#x8FC7;&#x4E00;&#x5C0F;&#x6BB5;&#x624D;&#x80FD;&#x6B7B;&#x6389;&#x3002;&#x5982;&#x679C;&#x8BE5;&#x7EBF;&#x7A0B;&#x7A0B;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x9501;&#x4F4F;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;kill&#x8BF7;&#x6C42;&#x4F1A;&#x5728;&#x9501;&#x91CA;&#x653E;&#x65F6;&#x9A6C;&#x4E0A;&#x751F;&#x6548;&#x3002;</li>
+<li>Locked: &#x88AB;&#x5176;&#x4ED6;&#x67E5;&#x8BE2;&#x9501;&#x4F4F;&#x4E86;&#x3002;</li>
+<li>Sending data: &#x6B63;&#x5728;&#x5904;&#x7406;SELECT&#x67E5;&#x8BE2;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x540C;&#x65F6;&#x6B63;&#x5728;&#x628A;&#x7ED3;&#x679C;&#x53D1;&#x9001;&#x7ED9;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</li>
+<li>Sorting for group: &#x6B63;&#x5728;&#x4E3A;GROUP BY&#x505A;&#x6392;&#x5E8F;&#x3002;</li>
+<li>Sorting for order: &#x6B63;&#x5728;&#x4E3A;ORDER BY&#x505A;&#x6392;&#x5E8F;&#x3002;</li>
+<li>Opening tables: &#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x5E94;&#x8BE5;&#x4F1A;&#x5F88;&#x5FEB;&#xFF0C;&#x9664;&#x975E;&#x53D7;&#x5230;&#x5176;&#x4ED6;&#x56E0;&#x7D20;&#x7684;&#x5E72;&#x6270;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x6267;ALTER TABLE&#x6216;LOCK TABLE&#x8BED;&#x53E5;&#x884C;&#x5B8C;&#x4EE5;&#x524D;&#xFF0C;&#x6570;&#x636E;&#x8868;&#x65E0;&#x6CD5;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6253;&#x5F00;&#x3002;&#x6B63;&#x5C1D;&#x8BD5;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x8868;&#x3002;</li>
+<li>Removing duplicates: &#x6B63;&#x5728;&#x6267;&#x884C;&#x4E00;&#x4E2A;SELECT DISTINCT&#x65B9;&#x5F0F;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;&#x4F46;&#x662F;MySQL&#x65E0;&#x6CD5;&#x5728;&#x524D;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#x4F18;&#x5316;&#x6389;&#x90A3;&#x4E9B;&#x91CD;&#x590D;&#x7684;&#x8BB0;&#x5F55;&#x3002;&#x56E0;&#x6B64;&#xFF0C;MySQL&#x9700;&#x8981;&#x518D;&#x6B21;&#x53BB;&#x6389;&#x91CD;&#x590D;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x628A;&#x7ED3;&#x679C;&#x53D1;&#x9001;&#x7ED9;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</li>
+<li>Reopen table: &#x83B7;&#x5F97;&#x4E86;&#x5BF9;&#x4E00;&#x4E2A;&#x8868;&#x7684;&#x9501;&#xFF0C;&#x4F46;&#x662F;&#x5FC5;&#x987B;&#x5728;&#x8868;&#x7ED3;&#x6784;&#x4FEE;&#x6539;&#x4E4B;&#x540E;&#x624D;&#x80FD;&#x83B7;&#x5F97;&#x8FD9;&#x4E2A;&#x9501;&#x3002;&#x5DF2;&#x7ECF;&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x5173;&#x95ED;&#x6570;&#x636E;&#x8868;&#xFF0C;&#x6B63;&#x5C1D;&#x8BD5;&#x91CD;&#x65B0;&#x6253;&#x5F00;&#x6570;&#x636E;&#x8868;&#x3002;</li>
+<li>Repair by sorting: &#x4FEE;&#x590D;&#x6307;&#x4EE4;&#x6B63;&#x5728;&#x6392;&#x5E8F;&#x4EE5;&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#x3002;</li>
+<li>Repair with keycache: &#x4FEE;&#x590D;&#x6307;&#x4EE4;&#x6B63;&#x5728;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x7F13;&#x5B58;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x5730;&#x521B;&#x5EFA;&#x65B0;&#x7D22;&#x5F15;&#x3002;&#x5B83;&#x4F1A;&#x6BD4;Repair by sorting&#x6162;&#x4E9B;&#x3002;</li>
+<li>Searching rows for update: &#x6B63;&#x5728;&#x8BB2;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x8BB0;&#x5F55;&#x627E;&#x51FA;&#x6765;&#x4EE5;&#x5907;&#x66F4;&#x65B0;&#x3002;&#x5B83;&#x5FC5;&#x987B;&#x5728;UPDATE&#x8981;&#x4FEE;&#x6539;&#x76F8;&#x5173;&#x7684;&#x8BB0;&#x5F55;&#x4E4B;&#x524D;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x3002;</li>
+<li>Sleeping: &#x6B63;&#x5728;&#x7B49;&#x5F85;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x65B0;&#x8BF7;&#x6C42;.</li>
+<li>System lock: &#x6B63;&#x5728;&#x7B49;&#x5F85;&#x53D6;&#x5F97;&#x4E00;&#x4E2A;&#x5916;&#x90E8;&#x7684;&#x7CFB;&#x7EDF;&#x9501;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x6CA1;&#x6709;&#x8FD0;&#x884C;&#x591A;&#x4E2A;mysqld&#x670D;&#x52A1;&#x5668;&#x540C;&#x65F6;&#x8BF7;&#x6C42;&#x540C;&#x4E00;&#x4E2A;&#x8868;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x589E;&#x52A0;&#x2013;skip-external-locking&#x53C2;&#x6570;&#x6765;&#x7981;&#x6B62;&#x5916;&#x90E8;&#x7CFB;&#x7EDF;&#x9501;&#x3002;</li>
+<li>Upgrading lock: INSERT DELAYED&#x6B63;&#x5728;&#x5C1D;&#x8BD5;&#x53D6;&#x5F97;&#x4E00;&#x4E2A;&#x9501;&#x8868;&#x4EE5;&#x63D2;&#x5165;&#x65B0;&#x8BB0;&#x5F55;&#x3002;</li>
+<li>Updating: &#x6B63;&#x5728;&#x641C;&#x7D22;&#x5339;&#x914D;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;&#x5B83;&#x4EEC;&#x3002;</li>
+<li>User Lock: &#x6B63;&#x5728;&#x7B49;&#x5F85;GET_LOCK()&#x3002;</li>
+<li>Waiting for tables: &#x8BE5;&#x7EBF;&#x7A0B;&#x5F97;&#x5230;&#x901A;&#x77E5;&#xFF0C;&#x6570;&#x636E;&#x8868;&#x7ED3;&#x6784;&#x5DF2;&#x7ECF;&#x88AB;&#x4FEE;&#x6539;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x6253;&#x5F00;&#x6570;&#x636E;&#x8868;&#x4EE5;&#x53D6;&#x5F97;&#x65B0;&#x7684;&#x7ED3;&#x6784;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x4E3A;&#x4E86;&#x80FD;&#x7684;&#x91CD;&#x65B0;&#x6253;&#x5F00;&#x6570;&#x636E;&#x8868;&#xFF0C;&#x5FC5;&#x987B;&#x7B49;&#x5230;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5173;&#x95ED;&#x8FD9;&#x4E2A;&#x8868;&#x3002;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E2A;&#x901A;&#x77E5;&#xFF1A;FLUSH TABLES tbl_name, ALTER TABLE, RENAME TABLE, REPAIR TABLE, ANALYZE TABLE,&#x6216;OPTIMIZE TABLE&#x3002;</li>
+<li>waiting for handler insert: INSERT DELAYED&#x5DF2;&#x7ECF;&#x5904;&#x7406;&#x5B8C;&#x4E86;&#x6240;&#x6709;&#x5F85;&#x5904;&#x7406;&#x7684;&#x63D2;&#x5165;&#x64CD;&#x4F5C;&#xFF0C;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x65B0;&#x7684;&#x8BF7;&#x6C42;&#x3002;<br>&#x3000;<br>&#x5927;&#x90E8;&#x5206;&#x72B6;&#x6001;&#x5BF9;&#x5E94;&#x5F88;&#x5FEB;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x53EA;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x4FDD;&#x6301;&#x540C;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#x597D;&#x51E0;&#x79D2;&#x949F;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x80FD;&#x662F;&#x6709;&#x95EE;&#x9898;&#x53D1;&#x751F;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x3002;</li>
+</ul>
+<p>&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x7684;&#x72B6;&#x6001;&#x6CA1;&#x5728;&#x4E0A;&#x9762;&#x4E2D;&#x5217;&#x51FA;&#x6765;&#xFF0C;&#x4E0D;&#x8FC7;&#x5B83;&#x4EEC;&#x5927;&#x90E8;&#x5206;&#x53EA;&#x662F;&#x5728;&#x67E5;&#x770B;&#x670D;&#x52A1;&#x5668;&#x662F;&#x5426;&#x6709;&#x5B58;&#x5728;&#x9519;&#x8BEF;&#x662F;&#x624D;&#x7528;&#x5F97;&#x7740;&#x3002;</p>
+<h2 id="show-open-tables"><a href="#show-open-tables" class="headerlink" title="show open tables;"></a>show open tables;</h2><p>&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x80FD;&#x591F;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x6709;&#x90A3;&#x4E9B;&#x8868;&#x662F;&#x6253;&#x5F00;&#x7684;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">open</span> <span class="keyword">tables</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">open</span> <span class="keyword">tables</span> <span class="keyword">from</span> <span class="keyword">database</span>(&#x5E93;&#x540D;);</div><div class="line">Database: &#x6570;&#x636E;&#x5E93;&#x540D;</div><div class="line">Table: &#x8868;&#x540D;</div><div class="line">In_use: &#x6709;&#x591A;&#x5C11;&#x7EBF;&#x7A0B;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x67D0;&#x5F20;&#x8868;</div><div class="line">Name_locked: &#x8868;&#x662F;&#x5426;&#x88AB;&#x9501;&#xFF0C;&#x8FD9;&#x4E00;&#x822C;&#x53D1;&#x751F;&#x5728;<span class="keyword">Drop</span>&#x6216;<span class="keyword">Rename</span>&#x547D;&#x4EE4;&#x64CD;&#x4F5C;&#x8FD9;&#x5F20;&#x8868;&#x65F6;&#x3002;</div><div class="line">&#x6240;&#x4EE5;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x901A;&#x5E38;&#x4E0D;&#x80FD;&#x5E2E;&#x52A9;&#x89E3;&#x7B54;&#x6211;&#x4EEC;&#x5E38;&#x89C1;&#x7684;&#x95EE;&#x9898;&#xFF1A;&#x5F53;&#x524D;&#x67D0;&#x5F20;&#x8868;&#x662F;&#x5426;&#x6709;&#x6B7B;&#x9501;&#xFF0C;&#x8C01;&#x62E5;&#x6709;&#x8868;&#x4E0A;&#x7684;&#x8FD9;&#x4E2A;&#x9501;&#x7B49;&#xFF1B;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x770B;&#x5230;&#x5F53;&#x524D;&#x54EA;&#x4E2A;&#x8868;&#x88AB;&#x5927;&#x91CF;<span class="keyword">sql</span>&#x64CD;&#x4F5C;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x9488;&#x5BF9;&#x67D0;&#x4E2A;&#x4E1A;&#x52A1;&#x6A21;&#x5757;&#x7684;<span class="keyword">sql</span>&#x8FDB;&#x884C;&#x4F18;&#x5316;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="show-status-like-&#x2018;-lock-&#x2019;"><a href="#show-status-like-&#x2018;-lock-&#x2019;" class="headerlink" title="show status like &#x2018;%lock%&#x2019;;"></a>show status like &#x2018;%lock%&#x2019;;</h2><p>&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x9501;&#x72B6;&#x6001;</p>
+<h2 id="show-engine-innodb-status-G"><a href="#show-engine-innodb-status-G" class="headerlink" title="show engine innodb status\G;"></a>show engine innodb status\G;</h2><p>&#x67E5;&#x770B;innodb&#x5F15;&#x64CE;&#x72B6;&#x6001;</p>
+<h2 id="show-variables-like-&#x2018;-timeout-&#x2019;"><a href="#show-variables-like-&#x2018;-timeout-&#x2019;" class="headerlink" title="show variables like &#x2018;%timeout%&#x2019;;"></a>show variables like &#x2018;%timeout%&#x2019;;</h2><p>&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x8D85;&#x65F6;&#x60C5;&#x51B5;</p>
+<h2 id="show-status"><a href="#show-status" class="headerlink" title="show status;"></a>show status;</h2><p>&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x5F53;&#x524D;&#x72B6;&#x6001;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">Aborted_clients &#x7531;&#x4E8E;&#x5BA2;&#x6237;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x5DF2;&#x7ECF;&#x6B7B;&#x6389;&#xFF0C;&#x5DF2;&#x7ECF;&#x653E;&#x5F03;&#x7684;&#x8FDE;&#x63A5;&#x6570;&#x91CF;&#x3002; </div><div class="line">Aborted_connects &#x5C1D;&#x8BD5;&#x5DF2;&#x7ECF;&#x5931;&#x8D25;&#x7684;MySQL&#x670D;&#x52A1;&#x5668;&#x7684;&#x8FDE;&#x63A5;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Connections &#x8BD5;&#x56FE;&#x8FDE;&#x63A5;MySQL&#x670D;&#x52A1;&#x5668;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Created_tmp_tables &#x5F53;&#x6267;&#x884C;&#x8BED;&#x53E5;&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x88AB;&#x521B;&#x9020;&#x4E86;&#x7684;&#x9690;&#x542B;&#x4E34;&#x65F6;&#x8868;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Delayed_insert_threads &#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x5EF6;&#x8FDF;&#x63D2;&#x5165;&#x5904;&#x7406;&#x5668;&#x7EBF;&#x7A0B;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Delayed_writes &#x7528;INSERT DELAYED&#x5199;&#x5165;&#x7684;&#x884C;&#x6570;&#x3002; </div><div class="line">Delayed_errors &#x7528;INSERT DELAYED&#x5199;&#x5165;&#x7684;&#x53D1;&#x751F;&#x67D0;&#x4E9B;&#x9519;&#x8BEF;(&#x53EF;&#x80FD;&#x91CD;&#x590D;&#x952E;&#x503C;)&#x7684;&#x884C;&#x6570;&#x3002; </div><div class="line">Flush_commands &#x6267;&#x884C;FLUSH&#x547D;&#x4EE4;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_delete &#x8BF7;&#x6C42;&#x4ECE;&#x4E00;&#x5F20;&#x8868;&#x4E2D;&#x5220;&#x9664;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_read_first &#x8BF7;&#x6C42;&#x8BFB;&#x5165;&#x8868;&#x4E2D;&#x7B2C;&#x4E00;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_read_key &#x8BF7;&#x6C42;&#x6570;&#x5B57;&#x57FA;&#x4E8E;&#x952E;&#x8BFB;&#x884C;&#x3002; </div><div class="line">Handler_read_next &#x8BF7;&#x6C42;&#x8BFB;&#x5165;&#x57FA;&#x4E8E;&#x4E00;&#x4E2A;&#x952E;&#x7684;&#x4E00;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_read_rnd &#x8BF7;&#x6C42;&#x8BFB;&#x5165;&#x57FA;&#x4E8E;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684;&#x4E00;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_update &#x8BF7;&#x6C42;&#x66F4;&#x65B0;&#x8868;&#x4E2D;&#x4E00;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Handler_write &#x8BF7;&#x6C42;&#x5411;&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x4E00;&#x884C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Key_blocks_used &#x7528;&#x4E8E;&#x5173;&#x952E;&#x5B57;&#x7F13;&#x5B58;&#x7684;&#x5757;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Key_read_requests &#x8BF7;&#x6C42;&#x4ECE;&#x7F13;&#x5B58;&#x8BFB;&#x5165;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x7684;&#x6B21;&#x6570;&#x3002;</div><div class="line">Key_reads &#x4ECE;&#x78C1;&#x76D8;&#x7269;&#x7406;&#x8BFB;&#x5165;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Key_write_requests &#x8BF7;&#x6C42;&#x5C06;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#x5757;&#x5199;&#x5165;&#x7F13;&#x5B58;&#x6B21;&#x6570;&#x3002; </div><div class="line">Key_writes &#x5C06;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5757;&#x7269;&#x7406;&#x5199;&#x5165;&#x78C1;&#x76D8;&#x7684;&#x6B21;&#x6570;&#x3002; </div><div class="line">Max_used_connections &#x540C;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x8FDE;&#x63A5;&#x7684;&#x6700;&#x5927;&#x6570;&#x76EE;&#x3002; </div><div class="line">Not_flushed_key_blocks &#x5728;&#x952E;&#x7F13;&#x5B58;&#x4E2D;&#x5DF2;&#x7ECF;&#x6539;&#x53D8;&#x4F46;&#x662F;&#x8FD8;&#x6CA1;&#x88AB;&#x6E05;&#x7A7A;&#x5230;&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x952E;&#x5757;&#x3002; </div><div class="line">Not_flushed_delayed_rows &#x5728;INSERT DELAY&#x961F;&#x5217;&#x4E2D;&#x7B49;&#x5F85;&#x5199;&#x5165;&#x7684;&#x884C;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Open_tables &#x6253;&#x5F00;&#x8868;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Open_files &#x6253;&#x5F00;&#x6587;&#x4EF6;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Open_streams &#x6253;&#x5F00;&#x6D41;&#x7684;&#x6570;&#x91CF;(&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x65E5;&#x5FD7;&#x8BB0;&#x8F7D;&#xFF09; </div><div class="line">Opened_tables &#x5DF2;&#x7ECF;&#x6253;&#x5F00;&#x7684;&#x8868;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Questions &#x53D1;&#x5F80;&#x670D;&#x52A1;&#x5668;&#x7684;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Slow_queries &#x8981;&#x82B1;&#x8D85;&#x8FC7;long_query_time&#x65F6;&#x95F4;&#x7684;&#x67E5;&#x8BE2;&#x6570;&#x91CF;&#x3002; </div><div class="line">Threads_connected &#x5F53;&#x524D;&#x6253;&#x5F00;&#x7684;&#x8FDE;&#x63A5;&#x7684;&#x6570;&#x91CF;&#x3002; </div><div class="line">Threads_running &#x4E0D;&#x5728;&#x7761;&#x7720;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#x3002; </div><div class="line">Uptime &#x670D;&#x52A1;&#x5668;&#x5DE5;&#x4F5C;&#x4E86;&#x591A;&#x5C11;&#x79D2;&#x3002;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/16/docker-registry/" rel="next" title="docker registry v2 私有仓库搭建">
+                <i class="fa fa-chevron-left"></i> docker registry v2 私有仓库搭建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/17/mysql-explain/" rel="prev" title="sql优化&执行计划（explain & desc）">
+                sql优化&执行计划（explain & desc） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-processlist"><span class="nav-number">2.</span> <span class="nav-text">show processlist;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-open-tables"><span class="nav-number">3.</span> <span class="nav-text">show open tables;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-status-like-‘-lock-’"><span class="nav-number">4.</span> <span class="nav-text">show status like ‘%lock%’;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-engine-innodb-status-G"><span class="nav-number">5.</span> <span class="nav-text">show engine innodb status\G;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-variables-like-‘-timeout-’"><span class="nav-number">6.</span> <span class="nav-text">show variables like ‘%timeout%’;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-status"><span class="nav-number">7.</span> <span class="nav-text">show status;</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
