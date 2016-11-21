@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="docker,etcd,kubernetes," />
 
 
 
@@ -84,12 +84,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Casstiel">
-<meta property="og:url" content="http://c.isme.pub/tags/随笔/index.html">
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E0A;&amp;#x4E00;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#x5DF2;&amp;#x7ECF;&amp;#x505A;&amp;#x597D;&amp;#x4E86;https&amp;#x8BA4;&amp;#x8BC1;&amp;#x7684;registry&amp;#x4ED3;&amp;#x5E93;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x5F00;&amp;#x59CB;&amp;#x642D;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker 集群化配置">
+<meta property="og:url" content="http://c.isme.pub/2016/11/21/docker-kubernetes/index.html">
 <meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E0A;&amp;#x4E00;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#x5DF2;&amp;#x7ECF;&amp;#x505A;&amp;#x597D;&amp;#x4E86;https&amp;#x8BA4;&amp;#x8BC1;&amp;#x7684;registry&amp;#x4ED3;&amp;#x5E93;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x5F00;&amp;#x59CB;&amp;#x642D;&amp;#x">
+<meta property="og:updated_time" content="2016-11-21T07:52:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Casstiel">
+<meta name="twitter:title" content="docker 集群化配置">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E0A;&amp;#x4E00;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#x5DF2;&amp;#x7ECF;&amp;#x505A;&amp;#x597D;&amp;#x4E86;https&amp;#x8BA4;&amp;#x8BC1;&amp;#x7684;registry&amp;#x4ED3;&amp;#x5E93;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x5F00;&amp;#x59CB;&amp;#x642D;&amp;#x">
 
 
 
@@ -110,10 +114,10 @@
 
 
 
-  <link rel="canonical" href="http://c.isme.pub/tags/随笔/"/>
+  <link rel="canonical" href="http://c.isme.pub/2016/11/21/docker-kubernetes/"/>
 
 
-  <title> 标签: 随笔 | Casstiel </title>
+  <title> docker 集群化配置 | Casstiel </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +138,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -222,46 +226,170 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        随笔
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                docker 集群化配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-21T15:33:31+08:00" content="2016-11-21">
+              2016-11-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/docker/etcd/" itemprop="url" rel="index">
+                    <span itemprop="name">etcd</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/docker/etcd/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><p>&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x5DF2;&#x7ECF;&#x505A;&#x597D;&#x4E86;https&#x8BA4;&#x8BC1;&#x7684;registry&#x4ED3;&#x5E93;&#xFF0C;&#x4E0B;&#x9762;&#x5F00;&#x59CB;&#x642D;&#x5EFA;etcd&#x96C6;&#x7FA4;&#xFF0C;&#x76EE;&#x524D;&#x53EA;&#x80FD;&#x60F3;&#x5230;&#x7528;&#x6765;&#x505A;&#x8282;&#x70B9;&#x7684;&#x914D;&#x7F6E;&#x4E0A;&#x62A5;&#xFF0C;&#x4E3A;&#x4E86;&#x540E;&#x7EED;&#x7684;api&#x6570;&#x636E;&#x505A;&#x51C6;&#x5907;&#xFF0C;&#x4E4B;&#x540E;&#x96C6;&#x7FA4;&#x5316;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x80FD;&#x4F1A;&#x7528;&#x5230;&#x3002;</p>
+<p>k8s&#x548C;swarm&#x8FD8;&#x6CA1;&#x51B3;&#x5B9A;&#x7528;&#x54EA;&#x4E2A;&#xFF0C;&#x53EF;&#x80FD;&#x6682;&#x65F6;&#x4E0D;&#x4F1A;&#x5B89;&#x88C5;&#x96C6;&#x7FA4;&#xFF0C;&#x6216;&#x8005;&#x5148;&#x5B89;&#x88C5;k8s&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x5BF9;&#x6211;&#x540E;&#x7EED;&#x73AF;&#x5883;&#x6709;&#x6CA1;&#x6709;&#x5F71;&#x54CD;&#xFF0C;&#x53CD;&#x6B63;&#x8FD9;&#x4FE9;&#x90FD;&#x662F;&#x521A;&#x63A5;&#x89E6;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x90FD;&#x8FD8;&#x4E0D;&#x719F;&#x6089;&#x3002;</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/11/17/mysql-performance/" itemprop="url">
-              
-                <span itemprop="name">mysql性能查询以及简单处理</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-17T14:15:16+08:00"
-              content="2016-11-17" >
-          11-17
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag">#docker</a>
+          
+            <a href="/tags/etcd/" rel="tag">#etcd</a>
+          
+            <a href="/tags/kubernetes/" rel="tag">#kubernetes</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/21/nginx-install/" rel="next" title="nginx 编译安装">
+                <i class="fa fa-chevron-left"></i> nginx 编译安装
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -269,6 +397,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -288,8 +420,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/img/avatar.jpg"
@@ -339,6 +480,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -435,6 +587,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
