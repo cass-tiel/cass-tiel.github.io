@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux,sftp," />
 
 
 
@@ -84,12 +84,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Casstiel">
-<meta property="og:url" content="http://c.isme.pub/archives/2016/08/index.html">
+<meta name="description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sftp安装配置">
+<meta property="og:url" content="http://c.isme.pub/2016/11/21/sftp-install/index.html">
 <meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
+<meta property="og:updated_time" content="2016-11-21T10:28:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Casstiel">
+<meta name="twitter:title" content="sftp安装配置">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
 
 
 
@@ -110,10 +114,10 @@
 
 
 
-  <link rel="canonical" href="http://c.isme.pub/archives/2016/08/"/>
+  <link rel="canonical" href="http://c.isme.pub/2016/11/21/sftp-install/"/>
 
 
-  <title> 归档 | Casstiel </title>
+  <title> sftp安装配置 | Casstiel </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +138,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -222,103 +226,155 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 18 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/08/29/linux-back-process/" itemprop="url">
-              
-                <span itemprop="name">Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-29T11:00:44+08:00"
-              content="2016-08-29" >
-          08-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/08/05/mysql-slave/" itemprop="url">
-              
-                <span itemprop="name">MySql主从同步配置</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-05T09:58:27+08:00"
-              content="2016-08-05" >
-          08-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                sftp安装配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-21T18:02:37+08:00" content="2016-11-21">
+              2016-11-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/sftp/" itemprop="url" rel="index">
+                    <span itemprop="name">sftp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Allow SFTP and chroot, but deny SSH.</div><div class="line"></div><div class="line">groupadd sftp</div><div class="line">useradd -g sftp <span class="_">-s</span> /sbin/nologin sftp</div><div class="line">passwd sftp</div><div class="line"></div><div class="line">mkdir -p /data/sftp/upload/repush</div><div class="line">usermod <span class="_">-d</span> /data/sftp sftp</div><div class="line">chown root:sftp /data/sftp</div><div class="line">chmod 755 /data/sftp -R</div><div class="line">chown sftp:sftp /data/sftp/upload -R</div><div class="line"></div><div class="line">vi /etc/ssh/sshd_config</div><div class="line"></div><div class="line">Subsystem sftp internal-sftp</div><div class="line"></div><div class="line">Match group sftp</div><div class="line">ChrootDirectory /data/%u</div><div class="line">X11Forwarding no</div><div class="line">AllowTcpForwarding no</div><div class="line">ForceCommand internal-sftp</div><div class="line"></div><div class="line">service sshd restart</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/sftp/" rel="tag">#sftp</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/21/docker-install/" rel="next" title="docker安装学习记录">
+                <i class="fa fa-chevron-left"></i> docker安装学习记录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -326,6 +382,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -345,8 +405,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/img/avatar.jpg"
@@ -396,6 +465,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -492,11 +572,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
 
 
   
