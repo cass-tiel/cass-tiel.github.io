@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
+<meta name="description" content="&amp;#x6458;&amp;#x8981;sftp &amp;#x642D;&amp;#x5EFA;&amp;#xFF0C;&amp;#x7981;&amp;#x6B62;sftp&amp;#x7528;&amp;#x6237;ssh&amp;#x767B;&amp;#x9646;&amp;#x5E76;&amp;#x505A;&amp;#x597D;chroot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sftp安装配置">
 <meta property="og:url" content="http://c.isme.pub/2016/11/21/sftp-install/index.html">
 <meta property="og:site_name" content="Casstiel">
-<meta property="og:description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
-<meta property="og:updated_time" content="2016-11-21T10:28:37.000Z">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;sftp &amp;#x642D;&amp;#x5EFA;&amp;#xFF0C;&amp;#x7981;&amp;#x6B62;sftp&amp;#x7528;&amp;#x6237;ssh&amp;#x767B;&amp;#x9646;&amp;#x5E76;&amp;#x505A;&amp;#x597D;chroot">
+<meta property="og:updated_time" content="2016-11-24T04:01:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sftp安装配置">
-<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;1234567891011121314151617181920212223Allow SFTP and chroot, but deny SSH.groupadd sftpuseradd -g sftp -s /sbin/nologin sftppasswd sftpmkdir -p /data/sftp/upload/repushusermod -d /data/">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;sftp &amp;#x642D;&amp;#x5EFA;&amp;#xFF0C;&amp;#x7981;&amp;#x6B62;sftp&amp;#x7528;&amp;#x6237;ssh&amp;#x767B;&amp;#x9646;&amp;#x5E76;&amp;#x505A;&amp;#x597D;chroot">
 
 
 
@@ -318,7 +318,9 @@
       
 
       
-        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Allow SFTP and chroot, but deny SSH.</div><div class="line"></div><div class="line">groupadd sftp</div><div class="line">useradd -g sftp <span class="_">-s</span> /sbin/nologin sftp</div><div class="line">passwd sftp</div><div class="line"></div><div class="line">mkdir -p /data/sftp/upload/repush</div><div class="line">usermod <span class="_">-d</span> /data/sftp sftp</div><div class="line">chown root:sftp /data/sftp</div><div class="line">chmod 755 /data/sftp -R</div><div class="line">chown sftp:sftp /data/sftp/upload -R</div><div class="line"></div><div class="line">vi /etc/ssh/sshd_config</div><div class="line"></div><div class="line">Subsystem sftp internal-sftp</div><div class="line"></div><div class="line">Match group sftp</div><div class="line">ChrootDirectory /data/%u</div><div class="line">X11Forwarding no</div><div class="line">AllowTcpForwarding no</div><div class="line">ForceCommand internal-sftp</div><div class="line"></div><div class="line">service sshd restart</div></pre></td></tr></table></figure>
+        <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><p>sftp &#x642D;&#x5EFA;&#xFF0C;&#x7981;&#x6B62;sftp&#x7528;&#x6237;ssh&#x767B;&#x9646;&#x5E76;&#x505A;&#x597D;chroot</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Allow SFTP and chroot, but deny SSH.</div><div class="line"></div><div class="line">groupadd sftp</div><div class="line">useradd -g sftp <span class="_">-s</span> /sbin/nologin sftp</div><div class="line">passwd sftp</div><div class="line"></div><div class="line">mkdir -p /data/sftp/upload/repush</div><div class="line">usermod <span class="_">-d</span> /data/sftp sftp</div><div class="line">chown root:sftp /data/sftp</div><div class="line">chmod 755 /data/sftp -R</div><div class="line">chown sftp:sftp /data/sftp/upload -R</div><div class="line"></div><div class="line">vi /etc/ssh/sshd_config</div><div class="line"></div><div class="line">Subsystem sftp internal-sftp</div><div class="line"></div><div class="line">Match group sftp</div><div class="line">ChrootDirectory /data/%u</div><div class="line">X11Forwarding no</div><div class="line">AllowTcpForwarding no</div><div class="line">ForceCommand internal-sftp</div><div class="line"></div><div class="line">service sshd restart</div></pre></td></tr></table></figure>
 
       
     </div>
