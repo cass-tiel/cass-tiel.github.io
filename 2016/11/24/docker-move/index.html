@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://c.isme.pub/2016/11/24/docker-move/index.html">
 <meta property="og:site_name" content="Casstiel">
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x539F;&amp;#x73AF;&amp;#x5883;&amp;#x662F;&amp;#x8D2D;&amp;#x4E70;&amp;#x7684;&amp;#x56FD;&amp;#x5185;&amp;#x4E00;&amp;#x5BB6;docker&amp;#x4E91;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x516C;&amp;#x53F8;&amp;#x7684;&amp;#x4E00;&amp;#x5957;&amp;#x79C1;&amp;#">
-<meta property="og:updated_time" content="2016-11-24T04:09:14.000Z">
+<meta property="og:updated_time" content="2016-11-30T04:06:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次 docker 容器迁移">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x539F;&amp;#x73AF;&amp;#x5883;&amp;#x662F;&amp;#x8D2D;&amp;#x4E70;&amp;#x7684;&amp;#x56FD;&amp;#x5185;&amp;#x4E00;&amp;#x5BB6;docker&amp;#x4E91;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x516C;&amp;#x53F8;&amp;#x7684;&amp;#x4E00;&amp;#x5957;&amp;#x79C1;&amp;#">
@@ -307,7 +307,7 @@
 
       
         <h2 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h2><p>&#x539F;&#x73AF;&#x5883;&#x662F;&#x8D2D;&#x4E70;&#x7684;&#x56FD;&#x5185;&#x4E00;&#x5BB6;docker&#x4E91;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x516C;&#x53F8;&#x7684;&#x4E00;&#x5957;&#x79C1;&#x6709;&#x73AF;&#x5883;&#xFF0C;&#x642D;&#x5EFA;&#x5728;&#x516C;&#x53F8;&#x7684;&#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x3002;</p>
-<p>&#x6574;&#x5957;&#x73AF;&#x5883;&#x5305;&#x62EC;registry&#x3001;web&#x7BA1;&#x7406;&#x754C;&#x9762;&#x3001;api&#x63A5;&#x53E3;&#x7B49;&#xFF1B;&#x4E3B;&#x8981;&#x4F7F;&#x7528;&#x5355;&#x673A;&#x7684;&#x5F62;&#x5F0F;&#x8FD0;&#x884C;&#xFF0C;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x5BF9;&#x5B98;&#x65B9;docker&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x65B0;&#x7248;&#x672C;&#x529F;&#x80FD;&#x8F83;&#x4E3A;&#x5B8C;&#x5584;&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x8D2D;&#x4E70;&#xFF0C;&#x56E0;&#x6B64;&#x51B3;&#x5B9A;&#x64A4;&#x6389;&#x8FD9;&#x5957;&#x73AF;&#x5883;&#x3002;</p>
+<p>&#x6574;&#x5957;&#x73AF;&#x5883;&#x5305;&#x62EC;registry&#x3001;web&#x7BA1;&#x7406;&#x754C;&#x9762;&#x3001;api&#x63A5;&#x53E3;&#x7B49;&#xFF1B;&#x4E3B;&#x8981;&#x4F7F;&#x7528;&#x5355;&#x673A;&#x7684;&#x5F62;&#x5F0F;&#x8FD0;&#x884C;&#xFF0C;&#x65B0;&#x7248;&#x672C;&#x529F;&#x80FD;&#x8F83;&#x4E3A;&#x5B8C;&#x5584;&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x8D2D;&#x4E70;&#xFF0C;&#x56E0;&#x6B64;&#x51B3;&#x5B9A;&#x64A4;&#x6389;&#x8FD9;&#x5957;&#x73AF;&#x5883;&#x3002;</p>
 <p>&#x7531;&#x4E8E;&#x4E4B;&#x524D;&#x662F;&#x5C06;&#x5BB9;&#x5668;&#x5F53;&#x505A;&#x865A;&#x62DF;&#x673A;&#x7684;&#x5F62;&#x5F0F;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x8FC1;&#x79FB;&#x8FC7;&#x7A0B;&#x53EA;&#x8FC1;&#x79FB;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#xFF1A;</p>
 <ul>
 <li>registry&#x4E2D;&#x955C;&#x50CF;</li>
@@ -317,10 +317,10 @@
 <h2 id="&#x73AF;&#x5883;&#x8BF4;&#x660E;"><a href="#&#x73AF;&#x5883;&#x8BF4;&#x660E;" class="headerlink" title="&#x73AF;&#x5883;&#x8BF4;&#x660E;"></a>&#x73AF;&#x5883;&#x8BF4;&#x660E;</h2><p>&#x539F;&#x73AF;&#x5883;</p>
 <ul>
 <li>&#x4E00;&#x53F0;master&#xFF08;web,api,registry,etcd&#xFF09;</li>
-<li>&#x56DB;&#x53F0;node</li>
+<li>&#x56DB;&#x53F0;node (30.7/24 ~ 30.10/24)</li>
 <li>ubuntu14.04</li>
 </ul>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker commit -p 30b8ae34aad1 jiaqiang-lianlu-bak</div><div class="line">docker save -o /data/jiaqiang-lianlu.tar jiaqiang-lianlu-bak</div><div class="line">docker load -i jiaqiang-lianlu.tar</div><div class="line">docker run <span class="_">-d</span> --cpuset-cpus 0-3 --momery 8G --name jiaqiang-lianlu jiaqiang-lianlu-bak</div></pre></td></tr></table></figure>
       
     </div>
 
