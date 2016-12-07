@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://c.isme.pub/2016/11/24/docker-move/index.html">
 <meta property="og:site_name" content="Casstiel">
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x539F;&amp;#x73AF;&amp;#x5883;&amp;#x662F;&amp;#x8D2D;&amp;#x4E70;&amp;#x7684;&amp;#x56FD;&amp;#x5185;&amp;#x4E00;&amp;#x5BB6;docker&amp;#x4E91;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x516C;&amp;#x53F8;&amp;#x7684;&amp;#x4E00;&amp;#x5957;&amp;#x79C1;&amp;#">
-<meta property="og:updated_time" content="2016-12-07T02:59:02.000Z">
+<meta property="og:updated_time" content="2016-12-07T03:00:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次 docker 容器迁移">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x539F;&amp;#x73AF;&amp;#x5883;&amp;#x662F;&amp;#x8D2D;&amp;#x4E70;&amp;#x7684;&amp;#x56FD;&amp;#x5185;&amp;#x4E00;&amp;#x5BB6;docker&amp;#x4E91;&amp;#x89E3;&amp;#x51B3;&amp;#x65B9;&amp;#x6848;&amp;#x516C;&amp;#x53F8;&amp;#x7684;&amp;#x4E00;&amp;#x5957;&amp;#x79C1;&amp;#">
@@ -346,7 +346,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">apt update &amp;&amp; apt upgrade</div><div class="line">apt install -y curl</div><div class="line">curl https://get.docker.com/ | sh</div><div class="line"></div><div class="line">vim /etc/default/docker</div><div class="line">	DOCKER_OPTS=<span class="string">&quot;-g /data/docker --insecure-registry opreg.chinawayltd.com -b=docker0 -H tcp://0.0.0.0:4273 -H unix:///var/run/docker.sock&quot;</span></div><div class="line">	</div><div class="line">/etc/init.d/docker restart</div><div class="line">docker info</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">apt update &amp;&amp; apt upgrade</div><div class="line">apt install -y curl</div><div class="line">curl https://get.docker.com/ | sh</div><div class="line"></div><div class="line">vim /etc/default/docker</div><div class="line">DOCKER_OPTS=<span class="string">&quot;-g /data/docker --insecure-registry opreg.chinawayltd.com -b=docker0 -H tcp://0.0.0.0:4273 -H unix:///var/run/docker.sock&quot;</span></div><div class="line">	</div><div class="line">/etc/init.d/docker restart</div><div class="line">docker info</div></pre></td></tr></table></figure>
 <h3 id="&#x914D;&#x7F6E;etcd&#x96C6;&#x7FA4;"><a href="#&#x914D;&#x7F6E;etcd&#x96C6;&#x7FA4;" class="headerlink" title="&#x914D;&#x7F6E;etcd&#x96C6;&#x7FA4;"></a>&#x914D;&#x7F6E;etcd&#x96C6;&#x7FA4;</h3><blockquote>
 <p>&#x53C2;&#x8003; <a href="http://c.isme.pub/2016/11/21/etcd-cluster/">etcd-cluster &#x96C6;&#x7FA4;&#x90E8;&#x7F72;</a></p>
 </blockquote>
