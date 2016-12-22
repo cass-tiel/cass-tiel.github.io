@@ -1,0 +1,616 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x81EA;&amp;#x4ECE;MySQL&amp;#x88AB;Oracle&amp;#x6536;&amp;#x8D2D;&amp;#x4EE5;&amp;#x540E;&amp;#xFF0C;PostgreSQL&amp;#x9010;&amp;#x6E10;&amp;#x6210;&amp;#x4E3A;&amp;#x5F00;&amp;#x6E90;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learn-postgresql">
+<meta property="og:url" content="http://c.isme.pub/2016/12/22/learn-postgresql/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x81EA;&amp;#x4ECE;MySQL&amp;#x88AB;Oracle&amp;#x6536;&amp;#x8D2D;&amp;#x4EE5;&amp;#x540E;&amp;#xFF0C;PostgreSQL&amp;#x9010;&amp;#x6E10;&amp;#x6210;&amp;#x4E3A;&amp;#x5F00;&amp;#x6E90;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x">
+<meta property="og:image" content="http://c.isme.pub/2016/12/22/learn-postgresql/1.png">
+<meta property="og:updated_time" content="2016-12-22T03:21:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="learn-postgresql">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x81EA;&amp;#x4ECE;MySQL&amp;#x88AB;Oracle&amp;#x6536;&amp;#x8D2D;&amp;#x4EE5;&amp;#x540E;&amp;#xFF0C;PostgreSQL&amp;#x9010;&amp;#x6E10;&amp;#x6210;&amp;#x4E3A;&amp;#x5F00;&amp;#x6E90;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x">
+<meta name="twitter:image" content="http://c.isme.pub/2016/12/22/learn-postgresql/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/12/22/learn-postgresql/"/>
+
+
+  <title> learn-postgresql | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                learn-postgresql
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-22T11:07:18+08:00" content="2016-12-22">
+              2016-12-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x81EA;&#x4ECE;MySQL&#x88AB;Oracle&#x6536;&#x8D2D;&#x4EE5;&#x540E;&#xFF0C;PostgreSQL&#x9010;&#x6E10;&#x6210;&#x4E3A;&#x5F00;&#x6E90;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x7684;&#x9996;&#x9009;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x4ECB;&#x7ECD;PostgreSQL&#x7684;&#x5B89;&#x88C5;&#x548C;&#x57FA;&#x672C;&#x7528;&#x6CD5;&#xFF0C;&#x4F9B;&#x521D;&#x6B21;&#x4F7F;&#x7528;&#x8005;&#x4E0A;&#x624B;&#x3002;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x57FA;&#x4E8E;Debian&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B9E;&#x5728;&#x6CA1;&#x6709;&#x7CBE;&#x529B;&#x517C;&#x987E;&#xFF0C;&#x4F46;&#x662F;&#x5927;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x5E94;&#x8BE5;&#x666E;&#x904D;&#x9002;&#x7528;&#x3002;</p>
+<p><img src="/2016/12/22/learn-postgresql/1.png" alt="img"></p>
+<a id="more"></a>
+<h1 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h1><h2 id="&#x5B89;&#x88C5;PostgreSQL-client"><a href="#&#x5B89;&#x88C5;PostgreSQL-client" class="headerlink" title="&#x5B89;&#x88C5;PostgreSQL-client"></a>&#x5B89;&#x88C5;PostgreSQL-client</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install postgresql-client</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;PostgreSQL-server"><a href="#&#x5B89;&#x88C5;PostgreSQL-server" class="headerlink" title="&#x5B89;&#x88C5;PostgreSQL-server"></a>&#x5B89;&#x88C5;PostgreSQL-server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install postgresql</div></pre></td></tr></table></figure>
+<p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#xFF0C;PostgreSQL&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x81EA;&#x52A8;&#x5728;&#x672C;&#x673A;&#x7684;5432&#x7AEF;&#x53E3;&#x5F00;&#x542F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8FD8;&#x60F3;&#x5B89;&#x88C5;&#x56FE;&#x5F62;&#x7BA1;&#x7406;&#x754C;&#x9762;&#xFF0C;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x662F;&#x672C;&#x6587;&#x4E0D;&#x6D89;&#x53CA;&#x8FD9;&#x65B9;&#x9762;&#x5185;&#x5BB9;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pgadmin3</div></pre></td></tr></table></figure>
+<h1 id="&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;"><a href="#&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;"></a>&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;</h1><p>&#x521D;&#x6B21;&#x5B89;&#x88C5;&#x540E;&#xFF0C;&#x9ED8;&#x8BA4;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;postgres&#x7684;&#x6570;&#x636E;&#x5E93;&#x548C;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;postgres&#x7684;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;&#x3002;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x751F;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;postgres&#x7684;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;postgres&#x7528;&#x6237;&#xFF0C;&#x6765;&#x751F;&#x6210;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;&#x3002;&#x597D;&#x51E0;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x7684;&#xFF0C;&#x8FD9;&#x91CC;&#x4ECB;&#x7ECD;&#x4E24;&#x79CD;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;PostgreSQL&#x63A7;&#x5236;&#x53F0;"><a href="#&#x4F7F;&#x7528;PostgreSQL&#x63A7;&#x5236;&#x53F0;" class="headerlink" title="&#x4F7F;&#x7528;PostgreSQL&#x63A7;&#x5236;&#x53F0;"></a>&#x4F7F;&#x7528;PostgreSQL&#x63A7;&#x5236;&#x53F0;</h2><h3 id="&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Linux&#x65B0;&#x7528;&#x6237;"><a href="#&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Linux&#x65B0;&#x7528;&#x6237;" class="headerlink" title="&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Linux&#x65B0;&#x7528;&#x6237;"></a>&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Linux&#x65B0;&#x7528;&#x6237;</h3><p>&#x53EF;&#x4EE5;&#x53D6;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;dbuser&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo adduser dbuser</div></pre></td></tr></table></figure>
+<h3 id="&#x5207;&#x6362;&#x5230;postgres&#x7528;&#x6237;"><a href="#&#x5207;&#x6362;&#x5230;postgres&#x7528;&#x6237;" class="headerlink" title="&#x5207;&#x6362;&#x5230;postgres&#x7528;&#x6237;"></a>&#x5207;&#x6362;&#x5230;postgres&#x7528;&#x6237;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo su - postgres</div></pre></td></tr></table></figure>
+<h3 id="&#x4F7F;&#x7528;psql&#x547D;&#x4EE4;&#x767B;&#x5F55;PostgreSQL&#x63A7;&#x5236;&#x53F0;"><a href="#&#x4F7F;&#x7528;psql&#x547D;&#x4EE4;&#x767B;&#x5F55;PostgreSQL&#x63A7;&#x5236;&#x53F0;" class="headerlink" title="&#x4F7F;&#x7528;psql&#x547D;&#x4EE4;&#x767B;&#x5F55;PostgreSQL&#x63A7;&#x5236;&#x53F0;"></a>&#x4F7F;&#x7528;psql&#x547D;&#x4EE4;&#x767B;&#x5F55;PostgreSQL&#x63A7;&#x5236;&#x53F0;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x65F6;&#x76F8;&#x5F53;&#x4E8E;&#x7CFB;&#x7EDF;&#x7528;&#x6237;postgres&#x4EE5;&#x540C;&#x540D;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;&#x7684;&#x8EAB;&#x4EFD;&#xFF0C;&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x662F;&#x4E0D;&#x7528;&#x8F93;&#x5165;&#x5BC6;&#x7801;&#x7684;&#x3002;&#x5982;&#x679C;&#x4E00;&#x5207;&#x6B63;&#x5E38;&#xFF0C;&#x7CFB;&#x7EDF;&#x63D0;&#x793A;&#x7B26;&#x4F1A;&#x53D8;&#x4E3A;&#x201D;postgres=#&#x201D;&#xFF0C;&#x8868;&#x793A;&#x8FD9;&#x65F6;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x4E86;&#x6570;&#x636E;&#x5E93;&#x63A7;&#x5236;&#x53F0;&#x3002;&#x4EE5;&#x4E0B;&#x7684;&#x547D;&#x4EE4;&#x90FD;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x5185;&#x5B8C;&#x6210;&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x4F7F;&#x7528;-password&#x547D;&#x4EE4;&#xFF0C;&#x4E3A;postgres&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5BC6;&#x7801;&#x3002;"><a href="#&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x4F7F;&#x7528;-password&#x547D;&#x4EE4;&#xFF0C;&#x4E3A;postgres&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5BC6;&#x7801;&#x3002;" class="headerlink" title="&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x4F7F;&#x7528;\password&#x547D;&#x4EE4;&#xFF0C;&#x4E3A;postgres&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5BC6;&#x7801;&#x3002;"></a>&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x4F7F;&#x7528;\password&#x547D;&#x4EE4;&#xFF0C;&#x4E3A;postgres&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5BC6;&#x7801;&#x3002;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\password postgres</div></pre></td></tr></table></figure>
+<h3 id="&#x7B2C;&#x4E8C;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF08;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;&#x662F;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF09;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#x3002;"><a href="#&#x7B2C;&#x4E8C;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF08;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;&#x662F;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF09;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#x3002;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF08;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;&#x662F;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF09;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#x3002;"></a>&#x7B2C;&#x4E8C;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF08;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;&#x662F;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF09;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#x3002;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE USER dbuser WITH PASSWORD <span class="string">&apos;password&apos;</span>;</div></pre></td></tr></table></figure>
+<h3 id="&#x7B2C;&#x4E09;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser&#x3002;"><a href="#&#x7B2C;&#x4E09;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser&#x3002;" class="headerlink" title="&#x7B2C;&#x4E09;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser&#x3002;"></a>&#x7B2C;&#x4E09;&#x4EF6;&#x4E8B;&#x662F;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser&#x3002;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE DATABASE exampledb OWNER dbuser;</div></pre></td></tr></table></figure>
+<h3 id="&#x7B2C;&#x56DB;&#x4EF6;&#x4E8B;&#x662F;&#x5C06;exampledb&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#x90FD;&#x8D4B;&#x4E88;dbuser&#xFF0C;&#x5426;&#x5219;dbuser&#x53EA;&#x80FD;&#x767B;&#x5F55;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x6743;&#x9650;&#x3002;"><a href="#&#x7B2C;&#x56DB;&#x4EF6;&#x4E8B;&#x662F;&#x5C06;exampledb&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#x90FD;&#x8D4B;&#x4E88;dbuser&#xFF0C;&#x5426;&#x5219;dbuser&#x53EA;&#x80FD;&#x767B;&#x5F55;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x6743;&#x9650;&#x3002;" class="headerlink" title="&#x7B2C;&#x56DB;&#x4EF6;&#x4E8B;&#x662F;&#x5C06;exampledb&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#x90FD;&#x8D4B;&#x4E88;dbuser&#xFF0C;&#x5426;&#x5219;dbuser&#x53EA;&#x80FD;&#x767B;&#x5F55;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x6743;&#x9650;&#x3002;"></a>&#x7B2C;&#x56DB;&#x4EF6;&#x4E8B;&#x662F;&#x5C06;exampledb&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#x90FD;&#x8D4B;&#x4E88;dbuser&#xFF0C;&#x5426;&#x5219;dbuser&#x53EA;&#x80FD;&#x767B;&#x5F55;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x6743;&#x9650;&#x3002;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GRANT ALL PRIVILEGES ON DATABASE exampledb to dbuser;</div></pre></td></tr></table></figure>
+<h3 id="&#x6700;&#x540E;&#xFF0C;&#x4F7F;&#x7528;-q&#x547D;&#x4EE4;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x6309;ctrl-D&#xFF09;&#x3002;"><a href="#&#x6700;&#x540E;&#xFF0C;&#x4F7F;&#x7528;-q&#x547D;&#x4EE4;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x6309;ctrl-D&#xFF09;&#x3002;" class="headerlink" title="&#x6700;&#x540E;&#xFF0C;&#x4F7F;&#x7528;\q&#x547D;&#x4EE4;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x6309;ctrl+D&#xFF09;&#x3002;"></a>&#x6700;&#x540E;&#xFF0C;&#x4F7F;&#x7528;\q&#x547D;&#x4EE4;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x6309;ctrl+D&#xFF09;&#x3002;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\q</div></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;shell&#x547D;&#x4EE4;&#x884C;"><a href="#&#x4F7F;&#x7528;shell&#x547D;&#x4EE4;&#x884C;" class="headerlink" title="&#x4F7F;&#x7528;shell&#x547D;&#x4EE4;&#x884C;"></a>&#x4F7F;&#x7528;shell&#x547D;&#x4EE4;&#x884C;</h2><p>&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x9664;&#x4E86;&#x5728;PostgreSQL&#x63A7;&#x5236;&#x53F0;&#x5185;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;shell&#x547D;&#x4EE4;&#x884C;&#x4E0B;&#x5B8C;&#x6210;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;PostgreSQL&#x63D0;&#x4F9B;&#x4E86;&#x547D;&#x4EE4;&#x884C;&#x7A0B;&#x5E8F;createuser&#x548C;createdb&#x3002;&#x8FD8;&#x662F;&#x4EE5;&#x65B0;&#x5EFA;&#x7528;&#x6237;dbuser&#x548C;&#x6570;&#x636E;&#x5E93;exampledb&#x4E3A;&#x4F8B;&#x3002;</p>
+<h3 id="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5176;&#x4E3A;&#x8D85;&#x7EA7;&#x7528;&#x6237;"><a href="#&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5176;&#x4E3A;&#x8D85;&#x7EA7;&#x7528;&#x6237;" class="headerlink" title="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5176;&#x4E3A;&#x8D85;&#x7EA7;&#x7528;&#x6237;"></a>&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;dbuser&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5176;&#x4E3A;&#x8D85;&#x7EA7;&#x7528;&#x6237;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -u postgres createuser --superuser dbuser</div></pre></td></tr></table></figure>
+<h3 id="&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x8BBE;&#x7F6E;dbuser&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;"><a href="#&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x8BBE;&#x7F6E;dbuser&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;" class="headerlink" title="&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x8BBE;&#x7F6E;dbuser&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;"></a>&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x8BBE;&#x7F6E;dbuser&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x9000;&#x51FA;&#x63A7;&#x5236;&#x53F0;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo -u postgres psql</div><div class="line">\password dbuser</div><div class="line">\q</div></pre></td></tr></table></figure>
+<h3 id="&#x5728;shell&#x547D;&#x4EE4;&#x884C;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser"><a href="#&#x5728;shell&#x547D;&#x4EE4;&#x884C;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser" class="headerlink" title="&#x5728;shell&#x547D;&#x4EE4;&#x884C;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser"></a>&#x5728;shell&#x547D;&#x4EE4;&#x884C;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;exampledb&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x6240;&#x6709;&#x8005;&#x4E3A;dbuser</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -u postgres createdb -O dbuser exampledb</div></pre></td></tr></table></figure>
+<h1 id="&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;"><a href="#&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;"></a>&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;</h1><p>&#x6DFB;&#x52A0;&#x65B0;&#x7528;&#x6237;&#x548C;&#x65B0;&#x6570;&#x636E;&#x5E93;&#x4EE5;&#x540E;&#xFF0C;&#x5C31;&#x8981;&#x4EE5;&#x65B0;&#x7528;&#x6237;&#x7684;&#x540D;&#x4E49;&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x662F;psql&#x547D;&#x4EE4;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql -U dbuser <span class="_">-d</span> exampledb -h 127.0.0.1 -p 5432</div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x547D;&#x4EE4;&#x7684;&#x53C2;&#x6570;&#x542B;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;-U&#x6307;&#x5B9A;&#x7528;&#x6237;&#xFF0C;-d&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#xFF0C;-h&#x6307;&#x5B9A;&#x670D;&#x52A1;&#x5668;&#xFF0C;-p&#x6307;&#x5B9A;&#x7AEF;&#x53E3;&#x3002;</p>
+<p>&#x8F93;&#x5165;&#x4E0A;&#x9762;&#x547D;&#x4EE4;&#x4EE5;&#x540E;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x63D0;&#x793A;&#x8F93;&#x5165;dbuser&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;&#x3002;&#x8F93;&#x5165;&#x6B63;&#x786E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x767B;&#x5F55;&#x63A7;&#x5236;&#x53F0;&#x4E86;&#x3002;</p>
+<p>psql&#x547D;&#x4EE4;&#x5B58;&#x5728;&#x7B80;&#x5199;&#x5F62;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x662F;PostgreSQL&#x7528;&#x6237;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#x7528;&#x6237;&#x540D;&#xFF08;-U&#x53C2;&#x6570;&#x7684;&#x90E8;&#x5206;&#xFF09;&#x3002;&#x4E3E;&#x4F8B;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x7684;Linux&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x540D;&#x4E3A;ruanyf&#xFF0C;&#x4E14;PostgreSQL&#x6570;&#x636E;&#x5E93;&#x5B58;&#x5728;&#x540C;&#x540D;&#x7528;&#x6237;&#xFF0C;&#x5219;&#x6211;&#x4EE5;ruanyf&#x8EAB;&#x4EFD;&#x767B;&#x5F55;Linux&#x7CFB;&#x7EDF;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x5BC6;&#x7801;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql exampledb</div></pre></td></tr></table></figure>
+<p>&#x6B64;&#x65F6;&#xFF0C;&#x5982;&#x679C;PostgreSQL&#x5185;&#x90E8;&#x8FD8;&#x5B58;&#x5728;&#x4E0E;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x540C;&#x540D;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5219;&#x8FDE;&#x6570;&#x636E;&#x5E93;&#x540D;&#x90FD;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x5047;&#x5B9A;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x53EB;&#x505A;ruanyf&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x952E;&#x5165;psql&#x5C31;&#x53EF;&#x4EE5;&#x767B;&#x5F55;&#x8BE5;&#x6570;&#x636E;&#x5E93;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql</div></pre></td></tr></table></figure>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x6062;&#x590D;&#x5916;&#x90E8;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql exampledb &lt; exampledb.sql</div></pre></td></tr></table></figure>
+<h1 id="&#x63A7;&#x5236;&#x53F0;&#x547D;&#x4EE4;"><a href="#&#x63A7;&#x5236;&#x53F0;&#x547D;&#x4EE4;" class="headerlink" title="&#x63A7;&#x5236;&#x53F0;&#x547D;&#x4EE4;"></a>&#x63A7;&#x5236;&#x53F0;&#x547D;&#x4EE4;</h1><p>&#x9664;&#x4E86;&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x7528;&#x5230;&#x7684;\password&#x547D;&#x4EE4;&#xFF08;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#xFF09;&#x548C;\q&#x547D;&#x4EE4;&#xFF08;&#x9000;&#x51FA;&#xFF09;&#x4EE5;&#x5916;&#xFF0C;&#x63A7;&#x5236;&#x53F0;&#x8FD8;&#x63D0;&#x4F9B;&#x4E00;&#x7CFB;&#x5217;&#x5176;&#x4ED6;&#x547D;&#x4EE4;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">\h&#xFF1A;&#x67E5;&#x770B;SQL&#x547D;&#x4EE4;&#x7684;&#x89E3;&#x91CA;&#xFF0C;&#x6BD4;&#x5982;\h select&#x3002;</div><div class="line">\?&#xFF1A;&#x67E5;&#x770B;psql&#x547D;&#x4EE4;&#x5217;&#x8868;&#x3002;</div><div class="line">\l&#xFF1A;&#x5217;&#x51FA;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;&#x3002;</div><div class="line">\c [database_name]&#xFF1A;&#x8FDE;&#x63A5;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x5E93;&#x3002;</div><div class="line">\d&#xFF1A;&#x5217;&#x51FA;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x8868;&#x683C;&#x3002;</div><div class="line">\d [table_name]&#xFF1A;&#x5217;&#x51FA;&#x67D0;&#x4E00;&#x5F20;&#x8868;&#x683C;&#x7684;&#x7ED3;&#x6784;&#x3002;</div><div class="line">\du&#xFF1A;&#x5217;&#x51FA;&#x6240;&#x6709;&#x7528;&#x6237;&#x3002;</div><div class="line">\e&#xFF1A;&#x6253;&#x5F00;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x3002;</div><div class="line">\conninfo&#xFF1A;&#x5217;&#x51FA;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5E93;&#x548C;&#x8FDE;&#x63A5;&#x7684;&#x4FE1;&#x606F;&#x3002;</div></pre></td></tr></table></figure>
+<h1 id="&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;"><a href="#&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;" class="headerlink" title="&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;"></a>&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;</h1><p>&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#xFF0C;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x4E00;&#x822C;&#x7684;SQL&#x8BED;&#x8A00;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;&#x65B0;&#x8868;"><a href="#&#x521B;&#x5EFA;&#x65B0;&#x8868;" class="headerlink" title="&#x521B;&#x5EFA;&#x65B0;&#x8868;"></a>&#x521B;&#x5EFA;&#x65B0;&#x8868;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE user_tbl(name VARCHAR(20), signup_date DATE);</div></pre></td></tr></table></figure>
+<h2 id="&#x63D2;&#x5165;&#x6570;&#x636E;"><a href="#&#x63D2;&#x5165;&#x6570;&#x636E;" class="headerlink" title="&#x63D2;&#x5165;&#x6570;&#x636E;"></a>&#x63D2;&#x5165;&#x6570;&#x636E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INSERT INTO user_tbl(name, signup_date) VALUES(<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>, <span class="string">&apos;2013-12-22&apos;</span>);</div></pre></td></tr></table></figure>
+<h2 id="&#x9009;&#x62E9;&#x8BB0;&#x5F55;"><a href="#&#x9009;&#x62E9;&#x8BB0;&#x5F55;" class="headerlink" title="&#x9009;&#x62E9;&#x8BB0;&#x5F55;"></a>&#x9009;&#x62E9;&#x8BB0;&#x5F55;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM user_tbl;</div></pre></td></tr></table></figure>
+<h2 id="&#x66F4;&#x65B0;&#x6570;&#x636E;"><a href="#&#x66F4;&#x65B0;&#x6570;&#x636E;" class="headerlink" title="&#x66F4;&#x65B0;&#x6570;&#x636E;"></a>&#x66F4;&#x65B0;&#x6570;&#x636E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE user_tbl <span class="built_in">set</span> name = <span class="string">&apos;&#x674E;&#x56DB;&apos;</span> WHERE name = <span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>;</div></pre></td></tr></table></figure>
+<h2 id="&#x5220;&#x9664;&#x8BB0;&#x5F55;"><a href="#&#x5220;&#x9664;&#x8BB0;&#x5F55;" class="headerlink" title="&#x5220;&#x9664;&#x8BB0;&#x5F55;"></a>&#x5220;&#x9664;&#x8BB0;&#x5F55;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DELETE FROM user_tbl WHERE name = <span class="string">&apos;&#x674E;&#x56DB;&apos;</span> ;</div></pre></td></tr></table></figure>
+<h2 id="&#x6DFB;&#x52A0;&#x680F;&#x4F4D;"><a href="#&#x6DFB;&#x52A0;&#x680F;&#x4F4D;" class="headerlink" title="&#x6DFB;&#x52A0;&#x680F;&#x4F4D;"></a>&#x6DFB;&#x52A0;&#x680F;&#x4F4D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl ADD email VARCHAR(40);</div></pre></td></tr></table></figure>
+<h2 id="&#x66F4;&#x65B0;&#x7ED3;&#x6784;"><a href="#&#x66F4;&#x65B0;&#x7ED3;&#x6784;" class="headerlink" title="&#x66F4;&#x65B0;&#x7ED3;&#x6784;"></a>&#x66F4;&#x65B0;&#x7ED3;&#x6784;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl ALTER COLUMN signup_date SET NOT NULL;</div></pre></td></tr></table></figure>
+<h2 id="&#x66F4;&#x540D;&#x680F;&#x4F4D;"><a href="#&#x66F4;&#x540D;&#x680F;&#x4F4D;" class="headerlink" title="&#x66F4;&#x540D;&#x680F;&#x4F4D;"></a>&#x66F4;&#x540D;&#x680F;&#x4F4D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl RENAME COLUMN signup_date TO signup;</div></pre></td></tr></table></figure>
+<h2 id="&#x5220;&#x9664;&#x680F;&#x4F4D;"><a href="#&#x5220;&#x9664;&#x680F;&#x4F4D;" class="headerlink" title="&#x5220;&#x9664;&#x680F;&#x4F4D;"></a>&#x5220;&#x9664;&#x680F;&#x4F4D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl DROP COLUMN email;</div></pre></td></tr></table></figure>
+<h2 id="&#x8868;&#x683C;&#x66F4;&#x540D;"><a href="#&#x8868;&#x683C;&#x66F4;&#x540D;" class="headerlink" title="&#x8868;&#x683C;&#x66F4;&#x540D;"></a>&#x8868;&#x683C;&#x66F4;&#x540D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl RENAME TO backup_tbl;</div></pre></td></tr></table></figure>
+<h2 id="&#x5220;&#x9664;&#x8868;&#x683C;"><a href="#&#x5220;&#x9664;&#x8868;&#x683C;" class="headerlink" title="&#x5220;&#x9664;&#x8868;&#x683C;"></a>&#x5220;&#x9664;&#x8868;&#x683C;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DROP TABLE IF EXISTS backup_tbl;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/21/sql-performance/" rel="next" title="sql优化之用索引优化order by语句">
+                <i class="fa fa-chevron-left"></i> sql优化之用索引优化order by语句
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PostgreSQL-client"><span class="nav-number">2.1.</span> <span class="nav-text">安装PostgreSQL-client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PostgreSQL-server"><span class="nav-number">2.2.</span> <span class="nav-text">安装PostgreSQL-server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加新用户和新数据库"><span class="nav-number">3.</span> <span class="nav-text">添加新用户和新数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用PostgreSQL控制台"><span class="nav-number">3.1.</span> <span class="nav-text">使用PostgreSQL控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建一个Linux新用户"><span class="nav-number">3.1.1.</span> <span class="nav-text">新建一个Linux新用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切换到postgres用户"><span class="nav-number">3.1.2.</span> <span class="nav-text">切换到postgres用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用psql命令登录PostgreSQL控制台"><span class="nav-number">3.1.3.</span> <span class="nav-text">使用psql命令登录PostgreSQL控制台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一件事是使用-password命令，为postgres用户设置一个密码。"><span class="nav-number">3.1.4.</span> <span class="nav-text">第一件事是使用\password命令，为postgres用户设置一个密码。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二件事是创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。"><span class="nav-number">3.1.5.</span> <span class="nav-text">第二件事是创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三件事是创建用户数据库，这里为exampledb，并指定所有者为dbuser。"><span class="nav-number">3.1.6.</span> <span class="nav-text">第三件事是创建用户数据库，这里为exampledb，并指定所有者为dbuser。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四件事是将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。"><span class="nav-number">3.1.7.</span> <span class="nav-text">第四件事是将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后，使用-q命令退出控制台（也可以直接按ctrl-D）。"><span class="nav-number">3.1.8.</span> <span class="nav-text">最后，使用\q命令退出控制台（也可以直接按ctrl+D）。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用shell命令行"><span class="nav-number">3.2.</span> <span class="nav-text">使用shell命令行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库用户dbuser，并指定其为超级用户"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建数据库用户dbuser，并指定其为超级用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录数据库控制台，设置dbuser用户的密码，完成后退出控制台"><span class="nav-number">3.2.2.</span> <span class="nav-text">登录数据库控制台，设置dbuser用户的密码，完成后退出控制台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在shell命令行下，创建数据库exampledb，并指定所有者为dbuser"><span class="nav-number">3.2.3.</span> <span class="nav-text">在shell命令行下，创建数据库exampledb，并指定所有者为dbuser</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录数据库"><span class="nav-number">4.</span> <span class="nav-text">登录数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制台命令"><span class="nav-number">5.</span> <span class="nav-text">控制台命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库操作"><span class="nav-number">6.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新表"><span class="nav-number">6.1.</span> <span class="nav-text">创建新表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入数据"><span class="nav-number">6.2.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择记录"><span class="nav-number">6.3.</span> <span class="nav-text">选择记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新数据"><span class="nav-number">6.4.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除记录"><span class="nav-number">6.5.</span> <span class="nav-text">删除记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加栏位"><span class="nav-number">6.6.</span> <span class="nav-text">添加栏位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新结构"><span class="nav-number">6.7.</span> <span class="nav-text">更新结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更名栏位"><span class="nav-number">6.8.</span> <span class="nav-text">更名栏位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除栏位"><span class="nav-number">6.9.</span> <span class="nav-text">删除栏位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格更名"><span class="nav-number">6.10.</span> <span class="nav-text">表格更名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除表格"><span class="nav-number">6.11.</span> <span class="nav-text">删除表格</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
