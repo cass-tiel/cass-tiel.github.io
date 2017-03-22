@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="docker," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -60,13 +60,13 @@
 
 <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些DOCKERFILE实例">
-<meta property="og:url" content="http://c.isme.pub/2016/12/14/learn-docker-images/index.html">
+<meta property="og:title" content="iptables-conf">
+<meta property="og:url" content="http://c.isme.pub/2017/03/17/iptables-conf/index.html">
 <meta property="og:site_name" content="Casstiel">
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
-<meta property="og:updated_time" content="2016-12-14T03:49:47.000Z">
+<meta property="og:updated_time" content="2017-03-17T09:19:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一些DOCKERFILE实例">
+<meta name="twitter:title" content="iptables-conf">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
 
 
@@ -88,10 +88,10 @@
 
 
 
-  <link rel="canonical" href="http://c.isme.pub/2016/12/14/learn-docker-images/"/>
+  <link rel="canonical" href="http://c.isme.pub/2017/03/17/iptables-conf/"/>
 
 
-  <title> 一些DOCKERFILE实例 | Casstiel </title>
+  <title> iptables-conf | Casstiel </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -221,7 +221,7 @@
             
             
               
-                一些DOCKERFILE实例
+                iptables-conf
               
             
           </h1>
@@ -233,30 +233,11 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-14T11:45:57+08:00" content="2016-12-14">
-              2016-12-14
+            <time itemprop="dateCreated" datetime="2017-03-17T14:40:40+08:00" content="2017-03-17">
+              2017-03-17
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -281,7 +262,7 @@
 
       
         <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">iptables -F</div><div class="line">iptables -t nat -F</div><div class="line">iptables -t mangle -F</div><div class="line">iptables -X</div><div class="line">iptables -t nat -X</div><div class="line">iptables -t mangle -X</div><div class="line"></div><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div><div class="line"></div><div class="line">/sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</div><div class="line"></div><div class="line">iptables -A INPUT -i lo -j ACCEPT</div><div class="line"></div><div class="line">iptables -A PREROUTING -p tcp -m tcp --dport 2233 -j DNAT --to-destination 172.16.210.12:22</div><div class="line">iptables -A PREROUTING -p tcp -m tcp --dport 2234 -j DNAT --to-destination 172.16.210.13:22</div><div class="line">iptables -A POSTROUTING <span class="_">-d</span> 172.16.210.12/32 -p tcp -m tcp --dport 22 -j SNAT --to-source 172.16.210.11</div><div class="line">iptables -A POSTROUTING <span class="_">-d</span> 172.16.210.13/32 -p tcp -m tcp --dport 22 -j SNAT --to-source 172.16.210.11</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 121.40.177.102 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 112.124.114.67 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 112.124.114.183 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 120.26.113.56 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 120.26.114.152 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 112.124.65.58 --dport 80 -j ACCEPT</div><div class="line">iptables -A INPUT -m state --state NEW -m tcp -p tcp <span class="_">-s</span> 0.0.0.0 --dport 10050 -j ACCEPT</div><div class="line"></div><div class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line"></div><div class="line">sleep 30</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">iptables -F</div><div class="line">iptables -Z</div><div class="line">iptables -X</div><div class="line"></div><div class="line">iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">iptables -A INPUT -i lo -j ACCEPT</div><div class="line">iptables -A INPUT -i eth0 -p icmp -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 116.62.93.173/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"></div><div class="line"><span class="comment">#C</span></div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.40.59.62/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.40.58.106/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"><span class="comment">#B</span></div><div class="line">iptables -A INPUT <span class="_">-s</span> 120.26.241.127/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 120.26.241.70/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"><span class="comment">#A</span></div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.40.61.154/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.40.242.200/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"></div><div class="line">iptables -A INPUT <span class="_">-s</span> 114.55.124.138/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 60.194.65.154/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.69.50.18/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"><span class="comment">#temp computer</span></div><div class="line">iptables -A INPUT <span class="_">-s</span> 121.40.202.23/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 123.56.0.101/32 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line"></div><div class="line">iptables -A INPUT <span class="_">-s</span> 172.21.0.0/16 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 172.22.0.0/16 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 172.23.0.0/16 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 172.23.0.0/16 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 172.16.19.0/24 -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT <span class="_">-s</span> 100.0.0.0/8  -p tcp -m tcp --dport 3306 -j ACCEPT</div><div class="line">iptables -A INPUT -p tcp -m tcp --dport 3306 -j DROP</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -301,28 +282,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/docker/" rel="tag">#docker</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/08/oracle-install-quiet/" rel="next" title="oracle11g静默安装">
-                <i class="fa fa-chevron-left"></i> oracle11g静默安装
+              <a href="/2017/03/06/python-list-unique/" rel="next" title="python-list-列表去重">
+                <i class="fa fa-chevron-left"></i> python-list-列表去重
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/21/sql-performance/" rel="prev" title="sql优化之用索引优化order by语句">
-                sql优化之用索引优化order by语句 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
