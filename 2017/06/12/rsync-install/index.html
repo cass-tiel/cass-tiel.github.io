@@ -1,0 +1,598 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,rsync," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync-install">
+<meta property="og:url" content="http://c.isme.pub/2017/06/12/rsync-install/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:updated_time" content="2017-06-12T06:47:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rsync-install">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2017/06/12/rsync-install/"/>
+
+
+  <title> rsync-install | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                rsync-install
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-12T14:44:36+08:00" content="2017-06-12">
+              2017-06-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/rsync/" itemprop="url" rel="index">
+                    <span itemprop="name">rsync</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
+<h1 id="Rsync&#x7684;&#x547D;&#x4EE4;&#x683C;&#x5F0F;"><a href="#Rsync&#x7684;&#x547D;&#x4EE4;&#x683C;&#x5F0F;" class="headerlink" title="Rsync&#x7684;&#x547D;&#x4EE4;&#x683C;&#x5F0F;"></a>Rsync&#x7684;&#x547D;&#x4EE4;&#x683C;&#x5F0F;</h1><p>&#x5728;&#x5BF9;rsync&#x670D;&#x52A1;&#x5668;&#x914D;&#x7F6E;&#x7ED3;&#x675F;&#x4EE5;&#x540E;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x5C31;&#x9700;&#x8981;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x51FA;rsync&#x547D;&#x4EE4;&#x6765;&#x5B9E;&#x73B0;&#x5C06;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684;&#x6587;&#x4EF6;&#x5907;&#x4EFD;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x6765;&#x3002;rsync&#x662F;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x975E;&#x5E38;&#x5F3A;&#x5927;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5176;&#x547D;&#x4EE4;&#x4E5F;&#x6709;&#x5F88;&#x591A;&#x529F;&#x80FD;&#x7279;&#x8272;&#x9009;&#x9879;&#xFF0C;&#x6211;&#x4EEC;&#x4E0B;&#x9762;&#x5C31;&#x5BF9;&#x5B83;&#x7684;&#x9009;&#x9879;&#x4E00;&#x4E00;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x8BF4;&#x660E;&#x3002;</p>
+<p>Rsync&#x7684;&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#x53EF;&#x4EE5;&#x4E3A;&#x4EE5;&#x4E0B;&#x516D;&#x79CD;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">rsync [OPTION]... SRC DEST</div><div class="line">rsync [OPTION]... SRC [USER@]HOST:DEST</div><div class="line">rsync [OPTION]... [USER@]HOST:SRC DEST</div><div class="line">rsync [OPTION]... [USER@]HOST::SRC DEST</div><div class="line">rsync [OPTION]... SRC [USER@]HOST::DEST</div><div class="line">rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]</div></pre></td></tr></table></figure>
+<h1 id="&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;"><a href="#&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;" class="headerlink" title="&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;"></a>&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</h1><p>&#x5BF9;&#x5E94;&#x4E8E;&#x4EE5;&#x4E0A;&#x516D;&#x79CD;&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF0C;rsync&#x6709;&#x516D;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li><p>&#x62F7;&#x8D1D;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x3002;&#x5F53;SRC&#x548C;DES&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x90FD;&#x4E0D;&#x5305;&#x542B;&#x6709;&#x5355;&#x4E2A;&#x5192;&#x53F7;&#x201D;:&#x201D;&#x5206;&#x9694;&#x7B26;&#x65F6;&#x5C31;&#x542F;&#x52A8;&#x8FD9;&#x79CD;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#x3002;&#x5982;&#xFF1A;rsync -a /data /backup</p>
+</li>
+<li><p>&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x8FDC;&#x7A0B;shell&#x7A0B;&#x5E8F;(&#x5982;rsh&#x3001;ssh)&#x6765;&#x5B9E;&#x73B0;&#x5C06;&#x672C;&#x5730;&#x673A;&#x5668;&#x7684;&#x5185;&#x5BB9;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x673A;&#x5668;&#x3002;&#x5F53;DST&#x8DEF;&#x5F84;&#x5730;&#x5740;&#x5305;&#x542B;&#x5355;&#x4E2A;&#x5192;&#x53F7;&#x201D;:&#x201D;&#x5206;&#x9694;&#x7B26;&#x65F6;&#x542F;&#x52A8;&#x8BE5;&#x6A21;&#x5F0F;&#x3002;&#x5982;&#xFF1A;rsync -avz *.c foo:src</p>
+</li>
+<li><p>&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x8FDC;&#x7A0B;shell&#x7A0B;&#x5E8F;(&#x5982;rsh&#x3001;ssh)&#x6765;&#x5B9E;&#x73B0;&#x5C06;&#x8FDC;&#x7A0B;&#x673A;&#x5668;&#x7684;&#x5185;&#x5BB9;&#x62F7;&#x8D1D;&#x5230;&#x672C;&#x5730;&#x673A;&#x5668;&#x3002;&#x5F53;SRC&#x5730;&#x5740;&#x8DEF;&#x5F84;&#x5305;&#x542B;&#x5355;&#x4E2A;&#x5192;&#x53F7;&#x201D;:&#x201D;&#x5206;&#x9694;&#x7B26;&#x65F6;&#x542F;&#x52A8;&#x8BE5;&#x6A21;&#x5F0F;&#x3002;&#x5982;&#xFF1A;rsync -avz foo:src/bar /data</p>
+</li>
+<li><p>&#x4ECE;&#x8FDC;&#x7A0B;rsync&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x5230;&#x672C;&#x5730;&#x673A;&#x3002;&#x5F53;SRC&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5305;&#x542B;&#x201D;::&#x201D;&#x5206;&#x9694;&#x7B26;&#x65F6;&#x542F;&#x52A8;&#x8BE5;&#x6A21;&#x5F0F;&#x3002;&#x5982;&#xFF1A;rsync -av root@172.16.78.192::www /databack</p>
+</li>
+<li><p>&#x4ECE;&#x672C;&#x5730;&#x673A;&#x5668;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x5230;&#x8FDC;&#x7A0B;rsync&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x3002;&#x5F53;DST&#x8DEF;&#x5F84;&#x4FE1;&#x606F;&#x5305;&#x542B;&#x201D;::&#x201D;&#x5206;&#x9694;&#x7B26;&#x65F6;&#x542F;&#x52A8;&#x8BE5;&#x6A21;&#x5F0F;&#x3002;&#x5982;&#xFF1A;rsync -av /databack root@172.16.78.192::www</p>
+</li>
+<li><p>&#x5217;&#x8FDC;&#x7A0B;&#x673A;&#x7684;&#x6587;&#x4EF6;&#x5217;&#x8868;&#x3002;&#x8FD9;&#x7C7B;&#x4F3C;&#x4E8E;rsync&#x4F20;&#x8F93;&#xFF0C;&#x4E0D;&#x8FC7;&#x53EA;&#x8981;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x7701;&#x7565;&#x6389;&#x672C;&#x5730;&#x673A;&#x4FE1;&#x606F;&#x5373;&#x53EF;&#x3002;&#x5982;&#xFF1A;rsync -v rsync://172.16.78.192/www</p>
+</li>
+</ul>
+<h1 id="rsync&#x53C2;&#x6570;&#x89E3;&#x91CA;"><a href="#rsync&#x53C2;&#x6570;&#x89E3;&#x91CA;" class="headerlink" title="rsync&#x53C2;&#x6570;&#x89E3;&#x91CA;"></a>rsync&#x53C2;&#x6570;&#x89E3;&#x91CA;</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">-v, --verbose &#x8BE6;&#x7EC6;&#x6A21;&#x5F0F;&#x8F93;&#x51FA;</div><div class="line">-q, --quiet &#x7CBE;&#x7B80;&#x8F93;&#x51FA;&#x6A21;&#x5F0F;</div><div class="line">-c, --checksum &#x6253;&#x5F00;&#x6821;&#x9A8C;&#x5F00;&#x5173;&#xFF0C;&#x5F3A;&#x5236;&#x5BF9;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x8FDB;&#x884C;&#x6821;&#x9A8C;</div><div class="line"><span class="_">-a</span>, --archive &#x5F52;&#x6863;&#x6A21;&#x5F0F;&#xFF0C;&#x8868;&#x793A;&#x4EE5;&#x9012;&#x5F52;&#x65B9;&#x5F0F;&#x4F20;&#x8F93;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4FDD;&#x6301;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x5C5E;&#x6027;&#xFF0C;&#x7B49;&#x4E8E;-rlptgoD</div><div class="line">-r, --recursive &#x5BF9;&#x5B50;&#x76EE;&#x5F55;&#x4EE5;&#x9012;&#x5F52;&#x6A21;&#x5F0F;&#x5904;&#x7406;</div><div class="line">-R, --relative &#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x4FE1;&#x606F;</div><div class="line">-b, --backup &#x521B;&#x5EFA;&#x5907;&#x4EFD;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5BF9;&#x4E8E;&#x76EE;&#x7684;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x6709;&#x540C;&#x6837;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x65F6;&#xFF0C;&#x5C06;&#x8001;&#x7684;&#x6587;&#x4EF6;&#x91CD;&#x65B0;&#x547D;&#x540D;&#x4E3A;~filename&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;--suffix&#x9009;&#x9879;&#x6765;&#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x524D;&#x7F00;&#x3002;</div><div class="line">--backup-dir &#x5C06;&#x5907;&#x4EFD;&#x6587;&#x4EF6;(&#x5982;~filename)&#x5B58;&#x653E;&#x5728;&#x5728;&#x76EE;&#x5F55;&#x4E0B;&#x3002;</div><div class="line">-suffix=SUFFIX &#x5B9A;&#x4E49;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x524D;&#x7F00;</div><div class="line">-u, --update &#x4EC5;&#x4EC5;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8DF3;&#x8FC7;&#x6240;&#x6709;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E8E;DST&#xFF0C;&#x5E76;&#x4E14;&#x6587;&#x4EF6;&#x65F6;&#x95F4;&#x665A;&#x4E8E;&#x8981;&#x5907;&#x4EFD;&#x7684;&#x6587;&#x4EF6;&#x3002;(&#x4E0D;&#x8986;&#x76D6;&#x66F4;&#x65B0;&#x7684;&#x6587;&#x4EF6;)</div><div class="line"><span class="_">-l</span>, --links &#x4FDD;&#x7559;&#x8F6F;&#x94FE;&#x7ED3;</div><div class="line">-L, --copy-links &#x60F3;&#x5BF9;&#x5F85;&#x5E38;&#x89C4;&#x6587;&#x4EF6;&#x4E00;&#x6837;&#x5904;&#x7406;&#x8F6F;&#x94FE;&#x7ED3;</div><div class="line">--copy-unsafe-links &#x4EC5;&#x4EC5;&#x62F7;&#x8D1D;&#x6307;&#x5411;SRC&#x8DEF;&#x5F84;&#x76EE;&#x5F55;&#x6811;&#x4EE5;&#x5916;&#x7684;&#x94FE;&#x7ED3;</div><div class="line">--safe-links &#x5FFD;&#x7565;&#x6307;&#x5411;SRC&#x8DEF;&#x5F84;&#x76EE;&#x5F55;&#x6811;&#x4EE5;&#x5916;&#x7684;&#x94FE;&#x7ED3;</div><div class="line">-H, --hard-links &#x4FDD;&#x7559;&#x786C;&#x94FE;&#x7ED3;</div><div class="line">-p, --perms &#x4FDD;&#x6301;&#x6587;&#x4EF6;&#x6743;&#x9650;</div><div class="line">-o, --owner &#x4FDD;&#x6301;&#x6587;&#x4EF6;&#x5C5E;&#x4E3B;&#x4FE1;&#x606F;</div><div class="line">-g, --group &#x4FDD;&#x6301;&#x6587;&#x4EF6;&#x5C5E;&#x7EC4;&#x4FE1;&#x606F;</div><div class="line">-D, --devices &#x4FDD;&#x6301;&#x8BBE;&#x5907;&#x6587;&#x4EF6;&#x4FE1;&#x606F;</div><div class="line">-t, --times &#x4FDD;&#x6301;&#x6587;&#x4EF6;&#x65F6;&#x95F4;&#x4FE1;&#x606F;</div><div class="line">-S, --sparse &#x5BF9;&#x7A00;&#x758F;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x7279;&#x6B8A;&#x5904;&#x7406;&#x4EE5;&#x8282;&#x7701;DST&#x7684;&#x7A7A;&#x95F4;</div><div class="line">-n, --dry-run&#x73B0;&#x5B9E;&#x54EA;&#x4E9B;&#x6587;&#x4EF6;&#x5C06;&#x88AB;&#x4F20;&#x8F93;</div><div class="line">-W, --whole-file &#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x8FDB;&#x884C;&#x589E;&#x91CF;&#x68C0;&#x6D4B;</div><div class="line">-x, --one-file-system &#x4E0D;&#x8981;&#x8DE8;&#x8D8A;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x8FB9;&#x754C;</div><div class="line">-B, --block-size=SIZE &#x68C0;&#x9A8C;&#x7B97;&#x6CD5;&#x4F7F;&#x7528;&#x7684;&#x5757;&#x5C3A;&#x5BF8;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;700&#x5B57;&#x8282;</div><div class="line"><span class="_">-e</span>, --rsh=COMMAND &#x6307;&#x5B9A;&#x4F7F;&#x7528;rsh&#x3001;ssh&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x540C;&#x6B65;</div><div class="line">--rsync-path=PATH &#x6307;&#x5B9A;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x7684;rsync&#x547D;&#x4EE4;&#x6240;&#x5728;&#x8DEF;&#x5F84;&#x4FE1;&#x606F;</div><div class="line">-C, --cvs-exclude &#x4F7F;&#x7528;&#x548C;CVS&#x4E00;&#x6837;&#x7684;&#x65B9;&#x6CD5;&#x81EA;&#x52A8;&#x5FFD;&#x7565;&#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x6392;&#x9664;&#x90A3;&#x4E9B;&#x4E0D;&#x5E0C;&#x671B;&#x4F20;&#x8F93;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--existing &#x4EC5;&#x4EC5;&#x66F4;&#x65B0;&#x90A3;&#x4E9B;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E8E;DST&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x4E0D;&#x5907;&#x4EFD;&#x90A3;&#x4E9B;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--delete &#x5220;&#x9664;&#x90A3;&#x4E9B;DST&#x4E2D;SRC&#x6CA1;&#x6709;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--delete-excluded &#x540C;&#x6837;&#x5220;&#x9664;&#x63A5;&#x6536;&#x7AEF;&#x90A3;&#x4E9B;&#x88AB;&#x8BE5;&#x9009;&#x9879;&#x6307;&#x5B9A;&#x6392;&#x9664;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--delete-after &#x4F20;&#x8F93;&#x7ED3;&#x675F;&#x4EE5;&#x540E;&#x518D;&#x5220;&#x9664;</div><div class="line">--ignore-errors &#x53CA;&#x65F6;&#x51FA;&#x73B0;IO&#x9519;&#x8BEF;&#x4E5F;&#x8FDB;&#x884C;&#x5220;&#x9664;</div><div class="line">--max-delete=NUM &#x6700;&#x591A;&#x5220;&#x9664;NUM&#x4E2A;&#x6587;&#x4EF6;</div><div class="line">--partial &#x4FDD;&#x7559;&#x90A3;&#x4E9B;&#x56E0;&#x6545;&#x6CA1;&#x6709;&#x5B8C;&#x5168;&#x4F20;&#x8F93;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x662F;&#x52A0;&#x5FEB;&#x968F;&#x540E;&#x7684;&#x518D;&#x6B21;&#x4F20;&#x8F93;</div><div class="line">--force &#x5F3A;&#x5236;&#x5220;&#x9664;&#x76EE;&#x5F55;&#xFF0C;&#x5373;&#x4F7F;&#x4E0D;&#x4E3A;&#x7A7A;</div><div class="line">--numeric-ids &#x4E0D;&#x5C06;&#x6570;&#x5B57;&#x7684;&#x7528;&#x6237;&#x548C;&#x7EC4;ID&#x5339;&#x914D;&#x4E3A;&#x7528;&#x6237;&#x540D;&#x548C;&#x7EC4;&#x540D;</div><div class="line">--timeout=TIME IP&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x4E3A;&#x79D2;</div><div class="line">-I, --ignore-times &#x4E0D;&#x8DF3;&#x8FC7;&#x90A3;&#x4E9B;&#x6709;&#x540C;&#x6837;&#x7684;&#x65F6;&#x95F4;&#x548C;&#x957F;&#x5EA6;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--size-only &#x5F53;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x8981;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x4EC5;&#x4EC5;&#x5BDF;&#x770B;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x800C;&#x4E0D;&#x8003;&#x8651;&#x6587;&#x4EF6;&#x65F6;&#x95F4;</div><div class="line">--modify-window=NUM &#x51B3;&#x5B9A;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x65F6;&#x95F4;&#x76F8;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x95F4;&#x6233;&#x7A97;&#x53E3;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;0</div><div class="line">-T --temp-dir=DIR &#x5728;DIR&#x4E2D;&#x521B;&#x5EFA;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</div><div class="line">--compare-dest=DIR &#x540C;&#x6837;&#x6BD4;&#x8F83;DIR&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x6765;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x5907;&#x4EFD;</div><div class="line">-P &#x7B49;&#x540C;&#x4E8E; --partial</div><div class="line">--progress &#x663E;&#x793A;&#x5907;&#x4EFD;&#x8FC7;&#x7A0B;</div><div class="line">-z, --compress &#x5BF9;&#x5907;&#x4EFD;&#x7684;&#x6587;&#x4EF6;&#x5728;&#x4F20;&#x8F93;&#x65F6;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#x5904;&#x7406;</div><div class="line">--exclude=PATTERN &#x6307;&#x5B9A;&#x6392;&#x9664;&#x4E0D;&#x9700;&#x8981;&#x4F20;&#x8F93;&#x7684;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;</div><div class="line">--include=PATTERN &#x6307;&#x5B9A;&#x4E0D;&#x6392;&#x9664;&#x800C;&#x9700;&#x8981;&#x4F20;&#x8F93;&#x7684;&#x6587;&#x4EF6;&#x6A21;&#x5F0F;</div><div class="line">--exclude-from=FILE &#x6392;&#x9664;FILE&#x4E2D;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--include-from=FILE &#x4E0D;&#x6392;&#x9664;FILE&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x7684;&#x6587;&#x4EF6;</div><div class="line">--version &#x6253;&#x5370;&#x7248;&#x672C;&#x4FE1;&#x606F;</div><div class="line">--address &#x7ED1;&#x5B9A;&#x5230;&#x7279;&#x5B9A;&#x7684;&#x5730;&#x5740;</div><div class="line">--config=FILE &#x6307;&#x5B9A;&#x5176;&#x4ED6;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;rsyncd.conf&#x6587;&#x4EF6;</div><div class="line">--port=PORT &#x6307;&#x5B9A;&#x5176;&#x4ED6;&#x7684;rsync&#x670D;&#x52A1;&#x7AEF;&#x53E3;</div><div class="line">--blocking-io &#x5BF9;&#x8FDC;&#x7A0B;shell&#x4F7F;&#x7528;&#x963B;&#x585E;IO</div><div class="line">-stats &#x7ED9;&#x51FA;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;&#x7684;&#x4F20;&#x8F93;&#x72B6;&#x6001;</div><div class="line">--progress &#x5728;&#x4F20;&#x8F93;&#x65F6;&#x73B0;&#x5B9E;&#x4F20;&#x8F93;&#x8FC7;&#x7A0B;</div><div class="line">--log-format=formAT &#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x683C;&#x5F0F;</div><div class="line">--password-file=FILE &#x4ECE;FILE&#x4E2D;&#x5F97;&#x5230;&#x5BC6;&#x7801;</div><div class="line">--bwlimit=KBPS &#x9650;&#x5236;I/O&#x5E26;&#x5BBD;&#xFF0C;KBytes per second</div><div class="line">-h, --help &#x663E;&#x793A;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/rsync/" rel="tag">#rsync</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/linux-ulimit/" rel="next" title="linux-ulimit">
+                <i class="fa fa-chevron-left"></i> linux-ulimit
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rsync的命令格式"><span class="nav-number">2.</span> <span class="nav-text">Rsync的命令格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作模式"><span class="nav-number">3.</span> <span class="nav-text">工作模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rsync参数解释"><span class="nav-number">4.</span> <span class="nav-text">rsync参数解释</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
