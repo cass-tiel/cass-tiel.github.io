@@ -1,0 +1,730 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,git,learn," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;Git&amp;#x94A9;&amp;#x5B50;&amp;#xFF1A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x4F60;&amp;#x7684;&amp;#x5DE5;&amp;#x4F5C;&amp;#x6D41;
+&amp;#x8FD9;&amp;#x662F;&amp;#x4E00;&amp;#x7BC7;&amp;#x5728;&amp;#x539F;&amp;#x6587;(B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git-hooks(钩子)：自定义你的工作流">
+<meta property="og:url" content="http://c.isme.pub/2017/06/14/git-hooks/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;Git&amp;#x94A9;&amp;#x5B50;&amp;#xFF1A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x4F60;&amp;#x7684;&amp;#x5DE5;&amp;#x4F5C;&amp;#x6D41;
+&amp;#x8FD9;&amp;#x662F;&amp;#x4E00;&amp;#x7BC7;&amp;#x5728;&amp;#x539F;&amp;#x6587;(B">
+<meta property="og:image" content="http://c.isme.pub/2017/06/14/git-hooks/1.svg">
+<meta property="og:image" content="http://c.isme.pub/2017/06/14/git-hooks/2.svg">
+<meta property="og:image" content="http://c.isme.pub/2017/06/14/git-hooks/3.svg">
+<meta property="og:updated_time" content="2017-06-15T03:08:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git-hooks(钩子)：自定义你的工作流">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;Git&amp;#x94A9;&amp;#x5B50;&amp;#xFF1A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x4F60;&amp;#x7684;&amp;#x5DE5;&amp;#x4F5C;&amp;#x6D41;
+&amp;#x8FD9;&amp;#x662F;&amp;#x4E00;&amp;#x7BC7;&amp;#x5728;&amp;#x539F;&amp;#x6587;(B">
+<meta name="twitter:image" content="http://c.isme.pub/2017/06/14/git-hooks/1.svg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2017/06/14/git-hooks/"/>
+
+
+  <title> git-hooks(钩子)：自定义你的工作流 | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git-hooks(钩子)：自定义你的工作流
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-14T10:36:04+08:00" content="2017-06-14">
+              2017-06-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/linux/learn/" itemprop="url" rel="index">
+                    <span itemprop="name">learn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p><img src="/2017/06/14/git-hooks/1.svg" alt=""></p>
+<blockquote>
+<p>&#x672C;&#x6587;&#x8F6C;&#x81EA;<a href="http://www.open-open.com/lib/view/open1449721833879.html#articleHeader6" target="_blank" rel="external">Git&#x94A9;&#x5B50;&#xFF1A;&#x81EA;&#x5B9A;&#x4E49;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x6D41;</a></p>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x7BC7;&#x5728;<a href="https://www.atlassian.com/git/tutorials/git-hooks" target="_blank" rel="external">&#x539F;&#x6587;(BY atlassian)</a>&#x57FA;&#x7840;&#x4E0A;&#x6F14;&#x7ECE;&#x7684;&#x8BD1;&#x6587;&#x3002;&#x9664;&#x975E;&#x53E6;&#x884C;&#x6CE8;&#x660E;&#xFF0C;&#x9875;&#x9762;&#x4E0A;&#x6240;&#x6709;&#x5185;&#x5BB9;&#x91C7;&#x7528;&#x77E5;&#x8BC6;&#x5171;&#x4EAB;-&#x7F72;&#x540D;(<a href="https://creativecommons.org/licenses/by/2.5/au/deed.zh" target="_blank" rel="external">CC BY 2.5 AU</a>)&#x534F;&#x8BAE;&#x5171;&#x4EAB;&#x3002;</p>
+</blockquote>
+<a id="more"></a>
+<p>Git&#x94A9;&#x5B50;&#x662F;&#x5728;Git&#x4ED3;&#x5E93;&#x4E2D;&#x7279;&#x5B9A;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x811A;&#x672C;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x8BA9;&#x4F60;&#x81EA;&#x5B9A;&#x4E49;Git&#x5185;&#x90E8;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x5728;&#x5F00;&#x53D1;&#x5468;&#x671F;&#x4E2D;&#x7684;&#x5173;&#x952E;&#x70B9;&#x89E6;&#x53D1;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<p><img src="/2017/06/14/git-hooks/2.svg" alt=""></p>
+<p>Git&#x94A9;&#x5B50;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x5305;&#x62EC;&#x63A8;&#x884C;&#x63D0;&#x4EA4;&#x89C4;&#x8303;&#xFF0C;&#x6839;&#x636E;&#x4ED3;&#x5E93;&#x72B6;&#x6001;&#x6539;&#x53D8;&#x9879;&#x76EE;&#x73AF;&#x5883;&#xFF0C;&#x548C;&#x63A5;&#x5165;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x5DE5;&#x4F5C;&#x6D41;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x56E0;&#x4E3A;&#x811A;&#x672C;&#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x5B9A;&#x5236;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;Git&#x94A9;&#x5B50;&#x6765;&#x81EA;&#x52A8;&#x5316;&#x6216;&#x8005;&#x4F18;&#x5316;&#x4F60;&#x5F00;&#x53D1;&#x5DE5;&#x4F5C;&#x6D41;&#x4E2D;&#x4EFB;&#x610F;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5148;&#x7B80;&#x8981;&#x4ECB;&#x7ECD;Git&#x94A9;&#x5B50;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5BA1;&#x89C6;&#x4E00;&#x4E9B;&#x672C;&#x5730;&#x548C;&#x8FDC;&#x7AEF;&#x4ED3;&#x5E93;&#x4F7F;&#x7528;&#x6700;&#x6D41;&#x884C;&#x7684;&#x94A9;&#x5B50;&#x3002;</p>
+<h1 id="&#x6982;&#x8FF0;"><a href="#&#x6982;&#x8FF0;" class="headerlink" title="&#x6982;&#x8FF0;"></a>&#x6982;&#x8FF0;</h1><p>Git&#x94A9;&#x5B50;&#x662F;&#x4ED3;&#x5E93;&#x4E2D;&#x7279;&#x5B9A;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;Git&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x666E;&#x901A;&#x811A;&#x672C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;Git&#x94A9;&#x5B50;&#x5B89;&#x88C5;&#x548C;&#x914D;&#x7F6E;&#x4E5F;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x3002;</p>
+<p>&#x94A9;&#x5B50;&#x5728;&#x672C;&#x5730;&#x6216;&#x670D;&#x52A1;&#x7AEF;&#x4ED3;&#x5E93;&#x90FD;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;&#xFF0C;&#x4E14;&#x53EA;&#x4F1A;&#x5728;&#x4ED3;&#x5E93;&#x4E2D;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#x88AB;&#x6267;&#x884C;&#x3002;&#x5728;&#x6587;&#x7AE0;&#x540E;&#x9762;&#x6211;&#x4EEC;&#x4F1A;&#x5177;&#x4F53;&#x5730;&#x7814;&#x7A76;&#x5404;&#x79CD;&#x94A9;&#x5B50;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6240;&#x8BB2;&#x7684;&#x914D;&#x7F6E;&#x5BF9;&#x672C;&#x5730;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#x90FD;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<h2 id="&#x5B89;&#x88C5;&#x94A9;&#x5B50;"><a href="#&#x5B89;&#x88C5;&#x94A9;&#x5B50;" class="headerlink" title="&#x5B89;&#x88C5;&#x94A9;&#x5B50;"></a>&#x5B89;&#x88C5;&#x94A9;&#x5B50;</h2><p>&#x94A9;&#x5B50;&#x5B58;&#x5728;&#x4E8E;&#x6BCF;&#x4E2A;Git&#x4ED3;&#x5E93;&#x7684;.git/hooks&#x76EE;&#x5F55;&#x4E2D;&#x3002;&#x5F53;&#x4F60;&#x521D;&#x59CB;&#x5316;&#x4ED3;&#x5E93;&#x65F6;&#xFF0C;Git&#x81EA;&#x52A8;&#x751F;&#x6210;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x548C;&#x4E00;&#x4E9B;&#x793A;&#x4F8B;&#x811A;&#x672C;&#x3002;&#x5F53;&#x4F60;&#x89C2;&#x5BDF;.git/hooks&#x65F6;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x4E0B;&#x9762;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">applypatch-msg.sample       pre-push.sample</div><div class="line">commit-msg.sample           pre-rebase.sample</div><div class="line">post-update.sample          prepare-commit-msg.sample</div><div class="line">pre-applypatch.sample       update.sample</div><div class="line">pre-commit.sample</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x5DF2;&#x7ECF;&#x5305;&#x542B;&#x4E86;&#x5927;&#x90E8;&#x5206;&#x53EF;&#x7528;&#x7684;&#x94A9;&#x5B50;&#x4E86;&#xFF0C;&#x4F46;&#x662F;.sample&#x62D3;&#x5C55;&#x540D;&#x9632;&#x6B62;&#x5B83;&#x4EEC;&#x9ED8;&#x8BA4;&#x88AB;&#x6267;&#x884C;&#x3002;&#x4E3A;&#x4E86;&#x5B89;&#x88C5;&#x4E00;&#x4E2A;&#x94A9;&#x5B50;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x53BB;&#x6389;.sample&#x62D3;&#x5C55;&#x540D;&#x3002;&#x6216;&#x8005;&#x4F60;&#x8981;&#x5199;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x4E0A;&#x8FF0;&#x5339;&#x914D;&#x7684;&#x65B0;&#x6587;&#x4EF6;&#xFF0C;&#x53BB;&#x6389;.sample&#x62D3;&#x5C55;&#x540D;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x8BD5;&#x8BD5;&#x5B89;&#x88C5;&#x4E00;&#x4E2A;prepare-commit-msg&#x94A9;&#x5B50;&#x3002;&#x53BB;&#x6389;&#x811A;&#x672C;&#x7684;.sample&#x62D3;&#x5C55;&#x540D;&#xFF0C;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x52A0;&#x4E0A;&#x4E0B;&#x9762;&#x8FD9;&#x4E24;&#x884C;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">&quot;# Please include a useful commit message!&quot;</span> &gt; <span class="variable">$1</span></div></pre></td></tr></table></figure>
+<p>&#x94A9;&#x5B50;&#x9700;&#x8981;&#x80FD;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F60;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x4E3A;&#x4E86;&#x786E;&#x4FDD;prepare-commit-msg&#x53EF;&#x6267;&#x884C;&#xFF0C;&#x8FD0;&#x884C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x prepare-commit-msg</div></pre></td></tr></table></figure>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x6BCF;&#x6B21;&#x8FD0;&#x884C;git commit&#x65F6;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x9ED8;&#x8BA4;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x90FD;&#x88AB;&#x66FF;&#x6362;&#x4E86;&#x3002;&#x6211;&#x4EEC;&#x4F1A;&#x5728;&#x201C;&#x51C6;&#x5907;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x201D;&#x4E00;&#x8282;&#x4E2D;&#x7EC6;&#x770B;&#x5B83;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;Git&#x7684;&#x5185;&#x90E8;&#x529F;&#x80FD;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x5750;&#x548C;&#x653E;&#x5BBD;&#x3002;</p>
+<p>&#x5185;&#x7F6E;&#x7684;&#x6837;&#x4F8B;&#x811A;&#x672C;&#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x53C2;&#x8003;&#x8D44;&#x6599;&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x94A9;&#x5B50;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x90FD;&#x6709;&#x975E;&#x5E38;&#x8BE6;&#x7EC6;&#x7684;&#x8BF4;&#x660E;&#xFF08;&#x4E0D;&#x540C;&#x94A9;&#x5B50;&#x4E0D;&#x4E00;&#x6837;&#xFF09;&#x3002;</p>
+<h2 id="&#x811A;&#x672C;&#x8BED;&#x8A00;"><a href="#&#x811A;&#x672C;&#x8BED;&#x8A00;" class="headerlink" title="&#x811A;&#x672C;&#x8BED;&#x8A00;"></a>&#x811A;&#x672C;&#x8BED;&#x8A00;</h2><p>&#x5185;&#x7F6E;&#x7684;&#x811A;&#x672C;&#x5927;&#x591A;&#x662F;shell&#x548C;PERL&#x8BED;&#x8A00;&#x7684;&#xFF0C;&#x4F46;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x811A;&#x672C;&#x8BED;&#x8A00;&#xFF0C;&#x53EA;&#x8981;&#x5B83;&#x4EEC;&#x6700;&#x540E;&#x80FD;&#x7F16;&#x8BD1;&#x5230;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;&#x6BCF;&#x6B21;&#x811A;&#x672C;&#x4E2D;&#x7684;#!/bin/sh&#x5B9A;&#x4E49;&#x4E86;&#x4F60;&#x7684;&#x6587;&#x4EF6;&#x5C06;&#x88AB;&#x5982;&#x4F55;&#x89E3;&#x91CA;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x65F6;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x5C06;path&#x6539;&#x4E3A;&#x4F60;&#x7684;&#x89E3;&#x91CA;&#x5668;&#x7684;&#x8DEF;&#x5F84;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;prepare-commit-msg&#x4E2D;&#x5199;&#x4E00;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x7684;Python&#x811A;&#x672C;&#x3002;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x548C;&#x4E0A;&#x4E00;&#x8282;&#x7684;shell&#x811A;&#x672C;&#x505A;&#x7684;&#x4E8B;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys, os</div><div class="line"></div><div class="line">commit_msg_filepath = sys.argv[<span class="number">1</span>]</div><div class="line"><span class="keyword">with</span> open(commit_msg_filepath, <span class="string">&apos;w&apos;</span>) <span class="keyword">as</span> f:</div><div class="line">    f.write(<span class="string">&quot;# Please include a useful commit message!&quot;</span>)</div><div class="line"></div><div class="line">&#x6CE8;&#x610F;&#x7B2C;&#x4E00;&#x884C;&#x6539;&#x6210;&#x4E86;Python&#x89E3;&#x91CA;&#x5668;&#x7684;&#x8DEF;&#x5F84;&#x3002;</div><div class="line">&#x6B64;&#x5916;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;sys.argv[<span class="number">1</span>]&#x800C;&#x4E0D;&#x662F;$<span class="number">1</span>&#x6765;&#x83B7;&#x53D6;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF08;&#x8FD9;&#x4E2A;&#x4E5F;&#x540E;&#x9762;&#x518D;&#x8BB2;&#xFF09;&#x3002;</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x4E2A;&#x7279;&#x6027;&#x975E;&#x5E38;&#x5F3A;&#x5927;&#xFF0C;&#x56E0;&#x4E3A;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x4EFB;&#x4F55;&#x4F60;&#x559C;&#x6B22;&#x7684;&#x8BED;&#x8A00;&#x6765;&#x7F16;&#x5199;Git&#x94A9;&#x5B50;&#x3002;</p>
+<h2 id="&#x94A9;&#x5B50;&#x7684;&#x4F5C;&#x7528;&#x57DF;"><a href="#&#x94A9;&#x5B50;&#x7684;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="&#x94A9;&#x5B50;&#x7684;&#x4F5C;&#x7528;&#x57DF;"></a>&#x94A9;&#x5B50;&#x7684;&#x4F5C;&#x7528;&#x57DF;</h2><p>&#x5BF9;&#x4E8E;&#x4EFB;&#x4F55;Git&#x4ED3;&#x5E93;&#x6765;&#x8BF4;&#x94A9;&#x5B50;&#x90FD;&#x662F;&#x672C;&#x5730;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x5B83;&#x4E0D;&#x4F1A;&#x968F;&#x7740;git clone&#x4E00;&#x8D77;&#x590D;&#x5236;&#x5230;&#x65B0;&#x7684;&#x4ED3;&#x5E93;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x56E0;&#x4E3A;&#x94A9;&#x5B50;&#x662F;&#x672C;&#x5730;&#x7684;&#xFF0C;&#x4EFB;&#x4F55;&#x80FD;&#x63A5;&#x89E6;&#x5F97;&#x5230;&#x4ED3;&#x5E93;&#x7684;&#x4EBA;&#x90FD;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x6709;&#x5F88;&#x5927;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x9996;&#x5148;&#xFF0C;&#x4F60;&#x8981;&#x786E;&#x4FDD;&#x4F60;&#x4EEC;&#x6210;&#x5458;&#x4E4B;&#x95F4;&#x7684;&#x94A9;&#x5B50;&#x90FD;&#x662F;&#x6700;&#x65B0;&#x7684;&#x3002;&#x5176;&#x6B21;&#xFF0C;&#x4F60;&#x4E5F;&#x4E0D;&#x80FD;&#x5F3A;&#x884C;&#x8BA9;&#x5176;&#x4ED6;&#x4EBA;&#x7528;&#x4F60;&#x559C;&#x6B22;&#x7684;&#x65B9;&#x5F0F;&#x63D0;&#x4EA4;&#x2014;&#x2014;&#x4F60;&#x53EA;&#x80FD;&#x9F13;&#x52B1;&#x4ED6;&#x4EEC;&#x8FD9;&#x6837;&#x505A;&#x3002;</p>
+<p>&#x5728;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x4E2D;&#x7EF4;&#x62A4;&#x94A9;&#x5B50;&#x662F;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;.git/hooks&#x76EE;&#x5F55;&#x4E0D;&#x968F;&#x4F60;&#x7684;&#x9879;&#x76EE;&#x4E00;&#x8D77;&#x62F7;&#x8D1D;&#xFF0C;&#x4E5F;&#x4E0D;&#x53D7;&#x7248;&#x672C;&#x63A7;&#x5236;&#x5F71;&#x54CD;&#x3002;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x628A;&#x4F60;&#x7684;&#x94A9;&#x5B50;&#x5B58;&#x5728;&#x9879;&#x76EE;&#x7684;&#x5B9E;&#x9645;&#x76EE;&#x5F55;&#x4E2D;&#xFF08;&#x5728;.git&#x5916;&#xFF09;&#x3002;&#x8FD9;&#x6837;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x50CF;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x4E00;&#x6837;&#x8FDB;&#x884C;&#x7248;&#x672C;&#x63A7;&#x5236;&#x3002;&#x4E3A;&#x4E86;&#x5B89;&#x88C5;&#x94A9;&#x5B50;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;.git/hooks&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x6216;&#x8005;&#x7B80;&#x5355;&#x5730;&#x5728;&#x66F4;&#x65B0;&#x540E;&#x628A;&#x5B83;&#x4EEC;&#x590D;&#x5236;&#x5230;.git/hooks&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p><img src="/2017/06/14/git-hooks/3.svg" alt=""></p>
+<p>&#x4F5C;&#x4E3A;&#x5907;&#x9009;&#x65B9;&#x6848;&#xFF0C;Git&#x540C;&#x6837;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x6A21;&#x677F;&#x76EE;&#x5F55;&#x673A;&#x5236;&#x6765;&#x66F4;&#x7B80;&#x5355;&#x5730;&#x81EA;&#x52A8;&#x5B89;&#x88C5;&#x94A9;&#x5B50;&#x3002;&#x6BCF;&#x6B21;&#x4F60;&#x4F7F;&#x7528;git init&#x6216;git clone&#x65F6;&#xFF0C;&#x6A21;&#x677F;&#x76EE;&#x5F55;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x90FD;&#x4F1A;&#x88AB;&#x590D;&#x5236;&#x5230;.git&#x6587;&#x4EF6;&#x5939;&#x3002;</p>
+<p>&#x6240;&#x6709;&#x7684;&#x4E0B;&#x9762;&#x8BB2;&#x5230;&#x7684;&#x672C;&#x5730;&#x94A9;&#x5B50;&#x90FD;&#x53EF;&#x4EE5;&#x88AB;&#x66F4;&#x6539;&#x6216;&#x8005;&#x5F7B;&#x5E95;&#x5220;&#x9664;&#xFF0C;&#x53EA;&#x8981;&#x4F60;&#x662F;&#x9879;&#x76EE;&#x7684;&#x53C2;&#x4E0E;&#x8005;&#x3002;&#x8FD9;&#x5B8C;&#x5168;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x56E2;&#x961F;&#x6210;&#x5458;&#x60F3;&#x4E0D;&#x60F3;&#x7528;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x3002;&#x6240;&#x4EE5;&#x8BB0;&#x4F4F;&#xFF0C;&#x6700;&#x597D;&#x628A;Git&#x94A9;&#x5B50;&#x5F53;&#x6210;&#x4E00;&#x4E2A;&#x65B9;&#x4FBF;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x5DE5;&#x5177;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x4E25;&#x683C;&#x5F3A;&#x5236;&#x7684;&#x5F00;&#x53D1;&#x89C4;&#x8303;&#x3002;</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x7528;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#x6765;&#x62D2;&#x7EDD;&#x6CA1;&#x6709;&#x9075;&#x5B88;&#x89C4;&#x8303;&#x7684;&#x63D0;&#x4EA4;&#x662F;&#x5B8C;&#x5168;&#x53EF;&#x884C;&#x7684;&#x3002;&#x540E;&#x9762;&#x6211;&#x4EEC;&#x4F1A;&#x518D;&#x8BA8;&#x8BBA;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<h1 id="&#x672C;&#x5730;&#x94A9;&#x5B50;"><a href="#&#x672C;&#x5730;&#x94A9;&#x5B50;" class="headerlink" title="&#x672C;&#x5730;&#x94A9;&#x5B50;"></a>&#x672C;&#x5730;&#x94A9;&#x5B50;</h1><p>&#x672C;&#x5730;&#x94A9;&#x5B50;&#x53EA;&#x5F71;&#x54CD;&#x5B83;&#x4EEC;&#x6240;&#x5728;&#x7684;&#x4ED3;&#x5E93;&#x3002;&#x5F53;&#x4F60;&#x5728;&#x8BFB;&#x8FD9;&#x4E00;&#x8282;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BB0;&#x4F4F;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x4ED6;&#x4EEC;&#x672C;&#x5730;&#x7684;&#x94A9;&#x5B50;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x8981;&#x7528;&#x5B83;&#x4EEC;&#x6765;&#x63A8;&#x884C;&#x5F3A;&#x5236;&#x7684;&#x63D0;&#x4EA4;&#x89C4;&#x8303;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x5B83;&#x4EEC;&#x786E;&#x5B9E;&#x53EF;&#x4EE5;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x66F4;&#x6613;&#x4E8E;&#x63A5;&#x53D7;&#x8FD9;&#x4E9B;&#x89C4;&#x8303;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x4E00;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x63A2;&#x8BA8;6&#x4E2A;&#x6700;&#x6709;&#x7528;&#x7684;&#x672C;&#x5730;&#x94A9;&#x5B50;&#xFF1A;</p>
+<ul>
+<li>pre-commit</li>
+<li>prepare-commit-msg</li>
+<li>commit-msg</li>
+<li>post-commit</li>
+<li>post-checkout</li>
+<li>pre-rebase</li>
+</ul>
+<p>&#x524D;&#x56DB;&#x4E2A;&#x94A9;&#x5B50;&#x8BA9;&#x4F60;&#x4ECB;&#x5165;&#x5B8C;&#x6574;&#x7684;&#x63D0;&#x4EA4;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x540E;&#x4E24;&#x4E2A;&#x5141;&#x8BB8;&#x4F60;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5206;&#x522B;&#x4E3A;git checkout&#x548C;git rebase&#x7684;&#x5B89;&#x5168;&#x68C0;&#x67E5;&#x3002;</p>
+<p>&#x6240;&#x6709;&#x5E26;pre-&#x7684;&#x94A9;&#x5B50;&#x5141;&#x8BB8;&#x4F60;&#x4FEE;&#x6539;&#x5373;&#x5C06;&#x53D1;&#x751F;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x5E26;post-&#x7684;&#x94A9;&#x5B50;&#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x901A;&#x77E5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E5F;&#x4F1A;&#x770B;&#x5230;&#x5904;&#x7406;&#x94A9;&#x5B50;&#x7684;&#x53C2;&#x6570;&#x548C;&#x7528;&#x5E95;&#x5C42;Git&#x547D;&#x4EE4;&#x83B7;&#x53D6;&#x4ED3;&#x5E93;&#x4FE1;&#x606F;&#x7684;&#x5B9E;&#x7528;&#x6280;&#x5DE7;&#x3002;</p>
+<h2 id="pre-commit"><a href="#pre-commit" class="headerlink" title="pre-commit"></a>pre-commit</h2><p>pre-commit&#x811A;&#x672C;&#x5728;&#x6BCF;&#x6B21;&#x4F60;&#x8FD0;&#x884C;git commit&#x547D;&#x4EE4;&#x65F6;&#xFF0C;Git&#x5411;&#x4F60;&#x8BE2;&#x95EE;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x6216;&#x8005;&#x751F;&#x4EA7;&#x63D0;&#x4EA4;&#x5BF9;&#x8C61;&#x65F6;&#x88AB;&#x6267;&#x884C;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x6765;&#x68C0;&#x67E5;&#x5373;&#x5C06;&#x88AB;&#x63D0;&#x4EA4;&#x7684;&#x4EE3;&#x7801;&#x5FEB;&#x7167;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4E00;&#x4E9B;&#x81EA;&#x52A8;&#x5316;&#x6D4B;&#x8BD5;&#xFF0C;&#x4FDD;&#x8BC1;&#x8FD9;&#x4E2A;&#x63D0;&#x4EA4;&#x4E0D;&#x4F1A;&#x7834;&#x574F;&#x73B0;&#x6709;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<p>pre-commit&#x4E0D;&#x9700;&#x8981;&#x4EFB;&#x4F55;&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#x65F6;&#x5C06;&#x653E;&#x5F03;&#x6574;&#x4E2A;&#x63D0;&#x4EA4;&#x3002;&#x8BA9;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E2A;&#x7B80;&#x5316;&#x4E86;&#x7684;&#xFF08;&#x548C;&#x66F4;&#x8BE6;&#x7EC6;&#x7684;&#xFF09;&#x5185;&#x7F6E;pre-commit&#x94A9;&#x5B50;&#x3002;&#x53EA;&#x8981;&#x68C0;&#x6D4B;&#x5230;&#x4E0D;&#x4E00;&#x81F4;&#x65F6;&#x811A;&#x672C;&#x5C31;&#x653E;&#x5F03;&#x8FD9;&#x4E2A;&#x63D0;&#x4EA4;&#xFF0C;&#x5C31;&#x50CF;git diff-index&#x547D;&#x4EE4;&#x5B9A;&#x4E49;&#x7684;&#x90A3;&#x6837;&#xFF08;&#x53EA;&#x8981;&#x8BCD;&#x5C3E;&#x6709;&#x7A7A;&#x767D;&#x5B57;&#x7B26;&#x3001;&#x53EA;&#x6709;&#x7A7A;&#x767D;&#x5B57;&#x7B26;&#x7684;&#x884C;&#x3001;&#x884C;&#x9996;&#x4E00;&#x4E2A;tab&#x540E;&#x7D27;&#x63A5;&#x4E00;&#x4E2A;&#x7A7A;&#x683C;&#x5C31;&#x88AB;&#x8BA4;&#x4E3A;&#x9519;&#x8BEF;&#xFF09;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="comment"># &#x68C0;&#x67E5;&#x8FD9;&#x662F;&#x5426;&#x662F;&#x521D;&#x59CB;&#x63D0;&#x4EA4;</span></div><div class="line"><span class="keyword">if</span> git rev-parse --verify HEAD &gt;/dev/null 2&gt;&amp;1</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">&quot;pre-commit: About to create a new commit...&quot;</span></div><div class="line">    against=HEAD</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">&quot;pre-commit: About to create the first commit...&quot;</span></div><div class="line">    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904</div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line"><span class="comment"># &#x4F7F;&#x7528;git diff-index&#x6765;&#x68C0;&#x67E5;&#x7A7A;&#x767D;&#x5B57;&#x7B26;&#x9519;&#x8BEF;</span></div><div class="line"><span class="built_in">echo</span> <span class="string">&quot;pre-commit: Testing for whitespace errors...&quot;</span></div><div class="line"><span class="keyword">if</span> ! git diff-index --check --cached <span class="variable">$against</span></div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">&quot;pre-commit: Aborting commit due to whitespace errors&quot;</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">&quot;pre-commit: No whitespace errors :)&quot;</span></div><div class="line">    <span class="built_in">exit</span> 0</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<p>&#x4F7F;&#x7528;git diff-index&#x65F6;&#x6211;&#x4EEC;&#x8981;&#x6307;&#x51FA;&#x548C;&#x54EA;&#x6B21;&#x63D0;&#x4EA4;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#x662F;HEAD&#xFF0C;&#x4F46;HEAD&#x5728;&#x521B;&#x5EFA;&#x7B2C;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#x65F6;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x662F;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x6781;&#x7AEF;&#x60C5;&#x5F62;&#x3002;&#x6211;&#x4EEC;&#x901A;&#x8FC7;git rev-parse &#x2013;verify&#x6765;&#x68C0;&#x67E5;HEAD&#x662F;&#x5426;&#x662F;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x7684;&#x5F15;&#x7528;&#x3002;&gt;/dev/null 2&gt;&amp;1&#x8FD9;&#x90E8;&#x5206;&#x5C4F;&#x853D;&#x4E86;git rev-parse&#x4EFB;&#x4F55;&#x8F93;&#x51FA;&#x3002;HEAD&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x63D0;&#x4EA4;&#x5BF9;&#x8C61;&#x88AB;&#x50A8;&#x5B58;&#x5728;against&#x53D8;&#x91CF;&#x4E2D;&#x4F9B;git diff-index&#x4F7F;&#x7528;&#x3002;4b825d&#x2026;&#x8FD9;&#x4E2A;&#x54C8;&#x5E0C;&#x5B57;&#x4E32;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x7A7A;&#x767D;&#x63D0;&#x4EA4;&#x7684;ID&#x3002;</p>
+<p>git diff-index &#x2013;cached&#x547D;&#x4EE4;&#x5C06;&#x63D0;&#x4EA4;&#x548C;&#x7F13;&#x5B58;&#x533A;&#x6BD4;&#x8F83;&#x3002;&#x901A;&#x8FC7;&#x4F20;&#x5165;-check&#x9009;&#x9879;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x6C42;&#x5B83;&#x5728;&#x66F4;&#x6539;&#x5F15;&#x5165;&#x7A7A;&#x767D;&#x5B57;&#x7B26;&#x9519;&#x8BEF;&#x65F6;&#x8B66;&#x544A;&#x6211;&#x4EEC;&#x3002;&#x5982;&#x679C;&#x5B83;&#x8FD9;&#x4E48;&#x505A;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x8FD4;&#x56DE;&#x72B6;&#x6001;1&#x6765;&#x653E;&#x5F03;&#x8FD9;&#x6B21;&#x63D0;&#x4EA4;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x72B6;&#x6001;0&#xFF0C;&#x63D0;&#x4EA4;&#x5DE5;&#x4F5C;&#x6D41;&#x6B63;&#x5E38;&#x8FDB;&#x884C;&#x3002;</p>
+<p>&#x8FD9;&#x53EA;&#x662F;pre-commit&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;&#x5B83;&#x6070;&#x597D;&#x4F7F;&#x7528;&#x4E86;&#x5DF2;&#x6709;&#x7684;Git&#x547D;&#x4EE4;&#x6765;&#x6839;&#x636E;&#x63D0;&#x4EA4;&#x5E26;&#x6765;&#x7684;&#x66F4;&#x6539;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x4F46;&#x4F60;&#x53EF;&#x4EE5;&#x5728;pre-commit&#x4E2D;&#x505A;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x505A;&#x7684;&#x4E8B;&#xFF0C;&#x6BD4;&#x5982;&#x6267;&#x884C;&#x5176;&#x5B83;&#x811A;&#x672C;&#x3001;&#x8FD0;&#x884C;&#x7B2C;&#x4E09;&#x65B9;&#x6D4B;&#x8BD5;&#x96C6;&#x3001;&#x7528;Lint&#x68C0;&#x67E5;&#x4EE3;&#x7801;&#x98CE;&#x683C;&#x3002;</p>
+<h2 id="prepare-commit-msg"><a href="#prepare-commit-msg" class="headerlink" title="prepare-commit-msg"></a>prepare-commit-msg</h2><p>prepare-commit-msg&#x94A9;&#x5B50;&#x5728;pre-commit&#x94A9;&#x5B50;&#x5728;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x4E2D;&#x751F;&#x6210;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x4E4B;&#x540E;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x8FD9;&#x88AB;&#x7528;&#x6765;&#x65B9;&#x4FBF;&#x5730;&#x4FEE;&#x6539;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;squash&#x6216;merge&#x63D0;&#x4EA4;&#x3002;</p>
+<p>prepare-commit-msg&#x811A;&#x672C;&#x7684;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x662F;&#x4E0B;&#x5217;&#x4E09;&#x4E2A;&#xFF1A;</p>
+<p>&#x5305;&#x542B;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x539F;&#x5730;&#x66F4;&#x6539;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x3002;<br>&#x63D0;&#x4EA4;&#x7C7B;&#x578B;&#x3002;&#x53EF;&#x4EE5;&#x662F;&#x4FE1;&#x606F;&#xFF08;-m&#x6216;-F&#x9009;&#x9879;&#xFF09;&#xFF0C;&#x6A21;&#x677F;&#xFF08;-t&#x9009;&#x9879;&#xFF09;&#xFF0C;merge&#xFF08;&#x5982;&#x679C;&#x662F;&#x4E2A;&#x5408;&#x5E76;&#x63D0;&#x4EA4;&#xFF09;&#x6216;squash&#xFF08;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x63D0;&#x4EA4;&#x63D2;&#x5165;&#x4E86;&#x5176;&#x4ED6;&#x63D0;&#x4EA4;&#xFF09;&#x3002;<br>&#x76F8;&#x5173;&#x63D0;&#x4EA4;&#x7684;SHA1&#x54C8;&#x5E0C;&#x5B57;&#x4E32;&#x3002;&#x53EA;&#x6709;&#x5F53;-c&#xFF0C;-C&#xFF0C;&#x6216;&#x2013;amend&#x9009;&#x9879;&#x51FA;&#x73B0;&#x65F6;&#x624D;&#x9700;&#x8981;&#x3002;<br>&#x548C;pre-commit&#x4E00;&#x6837;&#xFF0C;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#x4F1A;&#x653E;&#x5F03;&#x63D0;&#x4EA4;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x770B;&#x8FC7;&#x4E00;&#x4E2A;&#x4FEE;&#x6539;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x7684;&#x7B80;&#x5355;&#x4F8B;&#x5B50;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x66F4;&#x6709;&#x7528;&#x7684;&#x811A;&#x672C;&#x3002;&#x4F7F;&#x7528;issue&#x8DDF;&#x8E2A;&#x5668;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x5728;&#x5355;&#x72EC;&#x7684;&#x5206;&#x652F;&#x4E0A;&#x5904;&#x7406;issue&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;&#x5206;&#x652F;&#x540D;&#x4E2D;&#x5305;&#x542B;&#x4E86;issue&#x7F16;&#x53F7;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;prepare-commit-msg&#x94A9;&#x5B50;&#x6765;&#x81EA;&#x52A8;&#x5730;&#x5C06;&#x5B83;&#x5305;&#x62EC;&#x5728;&#x90A3;&#x4E2A;&#x5206;&#x652F;&#x7684;&#x6BCF;&#x4E2A;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x4E2D;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys, os, re</div><div class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> check_output</div><div class="line"></div><div class="line"><span class="comment"># &#x6536;&#x96C6;&#x53C2;&#x6570;</span></div><div class="line">commit_msg_filepath = sys.argv[<span class="number">1</span>]</div><div class="line"><span class="keyword">if</span> len(sys.argv) &gt; <span class="number">2</span>:</div><div class="line">    commit_type = sys.argv[<span class="number">2</span>]</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    commit_type = <span class="string">&apos;&apos;</span></div><div class="line"><span class="keyword">if</span> len(sys.argv) &gt; <span class="number">3</span>:</div><div class="line">    commit_hash = sys.argv[<span class="number">3</span>]</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    commit_hash = <span class="string">&apos;&apos;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;prepare-commit-msg: File: %s\nType: %s\nHash: %s&quot;</span> % (commit_msg_filepath, commit_type, commit_hash)</div><div class="line"></div><div class="line"><span class="comment"># &#x68C0;&#x6D4B;&#x6211;&#x4EEC;&#x6240;&#x5728;&#x7684;&#x5206;&#x652F;</span></div><div class="line">branch = check_output([<span class="string">&apos;git&apos;</span>, <span class="string">&apos;symbolic-ref&apos;</span>, <span class="string">&apos;--short&apos;</span>, <span class="string">&apos;HEAD&apos;</span>]).strip()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;prepare-commit-msg: On branch &apos;%s&apos;&quot;</span> % branch</div><div class="line"></div><div class="line"><span class="comment"># &#x7528;issue&#x7F16;&#x53F7;&#x751F;&#x6210;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;</span></div><div class="line"><span class="keyword">if</span> branch.startswith(<span class="string">&apos;issue-&apos;</span>):</div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;prepare-commit-msg: Oh hey, it&apos;s an issue branch.&quot;</span></div><div class="line">    result = re.match(<span class="string">&apos;issue-(.*)&apos;</span>, branch)</div><div class="line">    issue_number = result.group(<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="keyword">with</span> open(commit_msg_filepath, <span class="string">&apos;r+&apos;</span>) <span class="keyword">as</span> f:</div><div class="line">        content = f.read()</div><div class="line">        f.seek(<span class="number">0</span>, <span class="number">0</span>)</div><div class="line">        f.write(<span class="string">&quot;ISSUE-%s %s&quot;</span> % (issue_number, content))</div></pre></td></tr></table></figure>
+<p>&#x9996;&#x5148;&#xFF0C;&#x4E0A;&#x9762;&#x7684;prepare-commit-msg&#x94A9;&#x5B50;&#x544A;&#x8BC9;&#x4F60;&#x5982;&#x4F55;&#x6536;&#x96C6;&#x4F20;&#x5165;&#x811A;&#x672C;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x5B83;&#x8C03;&#x7528;&#x4E86;git symbolic-ref &#x2013;short HEAD&#x6765;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;HEAD&#x7684;&#x5206;&#x652F;&#x540D;&#x3002;&#x5982;&#x679C;&#x5206;&#x652F;&#x540D;&#x4EE5;issue-&#x5F00;&#x5934;&#xFF0C;&#x5B83;&#x4F1A;&#x91CD;&#x5199;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x7B2C;&#x4E00;&#x884C;&#x52A0;&#x4E0A;issue&#x7F16;&#x53F7;&#x3002;&#x6BD4;&#x5982;&#x4F60;&#x7684;&#x5206;&#x652F;&#x540D;issue-224&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x5C06;&#x4F1A;&#x751F;&#x6210;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ISSUE-224 </div><div class="line"></div><div class="line"><span class="comment"># Please enter the commit message for your changes. Lines starting </span></div><div class="line"><span class="comment"># with &apos;#&apos; will be ignored, and an empty message aborts the commit. </span></div><div class="line"><span class="comment"># On branch issue-224 </span></div><div class="line"><span class="comment"># Changes to be committed: </span></div><div class="line"><span class="comment">#   modified:   test.txt</span></div></pre></td></tr></table></figure>
+<p>&#x6709;&#x4E00;&#x70B9;&#x8981;&#x8BB0;&#x4F4F;&#x7684;&#x662F;&#x5373;&#x4F7F;&#x7528;&#x6237;&#x7528;-m&#x4F20;&#x5165;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#xFF0C;prepare-commit-msg&#x4E5F;&#x4F1A;&#x8FD0;&#x884C;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E0A;&#x9762;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x4F1A;&#x81EA;&#x52A8;&#x63D2;&#x5165;ISSUE-[#]&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x800C;&#x7528;&#x6237;&#x65E0;&#x6CD5;&#x66F4;&#x6539;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x68C0;&#x67E5;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x5426;&#x662F;&#x63D0;&#x4EA4;&#x7C7B;&#x578B;&#x6765;&#x5904;&#x7406;&#x8FD9;&#x4E2A;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;-m&#x9009;&#x9879;&#xFF0C;prepare-commit-msg&#x94A9;&#x5B50;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x751F;&#x6210;&#x540E;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x3002;&#x6240;&#x4EE5;&#x811A;&#x672C;&#x7684;&#x76EE;&#x7684;&#x662F;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x63A8;&#x884C;&#x5F3A;&#x5236;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x89C4;&#x8303;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8981;&#x8FD9;&#x4E48;&#x505A;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x4E0B;&#x4E00;&#x8282;&#x6240;&#x8BB2;&#x7684;commit-msg&#x94A9;&#x5B50;&#x3002;</p>
+<h2 id="commit-msg"><a href="#commit-msg" class="headerlink" title="commit-msg"></a>commit-msg</h2><p>commit-msg&#x94A9;&#x5B50;&#x548C;prepare-commit-msg&#x94A9;&#x5B50;&#x5F88;&#x50CF;&#xFF0C;&#x4F46;&#x5B83;&#x4F1A;&#x5728;&#x7528;&#x6237;&#x8F93;&#x5165;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x4E4B;&#x540E;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x8FD9;&#x9002;&#x5408;&#x7528;&#x6765;&#x63D0;&#x9192;&#x5F00;&#x53D1;&#x8005;&#x4ED6;&#x4EEC;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x4E0D;&#x7B26;&#x5408;&#x4F60;&#x56E2;&#x961F;&#x7684;&#x89C4;&#x8303;&#x3002;</p>
+<p>&#x4F20;&#x5165;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x552F;&#x4E00;&#x7684;&#x53C2;&#x6570;&#x662F;&#x5305;&#x542B;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x5982;&#x679C;&#x5B83;&#x4E0D;&#x559C;&#x6B22;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x5728;&#x539F;&#x5730;&#x4FEE;&#x6539;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF08;&#x548C;prepare-commit-msg&#x4E00;&#x6837;&#xFF09;&#xFF0C;&#x6216;&#x8005;&#x5B83;&#x4F1A;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#xFF0C;&#x653E;&#x5F03;&#x8FD9;&#x4E2A;&#x63D0;&#x4EA4;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x786E;&#x8BA4;&#x7528;&#x6237;&#x6CA1;&#x6709;&#x5220;&#x9664;prepare-commit-msg&#x811A;&#x672C;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;ISSUE-[#]&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys, os, re</div><div class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> check_output</div><div class="line"></div><div class="line"><span class="comment"># &#x6536;&#x96C6;&#x53C2;&#x6570;</span></div><div class="line">commit_msg_filepath = sys.argv[<span class="number">1</span>]</div><div class="line"></div><div class="line"><span class="comment"># &#x68C0;&#x6D4B;&#x6240;&#x5728;&#x7684;&#x5206;&#x652F;</span></div><div class="line">branch = check_output([<span class="string">&apos;git&apos;</span>, <span class="string">&apos;symbolic-ref&apos;</span>, <span class="string">&apos;--short&apos;</span>, <span class="string">&apos;HEAD&apos;</span>]).strip()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;commit-msg: On branch &apos;%s&apos;&quot;</span> % branch</div><div class="line"></div><div class="line"><span class="comment"># &#x68C0;&#x6D4B;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x4E00;&#x4E2A;issue&#x63D0;&#x4EA4;</span></div><div class="line"><span class="keyword">if</span> branch.startswith(<span class="string">&apos;issue-&apos;</span>):</div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;commit-msg: Oh hey, it&apos;s an issue branch.&quot;</span></div><div class="line">    result = re.match(<span class="string">&apos;issue-(.*)&apos;</span>, branch)</div><div class="line">    issue_number = result.group(<span class="number">1</span>)</div><div class="line">    required_message = <span class="string">&quot;ISSUE-%s&quot;</span> % issue_number</div><div class="line"></div><div class="line">    <span class="keyword">with</span> open(commit_msg_filepath, <span class="string">&apos;r&apos;</span>) <span class="keyword">as</span> f:</div><div class="line">        content = f.read()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> content.startswith(required_message):</div><div class="line">            <span class="keyword">print</span> <span class="string">&quot;commit-msg: ERROR! The commit message must start with &apos;%s&apos;&quot;</span> % required_message</div><div class="line">            sys.exit(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>&#x867D;&#x7136;&#x7528;&#x6237;&#x6BCF;&#x6B21;&#x521B;&#x5EFA;&#x63D0;&#x4EA4;&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x90FD;&#x4F1A;&#x8FD0;&#x884C;&#x3002;&#x4F46;&#x4F60;&#x8FD8;&#x662F;&#x5E94;&#x8BE5;&#x907F;&#x514D;&#x505A;&#x68C0;&#x67E5;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x4E4B;&#x5916;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x901A;&#x77E5;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x4E00;&#x4E2A;&#x5FEB;&#x7167;&#x5DF2;&#x7ECF;&#x88AB;&#x63D0;&#x4EA4;&#x4E86;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;post-commit&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x3002;</p>
+<h2 id="post-commit"><a href="#post-commit" class="headerlink" title="post-commit"></a>post-commit</h2><p>post-commit&#x94A9;&#x5B50;&#x5728;commit-msg&#x94A9;&#x5B50;&#x4E4B;&#x540E;&#x7ACB;&#x5373;&#x88AB;&#x8FD0;&#x884C; &#x3002;&#x5B83;&#x65E0;&#x6CD5;&#x66F4;&#x6539;git commit&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x901A;&#x77E5;&#x7528;&#x9014;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x4E14;&#x9000;&#x51FA;&#x72B6;&#x6001;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x63D0;&#x4EA4;&#x3002;&#x5BF9;&#x4E8E;&#x5927;&#x591A;&#x6570;post-commit&#x811A;&#x672C;&#x6765;&#x8BF4;&#xFF0C;&#x4F60;&#x53EA;&#x662F;&#x60F3;&#x8BBF;&#x95EE;&#x4F60;&#x521A;&#x521A;&#x521B;&#x5EFA;&#x7684;&#x63D0;&#x4EA4;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x7528;git rev-parse HEAD&#x6765;&#x83B7;&#x5F97;&#x6700;&#x8FD1;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#x7684;SHA1&#x54C8;&#x5E0C;&#x5B57;&#x4E32;&#xFF0C;&#x6216;&#x8005;&#x4F60;&#x53EF;&#x4EE5;&#x7528;git log -l HEAD&#x83B7;&#x53D6;&#x5B8C;&#x6574;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x6BCF;&#x6B21;&#x63D0;&#x4EA4;&#x5FEB;&#x7167;&#x65F6;&#x5411;&#x8001;&#x677F;&#x53D1;&#x5C01;&#x90AE;&#x4EF6;&#xFF08;&#x4E5F;&#x8BB8;&#x5BF9;&#x4E8E;&#x5927;&#x591A;&#x6570;&#x5DE5;&#x4F5C;&#x6D41;&#x6765;&#x8BF4;&#x8FD9;&#x4E0D;&#x662F;&#x4E2A;&#x597D;&#x7684;&#x60F3;&#x6CD5;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x52A0;&#x4E0A;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;post-commit&#x94A9;&#x5B50;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> smtplib</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> check_output</div><div class="line"></div><div class="line"><span class="comment"># &#x83B7;&#x5F97;&#x65B0;&#x63D0;&#x4EA4;&#x7684;git log --stat&#x8F93;&#x51FA;</span></div><div class="line">log = check_output([<span class="string">&apos;git&apos;</span>, <span class="string">&apos;log&apos;</span>, <span class="string">&apos;-1&apos;</span>, <span class="string">&apos;--stat&apos;</span>, <span class="string">&apos;HEAD&apos;</span>])</div><div class="line"></div><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7EAF;&#x6587;&#x672C;&#x7684;&#x90AE;&#x4EF6;&#x5185;&#x5BB9;</span></div><div class="line">msg = MIMEText(<span class="string">&quot;Look, I&apos;m actually doing some work:\n\n%s&quot;</span> % log)</div><div class="line"></div><div class="line">msg[<span class="string">&apos;Subject&apos;</span>] = <span class="string">&apos;Git post-commit hook notification&apos;</span></div><div class="line">msg[<span class="string">&apos;From&apos;</span>] = <span class="string">&apos;mary@example.com&apos;</span></div><div class="line">msg[<span class="string">&apos;To&apos;</span>] = <span class="string">&apos;boss@example.com&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x53D1;&#x9001;&#x4FE1;&#x606F;</span></div><div class="line">SMTP_SERVER = <span class="string">&apos;smtp.example.com&apos;</span></div><div class="line">SMTP_PORT = <span class="number">587</span></div><div class="line"></div><div class="line">session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)</div><div class="line">session.ehlo()</div><div class="line">session.starttls()</div><div class="line">session.ehlo()</div><div class="line">session.login(msg[<span class="string">&apos;From&apos;</span>], <span class="string">&apos;secretPassword&apos;</span>)</div><div class="line"></div><div class="line">session.sendmail(msg[<span class="string">&apos;From&apos;</span>], msg[<span class="string">&apos;To&apos;</span>], msg.as_string())</div><div class="line">session.quit()</div></pre></td></tr></table></figure>
+<p>&#x4F60;&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x7528;post-commit&#x6765;&#x89E6;&#x53D1;&#x672C;&#x5730;&#x7684;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F46;&#x5927;&#x591A;&#x6570;&#x65F6;&#x5019;&#x4F60;&#x60F3;&#x7528;&#x7684;&#x662F;post-receive&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x3002;&#x5B83;&#x8FD0;&#x884C;&#x5728;&#x670D;&#x52A1;&#x7AEF;&#x800C;&#x4E0D;&#x662F;&#x7528;&#x6237;&#x7684;&#x672C;&#x5730;&#x673A;&#x5668;&#xFF0C;&#x5B83;&#x540C;&#x6837;&#x5728;&#x4EFB;&#x4F55;&#x5F00;&#x53D1;&#x8005;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x65F6;&#x8FD0;&#x884C;&#x3002;&#x90A3;&#x91CC;&#x66F4;&#x9002;&#x5408;&#x4F60;&#x8FDB;&#x884C;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x3002;</p>
+<h2 id="post-checkout"><a href="#post-checkout" class="headerlink" title="post-checkout"></a>post-checkout</h2><p>post-checkout&#x94A9;&#x5B50;&#x548C;post-commit&#x94A9;&#x5B50;&#x5F88;&#x50CF;&#xFF0C;&#x4F46;&#x5B83;&#x5728;&#x4F60;&#x7528;git checkout&#x67E5;&#x770B;&#x5F15;&#x7528;&#x7684;&#x65F6;&#x5019;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x8FD9;&#x662F;&#x7528;&#x6765;&#x6E05;&#x7406;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x4EE4;&#x4EBA;&#x56F0;&#x60D1;&#x7684;&#x751F;&#x6210;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x63A5;&#x53D7;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x7684;&#x8FD4;&#x56DE;&#x72B6;&#x6001;&#x4E0D;&#x5F71;&#x54CD;git checkout&#x547D;&#x4EE4;&#x3002;</p>
+<p>HEAD&#x524D;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#x7684;&#x5F15;&#x7528;<br>&#x65B0;&#x7684;HEAD&#x7684;&#x5F15;&#x7528;<br>1&#x6216;0&#xFF0C;&#x5206;&#x522B;&#x4EE3;&#x8868;&#x662F;&#x5206;&#x652F;checkout&#x8FD8;&#x662F;&#x6587;&#x4EF6;checkout&#x3002;<br>Python&#x7A0B;&#x5E8F;&#x5458;&#x7ECF;&#x5E38;&#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;&#x662F;&#x5207;&#x6362;&#x5206;&#x652F;&#x540E;&#x90A3;&#x4E9B;&#x4E4B;&#x524D;&#x751F;&#x6210;&#x7684;.pyc&#x6587;&#x4EF6;&#x3002;&#x89E3;&#x91CA;&#x5668;&#x6709;&#x65F6;&#x4F7F;&#x7528;.pyc&#x800C;&#x4E0D;&#x662F;.py&#x6587;&#x4EF6;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x6B67;&#x4E49;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x6BCF;&#x6B21;&#x7528;post-checkout&#x5207;&#x6362;&#x5230;&#x65B0;&#x7684;&#x5206;&#x652F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5220;&#x9664;&#x6240;&#x6709;.pyc&#x6587;&#x4EF6;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys, os, re</div><div class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> check_output</div><div class="line"></div><div class="line"><span class="comment"># &#x6536;&#x96C6;&#x53C2;&#x6570;</span></div><div class="line">previous_head = sys.argv[<span class="number">1</span>]</div><div class="line">new_head = sys.argv[<span class="number">2</span>]</div><div class="line">is_branch_checkout = sys.argv[<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="keyword">if</span> is_branch_checkout == <span class="string">&quot;0&quot;</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;post-checkout: This is a file checkout. Nothing to do.&quot;</span></div><div class="line">    sys.exit(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;post-checkout: Deleting all &apos;.pyc&apos; files in working directory&quot;</span></div><div class="line"><span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(<span class="string">&apos;.&apos;</span>):</div><div class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">        ext = os.path.splitext(filename)[<span class="number">1</span>]</div><div class="line">        <span class="keyword">if</span> ext == <span class="string">&apos;.pyc&apos;</span>:</div><div class="line">            os.unlink(os.path.join(root, filename))</div></pre></td></tr></table></figure>
+<p>&#x94A9;&#x5B50;&#x811A;&#x672C;&#x5F53;&#x524D;&#x7684;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x603B;&#x662F;&#x4F4D;&#x4E8E;&#x4ED3;&#x5E93;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x6240;&#x4EE5;os.walk(&#x2018;.&#x2019;)&#x8C03;&#x7528;&#x904D;&#x5386;&#x4E86;&#x4ED3;&#x5E93;&#x4E2D;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x68C0;&#x67E5;&#x5B83;&#x7684;&#x62D3;&#x5C55;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x662F;.pyc&#x5C31;&#x5220;&#x9664;&#x5B83;&#x3002;</p>
+<p>&#x901A;&#x8FC7;post-checkout&#x94A9;&#x5B50;&#xFF0C;&#x4F60;&#x8FD8;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4F60;&#x5207;&#x6362;&#x7684;&#x5206;&#x652F;&#x6765;&#x6765;&#x66F4;&#x6539;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4EE3;&#x7801;&#x5E93;&#x5916;&#x9762;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x63D2;&#x4EF6;&#x5206;&#x652F;&#x6765;&#x50A8;&#x5B58;&#x4F60;&#x6240;&#x6709;&#x7684;&#x63D2;&#x4EF6;&#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E9B;&#x63D2;&#x4EF6;&#x9700;&#x8981;&#x5F88;&#x591A;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x800C;&#x5176;&#x4ED6;&#x5206;&#x652F;&#x4E0D;&#x9700;&#x8981;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x53EA;&#x5728;&#x63D2;&#x4EF6;&#x5206;&#x652F;&#x4E0A;build&#x3002;</p>
+<h2 id="pre-rebase"><a href="#pre-rebase" class="headerlink" title="pre-rebase"></a>pre-rebase</h2><p>pre-rebase&#x94A9;&#x5B50;&#x5728;git rebase&#x53D1;&#x751F;&#x66F4;&#x6539;&#x4E4B;&#x524D;&#x8FD0;&#x884C;&#xFF0C;&#x786E;&#x4FDD;&#x4E0D;&#x4F1A;&#x6709;&#x4EC0;&#x4E48;&#x7CDF;&#x7CD5;&#x7684;&#x4E8B;&#x60C5;&#x53D1;&#x751F;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;frok&#x4E4B;&#x524D;&#x7684;&#x4E0A;&#x6E38;&#x5206;&#x652F;&#xFF0C;&#x5C06;&#x8981;rebase&#x7684;&#x4E0B;&#x6E38;&#x5206;&#x652F;&#x3002;&#x5982;&#x679C;rebase&#x5F53;&#x524D;&#x5206;&#x652F;&#x5219;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;&#x7A7A;&#x3002;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#x4F1A;&#x653E;&#x5F03;&#x8FD9;&#x6B21;rebase&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5F7B;&#x5E95;&#x7981;&#x7528;rebase&#x64CD;&#x4F5C;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;pre-rebase&#x811A;&#x672C;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="comment"># &#x7981;&#x7528;&#x6240;&#x6709;rebase</span></div><div class="line"><span class="built_in">echo</span> <span class="string">&quot;pre-rebase: Rebasing is dangerous. Don&apos;t do it.&quot;</span></div><div class="line"><span class="built_in">exit</span> 1</div></pre></td></tr></table></figure>
+<p>&#x6BCF;&#x6B21;&#x8FD0;&#x884C;git rebase&#xFF0C;&#x4F60;&#x90FD;&#x4F1A;&#x770B;&#x5230;&#x4E0B;&#x9762;&#x7684;&#x4FE1;&#x606F;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pre-rebase: Rebasing is dangerous. Don<span class="string">&apos;t do it.</span></div><div class="line">The pre-rebase hook refused to rebase.</div></pre></td></tr></table></figure>
+<p>&#x5185;&#x7F6E;&#x7684;pre-rebase.sample&#x811A;&#x672C;&#x662F;&#x4E00;&#x4E2A;&#x66F4;&#x590D;&#x6742;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x5B83;&#x5728;&#x4F55;&#x65F6;&#x963B;&#x6B62;rebase&#x8FD9;&#x65B9;&#x9762;&#x66F4;&#x52A0;&#x667A;&#x80FD;&#x3002;&#x5B83;&#x4F1A;&#x68C0;&#x67E5;&#x4F60;&#x5F53;&#x524D;&#x7684;&#x5206;&#x652F;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5408;&#x5E76;&#x5230;&#x4E86;&#x4E0B;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x4E2D;&#x53BB;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#x4E3B;&#x5206;&#x652F;&#xFF09;&#x3002;&#x5982;&#x679C;&#x662F;&#x7684;&#x8BDD;&#xFF0C;rebase&#x53EF;&#x80FD;&#x4F1A;&#x9047;&#x5230;&#x95EE;&#x9898;&#xFF0C;&#x811A;&#x672C;&#x4F1A;&#x653E;&#x5F03;&#x8FD9;&#x6B21;rebase&#x3002;</p>
+<h1 id="&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;"><a href="#&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;" class="headerlink" title="&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;"></a>&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;</h1><p>&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#x548C;&#x672C;&#x5730;&#x94A9;&#x5B50;&#x51E0;&#x4E4E;&#x4E00;&#x6837;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x5B83;&#x4EEC;&#x5B58;&#x5728;&#x4E8E;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x4ED3;&#x5E93;&#x4E2D;&#xFF08;&#x6BD4;&#x5982;&#x8BF4;&#x4E2D;&#x5FC3;&#x4ED3;&#x5E93;&#xFF0C;&#x6216;&#x8005;&#x5F00;&#x53D1;&#x8005;&#x7684;&#x516C;&#x5171;&#x4ED3;&#x5E93;&#xFF09;&#x3002;&#x5F53;&#x548C;&#x5B98;&#x65B9;&#x4ED3;&#x5E93;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E9B;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x62D2;&#x7EDD;&#x4E00;&#x4E9B;&#x4E0D;&#x7B26;&#x5408;&#x89C4;&#x8303;&#x7684;&#x63D0;&#x4EA4;&#x3002;</p>
+<p>&#x8FD9;&#x8282;&#x4E2D;&#x6211;&#x4EEC;&#x8981;&#x8BA8;&#x8BBA;&#x4E0B;&#x9762;&#x4E09;&#x4E2A;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#xFF1A;</p>
+<ul>
+<li>pre-receive</li>
+<li>update</li>
+<li>post-receive</li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x94A9;&#x5B50;&#x90FD;&#x5141;&#x8BB8;&#x4F60;&#x5BF9;git push&#x7684;&#x4E0D;&#x540C;&#x9636;&#x6BB5;&#x505A;&#x51FA;&#x54CD;&#x5E94;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#x7684;&#x8F93;&#x51FA;&#x4F1A;&#x4F20;&#x9001;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x63A7;&#x5236;&#x53F0;&#x4E2D;&#xFF0C;&#x6240;&#x4EE5;&#x7ED9;&#x5F00;&#x53D1;&#x8005;&#x53D1;&#x9001;&#x4FE1;&#x606F;&#x662F;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x3002;&#x4F46;&#x4F60;&#x8981;&#x8BB0;&#x4F4F;&#x8FD9;&#x4E9B;&#x811A;&#x672C;&#x5728;&#x7ED3;&#x675F;&#x5B8C;&#x4E4B;&#x524D;&#x90FD;&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE;&#x63A7;&#x5236;&#x53F0;&#x7684;&#x63A7;&#x5236;&#x6743;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x8981;&#x5C0F;&#x5FC3;&#x90A3;&#x4E9B;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="pre-receive"><a href="#pre-receive" class="headerlink" title="pre-receive"></a>pre-receive</h2><p>pre-receive&#x94A9;&#x5B50;&#x5728;&#x6709;&#x4EBA;&#x7528;git push&#x5411;&#x4ED3;&#x5E93;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x65F6;&#x88AB;&#x6267;&#x884C;&#x3002;&#x5B83;&#x53EA;&#x5B58;&#x5728;&#x4E8E;&#x8FDC;&#x7AEF;&#x4ED3;&#x5E93;&#x4E2D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x539F;&#x6765;&#x7684;&#x4ED3;&#x5E93;&#x4E2D;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x5728;&#x4EFB;&#x610F;&#x5F15;&#x7528;&#x88AB;&#x66F4;&#x65B0;&#x94B1;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x662F;&#x5F3A;&#x5236;&#x63A8;&#x884C;&#x5F00;&#x53D1;&#x89C4;&#x8303;&#x7684;&#x597D;&#x5730;&#x65B9;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x559C;&#x6B22;&#x63A8;&#x9001;&#x7684;&#x90A3;&#x4E2A;&#x4EBA;&#xFF08;&#x591A;&#x5927;&#x4EC7;= =&#xFF09;&#xFF0C;&#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x6216;&#x8005;&#x63D0;&#x4EA4;&#x7684;&#x66F4;&#x6539;&#xFF0C;&#x4F60;&#x90FD;&#x53EF;&#x4EE5;&#x62D2;&#x7EDD;&#x8FD9;&#x6B21;&#x63D0;&#x4EA4;&#x3002;&#x867D;&#x7136;&#x4F60;&#x4E0D;&#x80FD;&#x963B;&#x6B62;&#x5F00;&#x53D1;&#x8005;&#x5199;&#x51FA;&#x7CDF;&#x7CD5;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x4F60;&#x53EF;&#x4EE5;&#x7528;pre-receive&#x9632;&#x6B62;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x6D41;&#x5165;&#x5B98;&#x65B9;&#x7684;&#x4EE3;&#x7801;&#x5E93;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x6BCF;&#x4E00;&#x4E2A;&#x63A8;&#x9001;&#x4E0A;&#x6765;&#x7684;&#x5F15;&#x7528;&#x90FD;&#x4F1A;&#x4EE5;&#x4E0B;&#x9762;&#x7684;&#x683C;&#x5F0F;&#x4F20;&#x5165;&#x811A;&#x672C;&#x7684;&#x5355;&#x72EC;&#x4E00;&#x884C;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;old-value&gt; &lt;new-value&gt; &lt;ref-name&gt;</div></pre></td></tr></table></figure>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x505A;&#x4E86;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#x4E8B;&#xFF0C;&#x5C31;&#x662F;&#x8BFB;&#x53D6;&#x63A8;&#x9001;&#x4E0A;&#x6765;&#x7684;&#x5F15;&#x7528;&#x5E76;&#x4E14;&#x628A;&#x5B83;&#x4EEC;&#x6253;&#x5370;&#x51FA;&#x6765;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> fileinput</div><div class="line"></div><div class="line"><span class="comment"># &#x8BFB;&#x53D6;&#x7528;&#x6237;&#x8BD5;&#x56FE;&#x66F4;&#x65B0;&#x7684;&#x6240;&#x6709;&#x5F15;&#x7528;</span></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> fileinput.input():</div><div class="line">    <span class="keyword">print</span> <span class="string">&quot;pre-receive: Trying to push ref: %s&quot;</span> % line</div><div class="line"></div><div class="line"><span class="comment"># &#x653E;&#x5F03;&#x63A8;&#x9001;</span></div><div class="line"><span class="comment"># sys.exit(1)</span></div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x548C;&#x5176;&#x5B83;&#x94A9;&#x5B50;&#x76F8;&#x6BD4;&#x7565;&#x5FAE;&#x6709;&#x4E9B;&#x4E0D;&#x540C;&#xFF0C;&#x56E0;&#x4E3A;&#x4FE1;&#x606F;&#x662F;&#x901A;&#x8FC7;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x800C;&#x4E0D;&#x662F;&#x547D;&#x4EE4;&#x884C;&#x4F20;&#x5165;&#x7684;&#x3002;&#x5728;&#x8FDC;&#x7AEF;&#x4ED3;&#x5E93;&#x7684;.git/hooks&#x4E2D;&#x52A0;&#x4E0A;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#xFF0C;&#x63A8;&#x9001;&#x5230;master&#x5206;&#x652F;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x4E0B;&#x9762;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x6253;&#x5370;&#x51FA;&#x6765;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b6b36c697eb2d24302f89aa22d9170dfe609855b 85baa88c22b52ddd24d71f05db31f4e46d579095 refs/heads/master</div></pre></td></tr></table></figure>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x7528;SHA1&#x54C8;&#x5E0C;&#x5B57;&#x4E32;&#xFF0C;&#x6216;&#x8005;&#x5E95;&#x5C42;&#x7684;Git&#x547D;&#x4EE4;&#xFF0C;&#x6765;&#x68C0;&#x67E5;&#x5C06;&#x8981;&#x5F15;&#x5165;&#x7684;&#x66F4;&#x6539;&#x3002;&#x4E00;&#x4E9B;&#x5E38;&#x89C1;&#x7684;&#x4F7F;&#x7528;&#x5305;&#x62EC;&#xFF1A;</p>
+<ul>
+<li>&#x62D2;&#x7EDD;&#x5C06;&#x4E0A;&#x6E38;&#x5206;&#x652F;rebase&#x7684;&#x66F4;&#x6539;</li>
+<li>&#x9632;&#x6B62;&#x9519;&#x7EFC;&#x590D;&#x6742;&#x7684;&#x5408;&#x5E76;&#xFF08;&#x975E;&#x5FEB;&#x901F;&#x5411;&#x524D;&#xFF0C;&#x4F1A;&#x9020;&#x6210;&#x9879;&#x76EE;&#x5386;&#x53F2;&#x975E;&#x7EBF;&#x6027;&#xFF09;</li>
+<li>&#x68C0;&#x67E5;&#x7528;&#x6237;&#x662F;&#x5426;&#x6709;&#x6B63;&#x786E;&#x7684;&#x6743;&#x9650;&#x6765;&#x505A;&#x8FD9;&#x4E9B;&#x66F4;&#x6539;&#xFF08;&#x5927;&#x591A;&#x7528;&#x4E8E;&#x4E2D;&#x5FC3;&#x5316;&#x7684;Git&#x5DE5;&#x4F5C;&#x6D41;&#x4E2D;&#xFF09;</li>
+<li>&#x5982;&#x679C;&#x591A;&#x4E2A;&#x5F15;&#x7528;&#x88AB;&#x63A8;&#x9001;&#xFF0C;&#x5728;pre-receive&#x4E2D;&#x8FD4;&#x56DE;&#x975E;0&#x72B6;&#x6001;&#xFF0C;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x63D0;&#x4EA4;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4E00;&#x4E2A;&#x4E2A;&#x63A5;&#x53D7;&#x6216;&#x62D2;&#x7EDD;&#x5206;&#x652F;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x4F7F;&#x7528;update&#x94A9;&#x5B50;</li>
+</ul>
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>update&#x94A9;&#x5B50;&#x5728;pre-receive&#x4E4B;&#x540E;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x7528;&#x6CD5;&#x4E5F;&#x5DEE;&#x4E0D;&#x591A;&#x3002;&#x5B83;&#x4E5F;&#x662F;&#x5728;&#x5B9E;&#x9645;&#x66F4;&#x65B0;&#x524D;&#x88AB;&#x8C03;&#x7528;&#x7684;&#xFF0C;&#x4F46;&#x5B83;&#x53EF;&#x4EE5;&#x5206;&#x522B;&#x88AB;&#x6BCF;&#x4E2A;&#x63A8;&#x9001;&#x4E0A;&#x6765;&#x7684;&#x5F15;&#x7528;&#x5206;&#x522B;&#x8C03;&#x7528;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5982;&#x679C;&#x7528;&#x6237;&#x5C1D;&#x8BD5;&#x63A8;&#x9001;&#x5230;4&#x4E2A;&#x5206;&#x652F;&#xFF0C;update&#x4F1A;&#x88AB;&#x6267;&#x884C;4&#x6B21;&#x3002;&#x548C;pre-receive&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x4E0D;&#x9700;&#x8981;&#x8BFB;&#x53D6;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x3002;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>&#x66F4;&#x65B0;&#x7684;&#x5F15;&#x7528;&#x540D;&#x79F0;</li>
+<li>&#x5F15;&#x7528;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x65E7;&#x7684;&#x5BF9;&#x8C61;&#x540D;&#x79F0;</li>
+<li>&#x5F15;&#x7528;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#x540D;&#x79F0;</li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x548C;pre-receive&#x76F8;&#x540C;&#xFF0C;&#x4F46;&#x56E0;&#x4E3A;&#x6BCF;&#x6B21;&#x5F15;&#x7528;&#x90FD;&#x4F1A;&#x5206;&#x522B;&#x89E6;&#x53D1;&#x66F4;&#x65B0;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x62D2;&#x7EDD;&#x4E00;&#x4E9B;&#x5F15;&#x7528;&#x800C;&#x63A5;&#x53D7;&#x53E6;&#x4E00;&#x4E9B;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">branch = sys.argv[<span class="number">1</span>]</div><div class="line">old_commit = sys.argv[<span class="number">2</span>]</div><div class="line">new_commit = sys.argv[<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Moving &apos;%s&apos; from %s to %s&quot;</span> % (branch, old_commit, new_commit)</div><div class="line"></div><div class="line"><span class="comment"># &#x53EA;&#x653E;&#x5F03;&#x5F53;&#x524D;&#x5206;&#x652F;&#x7684;&#x63A8;&#x9001;</span></div><div class="line"><span class="comment"># sys.exit(1)</span></div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x8FD9;&#x4E2A;&#x94A9;&#x5B50;&#x7B80;&#x5355;&#x5730;&#x8F93;&#x51FA;&#x4E86;&#x5206;&#x652F;&#x548C;&#x65B0;&#x65E7;&#x63D0;&#x4EA4;&#x7684;&#x54C8;&#x5E0C;&#x5B57;&#x4E32;&#x3002;&#x5F53;&#x4F60;&#x5411;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x63A8;&#x9001;&#x8D85;&#x8FC7;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6BCF;&#x4E2A;&#x5206;&#x652F;&#x90FD;&#x6709;&#x8F93;&#x51FA;&#x3002;</p>
+<h2 id="post-receive"><a href="#post-receive" class="headerlink" title="post-receive"></a>post-receive</h2><p>post-receive&#x94A9;&#x5B50;&#x5728;&#x6210;&#x529F;&#x63A8;&#x9001;&#x540E;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x9002;&#x5408;&#x7528;&#x4E8E;&#x53D1;&#x9001;&#x901A;&#x77E5;&#x3002;&#x5BF9;&#x5F88;&#x591A;&#x5DE5;&#x4F5C;&#x6D41;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6BD4;post-commit&#x66F4;&#x597D;&#x7684;&#x53D1;&#x9001;&#x901A;&#x77E5;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x66F4;&#x6539;&#x5728;&#x516C;&#x5171;&#x7684;&#x670D;&#x52A1;&#x5668;&#x800C;&#x4E0D;&#x662F;&#x7528;&#x6237;&#x7684;&#x672C;&#x5730;&#x673A;&#x5668;&#x4E0A;&#x3002;&#x7ED9;&#x5176;&#x4ED6;&#x5F00;&#x53D1;&#x8005;&#x53D1;&#x9001;&#x90AE;&#x4EF6;&#x6216;&#x8005;&#x89E6;&#x53D1;&#x4E00;&#x4E2A;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x7CFB;&#x7EDF;&#x90FD;&#x662F;post-receive&#x5E38;&#x7528;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x548C;pre-receive&#x4E00;&#x6837;&#x901A;&#x8FC7;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8BFB;&#x53D6;&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x4E86;&#x5982;&#x679C;&#x7528;Git&#x94A9;&#x5B50;&#x6765;&#x4FEE;&#x6539;&#x5185;&#x90E8;&#x884C;&#x4E3A;&#xFF0C;&#x5F53;&#x4ED3;&#x5E93;&#x4E2D;&#x7279;&#x5B9A;&#x7684;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#x63A5;&#x53D7;&#x6D88;&#x606F;&#x3002;&#x94A9;&#x5B50;&#x662F;&#x5B58;&#x5728;&#x4E8E;git/hooks&#x4ED3;&#x5E93;&#x4E2D;&#x7684;&#x666E;&#x901A;&#x811A;&#x672C;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x5B89;&#x88C5;&#x548C;&#x5B9A;&#x5236;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x8FD8;&#x770B;&#x4E86;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;&#x672C;&#x5730;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x94A9;&#x5B50;&#x3002;&#x8FD9;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x4ECB;&#x5165;&#x5230;&#x6574;&#x4E2A;&#x5F00;&#x53D1;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#x53BB;&#x3002;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x77E5;&#x9053;&#x4E86;&#x5982;&#x4F55;&#x5728;&#x521B;&#x5EFA;&#x63D0;&#x4EA4;&#x6216;&#x63A8;&#x9001;&#x7684;&#x6BCF;&#x4E2A;&#x9636;&#x6BB5;&#x6267;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x6709;&#x4E86;&#x8FD9;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x811A;&#x672C;&#x77E5;&#x8BC6;&#xFF0C;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x5BF9;Git&#x4ED3;&#x5E93;&#x4E3A;&#x6240;&#x6B32;&#x4E3A;&#x4E86; : )</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+            <a href="/tags/learn/" rel="tag">#learn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/12/rsync-install/" rel="next" title="rsync参数解析">
+                <i class="fa fa-chevron-left"></i> rsync参数解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/15/learn-git/" rel="prev" title="git学习简明教程">
+                git学习简明教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装钩子"><span class="nav-number">2.1.</span> <span class="nav-text">安装钩子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本语言"><span class="nav-number">2.2.</span> <span class="nav-text">脚本语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#钩子的作用域"><span class="nav-number">2.3.</span> <span class="nav-text">钩子的作用域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地钩子"><span class="nav-number">3.</span> <span class="nav-text">本地钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-commit"><span class="nav-number">3.1.</span> <span class="nav-text">pre-commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prepare-commit-msg"><span class="nav-number">3.2.</span> <span class="nav-text">prepare-commit-msg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#commit-msg"><span class="nav-number">3.3.</span> <span class="nav-text">commit-msg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post-commit"><span class="nav-number">3.4.</span> <span class="nav-text">post-commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post-checkout"><span class="nav-number">3.5.</span> <span class="nav-text">post-checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-rebase"><span class="nav-number">3.6.</span> <span class="nav-text">pre-rebase</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端钩子"><span class="nav-number">4.</span> <span class="nav-text">服务端钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-receive"><span class="nav-number">4.1.</span> <span class="nav-text">pre-receive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update"><span class="nav-number">4.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post-receive"><span class="nav-number">4.3.</span> <span class="nav-text">post-receive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
