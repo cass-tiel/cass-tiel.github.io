@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux,git,learn," />
+  <meta name="keywords" content="linux,git," />
 
 
 
@@ -70,7 +70,7 @@
 <meta property="og:image" content="http://c.isme.pub/2017/06/15/learn-git/2.png">
 <meta property="og:image" content="http://c.isme.pub/2017/06/15/learn-git/3.png">
 <meta property="og:image" content="http://c.isme.pub/2017/06/15/learn-git/4.png">
-<meta property="og:updated_time" content="2017-06-26T05:31:44.000Z">
+<meta property="og:updated_time" content="2017-08-22T02:12:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习简明教程">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
@@ -255,19 +255,7 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/" itemprop="url" rel="index">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
                     <span itemprop="name">linux</span>
                   </a>
                 </span>
@@ -279,8 +267,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/learn/" itemprop="url" rel="index">
-                    <span itemprop="name">learn</span>
+                  <a href="/categories/linux/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -332,6 +320,7 @@
 <p>&#x4E3A;&#x5206;&#x652F;&#x5408;&#x5E76;&#x81EA;&#x52A8;&#x8BC6;&#x522B;&#x51FA;&#x6700;&#x4F73;&#x7684;&#x540C;&#x6E90;&#x5408;&#x5E76;&#x70B9;</p>
 <p><img src="/2017/06/15/learn-git/4.png" alt=""></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> url <span class="comment">#&#x514B;&#x9686;&#x65B0;&#x7684;&#x7248;&#x672C;&#x5E93;</span></div><div class="line">git init </div><div class="line">git pull repo_name <span class="comment">#&#x6709;&#x5173;&#x8054;&#x7684;&#x8FDC;&#x7A0B;&#x5E93;&#xFF0C;&#x62BD;&#x53D6;&#x5E76;&#x548C;&#x672C;&#x5730;&#x5408;&#x5E76;</span></div><div class="line">git fetch remote_repo_name <span class="comment">#&#x62BD;&#x53D6;&#x5E76;&#x65B0;&#x5EFA;&#x5206;&#x652F;</span></div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line"><span class="comment">#&#x5728;&#x5F53;&#x524D;commit&#x5BF9;&#x8C61;&#x4E0A;&#x65B0;&#x5EFA;&#x5206;&#x652F;   &#x6307;&#x9488;head</span></div><div class="line"><span class="comment">#head&#x6307;&#x5411;&#x6B63;&#x5728;&#x5DE5;&#x4F5C;&#x4E2D;&#x7684;&#x672C;&#x5730;&#x5206;&#x652F;&#x7684;&#x6307;&#x9488;(&#x522B;&#x540D;)</span></div><div class="line"><span class="comment">#&#x4E0D;&#x4F1A;&#x5207;&#x6362;&#x5230;&#x65B0;&#x5EFA;&#x7684;&#x5206;&#x652F;&#x4E0A;</span></div><div class="line">git branch branch1</div><div class="line"></div><div class="line"><span class="comment">#&#x5207;&#x6362;&#x5206;&#x652F;&#x5C06;head&#x6307;&#x5411;branch1</span></div><div class="line">git checkout branch1 </div><div class="line"></div><div class="line"><span class="comment">#&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#x5361;</span></div><div class="line"><span class="comment">#&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5206;&#x652F;&#x91CC;&#x53CD;&#x590D;&#x5207;&#x6362;&#xFF0C;&#x5E76;&#x5728;&#x65F6;&#x673A;&#x6210;&#x719F;&#x65F6;&#x628A;&#x4ED6;&#x4EEC;&#x5408;&#x5E76;&#x5230;&#x4E00;&#x8D77;</span></div><div class="line"><span class="comment">#git&#x7684;&#x5206;&#x652F;&#x5B9E;&#x9645;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6240;&#x6307;&#x5411;&#x5BF9;&#x8C61;&#x6821;&#x9A8C;&#x548C;&#x7684;&#x6587;&#x4EF6;&#xFF08;40&#x4E2A;&#x5B57;&#x7B26;&#x957F;&#x5EA6;SHA-1&#x5B57;&#x4E32;&#xFF09;</span></div><div class="line"></div><div class="line"><span class="comment">#&#x5206;&#x652F;&#x7684;&#x65B0;&#x5EFA;&#x548C;&#x5408;&#x5E76;</span></div><div class="line"><span class="comment">#0&#x3001;&#x81EA;&#x5DF1;&#x5DE5;&#x4F5C;&#x5206;&#x652F;mybranch&#xFF0C;&#x5DE5;&#x4F5C;&#x7684;&#x597D;&#x597D;&#x7684; </span></div><div class="line"></div><div class="line"><span class="comment">#1&#x3001;&#x7A81;&#x7136;&#x6709;&#x65B0;&#x9700;&#x6C42;&#xFF0C;&#x5148;&#x5207;&#x6362;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x5206;&#x652F;product&#xFF1B;</span></div><div class="line">git checkout product</div><div class="line"></div><div class="line"><span class="comment">#2&#x3001;&#x4E3A;&#x65B0;&#x9700;&#x6C42;&#x65B0;&#x5EFA;&#x5206;&#x652F;branch_pack&#xFF0C;&#x5207;&#x5230;&#x5176;&#x4E2D;&#xFF0C;&#x5E76;&#x5728;&#x5176;&#x4E2D;&#x7F16;&#x7801;&#xFF0C;&#x76F4;&#x5230;&#x901A;&#x8FC7;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;</span></div><div class="line"><span class="comment"># -b &#x65B0;&#x5EFA;&#x5206;&#x652F;&#x5E76;&#x5207;&#x6362;&#x5230;&#x5176;&#x4E0A;</span></div><div class="line">git checkout -b issueXXXX </div><div class="line"></div><div class="line"><span class="comment">#3&#x3001;&#x5207;&#x6362;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x5206;&#x652F;product&#xFF0C;&#x5C06;2&#x4E2D;&#x7684;&#x5F00;&#x53D1;&#x5DE5;&#x4F5C;&#x5206;&#x652F;branch_pack&#x5408;&#x5E76;&#x8FDB;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x63A8;&#x9001;&#x5230;&#x751F;&#x4EA7;&#x670D;&#x52A1;&#x5668;&#x4E0A;</span></div><div class="line">git checkout product</div><div class="line"><span class="comment"># &#x5408;&#x5E76;</span></div><div class="line">git merge branch_pach</div><div class="line"><span class="comment">#&#x51B2;&#x7A81;&#x89E3;&#x51B3;&#xFF0C;merge&#x5931;&#x8D25;&#x65F6;&#x5F88;&#x53EF;&#x80FD;&#x56E0;&#x5BF9;&#x540C;&#x4E00;&#x6587;&#x4EF6;&#x7684;&#x540C;&#x65F6;&#x66F4;&#x6539;&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x624B;&#x52A8;&#x4EBA;&#x5DE5;&#x89E3;&#x51B3; &#x53D6;&#x820D;&#x4EE3;&#x7801;&#xFF0C;&#x786E;&#x8BA4;&#x51B2;&#x7A81;&#x89E3;&#x51B3;&#x540E;&#x9700;&#x8981;&#x628A;&#x51B2;&#x7A81;&#x6587;&#x4EF6; git add&#x5230;staged area&#xFF0C;&#x8FD0;&#x884C;git status&#x67E5;&#x770B;&#x6240;&#x6709;&#x72B6;&#x6001;&#x786E;&#x4FDD;&#x65E0;&#x8BEF;&#x540E;&#x518D;git commit&#x63D0;&#x4EA4;&#xFF0C;&#x6CE8;&#x91CA;&#x597D;&#x51B2;&#x7A81;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;&#x89E3;&#x51B3;</span></div><div class="line"></div><div class="line">git push &#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x540D;  &#x672C;&#x5730;&#x4ED3;&#x5E93;&#x540D;</div><div class="line"></div><div class="line"><span class="comment">#&#x5206;&#x652F;&#x5220;&#x9664;</span></div><div class="line">git branch <span class="_">-d</span> branch_pach</div><div class="line"></div><div class="line">4&#x3001;&#x5207;&#x6362;&#x5230;mybranch&#x7EE7;&#x7EED;&#x81EA;&#x5DF1;&#x7684;&#x5DE5;&#x4F5C;</div><div class="line">git checkout mybranch</div><div class="line"> </div><div class="line"><span class="comment">#&#x5207;&#x6362;&#x5206;&#x652F;&#x6700;&#x597D;&#x6CA1;&#x6709;&#x5F85;&#x63D0;&#x4EA4;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5373;stage area&#x662F;&#x6E05;&#x6D01;&#x7684;</span></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x5404;&#x4E2A;&#x5206;&#x652F;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x63D0;&#x4EA4;&#x5BF9;&#x8C61;&#x7684;&#x4FE1;&#x606F;</span></div><div class="line">git branch -v</div><div class="line">git branch --merge/no-merged</div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x54EA;&#x4E9B;&#x5206;&#x652F;&#x5DF2;&#x88AB;&#x5E76;&#x5165;&#x5F53;&#x524D;&#x5206;&#x652F;&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x54EA;&#x4E9B;&#x5206;&#x652F;&#x662F;&#x5F53;&#x524D;&#x5206;&#x652F;&#x7684;&#x76F4;&#x63A5;&#x4E0A;&#x6E38;</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x7ED9;&#x5206;&#x652F;&#x751F;&#x6210;patch&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x7ED9;</span></div><div class="line">git format-patch </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x628A;&#x672C;&#x5730;&#x540D;&#x4E3A;serverfix&#x7684;&#x5206;&#x652F;&#x63A8;&#x9001;&#x5230;&#x8FDC;&#x7A0B;origin&#x5E93;&#x7684;awesomebranch&#x5206;&#x652F;</span></div><div class="line">git push origin serverfix:awesomebranch </div><div class="line"></div><div class="line"><span class="comment">#&#x8DDF;&#x8E2A;&#x8FDC;&#x7A0B;&#x5206;&#x652F; &#x4ECE;&#x8FDC;&#x7A0B;&#x5206;&#x652F;checkout&#x51FA;&#x7684;&#x672C;&#x5730;&#x5206;&#x652F;&#x6210;&#x4E3A;  &#x8DDF;&#x8E2A;&#x5206;&#x652F;</span></div><div class="line">git checkout -b sf origin/serverfix</div><div class="line">git checkout --track origin/serverfix</div><div class="line"> </div><div class="line"><span class="comment">#&#x5220;&#x9664;&#x8FDC;&#x7A0B;&#x5206;&#x652F;</span></div><div class="line">git push origin :serverfix </div><div class="line"></div><div class="line">git&#x4E24;&#x79CD;&#x5F00;&#x53D1;&#x5206;&#x652F;&#x65B9;&#x6CD5;</div><div class="line">&#x957F;&#x671F;&#x5206;&#x652F;&#xFF1A;&#x4E00;&#x4E2A;&#x4E3B;&#x5206;&#x652F;&#x4FDD;&#x6301;&#x7A33;&#x5B9A;&#x4EE3;&#x7801;&#xFF0C;&#x5176;&#x4F59;&#x591A;&#x4E2A;&#x5F00;&#x653E;&#x5206;&#x652F;</div><div class="line">&#x7279;&#x6027;topic&#x5206;&#x652F;&#xFF1A;&#x591A;&#x4E2A;&#x77ED;&#x671F;&#x5355;&#x4E00;&#x529F;&#x80FD;&#x7684;&#x5206;&#x652F;</div><div class="line"></div><div class="line"><span class="comment">#&#x7ED9;&#x5F53;&#x524D;&#x6587;&#x4EF6; &#x6253;&#x7279;&#x5B9A;&#x7248;&#x672C;&#x6807;&#x7B7E;</span></div><div class="line">git tag <span class="_">-a</span>  beta0.1 -m <span class="string">&quot;some &#x6CE8;&#x91CA;&quot;</span></div><div class="line"></div><div class="line"><span class="comment">#&#x56DE;&#x9000;&#x5230;&#x67D0;&#x4E2A;tag</span></div><div class="line">git tag beta0.1</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -357,8 +346,6 @@
           
             <a href="/tags/git/" rel="tag">#git</a>
           
-            <a href="/tags/learn/" rel="tag">#learn</a>
-          
         </div>
       
 
@@ -374,8 +361,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/17/kvm-install/" rel="prev" title="kvm-install">
-                kvm-install <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/17/kvm-install/" rel="prev" title="KVM安装部署">
+                KVM安装部署 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -444,7 +431,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -452,7 +439,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -461,7 +448,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -509,7 +496,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

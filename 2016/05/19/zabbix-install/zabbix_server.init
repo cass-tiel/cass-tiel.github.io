@@ -1,0 +1,53 @@
+#!/bin/bash
+# chkconfig: - 95 5
+
+. /etc/init.d/functions
+
+RETVAL=0
+prog="Zabbix Server"
+ZABBIX_BIN="/usr/local/zabbix/sbin/zabbix_server"
+
+if [ ! -x ${ZABBIX_BIN} ] ; then
+        echo -n "${ZABBIX_BIN} not installed! "
+        exit 5
+fi
+
+start() {
+        echo -n $"Starting $prog: "
+        daemon $ZABBIX_BIN
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/zabbix_server
+        echo
+}
+
+stop() {
+        echo -n $"Stopping $prog: "
+        killproc $ZABBIX_BIN
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/zabbix_server
+        echo
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  reload|restart)
+        stop
+        sleep 3
+        start
+        RETVAL=$?
+        ;;
+  status)
+        status $ZABBIX_BIN
+        RETVAL=$?
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+
+exit $RETVAL

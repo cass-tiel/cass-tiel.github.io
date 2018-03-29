@@ -1,0 +1,583 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,network," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络模型以及相关协议">
+<meta property="og:url" content="http://c.isme.pub/2018/03/08/network-osi/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:image" content="http://c.isme.pub/2018/03/08/network-osi/1.jpg">
+<meta property="og:image" content="http://c.isme.pub/2018/03/08/network-osi/2.jpg">
+<meta property="og:updated_time" content="2018-03-08T08:18:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络模型以及相关协议">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta name="twitter:image" content="http://c.isme.pub/2018/03/08/network-osi/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/03/08/network-osi/"/>
+
+
+  <title> 网络模型以及相关协议 | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                网络模型以及相关协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-08T16:18:35+08:00" content="2018-03-08">
+              2018-03-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
+<h1 id="OSI&#x4E03;&#x5C42;&#x6A21;&#x578B;-&#x76F8;&#x5173;&#x534F;&#x8BAE;"><a href="#OSI&#x4E03;&#x5C42;&#x6A21;&#x578B;-&#x76F8;&#x5173;&#x534F;&#x8BAE;" class="headerlink" title="OSI&#x4E03;&#x5C42;&#x6A21;&#x578B; &#x76F8;&#x5173;&#x534F;&#x8BAE;"></a>OSI&#x4E03;&#x5C42;&#x6A21;&#x578B; &#x76F8;&#x5173;&#x534F;&#x8BAE;</h1><p><img src="/2018/03/08/network-osi/1.jpg" alt=""></p>
+<h2 id="tcp-ip&#x4E0E;osi"><a href="#tcp-ip&#x4E0E;osi" class="headerlink" title="tcp/ip&#x4E0E;osi"></a>tcp/ip&#x4E0E;osi</h2><p><img src="/2018/03/08/network-osi/2.jpg" alt=""></p>
+<h2 id="&#x5E94;&#x7528;&#x5C42;"><a href="#&#x5E94;&#x7528;&#x5C42;" class="headerlink" title="&#x5E94;&#x7528;&#x5C42;"></a>&#x5E94;&#x7528;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">HTTP &#x8D85;&#x6587;&#x672C;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">FTP &#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">SMTP &#x7B80;&#x5355;&#x90AE;&#x4EF6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">TELNET TCP/IP&#x7EC8;&#x7AEF;&#x4EFF;&#x771F;&#x534F;&#x8BAE;</div><div class="line">POP3 &#x90AE;&#x5C40;&#x534F;&#x8BAE;&#x7B2C;&#x4E09;&#x7248;</div><div class="line">Finger &#x7528;&#x6237;&#x4FE1;&#x606F;&#x534F;&#x8BAE;</div><div class="line">NNTP &#x7F51;&#x7EDC;&#x65B0;&#x95FB;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">IMAP4 &#x56E0;&#x7279;&#x7F51;&#x4FE1;&#x606F;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;&#x7B2C;&#x56DB;&#x7248;</div><div class="line">LPR UNIX &#x8FDC;&#x7A0B;&#x6253;&#x5370;&#x534F;&#x8BAE;</div><div class="line">Rwho UNIX &#x8FDC;&#x7A0B; Who&#x534F;&#x8BAE;</div><div class="line">Rexec UNIX&#x8FDC;&#x7A0B;&#x6267;&#x884C;&#x534F;&#x8BAE;</div><div class="line">Login UNIX &#x8FDC;&#x7A0B;&#x767B;&#x9646;&#x534F;&#x8BAE;</div><div class="line">RSH UNIX &#x8FDC;&#x7A0B;Shell&#x534F;&#x8BAE;</div><div class="line">NTF HP&#x7F51;&#x7EDC;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">RDA HP &#x8FDC;&#x7A0B;&#x6570;&#x636E;&#x5E93;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;</div><div class="line">VT &#x865A;&#x62DF;&#x7EC8;&#x7AEF;&#x4EFF;&#x771F;&#x534F;&#x8BAE;</div><div class="line">RFA HP &#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;</div><div class="line">RPC Remote Process Comm.</div><div class="line">S-HTTP &#x5B89;&#x5168;&#x8D85;&#x6587;&#x672C;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">GDP&#x7F51;&#x5173;&#x53D1;&#x73B0;&#x534F;&#x8BAE;</div><div class="line">X-Window</div><div class="line">CMOT &#x57FA;&#x4E8E;TCP/IP&#x7684;CMIP&#x534F;&#x8BAE;</div><div class="line">SOCKS &#x5B89;&#x5168;&#x5957;&#x63A5;&#x5B57;&#x534F;&#x8BAE;</div><div class="line">FANP&#x6D41;&#x5C5E;&#x6027;&#x901A;&#x77E5;&#x534F;&#x8BAE;</div><div class="line">SLP&#x670D;&#x52A1;&#x5B9A;&#x4F4D;&#x534F;&#x8BAE;</div><div class="line">MSN&#x5FAE;&#x8F6F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;</div><div class="line">Radius &#x8FDC;&#x7A0B;&#x7528;&#x6237;&#x62E8;&#x53F7;&#x8BA4;&#x8BC1;&#x670D;&#x52A1;&#x534F;&#x8BAE;</div><div class="line">DNS &#x57DF;&#x540D;&#x7CFB;&#x7EDF;</div><div class="line">NFS&#x7F51;&#x7EDC;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x534F;&#x8BAE;</div><div class="line">NIS SUN &#x7F51;&#x7EDC;&#x4FE1;&#x606F;&#x7CFB;&#x7EDF;&#x534F;&#x8BAE;</div><div class="line">R-STAT SUN&#x8FDC;&#x7A0B;&#x72B6;&#x6001;&#x534F;&#x8BAE;</div><div class="line">NSM SUN &#x7F51;&#x7EDC;&#x72B6;&#x6001;&#x76D1;&#x6D4B;&#x534F;&#x8BAE;</div><div class="line">PMAP SUN &#x7AEF;&#x53E3;&#x6620;&#x5C04;&#x534F;&#x8BAE;</div><div class="line">Mount</div><div class="line">LPR UNIX&#x8FDC;&#x7A0B;&#x6253;&#x5370;&#x534F;&#x8BAE;</div><div class="line">&#x5E38;&#x7528;UDP&#x534F;&#x8BAE;&#x7684;&#x5E94;&#x7528;&#x5C42;&#x670D;&#x52A1;</div><div class="line">BOOTP&#x5F15;&#x5BFC;&#x534F;&#x8BAE;</div><div class="line">DHCP&#x52A8;&#x6001;&#x4E3B;&#x673A;&#x914D;&#x5957;&#x534F;&#x8BAE;</div><div class="line">NTP&#x7F51;&#x7EDC;&#x65F6;&#x95F4;&#x534F;&#x8BAE;</div><div class="line">TFTP&#x7B80;&#x5355;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line"></div><div class="line">SNMP&#x7B80;&#x5355;&#x7F51;&#x7EDC;&#x7BA1;&#x7406;&#x534F;&#x8BAE;</div></pre></td></tr></table></figure>
+<h2 id="&#x8868;&#x793A;&#x5C42;"><a href="#&#x8868;&#x793A;&#x5C42;" class="headerlink" title="&#x8868;&#x793A;&#x5C42;"></a>&#x8868;&#x793A;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DECnet NSP</div><div class="line">LPP &#x8F7B;&#x91CF;&#x7EA7;&#x8868;&#x793A;&#x534F;&#x8BAE;</div><div class="line">NBSSN NetBIOS&#x4F1A;&#x8BDD;&#x670D;&#x52A1;&#x534F;&#x8BAE;</div><div class="line">XDP&#x5916;&#x90E8;&#x6570;&#x636E;&#x8868;&#x793A;&#x534F;&#x8BAE;</div><div class="line">IPX</div></pre></td></tr></table></figure>
+<h2 id="&#x4F1A;&#x8BDD;&#x5C42;"><a href="#&#x4F1A;&#x8BDD;&#x5C42;" class="headerlink" title="&#x4F1A;&#x8BDD;&#x5C42;"></a>&#x4F1A;&#x8BDD;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">SSL &#x5B89;&#x5168;&#x5957;&#x63A5;&#x5B57;&#x5C42;&#x534F;&#x8BAE;</div><div class="line">TLS&#x4F20;&#x8F93;&#x5C42;&#x5B89;&#x5168;&#x534F;&#x8BAE;</div><div class="line">DAP&#x76EE;&#x5F55;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;</div><div class="line">LDAP&#x8F7B;&#x91CF;&#x7EA7;&#x76EE;&#x5F55;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;</div><div class="line">RPC&#x8FDC;&#x7A0B;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&#x534F;&#x8BAE;</div><div class="line">VINES NETRPC</div><div class="line">VFRP</div><div class="line">NeTBIOS</div><div class="line">IPX</div></pre></td></tr></table></figure>
+<h2 id="&#x4F20;&#x8F93;&#x5C42;"><a href="#&#x4F20;&#x8F93;&#x5C42;" class="headerlink" title="&#x4F20;&#x8F93;&#x5C42;"></a>&#x4F20;&#x8F93;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">XOT &#x57FA;&#x4E8E;tcp&#x4E4B;&#x4E0A;&#x7684;X&#x534F;&#x8BAE;</div><div class="line">Van Jacobson &#x538B;&#x7F29;TCP&#x534F;&#x8BAE;</div><div class="line">ISO-DE ISO &#x5F00;&#x53D1;&#x73AF;&#x5883;--------&gt;NetBISO</div><div class="line">TALI &#x4F20;&#x8F93;&#x9002;&#x914D;&#x5C42;&#x63A5;&#x53E3;&#x534F;&#x8BAE;</div><div class="line">DSI&#x3001;NetBIOS&#x3001;IP NeTBIOS&#x3001;ISO-TP SSP&#x3001;SMB&#x3001;MSRPC</div><div class="line">UDP&#x7528;&#x6237;&#x6570;&#x636E;&#x62A5;&#x534F;&#x8BAE;</div><div class="line">RUDP&#x53EF;&#x9760;&#x7684;&#x7528;&#x6237;&#x6570;&#x636E;&#x62A5;&#x534F;&#x8BAE;</div><div class="line">Mobile IP &#x79FB;&#x52A8;IP&#x534F;&#x8BAE;</div></pre></td></tr></table></figure>
+<h2 id="&#x7F51;&#x7EDC;&#x5C42;"><a href="#&#x7F51;&#x7EDC;&#x5C42;" class="headerlink" title="&#x7F51;&#x7EDC;&#x5C42;"></a>&#x7F51;&#x7EDC;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">IP/IPv6 &#x4E92;&#x8054;&#x7F51;&#x534F;&#x8BAE;/&#x4E92;&#x8054;&#x7F51;&#x534F;&#x8BAE;&#x7B2C;&#x516D;&#x7248;</div><div class="line">ICMPv6&#x4E92;&#x8054;&#x7F51;&#x63A7;&#x5236;&#x4FE1;&#x606F;&#x534F;&#x8BAE;&#x7B2C;&#x516D;&#x7248;</div><div class="line">ICMP&#x4E92;&#x8054;&#x7F51;&#x63A7;&#x5236;&#x4FE1;&#x606F;&#x534F;&#x8BAE;</div><div class="line">IGMP &#x4E92;&#x8054;&#x7F51;&#x7EC4;&#x7BA1;&#x7406;&#x534F;&#x8BAE;</div><div class="line">SLIP &#x4E32;&#x884C;&#x7EBF;&#x8DEF;IP&#x534F;&#x8BAE;</div><div class="line">&#x5B89;&#x5168;&#x534F;&#x8BAE;</div><div class="line">AH &#x8BA4;&#x8BC1;&#x5934;&#x534F;&#x8BAE;</div><div class="line">ESP &#x5B89;&#x88C5;&#x5C01;&#x88C5;&#x6709;&#x6548;&#x8F7D;&#x8377;&#x534F;&#x8BAE;</div><div class="line">&#x8DEF;&#x7531;&#x534F;&#x8BAE;</div><div class="line">EGP &#x5916;&#x90E8;&#x7F51;&#x5173;&#x534F;&#x8BAE;</div><div class="line">OSPF &#x5F00;&#x653E;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#x4F18;&#x5148;&#x534F;&#x8BAE;</div><div class="line">IGRP &#x5185;&#x90E8;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x534F;&#x8BAE;</div><div class="line">NHRP &#x4E0B;&#x4E00;&#x8DF3;&#x89E3;&#x6790;&#x534F;&#x8BAE;</div><div class="line">IE-IRGP &#x589E;&#x5F3A;&#x5185;&#x90E8;&#x7F51;&#x5173;&#x8DEF;&#x7531;&#x9009;&#x62E9;&#x534F;&#x8BAE;</div><div class="line">RIPng for IPv6 IPv6&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x534F;&#x8BAE;</div><div class="line">GGP &#x7F51;&#x5173;&#x5230;&#x7F51;&#x5173;&#x534F;&#x8BAE;</div><div class="line">VRRP &#x865A;&#x62DF;&#x8DEF;&#x7531;&#x5668;&#x5197;&#x4F59;&#x534F;&#x8BAE;</div><div class="line">PGM &#x5B9E;&#x9645;&#x901A;&#x7528;&#x7EC4;&#x64AD;&#x534F;&#x8BAE;</div><div class="line">RSVP &#x8D44;&#x6E90;&#x9884;&#x7559;&#x534F;&#x8BAE;</div><div class="line">PIM-DM &#x5BC6;&#x96C6;&#x6A21;&#x5F0F;&#x72EC;&#x7ACB;&#x7EC4;&#x64AD;&#x534F;&#x8BAE;</div><div class="line">DVMRP &#x8DDD;&#x79BB;&#x77E2;&#x91CF;&#x7EC4;&#x64AD;&#x8DEF;&#x7531;&#x534F;&#x8BAE;</div><div class="line">RIP2 &#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x534F;&#x8BAE;&#x7B2C;&#x4E8C;&#x7248;</div><div class="line">PIM-SM &#x7A00;&#x758F;&#x6A21;&#x5F0F;&#x72EC;&#x7ACB;&#x7EC4;&#x64AD;&#x534F;&#x8BAE;</div><div class="line">MOSPF &#x7EC4;&#x64AD;&#x5F00;&#x653E;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#x4F18;&#x5148;&#x534F;&#x8BAE;</div></pre></td></tr></table></figure>
+<h3 id="&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;"><a href="#&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;" class="headerlink" title="&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;"></a>&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">MPLS &#x591A;&#x534F;&#x8BAE;&#x6807;&#x7B7E;&#x4EA4;&#x6362;&#x534F;&#x8BAE;</div><div class="line">XTP &#x538B;&#x7F29;&#x4F20;&#x8F93;&#x534F;&#x8BAE;</div><div class="line">DCAP &#x6570;&#x636E;&#x8F6C;&#x6362;&#x5BA2;&#x6237;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;</div><div class="line">SLE &#x4E32;&#x884C;&#x8FDE;&#x63A5;&#x5C01;&#x88C5;&#x534F;&#x8BAE;</div><div class="line">IPinIP IP&#x5957;IP&#x5C01;&#x88C5;&#x534F;&#x8BAE;</div><div class="line">&#x96A7;&#x9053;&#x534F;&#x8BAE;</div><div class="line">PPTP&#x70B9;&#x5BF9;&#x70B9;&#x96A7;&#x9053;&#x534F;&#x8BAE;</div><div class="line">L2F&#x7B2C;&#x4E8C;&#x5C42;&#x8F6C;&#x53D1;&#x534F;&#x8BAE;</div><div class="line">L2TP &#x7B2C;&#x4E8C;&#x5C42;&#x96A7;&#x9053;&#x534F;&#x8BAE;</div><div class="line">ATMP&#x63A5;&#x5165;&#x96A7;&#x9053;&#x7BA1;&#x7406;&#x534F;&#x8BAE;</div><div class="line">Cisco &#x534F;&#x8BAE;</div><div class="line">CDP &#x601D;&#x79D1;&#x53D1;&#x73B0;&#x534F;&#x8BAE;</div><div class="line">CGMP &#x601D;&#x79D1;&#x7EC4;&#x7BA1;&#x7406;&#x534F;&#x8BAE;</div><div class="line">&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;</div><div class="line">ARP&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;</div><div class="line">RAR&#x9006;&#x5411;&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;</div></pre></td></tr></table></figure>
+<h2 id="&#x7269;&#x7406;&#x5C42;"><a href="#&#x7269;&#x7406;&#x5C42;" class="headerlink" title="&#x7269;&#x7406;&#x5C42;"></a>&#x7269;&#x7406;&#x5C42;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">IEEE 802.2</div><div class="line">Ethernet v.2</div><div class="line">Internetwork</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/network/" rel="tag">#network</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/24/python-progress/" rel="next" title="进程与线程">
+                <i class="fa fa-chevron-left"></i> 进程与线程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/09/restfulapi/" rel="prev" title="Restful API设计规范">
+                Restful API设计规范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSI七层模型-相关协议"><span class="nav-number">2.</span> <span class="nav-text">OSI七层模型 相关协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp-ip与osi"><span class="nav-number">2.1.</span> <span class="nav-text">tcp/ip与osi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-number">2.2.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示层"><span class="nav-number">2.3.</span> <span class="nav-text">表示层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话层"><span class="nav-number">2.4.</span> <span class="nav-text">会话层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-number">2.5.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络层"><span class="nav-number">2.6.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层"><span class="nav-number">2.6.1.</span> <span class="nav-text">数据链路层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层"><span class="nav-number">2.7.</span> <span class="nav-text">物理层</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

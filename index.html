@@ -220,8 +220,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/27/python-shell-eg/" itemprop="url">
-                  python-shell-eg
+                <a class="post-title-link" href="/2018/03/24/mysql-base/" itemprop="url">
+                  Mysql数据库
                 </a>
               
             
@@ -234,8 +234,279 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-27T09:46:38+08:00" content="2017-06-27">
-              2017-06-27
+            <time itemprop="dateCreated" datetime="2018-03-24T17:06:43+08:00" content="2018-03-24">
+              2018-03-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/db/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x4EC0;&#x4E48;&#x662F;&#x6570;&#x636E;&#x5E93;&#xFF1F;</p>
+<p>&#x6570;&#x636E;&#x5E93;&#xFF08;Database&#xFF09;&#x662F;&#x6309;&#x7167;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x6765;&#x7EC4;&#x7EC7;&#x3001;&#x5B58;&#x50A8;&#x548C;&#x7BA1;&#x7406;&#x6570;&#x636E;&#x7684;&#x4ED3;&#x5E93;&#xFF0C;<br>&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x4E0D;&#x540C;&#x7684;API&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#xFF0C;&#x8BBF;&#x95EE;&#xFF0C;&#x7BA1;&#x7406;&#xFF0C;&#x641C;&#x7D22;&#x548C;&#x590D;&#x5236;&#x6240;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x5199;&#x6570;&#x636E;&#x901F;&#x5EA6;&#x76F8;&#x5BF9;&#x8F83;&#x6162;&#x3002;<br>&#x6240;&#x4EE5;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#xFF08;RDBMS&#xFF09;&#x6765;&#x5B58;&#x50A8;&#x548C;&#x7BA1;&#x7406;&#x7684;&#x5927;&#x6570;&#x636E;&#x91CF;&#x3002;&#x6240;&#x8C13;&#x7684;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x662F;&#x5EFA;&#x7ACB;&#x5728;&#x5173;&#x7CFB;&#x6A21;&#x578B;&#x57FA;&#x7840;&#x4E0A;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x501F;&#x52A9;&#x4E8E;&#x96C6;&#x5408;&#x4EE3;&#x6570;&#x7B49;&#x6570;&#x5B66;&#x6982;&#x5FF5;&#x548C;&#x65B9;&#x6CD5;&#x6765;&#x5904;&#x7406;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x3002;<br>RDBMS&#x5373;&#x5173;&#x7CFB;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;(Relational Database Management System)&#x7684;&#x7279;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x6570;&#x636E;&#x4EE5;&#x8868;&#x683C;&#x7684;&#x5F62;&#x5F0F;&#x51FA;&#x73B0;</li>
+<li>&#x6BCF;&#x884C;&#x4E3A;&#x5404;&#x79CD;&#x8BB0;&#x5F55;&#x540D;&#x79F0;</li>
+<li>&#x6BCF;&#x5217;&#x4E3A;&#x8BB0;&#x5F55;&#x540D;&#x79F0;&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x57DF;</li>
+<li>&#x8BB8;&#x591A;&#x7684;&#x884C;&#x548C;&#x5217;&#x7EC4;&#x6210;&#x4E00;&#x5F20;&#x8868;&#x5355;</li>
+<li>&#x82E5;&#x5E72;&#x7684;&#x8868;&#x5355;&#x7EC4;&#x6210;database</li>
+</ul>
+<p>&#x4E0B;&#x56FE;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;</p>
+<p><img src="/2018/03/24/mysql-base/1.png" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/03/24/mysql-base/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/24/python-orm/" itemprop="url">
+                  python-orm
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-24T13:43:42+08:00" content="2018-03-24">
+              2018-03-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>orm&#x82F1;&#x6587;&#x5168;&#x79F0;object relational mapping,&#x5C31;&#x662F;&#x5BF9;&#x8C61;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x7A0B;&#x5E8F;&#xFF0C;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#x6211;&#x4EEC;&#x7C7B;&#x4F3C;python&#x8FD9;&#x79CD;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x6765;&#x8BF4;&#x4E00;&#x5207;&#x7686;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5374;&#x90FD;&#x662F;&#x5173;&#x7CFB;&#x578B;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x4E00;&#x81F4;&#x7684;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x901A;&#x8FC7;orm&#x5C06;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x548C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5173;&#x7CFB;&#x6A21;&#x578B;&#x5EFA;&#x7ACB;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5728;&#x4F7F;&#x7528;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x76F4;&#x63A5;&#x4F7F;&#x7528;sql&#x8BED;&#x8A00;&#x3002;</p>
+<p><img src="/2018/03/24/python-orm/1.png" alt=""></p>
+<h2 id="orm&#x7684;&#x4F18;&#x70B9;"><a href="#orm&#x7684;&#x4F18;&#x70B9;" class="headerlink" title="orm&#x7684;&#x4F18;&#x70B9;"></a>orm&#x7684;&#x4F18;&#x70B9;</h2><ul>
+<li>&#x9690;&#x85CF;&#x4E86;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x7EC6;&#x8282;&#xFF0C;&#x201C;&#x5C01;&#x95ED;&#x201D;&#x7684;&#x901A;&#x7528;&#x6570;&#x636E;&#x5E93;&#x4EA4;&#x4E92;&#xFF0C;ORM&#x7684;&#x6838;&#x5FC3;&#x3002;&#x4ED6;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x7684;&#x901A;&#x7528;&#x6570;&#x636E;&#x5E93;&#x4EA4;&#x4E92;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x6613;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x5B8C;&#x5168;&#x4E0D;&#x7528;&#x8003;&#x8651;&#x8BE5;&#x6B7B;&#x7684;SQL&#x8BED;&#x53E5;&#x3002;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#xFF0C;&#x7531;&#x6B64;&#x800C;&#x6765;&#x3002;</li>
+<li>ORM&#x4F7F;&#x6211;&#x4EEC;&#x6784;&#x9020;&#x56FA;&#x5316;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x6613;&#x884C;&#x3002;</li>
+</ul>
+<h2 id="&#x7F3A;&#x70B9;"><a href="#&#x7F3A;&#x70B9;" class="headerlink" title="&#x7F3A;&#x70B9;"></a>&#x7F3A;&#x70B9;</h2><p>&#x65E0;&#x53EF;&#x907F;&#x514D;&#x7684;&#xFF0C;&#x81EA;&#x52A8;&#x5316;&#x610F;&#x5473;&#x7740;&#x6620;&#x5C04;&#x548C;&#x5173;&#x8054;&#x7BA1;&#x7406;&#xFF0C;&#x4EE3;&#x4EF7;&#x662F;&#x727A;&#x7272;&#x6027;&#x80FD;&#xFF08;&#x65E9;&#x671F;&#xFF0C;&#x8FD9;&#x662F;&#x6240;&#x6709;&#x4E0D;&#x559C;&#x6B22;ORM&#x4EBA;&#x7684;&#x5171;&#x540C;&#x70B9;&#xFF09;&#x3002;&#x73B0;&#x5728;&#x7684;&#x5404;&#x79CD;ORM&#x6846;&#x67B6;&#x90FD;&#x5728;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x51CF;&#x8F7B;&#x8FD9;&#x5757;&#xFF08;LazyLoad&#xFF0C;Cache&#xFF09;&#xFF0C;&#x6548;&#x679C;&#x8FD8;&#x662F;&#x5F88;&#x663E;&#x8457;&#x7684;&#x3002;</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/03/24/python-orm/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/24/linux-cache-flush/" itemprop="url">
+                  手动释放linux内存cache和脚本定时释放
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-24T11:52:57+08:00" content="2018-03-24">
+              2018-03-24
             </time>
           </span>
 
@@ -265,7 +536,7 @@
         
           <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/27/python-shell-eg/#more" rel="contents">
+            <a class="btn" href="/2018/03/24/linux-cache-flush/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,8 +587,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/26/learn-docker/" itemprop="url">
-                  什么是docker（ Build，Ship and Run ）
+                <a class="post-title-link" href="/2018/03/23/linux-iostat/" itemprop="url">
+                  Linux iostat监测IO状态
                 </a>
               
             
@@ -330,8 +601,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-26T13:31:58+08:00" content="2017-06-26">
-              2017-06-26
+            <time itemprop="dateCreated" datetime="2018-03-23T13:02:52+08:00" content="2018-03-23">
+              2018-03-23
             </time>
           </span>
 
@@ -344,250 +615,13 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
-<p>&#x672C;&#x6587;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4EC0;&#x4E48;&#x662F;docker&#x3001;docker&#x7684;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x800C;&#x5199;&#x3002;<br>&#x672C;&#x6587;&#x6240;&#x6709;&#x8D44;&#x6E90;&#x6765;&#x6E90;&#x4E8E;&#x300A;Docker &#x8FDB;&#x9636;&#x4E0E;&#x5B9E;&#x6218;&#x300B;&#x4E00;&#x4E66;&#x3002;</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/26/learn-docker/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/17/kvm-install/" itemprop="url">
-                  kvm-install
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-17T14:36:24+08:00" content="2017-06-17">
-              2017-06-17
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/17/kvm-install/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/15/learn-git/" itemprop="url">
-                  git学习简明教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-15T09:47:38+08:00" content="2017-06-15">
-              2017-06-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/" itemprop="url" rel="index">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
                     <span itemprop="name">linux</span>
                   </a>
                 </span>
 
                 
                 
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/learn/" itemprop="url" rel="index">
-                    <span itemprop="name">learn</span>
-                  </a>
-                </span>
-
-                
-                
 
               
             </span>
@@ -615,11 +649,9 @@
 
       
         
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
-<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x7531;&#x5B66;&#x4E60;<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">&#x5ED6;&#x96EA;&#x5CF0;&#x300A;Git&#x6559;&#x7A0B;&#x300B;</a>&#x800C;&#x6765;</p>
-</blockquote>
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Linux&#x7CFB;&#x7EDF;&#x51FA;&#x73B0;&#x4E86;&#x6027;&#x80FD;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;top&#x3001;iostat&#x3001;free&#x3001;vmstat&#x7B49;&#x547D;&#x4EE4;&#x6765;&#x67E5;&#x770B;&#x521D;&#x6B65;&#x5B9A;&#x4F4D;&#x95EE;&#x9898;&#x3002;&#x5176;&#x4E2D;iostat&#x53EF;&#x4EE5;&#x7ED9;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E30;&#x5BCC;&#x7684;IO&#x72B6;&#x6001;&#x6570;&#x636E;&#x3002;</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/15/learn-git/#more" rel="contents">
+            <a class="btn" href="/2018/03/23/linux-iostat/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -670,8 +702,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/14/git-hooks/" itemprop="url">
-                  git-hooks(钩子)：自定义你的工作流
+                <a class="post-title-link" href="/2018/03/16/python-Coroutine/" itemprop="url">
+                  python协程
                 </a>
               
             
@@ -684,8 +716,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-14T10:36:04+08:00" content="2017-06-14">
-              2017-06-14
+            <time itemprop="dateCreated" datetime="2018-03-16T14:03:03+08:00" content="2018-03-16">
+              2018-03-16
             </time>
           </span>
 
@@ -698,32 +730,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/linux/learn/" itemprop="url" rel="index">
-                    <span itemprop="name">learn</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -756,13 +764,12 @@
 
       
         
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p><img src="/2017/06/14/git-hooks/1.svg" alt=""></p>
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x534F;&#x7A0B;&#xFF0C;&#x53C8;&#x79F0;&#x5FAE;&#x7EBF;&#x7A0B;&#xFF0C;&#x7EA4;&#x7A0B;&#x3002;&#x82F1;&#x6587;&#x540D;Coroutine&#x3002;&#x4E00;&#x53E5;&#x8BDD;&#x8BF4;&#x660E;&#x4EC0;&#x4E48;&#x662F;&#x534F;&#x7A0B;&#xFF1A;&#x534F;&#x7A0B;&#x662F;&#x4E00;&#x79CD;&#x7528;&#x6237;&#x6001;&#x7684;&#x8F7B;&#x91CF;&#x7EA7;&#x7EBF;&#x7A0B;&#x3002;</p>
 <blockquote>
-<p>&#x672C;&#x6587;&#x8F6C;&#x81EA;<a href="http://www.open-open.com/lib/view/open1449721833879.html#articleHeader6">Git&#x94A9;&#x5B50;&#xFF1A;&#x81EA;&#x5B9A;&#x4E49;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x6D41;</a></p>
-<p>&#x8FD9;&#x662F;&#x4E00;&#x7BC7;&#x5728;<a href="https://www.atlassian.com/git/tutorials/git-hooks">&#x539F;&#x6587;(BY atlassian)</a>&#x57FA;&#x7840;&#x4E0A;&#x6F14;&#x7ECE;&#x7684;&#x8BD1;&#x6587;&#x3002;&#x9664;&#x975E;&#x53E6;&#x884C;&#x6CE8;&#x660E;&#xFF0C;&#x9875;&#x9762;&#x4E0A;&#x6240;&#x6709;&#x5185;&#x5BB9;&#x91C7;&#x7528;&#x77E5;&#x8BC6;&#x5171;&#x4EAB;-&#x7F72;&#x540D;(<a href="https://creativecommons.org/licenses/by/2.5/au/deed.zh">CC BY 2.5 AU</a>)&#x534F;&#x8BAE;&#x5171;&#x4EAB;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x6765;&#x81EA;<a href="http://www.cnblogs.com/alex3714/articles/5248247.html">&#x7F51;&#x7EDC;</a></p>
 </blockquote>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/14/git-hooks/#more" rel="contents">
+            <a class="btn" href="/2018/03/16/python-Coroutine/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -813,8 +820,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/12/rsync-install/" itemprop="url">
-                  rsync参数解析
+                <a class="post-title-link" href="/2018/03/16/system-operating/" itemprop="url">
+                  操作系统发展史
                 </a>
               
             
@@ -827,8 +834,240 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-12T14:44:36+08:00" content="2017-06-12">
-              2017-06-12
+            <time itemprop="dateCreated" datetime="2018-03-16T09:25:54+08:00" content="2018-03-16">
+              2018-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x8F6C;&#x81EA;&#x7F51;&#x7EDC;&#xFF0C;&#x7B80;&#x8FF0;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x53D1;&#x5C55;&#x53F2;&#x3002;</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/03/16/system-operating/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/09/restfulapi/" itemprop="url">
+                  Restful API设计规范
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-09T10:38:45+08:00" content="2018-03-09">
+              2018-03-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p>&#x672C;&#x6587;&#x7AE0;&#x539F;&#x8457;<br><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html">http://www.ruanyifeng.com/blog/2011/09/restful.html</a><br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/03/09/restfulapi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/08/network-osi/" itemprop="url">
+                  网络模型以及相关协议
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-08T16:18:35+08:00" content="2018-03-08">
+              2018-03-08
             </time>
           </span>
 
@@ -843,18 +1082,6 @@
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/linux/" itemprop="url" rel="index">
                     <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/rsync/" itemprop="url" rel="index">
-                    <span itemprop="name">rsync</span>
                   </a>
                 </span>
 
@@ -889,7 +1116,7 @@
         
           <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/12/rsync-install/#more" rel="contents">
+            <a class="btn" href="/2018/03/08/network-osi/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -940,8 +1167,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/26/linux-ulimit/" itemprop="url">
-                  linux-ulimit
+                <a class="post-title-link" href="/2018/02/24/python-progress/" itemprop="url">
+                  进程与线程
                 </a>
               
             
@@ -954,297 +1181,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-26T17:41:39+08:00" content="2017-05-26">
-              2017-05-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a href="http://blog.chinaunix.net/uid-22159621-id-3491068.html">http://blog.chinaunix.net/uid-22159621-id-3491068.html</a></p>
-<p>file-max<br><a href="http://blog.sina.com.cn/s/blog_4f9e8fa70101kprk.html">http://blog.sina.com.cn/s/blog_4f9e8fa70101kprk.html</a><br></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/26/linux-ulimit/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/09/python-format-str/" itemprop="url">
-                  python-format-str
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-09T11:17:20+08:00" content="2017-05-09">
-              2017-05-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>python &#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;<br>&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;<br>Python&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;:%&#x683C;&#x5F0F;&#x7B26;&#x65B9;&#x5F0F;&#xFF0C;format&#x65B9;&#x5F0F;</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/09/python-format-str/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/supervisor/" itemprop="url">
-                  supervisor
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-20T13:57:15+08:00" content="2017-04-20">
-              2017-04-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/20/supervisor/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/18/shell-awk-sed/" itemprop="url">
-                  一些简单常用的shell、awk、sed实例
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-18T15:14:18+08:00" content="2017-04-18">
-              2017-04-18
+            <time itemprop="dateCreated" datetime="2018-02-24T14:55:57+08:00" content="2018-02-24">
+              2018-02-24
             </time>
           </span>
 
@@ -1257,20 +1195,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/shell/" itemprop="url" rel="index">
-                    <span itemprop="name">shell</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1303,9 +1229,138 @@
 
       
         
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x5C06;&#x8BB0;&#x5F55;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x5B9E;&#x7528;&#x7684;shell&#x547D;&#x4EE4;&#x3001;&#x811A;&#x672C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x547D;&#x4EE4;&#x7EC4;&#x5408;&#x3002;</p>
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><ul>
+<li>Python&#x7684;&#x7279;&#x6B8A;&#x4E4B;&#x5904;&#x5728;&#x4E8E;Python&#x6709;&#x4E00;&#x628A;GIL&#x9501;&#xFF0C;&#x8FD9;&#x628A;&#x9501;&#x9650;&#x5236;&#x4E86;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x5185;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x80FD;&#x4F7F;&#x7528;cpu&#xFF0C;&#x4F46;&#x662F;GIL&#x5E76;&#x4E0D;&#x662F;python&#x53EA;&#x6709;&#x7684;&#x7279;&#x6027;&#x3002;</li>
+</ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/18/shell-awk-sed/#more" rel="contents">
+            <a class="btn" href="/2018/02/24/python-progress/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/18/python-serialize/" itemprop="url">
+                  python序列化模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-18T15:28:13+08:00" content="2018-01-18">
+              2018-01-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/module/" itemprop="url" rel="index">
+                    <span itemprop="name">module</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x8BB0;&#x5F55;&#x4E00;&#x4E9B;python&#x4E2D;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x6A21;&#x5757;</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/18/python-serialize/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1339,7 +1394,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1380,7 +1435,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1388,7 +1443,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1397,7 +1452,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1434,7 +1489,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

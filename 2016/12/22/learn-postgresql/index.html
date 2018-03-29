@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="learn,db,sql," />
+  <meta name="keywords" content="db,postgres," />
 
 
 
@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Casstiel">
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x81EA;&amp;#x4ECE;MySQL&amp;#x88AB;Oracle&amp;#x6536;&amp;#x8D2D;&amp;#x4EE5;&amp;#x540E;&amp;#xFF0C;PostgreSQL&amp;#x9010;&amp;#x6E10;&amp;#x6210;&amp;#x4E3A;&amp;#x5F00;&amp;#x6E90;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x">
 <meta property="og:image" content="http://c.isme.pub/2016/12/22/learn-postgresql/1.png">
-<meta property="og:updated_time" content="2017-03-01T02:28:29.000Z">
+<meta property="og:updated_time" content="2017-08-22T02:21:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="postgresql基础学习教程">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x81EA;&amp;#x4ECE;MySQL&amp;#x88AB;Oracle&amp;#x6536;&amp;#x8D2D;&amp;#x4EE5;&amp;#x540E;&amp;#xFF0C;PostgreSQL&amp;#x9010;&amp;#x6E10;&amp;#x6210;&amp;#x4E3A;&amp;#x5F00;&amp;#x6E90;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x">
@@ -261,20 +261,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/db/sql/" itemprop="url" rel="index">
-                    <span itemprop="name">sql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/db/sql/learn/" itemprop="url" rel="index">
-                    <span itemprop="name">learn</span>
+                  <a href="/categories/db/postgres/" itemprop="url" rel="index">
+                    <span itemprop="name">postgres</span>
                   </a>
                 </span>
 
@@ -356,6 +344,7 @@
 <h2 id="&#x5220;&#x9664;&#x680F;&#x4F4D;"><a href="#&#x5220;&#x9664;&#x680F;&#x4F4D;" class="headerlink" title="&#x5220;&#x9664;&#x680F;&#x4F4D;"></a>&#x5220;&#x9664;&#x680F;&#x4F4D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl DROP COLUMN email;</div></pre></td></tr></table></figure>
 <h2 id="&#x8868;&#x683C;&#x66F4;&#x540D;"><a href="#&#x8868;&#x683C;&#x66F4;&#x540D;" class="headerlink" title="&#x8868;&#x683C;&#x66F4;&#x540D;"></a>&#x8868;&#x683C;&#x66F4;&#x540D;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE user_tbl RENAME TO backup_tbl;</div></pre></td></tr></table></figure>
 <h2 id="&#x5220;&#x9664;&#x8868;&#x683C;"><a href="#&#x5220;&#x9664;&#x8868;&#x683C;" class="headerlink" title="&#x5220;&#x9664;&#x8868;&#x683C;"></a>&#x5220;&#x9664;&#x8868;&#x683C;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DROP TABLE IF EXISTS backup_tbl;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -377,11 +366,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/learn/" rel="tag">#learn</a>
-          
             <a href="/tags/db/" rel="tag">#db</a>
           
-            <a href="/tags/sql/" rel="tag">#sql</a>
+            <a href="/tags/postgres/" rel="tag">#postgres</a>
           
         </div>
       
@@ -398,8 +385,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/14/python-socket/" rel="prev" title="python之socket编程">
-                python之socket编程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/14/python-socket/" rel="prev" title="python之socket网络编程">
+                python之socket网络编程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -468,7 +455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -476,7 +463,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -485,7 +472,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -533,7 +520,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,603 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,PyYAML,configparser,xml," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E00;&amp;#x4E9B;python&amp;#x4E2D;&amp;#x5904;&amp;#x7406;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x6A21;&amp;#x5757;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python配置文件模块">
+<meta property="og:url" content="http://c.isme.pub/2018/01/18/python-config/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E00;&amp;#x4E9B;python&amp;#x4E2D;&amp;#x5904;&amp;#x7406;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x6A21;&amp;#x5757;">
+<meta property="og:updated_time" content="2018-01-18T06:47:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python配置文件模块">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E00;&amp;#x4E9B;python&amp;#x4E2D;&amp;#x5904;&amp;#x7406;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x6A21;&amp;#x5757;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/01/18/python-config/"/>
+
+
+  <title> python配置文件模块 | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python配置文件模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-18T14:47:15+08:00" content="2018-01-18">
+              2018-01-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/module/" itemprop="url" rel="index">
+                    <span itemprop="name">module</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x8BB0;&#x5F55;&#x4E00;&#x4E9B;python&#x4E2D;&#x5904;&#x7406;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x6A21;&#x5757;</p>
+<a id="more"></a>
+<h1 id="PyYAML"><a href="#PyYAML" class="headerlink" title="PyYAML"></a>PyYAML</h1><p>&#x5F85;&#x7EED;</p>
+<h1 id="ConfigParser"><a href="#ConfigParser" class="headerlink" title="ConfigParser"></a>ConfigParser</h1><p>&#x7528;&#x4E8E;&#x5BF9;&#x7279;&#x5B9A;&#x7684;&#x914D;&#x7F6E;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x5F53;&#x524D;&#x6A21;&#x5757;&#x7684;&#x540D;&#x79F0;&#x5728; python 3.x &#x7248;&#x672C;&#x4E2D;&#x53D8;&#x66F4;&#x4E3A; configparser&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x6CE8;&#x91CA;1</span></div><div class="line">; &#x6CE8;&#x91CA;<span class="number">2</span></div><div class="line"></div><div class="line">[section1]</div><div class="line">k1 = v1</div><div class="line">k2:v2</div><div class="line">user=egon</div><div class="line">age=<span class="number">18</span></div><div class="line">is_admin=true</div><div class="line">salary=<span class="number">31</span></div><div class="line"></div><div class="line">[section2]</div><div class="line">k1 = v1</div></pre></td></tr></table></figure>
+<h2 id="&#x8BFB;&#x53D6;"><a href="#&#x8BFB;&#x53D6;" class="headerlink" title="&#x8BFB;&#x53D6;"></a>&#x8BFB;&#x53D6;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> configparser</div><div class="line"></div><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">&apos;a.cfg&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6240;&#x6709;&#x7684;&#x6807;&#x9898;</span></div><div class="line">res=config.sections() <span class="comment">#[&apos;section1&apos;, &apos;section2&apos;]</span></div><div class="line">print(res)</div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;&#x6240;&#x6709;key=value&#x7684;key</span></div><div class="line">options=config.options(<span class="string">&apos;section1&apos;</span>)</div><div class="line">print(options) <span class="comment">#[&apos;k1&apos;, &apos;k2&apos;, &apos;user&apos;, &apos;age&apos;, &apos;is_admin&apos;, &apos;salary&apos;]</span></div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;&#x6240;&#x6709;key=value&#x7684;(key,value)&#x683C;&#x5F0F;</span></div><div class="line">item_list=config.items(<span class="string">&apos;section1&apos;</span>)</div><div class="line">print(item_list) <span class="comment">#[(&apos;k1&apos;, &apos;v1&apos;), (&apos;k2&apos;, &apos;v2&apos;), (&apos;user&apos;, &apos;egon&apos;), (&apos;age&apos;, &apos;18&apos;), (&apos;is_admin&apos;, &apos;true&apos;), (&apos;salary&apos;, &apos;31&apos;)]</span></div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;user&#x7684;&#x503C;=&gt;&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;</span></div><div class="line">val=config.get(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;user&apos;</span>)</div><div class="line">print(val) <span class="comment">#egon</span></div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;age&#x7684;&#x503C;=&gt;&#x6574;&#x6570;&#x683C;&#x5F0F;</span></div><div class="line">val1=config.getint(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;age&apos;</span>)</div><div class="line">print(val1) <span class="comment">#18</span></div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;is_admin&#x7684;&#x503C;=&gt;&#x5E03;&#x5C14;&#x503C;&#x683C;&#x5F0F;</span></div><div class="line">val2=config.getboolean(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;is_admin&apos;</span>)</div><div class="line">print(val2) <span class="comment">#True</span></div><div class="line"></div><div class="line"><span class="comment">#&#x67E5;&#x770B;&#x6807;&#x9898;section1&#x4E0B;salary&#x7684;&#x503C;=&gt;&#x6D6E;&#x70B9;&#x578B;&#x683C;&#x5F0F;</span></div><div class="line">val3=config.getfloat(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;salary&apos;</span>)</div><div class="line">print(val3) <span class="comment">#31.0</span></div></pre></td></tr></table></figure>
+<h2 id="&#x6539;&#x5199;"><a href="#&#x6539;&#x5199;" class="headerlink" title="&#x6539;&#x5199;"></a>&#x6539;&#x5199;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> configparser</div><div class="line"></div><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">&apos;a.cfg&apos;</span>,encoding=<span class="string">&apos;utf-8&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x5220;&#x9664;&#x6574;&#x4E2A;&#x6807;&#x9898;section2</span></div><div class="line">config.remove_section(<span class="string">&apos;section2&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment">#&#x5220;&#x9664;&#x6807;&#x9898;section1&#x4E0B;&#x7684;&#x67D0;&#x4E2A;k1&#x548C;k2</span></div><div class="line">config.remove_option(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;k1&apos;</span>)</div><div class="line">config.remove_option(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;k2&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment">#&#x5224;&#x65AD;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x6807;&#x9898;</span></div><div class="line">print(config.has_section(<span class="string">&apos;section1&apos;</span>))</div><div class="line"></div><div class="line"><span class="comment">#&#x5224;&#x65AD;&#x6807;&#x9898;section1&#x4E0B;&#x662F;&#x5426;&#x6709;user</span></div><div class="line">print(config.has_option(<span class="string">&apos;section1&apos;</span>,<span class="string">&apos;&apos;</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x6807;&#x9898;</span></div><div class="line">config.add_section(<span class="string">&apos;egon&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment">#&#x5728;&#x6807;&#x9898;egon&#x4E0B;&#x6DFB;&#x52A0;name=egon,age=18&#x7684;&#x914D;&#x7F6E;</span></div><div class="line">config.set(<span class="string">&apos;egon&apos;</span>,<span class="string">&apos;name&apos;</span>,<span class="string">&apos;egon&apos;</span>)</div><div class="line">config.set(<span class="string">&apos;egon&apos;</span>,<span class="string">&apos;age&apos;</span>,<span class="number">18</span>) <span class="comment">#&#x62A5;&#x9519;,&#x5FC5;&#x987B;&#x662F;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x6700;&#x540E;&#x5C06;&#x4FEE;&#x6539;&#x7684;&#x5185;&#x5BB9;&#x5199;&#x5165;&#x6587;&#x4EF6;,&#x5B8C;&#x6210;&#x6700;&#x7EC8;&#x7684;&#x4FEE;&#x6539;</span></div><div class="line">config.write(open(<span class="string">&apos;a.cfg&apos;</span>,<span class="string">&apos;w&apos;</span>))</div></pre></td></tr></table></figure>
+<h2 id="&#x57FA;&#x4E8E;&#x4E0A;&#x8FF0;&#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;ini&#x6587;&#x6863;"><a href="#&#x57FA;&#x4E8E;&#x4E0A;&#x8FF0;&#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;ini&#x6587;&#x6863;" class="headerlink" title="&#x57FA;&#x4E8E;&#x4E0A;&#x8FF0;&#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;ini&#x6587;&#x6863;"></a>&#x57FA;&#x4E8E;&#x4E0A;&#x8FF0;&#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;ini&#x6587;&#x6863;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> configparser</div><div class="line">  </div><div class="line">config = configparser.ConfigParser()</div><div class="line">config[<span class="string">&quot;DEFAULT&quot;</span>] = {<span class="string">&apos;ServerAliveInterval&apos;</span>: <span class="string">&apos;45&apos;</span>,</div><div class="line">                      <span class="string">&apos;Compression&apos;</span>: <span class="string">&apos;yes&apos;</span>,</div><div class="line">                     <span class="string">&apos;CompressionLevel&apos;</span>: <span class="string">&apos;9&apos;</span>}</div><div class="line">  </div><div class="line">config[<span class="string">&apos;bitbucket.org&apos;</span>] = {}</div><div class="line">config[<span class="string">&apos;bitbucket.org&apos;</span>][<span class="string">&apos;User&apos;</span>] = <span class="string">&apos;hg&apos;</span></div><div class="line">config[<span class="string">&apos;topsecret.server.com&apos;</span>] = {}</div><div class="line">topsecret = config[<span class="string">&apos;topsecret.server.com&apos;</span>]</div><div class="line">topsecret[<span class="string">&apos;Host Port&apos;</span>] = <span class="string">&apos;50022&apos;</span>     <span class="comment"># mutates the parser</span></div><div class="line">topsecret[<span class="string">&apos;ForwardX11&apos;</span>] = <span class="string">&apos;no&apos;</span>  <span class="comment"># same here</span></div><div class="line">config[<span class="string">&apos;DEFAULT&apos;</span>][<span class="string">&apos;ForwardX11&apos;</span>] = <span class="string">&apos;yes&apos;</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">&apos;example.ini&apos;</span>, <span class="string">&apos;w&apos;</span>) <span class="keyword">as</span> configfile:</div><div class="line">   config.write(configfile)</div></pre></td></tr></table></figure>
+<h1 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h1><p>xml&#x662F;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8BED;&#x8A00;&#x6216;&#x7A0B;&#x5E8F;&#x4E4B;&#x95F4;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x4EA4;&#x6362;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x8DDF;json&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;&#x4F46;json&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x66F4;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x8FC7;&#xFF0C;&#x53E4;&#x65F6;&#x5019;&#xFF0C;&#x5728;json&#x8FD8;&#x6CA1;&#x8BDE;&#x751F;&#x7684;&#x9ED1;&#x6697;&#x5E74;&#x4EE3;&#xFF0C;&#x5927;&#x5BB6;&#x53EA;&#x80FD;&#x9009;&#x62E9;&#x7528;xml&#x5440;&#xFF0C;&#x81F3;&#x4ECA;&#x5F88;&#x591A;&#x4F20;&#x7EDF;&#x516C;&#x53F8;&#x5982;&#x91D1;&#x878D;&#x884C;&#x4E1A;&#x7684;&#x5F88;&#x591A;&#x7CFB;&#x7EDF;&#x7684;&#x63A5;&#x53E3;&#x8FD8;&#x4E3B;&#x8981;&#x662F;xml&#x3002;</p>
+<p>xml&#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF0C;&#x5C31;&#x662F;&#x901A;&#x8FC7;&lt;&gt;&#x8282;&#x70B9;&#x6765;&#x533A;&#x522B;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</div><div class="line">&lt;data&gt;</div><div class="line">    &lt;country name=&quot;Liechtenstein&quot;&gt;</div><div class="line">        &lt;rank updated=&quot;yes&quot;&gt;2&lt;/rank&gt;</div><div class="line">        &lt;year&gt;2008&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;141100&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor name=&quot;Austria&quot; direction=&quot;E&quot;/&gt;</div><div class="line">        &lt;neighbor name=&quot;Switzerland&quot; direction=&quot;W&quot;/&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">    &lt;country name=&quot;Singapore&quot;&gt;</div><div class="line">        &lt;rank updated=&quot;yes&quot;&gt;5&lt;/rank&gt;</div><div class="line">        &lt;year&gt;2011&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;59900&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor name=&quot;Malaysia&quot; direction=&quot;N&quot;/&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">    &lt;country name=&quot;Panama&quot;&gt;</div><div class="line">        &lt;rank updated=&quot;yes&quot;&gt;69&lt;/rank&gt;</div><div class="line">        &lt;year&gt;2011&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;13600&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor name=&quot;Costa Rica&quot; direction=&quot;W&quot;/&gt;</div><div class="line">        &lt;neighbor name=&quot;Colombia&quot; direction=&quot;E&quot;/&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">&lt;/data&gt;</div></pre></td></tr></table></figure>
+<p>xml&#x534F;&#x8BAE;&#x5728;&#x5404;&#x4E2A;&#x8BED;&#x8A00;&#x91CC;&#x7684;&#x90FD; &#x662F;&#x652F;&#x6301;&#x7684;&#xFF0C;&#x5728;python&#x4E2D;&#x53EF;&#x4EE5;&#x7528;&#x4EE5;&#x4E0B;&#x6A21;&#x5757;&#x64CD;&#x4F5C;xml&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># print(root.iter(&apos;year&apos;)) #&#x5168;&#x6587;&#x641C;&#x7D22;</span></div><div class="line"><span class="comment"># print(root.find(&apos;country&apos;)) #&#x5728;root&#x7684;&#x5B50;&#x8282;&#x70B9;&#x627E;&#xFF0C;&#x53EA;&#x627E;&#x4E00;&#x4E2A;</span></div><div class="line"><span class="comment"># print(root.findall(&apos;country&apos;)) #&#x5728;root&#x7684;&#x5B50;&#x8282;&#x70B9;&#x627E;&#xFF0C;&#x627E;&#x6240;&#x6709;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line"> </div><div class="line">tree = ET.parse(<span class="string">&quot;xmltest.xml&quot;</span>)</div><div class="line">root = tree.getroot()</div><div class="line">print(root.tag)</div><div class="line"> </div><div class="line"><span class="comment">#&#x904D;&#x5386;xml&#x6587;&#x6863;</span></div><div class="line"><span class="keyword">for</span> child <span class="keyword">in</span> root:</div><div class="line">    print(<span class="string">&apos;========&gt;&apos;</span>,child.tag,child.attrib,child.attrib[<span class="string">&apos;name&apos;</span>])</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> child:</div><div class="line">        print(i.tag,i.attrib,i.text)</div><div class="line"> </div><div class="line"><span class="comment">#&#x53EA;&#x904D;&#x5386;year &#x8282;&#x70B9;</span></div><div class="line"><span class="keyword">for</span> node <span class="keyword">in</span> root.iter(<span class="string">&apos;year&apos;</span>):</div><div class="line">    print(node.tag,node.text)</div><div class="line"><span class="comment">#---------------------------------------</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line"> </div><div class="line">tree = ET.parse(<span class="string">&quot;xmltest.xml&quot;</span>)</div><div class="line">root = tree.getroot()</div><div class="line"> </div><div class="line"><span class="comment">#&#x4FEE;&#x6539;</span></div><div class="line"><span class="keyword">for</span> node <span class="keyword">in</span> root.iter(<span class="string">&apos;year&apos;</span>):</div><div class="line">    new_year=int(node.text)+<span class="number">1</span></div><div class="line">    node.text=str(new_year)</div><div class="line">    node.set(<span class="string">&apos;updated&apos;</span>,<span class="string">&apos;yes&apos;</span>)</div><div class="line">    node.set(<span class="string">&apos;version&apos;</span>,<span class="string">&apos;1.0&apos;</span>)</div><div class="line">tree.write(<span class="string">&apos;test.xml&apos;</span>)</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment">#&#x5220;&#x9664;node</span></div><div class="line"><span class="keyword">for</span> country <span class="keyword">in</span> root.findall(<span class="string">&apos;country&apos;</span>):</div><div class="line">   rank = int(country.find(<span class="string">&apos;rank&apos;</span>).text)</div><div class="line">   <span class="keyword">if</span> rank &gt; <span class="number">50</span>:</div><div class="line">     root.remove(country)</div><div class="line"> </div><div class="line">tree.write(<span class="string">&apos;output.xml&apos;</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#&#x5728;country&#x5185;&#x6DFB;&#x52A0;&#xFF08;append&#xFF09;&#x8282;&#x70B9;year2</span></div><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line">tree = ET.parse(<span class="string">&quot;a.xml&quot;</span>)</div><div class="line">root=tree.getroot()</div><div class="line"><span class="keyword">for</span> country <span class="keyword">in</span> root.findall(<span class="string">&apos;country&apos;</span>):</div><div class="line">    <span class="keyword">for</span> year <span class="keyword">in</span> country.findall(<span class="string">&apos;year&apos;</span>):</div><div class="line">        <span class="keyword">if</span> int(year.text) &gt; <span class="number">2000</span>:</div><div class="line">            year2=ET.Element(<span class="string">&apos;year2&apos;</span>)</div><div class="line">            year2.text=<span class="string">&apos;&#x65B0;&#x5E74;&apos;</span></div><div class="line">            year2.attrib={<span class="string">&apos;update&apos;</span>:<span class="string">&apos;yes&apos;</span>}</div><div class="line">            country.append(year2) <span class="comment">#&#x5F80;country&#x8282;&#x70B9;&#x4E0B;&#x6DFB;&#x52A0;&#x5B50;&#x8282;&#x70B9;</span></div><div class="line"></div><div class="line">tree.write(<span class="string">&apos;a.xml.swap&apos;</span>)</div></pre></td></tr></table></figure>
+<p>&#x81EA;&#x5DF1;&#x521B;&#x5EFA;xml&#x6587;&#x4EF6;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line"> </div><div class="line"> </div><div class="line">new_xml = ET.Element(<span class="string">&quot;namelist&quot;</span>)</div><div class="line">name = ET.SubElement(new_xml,<span class="string">&quot;name&quot;</span>,attrib={<span class="string">&quot;enrolled&quot;</span>:<span class="string">&quot;yes&quot;</span>})</div><div class="line">age = ET.SubElement(name,<span class="string">&quot;age&quot;</span>,attrib={<span class="string">&quot;checked&quot;</span>:<span class="string">&quot;no&quot;</span>})</div><div class="line">sex = ET.SubElement(name,<span class="string">&quot;sex&quot;</span>)</div><div class="line">sex.text = <span class="string">&apos;33&apos;</span></div><div class="line">name2 = ET.SubElement(new_xml,<span class="string">&quot;name&quot;</span>,attrib={<span class="string">&quot;enrolled&quot;</span>:<span class="string">&quot;no&quot;</span>})</div><div class="line">age = ET.SubElement(name2,<span class="string">&quot;age&quot;</span>)</div><div class="line">age.text = <span class="string">&apos;19&apos;</span></div><div class="line"> </div><div class="line">et = ET.ElementTree(new_xml) <span class="comment">#&#x751F;&#x6210;&#x6587;&#x6863;&#x5BF9;&#x8C61;</span></div><div class="line">et.write(<span class="string">&quot;test.xml&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>,xml_declaration=<span class="keyword">True</span>)</div><div class="line"> </div><div class="line">ET.dump(new_xml) <span class="comment">#&#x6253;&#x5370;&#x751F;&#x6210;&#x7684;&#x683C;&#x5F0F;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/PyYAML/" rel="tag">#PyYAML</a>
+          
+            <a href="/tags/configparser/" rel="tag">#configparser</a>
+          
+            <a href="/tags/xml/" rel="tag">#xml</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/17/python-syscommand/" rel="next" title="python执行系统命令">
+                <i class="fa fa-chevron-left"></i> python执行系统命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/18/python-shutil/" rel="prev" title="python模块（shutil）">
+                python模块（shutil） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyYAML"><span class="nav-number">2.</span> <span class="nav-text">PyYAML</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ConfigParser"><span class="nav-number">3.</span> <span class="nav-text">ConfigParser</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取"><span class="nav-number">3.1.</span> <span class="nav-text">读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改写"><span class="nav-number">3.2.</span> <span class="nav-text">改写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于上述方法添加一个ini文档"><span class="nav-number">3.3.</span> <span class="nav-text">基于上述方法添加一个ini文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xml"><span class="nav-number">4.</span> <span class="nav-text">xml</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

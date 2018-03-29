@@ -1,0 +1,677 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-deep">
+<meta property="og:url" content="http://c.isme.pub/2018/01/04/python-deep/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:updated_time" content="2018-01-04T08:59:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-deep">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/01/04/python-deep/"/>
+
+
+  <title> python-deep | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python-deep
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-04T16:59:11+08:00" content="2018-01-04">
+              2018-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
+<p>Python&#x540E;&#x7AEF;&#x3001;&#x5927;&#x6570;&#x636E;&#x5206;&#x6790;&#x3001;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x548C; AI &#x5DE5;&#x7A0B;&#x5E08;&#x6210;&#x529F;&#x8F6C;&#x578B;&#x4E3A;Rails&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#x9AD8;&#x624B;<br>&#x4F46;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x518D;&#x770B;&#xFF0C;Python &#x5DF2;&#x7ECF;&#x662F;&#x6570;&#x636E;&#x5206;&#x6790;&#x548C; AI&#x7684;&#x7B2C;&#x4E00;&#x8BED;&#x8A00;&#xFF0C;&#x7F51;&#x7EDC;&#x653B;&#x9632;&#x7684;&#x7B2C;&#x4E00;&#x9ED1;&#x5BA2;&#x8BED;&#x8A00;&#xFF0C;&#x6B63;&#x5728;&#x6210;&#x4E3A;&#x7F16;&#x7A0B;&#x5165;&#x95E8;&#x6559;&#x5B66;&#x7684;&#x7B2C;&#x4E00;&#x8BED;&#x8A00;&#xFF0C;&#x4E91;&#x8BA1;&#x7B97;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x7B2C;&#x4E00;&#x8BED;&#x8A00;&#x3002;</p>
+<p>Python &#x4E5F;&#x65E9;&#x5C31;&#x6210;&#x4E3A;Web &#x5F00;&#x53D1;&#x3001;&#x6E38;&#x620F;&#x811A;&#x672C;&#x3001;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x3001;&#x7269;&#x8054;&#x7F51;&#x7BA1;&#x7406;&#x548C;&#x673A;&#x5668;&#x4EBA;&#x5F00;&#x53D1;&#x7684;&#x4E3B;&#x6D41;&#x8BED;&#x8A00;&#x4E4B;&#x4E00;&#xFF0C;&#x968F;&#x7740; Python &#x7528;&#x6237;&#x53EF;&#x4EE5;&#x9884;&#x671F;&#x7684;&#x589E;&#x957F;&#xFF0C;&#x5B83;&#x8FD8;&#x6709;&#x673A;&#x4F1A;&#x5728;&#x591A;&#x4E2A;&#x9886;&#x57DF;&#x91CC;&#x767B;&#x9876;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x4E3A;&#x6570;&#x76DF;&#x539F;&#x521B;&#x8BD1;&#x6587;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x4E0D;&#x77E5;&#x9053;&#x4ECE;&#x54EA;&#x91CC;&#x5F00;&#x59CB;&#xFF0C;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x4F7F;&#x7528;&#x54EA;&#x79CD;&#x5E93;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x91CC;&#x5C31;&#x4E3A;&#x4F60;&#x63D0;&#x4F9B;&#x4E86;&#x8BB8;&#x591A;&#x5E2E;&#x52A9;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x91CC;&#xFF0C;&#x6211;&#x8BE6;&#x7EC6;&#x89E3;&#x8BFB;&#x4E86;9&#x4E2A;&#x6211;&#x6700;&#x559C;&#x6B22;&#x7684;Python&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x540D;&#x5355;&#x5E76;&#x4E0D;&#x8BE6;&#x5C3D;&#xFF0C;&#x5B83;&#x53EA;&#x662F;&#x6211;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x7684;&#x804C;&#x4E1A;&#x751F;&#x6DAF;&#x4E2D;&#x4F7F;&#x7528;&#x5E76;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x6BB5;&#x53D1;&#x73B0;&#x7279;&#x522B;&#x6709;&#x7528;&#x7684;&#x4E00;&#x4E2A;&#x5E93;&#x7684;&#x5217;&#x8868;&#x3002;</p>
+<p>&#x8FD9;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x5E93;&#x6211;&#x6BD4;&#x522B;&#x4EBA;&#x7528;&#x7684;&#x591A;&#x5F88;&#x591A;&#xFF0C;&#x5C24;&#x5176;&#x662F;Keras&#x3001;mxnet&#x548C;sklearn-theano&#x3002;</p>
+<p>&#x5176;&#x4ED6;&#x7684;&#x4E00;&#x4E9B;&#x6211;&#x662F;&#x95F4;&#x63A5;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x6BD4;&#x5982;Theano&#x548C;TensorFlow&#xFF08;&#x5E93;&#x5305;&#x62EC;Keras&#x3001;deepy&#x548C;Blocks&#x7B49;&#xFF09;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x7684;&#x6211;&#x53EA;&#x662F;&#x5728;&#x4E00;&#x4E9B;&#x7279;&#x522B;&#x7684;&#x4EFB;&#x52A1;&#x4E2D;&#x7528;&#x8FC7;&#xFF08;&#x6BD4;&#x5982;nolearn&#x548C;&#x4ED6;&#x4EEC;&#x7684;Deep Belief Network implementation&#xFF09;&#x3002;</p>
+<p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x76EE;&#x7684;&#x662F;&#x5411;&#x4F60;&#x4ECB;&#x7ECD;&#x8FD9;&#x4E9B;&#x5E93;&#x3002;&#x6211;&#x5EFA;&#x8BAE;&#x4F60;&#x8BA4;&#x771F;&#x4E86;&#x89E3;&#x8FD9;&#x91CC;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5E93;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x67D0;&#x4E2A;&#x5177;&#x4F53;&#x5DE5;&#x4F5C;&#x60C5;&#x5883;&#x4E2D;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x6700;&#x9002;&#x7528;&#x7684;&#x5E93;&#x3002;</p>
+<p>&#x6211;&#x60F3;&#x518D;&#x6B21;&#x91CD;&#x7533;&#xFF0C;&#x8FD9;&#x4EFD;&#x540D;&#x5355;&#x5E76;&#x4E0D;&#x8BE6;&#x5C3D;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x7814;&#x7A76;&#x4EBA;&#x5458;&#x5E76;&#x957F;&#x671F;&#x6D3B;&#x8DC3;&#x5728;&#x8FD9;&#x4E2A;&#x9886;&#x57DF;&#xFF0C;&#x5BF9;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF08;&#x7EC6;&#x80DE;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF09;&#x65B9;&#x9762;&#x7684;&#x5E93;&#x4F1A;&#x5173;&#x6CE8;&#x66F4;&#x591A;&#x3002;</p>
+<p>&#x6211;&#x628A;&#x8FD9;&#x4E2A;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x7684;&#x5217;&#x8868;&#x5206;&#x4E3A;&#x4E09;&#x4E2A;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x662F;&#x6BD4;&#x8F83;&#x6D41;&#x884C;&#x7684;&#x5E93;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x5DF2;&#x7ECF;&#x5F88;&#x719F;&#x6089;&#x4E86;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E9B;&#x5E93;&#xFF0C;&#x6211;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x901A;&#x4FD7;&#x7684;&#x3001;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x6982;&#x8FF0;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x9488;&#x5BF9;&#x6BCF;&#x4E2A;&#x5E93;&#x6211;&#x8BE6;&#x7EC6;&#x89E3;&#x8BF4;&#x4E86;&#x6211;&#x7684;&#x559C;&#x6B22;&#x4E4B;&#x5904;&#x548C;&#x4E0D;&#x559C;&#x6B22;&#x4E4B;&#x5904;&#xFF0C;&#x5E76;&#x5217;&#x4E3E;&#x4E86;&#x4E00;&#x4E9B;&#x9002;&#x5F53;&#x7684;&#x5E94;&#x7528;&#x6848;&#x4F8B;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x8FDB;&#x5165;&#x5230;&#x6211;&#x4E2A;&#x4EBA;&#x6700;&#x559C;&#x6B22;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#xFF0C;&#x4E5F;&#x662F;&#x6211;&#x65E5;&#x5E38;&#x5DE5;&#x4F5C;&#x4E2D;&#x4F7F;&#x7528;&#x6700;&#x591A;&#x7684;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;Keras&#x3001;mxnet&#x548C;sklearn-theano&#x7B49;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x6211;&#x5BF9;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x4E2D;&#x4E0D;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x505A;&#x4E86;&#x4E00;&#x4E2A;&#x201C;&#x798F;&#x5229;&#x201D;&#x677F;&#x5757;&#xFF0C;&#x4F60;&#x6216;&#x8BB8;&#x8FD8;&#x4F1A;&#x4ECE;&#x4E2D;&#x53D1;&#x73B0;&#x6709;&#x7528;&#x7684;&#x6216;&#x8005;&#x662F;&#x5728;&#x7B2C;&#x4E8C;&#x677F;&#x5757;&#x4E2D;&#x6211;&#x8FD8;&#x6CA1;&#x6709;&#x5C1D;&#x8BD5;&#x8FC7;&#x4F46;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x6709;&#x8DA3;&#x7684;&#x5E93;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x8BA9;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x63A2;&#x7D22;&#x3002;</p>
+<p>&#x9488;&#x5BF9;&#x521D;&#x5B66;&#x8005;&#xFF1A;</p>
+<p>1.Caffe</p>
+<p>&#x63D0;&#x5230;&#x201C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x201D;&#x5C31;&#x4E0D;&#x53EF;&#x80FD;&#x4E0D;&#x8BF4;&#x5230;Caffe&#x3002;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x81EA;&#x4ECE;&#x4F60;&#x6253;&#x5F00;&#x8FD9;&#x4E2A;&#x9875;&#x9762;&#x5B66;&#x4E60;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#xFF0C;&#x6211;&#x5C31;&#x6562;&#x6253;&#x4FDD;&#x7968;&#x4F60;&#x80AF;&#x5B9A;&#x542C;&#x8BF4;Caffe&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x7A76;&#x7ADF;Caffe&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;</p>
+<p>Caffe&#x662F;&#x7531;Berkeley Vision and Learning Center&#xFF08;BVLC&#xFF09;&#x5EFA;&#x7ACB;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6846;&#x67B6;&#x3002;&#x5B83;&#x662F;&#x6A21;&#x5757;&#x5316;&#x7684;&#xFF0C;&#x901F;&#x5EA6;&#x6781;&#x5FEB;&#x3002;&#x800C;&#x4E14;&#x88AB;&#x5E94;&#x7528;&#x4E8E;&#x5B66;&#x672F;&#x754C;&#x548C;&#x4EA7;&#x4E1A;&#x754C;&#x7684;start-of-the-art&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x3002;</p>
+<p>&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x53BB;&#x7FFB;&#x9605;&#x6700;&#x65B0;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x51FA;&#x7248;&#x7269;&#xFF08;&#x4E5F;&#x63D0;&#x4F9B;&#x6E90;&#x4EE3;&#x7801;&#xFF09;&#xFF0C;&#x4F60;&#x5C31;&#x5F88;&#x53EF;&#x80FD;&#x4F1A;&#x5728;&#x5B83;&#x4EEC;&#x76F8;&#x5173;&#x7684;GitHub&#x5E93;&#x4E2D;&#x627E;&#x5230;Caffe&#x6A21;&#x578B;&#x3002;</p>
+<p>&#x867D;&#x7136;Caffe&#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;Python&#x5E93;&#xFF0C;&#x4F46;&#x5B83;&#x63D0;&#x4F9B;&#x7ED1;&#x5B9A;&#x5230;Python&#x4E0A;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x3002;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x5728;&#x65B0;&#x9886;&#x57DF;&#x5F00;&#x62D3;&#x7F51;&#x7EDC;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x7ED1;&#x5B9A;&#x3002;</p>
+<p>&#x6211;&#x628A;Caffe&#x653E;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x7684;&#x539F;&#x56E0;&#x662F;&#x5B83;&#x51E0;&#x4E4E;&#x88AB;&#x5E94;&#x7528;&#x5728;&#x5404;&#x4E2A;&#x65B9;&#x9762;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x4E2A;&#x7A7A;&#x767D;&#x6587;&#x6863;&#x91CC;&#x5B9A;&#x4E49;&#x4F60;&#x7684;&#x6A21;&#x578B;&#x67B6;&#x6784;&#x548C;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;JSON&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x7684;.prototxt&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;Caffe&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x63D0;&#x53D6;&#x8FD9;&#x4E9B;.prototxt&#x6587;&#x4EF6;&#x5E76;&#x57F9;&#x8BAD;&#x4F60;&#x7684;&#x7F51;&#x7EDC;&#x3002;Caffe&#x5B8C;&#x6210;&#x57F9;&#x8BAD;&#x4E4B;&#x540E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x4F60;&#x7684;&#x7F51;&#x7EDC;&#x548C;&#x7ECF;&#x8FC7;&#x5206;&#x7C7B;&#x7684;&#x65B0;&#x56FE;&#x50CF;&#x901A;&#x8FC7;Caffe&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x66F4;&#x597D;&#x7684;&#x5C31;&#x76F4;&#x63A5;&#x901A;&#x8FC7;Python&#x6216;MATLAB&#x7684;API&#x3002;</p>
+<p>&#x867D;&#x7136;&#x6211;&#x5F88;&#x559C;&#x6B22;Caffe&#x7684;&#x6027;&#x80FD;&#xFF08;&#x5B83;&#x6BCF;&#x5929;&#x53EF;&#x4EE5;&#x5728;K40 GPU&#x4E0A;&#x5904;&#x7406;60&#x4E07;&#x5F20;&#x56FE;&#x7247;&#xFF09;&#xFF0C;&#x4F46;&#x76F8;&#x6BD4;&#x4E4B;&#x4E0B;&#x6211;&#x66F4;&#x559C;&#x6B22;Keras&#x548C;mxnet&#x3002;</p>
+<p>&#x4E3B;&#x8981;&#x7684;&#x539F;&#x56E0;&#x662F;&#xFF0C;&#x5728;.prototxt&#x6587;&#x4EF6;&#x5185;&#x90E8;&#x6784;&#x5EFA;&#x67B6;&#x6784;&#x53EF;&#x80FD;&#x4F1A;&#x53D8;&#x5F97;&#x76F8;&#x5F53;&#x4E4F;&#x5473;&#x548C;&#x65E0;&#x804A;&#x3002;&#x66F4;&#x91CD;&#x8981;&#x7684;&#x662F;&#xFF0C; Caffe&#x4E0D;&#x80FD;&#x7528;&#x7F16;&#x7A0B;&#x65B9;&#x5F0F;&#x8C03;&#x6574;&#x8D85;&#x53C2;&#x6570;&#xFF01;&#x7531;&#x4E8E;&#x8FD9;&#x4E24;&#x4E2A;&#x539F;&#x56E0;&#xFF0C;&#x5728;&#x57FA;&#x4E8E;Python&#x7684;API&#x4E2D;&#x6211;&#x503E;&#x5411;&#x4E8E;&#x5BF9;&#x5141;&#x8BB8;&#x6211;&#x5B9E;&#x73B0;&#x7EC8;&#x7AEF;&#x5230;&#x7EC8;&#x7AEF;&#x8054;&#x64AD;&#x7F51;&#x7684;&#x5E93;&#x503E;&#x659C;&#xFF08;&#x5305;&#x62EC;&#x4EA4;&#x53C9;&#x9A8C;&#x8BC1;&#x548C;&#x8C03;&#x6574;&#x8D85;&#x53C2;&#x6570;&#xFF09;&#x3002;</p>
+<p>Theano<br>&#x5728;&#x6700;&#x5F00;&#x59CB;&#x6211;&#x60F3;&#x8BF4;Theano&#x662F;&#x7F8E;&#x4E3D;&#x7684;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;Theano&#xFF0C;&#x6211;&#x4EEC;&#x6839;&#x672C;&#x4E0D;&#x4F1A;&#x8FBE;&#x5230;&#x73B0;&#x6709;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x7684;&#x6570;&#x91CF;&#xFF08;&#x7279;&#x522B;&#x662F;&#x5728;Python&#xFF09;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;numpy&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x4F1A;&#x6709;SciPy&#x3001;scikit-learn&#x548C; scikit-image,&#xFF0C;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x8BF4;&#x662F;&#x5173;&#x4E8E;Theano&#x548C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x66F4;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x62BD;&#x8C61;&#x3002;</p>
+<p>&#x975E;&#x5E38;&#x6838;&#x5FC3;&#x7684;&#x662F;&#xFF0C;Theano&#x662F;&#x4E00;&#x4E2A;Python&#x5E93;&#xFF0C;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x3001;&#x4F18;&#x5316;&#x548C;&#x8BC4;&#x4F30;&#x6D89;&#x53CA;&#x591A;&#x7EF4;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x5B66;&#x8868;&#x8FBE;&#x5F0F;&#x3002; Theano&#x901A;&#x8FC7;&#x4E0E;numpy&#x7684;&#x7D27;&#x5BC6;&#x96C6;&#x6210;&#xFF0C;&#x900F;&#x660E;&#x5730;&#x4F7F;&#x7528;GPU&#x6765;&#x5B8C;&#x6210;&#x8FD9;&#x4E9B;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x5229;&#x7528;Theano&#x5EFA;&#x7ACB;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F51;&#x7EDC;&#xFF0C;&#x4F46;&#x6211;&#x503E;&#x5411;&#x4E8E;&#x8BA4;&#x4E3A;Theano&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x57FA;&#x77F3;&#xFF0C;&#x540C;&#x6837;&#x7684;numpy&#x662F;&#x4F5C;&#x4E3A;&#x79D1;&#x5B66;&#x8BA1;&#x7B97;&#x7684;&#x57FA;&#x77F3;&#x3002;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x6211;&#x5728;&#x6587;&#x7AE0;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x5E93;&#x90FD;&#x662F;&#x56F4;&#x7ED5;&#x7740;Theano&#xFF0C;&#x4F7F;&#x81EA;&#x5DF1;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x4FBF;&#x5229;&#x3002;</p>
+<p>&#x4E0D;&#x8981;&#x8BEF;&#x4F1A;&#x6211;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x6211;&#x7231;Theano&#xFF0C;&#x6211;&#x53EA;&#x662F;&#x4E0D;&#x559C;&#x6B22;&#x7528;Theano&#x7F16;&#x5199;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x5728;Theano&#x5EFA;&#x8BBE;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5C31;&#x50CF;&#x53EA;&#x7528;&#x672C;&#x673A;Python&#x4E2D;&#x7684;numpy&#x5199;&#x4E00;&#x4E2A;&#x5B9A;&#x5236;&#x7684;&#x652F;&#x6301;&#x5411;&#x91CF;&#x673A;&#xFF08;SVM&#xFF09;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x4E2A;&#x5BF9;&#x6BD4;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x5B8C;&#x7F8E;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x505A;&#x5230;&#x5417;&#xFF1F;</p>
+<p>&#x5F53;&#x7136;&#x53EF;&#x4EE5;&#x3002;</p>
+<p>&#x5B83;&#x503C;&#x5F97;&#x82B1;&#x8D39;&#x60A8;&#x7684;&#x65F6;&#x95F4;&#x548C;&#x7CBE;&#x529B;&#x5417;&#xFF1F;</p>
+<p>&#x55EF;&#xFF0C;&#x4E5F;&#x8BB8;&#x5427;&#x3002;&#x8FD9;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x662F;&#x5426;&#x60F3;&#x6446;&#x8131;&#x4F4E;&#x7EA7;&#x522B;&#x6216;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x662F;&#x5426;&#x9700;&#x8981;&#x3002;</p>
+<p>&#x5C31;&#x4E2A;&#x4EBA;&#x800C;&#x8A00;&#xFF0C;&#x6211;&#x5B81;&#x613F;&#x4F7F;&#x7528;&#x50CF;Keras&#x8FD9;&#x6837;&#x7684;&#x5E93;&#xFF0C;&#x5B83;&#x628A;Theano&#x5305;&#x88C5;&#x6210;&#x66F4;&#x6709;&#x4EBA;&#x6027;&#x5316;&#x7684;API&#xFF0C;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;scikit-learn&#x4F7F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#x5DE5;&#x4F5C;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x3002;</p>
+<p>TensorFlow<br>&#x4E0E;Theano&#x7C7B;&#x4F3C;&#xFF0C;TensorFlow&#x662F;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x6D41;&#x56FE;&#x8FDB;&#x884C;&#x6570;&#x503C;&#x8BA1;&#x7B97;&#x7684;&#x5F00;&#x6E90;&#x5E93;&#xFF08;&#x8FD9;&#x662F;&#x6240;&#x6709;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x56FA;&#x6709;&#x7684;&#x7279;&#x5F81;&#xFF09;&#x3002;&#x6700;&#x521D;&#x7531;&#x8C37;&#x6B4C;&#x7684;&#x673A;&#x5668;&#x667A;&#x80FD;&#x7814;&#x7A76;&#x673A;&#x6784;&#x5185;&#x7684;Google Brain Team&#x7814;&#x7A76;&#x4EBA;&#x5458;&#x5F00;&#x53D1;&#xFF0C;&#x6B64;&#x540E;&#x5E93;&#x4E00;&#x76F4;&#x5F00;&#x6E90;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x7ED9;&#x516C;&#x4F17;&#x3002;</p>
+<p>&#x76F8;&#x6BD4;&#x4E8E;Theano &#xFF0C;TensorFlow&#x7684;&#x4E3B;&#x8981;&#x4F18;&#x70B9;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x8BA1;&#x7B97;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5728;&#x591A;GPU&#x7684;&#x73AF;&#x5883;&#x4E2D;&#xFF08;&#x867D;&#x7136;&#x8FD9;&#x662F;Theano&#x6B63;&#x5728;&#x653B;&#x514B;&#x7684;&#x9879;&#x76EE;&#xFF09;&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x7528;TensorFlow&#x800C;&#x4E0D;&#x662F;Theano&#x66FF;&#x6362;Keras&#x540E;&#x7AEF;&#xFF0C;&#x5BF9;&#x4E8E;TensorFlow&#x5E93;&#x6211;&#x5E76;&#x6CA1;&#x6709;&#x592A;&#x591A;&#x7684;&#x7ECF;&#x9A8C;&#x3002;&#x7136;&#x800C;&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x51E0;&#x4E2A;&#x6708;&#x91CC;&#xFF0C;&#x6211;&#x5E0C;&#x671B;&#x8FD9;&#x6709;&#x6240;&#x6539;&#x53D8;&#x3002;</p>
+<p>Lasagne<br>Lasagne&#x662F;Theano&#x4E2D;&#x7528;&#x4E8E;&#x6784;&#x5EFA;&#x548C;&#x8BAD;&#x7EC3;&#x7F51;&#x7EDC;&#x7684;&#x8F7B;&#x91CF;&#x7EA7;&#x5E93;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x5173;&#x952E;&#x8BCD;&#x662F;&#x8F7B;&#x91CF;&#x7EA7;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x50CF;Keras&#x4E00;&#x6837;&#x56F4;&#x7ED5;&#x7740;Theano&#x7684;&#x91CD;&#x5305;&#x88C5;&#x7684;&#x5E93;&#x3002;&#x867D;&#x7136;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x4F60;&#x7684;&#x4EE3;&#x7801;&#x66F4;&#x52A0;&#x7E41;&#x7410;&#xFF0C;&#x4F46;&#x5B83;&#x4F1A;&#x628A;&#x4F60;&#x4ECE;&#x5404;&#x79CD;&#x9650;&#x5236;&#x4E2D;&#x89E3;&#x8131;&#x51FA;&#x6765;&#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x53EF;&#x4EE5;&#x8BA9;&#x60A8;&#x6839;&#x636E;Theano&#x8FDB;&#x884C;&#x6A21;&#x5757;&#x5316;&#x7684;&#x6784;&#x5EFA;&#x3002;</p>
+<p>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;Lasagne&#x7684;&#x529F;&#x80FD;&#x662F;Theano&#x7684;&#x4F4E;&#x7EA7;&#x7F16;&#x7A0B;&#x548C;Keras&#x7684;&#x9AD8;&#x7EA7;&#x62BD;&#x8C61;&#x4E4B;&#x95F4;&#x7684;&#x4E00;&#x4E2A;&#x6298;&#x4E2D;&#x3002;</p>
+<p>&#x6211;&#x6700;&#x559C;&#x6B22;&#x7684;&#xFF1A;</p>
+<p>Keras<br>&#x5982;&#x679C;&#x6211;&#x5FC5;&#x987B;&#x9009;&#x51FA;&#x4E00;&#x4E2A;&#x6700;&#x559C;&#x6B22;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;Python&#x5E93;&#xFF0C;&#x6211;&#x5C06;&#x5F88;&#x96BE;&#x5728;Keras&#x548C;mxnet&#x4E2D;&#x505A;&#x51FA;&#x6289;&#x62E9;&#x2014;&#x2014;&#x4F46;&#x6700;&#x540E;&#xFF0C;&#x6211;&#x60F3;&#x6211;&#x4F1A;&#x9009;Keras&#x3002;</p>
+<p>&#x8BF4;&#x771F;&#x7684;&#xFF0C;Keras&#x7684;&#x597D;&#x5904;&#x6211;&#x8BF4;&#x90FD;&#x8BF4;&#x4E0D;&#x5B8C;&#x3002;</p>
+<p>Keras&#x662F;&#x4E00;&#x4E2A;&#x6700;&#x4F4E;&#x9650;&#x5EA6;&#x7684;&#x3001;&#x6A21;&#x5757;&#x5316;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5E93;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Theano&#x6216;TensorFlow&#x4F5C;&#x4E3A;&#x540E;&#x7AEF;&#x3002;Keras&#x6700;&#x4E3B;&#x8981;&#x7684;&#x7528;&#x6237;&#x4F53;&#x9A8C;&#x662F;&#xFF0C;&#x4ECE;&#x6784;&#x601D;&#x5230;&#x4EA7;&#x751F;&#x7ED3;&#x679C;&#x5C06;&#x4F1A;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x8FC5;&#x901F;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x5728;Keras&#x4E2D;&#x67B6;&#x6784;&#x7F51;&#x7EDC;&#x8BBE;&#x8BA1;&#x662F;&#x5341;&#x5206;&#x8F7B;&#x677E;&#x81EA;&#x7136;&#x7684;&#x3002;&#x5B83;&#x5305;&#x62EC;&#x4E00;&#x4E9B;state-of-the-art&#x4E2D;&#x9488;&#x5BF9;&#x4F18;&#x5316;&#xFF08;Adam&#xFF0C;RMSProp&#xFF09;&#x3001;&#x6807;&#x51C6;&#x5316;&#xFF08;BatchNorm&#xFF09;&#x548C;&#x6FC0;&#x6D3B;&#x5C42;&#xFF08;PReLU&#xFF0C;ELU&#xFF0C;LeakyReLU&#xFF09;&#x6700;&#x65B0;&#x7684;&#x7B97;&#x6CD5;&#x3002;</p>
+<p>Keras&#x4E5F;&#x975E;&#x5E38;&#x6CE8;&#x91CD;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x6211;&#x5341;&#x5206;&#x9700;&#x8981;&#x7684;&#x3002;&#x65E0;&#x8BBA;&#x5B83;&#x662F;&#x6709;&#x610F;&#x8FD8;&#x662F;&#x65E0;&#x610F;&#x7684;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x4ECE;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x770B;&#x8FD9;&#x662F;&#x975E;&#x5E38;&#x6709;&#x4EF7;&#x503C;&#x7684;&#x3002;</p>
+<p>&#x66F4;&#x91CD;&#x8981;&#x7684;&#x662F;&#xFF0C;&#x4F60;&#x65E2;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5730;&#x6784;&#x5EFA;&#x57FA;&#x4E8E;&#x5E8F;&#x5217;&#x7684;&#x7F51;&#x7EDC;&#xFF08;&#x5176;&#x4E2D;&#x8F93;&#x5165;&#x7EBF;&#x6027;&#x6D41;&#x7ECF;&#x7F51;&#x7EDC;&#xFF09;&#x53C8;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x57FA;&#x4E8E;&#x56FE;&#x5F62;&#x7684;&#x7F51;&#x7EDC;&#xFF08;&#x8F93;&#x5165;&#x53EF;&#x4EE5;&#x201C;&#x8DF3;&#x8FC7;&#x201D;&#x67D0;&#x4E9B;&#x5C42;&#x76F4;&#x63A5;&#x548C;&#x540E;&#x9762;&#x5BF9;&#x63A5;&#xFF09;&#x3002;&#x8FD9;&#x4F7F;&#x5F97;&#x521B;&#x5EFA;&#x50CF;GoogLeNet&#x548C;SqueezeNet&#x8FD9;&#x6837;&#x590D;&#x6742;&#x7684;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x53D8;&#x5F97;&#x5BB9;&#x6613;&#x5F97;&#x591A;&#x3002;</p>
+<p>&#x6211;&#x8BA4;&#x4E3A;Keras&#x552F;&#x4E00;&#x7684;&#x95EE;&#x9898;&#x662F;&#x5B83;&#x4E0D;&#x652F;&#x6301;&#x591A;GPU&#x73AF;&#x5883;&#x4E2D;&#x5E76;&#x884C;&#x5730;&#x8BAD;&#x7EC3;&#x7F51;&#x7EDC;&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x4E5F;&#x53EF;&#x80FD;&#x4E0D;&#x4F1A;&#x6210;&#x4E3A;&#x4F60;&#x7684;&#x5927;&#x5FCC;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x60F3;&#x5C3D;&#x5FEB;&#x5730;&#x8BAD;&#x7EC3;&#x7F51;&#x7EDC;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x7528;mxnet&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x6211;&#x9700;&#x8981;&#x8C03;&#x6574;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x6211;&#x5C31;&#x4F1A;&#x7528;Keras&#x8BBE;&#x7F6E;&#x56DB;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5B9E;&#x9A8C;&#xFF08;&#x5206;&#x522B;&#x5728;&#x6211;&#x7684;Titan X GPUs&#x4E0A;&#x8FD0;&#x884C;&#xFF09;&#x5E76;&#x8BC4;&#x4F30;&#x7ED3;&#x679C;&#x3002;</p>
+<p>mxnet<br>&#x6211;&#x7B2C;&#x4E8C;&#x559C;&#x6B22;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;Python&#x5E93;&#x65E0;&#x7591;&#x5C31;&#x662F;mxnet&#xFF08;&#x91CD;&#x70B9;&#x4E5F;&#x662F;&#x8BAD;&#x7EC3;&#x56FE;&#x50CF;&#x5206;&#x7C7B;&#x7F51;&#x7EDC;&#xFF09;&#x3002;&#x867D;&#x7136;&#x5728;mxnet&#x4E2D;&#x7AD9;&#x7ACB;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x8F83;&#x591A;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x5B83;&#x4F1A;&#x63D0;&#x4F9B;&#x7ED9;&#x4F60;&#x60CA;&#x4EBA;&#x6570;&#x91CF;&#x7684;&#x8BED;&#x8A00;&#x7ED1;&#x5B9A;&#xFF08;C ++&#x3001;Python&#x3001;R&#x3001;JavaScript&#x7B49;&#xFF09;&#x3002;</p>
+<p>Mxnet&#x5E93;&#x771F;&#x6B63;&#x51FA;&#x8272;&#x7684;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x8BA1;&#x7B97;&#xFF0C;&#x5B83;&#x652F;&#x6301;&#x5728;&#x591A;&#x4E2A;CPU / GPU&#x673A;&#x8BAD;&#x7EC3;&#x4F60;&#x7684;&#x7F51;&#x7EDC;&#xFF0C;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x5728;AWS&#x3001;Azure&#x4EE5;&#x53CA;YARN&#x96C6;&#x7FA4;&#x3002;</p>
+<p>&#x5B83;&#x786E;&#x5B9E;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7684;&#x4EE3;&#x7801;&#x6765;&#x8BBE;&#x7ACB;&#x4E00;&#x4E2A;&#x5B9E;&#x9A8C;&#x5E76;&#x5728;mxnet&#x4E0A;&#x8FD0;&#x884C;&#xFF08;&#x4E0E;Keras&#x76F8;&#x6BD4;&#xFF09;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x8DE8;&#x591A;&#x4E2A;GPU&#x6216;&#x7CFB;&#x7EDF;&#x5206;&#x914D;&#x8BAD;&#x7EC3;&#xFF0C;&#x6211;&#x63A8;&#x8350;mxnet&#x3002;</p>
+<p>sklearn-theano<br>&#x6709;&#x65F6;&#x5019;&#x4F60;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x7EC8;&#x7AEF;&#x5230;&#x7EC8;&#x7AEF;&#x7684;&#x57F9;&#x517B;&#x4E00;&#x4E2A;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3002;&#x76F8;&#x53CD;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x628A;CNN&#x770B;&#x4F5C;&#x4E00;&#x4E2A;&#x7279;&#x5F81;&#x63D0;&#x53D6;&#x5668;&#x3002;&#x5F53;&#x4F60;&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x6570;&#x636E;&#x6765;&#x4ECE;&#x5934;&#x57F9;&#x517B;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;CNN&#x65F6;&#x5B83;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x7279;&#x522B;&#x6709;&#x7528;&#x3002;&#x4EC5;&#x4EC5;&#x9700;&#x8981;&#x628A;&#x4F60;&#x7684;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x653E;&#x5165;&#x6D41;&#x884C;&#x7684;&#x9884;&#x5148;&#x8BAD;&#x7EC3;&#x67B6;&#x6784;&#xFF0C;&#x5982;OverFeat&#x3001;AlexNet&#x3001;VGGNet&#x6216;GoogLeNet&#xFF0C;&#x7136;&#x540E;&#x4ECE;FC&#x5C42;&#x63D0;&#x53D6;&#x7279;&#x5F81;&#xFF08;&#x6216;&#x4EFB;&#x4F55;&#x60A8;&#x8981;&#x4F7F;&#x7528;&#x7684;&#x5C42;&#xFF09;&#x3002;</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;sklearn-theano&#x7684;&#x529F;&#x80FD;&#x6240;&#x5728;&#x3002;&#x4F60;&#x4E0D;&#x80FD;&#x7528;&#x5B83;&#x4ECE;&#x5934;&#x5230;&#x5C3E;&#x7684;&#x8BAD;&#x7EC3;&#x4E00;&#x4E2A;&#x6A21;&#x578B;&#xFF0C;&#x4F46;&#x5B83;&#x7684;&#x795E;&#x5947;&#x4E4B;&#x5904;&#x5C31;&#x662F;&#x53EF;&#x4EE5;&#x628A;&#x7F51;&#x7EDC;&#x4F5C;&#x4E3A;&#x7279;&#x5F81;&#x63D0;&#x53D6;&#x5668;&#x3002;&#x5F53;&#x9700;&#x8981;&#x8BC4;&#x4F30;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x95EE;&#x9898;&#x662F;&#x5426;&#x9002;&#x5408;&#x4F7F;&#x7528;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6765;&#x89E3;&#x51B3;&#x65F6;&#xFF0C;&#x6211;&#x503E;&#x5411;&#x4E8E;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;&#x4F5C;&#x4E3A;&#x6211;&#x7684;&#x7B2C;&#x4E00;&#x624B;&#x5224;&#x65AD;&#x3002;</p>
+<p>nolearn<br>&#x6211;&#x5728;PyImageSearch&#x535A;&#x5BA2;&#x4E0A;&#x7528;&#x8FC7;&#x51E0;&#x6B21;nolearn&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x5728;&#x6211;&#x7684;MacBook Pro&#x4E0A;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x521D;&#x6B65;&#x7684;GPU&#x5B9E;&#x9A8C;&#x548C;&#x5728;Amazon EC2 GPU&#x5B9E;&#x4F8B;&#x4E2D;&#x8FDB;&#x884C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x3002;</p>
+<p>Keras&#x628A; Theano&#x548C;TensorFlow&#x5305;&#x88C5;&#x6210;&#x4E86;&#x66F4;&#x5177;&#x4EBA;&#x6027;&#x5316;&#x7684;API&#xFF0C;&#x800C;nolearn&#x4E5F;&#x4E3A;Lasagne&#x505A;&#x4E86;&#x76F8;&#x540C;&#x7684;&#x4E8B;&#x3002;&#x6B64;&#x5916;&#xFF0C;nolearn&#x4E2D;&#x6240;&#x6709;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x4E0E;scikit-learn&#x517C;&#x5BB9;&#x7684;&#xFF0C;&#x8FD9;&#x5BF9;&#x6211;&#x6765;&#x8BF4;&#x7EDD;&#x5BF9;&#x662F;&#x4E2A;&#x8D85;&#x7EA7;&#x7684;&#x798F;&#x5229;&#x3002;</p>
+<p>&#x6211;&#x4E2A;&#x4EBA;&#x4E0D;&#x4F7F;&#x7528;nolearn&#x505A;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF08;CNNs&#xFF09;&#xFF0C;&#x4F46;&#x4F60;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#xFF08;&#x6211;&#x66F4;&#x559C;&#x6B22;&#x7528;Keras&#x548C;mxnet&#x6765;&#x505A;CNNs&#xFF09;&#x3002;&#x6211;&#x4E3B;&#x8981;&#x7528;nolearn&#x6765;&#x5236;&#x4F5C;Deep Belief Networks (DBNs)&#x3002;</p>
+<p>DIGITS<br>DIGITS&#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#xFF08;&#x867D;&#x7136;&#x5B83;&#x662F;&#x7528;Python&#x5199;&#x7684;&#xFF09;&#x3002;DIGITS&#xFF08;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;GPU&#x57F9;&#x8BAD;&#x7CFB;&#x7EDF;&#xFF09;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x7528;&#x4E8E;&#x57F9;&#x8BAD;Caffe&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6A21;&#x5F0F;&#x7684;web&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF08;&#x867D;&#x7136;&#x6211;&#x8BA4;&#x4E3A;&#x4F60;&#x53EF;&#x4EE5;&#x7834;&#x89E3;&#x6E90;&#x4EE3;&#x7801;&#x7136;&#x540E;&#x4F7F;&#x7528;Caffe&#x4EE5;&#x5916;&#x5176;&#x4ED6;&#x7684;&#x540E;&#x7AEF;&#x8FDB;&#x884C;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F46;&#x8FD9;&#x542C;&#x8D77;&#x6765;&#x5C31;&#x50CF;&#x4E00;&#x573A;&#x5669;&#x68A6;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x66FE;&#x7ECF;&#x7528;&#x8FC7;Caffe&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x5C31;&#x4F1A;&#x77E5;&#x9053;&#x901A;&#x8FC7;&#x5B83;&#x7684;&#x7EC8;&#x7AEF;&#x6765;&#x5B9A;&#x4E49;.prototxt&#x6587;&#x4EF6;&#x3001;&#x751F;&#x6210;&#x56FE;&#x50CF;&#x6570;&#x636E;&#x3001;&#x8FD0;&#x884C;&#x7F51;&#x7EDC;&#x5E76;&#x76D1;&#x7BA1;&#x4F60;&#x7684;&#x7F51;&#x7EDC;&#x8BAD;&#x7EC3;&#x662F;&#x76F8;&#x5F53;&#x7E41;&#x7410;&#x7684;&#x3002; DIGITS&#x65E8;&#x5728;&#x901A;&#x8FC7;&#x8BA9;&#x4F60;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6B64;&#x5916;&#xFF0C;DIGITS&#x7684;&#x7528;&#x6237;&#x754C;&#x9762;&#x975E;&#x5E38;&#x51FA;&#x8272;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x4E3A;&#x4F60;&#x63D0;&#x4F9B;&#x6709;&#x4EF7;&#x503C;&#x7684;&#x7EDF;&#x8BA1;&#x6570;&#x636E;&#x548C;&#x56FE;&#x8868;&#x4F5C;&#x4E3A;&#x4F60;&#x7684;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5404;&#x79CD;&#x8F93;&#x5165;&#x8F7B;&#x677E;&#x5730;&#x53EF;&#x89C6;&#x5316;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x6FC0;&#x6D3B;&#x5C42;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x60F3;&#x6D4B;&#x8BD5;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x56FE;&#x50CF;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x628A;&#x56FE;&#x7247;&#x4E0A;&#x4F20;&#x5230;&#x4F60;&#x7684;DIGITS&#x670D;&#x52A1;&#x5668;&#x6216;&#x8FDB;&#x5165;&#x56FE;&#x7247;&#x7684;URL&#xFF0C;&#x7136;&#x540E;&#x4F60;&#x7684;Caffe&#x6A21;&#x578B;&#x5C06;&#x4F1A;&#x81EA;&#x52A8;&#x5206;&#x7C7B;&#x56FE;&#x50CF;&#x5E76;&#x628A;&#x7ED3;&#x679C;&#x663E;&#x793A;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x3002;&#x5E72;&#x51C0;&#x5229;&#x843D;&#xFF01;</p>
+<p>&#x798F;&#x5229;&#xFF1A;</p>
+<p>Blocks<br>&#x8BF4;&#x5B9E;&#x8BDD;&#xFF0C;&#x867D;&#x7136;&#x6211;&#x4E00;&#x76F4;&#x60F3;&#x5C1D;&#x8BD5;&#xFF0C;&#x4F46;&#x622A;&#x81F3;&#x76EE;&#x524D;&#x6211;&#x7684;&#x786E;&#x4ECE;&#x6765;&#x6CA1;&#x7528;&#x8FC7;Blocks&#xFF08;&#x8FD9;&#x4E5F;&#x662F;&#x6211;&#x628A;&#x5B83;&#x5305;&#x62EC;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x91CC;&#x7684;&#x539F;&#x56E0;&#xFF09;&#x3002;&#x5C31;&#x50CF;&#x8BB8;&#x591A;&#x4E2A;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x5E93;&#x4E00;&#x6837;&#xFF0C;Blocks&#x5EFA;&#x7ACB;&#x5728;Theano&#x4E4B;&#x4E0A;&#xFF0C;&#x5448;&#x73B0;&#x51FA;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x53CB;&#x597D;&#x578B;&#x7684;API&#x3002;</p>
+<p>deepy<br>&#x5982;&#x679C;&#x8BA9;&#x4F60;&#x731C;deepy&#x662F;&#x56F4;&#x7ED5;&#x54EA;&#x4E2A;&#x5E93;&#x5EFA;&#x7ACB;&#x7684;&#xFF0C;&#x4F60;&#x4F1A;&#x731C;&#x4EC0;&#x4E48;&#xFF1F;</p>
+<p>&#x6CA1;&#x9519;&#xFF0C;&#x5C31;&#x662F;Theano&#x3002;</p>
+<p>&#x6211;&#x8BB0;&#x5F97;&#x5728;&#x524D;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x7528;&#x8FC7;deepy&#xFF08;&#x505A;&#x4E86;&#x521D;&#x59CB;&#x63D0;&#x4EA4;&#xFF09;&#xFF0C;&#x4F46;&#x5728;&#x63A5;&#x4E0B;&#x91CC;&#x7684;&#x5927;&#x6982;6-8&#x4E2A;&#x6708;&#x6211;&#x90FD;&#x6CA1;&#x6709;&#x78B0;&#x5B83;&#x4E86;&#x3002;&#x6211;&#x6253;&#x7B97;&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x535A;&#x5BA2;&#x6587;&#x7AE0;&#x91CC;&#x518D;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;</p>
+<p>pylearn2<br>&#x867D;&#x7136;&#x6211;&#x4ECE;&#x6CA1;&#x6709;&#x4E3B;&#x52A8;&#x5730;&#x4F7F;&#x7528;pylearn2&#xFF0C;&#x4F46;&#x7531;&#x4E8E;&#x5386;&#x53F2;&#x539F;&#x56E0;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x5F88;&#x6709;&#x5FC5;&#x8981;&#x628A;&#x5B83;&#x5305;&#x62EC;&#x5728;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x91CC;&#x3002; Pylearn2&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x822C;&#x7684;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5E93;&#xFF08;&#x5730;&#x4F4D;&#x7C7B;&#x4F3C;&#x4E8E;scikit-learn&#xFF09;&#xFF0C;&#x4E5F;&#x5305;&#x542B;&#x4E86;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;pylearn2&#x6211;&#x6700;&#x5927;&#x7684;&#x62C5;&#x5FE7;&#x5C31;&#x662F;&#xFF08;&#x5728;&#x64B0;&#x5199;&#x672C;&#x6587;&#x65F6;&#xFF09;&#xFF0C;&#x5B83;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x6D3B;&#x8DC3;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x3002;&#x6B63;&#x56E0;&#x4E3A;&#x5982;&#x6B64;&#xFF0C;&#x76F8;&#x6BD4;&#x4E8E;&#x50CF;Keras&#x548C;mxnet&#x8FD9;&#x6837;&#x7684;&#x6709;&#x79EF;&#x6781;&#x7EF4;&#x62A4;&#x7684;&#x5E93;&#xFF0C;&#x63A8;&#x8350;pylearn2&#x6211;&#x8FD8;&#x6709;&#x4E9B;&#x72B9;&#x8C6B;&#x3002;</p>
+<p>Deeplearning4j<br>&#x8FD9;&#x672C;&#x5E94;&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;Python&#x7684;&#x5217;&#x8868;&#xFF0C;&#x4F46;&#x6211;&#x60F3;&#x6211;&#x4F1A;&#x628A;Deeplearning4j&#x5305;&#x62EC;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x51FA;&#x4E8E;&#x5BF9;&#x4ED6;&#x4EEC;&#x6240;&#x505A;&#x4E8B;&#x8FF9;&#x7684;&#x65E0;&#x6BD4;&#x5D07;&#x656C;&#x2014;&#x2014;Deeplearning4j&#x4E3A;JVM&#x5EFA;&#x7ACB;&#x4E86;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60A8;&#x5728;&#x4F01;&#x4E1A;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x585E;&#x6EE1;&#x4E86;&#x7528;&#x8FC7;&#x7684;Hadoop&#x548C;MapReduce&#x670D;&#x52A1;&#x5668;&#x7684;&#x50A8;&#x5B58;&#x5668;&#x3002;&#x4E5F;&#x8BB8;&#x8FD9;&#x4E9B;&#x4F60;&#x8FD8;&#x5728;&#x7528;&#xFF0C;&#x4E5F;&#x8BB8;&#x65E9;&#x5C31;&#x4E0D;&#x7528;&#x4E86;&#x3002;</p>
+<p>&#x4F60;&#x600E;&#x6837;&#x624D;&#x80FD;&#x628A;&#x8FD9;&#x4E9B;&#x76F8;&#x540C;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5E94;&#x7528;&#x5230;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x91CC;&#xFF1F;</p>
+<p>&#x4E8B;&#x5B9E;&#x8BC1;&#x660E;&#x662F;&#x53EF;&#x4EE5;&#x7684;&#x2014;&#x2014;&#x4F60;&#x53EA;&#x9700;&#x8981;Deeplearning4j&#x3002;</p>
+<p>&#x6DF1;&#x5165;&#x7814;&#x7A76;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;</p>
+<p>ADE.tm</p>
+<p>&#x56FE;1&#xFF1A;&#x4E86;&#x89E3;PyImageSearch&#x5927;&#x5E08;&#x8BFE;&#x7A0B;&#x5185;&#x7684;&#x5982;&#x4F55;&#x5229;&#x7528;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5BF9;&#x56FE;&#x50CF;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x5206;&#x7C7B;</p>
+<p>&#x5BF9;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x597D;&#x5947;&#x5417;&#xFF1F;</p>
+<p>&#x6211;&#x4F1A;&#x5728;&#x8FD9;&#x91CC;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#x3002;</p>
+<p>&#x5728;PyImageSearch&#x5927;&#x5E08;&#x7684;&#x8BFE;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x521B;&#x5EFA;&#x4E86;21&#x8282;&#x8BFE;&#x5305;&#x62EC;256&#x9875;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3001;&#x6DF1;&#x5EA6;&#x4FE1;&#x5FF5;&#x7F51;&#x7EDC;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6559;&#x7A0B;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x4F60;&#x8F7B;&#x677E;&#x5FEB;&#x901F;&#x7684;&#x5B66;&#x5230;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x60F3;&#x8981;&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x5173;&#x4E8E;PyImageSearch&#x5927;&#x5E08;&#x8BFE;&#x7A0B;&#x7684;&#x5185;&#x5BB9;&#xFF08;&#x62A2;10&#x4E2A;&#x514D;&#x8D39;&#x8BFE;&#x7A0B;&#x6837;&#x672C;&#xFF09;&#xFF0C;&#x53EA;&#x9700;&#x70B9;&#x51FB;&#x4E0B;&#x9762;&#x7684;&#x94FE;&#x63A5;&#xFF1A;</p>
+<p><a href="https://www.pyimagesearch.com/pyimagesearch-gurus/?src=post-deep-learning-libs" target="_blank" rel="external">https://www.pyimagesearch.com/pyimagesearch-gurus/?src=post-deep-learning-libs</a></p>
+<p>&#x603B;&#x7ED3;</p>
+<p>&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x56DE;&#x987E;&#x4E86;&#x4E00;&#x4E9B;&#x6211;&#x6700;&#x559C;&#x7231;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5E93;&#x3002;&#x4F46;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x51B3;&#x4E0D;&#x662F;&#x8BE6;&#x5C3D;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x4E13;&#x6CE8;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x548C;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5E93;&#x80AF;&#x5B9A;&#x662F;&#x6709;&#x5931;&#x504F;&#x9887;&#x7684;&#x3002;</p>
+<p>&#x5C3D;&#x7BA1;&#x8FD9;&#x6837;&#x8BF4;&#xFF0C;&#x4F46;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x521A;&#x521A;&#x8FDB;&#x5165;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x9886;&#x57DF;&#xFF0C;&#x5E76;&#x5728;&#x5BFB;&#x627E;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x5E93;&#x7684;&#x4EBA;&#xFF0C;&#x6211;&#x8BA4;&#x4E3A;&#x8FD9;&#x786E;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x4F1F;&#x5927;&#x7684;&#x5217;&#x8868;&#x3002;</p>
+<p>&#x6211;&#x4E2A;&#x4EBA;&#x8BA4;&#x4E3A;&#x6253;&#x8D25;Keras&#x548C;mxne&#x662F;&#x5F88;&#x96BE;&#x7684;&#x4E8B;&#x3002;Keras&#x5E93;&#x4F4D;&#x4E8E;&#x8BA1;&#x7B97;&#x7684;&#x9F99;&#x5934;&#x5730;&#x4F4D;&#xFF0C;&#x5982;Theano&#x548C;TensorFlow&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x60A8;&#x53EA;&#x9700;&#x51E0;&#x884C;Python&#x4EE3;&#x7801;&#x5C31;&#x53EF;&#x4EE5;&#x6784;&#x5EFA;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x67B6;&#x6784;&#x3002;</p>
+<p>&#x867D;&#x7136;mxnet&#x53EF;&#x80FD;&#x9700;&#x8981;&#x66F4;&#x591A;&#x4E00;&#x70B9;&#x7684;&#x4EE3;&#x7801;&#x6765;&#x6784;&#x5EFA;&#x548C;&#x57F9;&#x517B;&#x7F51;&#x7EDC;&#xFF0C;&#x4F46;&#x5B83;&#x80FD;&#x591F;&#x8F7B;&#x677E;&#x9AD8;&#x6548;&#x5730;&#x5C06;&#x57F9;&#x517B;&#x4EFB;&#x52A1;&#x5206;&#x914D;&#x5230;&#x591A;&#x4E2A;GPU&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;&#x4E00;&#x4E2A;&#x591A;GPU&#x7CFB;&#x7EDF;&#x6216;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x5E76;&#x5E0C;&#x671B;&#x5145;&#x5206;&#x5229;&#x7528;&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#xFF0C;&#x90A3;&#x5C31;&#x80AF;&#x5B9A;&#x8981;&#x8BD5;&#x4E00;&#x8BD5;mxnet&#x3002;</p>
+<p>&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x53D6;&#x4EE3;PC&#x4E92;&#x8054;&#x7F51;&#x9886;&#x8DD1;&#x5728;&#x4E92;&#x8054;&#x7F51;&#x65F6;&#x4EE3;&#x7684;&#x6700;&#x524D;&#x6CBF;&#xFF0C;Android&#x548C;iOS&#x4E00;&#x5EA6;&#x6210;&#x4E3A;&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x5E94;&#x7528;&#x5E73;&#x53F0;&#x7684;&#x4E24;&#x5927;&#x9738;&#x4E3B;&#xFF0C;&#x6210;&#x4E3A;&#x79FB;&#x52A8;&#x5F00;&#x53D1;&#x8005;&#x9996;&#x9009;&#x7684;&#x4E24;&#x95E8;&#x6280;&#x672F;&#xFF0C;HTML5&#x4EE5;&#x5176;&#x8DE8;&#x5E73;&#x53F0;&#x7684;&#x4F18;&#x52BF;&#x5728;&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x5E94;&#x7528;&#x5E73;&#x53F0;&#x5360;&#x636E;&#x91CD;&#x8981;&#x4F4D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;&#x662F;&#x540E;&#x6765;&#x8005;&#x5C45;&#x4E0A;&#x3002; &#x7531;&#x4E8E;&#x6280;&#x672F;&#x7684;&#x9650;&#x5236;&#x96BE;&#x4EE5;&#x50AC;&#x751F;&#x51FA;&#x66F4;&#x591A;&#x7684;&#x65B0;&#x5E94;&#x7528;&#xFF0C;&#x4E92;&#x8054;&#x7F51;+&#x7684;&#x4EA7;&#x54C1;&#x65E5;&#x6E10;&#x9971;&#x548C;&#xFF0C;&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x4ECE;&#x5DC5;&#x5CF0;&#x65F6;&#x4EE3;&#x9010;&#x6E10;&#x8D8B;&#x4E8E;&#x5E73;&#x7F13;&#x53D1;&#x5C55;&#xFF0C;&#x4E0B;&#x4E00;&#x4E2A;&#x65F6;&#x4EE3;&#x8C01;&#x662F;&#x4E3B;&#x573A;&#xFF1F;&#x4E0B;&#x4E00;&#x95E8;&#x5E94;&#x7528;&#x6280;&#x672F;&#x8C01;&#x6765;&#x638C;&#x95E8;&#xFF1F;</p>
+<p>&#x5728;&#x7B2C;&#x4E09;&#x5C4A;&#x4E92;&#x8054;&#x7F51;&#x5927;&#x4F1A;&#x4E2D;&#x767E;&#x5EA6;CEO&#x674E;&#x5F66;&#x5B8F;&#x66FE;&#x8868;&#x8FF0;&#xFF1A;&#x9760;&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x7684;&#x98CE;&#x53E3;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x53EF;&#x80FD;&#x518D;&#x51FA;&#x73B0;&#x72EC;&#x89D2;&#x517D;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x5E02;&#x573A;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x76F8;&#x5BF9;&#x5E73;&#x7A33;&#x7684;&#x53D1;&#x5C55;&#x9636;&#x6BB5;&#xFF0C;&#x4E92;&#x8054;&#x7F51;&#x4EBA;&#x53E3;&#x6E17;&#x900F;&#x7387;&#x5DF2;&#x7ECF;&#x8D85;&#x8FC7;&#x4E86;50%&#x3002;&#x800C;&#x672A;&#x6765;&#x7684;&#x673A;&#x4F1A;&#x5728;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x3002;&#x7684;&#x786E;&#x4E92;&#x8054;&#x7F51;&#x5DE8;&#x5934;&#x516C;&#x53F8;&#x5728;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x9886;&#x57DF;&#x6295;&#x5165;&#x660E;&#x663E;&#x589E;&#x5927;&#xFF0C;&#x90FD;&#x529B;&#x4E89;&#x505A;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x65F6;&#x4EE3;&#x7684;&#x201C;&#x5E26;&#x5934;&#x5927;&#x54E5;&#x201D;&#x3002;</p>
+<p>Python&#x4F5C;&#x4E3A;&#x4E00;&#x95E8;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x5176;&#x9B45;&#x529B;&#x8FDC;&#x8D85;C#&#xFF0C;Java,C,C++&#xFF0C;&#x5B83;&#x88AB;&#x6635;&#x79F0;&#x4E3A;&#x201C;&#x80F6;&#x6C34;&#x8BED;&#x8A00;&#x201D;&#xFF0C;&#x66F4;&#x88AB;&#x70ED;&#x7231;&#x5B83;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x8A89;&#x4E3A;&#x201C;&#x6700;&#x7F8E;&#x4E3D;&#x7684;&#x201D;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x3002;&#x4ECE;&#x4E91;&#x7AEF;&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5230;&#x7269;&#x8054;&#x7F51;&#x7EC8;&#x7AEF;&#xFF0C;python&#x5E94;&#x7528;&#x65E0;&#x5904;&#x4E0D;&#x5728;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x662F;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x9996;&#x5148;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x3002;</p>
+<p>&#x5728;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x4E0A;&#x4F7F;&#x7528;Python&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x4F18;&#x52BF;</p>
+<p>1.&#x4F18;&#x8D28;&#x7684;&#x6587;&#x6863;</p>
+<p>2.&#x5E73;&#x53F0;&#x65E0;&#x5173;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x73B0;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;*nix&#x7248;&#x672C;&#x4E0A;&#x4F7F;&#x7528;</p>
+<p>3.&#x548C;&#x5176;&#x4ED6;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x6BD4;&#x5B66;&#x4E60;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#x5FEB;&#x901F;</p>
+<p>4.Python&#x6709;&#x8BB8;&#x591A;&#x56FE;&#x50CF;&#x52A0;&#x5F3A;&#x5E93;&#x50CF;Python Imaging Libary,VTK&#x548C;Maya 3D&#x53EF;&#x89C6;&#x5316;&#x5DE5;&#x5177;&#x5305;&#xFF0C;Numeric Python, Scientific Python&#x548C;&#x5176;&#x4ED6;&#x5F88;&#x591A;&#x53EF;&#x7528;&#x5DE5;&#x5177;&#x53EF;&#x4EE5;&#x4E8E;&#x6570;&#x503C;&#x548C;&#x79D1;&#x5B66;&#x5E94;&#x7528;&#x3002;</p>
+<p>5.Python&#x7684;&#x8BBE;&#x8BA1;&#x975E;&#x5E38;&#x597D;&#xFF0C;&#x5FEB;&#x901F;&#xFF0C;&#x575A;&#x56FA;&#xFF0C;&#x53EF;&#x79FB;&#x690D;&#xFF0C;&#x53EF;&#x6269;&#x5C55;&#x3002;&#x5F88;&#x660E;&#x663E;&#x8FD9;&#x4E9B;&#x5BF9;&#x4E8E;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x5E94;&#x7528;&#x6765;&#x8BF4;&#x90FD;&#x662F;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x56E0;&#x7D20;&#x3002;</p>
+<p>6.&#x5BF9;&#x4E8E;&#x79D1;&#x5B66;&#x7528;&#x9014;&#x7684;&#x5E7F;&#x6CDB;&#x7F16;&#x7A0B;&#x4EFB;&#x52A1;&#x90FD;&#x5F88;&#x6709;&#x7528;&#xFF0C;&#x65E0;&#x8BBA;&#x4ECE;&#x5C0F;&#x7684;shell&#x811A;&#x672C;&#x8FD8;&#x662F;&#x6574;&#x4E2A;&#x7F51;&#x7AD9;&#x5E94;&#x7528;&#x3002;</p>
+<p>7.&#x6700;&#x540E;&#xFF0C;&#x5B83;&#x662F;&#x5F00;&#x6E90;&#x7684;&#x3002;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x76F8;&#x540C;&#x7684;&#x793E;&#x533A;&#x652F;&#x6301;&#x3002;</p>
+<p>AI&#x7684;Python&#x5E93;</p>
+<p>&#x603B;&#x4F53;&#x7684;AI&#x5E93;</p>
+<p>AIMA&#xFF1A;Python&#x5B9E;&#x73B0;&#x4E86;&#x4ECE;Russell&#x5230;Norvigs&#x7684;&#x201C;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#xFF1A;&#x4E00;&#x79CD;&#x73B0;&#x4EE3;&#x7684;&#x65B9;&#x6CD5;&#x201D;&#x7684;&#x7B97;&#x6CD5;</p>
+<p>pyDatalog&#xFF1A;Python&#x4E2D;&#x7684;&#x903B;&#x8F91;&#x7F16;&#x7A0B;&#x5F15;&#x64CE;</p>
+<p>SimpleAI&#xFF1A;Python&#x5B9E;&#x73B0;&#x5728;&#x201C;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#xFF1A;&#x4E00;&#x79CD;&#x73B0;&#x4EE3;&#x7684;&#x65B9;&#x6CD5;&#x201D;&#x8FD9;&#x672C;&#x4E66;&#x4E2D;&#x63CF;&#x8FF0;&#x8FC7;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x7684;&#x7B97;&#x6CD5;&#x3002;&#x5B83;&#x4E13;&#x6CE8;&#x4E8E;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#xFF0C;&#x6709;&#x826F;&#x597D;&#x6587;&#x6863;&#x548C;&#x6D4B;&#x8BD5;&#x7684;&#x5E93;&#x3002;</p>
+<p>EasyAI&#xFF1A;&#x4E00;&#x4E2A;&#x53CC;&#x4EBA;AI&#x6E38;&#x620F;&#x7684;python&#x5F15;&#x64CE;&#xFF08;&#x8D1F;&#x6781;&#x5927;&#x503C;&#xFF0C;&#x7F6E;&#x6362;&#x8868;&#x3001;&#x6E38;&#x620F;&#x89E3;&#x51B3;&#xFF09;</p>
+<p>&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5E93;</p>
+<p>PyBrain &#x4E00;&#x4E2A;&#x7075;&#x6D3B;&#xFF0C;&#x7B80;&#x5355;&#x800C;&#x6709;&#x6548;&#x7684;&#x9488;&#x5BF9;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4EFB;&#x52A1;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x5B83;&#x662F;&#x6A21;&#x5757;&#x5316;&#x7684;Python&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5E93;&#x3002;&#x5B83;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x591A;&#x79CD;&#x9884;&#x5B9A;&#x4E49;&#x597D;&#x7684;&#x73AF;&#x5883;&#x6765;&#x6D4B;&#x8BD5;&#x548C;&#x6BD4;&#x8F83;&#x4F60;&#x7684;&#x7B97;&#x6CD5;&#x3002;</p>
+<p>PyML &#x4E00;&#x4E2A;&#x7528;Python&#x5199;&#x7684;&#x53CC;&#x8FB9;&#x6846;&#x67B6;&#xFF0C;&#x91CD;&#x70B9;&#x7814;&#x7A76;SVM&#x548C;&#x5176;&#x4ED6;&#x5185;&#x6838;&#x65B9;&#x6CD5;&#x3002;&#x5B83;&#x652F;&#x6301;Linux&#x548C;Mac OS X&#x3002;</p>
+<p>scikit-learn &#x65E8;&#x5728;&#x63D0;&#x4F9B;&#x7B80;&#x5355;&#x800C;&#x5F3A;&#x5927;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x91CD;&#x7528;&#xFF1A;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4F5C;&#x4E3A;&#x79D1;&#x5B66;&#x548C;&#x5DE5;&#x7A0B;&#x7684;&#x4E00;&#x4E2A;&#x591A;&#x529F;&#x80FD;&#x5DE5;&#x5177;&#x3002;&#x5B83;&#x662F;python&#x7684;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#xFF0C;&#x96C6;&#x6210;&#x4E86;&#x7ECF;&#x5178;&#x7684;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x7B97;&#x6CD5;&#x662F;&#x548C;python&#x79D1;&#x5B66;&#x5305;&#xFF08;numpy,scipy.matplotlib&#xFF09;&#x7D27;&#x5BC6;&#x8054;&#x7CFB;&#x5728;&#x4E00;&#x8D77;&#x7684;&#x3002;</p>
+<p>MDP-Toolkit &#x8FD9;&#x662F;&#x4E00;&#x4E2A;Python&#x6570;&#x636E;&#x5904;&#x7406;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x8FDB;&#x884C;&#x6269;&#x5C55;&#x3002;&#x5B83;&#x6D77;&#x6536;&#x96C6;&#x4E86;&#x6709;&#x76D1;&#x7BA1;&#x548C;&#x6CA1;&#x6709;&#x76D1;&#x7BA1;&#x7684;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#x548C;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x5904;&#x7406;&#x5355;&#x5143;&#xFF0C;&#x53EF;&#x4EE5;&#x7EC4;&#x5408;&#x6210;&#x6570;&#x636E;&#x5904;&#x7406;&#x5E8F;&#x5217;&#x6216;&#x8005;&#x66F4;&#x590D;&#x6742;&#x7684;&#x524D;&#x9988;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x3002;&#x65B0;&#x7B97;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#x662F;&#x7B80;&#x5355;&#x548C;&#x76F4;&#x89C2;&#x7684;&#x3002;&#x53EF;&#x7528;&#x7684;&#x7B97;&#x6CD5;&#x662F;&#x5728;&#x4E0D;&#x65AD;&#x7684;&#x7A33;&#x5B9A;&#x589E;&#x52A0;&#x7684;&#xFF0C;&#x5305;&#x62EC;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#xFF08;&#x4E3B;&#x6210;&#x5206;&#x5206;&#x6790;&#x3001;&#x72EC;&#x7ACB;&#x6210;&#x5206;&#x5206;&#x6790;&#x3001;&#x6162;&#x7279;&#x5F81;&#x5206;&#x6790;&#xFF09;&#xFF0C;&#x6D41;&#x578B;&#x5B66;&#x4E60;&#x65B9;&#x6CD5;&#xFF08;&#x5C40;&#x90E8;&#x7EBF;&#x6027;&#x5D4C;&#x5165;&#xFF09;&#xFF0C;&#x96C6;&#x4E2D;&#x5206;&#x7C7B;&#xFF0C;&#x6982;&#x7387;&#x65B9;&#x6CD5;&#xFF08;&#x56E0;&#x5B50;&#x5206;&#x6790;&#xFF0C;RBM),&#x6570;&#x636E;&#x9884;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#x7B49;&#x7B49;&#x3002;</p>
+<p>&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x548C;&#x6587;&#x672C;&#x5904;&#x7406;&#x5E93;</p>
+<p>NLTK &#x5F00;&#x6E90;&#x7684;Python&#x6A21;&#x5757;&#xFF0C;&#x8BED;&#x8A00;&#x5B66;&#x6570;&#x636E;&#x548C;&#x6587;&#x6863;&#xFF0C;&#x7528;&#x6765;&#x7814;&#x7A76;&#x548C;&#x5F00;&#x53D1;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x5904;&#x7406;&#x548C;&#x6587;&#x672C;&#x5206;&#x6790;&#x3002;&#x6709;windows,Mac OSX&#x548C;Linux&#x7248;&#x672C;&#x3002;</p>
+<p>Python&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x4E00;&#x5927;&#x4F18;&#x52BF;&#xFF0C;&#x5C31;&#x5728;&#x4E8E;&#x5176;&#x4E30;&#x5BCC;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x3002;&#x7ECF;&#x8FC7;&#x8FC7;&#x53BB;&#x4E00;&#x5E74;&#x7684;&#x65F6;&#x95F4;&#xFF0C;Python&#x7684;&#x4E16;&#x754C;&#x4E2D;&#x53C8;&#x6D8C;&#x73B0;&#x51FA;&#x4E86;&#x54EA;&#x4E9B;&#x4F18;&#x79C0;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x5462;&#xFF1F;&#x5728;&#x672C;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x5C06;&#x7ED9;&#x5927;&#x5BB6;&#x4ECB;&#x7ECD;2015&#x5E74;&#x65B0;&#x51FA;&#x73B0;&#x7684;&#x5341;&#x5927;Python&#x5F00;&#x53D1;&#x5E93;&#x3002;&#x8FD9;&#x91CC;&#x6BD4;&#x8F83;&#x7684;&#x8303;&#x56F4;&#xFF0C;&#x6307;&#x7684;&#x662F;&#x5728;2015&#x65B0;&#x5F00;&#x53D1;&#x6216;&#x521B;&#x5EFA;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x3002;</p>
+<p>&#x5341;&#x5927;&#x6D41;&#x884C;&#x7684;Python&#x5E93;</p>
+<p>1.Keras</p>
+<p>Keras&#x662F;&#x4E00;&#x4E2A;&#x9AD8;&#x5EA6;&#x6A21;&#x5757;&#x5316;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5E93;&#xFF0C;&#x7528;Python&#x8BED;&#x8A00;&#x7F16;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#x57FA;&#x4E8E;TensorFlow&#x6216;Theano&#x6846;&#x67B6;&#x8FD0;&#x884C;&#x3002;Keras&#x7684;&#x5F00;&#x53D1;&#x8005;&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x5C31;&#x6CE8;&#x91CD;&#x652F;&#x6301;&#x5FEB;&#x901F;&#x5B9E;&#x9A8C;&#x8FD9;&#x4E00;&#x7279;&#x6027;&#x3002;&#x4F7F;&#x7528;Keras&#x5E93;&#xFF0C;&#x53EF;&#x4EE5;&#x6781;&#x5927;&#x5730;&#x7F29;&#x77ED;&#x4ECE;&#x60F3;&#x6CD5;&#x5230;&#x5B9E;&#x73B0;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p>2.YAPF</p>
+<p>yapf&#x662F;&#x4E00;&#x4E2A;Python&#x6587;&#x4EF6;&#x4EE3;&#x7801;&#x683C;&#x5F0F;&#x5316;&#x5DE5;&#x5177;&#xFF0C;&#x4F46;&#x4E0E;&#x5176;&#x4ED6;&#x7C7B;&#x4F3C;&#x5DE5;&#x5177;&#x91C7;&#x53D6;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x7B97;&#x6CD5;&#x3002;&#x5B83;&#x8131;&#x80CE;&#x4E8E;&#x7531; Daniel Jasper &#x5F00;&#x53D1;&#x7684; clang-format&#x3002;&#x5927;&#x4F53;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#x83B7;&#x53D6;&#x4EE3;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x521D;&#x59CB;&#x4EE3;&#x7801;&#x91CD;&#x65B0;&#x7F16;&#x6392;&#xFF0C;&#x5373;&#x4FBF;&#x521D;&#x59CB;&#x4EE3;&#x7801;&#x5E76;&#x6CA1;&#x6709;&#x8FDD;&#x80CC;&#x89C4;&#x8303;&#xFF0C;&#x4E5F;&#x53EF;&#x4F7F;&#x5176;&#x8FBE;&#x5230;&#x9075;&#x5FAA;&#x4EE3;&#x7801;&#x89C4;&#x8303;&#x7684;&#x6700;&#x4F73;&#x683C;&#x5F0F;&#x3002;&#x8FD9;&#x4E2A;&#x7406;&#x5FF5;&#x548C; Go &#x8BED;&#x8A00;&#x4E2D;&#x7684; gofmt &#x5DE5;&#x5177;&#x76F8;&#x4F3C;&#xFF0C;&#x7EC8;&#x7ED3;&#x5173;&#x4E8E;&#x683C;&#x5F0F;&#x7684;&#x5404;&#x79CD;&#x201C;&#x5723;&#x6218;&#x201D;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x4EE3;&#x7801;&#x5E93;&#xFF0C;&#x65E0;&#x8BBA;&#x4F55;&#x65F6;&#x4FEE;&#x6539;&#xFF0C;&#x901A;&#x8FC7; YAPF &#x4F18;&#x5316;&#x540E;&#xFF0C;&#x4EE3;&#x7801;&#x98CE;&#x683C;&#x53EF;&#x7EDF;&#x4E00;&#xFF0C;&#x5728;&#x6BCF;&#x6B21;&#x4EE3;&#x7801;&#x5BA1;&#x67E5;&#x4E2D;&#xFF0C;&#x4E5F;&#x5C31;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x4E89;&#x8BBA;&#x98CE;&#x683C;&#x4E86;&#x3002;</p>
+<p>YAPF&#x7684;&#x7EC8;&#x6781;&#x76EE;&#x6807;&#x662F;&#x751F;&#x6210;&#x548C;&#x9075;&#x5FAA;&#x4EE3;&#x7801;&#x89C4;&#x8303;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x5199;&#x51FA;&#x7684;&#x4E00;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x53EF;&#x5E2E;&#x4F60;&#x51CF;&#x5C11;&#x7EF4;&#x62A4;&#x4EE3;&#x7801;&#x7684;&#x82E6;&#x5DEE;&#x4E8B;&#x3002;</p>
+<p>3.tqdm</p>
+<p>tqdm&#xFF08;&#x8BFB;&#x97F3;&#xFF1A;taqadum, &#xFF09;&#x5728;&#x963F;&#x62C9;&#x4F2F;&#x8BED;&#x4E2D;&#x7684;&#x610F;&#x601D;&#x662F;&#x8FDB;&#x5C55;&#x3002;tqdm&#x53EF;&#x4EE5;&#x5728;&#x957F;&#x5FAA;&#x73AF;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x8FDB;&#x5EA6;&#x63D0;&#x793A;&#x4FE1;&#x606F;&#xFF0C;&#x7528;&#x6237;&#x53EA;&#x9700;&#x8981;&#x5C01;&#x88C5;&#x4EFB;&#x610F;&#x7684;&#x8FED;&#x4EE3;&#x5668; tqdm(iterator)&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5FEB;&#x901F;&#x3001;&#x6269;&#x5C55;&#x6027;&#x5F3A;&#x7684;&#x8FDB;&#x5EA6;&#x6761;&#x5DE5;&#x5177;&#x5E93;&#x3002;</p>
+<p>4.pyvim</p>
+<p>&#x7528;Python&#x8BED;&#x8A00;&#x5B9E;&#x73B0;&#x7684;Vim&#x7F16;&#x8F91;&#x5668;&#x3002;</p>
+<p>5.snake</p>
+<p>Snake&#x7528;&#x6765;&#x53D6;&#x4EE3;Vim&#x7684;VimScript&#x8FDB;&#x884C;Vim&#x7684;&#x63D2;&#x4EF6;&#x7F16;&#x7A0B;&#xFF0C;&#x501F;&#x7531;Python&#x7684;&#x5F3A;&#x5927;&#xFF0C;&#x8BA9;&#x63D2;&#x4EF6;&#x7F16;&#x7A0B;&#x5982;&#x864E;&#x6DFB;&#x7FFC;&#x3002;</p>
+<p>6.reverse-geocoder</p>
+<p>&#x7528;Python&#x5B9E;&#x73B0;&#x7684;&#x53CD;&#x5411;&#x5730;&#x7406;&#x4FE1;&#x606F;&#x7F16;&#x7801;&#x5668;&#xFF08;geocoder&#xFF09;&#xFF0C;&#x6027;&#x80FD;&#x5F3A;&#xFF0C;&#x53EF;&#x79BB;&#x7EBF;&#x4F7F;&#x7528;&#x3002;</p>
+<p>7.pyxley</p>
+<p>&#x4F7F;&#x7528;Flask&#x548C;React.js&#xFF0C;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#x6570;&#x636E;&#x9762;&#x677F;&#xFF08;dashboard&#x3002;&#x5728;&#x7F51;&#x9875;&#x4E0A;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9762;&#x677F;&#x662F;&#x4E0E;&#x4EBA;&#x5206;&#x4EAB;&#x6570;&#x636E;&#x79D1;&#x5B66;&#x53D1;&#x73B0;&#x7684;&#x6700;&#x76F4;&#x89C2;&#x65B9;&#x6CD5;&#x3002;&#x5BF9;R&#x8BED;&#x8A00;&#x6765;&#x8BF4;&#x6709;Shiny&#x6765;&#x7B80;&#x5316;&#x6570;&#x636E;&#x79D1;&#x5B66;&#x5BB6;&#x5F00;&#x53D1;&#x7F51;&#x9875;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x800C;Pyxley&#x5C31;&#x76F8;&#x5F53;&#x4E8E;Python&#x7248;&#x7684;Shiny&#x3002;&#x4F7F;&#x7528;Pyxley&#x4E0D;&#x5149;&#x4E0D;&#x7528;&#x5199;HTML&#x3001;CSS&#xFF0C;&#x4F60;&#x8FD8;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x81EA;&#x5DF1;&#x7684;JavaScript&#x6765;&#x8FDB;&#x884C;&#x5B9A;&#x5236;&#x3002;</p>
+<p>8.pupy</p>
+<p>Pupy&#x662F;&#x4E00;&#x4E2A;&#x8FDC;&#x7A0B;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF08;Administration Tool&#xFF09;&#xFF0C;&#x5F00;&#x6E90;&#x5E76;&#x4E14;&#x652F;&#x6301;&#x591A;&#x4E2A;&#x5E73;&#x53F0;&#x3002;Pupy&#x8FD8;&#x5185;&#x7F6E;&#x4E86;&#x4E00;&#x4E2A;Python&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x4ECE;&#x5185;&#x5B58;&#x4E2D;&#x52A0;&#x8F7D;Python&#x5305;&#xFF0C;&#x8BBF;&#x95EE;&#x8FDC;&#x7A0B;Python&#x5BF9;&#x8C61;&#x3002;</p>
+<p>9.tomorrow</p>
+<p>Tomorrow&#x4E3A;Python 2.7&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x4EE3;&#x7801;&#x63D0;&#x4F9B;&#x4E86;&#x795E;&#x5947;&#x7684;&#x88C5;&#x9970;&#x5668;&#x8BED;&#x6CD5;&#x5B9E;&#x73B0;&#x3002;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>10.ibis</p>
+<p>Ibis&#x662F;Cloudera Labs&#x63A8;&#x51FA;&#x7684;&#x4E00;&#x4E2A;&#x65B0;&#x9879;&#x76EE;&#xFF0C;&#x76EE;&#x524D;&#x8FD8;&#x662F;&#x9884;&#x89C8;&#x7248;&#x3002;&#x5B83;&#x8BD5;&#x56FE;&#x89E3;&#x51B3;&#x7684;&#x5C31;&#x662F;&#x6570;&#x636E;&#x96C6;&#x89C4;&#x6A21;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x5BF9;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x7684;&#x786E;&#x662F;&#x5355;&#x673A;&#x4E0A;Python&#x7684;&#x4F53;&#x9A8C;&#xFF0C;&#x800C;&#x4E14;&#x80FD;&#x591F;&#x4E0E;&#x73B0;&#x6709;&#x7684;Python&#x6570;&#x636E;&#x751F;&#x6001;&#x5708;&#xFF08;Pandas&#x3001;Scikit-learn&#x3001;Numpy&#xFF09;&#x8FDB;&#x884C;&#x96C6;&#x6210;&#x3002;&#x672A;&#x6765;&#x5B83;&#x8FD8;&#x8BA1;&#x5212;&#x52A0;&#x5165;&#x4E0E;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x548C;&#x9AD8;&#x7EA7;&#x5206;&#x6790;&#x96C6;&#x6210;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/22/Stardew-run/" rel="next" title="星露谷新手开荒四季简单攻略">
+                <i class="fa fa-chevron-left"></i> 星露谷新手开荒四季简单攻略
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/python-time/" rel="prev" title="python模块（time、datetime）">
+                python模块（time、datetime） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,learn,db,sqlite," />
+  <meta name="keywords" content="python,db,sqlite," />
 
 
 
@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://c.isme.pub/2017/02/13/learn-sqlite3/index.html">
 <meta property="og:site_name" content="Casstiel">
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;SQLite&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x6B3E;&amp;#x8F7B;&amp;#x578B;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x662F;&amp;#x9075;&amp;#x5B88;ACID&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7BA">
-<meta property="og:updated_time" content="2017-03-01T02:29:15.000Z">
+<meta property="og:updated_time" content="2017-08-22T02:12:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-sqlite3基础">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;SQLite&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x6B3E;&amp;#x8F7B;&amp;#x578B;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x662F;&amp;#x9075;&amp;#x5B88;ACID&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7BA">
@@ -259,32 +259,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/db/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/db/python/sqlite/" itemprop="url" rel="index">
+                  <a href="/categories/db/sqlite/" itemprop="url" rel="index">
                     <span itemprop="name">sqlite</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/db/python/sqlite/learn/" itemprop="url" rel="index">
-                    <span itemprop="name">learn</span>
                   </a>
                 </span>
 
@@ -349,6 +325,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;UPDATE COMPANY set SALARY = 25000.00 where ID=1&quot;</span>)</div><div class="line">conn.commit()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Total number of rows updated :&quot;</span>, conn.total_changes</div><div class="line"></div><div class="line">cursor = conn.execute(<span class="string">&quot;SELECT id, name, address, salary  from COMPANY&quot;</span>)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> cursor:</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ID = &quot;</span>, row[<span class="number">0</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;NAME = &quot;</span>, row[<span class="number">1</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ADDRESS = &quot;</span>, row[<span class="number">2</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;SALARY = &quot;</span>, row[<span class="number">3</span>], <span class="string">&quot;\n&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Operation done successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Total number of rows updated : <span class="number">1</span></div><div class="line">ID =  <span class="number">1</span></div><div class="line">NAME =  Paul</div><div class="line">ADDRESS =  California</div><div class="line">SALARY =  <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">2</span></div><div class="line">NAME =  Allen</div><div class="line">ADDRESS =  Texas</div><div class="line">SALARY =  <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">3</span></div><div class="line">NAME =  Teddy</div><div class="line">ADDRESS =  Norway</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">4</span></div><div class="line">NAME =  Mark</div><div class="line">ADDRESS =  Rich-Mond</div><div class="line">SALARY =  <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
 <h2 id="DELETE-&#x64CD;&#x4F5C;"><a href="#DELETE-&#x64CD;&#x4F5C;" class="headerlink" title="DELETE &#x64CD;&#x4F5C;"></a>DELETE &#x64CD;&#x4F5C;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x4EE3;&#x7801;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528; DELETE &#x8BED;&#x53E5;&#x5220;&#x9664;&#x4EFB;&#x4F55;&#x8BB0;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x4ECE; COMPANY &#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x5E76;&#x663E;&#x793A;&#x5269;&#x4F59;&#x7684;&#x8BB0;&#x5F55;&#xFF1A;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;DELETE from COMPANY where ID=2;&quot;</span>)</div><div class="line">conn.commit()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Total number of rows deleted :&quot;</span>, conn.total_changes</div><div class="line"></div><div class="line">cursor = conn.execute(<span class="string">&quot;SELECT id, name, address, salary  from COMPANY&quot;</span>)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> cursor:</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ID = &quot;</span>, row[<span class="number">0</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;NAME = &quot;</span>, row[<span class="number">1</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ADDRESS = &quot;</span>, row[<span class="number">2</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;SALARY = &quot;</span>, row[<span class="number">3</span>], <span class="string">&quot;\n&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Operation done successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Total number of rows deleted : <span class="number">1</span></div><div class="line">ID =  <span class="number">1</span></div><div class="line">NAME =  Paul</div><div class="line">ADDRESS =  California</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">3</span></div><div class="line">NAME =  Teddy</div><div class="line">ADDRESS =  Norway</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">4</span></div><div class="line">NAME =  Mark</div><div class="line">ADDRESS =  Rich-Mond</div><div class="line">SALARY =  <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -372,8 +349,6 @@
           
             <a href="/tags/python/" rel="tag">#python</a>
           
-            <a href="/tags/learn/" rel="tag">#learn</a>
-          
             <a href="/tags/db/" rel="tag">#db</a>
           
             <a href="/tags/sqlite/" rel="tag">#sqlite</a>
@@ -385,7 +360,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/09/learn-python-argparse/" rel="next" title="python-argparse模块使用教程">
+              <a href="/2017/02/09/python-argparse/" rel="next" title="python-argparse模块使用教程">
                 <i class="fa fa-chevron-left"></i> python-argparse模块使用教程
               </a>
             
@@ -463,7 +438,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">85</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -471,7 +446,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -480,7 +455,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -528,7 +503,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,597 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,logging," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;logging&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python模块（logging）">
+<meta property="og:url" content="http://c.isme.pub/2018/01/18/python-logging/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;logging&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
+<meta property="og:updated_time" content="2018-01-18T07:20:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python模块（logging）">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x672C;&amp;#x6587;&amp;#x8BB0;&amp;#x5F55;logging&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/01/18/python-logging/"/>
+
+
+  <title> python模块（logging） | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python模块（logging）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-18T15:20:12+08:00" content="2018-01-18">
+              2018-01-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/module/" itemprop="url" rel="index">
+                    <span itemprop="name">module</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x8BB0;&#x5F55;logging&#x6A21;&#x5757;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</p>
+<a id="more"></a>
+<h1 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h1><h2 id="&#x65E5;&#x5FD7;&#x7EA7;&#x522B;"><a href="#&#x65E5;&#x5FD7;&#x7EA7;&#x522B;" class="headerlink" title="&#x65E5;&#x5FD7;&#x7EA7;&#x522B;"></a>&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CRITICAL = <span class="number">50</span> <span class="comment">#FATAL = CRITICAL</span></div><div class="line">ERROR = <span class="number">40</span></div><div class="line">WARNING = <span class="number">30</span> <span class="comment">#WARN = WARNING</span></div><div class="line">INFO = <span class="number">20</span></div><div class="line">DEBUG = <span class="number">10</span></div><div class="line">NOTSET = <span class="number">0</span> <span class="comment">#&#x4E0D;&#x8BBE;&#x7F6E;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x9ED8;&#x8BA4;&#x7EA7;&#x522B;&#x4E3A;warning&#xFF0C;&#x9ED8;&#x8BA4;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;"><a href="#&#x9ED8;&#x8BA4;&#x7EA7;&#x522B;&#x4E3A;warning&#xFF0C;&#x9ED8;&#x8BA4;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;" class="headerlink" title="&#x9ED8;&#x8BA4;&#x7EA7;&#x522B;&#x4E3A;warning&#xFF0C;&#x9ED8;&#x8BA4;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;"></a>&#x9ED8;&#x8BA4;&#x7EA7;&#x522B;&#x4E3A;warning&#xFF0C;&#x9ED8;&#x8BA4;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">logging.debug(<span class="string">&apos;&#x8C03;&#x8BD5;debug&apos;</span>)</div><div class="line">logging.info(<span class="string">&apos;&#x6D88;&#x606F;info&apos;</span>)</div><div class="line">logging.warning(<span class="string">&apos;&#x8B66;&#x544A;warn&apos;</span>)</div><div class="line">logging.error(<span class="string">&apos;&#x9519;&#x8BEF;error&apos;</span>)</div><div class="line">logging.critical(<span class="string">&apos;&#x4E25;&#x91CD;critical&apos;</span>)</div><div class="line"></div><div class="line"><span class="string">&apos;&apos;&apos;</span></div><div class="line">WARNING:root:&#x8B66;&#x544A;warn</div><div class="line">ERROR:root:&#x9519;&#x8BEF;error</div><div class="line">CRITICAL:root:&#x4E25;&#x91CD;critical</div><div class="line">&apos;&apos;&apos;</div></pre></td></tr></table></figure>
+<h2 id="&#x4E3A;logging&#x6A21;&#x5757;&#x6307;&#x5B9A;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x9488;&#x5BF9;&#x6240;&#x6709;logger&#x6709;&#x6548;&#xFF0C;&#x63A7;&#x5236;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;"><a href="#&#x4E3A;logging&#x6A21;&#x5757;&#x6307;&#x5B9A;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x9488;&#x5BF9;&#x6240;&#x6709;logger&#x6709;&#x6548;&#xFF0C;&#x63A7;&#x5236;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;" class="headerlink" title="&#x4E3A;logging&#x6A21;&#x5757;&#x6307;&#x5B9A;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x9488;&#x5BF9;&#x6240;&#x6709;logger&#x6709;&#x6548;&#xFF0C;&#x63A7;&#x5236;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;"></a>&#x4E3A;logging&#x6A21;&#x5757;&#x6307;&#x5B9A;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x9488;&#x5BF9;&#x6240;&#x6709;logger&#x6709;&#x6548;&#xFF0C;&#x63A7;&#x5236;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&#x53EF;&#x5728;logging.basicConfig()&#x51FD;&#x6570;&#x4E2D;&#x901A;&#x8FC7;&#x5177;&#x4F53;&#x53C2;&#x6570;&#x6765;&#x66F4;&#x6539;logging&#x6A21;&#x5757;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#xFF0C;&#x53EF;&#x7528;&#x53C2;&#x6570;&#x6709;</div><div class="line">filename&#xFF1A;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x521B;&#x5EFA;FiledHandler&#xFF08;&#x540E;&#x8FB9;&#x4F1A;&#x5177;&#x4F53;&#x8BB2;&#x89E3;handler&#x7684;&#x6982;&#x5FF5;&#xFF09;&#xFF0C;&#x8FD9;&#x6837;&#x65E5;&#x5FD7;&#x4F1A;&#x88AB;&#x5B58;&#x50A8;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</div><div class="line">filemode&#xFF1A;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;&#x6307;&#x5B9A;&#x4E86;filename&#x65F6;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;&#x201C;a&#x201D;&#x8FD8;&#x53EF;&#x6307;&#x5B9A;&#x4E3A;&#x201C;w&#x201D;&#x3002;</div><div class="line">format&#xFF1A;&#x6307;&#x5B9A;handler&#x4F7F;&#x7528;&#x7684;&#x65E5;&#x5FD7;&#x663E;&#x793A;&#x683C;&#x5F0F;&#x3002; </div><div class="line">datefmt&#xFF1A;&#x6307;&#x5B9A;&#x65E5;&#x671F;&#x65F6;&#x95F4;&#x683C;&#x5F0F;&#x3002; </div><div class="line">level&#xFF1A;&#x8BBE;&#x7F6E;rootlogger&#xFF08;&#x540E;&#x8FB9;&#x4F1A;&#x8BB2;&#x89E3;&#x5177;&#x4F53;&#x6982;&#x5FF5;&#xFF09;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B; </div><div class="line">stream&#xFF1A;&#x7528;&#x6307;&#x5B9A;&#x7684;stream&#x521B;&#x5EFA;StreamHandler&#x3002;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x5230;sys.stderr,sys.stdout&#x6216;&#x8005;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;sys.stderr&#x3002;&#x82E5;&#x540C;&#x65F6;&#x5217;&#x51FA;&#x4E86;filename&#x548C;stream&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5219;stream&#x53C2;&#x6570;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#x3002;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x683C;&#x5F0F;</span></div><div class="line">%(name)s&#xFF1A;Logger&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x5E76;&#x975E;&#x7528;&#x6237;&#x540D;&#xFF0C;&#x8BE6;&#x7EC6;&#x67E5;&#x770B;</div><div class="line">%(levelno)s&#xFF1A;&#x6570;&#x5B57;&#x5F62;&#x5F0F;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</div><div class="line">%(levelname)s&#xFF1A;&#x6587;&#x672C;&#x5F62;&#x5F0F;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</div><div class="line">%(pathname)s&#xFF1A;&#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;&#x540D;&#xFF0C;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(filename)s&#xFF1A;&#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x7684;&#x6587;&#x4EF6;&#x540D;</div><div class="line">%(module)s&#xFF1A;&#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x540D;</div><div class="line">%(funcName)s&#xFF1A;&#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x51FD;&#x6570;&#x540D;</div><div class="line">%(lineno)d&#xFF1A;&#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x8BED;&#x53E5;&#x6240;&#x5728;&#x7684;&#x4EE3;&#x7801;&#x884C;</div><div class="line">%(created)f&#xFF1A;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x7528;UNIX&#x6807;&#x51C6;&#x7684;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x7684;&#x6D6E; &#x70B9;&#x6570;&#x8868;&#x793A;</div><div class="line">%(relativeCreated)d&#xFF1A;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x4FE1;&#x606F;&#x65F6;&#x7684;&#xFF0C;&#x81EA;Logger&#x521B;&#x5EFA;&#x4EE5; &#x6765;&#x7684;&#x6BEB;&#x79D2;&#x6570;</div><div class="line">%(asctime)s&#xFF1A;&#x5B57;&#x7B26;&#x4E32;&#x5F62;&#x5F0F;&#x7684;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;&#x9ED8;&#x8BA4;&#x683C;&#x5F0F;&#x662F; &#x201C;<span class="number">2003</span><span class="number">-07</span><span class="number">-08</span> <span class="number">16</span>:<span class="number">49</span>:<span class="number">45</span>,<span class="number">896</span>&#x201D;&#x3002;&#x9017;&#x53F7;&#x540E;&#x9762;&#x7684;&#x662F;&#x6BEB;&#x79D2;</div><div class="line">%(thread)d&#xFF1A;&#x7EBF;&#x7A0B;ID&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(threadName)s&#xFF1A;&#x7EBF;&#x7A0B;&#x540D;&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(process)d&#xFF1A;&#x8FDB;&#x7A0B;ID&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(message)s&#xFF1A;&#x7528;&#x6237;&#x8F93;&#x51FA;&#x7684;&#x6D88;&#x606F;</div><div class="line"></div><div class="line">logging.basicConfig()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#======&#x4ECB;&#x7ECD;</span></div><div class="line">&#x53EF;&#x5728;logging.basicConfig()&#x51FD;&#x6570;&#x4E2D;&#x53EF;&#x901A;&#x8FC7;&#x5177;&#x4F53;&#x53C2;&#x6570;&#x6765;&#x66F4;&#x6539;logging&#x6A21;&#x5757;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#xFF0C;&#x53EF;&#x7528;&#x53C2;&#x6570;&#x6709;</div><div class="line">filename&#xFF1A;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x521B;&#x5EFA;FiledHandler&#xFF08;&#x540E;&#x8FB9;&#x4F1A;&#x5177;&#x4F53;&#x8BB2;&#x89E3;handler&#x7684;&#x6982;&#x5FF5;&#xFF09;&#xFF0C;&#x8FD9;&#x6837;&#x65E5;&#x5FD7;&#x4F1A;&#x88AB;&#x5B58;&#x50A8;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</div><div class="line">filemode&#xFF1A;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;&#x6307;&#x5B9A;&#x4E86;filename&#x65F6;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;&#x201C;a&#x201D;&#x8FD8;&#x53EF;&#x6307;&#x5B9A;&#x4E3A;&#x201C;w&#x201D;&#x3002;</div><div class="line">format&#xFF1A;&#x6307;&#x5B9A;handler&#x4F7F;&#x7528;&#x7684;&#x65E5;&#x5FD7;&#x663E;&#x793A;&#x683C;&#x5F0F;&#x3002;</div><div class="line">datefmt&#xFF1A;&#x6307;&#x5B9A;&#x65E5;&#x671F;&#x65F6;&#x95F4;&#x683C;&#x5F0F;&#x3002;</div><div class="line">level&#xFF1A;&#x8BBE;&#x7F6E;rootlogger&#xFF08;&#x540E;&#x8FB9;&#x4F1A;&#x8BB2;&#x89E3;&#x5177;&#x4F53;&#x6982;&#x5FF5;&#xFF09;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</div><div class="line">stream&#xFF1A;&#x7528;&#x6307;&#x5B9A;&#x7684;stream&#x521B;&#x5EFA;StreamHandler&#x3002;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x5230;sys.stderr,sys.stdout&#x6216;&#x8005;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;sys.stderr&#x3002;&#x82E5;&#x540C;&#x65F6;&#x5217;&#x51FA;&#x4E86;filename&#x548C;stream&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5219;stream&#x53C2;&#x6570;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#x3002;</div><div class="line"></div><div class="line"></div><div class="line">format&#x53C2;&#x6570;&#x4E2D;&#x53EF;&#x80FD;&#x7528;&#x5230;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x4E32;&#xFF1A;</div><div class="line">%(name)s Logger&#x7684;&#x540D;&#x5B57;</div><div class="line">%(levelno)s &#x6570;&#x5B57;&#x5F62;&#x5F0F;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</div><div class="line">%(levelname)s &#x6587;&#x672C;&#x5F62;&#x5F0F;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</div><div class="line">%(pathname)s &#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;&#x540D;&#xFF0C;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(filename)s &#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x7684;&#x6587;&#x4EF6;&#x540D;</div><div class="line">%(module)s &#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x6A21;&#x5757;&#x540D;</div><div class="line">%(funcName)s &#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x51FD;&#x6570;&#x540D;</div><div class="line">%(lineno)d &#x8C03;&#x7528;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x8BED;&#x53E5;&#x6240;&#x5728;&#x7684;&#x4EE3;&#x7801;&#x884C;</div><div class="line">%(created)f &#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x7528;UNIX&#x6807;&#x51C6;&#x7684;&#x8868;&#x793A;&#x65F6;&#x95F4;&#x7684;&#x6D6E; &#x70B9;&#x6570;&#x8868;&#x793A;</div><div class="line">%(relativeCreated)d &#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x4FE1;&#x606F;&#x65F6;&#x7684;&#xFF0C;&#x81EA;Logger&#x521B;&#x5EFA;&#x4EE5; &#x6765;&#x7684;&#x6BEB;&#x79D2;&#x6570;</div><div class="line">%(asctime)s &#x5B57;&#x7B26;&#x4E32;&#x5F62;&#x5F0F;&#x7684;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;&#x9ED8;&#x8BA4;&#x683C;&#x5F0F;&#x662F; &#x201C;<span class="number">2003</span><span class="number">-07</span><span class="number">-08</span> <span class="number">16</span>:<span class="number">49</span>:<span class="number">45</span>,<span class="number">896</span>&#x201D;&#x3002;&#x9017;&#x53F7;&#x540E;&#x9762;&#x7684;&#x662F;&#x6BEB;&#x79D2;</div><div class="line">%(thread)d &#x7EBF;&#x7A0B;ID&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(threadName)s &#x7EBF;&#x7A0B;&#x540D;&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(process)d &#x8FDB;&#x7A0B;ID&#x3002;&#x53EF;&#x80FD;&#x6CA1;&#x6709;</div><div class="line">%(message)s&#x7528;&#x6237;&#x8F93;&#x51FA;&#x7684;&#x6D88;&#x606F;</div><div class="line"></div><div class="line"><span class="comment">#========&#x4F7F;&#x7528;</span></div><div class="line"><span class="keyword">import</span> logging</div><div class="line">logging.basicConfig(filename=<span class="string">&apos;access.log&apos;</span>,</div><div class="line">                    format=<span class="string">&apos;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&apos;</span>,</div><div class="line">                    datefmt=<span class="string">&apos;%Y-%m-%d %H:%M:%S %p&apos;</span>,</div><div class="line">                    level=<span class="number">10</span>)</div><div class="line"></div><div class="line">logging.debug(<span class="string">&apos;&#x8C03;&#x8BD5;debug&apos;</span>)</div><div class="line">logging.info(<span class="string">&apos;&#x6D88;&#x606F;info&apos;</span>)</div><div class="line">logging.warning(<span class="string">&apos;&#x8B66;&#x544A;warn&apos;</span>)</div><div class="line">logging.error(<span class="string">&apos;&#x9519;&#x8BEF;error&apos;</span>)</div><div class="line">logging.critical(<span class="string">&apos;&#x4E25;&#x91CD;critical&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment">#========&#x7ED3;&#x679C;</span></div><div class="line">access.log&#x5185;&#x5BB9;:</div><div class="line"><span class="number">2017</span><span class="number">-07</span><span class="number">-28</span> <span class="number">20</span>:<span class="number">32</span>:<span class="number">17</span> PM - root - DEBUG -test:  &#x8C03;&#x8BD5;debug</div><div class="line"><span class="number">2017</span><span class="number">-07</span><span class="number">-28</span> <span class="number">20</span>:<span class="number">32</span>:<span class="number">17</span> PM - root - INFO -test:  &#x6D88;&#x606F;info</div><div class="line"><span class="number">2017</span><span class="number">-07</span><span class="number">-28</span> <span class="number">20</span>:<span class="number">32</span>:<span class="number">17</span> PM - root - WARNING -test:  &#x8B66;&#x544A;warn</div><div class="line"><span class="number">2017</span><span class="number">-07</span><span class="number">-28</span> <span class="number">20</span>:<span class="number">32</span>:<span class="number">17</span> PM - root - ERROR -test:  &#x9519;&#x8BEF;error</div><div class="line"><span class="number">2017</span><span class="number">-07</span><span class="number">-28</span> <span class="number">20</span>:<span class="number">32</span>:<span class="number">17</span> PM - root - CRITICAL -test:  &#x4E25;&#x91CD;critical</div><div class="line"></div><div class="line">part2: &#x53EF;&#x4EE5;&#x4E3A;logging&#x6A21;&#x5757;&#x6307;&#x5B9A;&#x6A21;&#x5757;&#x7EA7;&#x7684;&#x914D;&#x7F6E;,&#x5373;&#x6240;&#x6709;logger&#x7684;&#x914D;&#x7F6E;</div></pre></td></tr></table></figure>
+<h2 id="logging&#x6A21;&#x5757;&#x7684;Formatter&#xFF0C;Handler&#xFF0C;Logger&#xFF0C;Filter&#x5BF9;&#x8C61;"><a href="#logging&#x6A21;&#x5757;&#x7684;Formatter&#xFF0C;Handler&#xFF0C;Logger&#xFF0C;Filter&#x5BF9;&#x8C61;" class="headerlink" title="logging&#x6A21;&#x5757;&#x7684;Formatter&#xFF0C;Handler&#xFF0C;Logger&#xFF0C;Filter&#x5BF9;&#x8C61;"></a>logging&#x6A21;&#x5757;&#x7684;Formatter&#xFF0C;Handler&#xFF0C;Logger&#xFF0C;Filter&#x5BF9;&#x8C61;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#logger&#xFF1A;&#x4EA7;&#x751F;&#x65E5;&#x5FD7;&#x7684;&#x5BF9;&#x8C61;</span></div><div class="line"></div><div class="line"><span class="comment">#Filter&#xFF1A;&#x8FC7;&#x6EE4;&#x65E5;&#x5FD7;&#x7684;&#x5BF9;&#x8C61;</span></div><div class="line"></div><div class="line"><span class="comment">#Handler&#xFF1A;&#x63A5;&#x6536;&#x65E5;&#x5FD7;&#x7136;&#x540E;&#x63A7;&#x5236;&#x6253;&#x5370;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;&#xFF0C;FileHandler&#x7528;&#x6765;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;StreamHandler&#x7528;&#x6765;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;</span></div><div class="line"></div><div class="line"><span class="comment">#Formatter&#x5BF9;&#x8C61;&#xFF1A;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;&#x4E0D;&#x540C;&#x7684;&#x65E5;&#x5FD7;&#x683C;&#x5F0F;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x7ED1;&#x5B9A;&#x7ED9;&#x4E0D;&#x540C;&#x7684;Handler&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x63A7;&#x5236;&#x4E0D;&#x540C;&#x7684;Handler&#x7684;&#x65E5;&#x5FD7;&#x683C;&#x5F0F;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="string">&apos;&apos;&apos;</span></div><div class="line">critical=50</div><div class="line">error =40</div><div class="line">warning =30</div><div class="line">info = 20</div><div class="line">debug =10</div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line"><span class="comment">#1&#x3001;logger&#x5BF9;&#x8C61;&#xFF1A;&#x8D1F;&#x8D23;&#x4EA7;&#x751F;&#x65E5;&#x5FD7;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7ED9;Filter&#x8FC7;&#x6EE4;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7ED9;&#x4E0D;&#x540C;&#x7684;Handler&#x8F93;&#x51FA;</span></div><div class="line">logger=logging.getLogger(__file__)</div><div class="line"></div><div class="line"><span class="comment">#2&#x3001;Filter&#x5BF9;&#x8C61;&#xFF1A;&#x4E0D;&#x5E38;&#x7528;&#xFF0C;&#x7565;</span></div><div class="line"></div><div class="line"><span class="comment">#3&#x3001;Handler&#x5BF9;&#x8C61;&#xFF1A;&#x63A5;&#x6536;logger&#x4F20;&#x6765;&#x7684;&#x65E5;&#x5FD7;&#xFF0C;&#x7136;&#x540E;&#x63A7;&#x5236;&#x8F93;&#x51FA;</span></div><div class="line">h1=logging.FileHandler(<span class="string">&apos;t1.log&apos;</span>) <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;</span></div><div class="line">h2=logging.FileHandler(<span class="string">&apos;t2.log&apos;</span>) <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;</span></div><div class="line">h3=logging.StreamHandler() <span class="comment">#&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;</span></div><div class="line"></div><div class="line"><span class="comment">#4&#x3001;Formatter&#x5BF9;&#x8C61;&#xFF1A;&#x65E5;&#x5FD7;&#x683C;&#x5F0F;</span></div><div class="line">formmater1=logging.Formatter(<span class="string">&apos;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&apos;</span>,</div><div class="line">                    datefmt=<span class="string">&apos;%Y-%m-%d %H:%M:%S %p&apos;</span>,)</div><div class="line"></div><div class="line">formmater2=logging.Formatter(<span class="string">&apos;%(asctime)s :  %(message)s&apos;</span>,</div><div class="line">                    datefmt=<span class="string">&apos;%Y-%m-%d %H:%M:%S %p&apos;</span>,)</div><div class="line"></div><div class="line">formmater3=logging.Formatter(<span class="string">&apos;%(name)s %(message)s&apos;</span>,)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#5&#x3001;&#x4E3A;Handler&#x5BF9;&#x8C61;&#x7ED1;&#x5B9A;&#x683C;&#x5F0F;</span></div><div class="line">h1.setFormatter(formmater1)</div><div class="line">h2.setFormatter(formmater2)</div><div class="line">h3.setFormatter(formmater3)</div><div class="line"></div><div class="line"><span class="comment">#6&#x3001;&#x5C06;Handler&#x6DFB;&#x52A0;&#x7ED9;logger&#x5E76;&#x8BBE;&#x7F6E;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;</span></div><div class="line">logger.addHandler(h1)</div><div class="line">logger.addHandler(h2)</div><div class="line">logger.addHandler(h3)</div><div class="line">logger.setLevel(<span class="number">10</span>)</div><div class="line"></div><div class="line"><span class="comment">#7&#x3001;&#x6D4B;&#x8BD5;</span></div><div class="line">logger.debug(<span class="string">&apos;debug&apos;</span>)</div><div class="line">logger.info(<span class="string">&apos;info&apos;</span>)</div><div class="line">logger.warning(<span class="string">&apos;warning&apos;</span>)</div><div class="line">logger.error(<span class="string">&apos;error&apos;</span>)</div><div class="line">logger.critical(<span class="string">&apos;critical&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="Logger&#x4E0E;Handler&#x7684;&#x7EA7;&#x522B;"><a href="#Logger&#x4E0E;Handler&#x7684;&#x7EA7;&#x522B;" class="headerlink" title="Logger&#x4E0E;Handler&#x7684;&#x7EA7;&#x522B;"></a>Logger&#x4E0E;Handler&#x7684;&#x7EA7;&#x522B;</h2><p>logger&#x662F;&#x7B2C;&#x4E00;&#x7EA7;&#x8FC7;&#x6EE4;&#xFF0C;&#x7136;&#x540E;&#x624D;&#x80FD;&#x5230;handler&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7ED9;logger&#x548C;handler&#x540C;&#x65F6;&#x8BBE;&#x7F6E;level&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Logger is also the first to filter the message based on a level &#x2014; if you set the logger to INFO, and all handlers to DEBUG, you still won&apos;t receive DEBUG messages on handlers &#x2014; they&apos;ll be rejected by the logger itself. If you set logger to DEBUG, but all handlers to INFO, you won&apos;t receive any DEBUG messages either &#x2014; because while the logger says &quot;ok, process this&quot;, the handlers reject it (DEBUG &lt; INFO).</div><div class="line"></div><div class="line">#&#x9A8C;&#x8BC1;</div><div class="line">import logging</div><div class="line"></div><div class="line"></div><div class="line">form=logging.Formatter(&apos;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&apos;,</div><div class="line">                    datefmt=&apos;%Y-%m-%d %H:%M:%S %p&apos;,)</div><div class="line"></div><div class="line">ch=logging.StreamHandler()</div><div class="line"></div><div class="line">ch.setFormatter(form)</div><div class="line"># ch.setLevel(10)</div><div class="line">ch.setLevel(20)</div><div class="line"></div><div class="line">l1=logging.getLogger(&apos;root&apos;)</div><div class="line"># l1.setLevel(20)</div><div class="line">l1.setLevel(10)</div><div class="line">l1.addHandler(ch)</div><div class="line"></div><div class="line">l1.debug(&apos;l1 debug&apos;)</div><div class="line"></div><div class="line">&#x91CD;&#x8981;&#xFF0C;&#x91CD;&#x8981;&#xFF0C;&#x91CD;&#x8981;&#xFF01;&#xFF01;&#xFF01;</div></pre></td></tr></table></figure>
+<h2 id="Logger&#x7684;&#x7EE7;&#x627F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"><a href="#Logger&#x7684;&#x7EE7;&#x627F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;" class="headerlink" title="Logger&#x7684;&#x7EE7;&#x627F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"></a>Logger&#x7684;&#x7EE7;&#x627F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">formatter=logging.Formatter(<span class="string">&apos;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&apos;</span>,</div><div class="line">                    datefmt=<span class="string">&apos;%Y-%m-%d %H:%M:%S %p&apos;</span>,)</div><div class="line"></div><div class="line">ch=logging.StreamHandler()</div><div class="line">ch.setFormatter(formatter)</div><div class="line"></div><div class="line">logger1=logging.getLogger(<span class="string">&apos;root&apos;</span>)</div><div class="line">logger2=logging.getLogger(<span class="string">&apos;root.child1&apos;</span>)</div><div class="line">logger3=logging.getLogger(<span class="string">&apos;root.child1.child2&apos;</span>)</div><div class="line"></div><div class="line">logger1.addHandler(ch)</div><div class="line">logger2.addHandler(ch)</div><div class="line">logger3.addHandler(ch)</div><div class="line">logger1.setLevel(<span class="number">10</span>)</div><div class="line">logger2.setLevel(<span class="number">10</span>)</div><div class="line">logger3.setLevel(<span class="number">10</span>)</div><div class="line"></div><div class="line">logger1.debug(<span class="string">&apos;log1 debug&apos;</span>)</div><div class="line">logger2.debug(<span class="string">&apos;log2 debug&apos;</span>)</div><div class="line">logger3.debug(<span class="string">&apos;log3 debug&apos;</span>)</div><div class="line"><span class="string">&apos;&apos;&apos;</span></div><div class="line">2017-07-28 22:22:05 PM - root - DEBUG -test:  log1 debug</div><div class="line">2017-07-28 22:22:05 PM - root.child1 - DEBUG -test:  log2 debug</div><div class="line">2017-07-28 22:22:05 PM - root.child1 - DEBUG -test:  log2 debug</div><div class="line">2017-07-28 22:22:05 PM - root.child1.child2 - DEBUG -test:  log3 debug</div><div class="line">2017-07-28 22:22:05 PM - root.child1.child2 - DEBUG -test:  log3 debug</div><div class="line">2017-07-28 22:22:05 PM - root.child1.child2 - DEBUG -test:  log3 debug</div><div class="line">&apos;&apos;&apos;</div></pre></td></tr></table></figure>
+<h2 id="&#x5E94;&#x7528;"><a href="#&#x5E94;&#x7528;" class="headerlink" title="&#x5E94;&#x7528;"></a>&#x5E94;&#x7528;</h2><h3 id="logging&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#logging&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="logging&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>logging&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="string">&quot;&quot;&quot;</span></div><div class="line">logging&#x914D;&#x7F6E;</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> logging.config</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x4E09;&#x79CD;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x683C;&#x5F0F; &#x5F00;&#x59CB;</span></div><div class="line"></div><div class="line">standard_format = <span class="string">&apos;[%(asctime)s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d]&apos;</span> \</div><div class="line">                  <span class="string">&apos;[%(levelname)s][%(message)s]&apos;</span> <span class="comment">#&#x5176;&#x4E2D;name&#x4E3A;getlogger&#x6307;&#x5B9A;&#x7684;&#x540D;&#x5B57;</span></div><div class="line"></div><div class="line">simple_format = <span class="string">&apos;[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s&apos;</span></div><div class="line"></div><div class="line">id_simple_format = <span class="string">&apos;[%(levelname)s][%(asctime)s] %(message)s&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x683C;&#x5F0F; &#x7ED3;&#x675F;</span></div><div class="line"></div><div class="line">logfile_dir = os.path.dirname(os.path.abspath(__file__))  <span class="comment"># log&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;</span></div><div class="line"></div><div class="line">logfile_name = <span class="string">&apos;all2.log&apos;</span>  <span class="comment"># log&#x6587;&#x4EF6;&#x540D;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x5B9A;&#x4E49;&#x7684;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#x5C31;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(logfile_dir):</div><div class="line">    os.mkdir(logfile_dir)</div><div class="line"></div><div class="line"><span class="comment"># log&#x6587;&#x4EF6;&#x7684;&#x5168;&#x8DEF;&#x5F84;</span></div><div class="line">logfile_path = os.path.join(logfile_dir, logfile_name)</div><div class="line"></div><div class="line"><span class="comment"># log&#x914D;&#x7F6E;&#x5B57;&#x5178;</span></div><div class="line">LOGGING_DIC = {</div><div class="line">    <span class="string">&apos;version&apos;</span>: <span class="number">1</span>,</div><div class="line">    <span class="string">&apos;disable_existing_loggers&apos;</span>: <span class="keyword">False</span>,</div><div class="line">    <span class="string">&apos;formatters&apos;</span>: {</div><div class="line">        <span class="string">&apos;standard&apos;</span>: {</div><div class="line">            <span class="string">&apos;format&apos;</span>: standard_format</div><div class="line">        },</div><div class="line">        <span class="string">&apos;simple&apos;</span>: {</div><div class="line">            <span class="string">&apos;format&apos;</span>: simple_format</div><div class="line">        },</div><div class="line">    },</div><div class="line">    <span class="string">&apos;filters&apos;</span>: {},</div><div class="line">    <span class="string">&apos;handlers&apos;</span>: {</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;console&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;DEBUG&apos;</span>,</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.StreamHandler&apos;</span>,  <span class="comment"># &#x6253;&#x5370;&#x5230;&#x5C4F;&#x5E55;</span></div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;simple&apos;</span></div><div class="line">        },</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x7684;&#x65E5;&#x5FD7;,&#x6536;&#x96C6;info&#x53CA;&#x4EE5;&#x4E0A;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;default&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;DEBUG&apos;</span>,</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.handlers.RotatingFileHandler&apos;</span>,  <span class="comment"># &#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;</span></div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;standard&apos;</span>,</div><div class="line">            <span class="string">&apos;filename&apos;</span>: logfile_path,  <span class="comment"># &#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span></div><div class="line">            <span class="string">&apos;maxBytes&apos;</span>: <span class="number">1024</span>*<span class="number">1024</span>*<span class="number">5</span>,  <span class="comment"># &#x65E5;&#x5FD7;&#x5927;&#x5C0F; 5M</span></div><div class="line">            <span class="string">&apos;backupCount&apos;</span>: <span class="number">5</span>,</div><div class="line">            <span class="string">&apos;encoding&apos;</span>: <span class="string">&apos;utf-8&apos;</span>,  <span class="comment"># &#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x518D;&#x4E5F;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x4E2D;&#x6587;log&#x4E71;&#x7801;&#x4E86;</span></div><div class="line">        },</div><div class="line">    },</div><div class="line">    <span class="string">&apos;loggers&apos;</span>: {</div><div class="line">        <span class="comment">#logging.getLogger(__name__)&#x62FF;&#x5230;&#x7684;logger&#x914D;&#x7F6E;</span></div><div class="line">        <span class="string">&apos;&apos;</span>: {</div><div class="line">            <span class="string">&apos;handlers&apos;</span>: [<span class="string">&apos;default&apos;</span>, <span class="string">&apos;console&apos;</span>],  <span class="comment"># &#x8FD9;&#x91CC;&#x628A;&#x4E0A;&#x9762;&#x5B9A;&#x4E49;&#x7684;&#x4E24;&#x4E2A;handler&#x90FD;&#x52A0;&#x4E0A;&#xFF0C;&#x5373;log&#x6570;&#x636E;&#x65E2;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x53C8;&#x6253;&#x5370;&#x5230;&#x5C4F;&#x5E55;</span></div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;DEBUG&apos;</span>,</div><div class="line">            <span class="string">&apos;propagate&apos;</span>: <span class="keyword">True</span>,  <span class="comment"># &#x5411;&#x4E0A;&#xFF08;&#x66F4;&#x9AD8;level&#x7684;logger&#xFF09;&#x4F20;&#x9012;</span></div><div class="line">        },</div><div class="line">    },</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_my_logging_cfg</span><span class="params">()</span>:</span></div><div class="line">    logging.config.dictConfig(LOGGING_DIC)  <span class="comment"># &#x5BFC;&#x5165;&#x4E0A;&#x9762;&#x5B9A;&#x4E49;&#x7684;logging&#x914D;&#x7F6E;</span></div><div class="line">    logger = logging.getLogger(__name__)  <span class="comment"># &#x751F;&#x6210;&#x4E00;&#x4E2A;log&#x5B9E;&#x4F8B;</span></div><div class="line">    logger.info(<span class="string">&apos;It works!&apos;</span>)  <span class="comment"># &#x8BB0;&#x5F55;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x8FD0;&#x884C;&#x72B6;&#x6001;</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    load_my_logging_cfg()</div></pre></td></tr></table></figure>
+<h3 id="&#x4F7F;&#x7528;"><a href="#&#x4F7F;&#x7528;" class="headerlink" title="&#x4F7F;&#x7528;"></a>&#x4F7F;&#x7528;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="string">&quot;&quot;&quot;</span></div><div class="line">MyLogging Test</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="keyword">import</span> my_logging  <span class="comment"># &#x5BFC;&#x5165;&#x81EA;&#x5B9A;&#x4E49;&#x7684;logging&#x914D;&#x7F6E;</span></div><div class="line"></div><div class="line">logger = logging.getLogger(__name__)  <span class="comment"># &#x751F;&#x6210;logger&#x5B9E;&#x4F8B;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">()</span>:</span></div><div class="line">    logger.debug(<span class="string">&quot;start range... time:{}&quot;</span>.format(time.time()))</div><div class="line">    logger.info(<span class="string">&quot;&#x4E2D;&#x6587;&#x6D4B;&#x8BD5;&#x5F00;&#x59CB;&#x3002;&#x3002;&#x3002;&quot;</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        logger.debug(<span class="string">&quot;i:{}&quot;</span>.format(i))</div><div class="line">        time.sleep(<span class="number">0.2</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        logger.debug(<span class="string">&quot;over range... time:{}&quot;</span>.format(time.time()))</div><div class="line">    logger.info(<span class="string">&quot;&#x4E2D;&#x6587;&#x6D4B;&#x8BD5;&#x7ED3;&#x675F;&#x3002;&#x3002;&#x3002;&quot;</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</div><div class="line">    my_logging.load_my_logging_cfg()  <span class="comment"># &#x5728;&#x4F60;&#x7A0B;&#x5E8F;&#x6587;&#x4EF6;&#x7684;&#x5165;&#x53E3;&#x52A0;&#x8F7D;&#x81EA;&#x5B9A;&#x4E49;logging&#x914D;&#x7F6E;</span></div><div class="line">    demo()</div></pre></td></tr></table></figure>
+<h3 id="&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x62FF;&#x5230;logger&#x5BF9;&#x8C61;&#x7684;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;"><a href="#&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x62FF;&#x5230;logger&#x5BF9;&#x8C61;&#x7684;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;" class="headerlink" title="&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x62FF;&#x5230;logger&#x5BF9;&#x8C61;&#x7684;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;"></a>&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x62FF;&#x5230;logger&#x5BF9;&#x8C61;&#x7684;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">&#x6CE8;&#x610F;&#x6CE8;&#x610F;&#x6CE8;&#x610F;&#xFF1A;</div><div class="line"></div><div class="line"></div><div class="line">#1&#x3001;&#x6709;&#x4E86;&#x4E0A;&#x8FF0;&#x65B9;&#x5F0F;&#x6211;&#x4EEC;&#x7684;&#x597D;&#x5904;&#x662F;&#xFF1A;&#x6240;&#x6709;&#x4E0E;logging&#x6A21;&#x5757;&#x6709;&#x5173;&#x7684;&#x914D;&#x7F6E;&#x90FD;&#x5199;&#x5230;&#x5B57;&#x5178;&#x4E2D;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x66F4;&#x52A0;&#x6E05;&#x6670;&#xFF0C;&#x65B9;&#x4FBF;&#x7BA1;&#x7406;</div><div class="line"></div><div class="line"></div><div class="line">#2&#x3001;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF1A;</div><div class="line">    1&#x3001;&#x4ECE;&#x5B57;&#x5178;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#xFF1A;logging.config.dictConfig(settings.LOGGING_DIC)</div><div class="line"></div><div class="line">    2&#x3001;&#x62FF;&#x5230;logger&#x5BF9;&#x8C61;&#x6765;&#x4EA7;&#x751F;&#x65E5;&#x5FD7;</div><div class="line">    logger&#x5BF9;&#x8C61;&#x90FD;&#x662F;&#x914D;&#x7F6E;&#x5230;&#x5B57;&#x5178;&#x7684;loggers &#x952E;&#x5BF9;&#x5E94;&#x7684;&#x5B50;&#x5B57;&#x5178;&#x4E2D;&#x7684;</div><div class="line">    &#x6309;&#x7167;&#x6211;&#x4EEC;&#x5BF9;logging&#x6A21;&#x5757;&#x7684;&#x7406;&#x89E3;&#xFF0C;&#x8981;&#x60F3;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x4E1C;&#x897F;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x540D;&#x5B57;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;key&#x6765;&#x83B7;&#x53D6;&#x7684;</div><div class="line">    &#x4E8E;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x83B7;&#x53D6;&#x4E0D;&#x540C;&#x7684;logger&#x5BF9;&#x8C61;&#x5C31;&#x662F;</div><div class="line">    logger=logging.getLogger(&apos;loggers&#x5B50;&#x5B57;&#x5178;&#x7684;key&#x540D;&apos;)</div><div class="line"></div><div class="line">    </div><div class="line">    &#x4F46;&#x95EE;&#x9898;&#x662F;&#xFF1A;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x4E0D;&#x540C;logger&#x540D;&#x7684;logger&#x5BF9;&#x8C61;&#x90FD;&#x5171;&#x7528;&#x4E00;&#x6BB5;&#x914D;&#x7F6E;&#xFF0C;&#x90A3;&#x4E48;&#x80AF;&#x5B9A;&#x4E0D;&#x80FD;&#x5728;loggers&#x5B50;&#x5B57;&#x5178;&#x4E2D;&#x5B9A;&#x4E49;n&#x4E2A;key   </div><div class="line"> &apos;loggers&apos;: {    </div><div class="line">        &apos;l1&apos;: {</div><div class="line">            &apos;handlers&apos;: [&apos;default&apos;, &apos;console&apos;],  #</div><div class="line">            &apos;level&apos;: &apos;DEBUG&apos;,</div><div class="line">            &apos;propagate&apos;: True,  # &#x5411;&#x4E0A;&#xFF08;&#x66F4;&#x9AD8;level&#x7684;logger&#xFF09;&#x4F20;&#x9012;</div><div class="line">        },</div><div class="line">        &apos;l2: {</div><div class="line">            &apos;handlers&apos;: [&apos;default&apos;, &apos;console&apos; ], </div><div class="line">            &apos;level&apos;: &apos;DEBUG&apos;,</div><div class="line">            &apos;propagate&apos;: False,  # &#x5411;&#x4E0A;&#xFF08;&#x66F4;&#x9AD8;level&#x7684;logger&#xFF09;&#x4F20;&#x9012;</div><div class="line">        },</div><div class="line">        &apos;l3&apos;: {</div><div class="line">            &apos;handlers&apos;: [&apos;default&apos;, &apos;console&apos;],  #</div><div class="line">            &apos;level&apos;: &apos;DEBUG&apos;,</div><div class="line">            &apos;propagate&apos;: True,  # &#x5411;&#x4E0A;&#xFF08;&#x66F4;&#x9AD8;level&#x7684;logger&#xFF09;&#x4F20;&#x9012;</div><div class="line">        },</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line">    </div><div class="line">#&#x6211;&#x4EEC;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x5F0F;&#x662F;&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;key</div><div class="line">    &apos;loggers&apos;: {</div><div class="line">        &apos;&apos;: {</div><div class="line">            &apos;handlers&apos;: [&apos;default&apos;, &apos;console&apos;], </div><div class="line">            &apos;level&apos;: &apos;DEBUG&apos;,</div><div class="line">            &apos;propagate&apos;: True, </div><div class="line">        },</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line">&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x518D;&#x53D6;logger&#x5BF9;&#x8C61;&#x65F6;</div><div class="line">logging.getLogger(__name__)&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;__name__&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x4FDD;&#x8BC1;&#x4E86;&#x6253;&#x5370;&#x65E5;&#x5FD7;&#x65F6;&#x6807;&#x8BC6;&#x4FE1;&#x606F;&#x4E0D;&#x540C;&#xFF0C;&#x4F46;&#x662F;&#x62FF;&#x7740;&#x8BE5;&#x540D;&#x5B57;&#x53BB;loggers&#x91CC;&#x627E;key&#x540D;&#x65F6;&#x5374;&#x53D1;&#x73B0;&#x627E;&#x4E0D;&#x5230;&#xFF0C;&#x4E8E;&#x662F;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;key=&apos;&apos;&#x7684;&#x914D;&#x7F6E;</div></pre></td></tr></table></figure>
+<h3 id="&#x53E6;&#x5916;&#x4E00;&#x4E2A;django&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x7784;&#x4E00;&#x773C;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x8DDF;&#x4E0A;&#x9762;&#x7684;&#x4E00;&#x6837;"><a href="#&#x53E6;&#x5916;&#x4E00;&#x4E2A;django&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x7784;&#x4E00;&#x773C;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x8DDF;&#x4E0A;&#x9762;&#x7684;&#x4E00;&#x6837;" class="headerlink" title="&#x53E6;&#x5916;&#x4E00;&#x4E2A;django&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x7784;&#x4E00;&#x773C;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x8DDF;&#x4E0A;&#x9762;&#x7684;&#x4E00;&#x6837;"></a>&#x53E6;&#x5916;&#x4E00;&#x4E2A;django&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x7784;&#x4E00;&#x773C;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x8DDF;&#x4E0A;&#x9762;&#x7684;&#x4E00;&#x6837;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#logging_config.py</span></div><div class="line">LOGGING = {</div><div class="line">    <span class="string">&apos;version&apos;</span>: <span class="number">1</span>,</div><div class="line">    <span class="string">&apos;disable_existing_loggers&apos;</span>: <span class="keyword">False</span>,</div><div class="line">    <span class="string">&apos;formatters&apos;</span>: {</div><div class="line">        <span class="string">&apos;standard&apos;</span>: {</div><div class="line">            <span class="string">&apos;format&apos;</span>: <span class="string">&apos;[%(asctime)s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d]&apos;</span></div><div class="line">                      <span class="string">&apos;[%(levelname)s][%(message)s]&apos;</span></div><div class="line">        },</div><div class="line">        <span class="string">&apos;simple&apos;</span>: {</div><div class="line">            <span class="string">&apos;format&apos;</span>: <span class="string">&apos;[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s&apos;</span></div><div class="line">        },</div><div class="line">        <span class="string">&apos;collect&apos;</span>: {</div><div class="line">            <span class="string">&apos;format&apos;</span>: <span class="string">&apos;%(message)s&apos;</span></div><div class="line">        }</div><div class="line">    },</div><div class="line">    <span class="string">&apos;filters&apos;</span>: {</div><div class="line">        <span class="string">&apos;require_debug_true&apos;</span>: {</div><div class="line">            <span class="string">&apos;()&apos;</span>: <span class="string">&apos;django.utils.log.RequireDebugTrue&apos;</span>,</div><div class="line">        },</div><div class="line">    },</div><div class="line">    <span class="string">&apos;handlers&apos;</span>: {</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;console&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;DEBUG&apos;</span>,</div><div class="line">            <span class="string">&apos;filters&apos;</span>: [<span class="string">&apos;require_debug_true&apos;</span>],</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.StreamHandler&apos;</span>,</div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;simple&apos;</span></div><div class="line">        },</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x7684;&#x65E5;&#x5FD7;,&#x6536;&#x96C6;info&#x53CA;&#x4EE5;&#x4E0A;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;default&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;INFO&apos;</span>,</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.handlers.RotatingFileHandler&apos;</span>,  <span class="comment"># &#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x81EA;&#x52A8;&#x5207;</span></div><div class="line">            <span class="string">&apos;filename&apos;</span>: os.path.join(BASE_LOG_DIR, <span class="string">&quot;xxx_info.log&quot;</span>),  <span class="comment"># &#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span></div><div class="line">            <span class="string">&apos;maxBytes&apos;</span>: <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>,  <span class="comment"># &#x65E5;&#x5FD7;&#x5927;&#x5C0F; 5M</span></div><div class="line">            <span class="string">&apos;backupCount&apos;</span>: <span class="number">3</span>,</div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;standard&apos;</span>,</div><div class="line">            <span class="string">&apos;encoding&apos;</span>: <span class="string">&apos;utf-8&apos;</span>,</div><div class="line">        },</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x7684;&#x65E5;&#x5FD7;:&#x6536;&#x96C6;&#x9519;&#x8BEF;&#x53CA;&#x4EE5;&#x4E0A;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;error&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;ERROR&apos;</span>,</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.handlers.RotatingFileHandler&apos;</span>,  <span class="comment"># &#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x81EA;&#x52A8;&#x5207;</span></div><div class="line">            <span class="string">&apos;filename&apos;</span>: os.path.join(BASE_LOG_DIR, <span class="string">&quot;xxx_err.log&quot;</span>),  <span class="comment"># &#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span></div><div class="line">            <span class="string">&apos;maxBytes&apos;</span>: <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>,  <span class="comment"># &#x65E5;&#x5FD7;&#x5927;&#x5C0F; 5M</span></div><div class="line">            <span class="string">&apos;backupCount&apos;</span>: <span class="number">5</span>,</div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;standard&apos;</span>,</div><div class="line">            <span class="string">&apos;encoding&apos;</span>: <span class="string">&apos;utf-8&apos;</span>,</div><div class="line">        },</div><div class="line">        <span class="comment">#&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">        <span class="string">&apos;collect&apos;</span>: {</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;INFO&apos;</span>,</div><div class="line">            <span class="string">&apos;class&apos;</span>: <span class="string">&apos;logging.handlers.RotatingFileHandler&apos;</span>,  <span class="comment"># &#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x81EA;&#x52A8;&#x5207;</span></div><div class="line">            <span class="string">&apos;filename&apos;</span>: os.path.join(BASE_LOG_DIR, <span class="string">&quot;xxx_collect.log&quot;</span>),</div><div class="line">            <span class="string">&apos;maxBytes&apos;</span>: <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>,  <span class="comment"># &#x65E5;&#x5FD7;&#x5927;&#x5C0F; 5M</span></div><div class="line">            <span class="string">&apos;backupCount&apos;</span>: <span class="number">5</span>,</div><div class="line">            <span class="string">&apos;formatter&apos;</span>: <span class="string">&apos;collect&apos;</span>,</div><div class="line">            <span class="string">&apos;encoding&apos;</span>: <span class="string">&quot;utf-8&quot;</span></div><div class="line">        }</div><div class="line">    },</div><div class="line">    <span class="string">&apos;loggers&apos;</span>: {</div><div class="line">        <span class="comment">#logging.getLogger(__name__)&#x62FF;&#x5230;&#x7684;logger&#x914D;&#x7F6E;</span></div><div class="line">        <span class="string">&apos;&apos;</span>: {</div><div class="line">            <span class="string">&apos;handlers&apos;</span>: [<span class="string">&apos;default&apos;</span>, <span class="string">&apos;console&apos;</span>, <span class="string">&apos;error&apos;</span>],</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;DEBUG&apos;</span>,</div><div class="line">            <span class="string">&apos;propagate&apos;</span>: <span class="keyword">True</span>,</div><div class="line">        },</div><div class="line">        <span class="comment">#logging.getLogger(&apos;collect&apos;)&#x62FF;&#x5230;&#x7684;logger&#x914D;&#x7F6E;</span></div><div class="line">        <span class="string">&apos;collect&apos;</span>: {</div><div class="line">            <span class="string">&apos;handlers&apos;</span>: [<span class="string">&apos;console&apos;</span>, <span class="string">&apos;collect&apos;</span>],</div><div class="line">            <span class="string">&apos;level&apos;</span>: <span class="string">&apos;INFO&apos;</span>,</div><div class="line">        }</div><div class="line">    },</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># -----------</span></div><div class="line"><span class="comment"># &#x7528;&#x6CD5;:&#x62FF;&#x5230;&#x4FE9;&#x4E2A;logger</span></div><div class="line"></div><div class="line">logger = logging.getLogger(__name__) <span class="comment">#&#x7EBF;&#x4E0A;&#x6B63;&#x5E38;&#x7684;&#x65E5;&#x5FD7;</span></div><div class="line">collect_logger = logging.getLogger(<span class="string">&quot;collect&quot;</span>) <span class="comment">#&#x9886;&#x5BFC;&#x8BF4;,&#x9700;&#x8981;&#x4E3A;&#x9886;&#x5BFC;&#x4EEC;&#x5355;&#x72EC;&#x5B9A;&#x5236;&#x9886;&#x5BFC;&#x4EEC;&#x770B;&#x7684;&#x65E5;&#x5FD7;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/logging/" rel="tag">#logging</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/18/python-shutil/" rel="next" title="python模块（shutil）">
+                <i class="fa fa-chevron-left"></i> python模块（shutil）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/18/python-serialize/" rel="prev" title="python序列化模块">
+                python序列化模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#logging"><span class="nav-number">2.</span> <span class="nav-text">logging</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日志级别"><span class="nav-number">2.1.</span> <span class="nav-text">日志级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认级别为warning，默认打印到终端"><span class="nav-number">2.2.</span> <span class="nav-text">默认级别为warning，默认打印到终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为logging模块指定全局配置，针对所有logger有效，控制打印到文件中"><span class="nav-number">2.3.</span> <span class="nav-text">为logging模块指定全局配置，针对所有logger有效，控制打印到文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#logging模块的Formatter，Handler，Logger，Filter对象"><span class="nav-number">2.4.</span> <span class="nav-text">logging模块的Formatter，Handler，Logger，Filter对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logger与Handler的级别"><span class="nav-number">2.5.</span> <span class="nav-text">Logger与Handler的级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logger的继承（了解）"><span class="nav-number">2.6.</span> <span class="nav-text">Logger的继承（了解）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">2.7.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#logging配置文件"><span class="nav-number">2.7.1.</span> <span class="nav-text">logging配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.7.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于如何拿到logger对象的详细解释"><span class="nav-number">2.7.3.</span> <span class="nav-text">关于如何拿到logger对象的详细解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另外一个django的配置，瞄一眼就可以，跟上面的一样"><span class="nav-number">2.7.4.</span> <span class="nav-text">另外一个django的配置，瞄一眼就可以，跟上面的一样</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

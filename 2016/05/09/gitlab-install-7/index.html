@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myvendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myvendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,git,gitlab," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab7.14(中文版|英文版)编译安装部署文档（全）">
+<meta property="og:url" content="http://c.isme.pub/2016/05/09/gitlab-install-7/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;#">
+<meta property="og:image" content="http://c.isme.pub/2016/05/09/gitlab-install-7/gitlab714/1.jpg">
+<meta property="og:image" content="http://c.isme.pub/2016/05/09/gitlab-install-7/gitlab714/2.jpg">
+<meta property="og:updated_time" content="2017-08-22T02:17:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gitlab7.14(中文版|英文版)编译安装部署文档（全）">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;#">
+<meta name="twitter:image" content="http://c.isme.pub/2016/05/09/gitlab-install-7/gitlab714/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/05/09/gitlab-install-7/"/>
+
+
+  <title> gitlab7.14(中文版|英文版)编译安装部署文档（全） | Casstiel </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Casstiel</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">普罗米修斯</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                gitlab7.14(中文版|英文版)编译安装部署文档（全）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-09T10:19:48+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/git/gitlab/" itemprop="url" rel="index">
+                    <span itemprop="name">gitlab</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x7B2C;&#x4E00;&#x6B21;&#x5B89;&#x88C5;gitlab&#x7684;&#x65F6;&#x5019;&#x672C;&#x6765;&#x4EE5;&#x4E3A;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x4F1A;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x7ED3;&#x679C;&#x53D1;&#x73B0;&#x7F51;&#x4E0A;&#x7684;&#x6587;&#x6863;&#x6216;&#x591A;&#x6216;&#x5C11;&#x7684;&#x90FD;&#x6709;&#x7740;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5751;&#xFF0C;&#x8FD8;&#x6709;&#x5C31;&#x662F;&#x56E0;&#x4E3A;&#x65F6;&#x95F4;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5F88;&#x591A;&#x6587;&#x6863;&#x90FD;&#x662F;&#x8001;&#x7248;&#x672C;&#x7684;&#xFF0C;&#x603B;&#x4E4B;&#x5C31;&#x662F;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4E8E;&#x662F;&#xFF0C;&#x5728;&#x81EA;&#x5DF1;&#x586B;&#x5E73;&#x4E86;&#x597D;&#x591A;&#x5751;&#x4E4B;&#x540E;&#xFF0C;&#x4E00;&#x70B9;&#x4E00;&#x70B9;&#x6574;&#x7406;&#x51FA;&#x4E00;&#x5957;&#x5B8C;&#x6574;&#x3001;&#x53EF;&#x9760;&#x7684;&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;&#xFF0C;&#x53EF;&#x662F;&#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x65F6;&#x95F4;&#x597D;&#x597D;&#x4FEE;&#x9970;&#x4E00;&#x756A;&#xFF0C;&#x76F4;&#x5230;&#x73B0;&#x5728;&#x3002;&#x4E8E;&#x662F;&#xFF0C;&#x5C31;&#x6709;&#x4E86;&#x8FD9;&#x7BC7;&#x6587;&#x6863;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x6863;&#x57FA;&#x4E8E;&#x7F51;&#x7EDC;&#x4E0A;&#x4E00;&#x4E9B;&#x6587;&#x6863;&#x4EE5;&#x53CA;&#x81EA;&#x5DF1;&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x6574;&#x5408;&#x800C;&#x6210;&#xFF0C;&#x672C;&#x6559;&#x7A0B;&#x5E76;&#x975E;&#x79BB;&#x7EBF;&#x5B89;&#x88C5;&#xFF0C;&#x8BF7;&#x786E;&#x4FDD;&#x670D;&#x52A1;&#x5668;&#x80FD;&#x591F;&#x6B63;&#x5E38;&#x8FDE;&#x63A5;&#x7F51;&#x7EDC;</p>
+<a id="more"></a>
+<h2 id="&#x5173;&#x4E8E;gitlab"><a href="#&#x5173;&#x4E8E;gitlab" class="headerlink" title="&#x5173;&#x4E8E;gitlab"></a><strong>&#x5173;&#x4E8E;gitlab</strong></h2><p>GitLab&#x662F;&#x4E00;&#x4E2A;&#x5229;&#x7528; Ruby on Rails &#x5F00;&#x53D1;&#x7684;&#x5F00;&#x6E90;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x81EA;&#x6258;&#x7BA1;&#x7684;Git&#x9879;&#x76EE;&#x4ED3;&#x5E93;&#xFF0C;&#x53EF;&#x901A;&#x8FC7;Web&#x754C;&#x9762;&#x8FDB;&#x884C;&#x8BBF;&#x95EE;&#x516C;&#x5F00;&#x7684;&#x6216;&#x8005;&#x79C1;&#x4EBA;&#x9879;&#x76EE;&#x3002; </p>
+<p>&#x5B83;&#x62E5;&#x6709;&#x4E0E;Github&#x7C7B;&#x4F3C;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x80FD;&#x591F;&#x6D4F;&#x89C8;&#x6E90;&#x4EE3;&#x7801;&#xFF0C;&#x7BA1;&#x7406;&#x7F3A;&#x9677;&#x548C;&#x6CE8;&#x91CA;&#x3002;&#x53EF;&#x4EE5;&#x7BA1;&#x7406;&#x56E2;&#x961F;&#x5BF9;&#x4ED3;&#x5E93;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x5B83;&#x975E;&#x5E38;&#x6613;&#x4E8E;&#x6D4F;&#x89C8;&#x63D0;&#x4EA4;&#x8FC7;&#x7684;&#x7248;&#x672C;&#x5E76;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5386;&#x53F2;&#x5E93;&#x3002;&#x56E2;&#x961F;&#x6210;&#x5458;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x5185;&#x7F6E;&#x7684;&#x7B80;&#x5355;&#x804A;&#x5929;&#x7A0B;&#x5E8F;(Wall)&#x8FDB;&#x884C;&#x4EA4;&#x6D41;&#x3002;&#x5B83;&#x8FD8;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x6536;&#x96C6;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x590D;&#x7528;&#xFF0C;&#x4FBF;&#x4E8E;&#x65E5;&#x540E;&#x6709;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#x3002; </p>
+<p>GitLab 5.0&#x4EE5;&#x524D;&#x7248;&#x672C;&#x8981;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x91C7;&#x7528; Gitolite &#x642D;&#x5EFA;&#xFF0C;5.0&#x7248;&#x672C;&#x4EE5;&#x540E;&#x4E0D;&#x518D;&#x4F7F;&#x7528; Gitolite &#xFF0C;&#x91C7;&#x7528;&#x81EA;&#x5DF1;&#x5F00;&#x53D1;&#x7684; gitlab-shell &#x6765;&#x5B9E;&#x73B0;&#x3002;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x5B89;&#x88C5;&#x9EBB;&#x70E6;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; GitLab Installers &#x4E00;&#x952E;&#x5B89;&#x88C5;&#x3002;</p>
+<h2 id="&#x7248;&#x672C;&#x8BF4;&#x660E;&#xFF1A;"><a href="#&#x7248;&#x672C;&#x8BF4;&#x660E;&#xFF1A;" class="headerlink" title="&#x7248;&#x672C;&#x8BF4;&#x660E;&#xFF1A;"></a><strong>&#x7248;&#x672C;&#x8BF4;&#x660E;&#xFF1A;</strong></h2><p>&#x672C;&#x6587;&#x5B89;&#x88C5;&#x7684;&#x662F;gitlab7.14&#x7684;&#x7248;&#x672C;&#xFF0C;&#x76EE;&#x524D;gitlab&#x6700;&#x65B0;&#x7248;&#x672C;&#x4E3A;8.2&#xFF0C;&#x800C;&#x76EE;&#x524D;&#x7F51;&#x4E0A;&#x6700;&#x591A;&#x7684;&#x6559;&#x7A0B;&#x90FD;&#x662F;6&#x7248;&#x672C;&#x7684;gitlab&#xFF0C;7.14&#x7248;&#x672C;&#x7684;&#x5B89;&#x88C5;&#x548C;6&#x7248;&#x672C;&#x5927;&#x540C;&#x5C0F;&#x5F02;&#xFF0C;&#x672C;&#x6587;&#x53EA;&#x662F;&#x505A;&#x4E00;&#x4E2A;&#x6574;&#x7406;&#x3002;</p>
+<p>gitlab7&#x76F8;&#x5BF9;&#x4E8E;6&#x754C;&#x9762;&#x53D8;&#x52A8;&#x5F88;&#x5927;&#xFF0C;&#x5230;&#x73B0;&#x5728;&#x7684;8&#x754C;&#x9762;&#x4E5F;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#xFF1B;&#x800C;7&#x7684;&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;&#x548C;6&#x57FA;&#x672C;&#x53EA;&#x6709;&#x7248;&#x672C;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x8FD9;&#x5757;8&#x7248;&#x672C;&#x7684;&#x56E0;&#x4E3A;&#x52A0;&#x5165;&#x4E86;go&#x7684;&#x4F9D;&#x8D56;&#x7B49;&#xFF0C;&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;&#x7167;&#x6BD4;&#x4E4B;&#x524D;&#x53D8;&#x5316;&#x5F88;&#x5927;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">* &#x7CFB;&#x7EDF;&#x7248;&#x672C;&#xFF1A;centos6.5_x86_64</div><div class="line">* gitlab&#xFF1A;7-14&#x4E2D;&#x6587;&#x7248;|&#x82F1;&#x6587;&#x7248;</div><div class="line">* ruby&#xFF1A;2.1.6 </div><div class="line">* mysql&#xFF1A;5.5 </div><div class="line">* nginx&#xFF1A;1.9.14 </div><div class="line">* git: 2.8.2</div><div class="line">* redis&#xFF1A;yum &#x7248;&#x672C;</div><div class="line">* &#x672C;&#x6587;&#x4F7F;&#x7528;ruby-2.1.6&#xFF0C;mysql-5.5.39&#xFF0C;nginx-1.8.0&#x4EE5;&#x53CA;yum&#x5B89;&#x88C5;&#x7684;redis</div></pre></td></tr></table></figure>
+<h1 id="&#x5B89;&#x88C5;&#x524D;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"><a href="#&#x5B89;&#x88C5;&#x524D;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;" class="headerlink" title="&#x5B89;&#x88C5;&#x524D;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"></a><strong>&#x5B89;&#x88C5;&#x524D;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</strong></h1><h2 id="&#x57FA;&#x672C;&#x914D;&#x7F6E;"><a href="#&#x57FA;&#x672C;&#x914D;&#x7F6E;" class="headerlink" title="&#x57FA;&#x672C;&#x914D;&#x7F6E;"></a>&#x57FA;&#x672C;&#x914D;&#x7F6E;</h2><p>&#x57FA;&#x672C;&#x7684;&#x73AF;&#x5883;&#x914D;&#x7F6E;&#xFF0C;&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;&#x3001;&#x5173;&#x95ED;selinux&#x7B49;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x505A;&#x592A;&#x591A;&#x4ECB;&#x7ECD;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x5B9E;&#x73B0;&#x6C38;&#x4E45;&#x5173;&#x95ED;SELinux</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">&apos;s/^SELINUX=.*/#&amp;/;s/^SELINUXTYPE=.*/#&amp;/;/SELINUX=.*/a SELINUX=disabled&apos;</span> /etc/sysconfig/selinux</div></pre></td></tr></table></figure>
+<p>&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x5B9E;&#x73B0;&#x4E34;&#x65F6;&#x5173;&#x95ED;SELinux</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setenforce 0</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;epel&#x6E90;"><a href="#&#x5B89;&#x88C5;epel&#x6E90;" class="headerlink" title="&#x5B89;&#x88C5;epel&#x6E90;"></a>&#x5B89;&#x88C5;epel&#x6E90;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum -y install epel* </div><div class="line">&#x6216;&#x8005;</div><div class="line">wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div><div class="line">rpm -ivh epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
+<h2 id="&#x5BFC;&#x5165;EPEL&#x6E90;&#x7684;key"><a href="#&#x5BFC;&#x5165;EPEL&#x6E90;&#x7684;key" class="headerlink" title="&#x5BFC;&#x5165;EPEL&#x6E90;&#x7684;key"></a>&#x5BFC;&#x5165;EPEL&#x6E90;&#x7684;key</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm --import https://www.fedoraproject.org/static/0608B895.txt</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><a href="#&#x4FEE;&#x6539;&#x914D;&#x7F6E;" class="headerlink" title="&#x4FEE;&#x6539;&#x914D;&#x7F6E;"></a>&#x4FEE;&#x6539;&#x914D;&#x7F6E;</h2><p>download.fedoraproject.org&#x57DF;&#x540D;&#x5DF2;&#x7ECF;&#x5931;&#x6548;<br>&#x53BB;&#x6389;#&#x53F7;&#x5C06;download.fedoraproject.org&#x53D8;&#x66F4;&#x4E3A;dl.fedoraproject.org</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repos.d/epel.repo	</div><div class="line"> baseurl=http://dl.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span></div><div class="line"> <span class="comment">#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;PUIAS&#x6E90;&#x548C;&#x5BFC;&#x5165;&#x5BF9;&#x5E94;key"><a href="#&#x5B89;&#x88C5;PUIAS&#x6E90;&#x548C;&#x5BFC;&#x5165;&#x5BF9;&#x5E94;key" class="headerlink" title="&#x5B89;&#x88C5;PUIAS&#x6E90;&#x548C;&#x5BFC;&#x5165;&#x5BF9;&#x5E94;key"></a>&#x5B89;&#x88C5;PUIAS&#x6E90;&#x548C;&#x5BFC;&#x5165;&#x5BF9;&#x5E94;key</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://gitlab.com/gitlab-org/gitlab-recipes/raw/master/install/centos/PUIAS_6_computational.repo &gt; /etc/yum.repos.d/PUIAS_6_computational.repo</div><div class="line"></div><div class="line">rpm --import http://springdale.math.ias.edu/data/puias/6/x86_64/os/RPM-GPG-KEY-puias</div></pre></td></tr></table></figure>
+<h2 id="&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x6E90;&#x7F13;&#x5B58;&#x548C;&#x68C0;&#x6D4B;key&#x5BFC;&#x5165;&#x662F;&#x5426;&#x6210;&#x529F;"><a href="#&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x6E90;&#x7F13;&#x5B58;&#x548C;&#x68C0;&#x6D4B;key&#x5BFC;&#x5165;&#x662F;&#x5426;&#x6210;&#x529F;" class="headerlink" title="&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x6E90;&#x7F13;&#x5B58;&#x548C;&#x68C0;&#x6D4B;key&#x5BFC;&#x5165;&#x662F;&#x5426;&#x6210;&#x529F;"></a>&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x6E90;&#x7F13;&#x5B58;&#x548C;&#x68C0;&#x6D4B;key&#x5BFC;&#x5165;&#x662F;&#x5426;&#x6210;&#x529F;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum clean all &amp;&amp; yum makecache</div><div class="line">rpm -qa gpg*| grep <span class="string">&apos;0608b895&apos;</span></div><div class="line">rpm -qa gpg*| grep <span class="string">&apos;41a40948&apos;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;Development-Tools&#x5F00;&#x53D1;&#x7EC4;&#x5305;&#x548C;&#x4E00;&#x4E9B;&#x8F6F;&#x4EF6;&#x6240;&#x9700;&#x4F9D;&#x8D56;&#x5305;"><a href="#&#x5B89;&#x88C5;Development-Tools&#x5F00;&#x53D1;&#x7EC4;&#x5305;&#x548C;&#x4E00;&#x4E9B;&#x8F6F;&#x4EF6;&#x6240;&#x9700;&#x4F9D;&#x8D56;&#x5305;" class="headerlink" title="&#x5B89;&#x88C5;Development Tools&#x5F00;&#x53D1;&#x7EC4;&#x5305;&#x548C;&#x4E00;&#x4E9B;&#x8F6F;&#x4EF6;&#x6240;&#x9700;&#x4F9D;&#x8D56;&#x5305;"></a>&#x5B89;&#x88C5;Development Tools&#x5F00;&#x53D1;&#x7EC4;&#x5305;&#x548C;&#x4E00;&#x4E9B;&#x8F6F;&#x4EF6;&#x6240;&#x9700;&#x4F9D;&#x8D56;&#x5305;</h2><p>&#x4E0D;&#x8981;&#x7528;yum&#x5B89;&#x88C5;ruby&#x3001;git&#x3001;nginx&#x548C;mysql;redis&#x53EF;&#x4EE5;&#x4F7F;&#x7528;yum&#x5B89;&#x88C5;&#x7684;&#x7248;&#x672C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install readline readline-devel ncurses-devel gdbm-devel glibc-devel tcl-devel expat-devel db4-devel byacc sqlite-devel libyaml libyaml-devel libffi libffi-devel libxml2 libxml2-devel libxslt libxslt-devel libicu libicu-devel system-config-firewall-tui python-devel redis wget crontabs logwatch logrotate perl-Time-HiRes gettext gettext-devel openssl-devel zlib-devel gcc gcc-c++ make autoconf tk-devel python-pip patch pcre-devel curl curl-devel sudo yum-plugin-fastestmirror cmake perl-CPAN nodejs automake libxml* libmcrypt* libtool-ltdl-devel* yum-utils</div></pre></td></tr></table></figure>
+<h2 id="&#x5378;&#x8F7D;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x5305;"><a href="#&#x5378;&#x8F7D;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x5305;" class="headerlink" title="&#x5378;&#x8F7D;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x5305;"></a>&#x5378;&#x8F7D;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x5305;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove ruby git nginx mysql mysql-server</div></pre></td></tr></table></figure>
+<p>Development Tools&#x5F00;&#x53D1;&#x7EC4;&#x5305;&#x6211;&#x6CA1;&#x6709;&#x5B89;&#x88C5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y groupinstall <span class="string">&apos;Development Tools&apos;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x540C;&#x6B65;&#x65F6;&#x95F4;"><a href="#&#x540C;&#x6B65;&#x65F6;&#x95F4;" class="headerlink" title="&#x540C;&#x6B65;&#x65F6;&#x95F4;"></a>&#x540C;&#x6B65;&#x65F6;&#x95F4;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">rm -rf /etc/localtime</div><div class="line"></div><div class="line">ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div><div class="line"></div><div class="line">yum -y install ntp</div><div class="line"></div><div class="line">ntpdate pool.ntp.org</div><div class="line"><span class="built_in">echo</span> <span class="string">&apos;*/20 * * * * /usr/sbin/ntpdate pool.ntp.org &gt; /dev/null 2&gt;&amp;1&apos;</span> &gt;&gt;/var/spool/cron/root</div></pre></td></tr></table></figure>
+<h1 id="&#x5B89;&#x88C5;git"><a href="#&#x5B89;&#x88C5;git" class="headerlink" title="&#x5B89;&#x88C5;git"></a><strong>&#x5B89;&#x88C5;git</strong></h1><h2 id="&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x5305;"><a href="#&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x5305;" class="headerlink" title="&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x5305;"></a>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x5305;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.5.4.tar.gz</div><div class="line"></div><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.8.2.tar.gz </div><div class="line"></div><div class="line">tar zxvf git-2.8.2.tar.gz &amp;&amp; <span class="built_in">cd</span> git-2.8.2</div><div class="line"></div><div class="line">./configure &amp;&amp; make prefix=/usr/<span class="built_in">local</span> all &amp;&amp; make prefix=/usr/<span class="built_in">local</span> install</div><div class="line"></div><div class="line">ln -fs /usr/<span class="built_in">local</span>/bin/git* /usr/bin/</div></pre></td></tr></table></figure>
+<h2 id="&#x627E;&#x5230;git&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a href="#&#x627E;&#x5230;git&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="&#x627E;&#x5230;git&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>&#x627E;&#x5230;git&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">which</span> git</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">&apos;export PATH=&quot;$PATH:/usr/local/bin&quot;&apos;</span> &gt;&gt; /root/. bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">&apos;export PATH=&quot;$PATH:/usr/local/bin&quot;&apos;</span> &gt;&gt; /etc/profile</div><div class="line"></div><div class="line"><span class="built_in">source</span> /etc/profile</div></pre></td></tr></table></figure>
+<h2 id="&#x6267;&#x884C;&#x4E4B;&#x540E;&#x6709;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x8BC1;&#x660E;gitserver&#x5B89;&#x88C5;&#x6210;&#x529F;"><a href="#&#x6267;&#x884C;&#x4E4B;&#x540E;&#x6709;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x8BC1;&#x660E;gitserver&#x5B89;&#x88C5;&#x6210;&#x529F;" class="headerlink" title="&#x6267;&#x884C;&#x4E4B;&#x540E;&#x6709;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x8BC1;&#x660E;gitserver&#x5B89;&#x88C5;&#x6210;&#x529F;"></a>&#x6267;&#x884C;&#x4E4B;&#x540E;&#x6709;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x8BC1;&#x660E;gitserver&#x5B89;&#x88C5;&#x6210;&#x529F;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure>
+<h2 id="&#x5728;&#x6267;&#x884C;git-&#x2013;version&#x7684;&#x65F6;&#x5019;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x5E93;&#x6587;&#x4EF6;"><a href="#&#x5728;&#x6267;&#x884C;git-&#x2013;version&#x7684;&#x65F6;&#x5019;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x5E93;&#x6587;&#x4EF6;" class="headerlink" title="&#x5728;&#x6267;&#x884C;git &#x2013;version&#x7684;&#x65F6;&#x5019;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x5E93;&#x6587;&#x4EF6;"></a>&#x5728;&#x6267;&#x884C;git &#x2013;version&#x7684;&#x65F6;&#x5019;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x5E93;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/lib/libcharset.so.1 /lib/libcharset.so.1</div><div class="line">ldconfig</div></pre></td></tr></table></figure>
+<h1 id="&#x5B89;&#x88C5;ruby"><a href="#&#x5B89;&#x88C5;ruby" class="headerlink" title="&#x5B89;&#x88C5;ruby"></a><strong>&#x5B89;&#x88C5;ruby</strong></h1><h2 id="&#x4E0B;&#x8F7D;ruby&#x6E90;&#x7801;&#x5305;"><a href="#&#x4E0B;&#x8F7D;ruby&#x6E90;&#x7801;&#x5305;" class="headerlink" title="&#x4E0B;&#x8F7D;ruby&#x6E90;&#x7801;&#x5305;"></a>&#x4E0B;&#x8F7D;ruby&#x6E90;&#x7801;&#x5305;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz</div></pre></td></tr></table></figure>
+<h2 id="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;ruby"><a href="#&#x7F16;&#x8BD1;&#x5B89;&#x88C5;ruby" class="headerlink" title="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;ruby"></a>&#x7F16;&#x8BD1;&#x5B89;&#x88C5;ruby</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar zfvx ruby-2.2.4.tar.gz &amp;&amp; <span class="built_in">cd</span> ruby-2.2.4</div><div class="line">./configure --disable-install-rdoc</div><div class="line">make clean &amp;&amp; make &amp;&amp; make prefix=/usr/<span class="built_in">local</span> install</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;bundler&#x9700;&#x8981;&#x6DFB;&#x52A0;rubygems&#x7684;&#x56FD;&#x5185;&#x955C;&#x50CF;"><a href="#&#x5B89;&#x88C5;bundler&#x9700;&#x8981;&#x6DFB;&#x52A0;rubygems&#x7684;&#x56FD;&#x5185;&#x955C;&#x50CF;" class="headerlink" title="&#x5B89;&#x88C5;bundler&#x9700;&#x8981;&#x6DFB;&#x52A0;rubygems&#x7684;&#x56FD;&#x5185;&#x955C;&#x50CF;"></a>&#x5B89;&#x88C5;bundler&#x9700;&#x8981;&#x6DFB;&#x52A0;rubygems&#x7684;&#x56FD;&#x5185;&#x955C;&#x50CF;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#gem source --remove|-r --add|-a</span></div><div class="line">gem <span class="built_in">source</span> -r https://rubygems.org/</div><div class="line">gem <span class="built_in">source</span> <span class="_">-a</span> https://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<h2 id="&#x786E;&#x4FDD;gem&#x6E90;&#x4E2D;&#x53EA;&#x6709;&#x6DD8;&#x5B9D;&#x6E90;"><a href="#&#x786E;&#x4FDD;gem&#x6E90;&#x4E2D;&#x53EA;&#x6709;&#x6DD8;&#x5B9D;&#x6E90;" class="headerlink" title="&#x786E;&#x4FDD;gem&#x6E90;&#x4E2D;&#x53EA;&#x6709;&#x6DD8;&#x5B9D;&#x6E90;"></a>&#x786E;&#x4FDD;gem&#x6E90;&#x4E2D;&#x53EA;&#x6709;&#x6DD8;&#x5B9D;&#x6E90;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">gem sources <span class="_">-l</span></div><div class="line">*** CURRENT SOURCES ***</div><div class="line">https://ruby.taobao.org/</div><div class="line"></div><div class="line">ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/bin/ruby /usr/bin/ruby</div><div class="line">ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/bin/gem /usr/bin/gem</div><div class="line">ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/bin/bundle /usr/bin/bundle</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;bundler"><a href="#&#x5B89;&#x88C5;bundler" class="headerlink" title="&#x5B89;&#x88C5;bundler"></a>&#x5B89;&#x88C5;bundler</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install bundler --no-ri --no-rdoc</div></pre></td></tr></table></figure>
+<h1 id="&#x5B89;&#x88C5;nginx"><a href="#&#x5B89;&#x88C5;nginx" class="headerlink" title="&#x5B89;&#x88C5;nginx"></a><strong>&#x5B89;&#x88C5;nginx</strong></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wget http://nginx.org/download/nginx-1.9.14.tar.gz</div><div class="line"></div><div class="line">tar xvf nginx-1.9.14.tar.gz &amp;&amp; <span class="built_in">cd</span> nginx-1.9.14</div><div class="line"></div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/nginx/ --user=www --group=www --with-http_ssl_module --with-http_stub_status_module --with-pcre</div><div class="line"></div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h1 id="&#x5B89;&#x88C5;gitlab"><a href="#&#x5B89;&#x88C5;gitlab" class="headerlink" title="&#x5B89;&#x88C5;gitlab"></a><strong>&#x5B89;&#x88C5;gitlab</strong></h1><h2 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;git&#x7528;&#x6237;&#x4F9B;gitLab&#x4F7F;&#x7528;"><a href="#&#x521B;&#x5EFA;&#x4E00;&#x4E2A;git&#x7528;&#x6237;&#x4F9B;gitLab&#x4F7F;&#x7528;" class="headerlink" title="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;git&#x7528;&#x6237;&#x4F9B;gitLab&#x4F7F;&#x7528;"></a>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;git&#x7528;&#x6237;&#x4F9B;gitLab&#x4F7F;&#x7528;</h2><p>&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x642D;&#x5EFA;&#x8FC7;git Server&#x4E0D;&#x9700;&#x8981;&#x518D;&#x6B21;&#x521B;&#x5EFA;git&#x7528;&#x6237;,&#x5982;&#x679C;&#x8981;&#x7EAF;&#x51C0;&#x5B89;&#x88C5;&#x7684;&#x8BDD;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x4E4B;&#x524D;&#x7684;&#x7528;&#x6237;.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">userdel -r git</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x7528;&#x6237;&#x540D;&#x4E00;&#x5B9A;&#x8981;&#x662F;git&#xFF0C;&#x5982;&#x679C;&#x6362;&#x6210;&#x522B;&#x7684;&#x9700;&#x8981;&#x6539;&#x5F88;&#x591A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x5EFA;&#x8BAE;&#x8FD9;&#x6837;&#x505A;</p>
+<p>&#x56E0;&#x4E3A;gitlab&#x521B;&#x5EFA;&#x4ED3;&#x5E93;&#x4EE5;&#x540E;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x90FD;&#x662F;&#x5B58;&#x5728;git&#x7528;&#x6237;&#x4E0B;&#x7684;&#xFF0C;&#x5982;&#x679C;git&#x5BB6;&#x76EE;&#x5F55;&#x4E0D;&#x591F;&#x5927;&#x662F;&#x4E0D;&#x884C;&#x7684;&#xFF0C;&#x800C;git&#x5F88;&#x591A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x90FD;&#x6709;/home/git&#x8FD9;&#x4E2A;&#x8DEF;&#x5F84;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x4FEE;&#x6539;git&#x9ED8;&#x8BA4;&#x7684;&#x5BB6;&#x76EE;&#x5F55;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5F88;&#x591A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5207;&#x8BB0;</p>
+<p>&#x56E0;&#x6211;&#x7684;home&#x7A7A;&#x95F4;&#x4E0D;&#x662F;&#x5F88;&#x5927;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x5BF9;git&#x6307;&#x5B9A;&#x4E86;&#x5BB6;&#x76EE;&#x5F55;&#xFF0C;&#x540E;&#x9762;&#x6709;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#xFF0C;&#x4EE5;&#x4E0B;&#x9762;&#x7684;&#x4E24;&#x884C;#&#x6CE8;&#x91CA;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##################################</span></div><div class="line">useradd --comment <span class="string">&apos;gitLab&apos;</span> git <span class="_">-d</span> /data/git</div><div class="line"><span class="comment">##################################</span></div><div class="line"></div><div class="line">useradd --comment <span class="string">&apos;gitLab&apos;</span> git</div><div class="line">passwd git</div></pre></td></tr></table></figure>
+<p>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x6DFB;&#x52A0;git&#x7528;&#x6237;&#x62E5;&#x6709;root&#x6743;&#x9650; [sudoers&#x6587;&#x4EF6;&#x9ED8;&#x8BA4;&#x6CA1;&#x6709;&#x5199;&#x6743;&#x9650;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x4FDD;&#x5B58;:wq!]&#xFF0C;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x628A;sudo&#x4FE1;&#x606F;&#x6DFB;&#x52A0;&#x5230;sudo&#x6587;&#x4EF6;&#x4E2D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">&quot;git ALL=(ALL) NOPASSWD: ALL&quot;</span> &gt;&gt;/etc/sudoers</div><div class="line">chmod -R 755 /data/git</div><div class="line"><span class="built_in">echo</span> <span class="string">&quot;export git_SSL_NO_VERIFY=1&quot;</span> &gt;&gt; /home/git/. bash_profile</div></pre></td></tr></table></figure>
+<p>&#x4E0D;&#x6DFB;&#x52A0;&#x53D8;&#x91CF;&#x7684;&#x8BDD;&#x4F7F;&#x7528;https&#x94FE;&#x63A5;&#x4F1A;&#x62A5;&#x5982;&#x4E0B;&#x9519;&#x8BEF;&#xFF0C;&#x4E0D;&#x8FC7;&#x672C;&#x6587;&#x6CA1;&#x6709;&#x4F7F;&#x7528;https</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal: unable to access <span class="string">&apos;https://github.com/gitlabhq/grit.git/&apos;</span>: Peer certificate cannot be authenticated with known CA certificates</div></pre></td></tr></table></figure>
+<h2 id="&#x914D;&#x7F6E;redis&#x4F7F;&#x7528;socket"><a href="#&#x914D;&#x7F6E;redis&#x4F7F;&#x7528;socket" class="headerlink" title="&#x914D;&#x7F6E;redis&#x4F7F;&#x7528;socket"></a>&#x914D;&#x7F6E;redis&#x4F7F;&#x7528;socket</h2><p>&#x5907;&#x4EFD;&#x4E4B;&#x524D;&#x914D;&#x7F6E;,&#x4FEE;&#x6539;&#x7AEF;&#x53E3;&#x53F7;,&#x6DFB;&#x52A0;socket&#x914D;&#x7F6E;,&#x6DFB;&#x52A0;socket&#x6743;&#x9650;(&gt;= redis 2.4.0).,&#x542F;&#x52A8;&#x670D;&#x52A1;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cp /etc/redis.conf /etc/redis.conf.orig</div><div class="line">sed <span class="string">&apos;s/^port .*/port 0/&apos;</span> /etc/redis.conf | sudo tee /etc/redis.conf</div><div class="line"><span class="built_in">echo</span> <span class="string">&apos;unixsocket /var/run/redis/redis.sock&apos;</span> | sudo tee <span class="_">-a</span> /etc/redis.conf</div><div class="line">sudo sed -i <span class="string">&apos;/# unixsocketperm/ s/^# unixsocketperm.*/unixsocketperm 0775/&apos;</span> /etc/redis.conf</div><div class="line">sudo service redis restart</div></pre></td></tr></table></figure>
+<p>&#x5C06;git&#x7528;&#x6237;&#x6DFB;&#x52A0;&#x5230;redis&#x7EC4;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo usermod <span class="_">-a</span>G redis git</div><div class="line">chkconfig redis on</div></pre></td></tr></table></figure>
+<h2 id="&#x5EFA;&#x7ACB;gitlab&#x6570;&#x636E;&#x5E93;&#x5E76;&#x6388;&#x6743;"><a href="#&#x5EFA;&#x7ACB;gitlab&#x6570;&#x636E;&#x5E93;&#x5E76;&#x6388;&#x6743;" class="headerlink" title="&#x5EFA;&#x7ACB;gitlab&#x6570;&#x636E;&#x5E93;&#x5E76;&#x6388;&#x6743;"></a>&#x5EFA;&#x7ACB;gitlab&#x6570;&#x636E;&#x5E93;&#x5E76;&#x6388;&#x6743;</h2><p>&#x7F16;&#x8BD1;&#x5B89;&#x88C5;mysql-5.5.39</p>
+<h3 id="&#x6DFB;&#x52A0;mysql&#x7528;&#x6237;"><a href="#&#x6DFB;&#x52A0;mysql&#x7528;&#x6237;" class="headerlink" title="&#x6DFB;&#x52A0;mysql&#x7528;&#x6237;"></a>&#x6DFB;&#x52A0;mysql&#x7528;&#x6237;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">groupadd mysql</div><div class="line">mkdir -pv /data/mysql</div><div class="line">useradd -r -g mysql <span class="_">-d</span> /data/mysql <span class="_">-s</span> /sbin/nologin mysql</div><div class="line">chown -R mysql.mysql /data/mysql</div></pre></td></tr></table></figure>
+<h3 id="&#x83B7;&#x53D6;&#x5B89;&#x88C5;&#x5305;"><a href="#&#x83B7;&#x53D6;&#x5B89;&#x88C5;&#x5305;" class="headerlink" title="&#x83B7;&#x53D6;&#x5B89;&#x88C5;&#x5305;"></a>&#x83B7;&#x53D6;&#x5B89;&#x88C5;&#x5305;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://downloads.mariadb.com/archives/mysql-5.5/mysql-5.5.39.tar.gz</div><div class="line"></div><div class="line">tar -xvf mysql-5.5.39.tar.gz &amp;&amp; <span class="built_in">cd</span> mysql-5.5.39</div></pre></td></tr></table></figure>
+<h3 id="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;"><a href="#&#x7F16;&#x8BD1;&#x5B89;&#x88C5;" class="headerlink" title="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;"></a>&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/<span class="built_in">local</span>/mysql5.5 -DDEFAULT_CHARSET=utf8 -DENABLED_LOCAL_INFILE=1 -DMYSQL_DATADIR=/data/mysql -DWITH_EXTRA_CHARSETS=all -DWITH_READLINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DMYSQL_TCP_PORT=3306 -DDEFAULT_COLLATION=utf8_general_ci</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h3 id="&#x521D;&#x59CB;&#x5316;"><a href="#&#x521D;&#x59CB;&#x5316;" class="headerlink" title="&#x521D;&#x59CB;&#x5316;"></a>&#x521D;&#x59CB;&#x5316;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">chown -R mysql.mysql /usr/<span class="built_in">local</span>/mysql5.5</div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql5.5/support-files/</div><div class="line">cp my-medium.cnf /data/mysql/my.cnf</div><div class="line">cp mysql.server /etc/init.d/mysqld</div><div class="line">chmod +x /etc/init.d/mysqld</div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql5.5/scripts/</div><div class="line">./mysql_install_db --user=mysql --basedir=/usr/<span class="built_in">local</span>/mysql5.5 --datadir=/data/mysql</div><div class="line"></div><div class="line">vim /data/mysql/my.cnf</div><div class="line">    datadir=/data/mysql</div><div class="line"></div><div class="line">/etc/init.d/mysqld start</div><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure>
+<h3 id="&#x5C06;mysql&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a href="#&#x5C06;mysql&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="&#x5C06;mysql&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>&#x5C06;mysql&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">&apos;export PATH=&quot;$PATH:/usr/local/bin:/usr/local/mysql5.5/bin&quot;&apos;</span> &gt;&gt; /root/. bashrc</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">&apos;export PATH=&quot;$PATH:/usr/local/bin:/usr/local/mysql5.5/bin&quot;&apos;</span> &gt;&gt; /etc/profile</div><div class="line"></div><div class="line"><span class="built_in">source</span> /etc/profile</div><div class="line"></div><div class="line">mysql -u root</div></pre></td></tr></table></figure>
+<h3 id="&#x6DFB;&#x52A0;git&#x8FDE;&#x63A5;mysql&#x7684;&#x7528;&#x6237;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x5E93;"><a href="#&#x6DFB;&#x52A0;git&#x8FDE;&#x63A5;mysql&#x7684;&#x7528;&#x6237;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x6DFB;&#x52A0;git&#x8FDE;&#x63A5;mysql&#x7684;&#x7528;&#x6237;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x5E93;"></a>&#x6DFB;&#x52A0;git&#x8FDE;&#x63A5;mysql&#x7684;&#x7528;&#x6237;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x5E93;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;CREATE DATABASE IF NOT EXISTS `gitlabhq_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;</div><div class="line">&gt;GRANT SELECT,LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `gitlabhq_production`.* TO &apos;gitlab&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;gitlab&apos;;</div><div class="line">&gt;flush privileges;</div></pre></td></tr></table></figure>
+<h3 id="&#x6D4B;&#x8BD5;git&#x7528;&#x6237;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;mysql&#x7528;&#x6237;&#x767B;&#x5F55;"><a href="#&#x6D4B;&#x8BD5;git&#x7528;&#x6237;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;mysql&#x7528;&#x6237;&#x767B;&#x5F55;" class="headerlink" title="&#x6D4B;&#x8BD5;git&#x7528;&#x6237;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;mysql&#x7528;&#x6237;&#x767B;&#x5F55;"></a>&#x6D4B;&#x8BD5;git&#x7528;&#x6237;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x521A;&#x624D;&#x521B;&#x5EFA;&#x7684;mysql&#x7528;&#x6237;&#x767B;&#x5F55;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">su - git</div><div class="line">mysql -u gitlab -p -D gitlabhq_production</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;gitLab-Shell"><a href="#&#x5B89;&#x88C5;gitLab-Shell" class="headerlink" title="&#x5B89;&#x88C5;gitLab-Shell"></a>&#x5B89;&#x88C5;gitLab-Shell</h2><h3 id="&#x5207;&#x6362;git&#x7528;&#x6237;"><a href="#&#x5207;&#x6362;git&#x7528;&#x6237;" class="headerlink" title="&#x5207;&#x6362;git&#x7528;&#x6237;"></a>&#x5207;&#x6362;git&#x7528;&#x6237;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - git</div></pre></td></tr></table></figure>
+<h3 id="&#x514B;&#x9686;gitlab&#x7684;shell"><a href="#&#x514B;&#x9686;gitlab&#x7684;shell" class="headerlink" title="&#x514B;&#x9686;gitlab&#x7684;shell"></a>&#x514B;&#x9686;gitlab&#x7684;shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://gitlab.com/gitlab-org/gitlab-shell.git -b v2.7.2</div><div class="line"><span class="built_in">cd</span> gitlab-shell/</div><div class="line">cp config.yml.example config.yml</div><div class="line">vi config.yml</div></pre></td></tr></table></figure>
+<h3 id="&#x914D;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;gitlab&#x57DF;&#x540D;&#x548C;&#x7AEF;&#x53E3;"><a href="#&#x914D;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;gitlab&#x57DF;&#x540D;&#x548C;&#x7AEF;&#x53E3;" class="headerlink" title="&#x914D;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;gitlab&#x57DF;&#x540D;&#x548C;&#x7AEF;&#x53E3;"></a>&#x914D;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;gitlab&#x57DF;&#x540D;&#x548C;&#x7AEF;&#x53E3;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gitlab_url: <span class="string">&quot;http://git.cass.com:8050&quot;</span></div></pre></td></tr></table></figure>
+<p>#&#x4E0B;&#x9762;&#x4FEE;&#x6539;&#x7684;&#x5185;&#x5BB9;&#x4E3A;git&#x6307;&#x5B9A;&#x5BB6;&#x76EE;&#x5F55;&#x540E;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x9ED8;&#x8BA4;&#x7684;/home/git&#x5219;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x540E;&#x9762;&#x4E0D;&#x518D;&#x63D0;&#x793A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##################################</span></div><div class="line">repos_path: <span class="string">&quot;/data/git/repositories&quot;</span></div><div class="line">auth_file: <span class="string">&quot;/data/git/.ssh/authorized_keys&quot;</span></div><div class="line"><span class="comment">##################################</span></div></pre></td></tr></table></figure>
+<h3 id="&#x914D;&#x7F6E;gitlab-shell&#x4F7F;&#x7528;reidis-socket"><a href="#&#x914D;&#x7F6E;gitlab-shell&#x4F7F;&#x7528;reidis-socket" class="headerlink" title="&#x914D;&#x7F6E;gitlab-shell&#x4F7F;&#x7528;reidis-socket"></a>&#x914D;&#x7F6E;gitlab-shell&#x4F7F;&#x7528;reidis-socket</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">redis:</div><div class="line">bin: /usr/bin/redis-cli</div><div class="line"><span class="comment"># host: 127.0.0.1</span></div><div class="line"><span class="comment"># port: 6379</span></div><div class="line"><span class="comment"># pass: redispass # Allows you to specify the password for Redis</span></div><div class="line">database: 0</div><div class="line">socket: /var/run/redis/redis.sock <span class="comment"># Comment out this line if you want to use TCP</span></div><div class="line">namespace: resque:gitlab</div></pre></td></tr></table></figure>
+<h3 id="&#x5B8C;&#x6210;&#x914D;&#x7F6E;"><a href="#&#x5B8C;&#x6210;&#x914D;&#x7F6E;" class="headerlink" title="&#x5B8C;&#x6210;&#x914D;&#x7F6E;"></a>&#x5B8C;&#x6210;&#x914D;&#x7F6E;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">./bin/install</div><div class="line"><span class="comment">###sudo -u git -H ./bin/install###</span></div><div class="line"></div><div class="line"> mkdir -p /home/git/repositories: OK</div><div class="line"> mkdir -p /home/git/.ssh: OK</div><div class="line"> chmod 700 /home/git/.ssh: OK</div><div class="line"> touch /home/git/.ssh/authorized_keys: OK</div><div class="line"> chmod 600 /home/git/.ssh/authorized_keys: OK</div><div class="line"> chmod ug+rwX,o-rwx /home/git/repositories: OK</div></pre></td></tr></table></figure>
+<h2 id="&#x514B;&#x9686;gitLab&#x6E90;"><a href="#&#x514B;&#x9686;gitLab&#x6E90;" class="headerlink" title="&#x514B;&#x9686;gitLab&#x6E90;"></a>&#x514B;&#x9686;gitLab&#x6E90;</h2><p>&#x8FD9;&#x4E24;&#x4E2A;&#x514B;&#x9686;&#x7684;&#x76EE;&#x5F55;&#x662F;&#x53EF;&#x4EE5;&#x6253;&#x5305;&#x591A;&#x6B21;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x7F51;&#x901F;&#x6162;&#x7684;&#x8BDD;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6253;&#x5305;&#x7559;&#x5B58;&#x4E00;&#x4E0B;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">su - git &amp;&amp; <span class="built_in">cd</span> ~</div><div class="line">git <span class="built_in">clone</span> https://gitlab.com/gitlab-org/gitlab-ce.git -b 7-14-stable gitlab</div><div class="line"><span class="comment">##&#x4E2D;&#x6587;&#x7248;7.14##&#x4EE5;&#x4E0B;url&#x90FD;&#x53EF;&#x4EE5;</span></div><div class="line">git <span class="built_in">clone</span> https://gitlab.com/jieme/gitlab.git -b 7-14-zh gitlab</div><div class="line">git <span class="built_in">clone</span> https://git.oschina.net/Yxnt/gitlab.git -b 7-14-zh gitlab <span class="comment"># &#x8FD9;&#x4E2A;&#x6BD4;&#x8F83;&#x5FEB;</span></div><div class="line">git <span class="built_in">clone</span> https://gitlab.com/ooppwwqq0/gitlab.git -b 7-14-zh gitlab</div><div class="line"></div><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">cp config/gitlab.yml.example config/gitlab.yml</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vim config/gitlab.yml</div><div class="line"><span class="comment">################</span></div><div class="line">:%s/home/data/g</div><div class="line"><span class="comment">################</span></div><div class="line"><span class="comment">## gitLab settings</span></div><div class="line">gitlab:</div><div class="line"><span class="comment">## Web server settings</span></div><div class="line">host: git.cass.com </div><div class="line">port: 8050</div><div class="line">https: <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x51C6;&#x5907;&#x4F7F;&#x7528;smtp&#x65B9;&#x5F0F;&#x53D1;&#x9001;&#x90AE;&#x4EF6;&#xFF0C;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x4E3A;&#x53D1;&#x9001;&#x90AE;&#x4EF6;&#x7684;&#x8D26;&#x53F7;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;sendmail&#x5C31;&#x4E0D;&#x7528;&#x4FEE;&#x6539;&#xFF0C;&#x672C;&#x4EBA;&#x4F7F;&#x7528;smtp&#x65B9;&#x5F0F;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">email_from: noreply@cass.com</div><div class="line">email_display_name: GitLab</div><div class="line">email_reply_to: noreply@cass.com</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x4ED3;&#x5E93;&#x6570;&#x91CF;&#xFF0C;&#x65E0;&#x9700;&#x4FEE;&#x6539;&#xFF0C;&#x521B;&#x5EFA;&#x8D26;&#x53F7;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## User settings</span></div><div class="line">default_projects_limit: 10</div></pre></td></tr></table></figure>
+<p>ldap&#x914D;&#x7F6E;&#xFF0C;&#x672C;&#x6587;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x6574;&#x5408;ldap&#xFF0C;&#x9700;&#x8981;&#x7684;&#x81EA;&#x5DF1;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x5427;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">ldap:</div><div class="line">enabled: <span class="literal">false</span></div><div class="line">host: <span class="string">&apos;_your_ldap_server&apos;</span></div><div class="line">base: <span class="string">&apos;_the_base_where_you_search_for_users&apos;</span></div><div class="line">port: 636</div><div class="line">uid: <span class="string">&apos;sAMAccountName&apos;</span></div><div class="line">method: <span class="string">&apos;ssl&apos;</span> <span class="comment"># &quot;ssl&quot; or &quot;plain&quot;</span></div><div class="line">bind_dn: <span class="string">&apos;_the_full_dn_of_the_user_you_will_bind_with&apos;</span></div><div class="line">password: <span class="string">&apos;_the_password_of_the_bind_user&apos;</span></div><div class="line">allow_username_or_email_login: <span class="literal">true</span></div><div class="line"><span class="comment">##################################</span></div><div class="line">path: /data/git/gitlab-satellites/</div><div class="line"></div><div class="line">gitlab_shell:</div><div class="line">path: /data/git/gitlab-shell/</div><div class="line"></div><div class="line"><span class="comment"># REPOS_PATH MUST NOT BE A SYMLINK!!!</span></div><div class="line">repos_path: /data/git/repositories/</div><div class="line">hooks_path: /data/git/gitlab-shell/hooks/</div><div class="line"><span class="comment">##################################</span></div></pre></td></tr></table></figure>
+<p>ssh&#x7AEF;&#x53E3;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x81EA;&#x884C;&#x4FEE;&#x6539;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#ssh_port: 22</span></div></pre></td></tr></table></figure>
+<p>&#x4E0B;&#x9762;&#x662F;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;git&#x540E;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x9ED8;&#x8BA4;&#x6587;&#x4EF6;&#x6700;&#x5927;&#x5927;&#x5C0F;&#x548C;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">git:</div><div class="line">bin_path: /usr/<span class="built_in">local</span>/bin/git</div><div class="line">max_size: 524288000 <span class="comment"># 5.megabytes</span></div><div class="line">timeout: 300</div><div class="line"></div><div class="line">cp config/unicorn.rb.example config/unicorn.rb</div><div class="line">vim config/unicorn.rb</div><div class="line"><span class="comment">###################################</span></div><div class="line">grep <span class="string">&quot;/data/git/&quot;</span> config/unicorn.rb</div><div class="line">working_directory <span class="string">&quot;/data/git/gitlab&quot;</span> <span class="comment"># available in 0.94.0+</span></div><div class="line">listen <span class="string">&quot;/data/git/gitlab/tmp/sockets/gitlab.socket&quot;</span>, :backlog =&gt; 64</div><div class="line">pid <span class="string">&quot;/data/git/gitlab/tmp/pids/unicorn.pid&quot;</span></div><div class="line">stderr_path <span class="string">&quot;/data/git/gitlab/log/unicorn.stderr.log&quot;</span></div><div class="line">stdout_path <span class="string">&quot;/data/git/gitlab/log/unicorn.stdout.log&quot;</span></div><div class="line"><span class="comment">###################################</span></div></pre></td></tr></table></figure>
+<p>&#x9ED8;&#x8BA4;8080&#x7AEF;&#x53E3;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x5360;&#x7528;&#x81EA;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x6211;&#x4E5F;&#x4E0D;&#x786E;&#x5B9A;&#x8FD9;&#x4E2A;&#x662F;&#x5E72;&#x4EC0;&#x4E48;&#x7528;&#x7684;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listen <span class="string">&quot;127.0.0.1:8060&quot;</span>, :tcp_nopush =&gt; <span class="literal">true</span></div><div class="line">timeout 300</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;&#x8FDE;&#x63A5;redis&#x914D;&#x7F6E;"><a href="#&#x4FEE;&#x6539;&#x8FDE;&#x63A5;redis&#x914D;&#x7F6E;" class="headerlink" title="&#x4FEE;&#x6539;&#x8FDE;&#x63A5;redis&#x914D;&#x7F6E;"></a>&#x4FEE;&#x6539;&#x8FDE;&#x63A5;redis&#x914D;&#x7F6E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp config/resque.yml.example config/resque.yml</div></pre></td></tr></table></figure>
+<p>&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim config/resque.yml</div><div class="line">development: redis://localhost:0</div><div class="line"><span class="built_in">test</span>: redis://localhost:0</div><div class="line">production: unix:/var/run/redis/redis.sock</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cp config/database.yml.mysql config/database.yml</div><div class="line"></div><div class="line">vim config/database.yml</div><div class="line">production:</div><div class="line">adapter: mysql2</div><div class="line">encoding: utf8</div><div class="line">reconnect: <span class="literal">false</span></div><div class="line">database: gitlabhq_production</div><div class="line">pool: 5</div><div class="line">username: gitlab</div><div class="line">password: <span class="string">&quot;gitlab&quot;</span></div><div class="line"><span class="comment"># host: localhost</span></div><div class="line"><span class="comment"># socket: /tmp/mysql.sock</span></div></pre></td></tr></table></figure>
+<h2 id="&#x521B;&#x5EFA;&#x6240;&#x9700;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x914D;&#x7F6E;&#x76F8;&#x5E94;&#x6743;&#x9650;"><a href="#&#x521B;&#x5EFA;&#x6240;&#x9700;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x914D;&#x7F6E;&#x76F8;&#x5E94;&#x6743;&#x9650;" class="headerlink" title="&#x521B;&#x5EFA;&#x6240;&#x9700;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x914D;&#x7F6E;&#x76F8;&#x5E94;&#x6743;&#x9650;"></a>&#x521B;&#x5EFA;&#x6240;&#x9700;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x914D;&#x7F6E;&#x76F8;&#x5E94;&#x6743;&#x9650;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">mkdir /home/git/gitlab-satellites</div><div class="line">chown -R git <span class="built_in">log</span>/</div><div class="line">chown -R git tmp/</div><div class="line">chmod -R u+rwX <span class="built_in">log</span>/</div><div class="line">chmod -R u+rwX tmp/</div><div class="line">chmod -R u+rwX tmp/pids/</div><div class="line">chmod -R u+rwX tmp/sockets/</div><div class="line">chmod -R u+rwX public/uploads</div><div class="line"></div><div class="line">cp config/initializers/rack_attack.rb.example config/initializers/rack_attack.rb</div><div class="line"></div><div class="line">git config --global user.name <span class="string">&quot;GitLab&quot;</span></div><div class="line">git config --global user.email <span class="string">&quot;gitlab@cass.org&quot;</span></div><div class="line">git config --global core.autocrlf input</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;gems"><a href="#&#x5B89;&#x88C5;gems" class="headerlink" title="&#x5B89;&#x88C5;gems"></a>&#x5B89;&#x88C5;gems</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">sudo gem install charlock_holmes --version <span class="string">&apos;0.6.9&apos;</span></div><div class="line">	 </div><div class="line">vim Gemfile</div><div class="line"> <span class="built_in">source</span> <span class="string">&quot;https://rubygems.org&quot;</span> &#x6539;&#x4E3A;</div><div class="line"> <span class="built_in">source</span> <span class="string">&quot;https://ruby.taobao.org&quot;</span></div><div class="line">	</div><div class="line"> vim Gemfile.lock</div><div class="line"> remote: https://rubygems.org/ &#x6539;&#x4E3A;</div><div class="line"> remote: https://ruby.taobao.org/</div><div class="line"><span class="comment">#&#x6267;&#x884C;:</span></div><div class="line">bundle install --deployment --without development <span class="built_in">test</span> postgres puma aws</div></pre></td></tr></table></figure>
+<h2 id="&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;"><a href="#&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;" class="headerlink" title="&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;"></a>&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">bundle <span class="built_in">exec</span> rake gitlab:setup RAILS_ENV=production --verbose</div><div class="line"></div><div class="line">This will create the necessary database tables and seed the database.</div><div class="line">You will lose any previous data stored <span class="keyword">in</span> the database.</div><div class="line">Do you want to <span class="built_in">continue</span> (yes/no)? yes</div><div class="line"><span class="comment">#&#x6700;&#x540E;&#x521D;&#x59CB;&#x5316;&#x6210;&#x529F;&#x540E;&#x4F1A;&#x83B7;&#x5F97;&#x8D26;&#x53F7;&#x548C;&#x5BC6;&#x7801;</span></div><div class="line">Administrator account created:</div><div class="line">login.........root</div><div class="line">password......5iveL!fe</div></pre></td></tr></table></figure>
+<h2 id="&#x68C0;&#x67E5;gitLab&#x53CA;&#x5176;&#x73AF;&#x5883;&#x7684;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6B63;&#x786E;"><a href="#&#x68C0;&#x67E5;gitLab&#x53CA;&#x5176;&#x73AF;&#x5883;&#x7684;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6B63;&#x786E;" class="headerlink" title="&#x68C0;&#x67E5;gitLab&#x53CA;&#x5176;&#x73AF;&#x5883;&#x7684;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6B63;&#x786E;"></a>&#x68C0;&#x67E5;gitLab&#x53CA;&#x5176;&#x73AF;&#x5883;&#x7684;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6B63;&#x786E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">bundle <span class="built_in">exec</span> rake gitlab:env:info RAILS_ENV=production</div><div class="line"></div><div class="line"> System information</div><div class="line"> System:		CentOS 6.5</div><div class="line"> Current User:	git</div><div class="line"> Using RVM:	no</div><div class="line"> Ruby Version:	2.2.4p230</div><div class="line"> Gem Version:	2.4.5.1</div><div class="line"> Bundler Version:1.12.3</div><div class="line"> Rake Version:	10.4.2</div><div class="line"> Sidekiq Version:3.3.0</div><div class="line"></div><div class="line"> GitLab information</div><div class="line"> Version:	7.14.3</div><div class="line"> Revision:	12bbae4</div><div class="line"> Directory:	/home/git/gitlab</div><div class="line"> DB Adapter:	mysql2</div><div class="line"> URL:		http://git.cass.com:8050</div><div class="line"> HTTP Clone URL:	http://git.cass.com:8050/some-group/some-project.git</div><div class="line"> SSH Clone URL:	git@git.cass.com:some-group/some-project.git</div><div class="line"> Using LDAP:	no</div><div class="line"> Using Omniauth:	no</div><div class="line"></div><div class="line"> GitLab Shell</div><div class="line"> Version:	2.7.2</div><div class="line"> Repositories:	/home/git/repositories/</div><div class="line"> Hooks:		/home/git/gitlab-shell/hooks/</div><div class="line"> Git:		/usr/<span class="built_in">local</span>/bin/git</div><div class="line"></div><div class="line"></div><div class="line">bundle <span class="built_in">exec</span> rake sidekiq:start RAILS_ENV=production</div><div class="line">bundle <span class="built_in">exec</span> rake gitlab:check RAILS_ENV=production</div><div class="line"></div><div class="line">sudo chmod -R ug+rwX,o-rwx /home/git/repositories/</div><div class="line">sudo chmod -R ug<span class="_">-s</span> /home/git/repositories/</div><div class="line">find /home/git/repositories/ -type d -print0 | sudo xargs -0 chmod g+s</div><div class="line">sudo chmod u+rwx,g=rx,o-rwx /home/git/gitlab-satellites</div></pre></td></tr></table></figure>
+<h2 id="&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;"><a href="#&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;" class="headerlink" title="&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;"></a>&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab</div><div class="line">sudo cp lib/support/init.d/gitlab.default.example /etc/default/gitlab</div><div class="line">sudo cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab</div><div class="line">sudo chmod +x /etc/init.d/gitlab</div><div class="line">sudo chkconfig --add gitlab</div><div class="line">sudo chkconfig gitlab on</div><div class="line"></div><div class="line"><span class="comment">##########################</span></div><div class="line">vim /etc/default/gitlab</div><div class="line">app_root=<span class="string">&quot;/data/<span class="variable">$app_user</span>/gitlab&quot;</span></div><div class="line"></div><div class="line"><span class="comment">#&#x65E0;&#x9700;&#x4E0B;&#x8F7D;</span></div><div class="line"><span class="comment">##sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/master/init/sysvinit/centos/gitlab-unicorn -P /etc/init.d/</span></div><div class="line"><span class="comment">##sudo mv /etc/init.d/gitlab-unicorn /etc/init.d/gitlab</span></div><div class="line"><span class="comment">##########################</span></div></pre></td></tr></table></figure>
+<h2 id="&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;"><a href="#&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;" class="headerlink" title="&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;[&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;]"></a>&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;[&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;]</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">sudo mkdir /usr/<span class="built_in">local</span>/nginx/conf/conf.d/ -p</div><div class="line">sudo cp lib/support/nginx/gitlab /usr/<span class="built_in">local</span>/nginx/conf/conf.d/</div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/conf/conf.d/</div><div class="line">sudo chown -R git:git .</div><div class="line">cp gitlab gitlab.conf</div><div class="line">vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</div></pre></td></tr></table></figure>
+<p>nginx&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user  git;</div><div class="line">worker_processes  4;</div><div class="line">events {</div><div class="line"> worker_connections  1024;</div><div class="line">}</div><div class="line"></div><div class="line">http {</div><div class="line"> includemime.types;</div><div class="line"> includeconf.d/*.conf;</div><div class="line">......</div><div class="line"></div><div class="line">sudo mkdir /var/<span class="built_in">log</span>/nginx</div></pre></td></tr></table></figure>
+<p>gitlab&#x865A;&#x62DF;&#x4E3B;&#x673A;&#x7684;&#x914D;&#x7F6E;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /usr/<span class="built_in">local</span>/nginx/conf/conf.d/gitlab.conf</div><div class="line">server {</div><div class="line"> listen 0.0.0.0:8050 default_server;</div><div class="line"> <span class="comment">#listen [::]:80 default_server;</span></div><div class="line"> server_name git.cass.com; </div><div class="line"></div><div class="line">location ~ ^/(assets)/ {</div><div class="line"> root /home/git/gitlab/public;</div><div class="line"> <span class="comment">#gzip_static on;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;"><a href="#&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;" class="headerlink" title="&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;"></a>&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su - git &amp;&amp; <span class="built_in">cd</span> ~/gitlab</div><div class="line">bundle <span class="built_in">exec</span> rake assets:precompile RAILS_ENV=production</div><div class="line">sudo service gitlab restart</div><div class="line">sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx</div></pre></td></tr></table></figure>
+<h2 id="&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;"><a href="#&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;"></a>&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;</h2><p><img src="/2016/05/09/gitlab-install-7/gitlab714/1.jpg" alt="logo"></p>
+<p>&#x521D;&#x59CB;&#x7BA1;&#x7406;&#x5458;&#x5E10;&#x53F7;&#x548C;&#x5BC6;&#x7801;&#x4E3A;&#xFF1A;</p>
+<p>root<br>5iveL!fe</p>
+<p>&#x767B;&#x9646;&#x6210;&#x529F;&#x540E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="/2016/05/09/gitlab-install-7/gitlab714/2.jpg" alt="logo"></p>
+<h2 id="&#x4FEE;&#x6539;&#x90AE;&#x4EF6;&#x53D1;&#x9001;"><a href="#&#x4FEE;&#x6539;&#x90AE;&#x4EF6;&#x53D1;&#x9001;" class="headerlink" title="&#x4FEE;&#x6539;&#x90AE;&#x4EF6;&#x53D1;&#x9001;"></a>&#x4FEE;&#x6539;&#x90AE;&#x4EF6;&#x53D1;&#x9001;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab/</div><div class="line">vim config/environments/production.rb</div><div class="line"> config.action_mailer.delivery_method = :smtp</div><div class="line"></div><div class="line">cp config/initializers/smtp_settings.rb.sample config/initializers/smtp_settings.rb</div><div class="line"></div><div class="line">vim config/initializers/smtp_settings.rb</div><div class="line"><span class="keyword">if</span> Rails.env.production?</div><div class="line"></div><div class="line">Gitlab::Application.config.action_mailer.delivery_method = :smtp</div><div class="line"></div><div class="line">ActionMailer::Base.smtp_settings = {</div><div class="line">address: <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">port: 25,</div><div class="line">user_name: <span class="string">&quot;xxx@cass.com&quot;</span>,</div><div class="line">password: <span class="string">&quot;password&quot;</span>,</div><div class="line">domain: <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">authentication: :plain,</div><div class="line">enable_starttls_auto: <span class="literal">true</span>,</div><div class="line"><span class="comment">#openssl_verify_mode: &apos;peer&apos; # See ActionMailer documentation for other possible options</span></div><div class="line">}</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>8.x&#x7248;&#x672C;&#x7684;&#x90AE;&#x4EF6;&#x914D;&#x7F6E;&#x548C;7.x&#x6709;&#x6240;&#x4E0D;&#x540C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab/</div><div class="line">vim config/environments/production.rb</div><div class="line">config.action_mailer.delivery_method = :smtp</div><div class="line">config.action_mailer.smtp_settings = {</div><div class="line">:address =&gt; <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">:port =&gt; <span class="string">&quot;25&quot;</span>,</div><div class="line">:domain =&gt; <span class="string">&quot;smtp.163.com&quot;</span>,</div><div class="line">:authentication =&gt; :plain,</div><div class="line">:user_name =&gt; <span class="string">&quot;xxx@163.com&quot;</span>,</div><div class="line">:password =&gt; <span class="string">&quot;xxx&quot;</span>,</div><div class="line">:enable_starttls_auto =&gt; <span class="literal">true</span></div><div class="line">  }</div></pre></td></tr></table></figure>
+<p>&#x914D;&#x7F6E;&#x597D;&#x4F60;&#x7684;&#x90AE;&#x7BB1;&#x548C;&#x5BC6;&#x7801;</p>
+<p>&#x7F16;&#x8F91;config/gitlab.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi config/gitlab.yml</div></pre></td></tr></table></figure>
+<p>&#x5BF9;&#x5E94;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#x914D;&#x7F6E;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">email_from: xxx@cass.com</div><div class="line">email_display_name: GitLab</div><div class="line">email_reply_to:xxx@cass.com</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+            <a href="/tags/gitlab/" rel="tag">#gitlab</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/18/fork-boom/" rel="prev" title="经典的 Fork 炸弹解析">
+                经典的 Fork 炸弹解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于gitlab"><span class="nav-number">1.1.</span> <span class="nav-text">关于gitlab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本说明："><span class="nav-number">1.2.</span> <span class="nav-text">版本说明：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装前准备工作"><span class="nav-number">2.</span> <span class="nav-text">安装前准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本配置"><span class="nav-number">2.1.</span> <span class="nav-text">基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装epel源"><span class="nav-number">2.2.</span> <span class="nav-text">安装epel源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入EPEL源的key"><span class="nav-number">2.3.</span> <span class="nav-text">导入EPEL源的key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置"><span class="nav-number">2.4.</span> <span class="nav-text">修改配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PUIAS源和导入对应key"><span class="nav-number">2.5.</span> <span class="nav-text">安装PUIAS源和导入对应key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新建立源缓存和检测key导入是否成功"><span class="nav-number">2.6.</span> <span class="nav-text">重新建立源缓存和检测key导入是否成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Development-Tools开发组包和一些软件所需依赖包"><span class="nav-number">2.7.</span> <span class="nav-text">安装Development Tools开发组包和一些软件所需依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载已经安装的包"><span class="nav-number">2.8.</span> <span class="nav-text">卸载已经安装的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步时间"><span class="nav-number">2.9.</span> <span class="nav-text">同步时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装git"><span class="nav-number">3.</span> <span class="nav-text">安装git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载源码包"><span class="nav-number">3.1.</span> <span class="nav-text">下载源码包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找到git的路径添加到环境变量"><span class="nav-number">3.2.</span> <span class="nav-text">找到git的路径添加到环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行之后有版本信息证明gitserver安装成功"><span class="nav-number">3.3.</span> <span class="nav-text">执行之后有版本信息证明gitserver安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在执行git-–version的时候有可能会报错找不到这个库文件"><span class="nav-number">3.4.</span> <span class="nav-text">在执行git –version的时候有可能会报错找不到这个库文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装ruby"><span class="nav-number">4.</span> <span class="nav-text">安装ruby</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载ruby源码包"><span class="nav-number">4.1.</span> <span class="nav-text">下载ruby源码包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装ruby"><span class="nav-number">4.2.</span> <span class="nav-text">编译安装ruby</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装bundler需要添加rubygems的国内镜像"><span class="nav-number">4.3.</span> <span class="nav-text">安装bundler需要添加rubygems的国内镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确保gem源中只有淘宝源"><span class="nav-number">4.4.</span> <span class="nav-text">确保gem源中只有淘宝源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装bundler"><span class="nav-number">4.5.</span> <span class="nav-text">安装bundler</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装nginx"><span class="nav-number">5.</span> <span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gitlab"><span class="nav-number">6.</span> <span class="nav-text">安装gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个git用户供gitLab使用"><span class="nav-number">6.1.</span> <span class="nav-text">创建一个git用户供gitLab使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置redis使用socket"><span class="nav-number">6.2.</span> <span class="nav-text">配置redis使用socket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立gitlab数据库并授权"><span class="nav-number">6.3.</span> <span class="nav-text">建立gitlab数据库并授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加mysql用户"><span class="nav-number">6.3.1.</span> <span class="nav-text">添加mysql用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取安装包"><span class="nav-number">6.3.2.</span> <span class="nav-text">获取安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number">6.3.3.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">6.3.4.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将mysql添加到环境变量"><span class="nav-number">6.3.5.</span> <span class="nav-text">将mysql添加到环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加git连接mysql的用户以及数据库"><span class="nav-number">6.3.6.</span> <span class="nav-text">添加git连接mysql的用户以及数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试git用户是否可以使用刚才创建的mysql用户登录"><span class="nav-number">6.3.7.</span> <span class="nav-text">测试git用户是否可以使用刚才创建的mysql用户登录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gitLab-Shell"><span class="nav-number">6.4.</span> <span class="nav-text">安装gitLab-Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#切换git用户"><span class="nav-number">6.4.1.</span> <span class="nav-text">切换git用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆gitlab的shell"><span class="nav-number">6.4.2.</span> <span class="nav-text">克隆gitlab的shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置自己的gitlab域名和端口"><span class="nav-number">6.4.3.</span> <span class="nav-text">配置自己的gitlab域名和端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置gitlab-shell使用reidis-socket"><span class="nav-number">6.4.4.</span> <span class="nav-text">配置gitlab-shell使用reidis-socket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成配置"><span class="nav-number">6.4.5.</span> <span class="nav-text">完成配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆gitLab源"><span class="nav-number">6.5.</span> <span class="nav-text">克隆gitLab源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">6.6.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接redis配置"><span class="nav-number">6.7.</span> <span class="nav-text">修改连接redis配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接数据库配置文件"><span class="nav-number">6.8.</span> <span class="nav-text">修改连接数据库配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建所需目录以及配置相应权限"><span class="nav-number">6.9.</span> <span class="nav-text">创建所需目录以及配置相应权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gems"><span class="nav-number">6.10.</span> <span class="nav-text">安装gems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据库进行初始化"><span class="nav-number">6.11.</span> <span class="nav-text">对数据库进行初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查gitLab及其环境的配置是否正确"><span class="nav-number">6.12.</span> <span class="nav-text">检查gitLab及其环境的配置是否正确</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建启动脚本"><span class="nav-number">6.13.</span> <span class="nav-text">创建启动脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制配置文件-这里使用nginx做为WEB服务"><span class="nav-number">6.14.</span> <span class="nav-text">复制配置文件[这里使用nginx做为WEB服务]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉取gitLab静态文件"><span class="nav-number">6.15.</span> <span class="nav-text">拉取gitLab静态文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问测试"><span class="nav-number">6.16.</span> <span class="nav-text">访问测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改邮件发送"><span class="nav-number">6.17.</span> <span class="nav-text">修改邮件发送</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/myvendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myvendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
