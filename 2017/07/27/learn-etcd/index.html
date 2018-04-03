@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="db,etcd," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x5185;&amp;#x5BB9;&amp;#x53D6;&amp;#x81EA; &amp;#x5B98;&amp;#x65B9;&amp;#x6F14;&amp;#x793A;demo&amp;#x3002;
+&amp;#x5728;&amp;#x6B64;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x90E8;&amp;#x5206;&amp;#x4E2A;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="etcd基本操作方式">
+<meta property="og:url" content="http://c.isme.pub/2017/07/27/learn-etcd/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x5185;&amp;#x5BB9;&amp;#x53D6;&amp;#x81EA; &amp;#x5B98;&amp;#x65B9;&amp;#x6F14;&amp;#x793A;demo&amp;#x3002;
+&amp;#x5728;&amp;#x6B64;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x90E8;&amp;#x5206;&amp;#x4E2A;&amp;">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/1.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/2.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/3.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/4.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/5.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/6.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/7.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/8.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/9.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/10.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/11.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/12.gif">
+<meta property="og:image" content="http://c.isme.pub/2017/07/27/learn-etcd/13.gif">
+<meta property="og:updated_time" content="2017-07-27T09:30:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="etcd基本操作方式">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x5185;&amp;#x5BB9;&amp;#x53D6;&amp;#x81EA; &amp;#x5B98;&amp;#x65B9;&amp;#x6F14;&amp;#x793A;demo&amp;#x3002;
+&amp;#x5728;&amp;#x6B64;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x90E8;&amp;#x5206;&amp;#x4E2A;&amp;">
+<meta name="twitter:image" content="http://c.isme.pub/2017/07/27/learn-etcd/1.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2017/07/27/learn-etcd/"/>
+
+
+
+
+
+  <title>etcd基本操作方式 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2017/07/27/learn-etcd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">etcd基本操作方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T17:30:27+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-07-27T17:30:27+08:00">
+                2017-07-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/etcd/" itemprop="url" rel="index">
+                    <span itemprop="name">etcd</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x53D6;&#x81EA; <a href="https://github.com/coreos/etcd/blob/master/Documentation/demo.md" target="_blank" rel="external">&#x5B98;&#x65B9;&#x6F14;&#x793A;demo</a>&#x3002;</p>
+<p>&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x6DFB;&#x52A0;&#x4E86;&#x90E8;&#x5206;&#x4E2A;&#x4EBA;&#x7406;&#x89E3;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<p>etcd&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x8BF7;&#x79FB;&#x6B65; <a href="http://c.isme.pub/2016/11/21/etcd-cluster/">etcd-cluster &#x96C6;&#x7FA4;&#x90E8;&#x7F72;</a></p>
+<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x76EE;&#x524D;&#x4E3A;api3&#x7684;&#x64CD;&#x4F5C;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="&#x914D;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x73AF;&#x5883;&#x53D8;&#x91CF;"><a href="#&#x914D;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x73AF;&#x5883;&#x53D8;&#x91CF;" class="headerlink" title="&#x914D;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></a>&#x914D;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">HOST_1=172.16.7.1</div><div class="line">HOST_2=172.16.7.2</div><div class="line">HOST_3=172.16.7.3</div><div class="line">ENDPOINTS=<span class="variable">$HOST_1</span>:2379,<span class="variable">$HOST_2</span>:2379,<span class="variable">$HOST_3</span>:2379</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> member list</div></pre></td></tr></table></figure>
+<h1 id="Access-etcd"><a href="#Access-etcd" class="headerlink" title="Access etcd"></a>Access etcd</h1><p><img src="/2017/07/27/learn-etcd/1.gif" alt=""></p>
+<p><strong>put</strong> command to write:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put foo <span class="string">&quot;Hello World!&quot;</span></div></pre></td></tr></table></figure>
+<p><strong>get</strong> to read from etcd:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> get foo</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> --write-out=<span class="string">&quot;json&quot;</span> get foo</div></pre></td></tr></table></figure>
+<h1 id="Get-by-prefix"><a href="#Get-by-prefix" class="headerlink" title="Get by prefix"></a>Get by prefix</h1><p><img src="/2017/07/27/learn-etcd/2.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put web1 value1</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put web2 value2</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put web3 value3</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> get web --prefix</div></pre></td></tr></table></figure>
+<h1 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h1><p><img src="/2017/07/27/learn-etcd/3.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put key myvalue</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> del key</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put k1 value1</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put k2 value2</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> del k --prefix</div></pre></td></tr></table></figure>
+<h1 id="Transactional-write"><a href="#Transactional-write" class="headerlink" title="Transactional write"></a>Transactional write</h1><p><strong>txn</strong> to wrap multiple requests into one transaction:</p>
+<p><img src="/2017/07/27/learn-etcd/4.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put user1 bad</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> txn --interactive</div><div class="line"></div><div class="line">compares:</div><div class="line">value(<span class="string">&quot;user1&quot;</span>) = <span class="string">&quot;bad&quot;</span>      </div><div class="line"></div><div class="line">success requests (get, put, delete):</div><div class="line">del user1  </div><div class="line"></div><div class="line">failure requests (get, put, delete):</div><div class="line">put user1 good</div></pre></td></tr></table></figure>
+<h1 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h1><p><strong>watch</strong> to get notified of future changes:</p>
+<p><img src="/2017/07/27/learn-etcd/5.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> watch stock1</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put stock1 1000</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> watch stock --prefix</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put stock1 10</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put stock2 20</div></pre></td></tr></table></figure>
+<h1 id="Lease"><a href="#Lease" class="headerlink" title="Lease"></a>Lease</h1><p><strong>lease</strong> to write with TTL:</p>
+<p><img src="/2017/07/27/learn-etcd/6.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> lease grant 300</div><div class="line"><span class="comment"># lease 2be7547fbc6a5afa granted with TTL(300s)</span></div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> put sample value --lease=2be7547fbc6a5afa</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> get sample</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> lease keep-alive 2be7547fbc6a5afa</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> lease revoke 2be7547fbc6a5afa</div><div class="line"><span class="comment"># or after 300 seconds</span></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> get sample</div></pre></td></tr></table></figure>
+<h1 id="Distributed-locks"><a href="#Distributed-locks" class="headerlink" title="Distributed locks"></a>Distributed locks</h1><p><strong>lock</strong> for distributed lock:</p>
+<p><img src="/2017/07/27/learn-etcd/7.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> lock mutex1</div><div class="line"></div><div class="line"><span class="comment"># another client with the same name blocks</span></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> lock mutex1</div></pre></td></tr></table></figure>
+<h1 id="Elections"><a href="#Elections" class="headerlink" title="Elections"></a>Elections</h1><p><strong>elect</strong> for leader election:</p>
+<p><img src="/2017/07/27/learn-etcd/8.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> elect one p1</div><div class="line"></div><div class="line"><span class="comment"># another client with the same name blocks</span></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> elect one p2</div></pre></td></tr></table></figure>
+<h1 id="Cluster-status"><a href="#Cluster-status" class="headerlink" title="Cluster status"></a>Cluster status</h1><p>Specify the initial cluster configuration for each machine:</p>
+<p><img src="/2017/07/27/learn-etcd/9.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">etcdctl --write-out=table --endpoints=<span class="variable">$ENDPOINTS</span> endpoint status</div><div class="line"></div><div class="line">+------------------+------------------+---------+---------+-----------+-----------+------------+</div><div class="line">|     ENDPOINT     |        ID        | VERSION | DB SIZE | IS LEADER | RAFT TERM | RAFT INDEX |</div><div class="line">+------------------+------------------+---------+---------+-----------+-----------+------------+</div><div class="line">| 10.240.0.17:2379 | 4917a7ab173fabe7 | 3.0.0   | 45 kB   | <span class="literal">true</span>      |         4 |      16726 |</div><div class="line">| 10.240.0.18:2379 | 59796ba9<span class="built_in">cd</span>1bcd72 | 3.0.0   | 45 kB   | <span class="literal">false</span>     |         4 |      16726 |</div><div class="line">| 10.240.0.19:2379 | 94df724b66343e6c | 3.0.0   | 45 kB   | <span class="literal">false</span>     |         4 |      16726 |</div><div class="line">+------------------+------------------+---------+---------+-----------+-----------+------------+</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> endpoint health</div><div class="line"></div><div class="line">10.240.0.17:2379 is healthy: successfully committed proposal: took = 3.345431ms</div><div class="line">10.240.0.19:2379 is healthy: successfully committed proposal: took = 3.767967ms</div><div class="line">10.240.0.18:2379 is healthy: successfully committed proposal: took = 4.025451ms</div></pre></td></tr></table></figure>
+<h1 id="Snapshot"><a href="#Snapshot" class="headerlink" title="Snapshot"></a>Snapshot</h1><p><strong>snapshot</strong> to save point-in-time snapshot of etcd database:</p>
+<p><img src="/2017/07/27/learn-etcd/10.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> snapshot save my.db</div><div class="line"></div><div class="line">Snapshot saved at my.db</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">etcdctl --write-out=table --endpoints=<span class="variable">$ENDPOINTS</span> snapshot status my.db</div><div class="line"></div><div class="line">+---------+----------+------------+------------+</div><div class="line">|  HASH   | REVISION | TOTAL KEYS | TOTAL SIZE |</div><div class="line">+---------+----------+------------+------------+</div><div class="line">| c55e8b8 |        9 |         13 | 25 kB      |</div><div class="line">+---------+----------+------------+------------+</div></pre></td></tr></table></figure>
+<h1 id="Migrate"><a href="#Migrate" class="headerlink" title="Migrate"></a>Migrate</h1><p><strong>migrate</strong> to transform etcd v2 to v3 data:</p>
+<p><img src="/2017/07/27/learn-etcd/11.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># write key in etcd version 2 store</span></div><div class="line"><span class="built_in">export</span> ETCDCTL_API=2</div><div class="line">etcdctl --endpoints=http://<span class="variable">$ENDPOINT</span> <span class="built_in">set</span> foo bar</div><div class="line"></div><div class="line"><span class="comment"># read key in etcd v2</span></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> --output=<span class="string">&quot;json&quot;</span> get foo</div><div class="line"></div><div class="line"><span class="comment"># stop etcd node to migrate, one by one</span></div><div class="line"></div><div class="line"><span class="comment"># migrate v2 data</span></div><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINT</span> migrate --data-dir=<span class="string">&quot;default.etcd&quot;</span> --wal-dir=<span class="string">&quot;default.etcd/member/wal&quot;</span></div><div class="line"></div><div class="line"><span class="comment"># restart etcd node after migrate, one by one</span></div><div class="line"></div><div class="line"><span class="comment"># confirm that the key got migrated</span></div><div class="line">etcdctl --endpoints=<span class="variable">$ENDPOINTS</span> get /foo</div></pre></td></tr></table></figure>
+<h1 id="Member"><a href="#Member" class="headerlink" title="Member"></a>Member</h1><p><strong>member</strong> to add,remove,update membership:</p>
+<p><img src="/2017/07/27/learn-etcd/12.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># For each machine</span></div><div class="line">TOKEN=my-etcd-token-1</div><div class="line">CLUSTER_STATE=new</div><div class="line">NAME_1=etcd-node-1</div><div class="line">NAME_2=etcd-node-2</div><div class="line">NAME_3=etcd-node-3</div><div class="line">HOST_1=10.240.0.13</div><div class="line">HOST_2=10.240.0.14</div><div class="line">HOST_3=10.240.0.15</div><div class="line">CLUSTER=<span class="variable">${NAME_1}</span>=http://<span class="variable">${HOST_1}</span>:2380,<span class="variable">${NAME_2}</span>=http://<span class="variable">${HOST_2}</span>:2380,<span class="variable">${NAME_3}</span>=http://<span class="variable">${HOST_3}</span>:2380</div><div class="line"></div><div class="line"><span class="comment"># For node 1</span></div><div class="line">THIS_NAME=<span class="variable">${NAME_1}</span></div><div class="line">THIS_IP=<span class="variable">${HOST_1}</span></div><div class="line">etcd --data-dir=data.etcd --name <span class="variable">${THIS_NAME}</span> \</div><div class="line">	--initial-advertise-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--listen-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--advertise-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--listen-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--initial-cluster <span class="variable">${CLUSTER}</span> \</div><div class="line">	--initial-cluster-state <span class="variable">${CLUSTER_STATE}</span> \</div><div class="line">	--initial-cluster-token <span class="variable">${TOKEN}</span></div><div class="line"></div><div class="line"><span class="comment"># For node 2</span></div><div class="line">THIS_NAME=<span class="variable">${NAME_2}</span></div><div class="line">THIS_IP=<span class="variable">${HOST_2}</span></div><div class="line">etcd --data-dir=data.etcd --name <span class="variable">${THIS_NAME}</span> \</div><div class="line">	--initial-advertise-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--listen-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--advertise-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--listen-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--initial-cluster <span class="variable">${CLUSTER}</span> \</div><div class="line">	--initial-cluster-state <span class="variable">${CLUSTER_STATE}</span> \</div><div class="line">	--initial-cluster-token <span class="variable">${TOKEN}</span></div><div class="line"></div><div class="line"><span class="comment"># For node 3</span></div><div class="line">THIS_NAME=<span class="variable">${NAME_3}</span></div><div class="line">THIS_IP=<span class="variable">${HOST_3}</span></div><div class="line">etcd --data-dir=data.etcd --name <span class="variable">${THIS_NAME}</span> \</div><div class="line">	--initial-advertise-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--listen-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--advertise-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--listen-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--initial-cluster <span class="variable">${CLUSTER}</span> \</div><div class="line">	--initial-cluster-state <span class="variable">${CLUSTER_STATE}</span> \</div><div class="line">	--initial-cluster-token <span class="variable">${TOKEN}</span></div></pre></td></tr></table></figure>
+<p>Then replace a member with member remove and member add commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># get member ID</span></div><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">HOST_1=10.240.0.13</div><div class="line">HOST_2=10.240.0.14</div><div class="line">HOST_3=10.240.0.15</div><div class="line">etcdctl --endpoints=<span class="variable">${HOST_1}</span>:2379,<span class="variable">${HOST_2}</span>:2379,<span class="variable">${HOST_3}</span>:2379 member list</div><div class="line"></div><div class="line"><span class="comment"># remove the member</span></div><div class="line">MEMBER_ID=278c654c9a6dfd3b</div><div class="line">etcdctl --endpoints=<span class="variable">${HOST_1}</span>:2379,<span class="variable">${HOST_2}</span>:2379,<span class="variable">${HOST_3}</span>:2379 \</div><div class="line">	member remove <span class="variable">${MEMBER_ID}</span></div><div class="line"></div><div class="line"><span class="comment"># add a new member (node 4)</span></div><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">NAME_1=etcd-node-1</div><div class="line">NAME_2=etcd-node-2</div><div class="line">NAME_4=etcd-node-4</div><div class="line">HOST_1=10.240.0.13</div><div class="line">HOST_2=10.240.0.14</div><div class="line">HOST_4=10.240.0.16 <span class="comment"># new member</span></div><div class="line">etcdctl --endpoints=<span class="variable">${HOST_1}</span>:2379,<span class="variable">${HOST_2}</span>:2379 \</div><div class="line">	member add <span class="variable">${NAME_4}</span> \</div><div class="line">	--peer-urls=http://<span class="variable">${HOST_4}</span>:2380</div></pre></td></tr></table></figure>
+<p>Next, start the new member with &#x2013;initial-cluster-state existing flag:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># [WARNING] If the new member starts from the same disk space,</span></div><div class="line"><span class="comment"># make sure to remove the data directory of the old member</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># restart with &apos;existing&apos; flag</span></div><div class="line">TOKEN=my-etcd-token-1</div><div class="line">CLUSTER_STATE=existing</div><div class="line">NAME_1=etcd-node-1</div><div class="line">NAME_2=etcd-node-2</div><div class="line">NAME_4=etcd-node-4</div><div class="line">HOST_1=10.240.0.13</div><div class="line">HOST_2=10.240.0.14</div><div class="line">HOST_4=10.240.0.16 <span class="comment"># new member</span></div><div class="line">CLUSTER=<span class="variable">${NAME_1}</span>=http://<span class="variable">${HOST_1}</span>:2380,<span class="variable">${NAME_2}</span>=http://<span class="variable">${HOST_2}</span>:2380,<span class="variable">${NAME_4}</span>=http://<span class="variable">${HOST_4}</span>:2380</div><div class="line"></div><div class="line">THIS_NAME=<span class="variable">${NAME_4}</span></div><div class="line">THIS_IP=<span class="variable">${HOST_4}</span></div><div class="line">etcd --data-dir=data.etcd --name <span class="variable">${THIS_NAME}</span> \</div><div class="line">	--initial-advertise-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--listen-peer-urls http://<span class="variable">${THIS_IP}</span>:2380 \</div><div class="line">	--advertise-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--listen-client-urls http://<span class="variable">${THIS_IP}</span>:2379 \</div><div class="line">	--initial-cluster <span class="variable">${CLUSTER}</span> \</div><div class="line">	--initial-cluster-state <span class="variable">${CLUSTER_STATE}</span> \</div><div class="line">	--initial-cluster-token <span class="variable">${TOKEN}</span></div></pre></td></tr></table></figure>
+<h1 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h1><p><strong>auth</strong>,<strong>user</strong>,<strong>role</strong> for authentication:</p>
+<p><img src="/2017/07/27/learn-etcd/13.gif" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">ENDPOINTS=localhost:2379</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> role add root</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> role grant-permission root readwrite foo</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> role get root</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> user add root</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> user grant-role root root</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> user get root</div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> auth <span class="built_in">enable</span></div><div class="line"><span class="comment"># now all client requests go through auth</span></div><div class="line"></div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> --user=root:123 put foo bar</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> get foo</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> --user=root:123 get foo</div><div class="line">etcdctl --endpoints=<span class="variable">${ENDPOINTS}</span> --user=root:123 get foo1</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/db/" rel="tag"># db</a>
+          
+            <a href="/tags/etcd/" rel="tag"># etcd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/jumpserver-problem/" rel="next" title="jumpserver Connection Reset By Peer 问题总结">
+                <i class="fa fa-chevron-left"></i> jumpserver Connection Reset By Peer 问题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/28/markdown-tools/" rel="prev" title="markdown小技巧">
+                markdown小技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置客户端环境变量"><span class="nav-number">2.</span> <span class="nav-text">配置客户端环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Access-etcd"><span class="nav-number">3.</span> <span class="nav-text">Access etcd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Get-by-prefix"><span class="nav-number">4.</span> <span class="nav-text">Get by prefix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Delete"><span class="nav-number">5.</span> <span class="nav-text">Delete</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transactional-write"><span class="nav-number">6.</span> <span class="nav-text">Transactional write</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Watch"><span class="nav-number">7.</span> <span class="nav-text">Watch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lease"><span class="nav-number">8.</span> <span class="nav-text">Lease</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distributed-locks"><span class="nav-number">9.</span> <span class="nav-text">Distributed locks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elections"><span class="nav-number">10.</span> <span class="nav-text">Elections</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cluster-status"><span class="nav-number">11.</span> <span class="nav-text">Cluster status</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Snapshot"><span class="nav-number">12.</span> <span class="nav-text">Snapshot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Migrate"><span class="nav-number">13.</span> <span class="nav-text">Migrate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Member"><span class="nav-number">14.</span> <span class="nav-text">Member</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Auth"><span class="nav-number">15.</span> <span class="nav-text">Auth</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

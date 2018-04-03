@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="db,mysql,sql," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;MySQL&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x6027;&amp;#x80FD;&amp;#x5DEE;&amp;#xFF0C;&amp;#x4E00;&amp;#x822C;&amp;#x60C5;&amp;#x51B5;&amp;#x6162;&amp;#x67E5;&amp;#x8BE2;sql&amp;#x5360;&amp;#x636E;&amp;#x4E86;&amp;#x5F88;&amp;#x5927;&amp;#x7684;&amp;#x6BD4;&amp;#x4F8B;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql优化之用索引优化order by语句">
+<meta property="og:url" content="http://c.isme.pub/2016/12/21/sql-performance/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;MySQL&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x6027;&amp;#x80FD;&amp;#x5DEE;&amp;#xFF0C;&amp;#x4E00;&amp;#x822C;&amp;#x60C5;&amp;#x51B5;&amp;#x6162;&amp;#x67E5;&amp;#x8BE2;sql&amp;#x5360;&amp;#x636E;&amp;#x4E86;&amp;#x5F88;&amp;#x5927;&amp;#x7684;&amp;#x6BD4;&amp;#x4F8B;">
+<meta property="og:updated_time" content="2017-08-22T02:09:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql优化之用索引优化order by语句">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;MySQL&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x6027;&amp;#x80FD;&amp;#x5DEE;&amp;#xFF0C;&amp;#x4E00;&amp;#x822C;&amp;#x60C5;&amp;#x51B5;&amp;#x6162;&amp;#x67E5;&amp;#x8BE2;sql&amp;#x5360;&amp;#x636E;&amp;#x4E86;&amp;#x5F88;&amp;#x5927;&amp;#x7684;&amp;#x6BD4;&amp;#x4F8B;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/12/21/sql-performance/"/>
+
+
+
+
+
+  <title>sql优化之用索引优化order by语句 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/12/21/sql-performance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sql优化之用索引优化order by语句</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-21T10:02:26+08:00">
+                2016-12-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-22T10:09:08+08:00">
+                2017-08-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/mysql/sql/" itemprop="url" rel="index">
+                    <span itemprop="name">sql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>MySQL&#x6570;&#x636E;&#x5E93;&#x6027;&#x80FD;&#x5DEE;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x6162;&#x67E5;&#x8BE2;sql&#x5360;&#x636E;&#x4E86;&#x5F88;&#x5927;&#x7684;&#x6BD4;&#x4F8B;&#xFF0C;&#x4ECE;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x627E;&#x5230;&#x4E86;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x5E93;&#x6027;&#x80FD;&#x5DEE;&#x7684;sql&#x4E4B;&#x540E;&#xFF0C;&#x914D;&#x5408;sql&#x6267;&#x884C;&#x8BA1;&#x5212;&#x5C31;&#x53EF;&#x4EE5;&#x5BF9;sql&#x8FDB;&#x884C;&#x4F18;&#x5316;&#x4E86;&#x3002;</p>
+<p>MySQL&#x7D22;&#x5F15;&#x901A;&#x5E38;&#x662F;&#x88AB;&#x7528;&#x4E8E;&#x63D0;&#x9AD8;WHERE&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;&#x884C;&#x5339;&#x914D;&#x6216;&#x8005;&#x6267;&#x884C;&#x8054;&#x7ED3;&#x64CD;&#x4F5C;&#x65F6;&#x5339;&#x914D;&#x5176;&#x5B83;&#x8868;&#x7684;&#x6570;&#x636E;&#x884C;&#x7684;&#x641C;&#x7D22;&#x901F;&#x5EA6;&#x3002;</p>
+<p>MySQL&#x4E5F;&#x80FD;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5FEB;&#x901F;&#x5730;&#x6267;&#x884C;ORDER BY&#x548C;GROUP BY&#x8BED;&#x53E5;&#x7684;&#x6392;&#x5E8F;&#x548C;&#x5206;&#x7EC4;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>ORDER BY&#x548C;GROUP BY&#x8BED;&#x53E5;&#x4F1A;&#x5148;&#x5BF9;&#x67E5;&#x8BE2;&#x8868;&#x6267;&#x884C;&#x6392;&#x5E8F;&#x6216;&#x5206;&#x7EC4;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x6267;&#x884C;where&#x6761;&#x4EF6;&#x91CC;&#x9762;&#x7684;&#x7B5B;&#x9009;&#xFF0C;&#x5E76;&#x4E14;&#x4E00;&#x6B21;&#x67E5;&#x8BE2;&#x53EA;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7D22;&#x5F15;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x53D6;&#x81EA; <a href="http://blog.csdn.net/ryb7899/archive/2010/05/11/5580624.aspx" target="_blank" rel="external">CSDN&#x535A;&#x5BA2;</a></p>
+<a id="more"></a>
+<h1 id="MySQL&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316;-Order-By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;"><a href="#MySQL&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316;-Order-By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;" class="headerlink" title="MySQL&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316; Order By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;"></a>MySQL&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316; Order By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;</h1><h2 id="ORDER-BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;"><a href="#ORDER-BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;" class="headerlink" title="ORDER BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;"></a>ORDER BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;</h2><p>&#x5982;&#x679C;&#x4E00;&#x4E2A;SQL&#x8BED;&#x53E5;&#x5F62;&#x5982;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>] <span class="keyword">ORDER</span> <span class="keyword">BY</span> [<span class="keyword">sort</span>];</div></pre></td></tr></table></figure>
+<p>&#x5728;[sort]&#x8FD9;&#x4E2A;&#x680F;&#x4F4D;&#x4E0A;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;&#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x8FDB;&#x884C;order by &#x4F18;&#x5316;&#x3002;</p>
+<h2 id="WHERE-ORDER-BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;"><a href="#WHERE-ORDER-BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;" class="headerlink" title="WHERE + ORDER BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;"></a>WHERE + ORDER BY&#x7684;&#x7D22;&#x5F15;&#x4F18;&#x5316;</h2><p>&#x5F62;&#x5982;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>] <span class="keyword">WHERE</span> [columnX] = [<span class="keyword">value</span>] <span class="keyword">ORDER</span> <span class="keyword">BY</span> [<span class="keyword">sort</span>];</div></pre></td></tr></table></figure>
+<p>&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x8054;&#x5408;&#x7D22;&#x5F15;(columnX,sort)&#x6765;&#x5B9E;&#x73B0;order by &#x4F18;&#x5316;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;columnX&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x5982;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x5C31;&#x65E0;&#x6CD5;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5B9E;&#x73B0;order by&#x7684;&#x4F18;&#x5316;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>] <span class="keyword">WHERE</span> [columnX] <span class="keyword">IN</span> ([value1],[value2],&#x2026;) <span class="keyword">ORDER</span> <span class="keyword">BY</span>[<span class="keyword">sort</span>];</div></pre></td></tr></table></figure>
+<h2 id="WHERE-&#x591A;&#x4E2A;&#x5B57;&#x6BB5;ORDER-BY"><a href="#WHERE-&#x591A;&#x4E2A;&#x5B57;&#x6BB5;ORDER-BY" class="headerlink" title="WHERE+ &#x591A;&#x4E2A;&#x5B57;&#x6BB5;ORDER BY"></a>WHERE+ &#x591A;&#x4E2A;&#x5B57;&#x6BB5;ORDER BY</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> [<span class="keyword">table</span>] <span class="keyword">WHERE</span> uid=<span class="number">1</span> <span class="keyword">ORDER</span> x,y <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">10</span>;</div></pre></td></tr></table></figure>
+<p>&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;(uid,x,y)&#x5B9E;&#x73B0;order by&#x7684;&#x4F18;&#x5316;,&#x6BD4;&#x5EFA;&#x7ACB;(x,y,uid)&#x7D22;&#x5F15;&#x6548;&#x679C;&#x8981;&#x597D;&#x5F97;&#x591A;&#x3002;</p>
+<h1 id="MySQL&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316;-Order-By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;"><a href="#MySQL&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316;-Order-By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;" class="headerlink" title="MySQL&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316; Order By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;"></a>MySQL&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x4F18;&#x5316; Order By&#x6392;&#x5E8F;&#x7684;&#x60C5;&#x51B5;</h1><h2 id="&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x505A;-ORDER-BY-&#xFF1A;-key1-key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;"><a href="#&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x505A;-ORDER-BY-&#xFF1A;-key1-key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;" class="headerlink" title="&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x505A; ORDER BY &#xFF1A;(key1,key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)"></a>&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x505A; ORDER BY &#xFF1A;(key1,key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1 <span class="keyword">ORDER</span> <span class="keyword">BY</span> key1, key2;</div></pre></td></tr></table></figure>
+<h2 id="&#x5728;&#x975E;&#x8FDE;&#x7EED;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x90E8;&#x5206;&#x4E0A;&#x505A;-ORDER-BY&#xFF1A;-key-part1-key-part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;-key2&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;"><a href="#&#x5728;&#x975E;&#x8FDE;&#x7EED;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x90E8;&#x5206;&#x4E0A;&#x505A;-ORDER-BY&#xFF1A;-key-part1-key-part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;-key2&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;" class="headerlink" title="&#x5728;&#x975E;&#x8FDE;&#x7EED;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x90E8;&#x5206;&#x4E0A;&#x505A; ORDER BY&#xFF1A;(key_part1,key_part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;;key2&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)"></a>&#x5728;&#x975E;&#x8FDE;&#x7EED;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x90E8;&#x5206;&#x4E0A;&#x505A; ORDER BY&#xFF1A;(key_part1,key_part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;;key2&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1 <span class="keyword">WHERE</span> key2=<span class="keyword">constant</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> key_part2;</div></pre></td></tr></table></figure>
+<h2 id="&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x4E86;-ASC-&#x548C;-DESC&#xFF1A;-key-part1-key-part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;"><a href="#&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x4E86;-ASC-&#x548C;-DESC&#xFF1A;-key-part1-key-part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;" class="headerlink" title="&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x4E86; ASC &#x548C; DESC&#xFF1A;(key_part1,key_part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;)"></a>&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x4E86; ASC &#x548C; DESC&#xFF1A;(key_part1,key_part2&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1 <span class="keyword">ORDER</span> <span class="keyword">BY</span> key_part1 <span class="keyword">DESC</span>, key_part2 <span class="keyword">ASC</span>;</div></pre></td></tr></table></figure>
+<h2 id="&#x7528;&#x4E8E;&#x641C;&#x7D22;&#x8BB0;&#x5F55;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x548C;&#x505A;-ORDER-BY-&#x7684;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF1A;-key1-key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;"><a href="#&#x7528;&#x4E8E;&#x641C;&#x7D22;&#x8BB0;&#x5F55;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x548C;&#x505A;-ORDER-BY-&#x7684;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF1A;-key1-key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;" class="headerlink" title="&#x7528;&#x4E8E;&#x641C;&#x7D22;&#x8BB0;&#x5F55;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x548C;&#x505A; ORDER BY &#x7684;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF1A;(key1,key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)"></a>&#x7528;&#x4E8E;&#x641C;&#x7D22;&#x8BB0;&#x5F55;&#x7684;&#x7D22;&#x5F15;&#x952E;&#x548C;&#x505A; ORDER BY &#x7684;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF1A;(key1,key2&#x5206;&#x522B;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1 <span class="keyword">WHERE</span> key2=<span class="keyword">constant</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> key1;</div></pre></td></tr></table></figure>
+<h2 id="&#x5982;&#x679C;&#x5728;WHERE&#x548C;ORDER-BY&#x7684;&#x680F;&#x4F4D;&#x4E0A;&#x5E94;&#x7528;&#x8868;&#x8FBE;&#x5F0F;-&#x51FD;&#x6570;-&#x65F6;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5B9E;&#x73B0;order-by&#x7684;&#x4F18;&#x5316;"><a href="#&#x5982;&#x679C;&#x5728;WHERE&#x548C;ORDER-BY&#x7684;&#x680F;&#x4F4D;&#x4E0A;&#x5E94;&#x7528;&#x8868;&#x8FBE;&#x5F0F;-&#x51FD;&#x6570;-&#x65F6;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5B9E;&#x73B0;order-by&#x7684;&#x4F18;&#x5316;" class="headerlink" title="&#x5982;&#x679C;&#x5728;WHERE&#x548C;ORDER BY&#x7684;&#x680F;&#x4F4D;&#x4E0A;&#x5E94;&#x7528;&#x8868;&#x8FBE;&#x5F0F;(&#x51FD;&#x6570;)&#x65F6;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5B9E;&#x73B0;order by&#x7684;&#x4F18;&#x5316;"></a>&#x5982;&#x679C;&#x5728;WHERE&#x548C;ORDER BY&#x7684;&#x680F;&#x4F4D;&#x4E0A;&#x5E94;&#x7528;&#x8868;&#x8FBE;&#x5F0F;(&#x51FD;&#x6570;)&#x65F6;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x5229;&#x7528;&#x7D22;&#x5F15;&#x6765;&#x5B9E;&#x73B0;order by&#x7684;&#x4F18;&#x5316;</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1 <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">YEAR</span>(logindate) <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">10</span>;</div></pre></td></tr></table></figure>
+<h1 id="&#x4F7F;&#x7528;&#x5B50;&#x67E5;&#x8BE2;&#x6765;&#x4F18;&#x5316;order-by&#x8BED;&#x53E5;"><a href="#&#x4F7F;&#x7528;&#x5B50;&#x67E5;&#x8BE2;&#x6765;&#x4F18;&#x5316;order-by&#x8BED;&#x53E5;" class="headerlink" title="&#x4F7F;&#x7528;&#x5B50;&#x67E5;&#x8BE2;&#x6765;&#x4F18;&#x5316;order by&#x8BED;&#x53E5;"></a>&#x4F7F;&#x7528;&#x5B50;&#x67E5;&#x8BE2;&#x6765;&#x4F18;&#x5316;order by&#x8BED;&#x53E5;</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>] <span class="keyword">WHERE</span> [columnX] = [<span class="keyword">value</span>] <span class="keyword">ORDER</span> <span class="keyword">BY</span> [<span class="keyword">sort</span>];</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x6539;&#x6210;&#x5B50;&#x67E5;&#x8BE2;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x5B50;&#x67E5;&#x8BE2;&#x5148;&#x6267;&#x884C;&#x7B5B;&#x9009;&#xFF0C;&#x5916;&#x5C42;&#x8FDB;&#x884C;&#x6392;&#x5E8F;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">from</span> (<span class="keyword">SELECT</span> [column1],[column2],&#x2026;. <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>] <span class="keyword">WHERE</span> [columnX] = [<span class="keyword">value</span>] ) a <span class="keyword">ORDER</span> <span class="keyword">BY</span> [<span class="keyword">sort</span>];</div></pre></td></tr></table></figure>
+<h1 id="&#x7279;&#x522B;&#x63D0;&#x793A;"><a href="#&#x7279;&#x522B;&#x63D0;&#x793A;" class="headerlink" title="&#x7279;&#x522B;&#x63D0;&#x793A;"></a>&#x7279;&#x522B;&#x63D0;&#x793A;</h1><ul>
+<li>mysql&#x4E00;&#x6B21;&#x67E5;&#x8BE2;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7D22;&#x5F15;&#x3002;&#x5982;&#x679C;&#x8981;&#x5BF9;&#x591A;&#x4E2A;&#x5B57;&#x6BB5;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#xFF0C;&#x5EFA;&#x7ACB;&#x590D;&#x5408;&#x7D22;&#x5F15;&#x3002;</li>
+<li>&#x5728;ORDER BY&#x64CD;&#x4F5C;&#x4E2D;&#xFF0C;MySQL&#x53EA;&#x6709;&#x5728;&#x6392;&#x5E8F;&#x6761;&#x4EF6;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x624D;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#x3002;</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/db/" rel="tag"># db</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+            <a href="/tags/sql/" rel="tag"># sql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/14/learn-docker-images/" rel="next" title="一些DOCKERFILE实例">
+                <i class="fa fa-chevron-left"></i> 一些DOCKERFILE实例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/22/learn-postgresql/" rel="prev" title="postgresql基础学习教程">
+                postgresql基础学习教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL能使用索引来优化-Order-By排序的情况"><span class="nav-number">2.</span> <span class="nav-text">MySQL能使用索引来优化 Order By排序的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORDER-BY的索引优化"><span class="nav-number">2.1.</span> <span class="nav-text">ORDER BY的索引优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHERE-ORDER-BY的索引优化"><span class="nav-number">2.2.</span> <span class="nav-text">WHERE + ORDER BY的索引优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHERE-多个字段ORDER-BY"><span class="nav-number">2.3.</span> <span class="nav-text">WHERE+ 多个字段ORDER BY</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL不能使用索引来优化-Order-By排序的情况"><span class="nav-number">3.</span> <span class="nav-text">MySQL不能使用索引来优化 Order By排序的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对不同的索引键做-ORDER-BY-：-key1-key2分别建立索引"><span class="nav-number">3.1.</span> <span class="nav-text">对不同的索引键做 ORDER BY ：(key1,key2分别建立索引)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在非连续的索引键部分上做-ORDER-BY：-key-part1-key-part2建立联合索引-key2建立索引"><span class="nav-number">3.2.</span> <span class="nav-text">在非连续的索引键部分上做 ORDER BY：(key_part1,key_part2建立联合索引;key2建立索引)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时使用了-ASC-和-DESC：-key-part1-key-part2建立联合索引"><span class="nav-number">3.3.</span> <span class="nav-text">同时使用了 ASC 和 DESC：(key_part1,key_part2建立联合索引)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用于搜索记录的索引键和做-ORDER-BY-的不是同一个：-key1-key2分别建立索引"><span class="nav-number">3.4.</span> <span class="nav-text">用于搜索记录的索引键和做 ORDER BY 的不是同一个：(key1,key2分别建立索引)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果在WHERE和ORDER-BY的栏位上应用表达式-函数-时，则无法利用索引来实现order-by的优化"><span class="nav-number">3.5.</span> <span class="nav-text">如果在WHERE和ORDER BY的栏位上应用表达式(函数)时，则无法利用索引来实现order by的优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用子查询来优化order-by语句"><span class="nav-number">4.</span> <span class="nav-text">使用子查询来优化order by语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特别提示"><span class="nav-number">5.</span> <span class="nav-text">特别提示</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

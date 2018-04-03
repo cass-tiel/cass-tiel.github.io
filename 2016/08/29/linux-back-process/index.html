@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x53C2;&amp;#x8003;&amp;#x8D44;&amp;#x6599;&amp;#xFF1A;http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/
+
+&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x4F1A;&amp;#x78B0;&amp;#x5230;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#x95EE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen">
+<meta property="og:url" content="http://c.isme.pub/2016/08/29/linux-back-process/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x53C2;&amp;#x8003;&amp;#x8D44;&amp;#x6599;&amp;#xFF1A;http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/
+
+&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x4F1A;&amp;#x78B0;&amp;#x5230;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#x95EE">
+<meta property="og:updated_time" content="2016-12-14T02:35:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x53C2;&amp;#x8003;&amp;#x8D44;&amp;#x6599;&amp;#xFF1A;http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/
+
+&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x4F1A;&amp;#x78B0;&amp;#x5230;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#x95EE">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2016/08/29/linux-back-process/"/>
+
+
+
+
+
+  <title>Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/08/29/linux-back-process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux运行与控制后台进程的方法：nohup, setsid, &, disown, screen</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-29T11:00:44+08:00">
+                2016-08-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T10:35:01+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p>&#x53C2;&#x8003;&#x8D44;&#x6599;&#xFF1A;<br><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/</a></p>
+</blockquote>
+<p>&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x4F1A;&#x78B0;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x7528;ssh&#x767B;&#x5F55;&#x4E86;&#x8FDC;&#x7A0B;&#x7684;Linux&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FD0;&#x884C;&#x4E86;&#x4E00;&#x4E9B;&#x8017;&#x65F6;&#x8F83;&#x957F;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x7ED3;&#x679C;&#x5374;&#x7531;&#x4E8E;&#x7F51;&#x7EDC;&#x7B49;&#x7684;&#x4E0D;&#x7A33;&#x5B9A;&#x5BFC;&#x81F4;&#x4EFB;&#x52A1;&#x4E2D;&#x9014;&#x5931;&#x8D25;&#x3002;</p>
+<p>&#x8FD9;&#x662F;&#x7531;&#x4E8E;&#x5728;&#x7528;&#x6237;&#x6CE8;&#x9500;&#xFF08;logout&#xFF09;&#x6216;&#x8005;&#x7F51;&#x7EDC;&#x65AD;&#x5F00;&#x65F6;&#xFF0C;&#x7EC8;&#x7AEF;&#x4F1A;&#x6536;&#x5230; HUP&#xFF08;hangup&#xFF09;&#x4FE1;&#x53F7;&#x4ECE;&#x800C;&#x5173;&#x95ED;&#x5176;&#x6240;&#x6709;&#x5B50;&#x8FDB;&#x7A0B;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x6709;&#x4E24;&#x79CD;&#xFF1A;&#x8BA9;&#x8FDB;&#x7A0B;&#x5FFD;&#x7565;HUP&#x4FE1;&#x53F7;&#xFF0C;&#x6216;&#x8BA9;&#x8FDB;&#x7A0B;&#x8FD0;&#x884C;&#x5728;&#x65B0;&#x7684;&#x4F1A;&#x8BDD;&#x91CC;&#x4ECE;&#x800C;&#x6210;&#x4E3A;&#x4E0D;&#x5C5E;&#x4E8E;&#x6B64;&#x7EC8;&#x7AEF;&#x7684;&#x5B50;&#x8FDB;&#x7A0B;&#x3002;</p>
+<a id="more"></a>
+<p>&#x4E0B;&#x9762;&#x662F;&#x5BF9;Linux&#x4E0B;&#x8FD0;&#x884C;&#x4E0E;&#x63A7;&#x5236;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x7684;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x7684;&#x4ECB;&#x7ECD;&#xFF1A;</p>
+<h1 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a><strong>nohup</strong></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;nohup&#x7684;&#x7528;&#x9014;&#x5C31;&#x662F;&#x8BA9;&#x63D0;&#x4EA4;&#x7684;&#x547D;&#x4EE4;&#x5FFD;&#x7565;&#x6240;&#x6709;&#x7684;hangup&#x4FE1;&#x53F7;&#x3002;</div><div class="line">&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;nohup COMMAND [ARG]...</div></pre></td></tr></table></figure>
+<h1 id="setsid"><a href="#setsid" class="headerlink" title="setsid"></a><strong>setsid</strong></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x5728;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4F1A;&#x8BDD;&#x4E2D;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#xFF0C;&#x4ECE;&#x800C;&#x53EF;&#x4EE5;&#x907F;&#x5F00;&#x5F53;&#x524D;&#x7EC8;&#x7AEF;&#x53D1;&#x51FA;&#x7684;HUP&#x4FE1;&#x53F7;&#x3002;</div><div class="line">&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;setsid COMMAND [ARG]...</div></pre></td></tr></table></figure>
+<h1 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a><strong>&amp;</strong></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x53EF;&#x4EE5;&#x7ED3;&#x5408;()&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5B50;shell&#x5E76;&#x5728;&#x8FD9;&#x4E2A;&#x5B50;shell&#x4E2D;&#x5C06;&#x4EFB;&#x52A1;&#x653E;&#x7F6E;&#x5230;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#xFF0C;&#x4ECE;&#x800C;&#x4E0D;&#x53D7;&#x5F53;&#x524D;shell&#x7EC8;&#x7AEF;&#x7684;HUP&#x4FE1;&#x53F7;&#x5F71;&#x54CD;&#x3002;</div><div class="line">&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;(COMMAND [ARG]... &amp;)</div></pre></td></tr></table></figure>
+<p>&#x800C;&#x6211;&#x901A;&#x5E38;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup ./filename.sh &gt; filename.log 2&gt;&amp;1 &amp;</div><div class="line">nohup ./filename.sh &amp;&gt; filename.log &amp;</div></pre></td></tr></table></figure>
+<p>&#x4E09;&#x70B9;&#x7406;&#x7531;:</p>
+<ul>
+<li>nohup&#x4FDD;&#x969C;&#x8FDB;&#x7A0B;&#x4E0D;&#x4F1A;&#x88AB;hangup&#x4FE1;&#x53F7;&#x5F02;&#x5E38;&#x4E2D;&#x65AD;&#xFF1B;</li>
+<li>&#x5C06;&#x4EFB;&#x52A1;&#x653E;&#x7F6E;&#x5230;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#xFF0C;&#x4E0D;&#x5360;&#x7528;&#x5F53;&#x524D;&#x7684;&#x7EC8;&#x7AEF;&#xFF1B;</li>
+<li>&#x5C06;&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#x4E5F;&#x6253;&#x5370;&#x5230;log&#x4E2D;&#xFF0C;&#x9ED8;&#x8BA4;&gt;&#x53EA;&#x6709;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#xFF0C;&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#x6CA1;&#x6709;&#x3002;</li>
+</ul>
+<h1 id="&#x63A7;&#x5236;&#x8FDB;&#x7A0B;"><a href="#&#x63A7;&#x5236;&#x8FDB;&#x7A0B;" class="headerlink" title="&#x63A7;&#x5236;&#x8FDB;&#x7A0B;"></a><strong>&#x63A7;&#x5236;&#x8FDB;&#x7A0B;</strong></h1><p>&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5BF9;&#x653E;&#x5165;&#x5230;&#x540E;&#x53F0;&#x7684;&#x547D;&#x4EE4;&#x8FDB;&#x884C;&#x63A7;&#x5236;</p>
+<p>&#x67E5;&#x770B;&#x5F53;&#x524D;&#x7EC8;&#x7AEF;&#x4E0B;&#x7684;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#xFF1A;<br>&#x76F4;&#x63A5;&#x6267;&#x884C;&#xFF1A;jobs</p>
+<p>&#x5C06;&#x67E5;&#x770B;&#x5230;&#x7684;&#x67D0;&#x4E2A;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x653E;&#x56DE;&#x5230;&#x524D;&#x53F0;&#xFF1A;<br>&#x76F4;&#x63A5;&#x8F93;&#x5165;&#xFF1A;fg {jobid} //&#x8FD9;&#x91CC;&#x7684;{jobid}&#x662F;&#x901A;&#x8FC7;jobs&#x547D;&#x4EE4;&#x4E2D;&#x770B;&#x5230;&#x7684;&#x8FDB;&#x7A0B;&#x524D;[]&#x4E2D;&#x7684;&#x6570;&#x5B57;&#x3002;</p>
+<p>&#x5C06;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x524D;&#x53F0;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;&#x8FD0;&#x884C;:<br>&#x5148;&#x6572;&#x4E0B;&#x5FEB;&#x6377;&#x952E;&#xFF1A;ctrl +z //&#x6682;&#x505C;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x3002;<br>&#x518D;&#x6267;&#x884C;&#xFF1A;bg</p>
+<p>&#x7EC8;&#x6B62;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x524D;&#x53F0;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#xFF1A;<br>&#x76F4;&#x63A5;&#x6572;&#x4E0B;&#x5FEB;&#x6377;&#x952E;&#xFF1A;ctrl +c</p>
+<h1 id="disown"><a href="#disown" class="headerlink" title="disown"></a><strong>disown</strong></h1><p>&#x4EA1;&#x7F8A;&#x8865;&#x7262;&#xFF0C;&#x4E3A;&#x6CA1;&#x6709;&#x4F7F;&#x7528;nohup&#x4E0E;setsid&#x7684;&#x8FDB;&#x7A0B;&#x52A0;&#x4E0A;&#x5FFD;&#x7565;HUP&#x4FE1;&#x53F7;&#x7684;&#x529F;&#x80FD;&#x3002;<br>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;<br>&#x5C06;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x524D;&#x53F0;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;&#x8FD0;&#x884C;;<br>&#x7136;&#x540E;&#x6267;&#x884C;disown -h %{jobid} //&#x8FD9;&#x91CC;&#x7684;{jobid}&#x662F;&#x901A;&#x8FC7;jobs&#x547D;&#x4EE4;&#x4E2D;&#x770B;&#x5230;&#x7684;&#x8FDB;&#x7A0B;&#x524D;[]&#x4E2D;&#x7684;&#x6570;&#x5B57;&#x3002;</p>
+<h1 id="&#x901A;&#x8FC7;screen&#x6765;&#x5B9E;&#x73B0;&#x7A33;&#x5B9A;&#x7684;&#x540E;&#x53F0;&#x8FD0;&#x884C;"><a href="#&#x901A;&#x8FC7;screen&#x6765;&#x5B9E;&#x73B0;&#x7A33;&#x5B9A;&#x7684;&#x540E;&#x53F0;&#x8FD0;&#x884C;" class="headerlink" title="&#x901A;&#x8FC7;screen&#x6765;&#x5B9E;&#x73B0;&#x7A33;&#x5B9A;&#x7684;&#x540E;&#x53F0;&#x8FD0;&#x884C;"></a><strong>&#x901A;&#x8FC7;screen&#x6765;&#x5B9E;&#x73B0;&#x7A33;&#x5B9A;&#x7684;&#x540E;&#x53F0;&#x8FD0;&#x884C;</strong></h1><p>screen&#x662F;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5168;&#x5C4F;&#x865A;&#x62DF;&#x4F1A;&#x8BDD;&#x7EC8;&#x7AEF;&#xFF0C;&#x8FD9;&#x4E2A;&#x4F1A;&#x8BDD;&#x53EA;&#x6709;&#x5728;&#x624B;&#x52A8;&#x8F93;&#x5165;exit&#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x9000;&#x51FA;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x4F1A;&#x8BDD;&#x91CC;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;HUP&#x4FE1;&#x53F7;&#x4F1A;&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x8FDB;&#x7A0B;&#x9020;&#x6210;&#x5F71;&#x54CD;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x4E0D;&#x7528;&#x7ED9;&#x6BCF;&#x4E2A;&#x547D;&#x4EE4;&#x524D;&#x90FD;&#x52A0;&#x4E0A;&#x201C;nohup&#x201D;&#x6216;&#x201C;setsid&#x201D;&#x4E86;&#xFF0C;&#x975E;&#x5E38;&#x9002;&#x5408;&#x6211;&#x4EEC;&#x6709;&#x89C4;&#x5212;&#x7684;&#x6267;&#x884C;&#x5927;&#x91CF;&#x7684;&#x540E;&#x53F0;&#x4EFB;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#x7684;&#x8BA9;&#x6211;&#x4EEC;&#x5BF9;&#x8FD9;&#x4E9B;&#x540E;&#x53F0;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x7BA1;&#x7406;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">screen //&#x7ACB;&#x5373;&#x521B;&#x5EFA;&#x5E76;&#x8FDB;&#x5165;&#x4E00;&#x4E2A;&#x4F1A;&#x8BDD;&#x3002;</div><div class="line">screen -dmS {name} //&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x5904;&#x4E8E;&#x6302;&#x8D77;&#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x4F1A;&#x8BDD;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x6211;&#x4EEC;&#x7684;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x5176;&#x4F1A;&#x8BDD;&#x540D;&#x79F0;&#x3002;</div><div class="line">screen -dmS {name} {script} //&#x5728;&#x5EFA;&#x7ACB;&#x4F1A;&#x8BDD;&#x65F6;&#x540C;&#x65F6;&#x6267;&#x884C;&#x6307;&#x5B9A;&#x7684;&#x547D;&#x4EE4;&#x6216;&#x811A;&#x672C;</div><div class="line">screen -list //&#x5217;&#x51FA;&#x6240;&#x6709;&#x4F1A;&#x8BDD;&#x3002;</div><div class="line">screen -r {name} //&#x4EE5;&#x72EC;&#x5360;&#x65B9;&#x5F0F;&#x8FDB;&#x5165;&#x6307;&#x5B9A;&#x4F1A;&#x8BDD;&#x3002;</div><div class="line">screen -x {name} //&#x4EE5;&#x5E76;&#x884C;&#x65B9;&#x5F0F;&#x8FDB;&#x5165;&#x6307;&#x5B9A;&#x4F1A;&#x8BDD;&#x3002;</div><div class="line">ctrl +ad //&#x8F93;&#x5165;&#x5FEB;&#x6377;&#x952E;ctrl +a&#x548C;d&#xFF0C;&#x53EF;&#x6682;&#x65F6;&#x9000;&#x51FA;&#x5F53;&#x524D;&#x4F1A;&#x8BDD;&#x3002;</div><div class="line"><span class="built_in">exit</span> //&#x8FDB;&#x5165;&#x6307;&#x5B9A;&#x4F1A;&#x8BDD;&#x540E;&#x6267;&#x884C;<span class="built_in">exit</span>&#x5373;&#x53EF;&#x5173;&#x95ED;&#x8BE5;&#x4F1A;&#x8BDD;&#x3002;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/05/mysql-slave/" rel="next" title="MySql主从同步配置">
+                <i class="fa fa-chevron-left"></i> MySql主从同步配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/06/25-linux-truth/" rel="prev" title="（转）25个你可能不知道的Linux真相">
+                （转）25个你可能不知道的Linux真相 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup"><span class="nav-number">2.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setsid"><span class="nav-number">3.</span> <span class="nav-text">setsid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amp"><span class="nav-number">4.</span> <span class="nav-text">&</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制进程"><span class="nav-number">5.</span> <span class="nav-text">控制进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#disown"><span class="nav-number">6.</span> <span class="nav-text">disown</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过screen来实现稳定的后台运行"><span class="nav-number">7.</span> <span class="nav-text">通过screen来实现稳定的后台运行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

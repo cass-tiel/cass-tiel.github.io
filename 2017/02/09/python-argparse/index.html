@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,argparse," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;argparse&amp;#x6A21;&amp;#x5757;&amp;#x53EF;&amp;#x4EE5;&amp;#x5F88;&amp;#x5BB9;&amp;#x6613;&amp;#x7684;&amp;#x7F16;&amp;#x5199;&amp;#x53CB;&amp;#x597D;&amp;#x7684;&amp;#x547D;&amp;#x4EE4;&amp;#x884C;&amp;#x63A5;&amp;#x53E3;&amp;#x3002;&amp;#x53EF;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-argparse模块使用教程">
+<meta property="og:url" content="http://c.isme.pub/2017/02/09/python-argparse/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;argparse&amp;#x6A21;&amp;#x5757;&amp;#x53EF;&amp;#x4EE5;&amp;#x5F88;&amp;#x5BB9;&amp;#x6613;&amp;#x7684;&amp;#x7F16;&amp;#x5199;&amp;#x53CB;&amp;#x597D;&amp;#x7684;&amp;#x547D;&amp;#x4EE4;&amp;#x884C;&amp;#x63A5;&amp;#x53E3;&amp;#x3002;&amp;#x53EF;">
+<meta property="og:updated_time" content="2018-01-17T04:11:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-argparse模块使用教程">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;argparse&amp;#x6A21;&amp;#x5757;&amp;#x53EF;&amp;#x4EE5;&amp;#x5F88;&amp;#x5BB9;&amp;#x6613;&amp;#x7684;&amp;#x7F16;&amp;#x5199;&amp;#x53CB;&amp;#x597D;&amp;#x7684;&amp;#x547D;&amp;#x4EE4;&amp;#x884C;&amp;#x63A5;&amp;#x53E3;&amp;#x3002;&amp;#x53EF;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2017/02/09/python-argparse/"/>
+
+
+
+
+
+  <title>python-argparse模块使用教程 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2017/02/09/python-argparse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python-argparse模块使用教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-09T12:40:37+08:00">
+                2017-02-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-17T12:11:04+08:00">
+                2018-01-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/module/" itemprop="url" rel="index">
+                    <span itemprop="name">module</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x4F7F;&#x7528;argparse&#x6A21;&#x5757;&#x53EF;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x7F16;&#x5199;&#x53CB;&#x597D;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x63A5;&#x53E3;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B83;&#x5B9A;&#x4E49;&#x6240;&#x9700;&#x8981;&#x7684;&#x53C2;&#x6570;, argparse&#x80FD;&#x591F;&#x63A5;&#x6536;&#x5E76;&#x89E3;&#x6790;&#x8FD9;&#x4E9B;sys.argv&#xFF08;&#x53C2;&#x6570;&#xFF0C;&#x9009;&#x9879;&#xFF09;&#x3002;&#x540C;&#x65F6;argparse&#x6A21;&#x5757;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x5E2E;&#x52A9;&#x548C;&#x4F7F;&#x7528;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x5BF9;&#x65E0;&#x6548;&#x53C2;&#x6570;&#x505A;&#x51FA;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x3002;</p>
+<p>python&#x65E9;&#x671F;&#x4F7F;&#x7528;optparse&#x6A21;&#x5757;&#xFF0C;2.7&#x7248;&#x672C;&#x65F6;&#x505C;&#x6B62;optparse&#x6A21;&#x5757;&#x7684;&#x5F00;&#x53D1;&#xFF0C;&#x540C;&#x65F6;&#x5F00;&#x59CB;argparse&#x6A21;&#x5757;&#x7684;&#x5F00;&#x53D1;&#x7EF4;&#x62A4;&#xFF0C;&#x56E0;&#x6B64;&#x5EFA;&#x8BAE;&#x5404;&#x4F4D;&#x76F4;&#x63A5;&#x4F7F;&#x7528;argparse&#x3002;</p>
+<blockquote>
+<p>&#x672C;&#x6587;&#x4F7F;&#x7528;python3&#x7248;&#x672C;&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#x73AF;&#x5883;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x4E3B;&#x8981;&#x6E90;&#x81EA;&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF0C;&#x52A0;&#x4E0A;&#x672C;&#x4EBA;&#x5728;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x7406;&#x89E3;&#x3002;<a href="https://docs.python.org/3/library/argparse.html#add-help" target="_blank" rel="external">&#x5B98;&#x65B9;&#x6587;&#x6863;</a></p>
+</blockquote>
+<a id="more"></a>
+<h1 id="&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;"><a href="#&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;" class="headerlink" title="&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;"></a>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> argparse</div><div class="line"></div><div class="line">parser = argparse.ArgumentParser(description=<span class="string">&apos;Process some integers.&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;integers&apos;</span>, metavar=<span class="string">&apos;N&apos;</span>, type=int, nargs=<span class="string">&apos;+&apos;</span>,</div><div class="line">                    help=<span class="string">&apos;an integer for the accumulator&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;--sum&apos;</span>, dest=<span class="string">&apos;accumulate&apos;</span>, action=<span class="string">&apos;store_const&apos;</span>,</div><div class="line">                    const=sum, default=max,</div><div class="line">                    help=<span class="string">&apos;sum the integers (default: find the max)&apos;</span>)</div><div class="line"></div><div class="line">args = parser.parse_args()</div><div class="line">print(args.accumulate(args.integers))</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">$ python prog.py -h</div><div class="line">usage: prog.py [-h] [--sum] N [N ...]</div><div class="line"></div><div class="line">Process some integers.</div><div class="line"></div><div class="line">positional arguments:</div><div class="line"> N           an <span class="built_in">integer</span> <span class="keyword">for</span> the accumulator</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help  show this <span class="built_in">help</span> message and <span class="built_in">exit</span></div><div class="line"> --sum       sum the integers (default: find the max)</div><div class="line"></div><div class="line"><span class="comment">### </span></div><div class="line">$ python prog.py 1 2 3 4</div><div class="line">4</div><div class="line"></div><div class="line">$ python prog.py 1 2 3 4 --sum</div><div class="line">10</div><div class="line"></div><div class="line"><span class="comment">### </span></div><div class="line">$ python prog.py a b c</div><div class="line">usage: prog.py [-h] [--sum] N [N ...]</div><div class="line">prog.py: error: argument N: invalid int value: <span class="string">&apos;a&apos;</span></div></pre></td></tr></table></figure>
+<h1 id="&#x4F7F;&#x7528;&#x6B65;&#x9AA4;"><a href="#&#x4F7F;&#x7528;&#x6B65;&#x9AA4;" class="headerlink" title="&#x4F7F;&#x7528;&#x6B65;&#x9AA4;"></a>&#x4F7F;&#x7528;&#x6B65;&#x9AA4;</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x5BFC;&#x5165;&#x6A21;&#x5757;</span></div><div class="line">1:import argparse</div><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x89E3;&#x6790;&#x5BF9;&#x8C61;</span></div><div class="line">2:parser = argparse.ArgumentParser()</div><div class="line"><span class="comment"># &#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x9879;</span></div><div class="line">3:parser.add_argument()</div><div class="line"><span class="comment"># &#x89E3;&#x6790;&#x53C2;&#x6570;&#x9879;</span></div><div class="line">4:args = parser.parse_args()</div><div class="line"><span class="comment"># &#x4F7F;&#x7528;</span></div><div class="line">5:args.xxx</div></pre></td></tr></table></figure>
+<h1 id="ArgumentParser&#x5BF9;&#x8C61;&#x53C2;&#x6570;&#x89E3;&#x6790;"><a href="#ArgumentParser&#x5BF9;&#x8C61;&#x53C2;&#x6570;&#x89E3;&#x6790;" class="headerlink" title="ArgumentParser&#x5BF9;&#x8C61;&#x53C2;&#x6570;&#x89E3;&#x6790;"></a>ArgumentParser&#x5BF9;&#x8C61;&#x53C2;&#x6570;&#x89E3;&#x6790;</h1><p>&#x8FD9;&#x90E8;&#x5206;&#x5E76;&#x975E;&#x91CD;&#x70B9;&#x5185;&#x5BB9;&#xFF0C;&#x53EA;&#x8981;&#x77E5;&#x9053;&#x524D;&#x51E0;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x7528;&#x6CD5;&#x5373;&#x53EF;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">class argparse.ArgumentParser(prog=None, usage=None, description=None, epilog=None, parents=[], formatter_class=argparse.HelpFormatter, prefix_chars=<span class="string">&apos;-&apos;</span>, fromfile_prefix_chars=None, argument_default=None, conflict_handler=<span class="string">&apos;error&apos;</span>, add_help=True, allow_abbrev=True)</div><div class="line">Create a new ArgumentParser object. All parameters should be passed as keyword arguments. Each parameter has its own more detailed description below, but <span class="keyword">in</span> short they are:</div></pre></td></tr></table></figure>
+<ul>
+<li>prog - The name of the program (default: sys.argv[0])</li>
+<li>usage - The string describing the program usage (default: generated from arguments added to parser)</li>
+<li>description - Text to display before the argument help (default: none)</li>
+<li>epilog - Text to display after the argument help (default: none)</li>
+<li>parents - A list of ArgumentParser objects whose arguments should also be included</li>
+<li>formatter_class - A class for customizing the help output</li>
+<li>prefix_chars - The set of characters that prefix optional arguments (default: &#x2018;-&#x2018;)</li>
+<li>fromfile_prefix_chars - The set of characters that prefix files from which additional arguments should be read (default: None)</li>
+<li>argument_default - The global default value for arguments (default: None)</li>
+<li>conflict_handler - The strategy for resolving conflicting optionals (usually unnecessary)</li>
+<li>add_help - Add a -h/&#x2013;help option to the parser (default: True)</li>
+<li>allow_abbrev - Allows long options to be abbreviated if the abbreviation is unambiguous. (default: True)</li>
+</ul>
+<h2 id="prog"><a href="#prog" class="headerlink" title="prog"></a>prog</h2><p>prog&#x53C2;&#x6570;&#x76F8;&#x5F53;&#x4E8E;python&#x4E2D;&#x7684;sys.argv[0]&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x6267;&#x884C;&#x811A;&#x672C;&#x7684;&#x811A;&#x672C;&#x540D;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(prog=<span class="string">&apos;myprogram&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h2><p>usage&#x53C2;&#x6570;&#x7528;&#x6765;&#x63D0;&#x793A;&#x53C2;&#x6570;&#x9879;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, usage=<span class="string">&apos;%(prog)s [options]&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="description"><a href="#description" class="headerlink" title="description"></a>description</h2><p>description&#x7528;&#x6765;&#x6DFB;&#x52A0;&#x5E2E;&#x52A9;&#x83DC;&#x5355;&#x4E2D;&#x7684;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x7A7A;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(description=<span class="string">&apos;A foo that bars&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="epilog"><a href="#epilog" class="headerlink" title="epilog"></a>epilog</h2><p>epilog&#x7528;&#x6765;&#x6DFB;&#x52A0;&#x5E2E;&#x52A9;&#x83DC;&#x5355;&#x4E2D;&#x7684;&#x7A0B;&#x5E8F;&#x7ED3;&#x5C3E;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x7A7A;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(</div><div class="line">	description=<span class="string">&apos;A foo that bars&apos;</span>,</div><div class="line">	epilog=<span class="string">&quot;And that&apos;s how you&apos;d foo a bar&quot;</span>)</div></pre></td></tr></table></figure>
+<h2 id="parents"><a href="#parents" class="headerlink" title="parents"></a>parents</h2><p>&#x6709;&#x65F6;&#x5019;&#xFF0C;&#x6709;&#x4E9B;&#x53C2;&#x6570;&#x9879;&#x53EF;&#x80FD;&#x4F5C;&#x4E3A;&#x4E00;&#x7EC4;&#x901A;&#x7528;&#x53C2;&#x6570;&#x9879;&#x6765;&#x5206;&#x4EAB;&#x7ED9;&#x4E0D;&#x901A;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x800C;&#x65E0;&#x9700;&#x91CD;&#x590D;&#x7684;&#x6765;&#x5B9A;&#x4E49;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x9879;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x5230;parents&#x53C2;&#x6570;&#xFF0C;&#x5B50;&#x5BF9;&#x8C61;&#x4F1A;&#x7EE7;&#x627F;parents&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x9879;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x9996;&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x7EE7;&#x627F;&#x7684;parents&#xFF0C;&#x9700;&#x8981;&#x5173;&#x95ED;add_help&#x53C2;&#x6570;</span></div><div class="line">parent_parser = argparse.ArgumentParser(add_help=<span class="keyword">False</span>)</div><div class="line">parent_parser.add_argument(<span class="string">&apos;--parent&apos;</span>, type=int)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B50;&#x5BF9;&#x8C61;</span></div><div class="line">foo_parser = argparse.ArgumentParser(parents=[parent_parser])</div><div class="line">foo_parser.add_argument(<span class="string">&apos;foo&apos;</span>)</div><div class="line">foo_parser.parse_args([<span class="string">&apos;--parent&apos;</span>, <span class="string">&apos;2&apos;</span>, <span class="string">&apos;XXX&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;XXX&apos;</span>, parent=<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B50;&#x5BF9;&#x8C61;</span></div><div class="line">bar_parser = argparse.ArgumentParser(parents=[parent_parser])</div><div class="line">bar_parser.add_argument(<span class="string">&apos;--bar&apos;</span>)</div><div class="line">bar_parser.parse_args([<span class="string">&apos;--bar&apos;</span>, <span class="string">&apos;YYY&apos;</span>])</div><div class="line">Namespace(bar=<span class="string">&apos;YYY&apos;</span>, parent=<span class="keyword">None</span>)</div></pre></td></tr></table></figure>
+<h2 id="formatter-class"><a href="#formatter-class" class="headerlink" title="formatter_class"></a>formatter_class</h2><p>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x51E0;&#x4E2A;&#x9009;&#x9879;&#x53EF;&#x4EE5;&#x628A;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;&#x4E2D;&#x7684;&#x683C;&#x5F0F;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#x3002;</p>
+<h3 id="RawDescriptionHelpFormatter"><a href="#RawDescriptionHelpFormatter" class="headerlink" title="RawDescriptionHelpFormatter"></a>RawDescriptionHelpFormatter</h3><p>&#x5B9A;&#x5236;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#x7F29;&#x8FDB;&#x683C;&#x5F0F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(</div><div class="line">     prog=<span class="string">&apos;PROG&apos;</span>,</div><div class="line">     formatter_class=argparse.RawDescriptionHelpFormatter,</div><div class="line">     description=textwrap.dedent(<span class="string">&apos;&apos;&apos;\</span></div><div class="line">         Please do not mess up this text!</div><div class="line">         --------------------------------</div><div class="line">             I have indented it</div><div class="line">             exactly the way</div><div class="line">             I want it</div><div class="line">         &apos;&apos;&apos;))</div><div class="line"></div><div class="line">usage: PROG [-h]</div><div class="line"></div><div class="line">Please do <span class="keyword">not</span> mess up this text!</div><div class="line">--------------------------------</div><div class="line">   I have indented it</div><div class="line">   exactly the way</div><div class="line">   I want it</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help  show this help message <span class="keyword">and</span> exit</div></pre></td></tr></table></figure>
+<h3 id="ArgumentDefaultsHelpFormatter"><a href="#ArgumentDefaultsHelpFormatter" class="headerlink" title="ArgumentDefaultsHelpFormatter"></a>ArgumentDefaultsHelpFormatter</h3><p>&#x81EA;&#x52A8;&#x589E;&#x52A0;defaults&#x503C;&#x663E;&#x793A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(</div><div class="line">    prog=<span class="string">&apos;PROG&apos;</span>,</div><div class="line">    formatter_class=argparse.ArgumentDefaultsHelpFormatter)</div><div class="line">parser.add_argument(<span class="string">&apos;--foo&apos;</span>, <span class="built_in">type</span>=int, default=42, <span class="built_in">help</span>=<span class="string">&apos;FOO!&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;bar&apos;</span>, nargs=<span class="string">&apos;*&apos;</span>, default=[1, 2, 3], <span class="built_in">help</span>=<span class="string">&apos;BAR!&apos;</span>)</div><div class="line"></div><div class="line">usage: PROG [-h] [--foo FOO] [bar [bar ...]]</div><div class="line"></div><div class="line">positional arguments:</div><div class="line"> bar         BAR! (default: [1, 2, 3])</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help  show this <span class="built_in">help</span> message and <span class="built_in">exit</span></div><div class="line"> --foo FOO   FOO! (default: 42)</div></pre></td></tr></table></figure>
+<h3 id="MetavarTypeHelpFormatter"><a href="#MetavarTypeHelpFormatter" class="headerlink" title="MetavarTypeHelpFormatter"></a>MetavarTypeHelpFormatter</h3><p>&#x7528;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x6765;&#x66FF;&#x4EE3;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(</div><div class="line">    prog=<span class="string">&apos;PROG&apos;</span>,</div><div class="line">    formatter_class=argparse.MetavarTypeHelpFormatter)</div><div class="line">parser.add_argument(<span class="string">&apos;--foo&apos;</span>, type=int)</div><div class="line">parser.add_argument(<span class="string">&apos;bar&apos;</span>, type=float)</div><div class="line"></div><div class="line">usage: PROG [-h] [--foo int] float</div><div class="line"></div><div class="line">positional arguments:</div><div class="line">  float</div><div class="line"></div><div class="line">optional arguments:</div><div class="line">  -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line">  --foo int</div></pre></td></tr></table></figure>
+<h2 id="prefix-chars"><a href="#prefix-chars" class="headerlink" title="prefix_chars"></a>prefix_chars</h2><p>prefix_chars&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x9009;&#x9879;&#x53C2;&#x6570;&#x7684;&#x524D;&#x7F00;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;[-/&#x2013;]&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, prefix_chars=<span class="string">&apos;-+&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;+f&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;++bar&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="fromfile-prefix-chars"><a href="#fromfile-prefix-chars" class="headerlink" title="fromfile_prefix_chars"></a>fromfile_prefix_chars</h2><p>fromfile_prefix_chars&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x4E3A;&#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x9879;&#x503C;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">&apos;args.txt&apos;</span>, <span class="string">&apos;w&apos;</span>) <span class="keyword">as</span> fp:</div><div class="line">    fp.write(<span class="string">&apos;-f\nbar&apos;</span>)</div><div class="line">parser = argparse.ArgumentParser(fromfile_prefix_chars=<span class="string">&apos;@&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;-f&apos;</span>)</div><div class="line">parser.parse_args([<span class="string">&apos;-f&apos;</span>, <span class="string">&apos;foo&apos;</span>, <span class="string">&apos;@args.txt&apos;</span>])</div><div class="line">Namespace(f=<span class="string">&apos;bar&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="argument-default"><a href="#argument-default" class="headerlink" title="argument_default"></a>argument_default</h2><p>&#x6B63;&#x5E38;&#x6765;&#x8BF4;&#x7ED9;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x9879;&#x8BBE;&#x5B9A;&#x9ED8;&#x8BA4;&#x503C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;add_argument()&#x6216;&#x8005;set_defaults()&#x65B9;&#x6CD5;&#x6765;&#x6DFB;&#x52A0;&#xFF0C;&#x4F46;&#x662F;&#x53EA;&#x80FD;&#x5BF9;&#x6BCF;&#x4E2A;&#x53C2;&#x6570;&#x5355;&#x72EC;&#x5236;&#x5B9A;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;argument_default&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x7ED9;&#x6240;&#x6709;&#x6CA1;&#x6709;&#x9ED8;&#x8BA4;&#x503C;&#x7684;&#x53C2;&#x6570;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x503C;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Generally, argument defaults are specified either by passing a default to add_argument() or by calling the set_defaults() methods with a specific <span class="built_in">set</span> of name-value pairs. Sometimes however, it may be useful to specify a single parser-wide default <span class="keyword">for</span> arguments. This can be accomplished by passing the argument_default= keyword argument to ArgumentParser. For example, to globally suppress attribute creation on parse_args() calls, we supply argument_default=SUPPRESS:</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x6CA1;&#x770B;&#x61C2;&#xFF0C;&#x8D34;&#x4E00;&#x4E0B;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x5427;</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)</div></pre></td></tr></table></figure>
+<h2 id="allow-abbrev"><a href="#allow-abbrev" class="headerlink" title="allow_abbrev"></a>allow_abbrev</h2><p>&#x901A;&#x5E38;&#x60C5;&#x51B5;&#xFF0C;&#x5F53;&#x4F60;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x9879;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x7F29;&#x5199;&#x7684;&#x53C2;&#x6570;&#x9879;&#xFF0C;allow_abbrev&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x5173;&#x95ED;&#x7F29;&#x5199;&#x53C2;&#x6570;&#x9879;&#xFF08;python3&#xFF09;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, allow_abbrev=<span class="keyword">False</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;--foobar&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;--foonley&apos;</span>, action=<span class="string">&apos;store_false&apos;</span>)</div><div class="line">parser.parse_args([<span class="string">&apos;--foon&apos;</span>])</div><div class="line"></div><div class="line">usage: PROG [-h] [--foobar] [--foonley]</div><div class="line">PROG: error: unrecognized arguments: --foon</div><div class="line"></div><div class="line"><span class="comment"># &#x4E0D;&#x5173;&#x95ED;&#x7684;&#x60C5;&#x51B5;</span></div><div class="line">parser.parse_args([<span class="string">&apos;--foob&apos;</span>])</div><div class="line">Namespace(foobar=<span class="keyword">True</span>, foonley=<span class="keyword">True</span>)</div><div class="line">parser.parse_args([<span class="string">&apos;--foon&apos;</span>])</div><div class="line">Namespace(foobar=<span class="keyword">False</span>, foonley=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
+<h2 id="conflict-handler"><a href="#conflict-handler" class="headerlink" title="conflict_handler"></a>conflict_handler</h2><p>&#x6B63;&#x5E38;&#x6765;&#x8BF4;&#x4F60;&#x6307;&#x5B9A;&#x4E86;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x9879;&#xFF0C;&#x662F;&#x4E0D;&#x80FD;&#x5728;&#x6B64;&#x6307;&#x5B9A;&#x6765;&#x8986;&#x76D6;&#x5DF2;&#x7ECF;&#x6307;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x9879;&#x7684;&#xFF0C;conflict_handler&#x53EF;&#x4EE5;&#x5F00;&#x653E;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-f&apos;</span>, <span class="string">&apos;--foo&apos;</span>, help=<span class="string">&apos;old foo help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, help=<span class="string">&apos;new foo help&apos;</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line"> ..</div><div class="line">ArgumentError: argument --foo: conflicting option string(s): --foo</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, conflict_handler=<span class="string">&apos;resolve&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-f&apos;</span>, <span class="string">&apos;--foo&apos;</span>, help=<span class="string">&apos;old foo help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, help=<span class="string">&apos;new foo help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</div><div class="line">usage: PROG [-h] [-f FOO] [--foo FOO]</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line"> -f FOO      old foo help</div><div class="line"> --foo FOO   new foo help</div></pre></td></tr></table></figure>
+<h2 id="add-help"><a href="#add-help" class="headerlink" title="add_help"></a>add_help</h2><p>&#x53EF;&#x4EE5;&#x7528;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x6765;&#x5173;&#x95ED;&#x9ED8;&#x8BA4;&#x7684;help&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x81EA;&#x5B9A;&#x4E49;&#x3002;&#x5173;&#x95ED;&#x4E86;&#x4E4B;&#x540E;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x7528;parser.print_help() &#x6765;&#x6253;&#x5370;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;&#x7684;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, add_help=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
+<h1 id="add-argument&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x89E3;&#x6790;"><a href="#add-argument&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x89E3;&#x6790;" class="headerlink" title="add_argument&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x89E3;&#x6790;"></a>add_argument&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x89E3;&#x6790;</h1><p>&#x8FD9;&#x4E2A;&#x624D;&#x662F;&#x672C;&#x6587;&#x7684;&#x91CD;&#x70B9;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])</div><div class="line">Define how a single command-line argument should be parsed. Each parameter has its own more detailed description below, but in short they are:</div></pre></td></tr></table></figure>
+<ul>
+<li>name or flags - Either a name or a list of option strings, e.g. foo or -f, &#x2013;foo.</li>
+<li>action - The basic type of action to be taken when this argument is encountered at the command line.</li>
+<li>nargs - The number of command-line arguments that should be consumed.</li>
+<li>const - A constant value required by some action and nargs selections.</li>
+<li>default - The value produced if the argument is absent from the command line.</li>
+<li>type - The type to which the command-line argument should be converted.</li>
+<li>choices - A container of the allowable values for the argument.</li>
+<li>required - Whether or not the command-line option may be omitted (optionals only).</li>
+<li>help - A brief description of what the argument does.</li>
+<li>metavar - A name for the argument in usage messages.</li>
+<li>dest - The name of the attribute to be added to the object returned by parse_args().</li>
+</ul>
+<h2 id="name-or-flags"><a href="#name-or-flags" class="headerlink" title="name or flags"></a>name or flags</h2><p>&#x9009;&#x9879;&#x540D;&#x3001;&#x53C2;&#x6570;&#x540D;&#x3001;&#x6807;&#x7B7E;&#x3002;&#x5206;&#x4E3A;&#x4E24;&#x79CD;</p>
+<ul>
+<li>&#x5E26;&#x524D;&#x7F00;&#xFF1A;-f -foo &#xFF0C;&#x53C2;&#x6570;&#x9879;</li>
+<li>&#x4E0D;&#x5E26;&#x524D;&#x7F00;&#xFF1A;bar&#xFF0C;&#x4F4D;&#x7F6E;&#x53D8;&#x91CF;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parser.add_argument(<span class="string">&apos;-f&apos;</span>, <span class="string">&apos;--foo&apos;</span>)</div><div class="line">parser.add_argument(<span class="string">&apos;bar&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="action"><a href="#action" class="headerlink" title="action"></a>action</h2><p>action&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x9879;&#x7684;&#x5C5E;&#x6027;&#x7C7B;&#x578B;&#x3002;</p>
+<h3 id="store"><a href="#store" class="headerlink" title="store"></a>store</h3><p>&#x9ED8;&#x8BA4;&#x7C7B;&#x578B;&#xFF0C;&#x53EA;&#x662F;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x503C;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;--foo 1&apos;</span>.split())</div><div class="line">Namespace(foo=<span class="string">&apos;1&apos;</span>)</div></pre></td></tr></table></figure>
+<h3 id="store-const"><a href="#store-const" class="headerlink" title="store_const"></a>store_const</h3><p>&#x548C;const&#x53C2;&#x6570;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C;&#x5B58;&#x50A8;&#x4E00;&#x4E2A;&#x5E38;&#x91CF;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_const&apos;</span>, const=<span class="number">42</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>])</div><div class="line">Namespace(foo=<span class="number">42</span>)</div></pre></td></tr></table></figure>
+<h3 id="store-true-amp-store-false"><a href="#store-true-amp-store-false" class="headerlink" title="store_true &amp; store_false"></a>store_true &amp; store_false</h3><p>&#x5B58;&#x50A8;&#x5E38;&#x91CF;&#x7684;&#x7279;&#x6B8A;&#x7C7B;&#x578B;&#xFF0C;&#x5B58;&#x50A8;&#x5E03;&#x5C14;&#x503C;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--bar&apos;</span>, action=<span class="string">&apos;store_false&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--baz&apos;</span>, action=<span class="string">&apos;store_false&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;--foo --bar&apos;</span>.split())</div><div class="line">Namespace(foo=<span class="keyword">True</span>, bar=<span class="keyword">False</span>, baz=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
+<h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><p>&#x8FFD;&#x52A0;&#x5C5E;&#x6027;&#xFF0C;&#x53C2;&#x6570;&#x9879;&#x53EF;&#x4EE5;&#x591A;&#x6B21;&#x51FA;&#x73B0;&#xFF0C;&#x591A;&#x6B21;&#x503C;&#x4F1A;&#x8FFD;&#x52A0;&#x6210;&#x4E00;&#x4E2A;list&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;append&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;--foo 1 --foo 2&apos;</span>.split())</div><div class="line">Namespace(foo=[<span class="string">&apos;1&apos;</span>, <span class="string">&apos;2&apos;</span>])</div></pre></td></tr></table></figure>
+<h3 id="append-const"><a href="#append-const" class="headerlink" title="append_const"></a>append_const</h3><p>&#x548C;const&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C;&#x7528;&#x6765;&#x8FFD;&#x52A0;&#x5E38;&#x91CF;&#x3002;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; parser = argparse.ArgumentParser()</div><div class="line">&gt;&gt;&gt; parser.add_argument(&apos;--str&apos;, dest=&apos;types&apos;, action=&apos;append_const&apos;, const=str)</div><div class="line">&gt;&gt;&gt; parser.add_argument(&apos;--int&apos;, dest=&apos;types&apos;, action=&apos;append_const&apos;, const=int)</div><div class="line">&gt;&gt;&gt; parser.parse_args(&apos;--str --int&apos;.split())</div><div class="line">Namespace(types=[&lt;class &apos;str&apos;&gt;, &lt;class &apos;int&apos;&gt;])</div></pre></td></tr></table></figure>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><p>&#x6570;&#x91CF;&#x7EDF;&#x8BA1;&#xFF0C;&#x53C2;&#x6570;&#x9879;&#x53EF;&#x4EE5;&#x591A;&#x6B21;&#x51FA;&#x73B0;&#xFF0C;&#x8BB0;&#x5F55;&#x51FA;&#x73B0;&#x6B21;&#x6570;&#x4E3A;&#x9009;&#x9879;&#x7684;&#x503C;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--verbose&apos;</span>, <span class="string">&apos;-v&apos;</span>, action=<span class="string">&apos;count&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-vvv&apos;</span>])</div><div class="line">Namespace(verbose=<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p>&#x81EA;&#x5B9A;&#x4E49;help&#x9009;&#x9879;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x7684;&#x3002;</p>
+<h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p>&#x521B;&#x5EFA;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x4F7F;&#x7528;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> argparse</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--version&apos;</span>, action=<span class="string">&apos;version&apos;</span>, version=<span class="string">&apos;%(prog)s 2.0&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--version&apos;</span>])</div><div class="line">PROG <span class="number">2.0</span></div></pre></td></tr></table></figure>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;action"><a href="#&#x81EA;&#x5B9A;&#x4E49;action" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;action"></a>&#x81EA;&#x5B9A;&#x4E49;action</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">FooAction</span><span class="params">(argparse.Action)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, option_strings, dest, nargs=None, **kwargs)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">if</span> nargs <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line"><span class="meta">... </span>            <span class="keyword">raise</span> ValueError(<span class="string">&quot;nargs not allowed&quot;</span>)</div><div class="line"><span class="meta">... </span>        super(FooAction, self).__init__(option_strings, dest, **kwargs)</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, parser, namespace, values, option_string=None)</span>:</span></div><div class="line"><span class="meta">... </span>        print(<span class="string">&apos;%r %r %r&apos;</span> % (namespace, values, option_string))</div><div class="line"><span class="meta">... </span>        setattr(namespace, self.dest, values)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=FooAction)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, action=FooAction)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args = parser.parse_args(<span class="string">&apos;1 --foo 2&apos;</span>.split())</div><div class="line">Namespace(bar=<span class="keyword">None</span>, foo=<span class="keyword">None</span>) <span class="string">&apos;1&apos;</span> <span class="keyword">None</span></div><div class="line">Namespace(bar=<span class="string">&apos;1&apos;</span>, foo=<span class="keyword">None</span>) <span class="string">&apos;2&apos;</span> <span class="string">&apos;--foo&apos;</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args</div><div class="line">Namespace(bar=<span class="string">&apos;1&apos;</span>, foo=<span class="string">&apos;2&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="nargs"><a href="#nargs" class="headerlink" title="nargs"></a>nargs</h2><p>&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x7528;&#x6765;&#x89C4;&#x5B9A;&#x6DFB;&#x52A0;&#x7684;&#x53C2;&#x6570;&#x9879;&#x5BF9;&#x5E94;&#x53C2;&#x6570;&#x503C;&#x7684;&#x4E2A;&#x6570;&#x3002;</p>
+<ul>
+<li>1&#x3001;2&#x3001;3&#x2026; </li>
+<li>&#x2018;?&#x2019; 0&#x6216;1&#x4E2A;</li>
+<li>&#x2018;+&#x2019; &#x81F3;&#x5C11;&#x4E00;&#x4E2A;</li>
+<li>&#x2018;*&#x2019; 0&#x5230;&#x591A;&#x4E2A;</li>
+<li>argparse.REMAINDER &#xFF1F;&#xFF1F;&#xFF1F;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, nargs=<span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, nargs=<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, nargs=<span class="string">&apos;?&apos;</span>, const=<span class="string">&apos;c&apos;</span>, default=<span class="string">&apos;d&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--bar&apos;</span>, nargs=<span class="string">&apos;*&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, nargs=<span class="string">&apos;+&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x5E38;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x4E0E;store_const &#x548C;append_const &#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x3002;</p>
+<h2 id="default"><a href="#default" class="headerlink" title="default"></a>default</h2><p>&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x503C;</p>
+<h2 id="type"><a href="#type" class="headerlink" title="type"></a>type</h2><p>&#x8BBE;&#x5B9A;&#x53C2;&#x6570;&#x9879;&#x7684;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x9ED8;&#x8BA4;str&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x4EE5;int&#x3001;float&#x7B49;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, type=int)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, type=open)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;2 temp.txt&apos;</span>.split())</div><div class="line">Namespace(bar=&lt;_io.TextIOWrapper name=<span class="string">&apos;temp.txt&apos;</span> encoding=<span class="string">&apos;UTF-8&apos;</span>&gt;, foo=<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, type=argparse.FileType(<span class="string">&apos;w&apos;</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;out.txt&apos;</span>])</div><div class="line">Namespace(bar=&lt;_io.TextIOWrapper name=<span class="string">&apos;out.txt&apos;</span> encoding=<span class="string">&apos;UTF-8&apos;</span>&gt;)</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">perfect_square</span><span class="params">(string)</span>:</span></div><div class="line"><span class="meta">... </span>    value = int(string)</div><div class="line"><span class="meta">... </span>    sqrt = math.sqrt(value)</div><div class="line"><span class="meta">... </span>    <span class="keyword">if</span> sqrt != int(sqrt):</div><div class="line"><span class="meta">... </span>        msg = <span class="string">&quot;%r is not a perfect square&quot;</span> % string</div><div class="line"><span class="meta">... </span>        <span class="keyword">raise</span> argparse.ArgumentTypeError(msg)</div><div class="line"><span class="meta">... </span>    <span class="keyword">return</span> value</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, type=perfect_square)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;9&apos;</span>])</div><div class="line">Namespace(foo=<span class="number">9</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;7&apos;</span>])</div><div class="line">usage: PROG [-h] foo</div><div class="line">PROG: error: argument foo: <span class="string">&apos;7&apos;</span> <span class="keyword">is</span> <span class="keyword">not</span> a perfect square</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x4F7F;&#x7528;choices&#x53C2;&#x6570;&#x6765;&#x5B9A;&#x4E49;&#x53C2;&#x6570;&#x503C;&#x8303;&#x56F4;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, type=int, choices=range(<span class="number">5</span>, <span class="number">10</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;7&apos;</span>])</div><div class="line">Namespace(foo=<span class="number">7</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;11&apos;</span>])</div><div class="line">usage: PROG [-h] {<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>}</div><div class="line">PROG: error: argument foo: invalid choice: <span class="number">11</span> (choose <span class="keyword">from</span> <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>)</div></pre></td></tr></table></figure>
+<h2 id="choices"><a href="#choices" class="headerlink" title="choices"></a>choices</h2><p>&#x7528;&#x6765;&#x9650;&#x5236;&#x53C2;&#x6570;&#x503C;&#x7684;&#x9009;&#x5B9A;&#x8303;&#x56F4;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parser.add_argument(<span class="string">&apos;move&apos;</span>, choices=[<span class="string">&apos;rock&apos;</span>, <span class="string">&apos;paper&apos;</span>, <span class="string">&apos;scissors&apos;</span>])</div><div class="line">parser.add_argument(<span class="string">&apos;door&apos;</span>, type=int, choices=range(<span class="number">1</span>, <span class="number">4</span>))</div></pre></td></tr></table></figure>
+<h2 id="required"><a href="#required" class="headerlink" title="required"></a>required</h2><p>&#x8BBE;&#x5B9A;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x53EF;&#x662F;&#x8BA9;&#x53C2;&#x6570;&#x9879;&#x53D8;&#x6210;&#x5FC5;&#x9009;&#x9879;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, required=<span class="keyword">True</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;BAR&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;BAR&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([])</div><div class="line">usage: argparse.py [-h] [--foo FOO]</div><div class="line">argparse.py: error: option --foo <span class="keyword">is</span> required</div></pre></td></tr></table></figure>
+<h2 id="help-1"><a href="#help-1" class="headerlink" title="help"></a>help</h2><p>&#x7528;&#x6765;&#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x9879;&#x7684;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;</p>
+<h2 id="metavar"><a href="#metavar" class="headerlink" title="metavar"></a>metavar</h2><p>&#x6253;&#x5370;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;&#x65F6;&#xFF0C;&#x53C2;&#x6570;&#x9879;&#x7684;&#x6F14;&#x793A;&#x503C;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, metavar=<span class="string">&apos;YYY&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, metavar=<span class="string">&apos;XXX&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;X --foo Y&apos;</span>.split())</div><div class="line">Namespace(bar=<span class="string">&apos;X&apos;</span>, foo=<span class="string">&apos;Y&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</div><div class="line">usage:  [-h] [--foo YYY] XXX</div><div class="line"></div><div class="line">positional arguments:</div><div class="line"> XXX</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line"> --foo YYY</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-x&apos;</span>, nargs=<span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, nargs=<span class="number">2</span>, metavar=(<span class="string">&apos;bar&apos;</span>, <span class="string">&apos;baz&apos;</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</div><div class="line">usage: PROG [-h] [-x X X] [--foo bar baz]</div><div class="line"></div><div class="line">optional arguments:</div><div class="line"> -h, --help     show this help message <span class="keyword">and</span> exit</div><div class="line"> -x X X</div><div class="line"> --foo bar baz</div></pre></td></tr></table></figure>
+<h2 id="dest"><a href="#dest" class="headerlink" title="dest"></a>dest</h2><p>&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#x9879;&#x540D;&#x5B57;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, dest=<span class="string">&apos;bar&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;--foo XXX&apos;</span>.split())</div><div class="line">Namespace(bar=<span class="string">&apos;XXX&apos;</span>)</div></pre></td></tr></table></figure>
+<h1 id="parse-args-&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x8BF4;&#x660E;"><a href="#parse-args-&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x8BF4;&#x660E;" class="headerlink" title="parse_args()&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x8BF4;&#x660E;"></a>parse_args()&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x8BF4;&#x660E;</h1><p>&#x7528;&#x6765;&#x89E3;&#x6790;&#x53C2;&#x6570;&#x9879;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x4E0D;&#x662F;&#x91CD;&#x70B9;&#xFF0C;&#x770B;&#x770B;&#x5C31;&#x597D;&#x3002;</p>
+<h2 id="Option-value-syntax"><a href="#Option-value-syntax" class="headerlink" title="Option value syntax"></a>Option value syntax</h2><p>&#x53C2;&#x6570;&#x9879;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-x&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-x&apos;</span>, <span class="string">&apos;X&apos;</span>])</div><div class="line">Namespace(foo=<span class="keyword">None</span>, x=<span class="string">&apos;X&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;FOO&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;FOO&apos;</span>, x=<span class="keyword">None</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo=FOO&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;FOO&apos;</span>, x=<span class="keyword">None</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-xX&apos;</span>])</div><div class="line">Namespace(foo=<span class="keyword">None</span>, x=<span class="string">&apos;X&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-x&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-y&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-z&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-xyzZ&apos;</span>])</div><div class="line">Namespace(x=<span class="keyword">True</span>, y=<span class="keyword">True</span>, z=<span class="string">&apos;Z&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="Invalid-arguments"><a href="#Invalid-arguments" class="headerlink" title="Invalid arguments"></a>Invalid arguments</h2><p>&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#xFF0C;&#x53C2;&#x6570;&#x9879;&#x6216;&#x53C2;&#x6570;&#x503C;&#x4E0D;&#x7B26;&#x5408;&#x89C4;&#x5B9A;&#x65F6;&#x4F1A;&#x63D0;&#x793A;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, type=int)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>, nargs=<span class="string">&apos;?&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># invalid type</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;spam&apos;</span>])</div><div class="line">usage: PROG [-h] [--foo FOO] [bar]</div><div class="line">PROG: error: argument --foo: invalid int value: <span class="string">&apos;spam&apos;</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># invalid option</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--bar&apos;</span>])</div><div class="line">usage: PROG [-h] [--foo FOO] [bar]</div><div class="line">PROG: error: no such option: --bar</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># wrong number of arguments</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;spam&apos;</span>, <span class="string">&apos;badger&apos;</span>])</div><div class="line">usage: PROG [-h] [--foo FOO] [bar]</div><div class="line">PROG: error: extra arguments found: badger</div></pre></td></tr></table></figure>
+<h2 id="Arguments-containing"><a href="#Arguments-containing" class="headerlink" title="Arguments containing"></a>Arguments containing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-x&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, nargs=<span class="string">&apos;?&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># no negative number options, so -1 is a positional argument</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-x&apos;</span>, <span class="string">&apos;-1&apos;</span>])</div><div class="line">Namespace(foo=<span class="keyword">None</span>, x=<span class="string">&apos;-1&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># no negative number options, so -1 and -5 are positional arguments</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-x&apos;</span>, <span class="string">&apos;-1&apos;</span>, <span class="string">&apos;-5&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;-5&apos;</span>, x=<span class="string">&apos;-1&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-1&apos;</span>, dest=<span class="string">&apos;one&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, nargs=<span class="string">&apos;?&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so -1 is an option</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-1&apos;</span>, <span class="string">&apos;X&apos;</span>])</div><div class="line">Namespace(foo=<span class="keyword">None</span>, one=<span class="string">&apos;X&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so -2 is an option</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-2&apos;</span>])</div><div class="line">usage: PROG [-h] [<span class="number">-1</span> ONE] [foo]</div><div class="line">PROG: error: no such option: <span class="number">-2</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so both -1s are options</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-1&apos;</span>, <span class="string">&apos;-1&apos;</span>])</div><div class="line">usage: PROG [-h] [<span class="number">-1</span> ONE] [foo]</div><div class="line">PROG: error: argument <span class="number">-1</span>: expected one argument</div></pre></td></tr></table></figure>
+<h2 id="Argument-abbreviations-prefix-matching"><a href="#Argument-abbreviations-prefix-matching" class="headerlink" title="Argument abbreviations (prefix matching)"></a>Argument abbreviations (prefix matching)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-bacon&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;-badger&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;-bac MMM&apos;</span>.split())</div><div class="line">Namespace(bacon=<span class="string">&apos;MMM&apos;</span>, badger=<span class="keyword">None</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;-bad WOOD&apos;</span>.split())</div><div class="line">Namespace(bacon=<span class="keyword">None</span>, badger=<span class="string">&apos;WOOD&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">&apos;-ba BA&apos;</span>.split())</div><div class="line">usage: PROG [-h] [-bacon BACON] [-badger BADGER]</div><div class="line">PROG: error: ambiguous option: -ba could match -badger, -bacon</div></pre></td></tr></table></figure>
+<h2 id="Beyond-sys-argv"><a href="#Beyond-sys-argv" class="headerlink" title="Beyond sys.argv"></a>Beyond sys.argv</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(</div><div class="line"><span class="meta">... </span>    <span class="string">&apos;integers&apos;</span>, metavar=<span class="string">&apos;int&apos;</span>, type=int, choices=range(<span class="number">10</span>),</div><div class="line"><span class="meta">... </span>    nargs=<span class="string">&apos;+&apos;</span>, help=<span class="string">&apos;an integer in the range 0..9&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(</div><div class="line"><span class="meta">... </span>    <span class="string">&apos;--sum&apos;</span>, dest=<span class="string">&apos;accumulate&apos;</span>, action=<span class="string">&apos;store_const&apos;</span>, const=sum,</div><div class="line"><span class="meta">... </span>    default=max, help=<span class="string">&apos;sum the integers (default: find the max)&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;1&apos;</span>, <span class="string">&apos;2&apos;</span>, <span class="string">&apos;3&apos;</span>, <span class="string">&apos;4&apos;</span>])</div><div class="line">Namespace(accumulate=&lt;built-<span class="keyword">in</span> function max&gt;, integers=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;1&apos;</span>, <span class="string">&apos;2&apos;</span>, <span class="string">&apos;3&apos;</span>, <span class="string">&apos;4&apos;</span>, <span class="string">&apos;--sum&apos;</span>])</div><div class="line">Namespace(accumulate=&lt;built-<span class="keyword">in</span> function sum&gt;, integers=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</div></pre></td></tr></table></figure>
+<h2 id="The-Namespace-object"><a href="#The-Namespace-object" class="headerlink" title="The Namespace object"></a>The Namespace object</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args = parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;BAR&apos;</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>vars(args)</div><div class="line">{<span class="string">&apos;foo&apos;</span>: <span class="string">&apos;BAR&apos;</span>}</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">pass</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = C()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(args=[<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;BAR&apos;</span>], namespace=c)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.foo</div><div class="line"><span class="string">&apos;BAR&apos;</span></div></pre></td></tr></table></figure>
+<h1 id="&#x5176;&#x4ED6;&#x65B9;&#x6CD5;"><a href="#&#x5176;&#x4ED6;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5176;&#x4ED6;&#x65B9;&#x6CD5;"></a>&#x5176;&#x4ED6;&#x65B9;&#x6CD5;</h1><p>&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x6709;&#x4E00;&#x4E9B;&#x4E1C;&#x897F;&#x8FD8;&#x662F;&#x6BD4;&#x8F83;&#x6709;&#x7528;&#x7684;</p>
+<h2 id="Sub-commands"><a href="#Sub-commands" class="headerlink" title="Sub-commands"></a>Sub-commands</h2><p>&#x5B50;&#x53C2;&#x6570;&#x9879;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5B50;&#x53C2;&#x6570;&#x9879;&#x7684;&#x53C2;&#x6570;&#x9879;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the top-level parser</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>, help=<span class="string">&apos;foo help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers = parser.add_subparsers(help=<span class="string">&apos;sub-command help&apos;</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the parser for the &quot;a&quot; command</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_a = subparsers.add_parser(<span class="string">&apos;a&apos;</span>, help=<span class="string">&apos;a help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_a.add_argument(<span class="string">&apos;bar&apos;</span>, type=int, help=<span class="string">&apos;bar help&apos;</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the parser for the &quot;b&quot; command</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_b = subparsers.add_parser(<span class="string">&apos;b&apos;</span>, help=<span class="string">&apos;b help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_b.add_argument(<span class="string">&apos;--baz&apos;</span>, choices=<span class="string">&apos;XYZ&apos;</span>, help=<span class="string">&apos;baz help&apos;</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># parse some argument lists</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;a&apos;</span>, <span class="string">&apos;12&apos;</span>])</div><div class="line">Namespace(bar=<span class="number">12</span>, foo=<span class="keyword">False</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;b&apos;</span>, <span class="string">&apos;--baz&apos;</span>, <span class="string">&apos;Z&apos;</span>])</div><div class="line">Namespace(baz=<span class="string">&apos;Z&apos;</span>, foo=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#####</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--help&apos;</span>])</div><div class="line">usage: PROG [-h] [--foo] {a,b} ...</div><div class="line"></div><div class="line">positional arguments:</div><div class="line">  {a,b}   sub-command help</div><div class="line">    a     a help</div><div class="line">    b     b help</div><div class="line"></div><div class="line">optional arguments:</div><div class="line">  -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line">  --foo   foo help</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;a&apos;</span>, <span class="string">&apos;--help&apos;</span>])</div><div class="line">usage: PROG a [-h] bar</div><div class="line"></div><div class="line">positional arguments:</div><div class="line">  bar     bar help</div><div class="line"></div><div class="line">optional arguments:</div><div class="line">  -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;b&apos;</span>, <span class="string">&apos;--help&apos;</span>])</div><div class="line">usage: PROG b [-h] [--baz {X,Y,Z}]</div><div class="line"></div><div class="line">optional arguments:</div><div class="line">  -h, --help     show this help message <span class="keyword">and</span> exit</div><div class="line">  --baz {X,Y,Z}  baz help</div></pre></td></tr></table></figure>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5355;&#x72EC;&#x7684;&#x6807;&#x9898;&#x548C;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers = parser.add_subparsers(title=<span class="string">&apos;subcommands&apos;</span>,</div><div class="line"><span class="meta">... </span>                                   description=<span class="string">&apos;valid subcommands&apos;</span>,</div><div class="line"><span class="meta">... </span>                                   help=<span class="string">&apos;additional help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers.add_parser(<span class="string">&apos;foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers.add_parser(<span class="string">&apos;bar&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-h&apos;</span>])</div><div class="line">usage:  [-h] {foo,bar} ...</div><div class="line"></div><div class="line">optional arguments:</div><div class="line">  -h, --help  show this help message <span class="keyword">and</span> exit</div><div class="line"></div><div class="line">subcommands:</div><div class="line">  valid subcommands</div><div class="line"></div><div class="line">  {foo,bar}   additional help</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x522B;&#x540D;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers = parser.add_subparsers()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>checkout = subparsers.add_parser(<span class="string">&apos;checkout&apos;</span>, aliases=[<span class="string">&apos;co&apos;</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>checkout.add_argument(<span class="string">&apos;foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;co&apos;</span>, <span class="string">&apos;bar&apos;</span>])</div><div class="line">Namespace(foo=<span class="string">&apos;bar&apos;</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># sub-command functions</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(args)</span>:</span></div><div class="line"><span class="meta">... </span>    print(args.x * args.y)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(args)</span>:</span></div><div class="line"><span class="meta">... </span>    print(<span class="string">&apos;((%s))&apos;</span> % args.z)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the top-level parser</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers = parser.add_subparsers()</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the parser for the &quot;foo&quot; command</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_foo = subparsers.add_parser(<span class="string">&apos;foo&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_foo.add_argument(<span class="string">&apos;-x&apos;</span>, type=int, default=<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_foo.add_argument(<span class="string">&apos;y&apos;</span>, type=float)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_foo.set_defaults(func=foo)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># create the parser for the &quot;bar&quot; command</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_bar = subparsers.add_parser(<span class="string">&apos;bar&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_bar.add_argument(<span class="string">&apos;z&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser_bar.set_defaults(func=bar)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># parse the args and call whatever function was selected</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args = parser.parse_args(<span class="string">&apos;foo 1 -x 2&apos;</span>.split())</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args.func(args)</div><div class="line"><span class="number">2.0</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># parse the args and call whatever function was selected</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args = parser.parse_args(<span class="string">&apos;bar XYZYX&apos;</span>.split())</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>args.func(args)</div><div class="line">((XYZYX))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparsers = parser.add_subparsers(dest=<span class="string">&apos;subparser_name&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparser1 = subparsers.add_parser(<span class="string">&apos;1&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparser1.add_argument(<span class="string">&apos;-x&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparser2 = subparsers.add_parser(<span class="string">&apos;2&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>subparser2.add_argument(<span class="string">&apos;y&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;2&apos;</span>, <span class="string">&apos;frobble&apos;</span>])</div><div class="line">Namespace(subparser_name=<span class="string">&apos;2&apos;</span>, y=<span class="string">&apos;frobble&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="FileType-objects"><a href="#FileType-objects" class="headerlink" title="FileType objects"></a>FileType objects</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--raw&apos;</span>, type=argparse.FileType(<span class="string">&apos;wb&apos;</span>, <span class="number">0</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;out&apos;</span>, type=argparse.FileType(<span class="string">&apos;w&apos;</span>, encoding=<span class="string">&apos;UTF-8&apos;</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--raw&apos;</span>, <span class="string">&apos;raw.dat&apos;</span>, <span class="string">&apos;file.txt&apos;</span>])</div><div class="line">Namespace(out=&lt;_io.TextIOWrapper name=<span class="string">&apos;file.txt&apos;</span> mode=<span class="string">&apos;w&apos;</span> encoding=<span class="string">&apos;UTF-8&apos;</span>&gt;, raw=&lt;_io.FileIO name=<span class="string">&apos;raw.dat&apos;</span> mode=<span class="string">&apos;wb&apos;</span>&gt;)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;infile&apos;</span>, type=argparse.FileType(<span class="string">&apos;r&apos;</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;-&apos;</span>])</div><div class="line">Namespace(infile=&lt;_io.TextIOWrapper name=<span class="string">&apos;&lt;stdin&gt;&apos;</span> encoding=<span class="string">&apos;UTF-8&apos;</span>&gt;)</div></pre></td></tr></table></figure>
+<h2 id="Argument-groups"><a href="#Argument-groups" class="headerlink" title="Argument groups"></a>Argument groups</h2><p>&#x53C2;&#x6570;&#x9879;&#x7EC4;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>, add_help=<span class="keyword">False</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group1 = parser.add_argument_group(<span class="string">&apos;group1&apos;</span>, <span class="string">&apos;group1 description&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group1.add_argument(<span class="string">&apos;foo&apos;</span>, help=<span class="string">&apos;foo help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group2 = parser.add_argument_group(<span class="string">&apos;group2&apos;</span>, <span class="string">&apos;group2 description&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group2.add_argument(<span class="string">&apos;--bar&apos;</span>, help=<span class="string">&apos;bar help&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</div><div class="line">usage: PROG [--bar BAR] foo</div><div class="line"></div><div class="line">group1:</div><div class="line">  group1 description</div><div class="line"></div><div class="line">  foo    foo help</div><div class="line"></div><div class="line">group2:</div><div class="line">  group2 description</div><div class="line"></div><div class="line">  --bar BAR  bar help</div></pre></td></tr></table></figure>
+<h2 id="Mutual-exclusion"><a href="#Mutual-exclusion" class="headerlink" title="Mutual exclusion"></a>Mutual exclusion</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group = parser.add_mutually_exclusive_group()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group.add_argument(<span class="string">&apos;--bar&apos;</span>, action=<span class="string">&apos;store_false&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>])</div><div class="line">Namespace(bar=<span class="keyword">True</span>, foo=<span class="keyword">True</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--bar&apos;</span>])</div><div class="line">Namespace(bar=<span class="keyword">False</span>, foo=<span class="keyword">False</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;--bar&apos;</span>])</div><div class="line">usage: PROG [-h] [--foo | --bar]</div><div class="line">PROG: error: argument --bar: <span class="keyword">not</span> allowed <span class="keyword">with</span> argument --foo</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">&apos;PROG&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group = parser.add_mutually_exclusive_group(required=<span class="keyword">True</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>group.add_argument(<span class="string">&apos;--bar&apos;</span>, action=<span class="string">&apos;store_false&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([])</div><div class="line">usage: PROG [-h] (--foo | --bar)</div><div class="line">PROG: error: one of the arguments --foo --bar <span class="keyword">is</span> required</div></pre></td></tr></table></figure>
+<h2 id="Parser-defaults"><a href="#Parser-defaults" class="headerlink" title="Parser defaults"></a>Parser defaults</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;foo&apos;</span>, type=int)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.set_defaults(bar=<span class="number">42</span>, baz=<span class="string">&apos;badger&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">&apos;736&apos;</span>])</div><div class="line">Namespace(bar=<span class="number">42</span>, baz=<span class="string">&apos;badger&apos;</span>, foo=<span class="number">736</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, default=<span class="string">&apos;bar&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.set_defaults(foo=<span class="string">&apos;spam&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([])</div><div class="line">Namespace(foo=<span class="string">&apos;spam&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, default=<span class="string">&apos;badger&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.get_default(<span class="string">&apos;foo&apos;</span>)</div><div class="line"><span class="string">&apos;badger&apos;</span></div></pre></td></tr></table></figure>
+<h2 id="Printing-help"><a href="#Printing-help" class="headerlink" title="Printing help"></a>Printing help</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ArgumentParser.print_usage(file=<span class="keyword">None</span>)</div><div class="line">Print a brief description of how the ArgumentParser should be invoked on the command line. If file <span class="keyword">is</span> <span class="keyword">None</span>, sys.stdout <span class="keyword">is</span> assumed.</div><div class="line"></div><div class="line">ArgumentParser.print_help(file=<span class="keyword">None</span>)</div><div class="line">Print a help message, including the program usage <span class="keyword">and</span> information about the arguments registered <span class="keyword">with</span> the ArgumentParser. If file <span class="keyword">is</span> <span class="keyword">None</span>, sys.stdout <span class="keyword">is</span> assumed.</div><div class="line"></div><div class="line">There are also variants of these methods that simply <span class="keyword">return</span> a string instead of printing it:</div><div class="line"></div><div class="line">ArgumentParser.format_usage()</div><div class="line">Return a string containing a brief description of how the ArgumentParser should be invoked on the command line.</div><div class="line"></div><div class="line">ArgumentParser.format_help()</div><div class="line">Return a string containing a help message, including the program usage <span class="keyword">and</span> information about the arguments registered <span class="keyword">with</span> the ArgumentParser.</div></pre></td></tr></table></figure>
+<h2 id="Partial-parsing"><a href="#Partial-parsing" class="headerlink" title="Partial parsing"></a>Partial parsing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;--foo&apos;</span>, action=<span class="string">&apos;store_true&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">&apos;bar&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_known_args([<span class="string">&apos;--foo&apos;</span>, <span class="string">&apos;--badger&apos;</span>, <span class="string">&apos;BAR&apos;</span>, <span class="string">&apos;spam&apos;</span>])</div><div class="line">(Namespace(bar=<span class="string">&apos;BAR&apos;</span>, foo=<span class="keyword">True</span>), [<span class="string">&apos;--badger&apos;</span>, <span class="string">&apos;spam&apos;</span>])</div></pre></td></tr></table></figure>
+<h2 id="Customizing-file-parsing"><a href="#Customizing-file-parsing" class="headerlink" title="Customizing file parsing"></a>Customizing file parsing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyArgumentParser</span><span class="params">(argparse.ArgumentParser)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert_arg_line_to_args</span><span class="params">(self, arg_line)</span>:</span></div><div class="line">        <span class="keyword">return</span> arg_line.split()</div></pre></td></tr></table></figure>
+<h2 id="Exiting-methods"><a href="#Exiting-methods" class="headerlink" title="Exiting methods"></a>Exiting methods</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ArgumentParser.exit(status=<span class="number">0</span>, message=<span class="keyword">None</span>)</div><div class="line">This method terminates the program, exiting <span class="keyword">with</span> the specified status <span class="keyword">and</span>, <span class="keyword">if</span> given, it prints a message before that.</div><div class="line"></div><div class="line">ArgumentParser.error(message)</div><div class="line">This method prints a usage message including the message to the standard error <span class="keyword">and</span> terminates the program <span class="keyword">with</span> a status code of <span class="number">2.</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/argparse/" rel="tag"># argparse</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/14/python-socket/" rel="next" title="python之socket网络编程">
+                <i class="fa fa-chevron-left"></i> python之socket网络编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/13/learn-sqlite3/" rel="prev" title="python-sqlite3基础">
+                python-sqlite3基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">2.</span> <span class="nav-text">一个简单的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用步骤"><span class="nav-number">3.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ArgumentParser对象参数解析"><span class="nav-number">4.</span> <span class="nav-text">ArgumentParser对象参数解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prog"><span class="nav-number">4.1.</span> <span class="nav-text">prog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usage"><span class="nav-number">4.2.</span> <span class="nav-text">usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">4.3.</span> <span class="nav-text">description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epilog"><span class="nav-number">4.4.</span> <span class="nav-text">epilog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parents"><span class="nav-number">4.5.</span> <span class="nav-text">parents</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#formatter-class"><span class="nav-number">4.6.</span> <span class="nav-text">formatter_class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RawDescriptionHelpFormatter"><span class="nav-number">4.6.1.</span> <span class="nav-text">RawDescriptionHelpFormatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArgumentDefaultsHelpFormatter"><span class="nav-number">4.6.2.</span> <span class="nav-text">ArgumentDefaultsHelpFormatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MetavarTypeHelpFormatter"><span class="nav-number">4.6.3.</span> <span class="nav-text">MetavarTypeHelpFormatter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix-chars"><span class="nav-number">4.7.</span> <span class="nav-text">prefix_chars</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromfile-prefix-chars"><span class="nav-number">4.8.</span> <span class="nav-text">fromfile_prefix_chars</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argument-default"><span class="nav-number">4.9.</span> <span class="nav-text">argument_default</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#allow-abbrev"><span class="nav-number">4.10.</span> <span class="nav-text">allow_abbrev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conflict-handler"><span class="nav-number">4.11.</span> <span class="nav-text">conflict_handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-help"><span class="nav-number">4.12.</span> <span class="nav-text">add_help</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#add-argument方法参数解析"><span class="nav-number">5.</span> <span class="nav-text">add_argument方法参数解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#name-or-flags"><span class="nav-number">5.1.</span> <span class="nav-text">name or flags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#action"><span class="nav-number">5.2.</span> <span class="nav-text">action</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#store"><span class="nav-number">5.2.1.</span> <span class="nav-text">store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#store-const"><span class="nav-number">5.2.2.</span> <span class="nav-text">store_const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#store-true-amp-store-false"><span class="nav-number">5.2.3.</span> <span class="nav-text">store_true & store_false</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append"><span class="nav-number">5.2.4.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-const"><span class="nav-number">5.2.5.</span> <span class="nav-text">append_const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">5.2.6.</span> <span class="nav-text">count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#help"><span class="nav-number">5.2.7.</span> <span class="nav-text">help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#version"><span class="nav-number">5.2.8.</span> <span class="nav-text">version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义action"><span class="nav-number">5.2.9.</span> <span class="nav-text">自定义action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nargs"><span class="nav-number">5.3.</span> <span class="nav-text">nargs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const"><span class="nav-number">5.4.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#default"><span class="nav-number">5.5.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type"><span class="nav-number">5.6.</span> <span class="nav-text">type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#choices"><span class="nav-number">5.7.</span> <span class="nav-text">choices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#required"><span class="nav-number">5.8.</span> <span class="nav-text">required</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#help-1"><span class="nav-number">5.9.</span> <span class="nav-text">help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#metavar"><span class="nav-number">5.10.</span> <span class="nav-text">metavar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dest"><span class="nav-number">5.11.</span> <span class="nav-text">dest</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parse-args-方法参数说明"><span class="nav-number">6.</span> <span class="nav-text">parse_args()方法参数说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Option-value-syntax"><span class="nav-number">6.1.</span> <span class="nav-text">Option value syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invalid-arguments"><span class="nav-number">6.2.</span> <span class="nav-text">Invalid arguments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arguments-containing"><span class="nav-number">6.3.</span> <span class="nav-text">Arguments containing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Argument-abbreviations-prefix-matching"><span class="nav-number">6.4.</span> <span class="nav-text">Argument abbreviations (prefix matching)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beyond-sys-argv"><span class="nav-number">6.5.</span> <span class="nav-text">Beyond sys.argv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Namespace-object"><span class="nav-number">6.6.</span> <span class="nav-text">The Namespace object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他方法"><span class="nav-number">7.</span> <span class="nav-text">其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sub-commands"><span class="nav-number">7.1.</span> <span class="nav-text">Sub-commands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileType-objects"><span class="nav-number">7.2.</span> <span class="nav-text">FileType objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Argument-groups"><span class="nav-number">7.3.</span> <span class="nav-text">Argument groups</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mutual-exclusion"><span class="nav-number">7.4.</span> <span class="nav-text">Mutual exclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser-defaults"><span class="nav-number">7.5.</span> <span class="nav-text">Parser defaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printing-help"><span class="nav-number">7.6.</span> <span class="nav-text">Printing help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partial-parsing"><span class="nav-number">7.7.</span> <span class="nav-text">Partial parsing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Customizing-file-parsing"><span class="nav-number">7.8.</span> <span class="nav-text">Customizing file parsing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exiting-methods"><span class="nav-number">7.9.</span> <span class="nav-text">Exiting methods</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

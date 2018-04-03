@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,db,sqlite," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;SQLite&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x6B3E;&amp;#x8F7B;&amp;#x578B;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x662F;&amp;#x9075;&amp;#x5B88;ACID&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7BA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-sqlite3基础">
+<meta property="og:url" content="http://c.isme.pub/2017/02/13/learn-sqlite3/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;SQLite&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x6B3E;&amp;#x8F7B;&amp;#x578B;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x662F;&amp;#x9075;&amp;#x5B88;ACID&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7BA">
+<meta property="og:updated_time" content="2017-08-22T02:12:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-sqlite3基础">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;SQLite&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x6B3E;&amp;#x8F7B;&amp;#x578B;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x662F;&amp;#x9075;&amp;#x5B88;ACID&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7BA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2017/02/13/learn-sqlite3/"/>
+
+
+
+
+
+  <title>python-sqlite3基础 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2017/02/13/learn-sqlite3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python-sqlite3基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T12:00:14+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-22T10:12:27+08:00">
+                2017-08-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/sqlite/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>SQLite&#xFF0C;&#x662F;&#x4E00;&#x6B3E;&#x8F7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x662F;&#x9075;&#x5B88;ACID&#x7684;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x5728;&#x4E00;&#x4E2A;&#x76F8;&#x5BF9;&#x5C0F;&#x7684;C&#x5E93;&#x4E2D;&#x3002;&#x5B83;&#x662F;D.RichardHipp&#x5EFA;&#x7ACB;&#x7684;&#x516C;&#x6709;&#x9886;&#x57DF;&#x9879;&#x76EE;&#x3002;&#x5B83;&#x7684;&#x8BBE;&#x8BA1;&#x76EE;&#x6807;&#x662F;&#x5D4C;&#x5165;&#x5F0F;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x76EE;&#x524D;&#x5DF2;&#x7ECF;&#x5728;&#x5F88;&#x591A;&#x5D4C;&#x5165;&#x5F0F;&#x4EA7;&#x54C1;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x5B83;&#xFF0C;&#x5B83;&#x5360;&#x7528;&#x8D44;&#x6E90;&#x975E;&#x5E38;&#x7684;&#x4F4E;&#xFF0C;&#x5728;&#x5D4C;&#x5165;&#x5F0F;&#x8BBE;&#x5907;&#x4E2D;&#xFF0C;&#x53EF;&#x80FD;&#x53EA;&#x9700;&#x8981;&#x51E0;&#x767E;K&#x7684;&#x5185;&#x5B58;&#x5C31;&#x591F;&#x4E86;&#x3002;&#x5B83;&#x80FD;&#x591F;&#x652F;&#x6301;Windows/Linux/Unix&#x7B49;&#x7B49;&#x4E3B;&#x6D41;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x540C;&#x65F6;&#x80FD;&#x591F;&#x8DDF;&#x5F88;&#x591A;&#x7A0B;&#x5E8F;&#x8BED;&#x8A00;&#x76F8;&#x7ED3;&#x5408;&#xFF0C;&#x6BD4;&#x5982; Tcl&#x3001;C#&#x3001;PHP&#x3001;Java&#x3001;Python&#x7B49;&#xFF0C;&#x8FD8;&#x6709;ODBC&#x63A5;&#x53E3;&#xFF0C;&#x540C;&#x6837;&#x6BD4;&#x8D77;Mysql&#x3001;PostgreSQL&#x8FD9;&#x4E24;&#x6B3E;&#x5F00;&#x6E90;&#x7684;&#x4E16;&#x754C;&#x8457;&#x540D;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x6765;&#x8BB2;&#xFF0C;&#x5B83;&#x7684;&#x5904;&#x7406;&#x901F;&#x5EA6;&#x6BD4;&#x4ED6;&#x4EEC;&#x90FD;&#x5FEB;&#x3002;SQLite&#x7B2C;&#x4E00;&#x4E2A;Alpha&#x7248;&#x672C;&#x8BDE;&#x751F;&#x4E8E;2000&#x5E74;5&#x6708;&#x3002; &#x81F3;2015&#x5E74;&#x5DF2;&#x7ECF;&#x6709;15&#x4E2A;&#x5E74;&#x5934;&#xFF0C;SQLite&#x4E5F;&#x8FCE;&#x6765;&#x4E86;&#x4E00;&#x4E2A;&#x7248;&#x672C; SQLite 3&#x5DF2;&#x7ECF;&#x53D1;&#x5E03;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x53D6;&#x81EA;&#x7F51;&#x7EDC;&#xFF0C;<a href="http://www.runoob.com/sqlite/sqlite-python.html" target="_blank" rel="external">&#x539F;&#x6587;&#x5730;&#x5740;</a></p>
+<a id="more"></a>
+<h1 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h1><p>SQLite3 &#x53EF;&#x4F7F;&#x7528; sqlite3 &#x6A21;&#x5757;&#x4E0E; Python &#x8FDB;&#x884C;&#x96C6;&#x6210;&#x3002;sqlite3 &#x6A21;&#x5757;&#x662F;&#x7531; Gerhard Haring &#x7F16;&#x5199;&#x7684;&#x3002;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x4E0E; PEP 249 &#x63CF;&#x8FF0;&#x7684; DB-API 2.0 &#x89C4;&#x8303;&#x517C;&#x5BB9;&#x7684; SQL &#x63A5;&#x53E3;&#x3002;&#x60A8;&#x4E0D;&#x9700;&#x8981;&#x5355;&#x72EC;&#x5B89;&#x88C5;&#x8BE5;&#x6A21;&#x5757;&#xFF0C;&#x56E0;&#x4E3A; Python 2.5.x &#x4EE5;&#x4E0A;&#x7248;&#x672C;&#x9ED8;&#x8BA4;&#x81EA;&#x5E26;&#x4E86;&#x8BE5;&#x6A21;&#x5757;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x4F7F;&#x7528; sqlite3 &#x6A21;&#x5757;&#xFF0C;&#x60A8;&#x9996;&#x5148;&#x5FC5;&#x987B;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDE;&#x63A5;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x60A8;&#x53EF;&#x4EE5;&#x6709;&#x9009;&#x62E9;&#x5730;&#x521B;&#x5EFA;&#x5149;&#x6807;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x5C06;&#x5E2E;&#x52A9;&#x60A8;&#x6267;&#x884C;&#x6240;&#x6709;&#x7684; SQL &#x8BED;&#x53E5;&#x3002;</p>
+<h1 id="Python-sqlite3-&#x6A21;&#x5757;-API"><a href="#Python-sqlite3-&#x6A21;&#x5757;-API" class="headerlink" title="Python sqlite3 &#x6A21;&#x5757; API"></a>Python sqlite3 &#x6A21;&#x5757; API</h1><p>&#x4EE5;&#x4E0B;&#x662F;&#x91CD;&#x8981;&#x7684; sqlite3 &#x6A21;&#x5757;&#x7A0B;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x60A8;&#x5728; Python &#x7A0B;&#x5E8F;&#x4E2D;&#x4F7F;&#x7528; SQLite &#x6570;&#x636E;&#x5E93;&#x7684;&#x9700;&#x6C42;&#x3002;&#x5982;&#x679C;&#x60A8;&#x9700;&#x8981;&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x7EC6;&#x8282;&#xFF0C;&#x8BF7;&#x67E5;&#x770B; Python sqlite3 &#x6A21;&#x5757;&#x7684;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x3002;</p>
+<h2 id="sqlite3-connect-database-timeout-other-optional-arguments"><a href="#sqlite3-connect-database-timeout-other-optional-arguments" class="headerlink" title="sqlite3.connect(database [,timeout ,other optional arguments])"></a>sqlite3.connect(database [,timeout ,other optional arguments])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x8BE5; API &#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x5230; SQLite &#x6570;&#x636E;&#x5E93;&#x6587;&#x4EF6; database &#x7684;&#x94FE;&#x63A5;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; &quot;:memory:&quot; &#x6765;&#x5728; RAM &#x4E2D;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x5230; database &#x7684;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x78C1;&#x76D8;&#x4E0A;&#x6253;&#x5F00;&#x3002;&#x5982;&#x679C;&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;&#x6253;&#x5F00;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x5BF9;&#x8C61;&#x3002;</div><div class="line">&#x5F53;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x88AB;&#x591A;&#x4E2A;&#x8FDE;&#x63A5;&#x8BBF;&#x95EE;&#xFF0C;&#x4E14;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x4FEE;&#x6539;&#x4E86;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6B64;&#x65F6; SQLite &#x6570;&#x636E;&#x5E93;&#x88AB;&#x9501;&#x5B9A;&#xFF0C;&#x76F4;&#x5230;&#x4E8B;&#x52A1;&#x63D0;&#x4EA4;&#x3002;timeout &#x53C2;&#x6570;&#x8868;&#x793A;&#x8FDE;&#x63A5;&#x7B49;&#x5F85;&#x9501;&#x5B9A;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#xFF0C;&#x76F4;&#x5230;&#x53D1;&#x751F;&#x5F02;&#x5E38;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#x3002;timeout &#x53C2;&#x6570;&#x9ED8;&#x8BA4;&#x662F; 5.0&#xFF08;5 &#x79D2;&#xFF09;&#x3002;</div><div class="line">&#x5982;&#x679C;&#x7ED9;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x5E93;&#x540D;&#x79F0; filename &#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8BE5;&#x8C03;&#x7528;&#x5C06;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x3002;&#x5982;&#x679C;&#x60A8;&#x4E0D;&#x60F3;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x90A3;&#x4E48;&#x60A8;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5E26;&#x6709;&#x8DEF;&#x5F84;&#x7684;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x8FD9;&#x6837;&#x60A8;&#x5C31;&#x80FD;&#x5728;&#x4EFB;&#x610F;&#x5730;&#x65B9;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-cursor-cursorClass"><a href="#connection-cursor-cursorClass" class="headerlink" title="connection.cursor([cursorClass])"></a>connection.cursor([cursorClass])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; cursor&#xFF0C;&#x5C06;&#x5728; Python &#x6570;&#x636E;&#x5E93;&#x7F16;&#x7A0B;&#x4E2D;&#x7528;&#x5230;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x7684;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570; cursorClass&#x3002;&#x5982;&#x679C;&#x63D0;&#x4F9B;&#x4E86;&#x8BE5;&#x53C2;&#x6570;&#xFF0C;&#x5219;&#x5B83;&#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;&#x6269;&#x5C55;&#x81EA; sqlite3.Cursor &#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x7684; cursor &#x7C7B;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="cursor-execute-sql-optional-parameters"><a href="#cursor-execute-sql-optional-parameters" class="headerlink" title="cursor.execute(sql [, optional parameters])"></a>cursor.execute(sql [, optional parameters])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x6267;&#x884C;&#x4E00;&#x4E2A; SQL &#x8BED;&#x53E5;&#x3002;&#x8BE5; SQL &#x8BED;&#x53E5;&#x53EF;&#x4EE5;&#x88AB;&#x53C2;&#x6570;&#x5316;&#xFF08;&#x5373;&#x4F7F;&#x7528;&#x5360;&#x4F4D;&#x7B26;&#x4EE3;&#x66FF; SQL &#x6587;&#x672C;&#xFF09;&#x3002;sqlite3 &#x6A21;&#x5757;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x5360;&#x4F4D;&#x7B26;&#xFF1A;&#x95EE;&#x53F7;&#x548C;&#x547D;&#x540D;&#x5360;&#x4F4D;&#x7B26;&#xFF08;&#x547D;&#x540D;&#x6837;&#x5F0F;&#xFF09;&#x3002;</div><div class="line">&#x4F8B;&#x5982;&#xFF1A;cursor.execute(&quot;insert into people values (?, ?)&quot;, (who, age))</div></pre></td></tr></table></figure>
+<h2 id="connection-execute-sql-optional-parameters"><a href="#connection-execute-sql-optional-parameters" class="headerlink" title="connection.execute(sql [, optional parameters])"></a>connection.execute(sql [, optional parameters])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x662F;&#x4E0A;&#x9762;&#x6267;&#x884C;&#x7684;&#x7531;&#x5149;&#x6807;&#xFF08;cursor&#xFF09;&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5149;&#x6807;&#xFF08;cursor&#xFF09;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x4E2D;&#x95F4;&#x7684;&#x5149;&#x6807;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x5149;&#x6807;&#x7684; execute &#x65B9;&#x6CD5;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="cursor-executemany-sql-seq-of-parameters"><a href="#cursor-executemany-sql-seq-of-parameters" class="headerlink" title="cursor.executemany(sql, seq_of_parameters)"></a>cursor.executemany(sql, seq_of_parameters)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x5BF9; seq_of_parameters &#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x6216;&#x6620;&#x5C04;&#x6267;&#x884C;&#x4E00;&#x4E2A; SQL &#x547D;&#x4EE4;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-executemany-sql-parameters"><a href="#connection-executemany-sql-parameters" class="headerlink" title="connection.executemany(sql[, parameters])"></a>connection.executemany(sql[, parameters])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#x8C03;&#x7528;&#x5149;&#x6807;&#xFF08;cursor&#xFF09;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x7684;&#x4E2D;&#x95F4;&#x7684;&#x5149;&#x6807;&#x5BF9;&#x8C61;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x5149;&#x6807;&#x7684; executemany &#x65B9;&#x6CD5;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="cursor-executescript-sql-script"><a href="#cursor-executescript-sql-script" class="headerlink" title="cursor.executescript(sql_script)"></a>cursor.executescript(sql_script)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x4E00;&#x65E6;&#x63A5;&#x6536;&#x5230;&#x811A;&#x672C;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x591A;&#x4E2A; SQL &#x8BED;&#x53E5;&#x3002;&#x5B83;&#x9996;&#x5148;&#x6267;&#x884C; COMMIT &#x8BED;&#x53E5;&#xFF0C;&#x7136;&#x540E;&#x6267;&#x884C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x7684; SQL &#x811A;&#x672C;&#x3002;&#x6240;&#x6709;&#x7684; SQL &#x8BED;&#x53E5;&#x5E94;&#x8BE5;&#x7528;&#x5206;&#x53F7;&#xFF08;;&#xFF09;&#x5206;&#x9694;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-executescript-sql-script"><a href="#connection-executescript-sql-script" class="headerlink" title="connection.executescript(sql_script)"></a>connection.executescript(sql_script)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#x8C03;&#x7528;&#x5149;&#x6807;&#xFF08;cursor&#xFF09;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x7684;&#x4E2D;&#x95F4;&#x7684;&#x5149;&#x6807;&#x5BF9;&#x8C61;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x5149;&#x6807;&#x7684; executescript &#x65B9;&#x6CD5;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-total-changes"><a href="#connection-total-changes" class="headerlink" title="connection.total_changes()"></a>connection.total_changes()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x8FD4;&#x56DE;&#x81EA;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x6253;&#x5F00;&#x4EE5;&#x6765;&#x88AB;&#x4FEE;&#x6539;&#x3001;&#x63D2;&#x5165;&#x6216;&#x5220;&#x9664;&#x7684;&#x6570;&#x636E;&#x5E93;&#x603B;&#x884C;&#x6570;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-commit"><a href="#connection-commit" class="headerlink" title="connection.commit()"></a>connection.commit()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x65B9;&#x6CD5;&#x63D0;&#x4EA4;&#x5F53;&#x524D;&#x7684;&#x4E8B;&#x52A1;&#x3002;&#x5982;&#x679C;&#x60A8;&#x672A;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x81EA;&#x60A8;&#x4E0A;&#x4E00;&#x6B21;&#x8C03;&#x7528; commit() &#x4EE5;&#x6765;&#x6240;&#x505A;&#x7684;&#x4EFB;&#x4F55;&#x52A8;&#x4F5C;&#x5BF9;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x6765;&#x8BF4;&#x662F;&#x4E0D;&#x53EF;&#x89C1;&#x7684;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-rollback"><a href="#connection-rollback" class="headerlink" title="connection.rollback()"></a>connection.rollback()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x65B9;&#x6CD5;&#x56DE;&#x6EDA;&#x81EA;&#x4E0A;&#x4E00;&#x6B21;&#x8C03;&#x7528; commit() &#x4EE5;&#x6765;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x6240;&#x505A;&#x7684;&#x66F4;&#x6539;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="connection-close"><a href="#connection-close" class="headerlink" title="connection.close()"></a>connection.close()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x65B9;&#x6CD5;&#x5173;&#x95ED;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x3002;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x8C03;&#x7528; commit()&#x3002;&#x5982;&#x679C;&#x60A8;&#x4E4B;&#x524D;&#x672A;&#x8C03;&#x7528; commit() &#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x76F4;&#x63A5;&#x5173;&#x95ED;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#xFF0C;&#x60A8;&#x6240;&#x505A;&#x7684;&#x6240;&#x6709;&#x66F4;&#x6539;&#x5C06;&#x5168;&#x90E8;&#x4E22;&#x5931;&#xFF01;</div></pre></td></tr></table></figure>
+<h2 id="cursor-fetchone"><a href="#cursor-fetchone" class="headerlink" title="cursor.fetchone()"></a>cursor.fetchone()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#x7684;&#x4E0B;&#x4E00;&#x884C;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x7684;&#x5E8F;&#x5217;&#xFF0C;&#x5F53;&#x6CA1;&#x6709;&#x66F4;&#x591A;&#x53EF;&#x7528;&#x7684;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; None&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="cursor-fetchmany-size-cursor-arraysize"><a href="#cursor-fetchmany-size-cursor-arraysize" class="headerlink" title="cursor.fetchmany([size=cursor.arraysize])"></a>cursor.fetchmany([size=cursor.arraysize])</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#x7684;&#x4E0B;&#x4E00;&#x884C;&#x7EC4;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x3002;&#x5F53;&#x6CA1;&#x6709;&#x66F4;&#x591A;&#x7684;&#x53EF;&#x7528;&#x7684;&#x884C;&#x65F6;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;&#x5217;&#x8868;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x7531; size &#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;&#x884C;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="cursor-fetchall"><a href="#cursor-fetchall" class="headerlink" title="cursor.fetchall()"></a>cursor.fetchall()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8BE5;&#x4F8B;&#x7A0B;&#x83B7;&#x53D6;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#x6240;&#x6709;&#xFF08;&#x5269;&#x4F59;&#xFF09;&#x7684;&#x884C;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x3002;&#x5F53;&#x6CA1;&#x6709;&#x53EF;&#x7528;&#x7684;&#x884C;&#x65F6;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;&#x5217;&#x8868;&#x3002;</div></pre></td></tr></table></figure>
+<h1 id="&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;"><a href="#&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;" class="headerlink" title="&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;"></a>&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;</h1><h2 id="&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;"><a href="#&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;"></a>&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x4EE3;&#x7801;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x8FDE;&#x63A5;&#x5230;&#x4E00;&#x4E2A;&#x73B0;&#x6709;&#x7684;&#x6570;&#x636E;&#x5E93;&#x3002;&#x5982;&#x679C;&#x6570;&#x636E;&#x5E93;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x4F1A;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x6700;&#x540E;&#x5C06;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line">&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x60A8;&#x4E5F;&#x53EF;&#x4EE5;&#x628A;&#x6570;&#x636E;&#x5E93;&#x540D;&#x79F0;&#x590D;&#x5236;&#x4E3A;&#x7279;&#x5B9A;&#x7684;&#x540D;&#x79F0; :memory:&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4F1A;&#x5728; RAM &#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x8FD0;&#x884C;&#x4E0A;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x5E93; test.db&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9700;&#x8981;&#x6539;&#x53D8;&#x8DEF;&#x5F84;&#x3002;&#x4FDD;&#x5B58;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x5230; sqlite.py &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5E76;&#x6309;&#x5982;&#x4E0B;&#x6240;&#x793A;&#x6267;&#x884C;&#x3002;&#x5982;&#x679C;&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;&#x521B;&#x5EFA;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x663E;&#x793A;&#x4E0B;&#x9762;&#x6240;&#x793A;&#x7684;&#x6D88;&#x606F;&#xFF1A;</div><div class="line">$chmod +x sqlite.py</div><div class="line">$./sqlite.py</div><div class="line">Open database successfully</div></pre></td></tr></table></figure>
+<h2 id="&#x521B;&#x5EFA;&#x8868;"><a href="#&#x521B;&#x5EFA;&#x8868;" class="headerlink" title="&#x521B;&#x5EFA;&#x8868;"></a>&#x521B;&#x5EFA;&#x8868;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x4EE3;&#x7801;&#x6BB5;&#x5C06;&#x7528;&#x4E8E;&#x5728;&#x5148;&#x524D;&#x521B;&#x5EFA;&#x7684;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8868;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&apos;&apos;&apos;CREATE TABLE COMPANY</span></div><div class="line">       (ID INT PRIMARY KEY     NOT NULL,</div><div class="line">       NAME           TEXT    NOT NULL,</div><div class="line">       AGE            INT     NOT NULL,</div><div class="line">       ADDRESS        CHAR(50),</div><div class="line">       SALARY         REAL);&apos;&apos;&apos;)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Table created successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5728; test.db &#x4E2D;&#x521B;&#x5EFA; COMPANY &#x8868;&#xFF0C;&#x5E76;&#x663E;&#x793A;&#x4E0B;&#x9762;&#x6240;&#x793A;&#x7684;&#x6D88;&#x606F;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Table created successfully</div></pre></td></tr></table></figure>
+<h2 id="INSERT-&#x64CD;&#x4F5C;"><a href="#INSERT-&#x64CD;&#x4F5C;" class="headerlink" title="INSERT &#x64CD;&#x4F5C;"></a>INSERT &#x64CD;&#x4F5C;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x7A0B;&#x5E8F;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x5728;&#x4E0A;&#x9762;&#x521B;&#x5EFA;&#x7684; COMPANY &#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x8BB0;&#x5F55;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \</span></div><div class="line">      VALUES (1, &apos;Paul&apos;, 32, &apos;California&apos;, 20000.00 )&quot;);</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \</span></div><div class="line">      VALUES (2, &apos;Allen&apos;, 25, &apos;Texas&apos;, 15000.00 )&quot;);</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \</span></div><div class="line">      VALUES (3, &apos;Teddy&apos;, 23, &apos;Norway&apos;, 20000.00 )&quot;);</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \</span></div><div class="line">      VALUES (4, &apos;Mark&apos;, 25, &apos;Rich-Mond &apos;, 65000.00 )&quot;);</div><div class="line"></div><div class="line">conn.commit()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Records created successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5728; COMPANY &#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x7ED9;&#x5B9A;&#x8BB0;&#x5F55;&#xFF0C;&#x5E76;&#x4F1A;&#x663E;&#x793A;&#x4EE5;&#x4E0B;&#x4E24;&#x884C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Records created successfully</div></pre></td></tr></table></figure>
+<h2 id="SELECT-&#x64CD;&#x4F5C;"><a href="#SELECT-&#x64CD;&#x4F5C;" class="headerlink" title="SELECT &#x64CD;&#x4F5C;"></a>SELECT &#x64CD;&#x4F5C;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x7A0B;&#x5E8F;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4ECE;&#x524D;&#x9762;&#x521B;&#x5EFA;&#x7684; COMPANY &#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x5E76;&#x663E;&#x793A;&#x8BB0;&#x5F55;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">cursor = conn.execute(<span class="string">&quot;SELECT id, name, address, salary  from COMPANY&quot;</span>)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> cursor:</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ID = &quot;</span>, row[<span class="number">0</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;NAME = &quot;</span>, row[<span class="number">1</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ADDRESS = &quot;</span>, row[<span class="number">2</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;SALARY = &quot;</span>, row[<span class="number">3</span>], <span class="string">&quot;\n&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Operation done successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">ID =  <span class="number">1</span></div><div class="line">NAME =  Paul</div><div class="line">ADDRESS =  California</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">2</span></div><div class="line">NAME =  Allen</div><div class="line">ADDRESS =  Texas</div><div class="line">SALARY =  <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">3</span></div><div class="line">NAME =  Teddy</div><div class="line">ADDRESS =  Norway</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">4</span></div><div class="line">NAME =  Mark</div><div class="line">ADDRESS =  Rich-Mond</div><div class="line">SALARY =  <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
+<h2 id="UPDATE-&#x64CD;&#x4F5C;"><a href="#UPDATE-&#x64CD;&#x4F5C;" class="headerlink" title="UPDATE &#x64CD;&#x4F5C;"></a>UPDATE &#x64CD;&#x4F5C;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x4EE3;&#x7801;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528; UPDATE &#x8BED;&#x53E5;&#x6765;&#x66F4;&#x65B0;&#x4EFB;&#x4F55;&#x8BB0;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x4ECE; COMPANY &#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x5E76;&#x663E;&#x793A;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;UPDATE COMPANY set SALARY = 25000.00 where ID=1&quot;</span>)</div><div class="line">conn.commit()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Total number of rows updated :&quot;</span>, conn.total_changes</div><div class="line"></div><div class="line">cursor = conn.execute(<span class="string">&quot;SELECT id, name, address, salary  from COMPANY&quot;</span>)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> cursor:</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ID = &quot;</span>, row[<span class="number">0</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;NAME = &quot;</span>, row[<span class="number">1</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ADDRESS = &quot;</span>, row[<span class="number">2</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;SALARY = &quot;</span>, row[<span class="number">3</span>], <span class="string">&quot;\n&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Operation done successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Total number of rows updated : <span class="number">1</span></div><div class="line">ID =  <span class="number">1</span></div><div class="line">NAME =  Paul</div><div class="line">ADDRESS =  California</div><div class="line">SALARY =  <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">2</span></div><div class="line">NAME =  Allen</div><div class="line">ADDRESS =  Texas</div><div class="line">SALARY =  <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">3</span></div><div class="line">NAME =  Teddy</div><div class="line">ADDRESS =  Norway</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">4</span></div><div class="line">NAME =  Mark</div><div class="line">ADDRESS =  Rich-Mond</div><div class="line">SALARY =  <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
+<h2 id="DELETE-&#x64CD;&#x4F5C;"><a href="#DELETE-&#x64CD;&#x4F5C;" class="headerlink" title="DELETE &#x64CD;&#x4F5C;"></a>DELETE &#x64CD;&#x4F5C;</h2><p>&#x4E0B;&#x9762;&#x7684; Python &#x4EE3;&#x7801;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528; DELETE &#x8BED;&#x53E5;&#x5220;&#x9664;&#x4EFB;&#x4F55;&#x8BB0;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x4ECE; COMPANY &#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x5E76;&#x663E;&#x793A;&#x5269;&#x4F59;&#x7684;&#x8BB0;&#x5F55;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3</div><div class="line"></div><div class="line">conn = sqlite3.connect(<span class="string">&apos;test.db&apos;</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Opened database successfully&quot;</span>;</div><div class="line"></div><div class="line">conn.execute(<span class="string">&quot;DELETE from COMPANY where ID=2;&quot;</span>)</div><div class="line">conn.commit()</div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Total number of rows deleted :&quot;</span>, conn.total_changes</div><div class="line"></div><div class="line">cursor = conn.execute(<span class="string">&quot;SELECT id, name, address, salary  from COMPANY&quot;</span>)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> cursor:</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ID = &quot;</span>, row[<span class="number">0</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;NAME = &quot;</span>, row[<span class="number">1</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;ADDRESS = &quot;</span>, row[<span class="number">2</span>]</div><div class="line">   <span class="keyword">print</span> <span class="string">&quot;SALARY = &quot;</span>, row[<span class="number">3</span>], <span class="string">&quot;\n&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">&quot;Operation done successfully&quot;</span>;</div><div class="line">conn.close()</div><div class="line">&#x4E0A;&#x8FF0;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">Opened database successfully</div><div class="line">Total number of rows deleted : <span class="number">1</span></div><div class="line">ID =  <span class="number">1</span></div><div class="line">NAME =  Paul</div><div class="line">ADDRESS =  California</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">3</span></div><div class="line">NAME =  Teddy</div><div class="line">ADDRESS =  Norway</div><div class="line">SALARY =  <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID =  <span class="number">4</span></div><div class="line">NAME =  Mark</div><div class="line">ADDRESS =  Rich-Mond</div><div class="line">SALARY =  <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/db/" rel="tag"># db</a>
+          
+            <a href="/tags/sqlite/" rel="tag"># sqlite</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/09/python-argparse/" rel="next" title="python-argparse模块使用教程">
+                <i class="fa fa-chevron-left"></i> python-argparse模块使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/13/http-error-code/" rel="prev" title="http 错误代码表">
+                http 错误代码表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-sqlite3-模块-API"><span class="nav-number">3.</span> <span class="nav-text">Python sqlite3 模块 API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlite3-connect-database-timeout-other-optional-arguments"><span class="nav-number">3.1.</span> <span class="nav-text">sqlite3.connect(database [,timeout ,other optional arguments])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-cursor-cursorClass"><span class="nav-number">3.2.</span> <span class="nav-text">connection.cursor([cursorClass])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-execute-sql-optional-parameters"><span class="nav-number">3.3.</span> <span class="nav-text">cursor.execute(sql [, optional parameters])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-execute-sql-optional-parameters"><span class="nav-number">3.4.</span> <span class="nav-text">connection.execute(sql [, optional parameters])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-executemany-sql-seq-of-parameters"><span class="nav-number">3.5.</span> <span class="nav-text">cursor.executemany(sql, seq_of_parameters)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-executemany-sql-parameters"><span class="nav-number">3.6.</span> <span class="nav-text">connection.executemany(sql[, parameters])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-executescript-sql-script"><span class="nav-number">3.7.</span> <span class="nav-text">cursor.executescript(sql_script)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-executescript-sql-script"><span class="nav-number">3.8.</span> <span class="nav-text">connection.executescript(sql_script)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-total-changes"><span class="nav-number">3.9.</span> <span class="nav-text">connection.total_changes()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-commit"><span class="nav-number">3.10.</span> <span class="nav-text">connection.commit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-rollback"><span class="nav-number">3.11.</span> <span class="nav-text">connection.rollback()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-close"><span class="nav-number">3.12.</span> <span class="nav-text">connection.close()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-fetchone"><span class="nav-number">3.13.</span> <span class="nav-text">cursor.fetchone()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-fetchmany-size-cursor-arraysize"><span class="nav-number">3.14.</span> <span class="nav-text">cursor.fetchmany([size=cursor.arraysize])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cursor-fetchall"><span class="nav-number">3.15.</span> <span class="nav-text">cursor.fetchall()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作方式"><span class="nav-number">4.</span> <span class="nav-text">操作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数据库"><span class="nav-number">4.1.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表"><span class="nav-number">4.2.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INSERT-操作"><span class="nav-number">4.3.</span> <span class="nav-text">INSERT 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SELECT-操作"><span class="nav-number">4.4.</span> <span class="nav-text">SELECT 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UPDATE-操作"><span class="nav-number">4.5.</span> <span class="nav-text">UPDATE 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DELETE-操作"><span class="nav-number">4.6.</span> <span class="nav-text">DELETE 操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

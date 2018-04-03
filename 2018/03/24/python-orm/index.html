@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,sqlalchemy," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;orm&amp;#x82F1;&amp;#x6587;&amp;#x5168;&amp;#x79F0;object relational mapping,&amp;#x5C31;&amp;#x662F;&amp;#x5BF9;&amp;#x8C61;&amp;#x6620;&amp;#x5C04;&amp;#x5173;&amp;#x7CFB;&amp;#x7A0B;&amp;#x5E8F;&amp;#xFF0C;&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-orm">
+<meta property="og:url" content="http://c.isme.pub/2018/03/24/python-orm/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;orm&amp;#x82F1;&amp;#x6587;&amp;#x5168;&amp;#x79F0;object relational mapping,&amp;#x5C31;&amp;#x662F;&amp;#x5BF9;&amp;#x8C61;&amp;#x6620;&amp;#x5C04;&amp;#x5173;&amp;#x7CFB;&amp;#x7A0B;&amp;#x5E8F;&amp;#xFF0C;&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#x">
+<meta property="og:image" content="http://c.isme.pub/2018/03/24/python-orm/1.png">
+<meta property="og:image" content="http://c.isme.pub/2018/03/24/python-orm/2.png">
+<meta property="og:updated_time" content="2018-03-24T05:43:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-orm">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;orm&amp;#x82F1;&amp;#x6587;&amp;#x5168;&amp;#x79F0;object relational mapping,&amp;#x5C31;&amp;#x662F;&amp;#x5BF9;&amp;#x8C61;&amp;#x6620;&amp;#x5C04;&amp;#x5173;&amp;#x7CFB;&amp;#x7A0B;&amp;#x5E8F;&amp;#xFF0C;&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#x">
+<meta name="twitter:image" content="http://c.isme.pub/2018/03/24/python-orm/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/03/24/python-orm/"/>
+
+
+
+
+
+  <title>python-orm | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/03/24/python-orm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python-orm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T13:43:42+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-24T13:43:42+08:00">
+                2018-03-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>orm&#x82F1;&#x6587;&#x5168;&#x79F0;object relational mapping,&#x5C31;&#x662F;&#x5BF9;&#x8C61;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x7A0B;&#x5E8F;&#xFF0C;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#x6211;&#x4EEC;&#x7C7B;&#x4F3C;python&#x8FD9;&#x79CD;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x6765;&#x8BF4;&#x4E00;&#x5207;&#x7686;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5374;&#x90FD;&#x662F;&#x5173;&#x7CFB;&#x578B;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x4E00;&#x81F4;&#x7684;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x901A;&#x8FC7;orm&#x5C06;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x548C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5173;&#x7CFB;&#x6A21;&#x578B;&#x5EFA;&#x7ACB;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5728;&#x4F7F;&#x7528;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x76F4;&#x63A5;&#x4F7F;&#x7528;sql&#x8BED;&#x8A00;&#x3002;</p>
+<p><img src="/2018/03/24/python-orm/1.png" alt=""></p>
+<h2 id="orm&#x7684;&#x4F18;&#x70B9;"><a href="#orm&#x7684;&#x4F18;&#x70B9;" class="headerlink" title="orm&#x7684;&#x4F18;&#x70B9;"></a>orm&#x7684;&#x4F18;&#x70B9;</h2><ul>
+<li>&#x9690;&#x85CF;&#x4E86;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x7EC6;&#x8282;&#xFF0C;&#x201C;&#x5C01;&#x95ED;&#x201D;&#x7684;&#x901A;&#x7528;&#x6570;&#x636E;&#x5E93;&#x4EA4;&#x4E92;&#xFF0C;ORM&#x7684;&#x6838;&#x5FC3;&#x3002;&#x4ED6;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x7684;&#x901A;&#x7528;&#x6570;&#x636E;&#x5E93;&#x4EA4;&#x4E92;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x6613;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x5B8C;&#x5168;&#x4E0D;&#x7528;&#x8003;&#x8651;&#x8BE5;&#x6B7B;&#x7684;SQL&#x8BED;&#x53E5;&#x3002;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#xFF0C;&#x7531;&#x6B64;&#x800C;&#x6765;&#x3002;</li>
+<li>ORM&#x4F7F;&#x6211;&#x4EEC;&#x6784;&#x9020;&#x56FA;&#x5316;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x6613;&#x884C;&#x3002;</li>
+</ul>
+<h2 id="&#x7F3A;&#x70B9;"><a href="#&#x7F3A;&#x70B9;" class="headerlink" title="&#x7F3A;&#x70B9;"></a>&#x7F3A;&#x70B9;</h2><p>&#x65E0;&#x53EF;&#x907F;&#x514D;&#x7684;&#xFF0C;&#x81EA;&#x52A8;&#x5316;&#x610F;&#x5473;&#x7740;&#x6620;&#x5C04;&#x548C;&#x5173;&#x8054;&#x7BA1;&#x7406;&#xFF0C;&#x4EE3;&#x4EF7;&#x662F;&#x727A;&#x7272;&#x6027;&#x80FD;&#xFF08;&#x65E9;&#x671F;&#xFF0C;&#x8FD9;&#x662F;&#x6240;&#x6709;&#x4E0D;&#x559C;&#x6B22;ORM&#x4EBA;&#x7684;&#x5171;&#x540C;&#x70B9;&#xFF09;&#x3002;&#x73B0;&#x5728;&#x7684;&#x5404;&#x79CD;ORM&#x6846;&#x67B6;&#x90FD;&#x5728;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x51CF;&#x8F7B;&#x8FD9;&#x5757;&#xFF08;LazyLoad&#xFF0C;Cache&#xFF09;&#xFF0C;&#x6548;&#x679C;&#x8FD8;&#x662F;&#x5F88;&#x663E;&#x8457;&#x7684;&#x3002;</p>
+<a id="more"></a>
+<h1 id="sqlalchemy"><a href="#sqlalchemy" class="headerlink" title="sqlalchemy"></a>sqlalchemy</h1><p>&#x5728;Python&#x4E2D;&#xFF0C;&#x6700;&#x6709;&#x540D;&#x7684;ORM&#x6846;&#x67B6;&#x662F;SQLAlchemy&#x3002;</p>
+<p>&#x7528;&#x6237;&#x5305;&#x62EC;openstack&#xFF3C;Dropbox&#x7B49;&#x77E5;&#x540D;&#x516C;&#x53F8;&#x6216;&#x5E94;&#x7528;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x6237;&#x5217;&#x8868;<a href="http://www.sqlalchemy.org/organizations.html#openstack" target="_blank" rel="external">http://www.sqlalchemy.org/organizations.html#openstack</a></p>
+<p><img src="/2018/03/24/python-orm/2.png" alt=""></p>
+<p>Dialect&#x7528;&#x4E8E;&#x548C;&#x6570;&#x636E;API&#x8FDB;&#x884C;&#x4EA4;&#x6D41;&#xFF0C;&#x6839;&#x636E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x4E0D;&#x540C;&#x8C03;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x5E93;API&#xFF0C;&#x4ECE;&#x800C;&#x5B9E;&#x73B0;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">MySQL-Python</div><div class="line">    mysql+mysqldb://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;</div><div class="line">   </div><div class="line">pymysql</div><div class="line">    mysql+pymysql://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;/&lt;dbname&gt;[?&lt;options&gt;]</div><div class="line">   </div><div class="line">MySQL-Connector</div><div class="line">    mysql+mysqlconnector://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;</div><div class="line">   </div><div class="line">cx_Oracle</div><div class="line">    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&amp;key=value...]</div><div class="line">   </div><div class="line">&#x66F4;&#x591A;&#x8BE6;&#x89C1;&#xFF1A;http://docs.sqlalchemy.org/en/latest/dialects/index.html</div></pre></td></tr></table></figure>
+<h2 id="&#x5B89;&#x88C5;sqlalchemy"><a href="#&#x5B89;&#x88C5;sqlalchemy" class="headerlink" title="&#x5B89;&#x88C5;sqlalchemy"></a>&#x5B89;&#x88C5;sqlalchemy</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install SQLAlchemy&lt;br&gt;&lt;br&gt;pip install pymysql  <span class="comment">#&#x7531;&#x4E8E;mysqldb&#x4F9D;&#x7136;&#x4E0D;&#x652F;&#x6301;py3&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x7528;pymysql&#x4E0E;sqlalchemy&#x4EA4;&#x4E92;</span></div></pre></td></tr></table></figure>
+<h1 id="sqlalchemy&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a href="#sqlalchemy&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="headerlink" title="sqlalchemy&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>sqlalchemy&#x57FA;&#x672C;&#x4F7F;&#x7528;</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE user (</div><div class="line">    id INTEGER NOT NULL AUTO_INCREMENT,</div><div class="line">    name VARCHAR(32),</div><div class="line">    password VARCHAR(64),</div><div class="line">    PRIMARY KEY (id)</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x53EA;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;sql&#x8868;&#xFF0C;&#x5982;&#x679C;&#x518D;&#x52A0;&#x4E0A;&#x5916;&#x952E;&#x5173;&#x8054;&#x4EC0;&#x4E48;&#x7684;&#xFF0C;&#x4E00;&#x822C;&#x7A0B;&#x5E8F;&#x5458;&#x7684;&#x8111;&#x5BB9;&#x91CF;&#x662F;&#x8BB0;&#x4E0D;&#x4F4F;&#x90A3;&#x4E9B;sql&#x8BED;&#x53E5;&#x7684;&#xFF0C;&#x4E8E;&#x662F;&#x6709;&#x4E86;orm,&#x5B9E;&#x73B0;&#x4E0A;&#x9762;&#x540C;&#x6837;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import sqlalchemy</div><div class="line">from sqlalchemy import create_engine</div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line">from sqlalchemy import Column, Integer, String</div><div class="line"> </div><div class="line">engine = create_engine(<span class="string">&quot;mysql+pymysql://root:alex3714@localhost/testdb&quot;</span>,</div><div class="line">                                    encoding=<span class="string">&apos;utf-8&apos;</span>, <span class="built_in">echo</span>=True)</div><div class="line"> </div><div class="line"> </div><div class="line">Base = declarative_base() <span class="comment">#&#x751F;&#x6210;orm&#x57FA;&#x7C7B;</span></div><div class="line"> </div><div class="line">class User(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;user&apos;</span> <span class="comment">#&#x8868;&#x540D;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String(32))</div><div class="line">    password = Column(String(64))</div><div class="line"> </div><div class="line">Base.metadata.create_all(engine) <span class="comment">#&#x521B;&#x5EFA;&#x8868;&#x7ED3;&#x6784;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Lazy Connecting</div><div class="line">The Engine, when first returned by create_engine(), has not actually tried to connect to the database yet; that happens only the first time it is asked to perform a task against the database.</div></pre></td></tr></table></figure>
+<p>&#x9664;&#x4E0A;&#x9762;&#x7684;&#x521B;&#x5EFA;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x521B;&#x5EFA;&#x8868;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0D;&#x5E38;&#x7528;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey</div><div class="line">from sqlalchemy.orm import mapper</div><div class="line"> </div><div class="line">metadata = MetaData()</div><div class="line"> </div><div class="line">user = Table(<span class="string">&apos;user&apos;</span>, metadata,</div><div class="line">            Column(<span class="string">&apos;id&apos;</span>, Integer, primary_key=True),</div><div class="line">            Column(<span class="string">&apos;name&apos;</span>, String(50)),</div><div class="line">            Column(<span class="string">&apos;fullname&apos;</span>, String(50)),</div><div class="line">            Column(<span class="string">&apos;password&apos;</span>, String(12))</div><div class="line">        )</div><div class="line"> </div><div class="line">class User(object):</div><div class="line">    def __init__(self, name, fullname, password):</div><div class="line">        self.name = name</div><div class="line">        self.fullname = fullname</div><div class="line">        self.password = password</div><div class="line"> </div><div class="line">mapper(User, user) <span class="comment">#the table metadata is created separately with the Table construct, then associated with the User class via the mapper() function</span></div><div class="line">&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x7684;&#x8868;&#x5C31;&#x662F;&#x57FA;&#x4E8E;&#x7B2C;2&#x79CD;&#x65B9;&#x5F0F;&#x7684;&#x518D;&#x5C01;&#x88C5;&#x3002;</div></pre></td></tr></table></figure>
+<p>&#x6700;&#x57FA;&#x672C;&#x7684;&#x8868;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x597D;&#x4E86;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x7528;orm&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x6570;&#x636E;&#x8BD5;&#x8BD5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Session_class = sessionmaker(<span class="built_in">bind</span>=engine) <span class="comment">#&#x521B;&#x5EFA;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x7684;&#x4F1A;&#x8BDD;session class ,&#x6CE8;&#x610F;,&#x8FD9;&#x91CC;&#x8FD4;&#x56DE;&#x7ED9;session&#x7684;&#x662F;&#x4E2A;class,&#x4E0D;&#x662F;&#x5B9E;&#x4F8B;</span></div><div class="line">Session = Session_class() <span class="comment">#&#x751F;&#x6210;session&#x5B9E;&#x4F8B;</span></div><div class="line"> </div><div class="line"> </div><div class="line">user_obj = User(name=<span class="string">&quot;alex&quot;</span>,password=<span class="string">&quot;alex3714&quot;</span>) <span class="comment">#&#x751F;&#x6210;&#x4F60;&#x8981;&#x521B;&#x5EFA;&#x7684;&#x6570;&#x636E;&#x5BF9;&#x8C61;</span></div><div class="line"><span class="built_in">print</span>(user_obj.name,user_obj.id)  <span class="comment">#&#x6B64;&#x65F6;&#x8FD8;&#x6CA1;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x5462;&#xFF0C;&#x4E0D;&#x4FE1;&#x4F60;&#x6253;&#x5370;&#x4E00;&#x4E0B;id&#x53D1;&#x73B0;&#x8FD8;&#x662F;None</span></div><div class="line"> </div><div class="line">Session.add(user_obj) <span class="comment">#&#x628A;&#x8981;&#x521B;&#x5EFA;&#x7684;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230;&#x8FD9;&#x4E2A;session&#x91CC;&#xFF0C; &#x4E00;&#x4F1A;&#x7EDF;&#x4E00;&#x521B;&#x5EFA;</span></div><div class="line"><span class="built_in">print</span>(user_obj.name,user_obj.id) <span class="comment">#&#x6B64;&#x65F6;&#x4E5F;&#x4F9D;&#x7136;&#x8FD8;&#x6CA1;&#x521B;&#x5EFA;</span></div><div class="line"> </div><div class="line">Session.commit() <span class="comment">#&#x73B0;&#x6B64;&#x624D;&#x7EDF;&#x4E00;&#x63D0;&#x4EA4;&#xFF0C;&#x521B;&#x5EFA;&#x6570;&#x636E;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x67E5;&#x8BE2;"><a href="#&#x67E5;&#x8BE2;" class="headerlink" title="&#x67E5;&#x8BE2;"></a>&#x67E5;&#x8BE2;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_user = Session.query(User).filter_by(name=<span class="string">&quot;alex&quot;</span>).first()</div><div class="line"><span class="built_in">print</span>(my_user)</div></pre></td></tr></table></figure>
+<p>&#x6B64;&#x65F6;&#x4F60;&#x770B;&#x5230;&#x7684;&#x8F93;&#x51FA;&#x662F;&#x8FD9;&#x6837;&#x7684;&#x5E94;&#x8BE5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;__main__.User object at 0x105b4ba90&gt;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(my_user.id,my_user.name,my_user.password)</div><div class="line"></div><div class="line">&#x8F93;&#x51FA;</div><div class="line">1 alex alex3714</div></pre></td></tr></table></figure>
+<p>&#x4E0D;&#x8FC7;&#x521A;&#x624D;&#x4E0A;&#x9762;&#x7684;&#x663E;&#x793A;&#x7684;&#x5185;&#x5B58;&#x5BF9;&#x8C61;&#x5BF9;&#x5740;&#x4F60;&#x662F;&#x6CA1;&#x529E;&#x6CD5;&#x5206;&#x6E05;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#x6570;&#x636E;&#x7684;&#xFF0C;&#x9664;&#x975E;&#x6253;&#x5370;&#x5177;&#x4F53;&#x5B57;&#x6BB5;&#x770B;&#x4E00;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8BA9;&#x5B83;&#x53D8;&#x7684;&#x53EF;&#x8BFB;&#xFF0C;&#x53EA;&#x9700;&#x5728;&#x5B9A;&#x4E49;&#x8868;&#x7684;&#x7C7B;&#x4E0B;&#x9762;&#x52A0;&#x4E0A;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">def __repr__(self):</div><div class="line">    <span class="built_in">return</span> <span class="string">&quot;&lt;User(name=&apos;%s&apos;,  password=&apos;%s&apos;)&gt;&quot;</span> % (</div><div class="line">        self.name, self.password)</div><div class="line">```&#x3000;&#x3000;</div><div class="line"></div><div class="line"><span class="comment">## &#x4FEE;&#x6539;</span></div><div class="line"></div><div class="line">``` bash</div><div class="line">my_user = Session.query(User).filter_by(name=<span class="string">&quot;alex&quot;</span>).first()</div><div class="line"> </div><div class="line">my_user.name = <span class="string">&quot;Alex Li&quot;</span></div><div class="line"> </div><div class="line">Session.commit()</div></pre></td></tr></table></figure>
+<h2 id="&#x56DE;&#x6EDA;"><a href="#&#x56DE;&#x6EDA;" class="headerlink" title="&#x56DE;&#x6EDA;"></a>&#x56DE;&#x6EDA;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">my_user = Session.query(User).filter_by(id=1).first()</div><div class="line">my_user.name = <span class="string">&quot;Jack&quot;</span></div><div class="line"> </div><div class="line"> </div><div class="line">fake_user = User(name=<span class="string">&apos;Rain&apos;</span>, password=<span class="string">&apos;12345&apos;</span>)</div><div class="line">Session.add(fake_user)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(Session.query(User).filter(User.name.in_([<span class="string">&apos;Jack&apos;</span>,<span class="string">&apos;rain&apos;</span>])).all() )  <span class="comment">#&#x8FD9;&#x65F6;&#x770B;session&#x91CC;&#x6709;&#x4F60;&#x521A;&#x6DFB;&#x52A0;&#x548C;&#x4FEE;&#x6539;&#x7684;&#x6570;&#x636E;</span></div><div class="line"> </div><div class="line">Session.rollback() <span class="comment">#&#x6B64;&#x65F6;&#x4F60;rollback&#x4E00;&#x4E0B;</span></div><div class="line"> </div><div class="line"><span class="built_in">print</span>(Session.query(User).filter(User.name.in_([<span class="string">&apos;Jack&apos;</span>,<span class="string">&apos;rain&apos;</span>])).all() ) <span class="comment">#&#x518D;&#x67E5;&#x5C31;&#x53D1;&#x73B0;&#x521A;&#x624D;&#x6DFB;&#x52A0;&#x7684;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x4E86;&#x3002;</span></div><div class="line"></div><div class="line"><span class="comment"># Session</span></div><div class="line"><span class="comment"># Session.commit()</span></div><div class="line">```&#x3000;</div><div class="line"></div><div class="line"><span class="comment">## &#x83B7;&#x53D6;&#x6240;&#x6709;&#x6570;&#x636E;</span></div><div class="line"></div><div class="line">``` bash</div><div class="line"><span class="built_in">print</span>(Session.query(User.name,User.id).all() )</div></pre></td></tr></table></figure>
+<h2 id="&#x591A;&#x6761;&#x4EF6;&#x67E5;&#x8BE2;"><a href="#&#x591A;&#x6761;&#x4EF6;&#x67E5;&#x8BE2;" class="headerlink" title="&#x591A;&#x6761;&#x4EF6;&#x67E5;&#x8BE2;"></a>&#x591A;&#x6761;&#x4EF6;&#x67E5;&#x8BE2;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">objs = Session.query(User).filter(User.id&gt;0).filter(User.id&lt;7).all()</div><div class="line">&#x4E0A;&#x9762;2&#x4E2A;filter&#x7684;&#x5173;&#x7CFB;&#x76F8;&#x5F53;&#x4E8E; user.id &gt;1 AND user.id &lt;7 &#x7684;&#x6548;&#x679C;</div></pre></td></tr></table></figure>
+<h2 id="&#x7EDF;&#x8BA1;&#x548C;&#x5206;&#x7EC4;"><a href="#&#x7EDF;&#x8BA1;&#x548C;&#x5206;&#x7EC4;" class="headerlink" title="&#x7EDF;&#x8BA1;&#x548C;&#x5206;&#x7EC4;"></a>&#x7EDF;&#x8BA1;&#x548C;&#x5206;&#x7EC4;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Session.query(User).filter(User.name.like(<span class="string">&quot;Ra%&quot;</span>)).count()</div><div class="line">``` </div><div class="line"><span class="comment">## &#x5206;&#x7EC4;</span></div><div class="line"></div><div class="line">``` bash</div><div class="line">from sqlalchemy import func</div><div class="line"><span class="built_in">print</span>(Session.query(func.count(User.name),User.name).group_by(User.name).all() )</div></pre></td></tr></table></figure>
+<p>&#x76F8;&#x5F53;&#x4E8E;&#x539F;&#x751F;sql&#x4E3A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT count(user.name) AS count_1, user.name AS user_name</div><div class="line">FROM user GROUP BY user.name</div><div class="line">&#x8F93;&#x51FA;&#x4E3A;</div><div class="line"></div><div class="line">[(1, <span class="string">&apos;Jack&apos;</span>), (2, <span class="string">&apos;Rain&apos;</span>)]</div></pre></td></tr></table></figure>
+<h2 id="&#x5916;&#x952E;&#x5173;&#x8054;"><a href="#&#x5916;&#x952E;&#x5173;&#x8054;" class="headerlink" title="&#x5916;&#x952E;&#x5173;&#x8054;"></a>&#x5916;&#x952E;&#x5173;&#x8054;</h2><p>&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;addresses&#x8868;&#xFF0C;&#x8DDF;user&#x8868;&#x5173;&#x8054;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import ForeignKey</div><div class="line">from sqlalchemy.orm import relationship</div><div class="line"> </div><div class="line">class Address(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;addresses&apos;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    email_address = Column(String(32), nullable=False)</div><div class="line">    user_id = Column(Integer, ForeignKey(<span class="string">&apos;user.id&apos;</span>))</div><div class="line"> </div><div class="line">    user = relationship(<span class="string">&quot;User&quot;</span>, backref=<span class="string">&quot;addresses&quot;</span>) <span class="comment">#&#x8FD9;&#x4E2A;nb&#xFF0C;&#x5141;&#x8BB8;&#x4F60;&#x5728;user&#x8868;&#x91CC;&#x901A;&#x8FC7;backref&#x5B57;&#x6BB5;&#x53CD;&#x5411;&#x67E5;&#x51FA;&#x6240;&#x6709;&#x5B83;&#x5728;addresses&#x8868;&#x91CC;&#x7684;&#x5173;&#x8054;&#x9879;</span></div><div class="line"> </div><div class="line">    def __repr__(self):</div><div class="line">        <span class="built_in">return</span> <span class="string">&quot;&lt;Address(email_address=&apos;%s&apos;)&gt;&quot;</span> % self.email_address</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The relationship.back_populates parameter is a newer version of a very common SQLAlchemy feature calledrelationship.backref. The relationship.backref parameter hasn&#x2019;t gone anywhere and will always remain available! The relationship.back_populates is the same thing, except a little more verbose and easier to manipulate. For an overview of the entire topic, see the section Linking Relationships with Backref.</div></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;<br>&#x8868;&#x521B;&#x5EFA;&#x597D;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x53CD;&#x67E5;&#x8BD5;&#x8BD5;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">obj = Session.query(User).first()</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> obj.addresses: <span class="comment">#&#x901A;&#x8FC7;user&#x5BF9;&#x8C61;&#x53CD;&#x67E5;&#x5173;&#x8054;&#x7684;addresses&#x8BB0;&#x5F55;</span></div><div class="line">    <span class="built_in">print</span>(i)</div><div class="line"> </div><div class="line">addr_obj = Session.query(Address).first()</div><div class="line"><span class="built_in">print</span>(addr_obj.user.name)  <span class="comment">#&#x5728;addr_obj&#x91CC;&#x76F4;&#x63A5;&#x67E5;&#x5173;&#x8054;&#x7684;user&#x8868;</span></div><div class="line">&#x521B;&#x5EFA;&#x5173;&#x8054;&#x5BF9;&#x8C61;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">obj = Session.query(User).filter(User.name==<span class="string">&apos;rain&apos;</span>).all()[0]</div><div class="line"><span class="built_in">print</span>(obj.addresses)</div><div class="line"> </div><div class="line">obj.addresses = [Address(email_address=<span class="string">&quot;r1@126.com&quot;</span>), <span class="comment">#&#x6DFB;&#x52A0;&#x5173;&#x8054;&#x5BF9;&#x8C61;</span></div><div class="line">                 Address(email_address=<span class="string">&quot;r2@126.com&quot;</span>)]</div><div class="line"> </div><div class="line"> </div><div class="line">Session.commit()</div></pre></td></tr></table></figure>
+<h2 id="&#x5E38;&#x7528;&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;"><a href="#&#x5E38;&#x7528;&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;" class="headerlink" title="&#x5E38;&#x7528;&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;"></a>&#x5E38;&#x7528;&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;</h2><p>Common Filter Operators</p>
+<p>Here&#x2019;s a rundown of some of the most common operators used in filter():</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">equals:</div><div class="line">     query.filter(User.name == <span class="string">&apos;ed&apos;</span>)</div><div class="line">not equals:</div><div class="line"></div><div class="line">     query.filter(User.name != <span class="string">&apos;ed&apos;</span>)</div><div class="line">LIKE:</div><div class="line"></div><div class="line">query.filter(User.name.like(<span class="string">&apos;%ed%&apos;</span>))</div><div class="line"></div><div class="line">IN:</div><div class="line"></div><div class="line">NOT IN:</div><div class="line">query.filter(~User.name.in_([<span class="string">&apos;ed&apos;</span>, <span class="string">&apos;wendy&apos;</span>, <span class="string">&apos;jack&apos;</span>]))</div><div class="line"></div><div class="line">IS NULL:</div><div class="line"></div><div class="line">IS NOT NULL:</div><div class="line"></div><div class="line">AND:</div><div class="line">2.1. ObjectRelationalTutorial 17</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">query.filter(User.name.in_([&apos;ed&apos;, &apos;wendy&apos;, &apos;jack&apos;]))</div><div class="line"># works with query objects too:</div><div class="line">query.filter(User.name.in_( session.query(User.name).filter(User.name.like(&apos;%ed%&apos;))</div><div class="line"></div><div class="line">))</div><div class="line"></div><div class="line">query.filter(User.name == None)</div><div class="line"># alternatively, if pep8/linters are a concern</div><div class="line">query.filter(User.name.is_(None))</div><div class="line">query.filter(User.name != None)</div><div class="line"># alternatively, if pep8/linters are a concern</div><div class="line">query.filter(User.name.isnot(None))</div><div class="line">SQLAlchemy Documentation, Release 1.1.0b1</div><div class="line"></div><div class="line"># use and_()</div><div class="line"></div><div class="line">from sqlalchemy import and_</div><div class="line">query.filter(and_(User.name == &apos;ed&apos;, User.fullname == &apos;Ed Jones&apos;))</div><div class="line"></div><div class="line"># or send multiple expressions to .filter()</div><div class="line">query.filter(User.name == &apos;ed&apos;, User.fullname == &apos;Ed Jones&apos;)</div><div class="line"># or chain multiple filter()/filter_by() calls</div><div class="line">query.filter(User.name == &apos;ed&apos;).filter(User.fullname == &apos;Ed Jones&apos;)</div><div class="line">Note: Makesureyouuseand_()andnotthePythonandoperator! &#x2022; OR:</div><div class="line"></div><div class="line">Note: Makesureyouuseor_()andnotthePythonoroperator! &#x2022; MATCH:</div><div class="line"></div><div class="line">query.filter(User.name.match(&apos;wendy&apos;))</div><div class="line">Note: match() uses a database-specific MATCH or CONTAINS f</div></pre></td></tr></table></figure>
+<h1 id="&#x591A;&#x5916;&#x952E;&#x5173;&#x8054;"><a href="#&#x591A;&#x5916;&#x952E;&#x5173;&#x8054;" class="headerlink" title="&#x591A;&#x5916;&#x952E;&#x5173;&#x8054;"></a>&#x591A;&#x5916;&#x952E;&#x5173;&#x8054;</h1><p>&#x4E0B;&#x8868;&#x4E2D;&#xFF0C;Customer&#x8868;&#x6709;2&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x5173;&#x8054;&#x4E86;Address&#x8868; </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import Integer, ForeignKey, String, Column</div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line">from sqlalchemy.orm import relationship</div><div class="line"> </div><div class="line">Base = declarative_base()</div><div class="line"> </div><div class="line">class Customer(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;customer&apos;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line"> </div><div class="line">    billing_address_id = Column(Integer, ForeignKey(<span class="string">&quot;address.id&quot;</span>))</div><div class="line">    shipping_address_id = Column(Integer, ForeignKey(<span class="string">&quot;address.id&quot;</span>))</div><div class="line"> </div><div class="line">    billing_address = relationship(<span class="string">&quot;Address&quot;</span>) </div><div class="line">    shipping_address = relationship(<span class="string">&quot;Address&quot;</span>)</div><div class="line"> </div><div class="line">class Address(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;address&apos;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    street = Column(String)</div><div class="line">    city = Column(String)</div><div class="line">    state = Column(String)</div></pre></td></tr></table></figure>
+<p>&#x521B;&#x5EFA;&#x8868;&#x7ED3;&#x6784;&#x662F;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x7684;&#xFF0C;&#x4F46;&#x4F60;Address&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x6570;&#x636E;&#x65F6;&#x4F1A;&#x62A5;&#x4E0B;&#x9762;&#x7684;&#x9519;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine join</div><div class="line">condition between parent/child tables on relationship</div><div class="line">Customer.billing_address - there are multiple foreign key</div><div class="line">paths linking the tables.  Specify the <span class="string">&apos;foreign_keys&apos;</span> argument,</div><div class="line">providing a list of those columns <span class="built_in">which</span> should be</div><div class="line">counted as containing a foreign key reference to the parent table.</div></pre></td></tr></table></figure>
+<p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x5982;&#x4E0B;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Customer(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;customer&apos;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line"> </div><div class="line">    billing_address_id = Column(Integer, ForeignKey(<span class="string">&quot;address.id&quot;</span>))</div><div class="line">    shipping_address_id = Column(Integer, ForeignKey(<span class="string">&quot;address.id&quot;</span>))</div><div class="line"> </div><div class="line">    billing_address = relationship(<span class="string">&quot;Address&quot;</span>, foreign_keys=[billing_address_id])</div><div class="line">    shipping_address = relationship(<span class="string">&quot;Address&quot;</span>, foreign_keys=[shipping_address_id])</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;sqlachemy&#x5C31;&#x80FD;&#x5206;&#x6E05;&#x54EA;&#x4E2A;&#x5916;&#x952E;&#x662F;&#x5BF9;&#x5E94;&#x54EA;&#x4E2A;&#x5B57;&#x6BB5;&#x4E86;</p>
+<h1 id="&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;"><a href="#&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;" class="headerlink" title="&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;"></a>&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;</h1><p>&#x73B0;&#x5728;&#x6765;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x80FD;&#x63CF;&#x8FF0;&#x201C;&#x56FE;&#x4E66;&#x201D;&#x4E0E;&#x201C;&#x4F5C;&#x8005;&#x201D;&#x7684;&#x5173;&#x7CFB;&#x7684;&#x8868;&#x7ED3;&#x6784;&#xFF0C;&#x9700;&#x6C42;&#x662F;</p>
+<ul>
+<li>&#x4E00;&#x672C;&#x4E66;&#x53EF;&#x4EE5;&#x6709;&#x597D;&#x51E0;&#x4E2A;&#x4F5C;&#x8005;&#x4E00;&#x8D77;&#x51FA;&#x7248;</li>
+<li>&#x4E00;&#x4E2A;&#x4F5C;&#x8005;&#x53EF;&#x4EE5;&#x5199;&#x597D;&#x51E0;&#x672C;&#x4E66;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#&#x4E00;&#x672C;&#x4E66;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x4F5C;&#x8005;&#xFF0C;&#x4E00;&#x4E2A;&#x4F5C;&#x8005;&#x53C8;&#x53EF;&#x4EE5;&#x51FA;&#x7248;&#x591A;&#x672C;&#x4E66;</span></div><div class="line"></div><div class="line"></div><div class="line">from sqlalchemy import Table, Column, Integer,String,DATE, ForeignKey</div><div class="line">from sqlalchemy.orm import relationship</div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line">from sqlalchemy import create_engine</div><div class="line">from sqlalchemy.orm import sessionmaker</div><div class="line"></div><div class="line"></div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line">book_m2m_author = Table(<span class="string">&apos;book_m2m_author&apos;</span>, Base.metadata,</div><div class="line">                        Column(<span class="string">&apos;book_id&apos;</span>,Integer,ForeignKey(<span class="string">&apos;books.id&apos;</span>)),</div><div class="line">                        Column(<span class="string">&apos;author_id&apos;</span>,Integer,ForeignKey(<span class="string">&apos;authors.id&apos;</span>)),</div><div class="line">                        )</div><div class="line"></div><div class="line">class Book(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;books&apos;</span></div><div class="line">    id = Column(Integer,primary_key=True)</div><div class="line">    name = Column(String(64))</div><div class="line">    pub_date = Column(DATE)</div><div class="line">    authors = relationship(<span class="string">&apos;Author&apos;</span>,secondary=book_m2m_author,backref=<span class="string">&apos;books&apos;</span>)</div><div class="line"></div><div class="line">    def __repr__(self):</div><div class="line">        <span class="built_in">return</span> self.name</div><div class="line"></div><div class="line">class Author(Base):</div><div class="line">    __tablename__ = <span class="string">&apos;authors&apos;</span></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String(32))</div><div class="line"></div><div class="line">    def __repr__(self):</div><div class="line">        <span class="built_in">return</span> self.name</div><div class="line"></div><div class="line">orm &#x591A;&#x5BF9;&#x591A;</div></pre></td></tr></table></figure>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x521B;&#x5EFA;&#x51E0;&#x672C;&#x4E66;&#x548C;&#x4F5C;&#x8005;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Session_class = sessionmaker(<span class="built_in">bind</span>=engine) <span class="comment">#&#x521B;&#x5EFA;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x7684;&#x4F1A;&#x8BDD;session class ,&#x6CE8;&#x610F;,&#x8FD9;&#x91CC;&#x8FD4;&#x56DE;&#x7ED9;session&#x7684;&#x662F;&#x4E2A;class,&#x4E0D;&#x662F;&#x5B9E;&#x4F8B;</span></div><div class="line">s = Session_class() <span class="comment">#&#x751F;&#x6210;session&#x5B9E;&#x4F8B;</span></div><div class="line"> </div><div class="line">b1 = Book(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;Python&quot;</span>)</div><div class="line">b2 = Book(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;&#x628A;&#x59B9;&quot;</span>)</div><div class="line">b3 = Book(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;&#x88C5;&#x903C;&quot;</span>)</div><div class="line">b4 = Book(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;&#x5F00;&#x8F66;&quot;</span>)</div><div class="line"> </div><div class="line">a1 = Author(name=<span class="string">&quot;Alex&quot;</span>)</div><div class="line">a2 = Author(name=<span class="string">&quot;Jack&quot;</span>)</div><div class="line">a3 = Author(name=<span class="string">&quot;Rain&quot;</span>)</div><div class="line"> </div><div class="line">b1.authors = [a1,a2]</div><div class="line">b2.authors = [a1,a2,a3]</div><div class="line"> </div><div class="line">s.add_all([b1,b2,b3,b4,a1,a2,a3])</div><div class="line"> </div><div class="line">s.commit()</div></pre></td></tr></table></figure>
+<p>&#x6B64;&#x65F6;&#xFF0C;&#x624B;&#x52A8;&#x8FDE;&#x4E0A;mysql&#xFF0C;&#x5206;&#x522B;&#x67E5;&#x770B;&#x8FD9;3&#x5F20;&#x8868;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;book_m2m_author&#x4E2D;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x4E86;&#x591A;&#x6761;&#x7EAA;&#x5F55;&#x7528;&#x6765;&#x8FDE;&#x63A5;book&#x548C;author&#x8868;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from books;</div><div class="line">+----+------------------+----------+</div><div class="line">| id | name             | pub_date |</div><div class="line">+----+------------------+----------+</div><div class="line">|  1 | &#x8DDF;Alex&#x5B66;Python   | NULL     |</div><div class="line">|  2 | &#x8DDF;Alex&#x5B66;&#x628A;&#x59B9;     | NULL     |</div><div class="line">|  3 | &#x8DDF;Alex&#x5B66;&#x88C5;&#x903C;     | NULL     |</div><div class="line">|  4 | &#x8DDF;Alex&#x5B66;&#x5F00;&#x8F66;     | NULL     |</div><div class="line">+----+------------------+----------+</div><div class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div><div class="line"> </div><div class="line">mysql&gt; select * from authors;</div><div class="line">+----+------+</div><div class="line">| id | name |</div><div class="line">+----+------+</div><div class="line">| 10 | Alex |</div><div class="line">| 11 | Jack |</div><div class="line">| 12 | Rain |</div><div class="line">+----+------+</div><div class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div><div class="line"> </div><div class="line">mysql&gt; select * from book_m2m_author;</div><div class="line">+---------+-----------+</div><div class="line">| book_id | author_id |</div><div class="line">+---------+-----------+</div><div class="line">|       2 |        10 |</div><div class="line">|       2 |        11 |</div><div class="line">|       2 |        12 |</div><div class="line">|       1 |        10 |</div><div class="line">|       1 |        11 |</div><div class="line">+---------+-----------+</div><div class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div></pre></td></tr></table></figure>
+<p>&#x6B64;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53BB;&#x7528;orm&#x67E5;&#x4E00;&#x4E0B;&#x6570;&#x636E;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span>(<span class="string">&apos;--------&#x901A;&#x8FC7;&#x4E66;&#x8868;&#x67E5;&#x5173;&#x8054;&#x7684;&#x4F5C;&#x8005;---------&apos;</span>)</div><div class="line"> </div><div class="line">book_obj = s.query(Book).filter_by(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;Python&quot;</span>).first()</div><div class="line"><span class="built_in">print</span>(book_obj.name, book_obj.authors)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(<span class="string">&apos;--------&#x901A;&#x8FC7;&#x4F5C;&#x8005;&#x8868;&#x67E5;&#x5173;&#x8054;&#x7684;&#x4E66;---------&apos;</span>)</div><div class="line">author_obj =s.query(Author).filter_by(name=<span class="string">&quot;Alex&quot;</span>).first()</div><div class="line"><span class="built_in">print</span>(author_obj.name , author_obj.books)</div><div class="line">s.commit()</div><div class="line">&#x8F93;&#x51FA;&#x5982;&#x4E0B;</div><div class="line"></div><div class="line">--------&#x901A;&#x8FC7;&#x4E66;&#x8868;&#x67E5;&#x5173;&#x8054;&#x7684;&#x4F5C;&#x8005;---------</div><div class="line">&#x8DDF;Alex&#x5B66;Python [Alex, Jack]</div><div class="line">--------&#x901A;&#x8FC7;&#x4F5C;&#x8005;&#x8868;&#x67E5;&#x5173;&#x8054;&#x7684;&#x4E66;---------</div><div class="line">Alex [&#x8DDF;Alex&#x5B66;&#x628A;&#x59B9;, &#x8DDF;Alex&#x5B66;Python]</div></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;</p>
+<h2 id="&#x591A;&#x5BF9;&#x591A;&#x5220;&#x9664;"><a href="#&#x591A;&#x5BF9;&#x591A;&#x5220;&#x9664;" class="headerlink" title="&#x591A;&#x5BF9;&#x591A;&#x5220;&#x9664;"></a>&#x591A;&#x5BF9;&#x591A;&#x5220;&#x9664;</h2><p>&#x5220;&#x9664;&#x6570;&#x636E;&#x65F6;&#x4E0D;&#x7528;&#x7BA1;boo_m2m_authors&#x3000;&#xFF0C; sqlalchemy&#x4F1A;&#x81EA;&#x52A8;&#x5E2E;&#x4F60;&#x628A;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5220;&#x9664;</p>
+<p>&#x901A;&#x8FC7;&#x4E66;&#x5220;&#x9664;&#x4F5C;&#x8005;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">author_obj =s.query(Author).filter_by(name=<span class="string">&quot;Jack&quot;</span>).first()</div><div class="line"> </div><div class="line">book_obj = s.query(Book).filter_by(name=<span class="string">&quot;&#x8DDF;Alex&#x5B66;&#x628A;&#x59B9;&quot;</span>).first()</div><div class="line"> </div><div class="line">book_obj.authors.remove(author_obj) <span class="comment">#&#x4ECE;&#x4E00;&#x672C;&#x4E66;&#x91CC;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x4F5C;&#x8005;</span></div><div class="line">s.commit()</div></pre></td></tr></table></figure>
+<p>&#x76F4;&#x63A5;&#x5220;&#x9664;&#x4F5C;&#x8005;&#x3000;</p>
+<p>&#x5220;&#x9664;&#x4F5C;&#x8005;&#x65F6;&#xFF0C;&#x4F1A;&#x628A;&#x8FD9;&#x4E2A;&#x4F5C;&#x8005;&#x8DDF;&#x6240;&#x6709;&#x4E66;&#x7684;&#x5173;&#x8054;&#x5173;&#x7CFB;&#x6570;&#x636E;&#x4E5F;&#x81EA;&#x52A8;&#x5220;&#x9664;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">author_obj =s.query(Author).filter_by(name=<span class="string">&quot;Alex&quot;</span>).first()</div><div class="line"><span class="comment"># print(author_obj.name , author_obj.books)</span></div><div class="line">s.delete(author_obj)</div><div class="line">s.commit()</div><div class="line">```&#x3000;&#x3000;</div><div class="line"></div><div class="line">&#x5904;&#x7406;&#x4E2D;&#x6587;</div></pre></td></tr></table></figure>
+<p>sqlalchemy&#x8BBE;&#x7F6E;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x6570;&#x636E;&#x5E93;&#x8BBF;&#x95EE;&#x7684;URL&#x4E0A;&#x589E;&#x52A0;charset=utf8&#xFF0C;&#x5426;&#x5219;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDE;&#x63A5;&#x5C31;&#x4E0D;&#x662F;utf8&#x7684;&#x7F16;&#x7801;&#x683C;&#x5F0F;</p>
+<p>eng = create_engine(&#x2018;mysql://root:root@localhost:3306/test2?charset=utf8&#x2019;,echo=True)<br>```</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/sqlalchemy/" rel="tag"># sqlalchemy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/24/linux-cache-flush/" rel="next" title="手动释放linux内存cache和脚本定时释放">
+                <i class="fa fa-chevron-left"></i> 手动释放linux内存cache和脚本定时释放
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/24/mysql-base/" rel="prev" title="Mysql数据库">
+                Mysql数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#orm的优点"><span class="nav-number">1.1.</span> <span class="nav-text">orm的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlalchemy"><span class="nav-number">2.</span> <span class="nav-text">sqlalchemy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装sqlalchemy"><span class="nav-number">2.1.</span> <span class="nav-text">安装sqlalchemy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlalchemy基本使用"><span class="nav-number">3.</span> <span class="nav-text">sqlalchemy基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">3.1.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回滚"><span class="nav-number">3.2.</span> <span class="nav-text">回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多条件查询"><span class="nav-number">3.3.</span> <span class="nav-text">多条件查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计和分组"><span class="nav-number">3.4.</span> <span class="nav-text">统计和分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外键关联"><span class="nav-number">3.5.</span> <span class="nav-text">外键关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用查询语法"><span class="nav-number">3.6.</span> <span class="nav-text">常用查询语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多外键关联"><span class="nav-number">4.</span> <span class="nav-text">多外键关联</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多对多关系"><span class="nav-number">5.</span> <span class="nav-text">多对多关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多对多删除"><span class="nav-number">5.1.</span> <span class="nav-text">多对多删除</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
