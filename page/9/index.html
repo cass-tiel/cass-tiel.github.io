@@ -299,6 +299,375 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/08/05/mysql-slave/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/05/mysql-slave/" itemprop="url">MySql主从同步配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-05T09:58:27+08:00">
+                2016-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-23T22:56:12+08:00">
+                2018-02-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/db/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><h2 id="MySql-AB&#x590D;&#x5236;&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x590D;&#x5236;&#x6280;&#x672F;"><a href="#MySql-AB&#x590D;&#x5236;&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x590D;&#x5236;&#x6280;&#x672F;" class="headerlink" title="MySql-AB&#x590D;&#x5236;&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x590D;&#x5236;&#x6280;&#x672F;"></a>MySql-AB&#x590D;&#x5236;&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x590D;&#x5236;&#x6280;&#x672F;</h2><ul>
+<li>MySQL&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x79CD;&#x9AD8;&#x6027;&#x80FD;&#x3001;&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;</li>
+<li>&#x590D;&#x5236;<ul>
+<li>&#x5355;&#x5411;&#x590D;&#x5236;&#xFF1A;&#x4E0D;&#x8981;&#x5728;slave&#x4E0A;&#x505A;&#x5199;&#x5165;&#x64CD;&#x4F5C;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x4E3B;&#x4ECE;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x3002;</li>
+<li>&#x53CC;&#x5411;&#x590D;&#x5236;</li>
+<li>&#x5F02;&#x6B65;&#x590D;&#x5236;</li>
+</ul>
+</li>
+<li>ab&#x590D;&#x5236;&#x7684;&#x6A21;&#x5F0F;<ul>
+<li>&#x4E00;&#x4E3B;&#x4E00;&#x4ECE;</li>
+<li>&#x4E00;&#x4E3B;&#x591A;&#x4ECE;</li>
+<li>&#x53CC;&#x4E3B;</li>
+<li>&#x591A;&#x4E3B;&#x591A;&#x4ECE;</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/05/mysql-slave/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/06/14/gerrit-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/14/gerrit-install/" itemprop="url">gerrit安装部署文档</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-14T13:01:11+08:00">
+                2016-06-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-06-29T09:51:40+08:00">
+                2017-06-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/git/gerrit/" itemprop="url" rel="index">
+                    <span itemprop="name">gerrit</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>gerrit&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;&#x8FD8;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x867D;&#x7136;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;web&#x754C;&#x9762;&#x4EE5;&#x53CA;&#x64CD;&#x4F5C;&#x4F53;&#x9A8C;&#x975E;&#x5E38;&#x4E0D;&#x723D;&#xFF0C;&#x800C;&#x4E14;&#x56FD;&#x5185;&#x4E5F;&#x6B20;&#x7F3A;&#x9760;&#x8C31;&#x7684;&#x4F7F;&#x7528;&#x6587;&#x6863;&#xFF0C;&#x4F46;&#x662F;gerrit&#x7684;review&#x3001;&#x4EE3;&#x7801;&#x5BA1;&#x6838;&#x529F;&#x80FD;&#x8FD8;&#x662F;&#x6709;&#x5F88;&#x591A;&#x56E2;&#x961F;&#x9700;&#x8981;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x3001;&#x4EE5;&#x53CA;&#x540E;&#x7EED;&#x7684;&#x7BA1;&#x7406;&#x8FD8;&#x662F;&#x9700;&#x8981;&#x7684;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x672C;&#x4EBA;&#x7684;&#x5DE5;&#x4F5C;&#x63A5;&#x89E6;&#x5230;&#x4E86;gerrit&#xFF0C;&#x6240;&#x4EE5;&#x624D;&#x6709;&#x4E86;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x3002;</p>
+<blockquote>
+<p><a href="https://www.gerritcodereview.com/releases/2.13.md">&#x5B98;&#x65B9;&#x6587;&#x6863;</a></p>
+<p>&#x672C;&#x6587;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x53D6;&#x81EA;&#x7F51;&#x7EDC;&#xFF0C;&#x7531;&#x672C;&#x4EBA;&#x6574;&#x7406;&#x5E76;&#x901A;&#x8FC7;&#x771F;&#x5B9E;&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;&#x64B0;&#x5199;&#x800C;&#x6210;</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/14/gerrit-install/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/05/20/sge-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1359,7 +1728,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1370,7 +1739,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1381,7 +1750,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

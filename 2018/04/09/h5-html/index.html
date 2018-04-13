@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x81EA;&amp;#x5F3A;&amp;#x5B66;&amp;#x9662;&amp;#x7684;html5&amp;#x6559;&amp;#x7A0B;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x8BB0;&amp;#x5F55;html&amp;#x4E2D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x6807;&amp;#x7B7E;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学html">
+<meta property="og:url" content="http://c.isme.pub/2018/04/09/h5-html/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x81EA;&amp;#x5F3A;&amp;#x5B66;&amp;#x9662;&amp;#x7684;html5&amp;#x6559;&amp;#x7A0B;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x8BB0;&amp;#x5F55;html&amp;#x4E2D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x6807;&amp;#x7B7E;">
+<meta property="og:updated_time" content="2018-04-09T01:32:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初学html">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x81EA;&amp;#x5F3A;&amp;#x5B66;&amp;#x9662;&amp;#x7684;html5&amp;#x6559;&amp;#x7A0B;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x8BB0;&amp;#x5F55;html&amp;#x4E2D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x6807;&amp;#x7B7E;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/04/09/h5-html/"/>
+
+
+
+
+
+  <title>初学html | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/04/09/h5-html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初学html</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T09:32:03+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-09T09:32:03+08:00">
+                2018-04-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/h5/" itemprop="url" rel="index">
+                    <span itemprop="name">h5</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/h5/html/" itemprop="url" rel="index">
+                    <span itemprop="name">html</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p><a href="https://code.ziqiangxuetang.com/" target="_blank" rel="external">&#x81EA;&#x5F3A;&#x5B66;&#x9662;</a>&#x7684;<a href="https://code.ziqiangxuetang.com/html/html5-intro.html" target="_blank" rel="external">html5&#x6559;&#x7A0B;</a><br>&#x672C;&#x6587;&#x7B80;&#x5355;&#x8BB0;&#x5F55;html&#x4E2D;&#x5E38;&#x7528;&#x7684;&#x6807;&#x7B7E;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="HTML5&#x7B80;&#x4ECB;"><a href="#HTML5&#x7B80;&#x4ECB;" class="headerlink" title="HTML5&#x7B80;&#x4ECB;"></a>HTML5&#x7B80;&#x4ECB;</h1><h2 id="&#x4EC0;&#x4E48;&#x662F;HTML"><a href="#&#x4EC0;&#x4E48;&#x662F;HTML" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;HTML?"></a>&#x4EC0;&#x4E48;&#x662F;HTML?</h2><p>HTML &#x662F;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x7F51;&#x9875;&#x7684;&#x4E00;&#x79CD;&#x8BED;&#x8A00;&#x3002;</p>
+<p>HTML &#x6307;&#x7684;&#x662F;&#x8D85;&#x6587;&#x672C;&#x6807;&#x8BB0;&#x8BED;&#x8A00;: Hyper Text Markup Language</p>
+<ul>
+<li>HTML &#x4E0D;&#x662F;&#x4E00;&#x79CD;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x79CD;&#x6807;&#x8BB0;&#x8BED;&#x8A00;</li>
+<li>&#x6807;&#x8BB0;&#x8BED;&#x8A00;&#x662F;&#x4E00;&#x5957;&#x6807;&#x8BB0;&#x6807;&#x7B7E; (markup tag)</li>
+<li>HTML &#x4F7F;&#x7528;&#x6807;&#x8BB0;&#x6807;&#x7B7E;&#x6765;&#x63CF;&#x8FF0;&#x7F51;&#x9875;</li>
+<li>HTML &#x6587;&#x6863;&#x5305;&#x542B;&#x4E86;HTML &#x6807;&#x7B7E;&#x53CA;&#x6587;&#x672C;&#x5185;&#x5BB9;</li>
+<li>HTML&#x6587;&#x6863;&#x4E5F;&#x53EB;&#x505A; web &#x9875;&#x9762;</li>
+</ul>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;-HTML5"><a href="#&#x4EC0;&#x4E48;&#x662F;-HTML5" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; HTML5?"></a>&#x4EC0;&#x4E48;&#x662F; HTML5?</h2><p>HTML5 &#x662F;&#x4E0B;&#x4E00;&#x4EE3; HTML &#x6807;&#x51C6;&#x3002;</p>
+<p>HTML , HTML 4.01&#x7684;&#x4E0A;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x8BDE;&#x751F;&#x4E8E; 1999 &#x5E74;&#x3002;&#x81EA;&#x4ECE;&#x90A3;&#x4EE5;&#x540E;&#xFF0C;Web &#x4E16;&#x754C;&#x5DF2;&#x7ECF;&#x7ECF;&#x5386;&#x4E86;&#x5DE8;&#x53D8;&#x3002;</p>
+<p>HTML5 &#x4ECD;&#x5904;&#x4E8E;&#x5B8C;&#x5584;&#x4E4B;&#x4E2D;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x73B0;&#x4EE3;&#x6D4F;&#x89C8;&#x5668;&#x5DF2;&#x7ECF;&#x5177;&#x5907;&#x4E86;&#x67D0;&#x4E9B; HTML5 &#x652F;&#x6301;&#x3002;</p>
+<h2 id="HTML5-&#x662F;&#x5982;&#x4F55;&#x8D77;&#x6B65;&#x7684;&#xFF1F;"><a href="#HTML5-&#x662F;&#x5982;&#x4F55;&#x8D77;&#x6B65;&#x7684;&#xFF1F;" class="headerlink" title="HTML5 &#x662F;&#x5982;&#x4F55;&#x8D77;&#x6B65;&#x7684;&#xFF1F;"></a>HTML5 &#x662F;&#x5982;&#x4F55;&#x8D77;&#x6B65;&#x7684;&#xFF1F;</h2><p>HTML5 &#x662F; W3C &#x4E0E; WHATWG &#x5408;&#x4F5C;&#x7684;&#x7ED3;&#x679C;,WHATWG &#x6307; Web Hypertext Application Technology Working Group&#x3002;&#x3002;</p>
+<p>WHATWG &#x81F4;&#x529B;&#x4E8E; web &#x8868;&#x5355;&#x548C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x800C; W3C &#x4E13;&#x6CE8;&#x4E8E; XHTML 2.0&#x3002;&#x5728; 2006 &#x5E74;&#xFF0C;&#x53CC;&#x65B9;&#x51B3;&#x5B9A;&#x8FDB;&#x884C;&#x5408;&#x4F5C;&#xFF0C;&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7248;&#x672C;&#x7684; HTML&#x3002;</p>
+<p>HTML5 &#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x6709;&#x8DA3;&#x7684;&#x65B0;&#x7279;&#x6027;&#xFF1A;</p>
+<ul>
+<li>&#x7528;&#x4E8E;&#x7ED8;&#x753B;&#x7684; canvas &#x5143;&#x7D20;</li>
+<li>&#x7528;&#x4E8E;&#x5A92;&#x4ECB;&#x56DE;&#x653E;&#x7684; video &#x548C; audio &#x5143;&#x7D20;</li>
+<li>&#x5BF9;&#x672C;&#x5730;&#x79BB;&#x7EBF;&#x5B58;&#x50A8;&#x7684;&#x66F4;&#x597D;&#x7684;&#x652F;&#x6301;</li>
+<li>&#x65B0;&#x7684;&#x7279;&#x6B8A;&#x5185;&#x5BB9;&#x5143;&#x7D20;&#xFF0C;&#x6BD4;&#x5982; article&#x3001;footer&#x3001;header&#x3001;nav&#x3001;section</li>
+<li>&#x65B0;&#x7684;&#x8868;&#x5355;&#x63A7;&#x4EF6;&#xFF0C;&#x6BD4;&#x5982; calendar&#x3001;date&#x3001;time&#x3001;email&#x3001;url&#x3001;search</li>
+</ul>
+<h2 id="&#x6807;&#x7B7E;&#x5206;&#x7C7B;"><a href="#&#x6807;&#x7B7E;&#x5206;&#x7C7B;" class="headerlink" title="&#x6807;&#x7B7E;&#x5206;&#x7C7B;"></a>&#x6807;&#x7B7E;&#x5206;&#x7C7B;</h2><ul>
+<li>&#x81EA;&#x95ED;&#x548C;&#x6807;&#x7B7E; </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>&#x4E3B;&#x52A8;&#x95ED;&#x5408;&#x6807;&#x7B7E;</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="head&#x6807;&#x7B7E;"><a href="#head&#x6807;&#x7B7E;" class="headerlink" title="head&#x6807;&#x7B7E;"></a>head&#x6807;&#x7B7E;</h1><h2 id="meta"><a href="#meta" class="headerlink" title="meta"></a>meta</h2><ul>
+<li>&#x7F16;&#x7801;</li>
+<li>&#x8DF3;&#x8F6C;</li>
+<li>&#x5237;&#x65B0;</li>
+<li>&#x5173;&#x952E;&#x5B57;</li>
+<li>&#x63CF;&#x8FF0;</li>
+<li>IE&#x517C;&#x5BB9;</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html;charset=UTF-8&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;0; url=http://example.com&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;keywords&quot;</span> <span class="attr">content</span>=<span class="string">&quot;meta,&#x6211;&#x7684;&#x6807;&#x7B7E;&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie=edge&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;description&quot;</span> <span class="attr">content</span>=<span class="string">&quot;Free Web tutorials on HTML and CSS&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="title"><a href="#title" class="headerlink" title="title"></a>title</h2><p>&#x7F51;&#x9875;&#x7684;&#x5934;&#x90E8;&#x4FE1;&#x606F;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><ul>
+<li>css</li>
+<li>icon</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style.css&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;shortcut icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;favicon.ico&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/x-icon&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="style"><a href="#style" class="headerlink" title="style"></a>style</h2><p>&#x5728;&#x9875;&#x9762;&#x4E2D;&#x5199;&#x6837;&#x5F0F;&#xFF0C;&#x53C2;&#x7167;css</p>
+<h2 id="script"><a href="#script" class="headerlink" title="script"></a>script</h2><p>&#x5F15;&#x5165;js&#x6587;&#x4EF6;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;my.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="body&#x6807;&#x7B7E;"><a href="#body&#x6807;&#x7B7E;" class="headerlink" title="body&#x6807;&#x7B7E;"></a>body&#x6807;&#x7B7E;</h1><blockquote>
+<p>&#x56FE;&#x6807;&#x4EE5;&#x53CA;&#x5404;&#x79CD;&#x5B57;&#x7B26;,<a href="https://code.ziqiangxuetang.com/tags/html-symbols.html" target="_blank" rel="external">&#x8BF7;&#x53C2;&#x7167;</a></p>
+</blockquote>
+<ul>
+<li>p&#xFF1A;&#x6BB5;&#x843D;</li>
+<li>br&#xFF1A;&#x6362;&#x884C;</li>
+<li>hr&#xFF1A;&#x5206;&#x5272;&#x7EBF;</li>
+<li>h&#x7CFB;&#x5217;&#xFF1A;&#x6807;&#x9898;</li>
+<li><figure class="highlight plain"><figcaption><span>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6CE8;&#x91CA; --&gt;```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## input</div><div class="line"></div><div class="line">* type=&apos;text&apos;&#xFF1A;name&#x3001;value</div><div class="line">* type=&apos;password&apos;&#xFF1A;name&#x3001;value</div><div class="line">* type=&apos;submit&apos;&#xFF1A;value=&apos;&apos; &#x63D0;&#x4EA4;&#x6309;&#x94AE;&#x3001;&#x8868;&#x5355;</div><div class="line">* type=&apos;button&apos;&#xFF1A;&#x6309;&#x94AE;</div><div class="line">* type=&apos;radio&apos;&#xFF1A;&#x5355;&#x9009;&#x6846; value&#x3001;checked=&apos;checked&apos; name&#x76F8;&#x540C;&#x4E92;&#x65A5;</div><div class="line">* type=&apos;checkbox&apos;&#xFF1A;&#x590D;&#x9009;&#x6846; value&#x3001;checked=&apos;checked&apos; name&#x6279;&#x91CF;&#x83B7;&#x53D6;&#x6570;&#x636E;</div><div class="line">* type=&apos;file&apos;&#xFF1A;&#x4F9D;&#x8D56;```&lt;form action=&quot;&quot; enctype=&quot;multipart/form-data&quot;&gt;&lt;/form&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>type=&#x2019;rest&#x2019;&#xFF1A;&#x91CD;&#x7F6E;</p>
+</li>
+</ul>
+<h2 id="textarea"><a href="#textarea" class="headerlink" title="textarea"></a>textarea</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p>name&#xFF0C;&#x5185;&#x90E8;option value&#xFF0C;&#x63D0;&#x4EA4;&#x5230;&#x540E;&#x53F0;&#xFF0C;size&#xFF0C;multiple</p>
+<h2 id="a"><a href="#a" class="headerlink" title="a"></a>a</h2><ul>
+<li>&#x8DF3;&#x8F6C;</li>
+<li>&#x951A;&#xFF1A;href=&#x201D;#id&#x201D; &#x6807;&#x7B7E;&#x7684;id&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x590D;</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://c.isme.pub/&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>isme<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="img"><a href="#img" class="headerlink" title="img"></a>img</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;a.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&#x56FE;&#x7247;&quot;</span> <span class="attr">title</span>=<span class="string">&quot;&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5217;&#x8868;"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</h2><ul>
+<li>&#x65E0;&#x5E8F;&#x5217;&#x8868;&#xFF1A;ul li</li>
+<li>&#x6709;&#x5E8F;&#x5217;&#x8868;&#xFF1A;ol li</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x5217;&#x8868;&#xFF1A;dl dt dd</li>
+</ul>
+<h2 id="&#x8868;&#x683C;"><a href="#&#x8868;&#x683C;" class="headerlink" title="&#x8868;&#x683C;"></a>&#x8868;&#x683C;</h2><ul>
+<li>table<ul>
+<li>thead<ul>
+<li>tr<ul>
+<li>th</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tbody<ul>
+<li>tr<ul>
+<li>th</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>colspan</li>
+<li>rowspan</li>
+</ul>
+<h2 id="label"><a href="#label" class="headerlink" title="label"></a>label</h2><p>&#x7528;&#x4E8E;&#x70B9;&#x51FB;&#x6587;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x5173;&#x8054;&#x7684;&#x6807;&#x7B7E;&#x83B7;&#x53D6;&#x5149;&#x6807;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;user&quot;</span>&gt;</span>&#x7528;&#x6237;&#x540D;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span>&gt;</span></div><div class="line">``` </div><div class="line"></div><div class="line">## fieldset</div><div class="line">	</div><div class="line">* legend</div><div class="line"></div><div class="line">## &#x6807;&#x7B7E;&#x5206;&#x7C7B;</div><div class="line"></div><div class="line">* &#x5757;&#x7EA7;&#x6807;&#x7B7E;</div><div class="line">	* div</div><div class="line">	* h</div><div class="line">	* p</div><div class="line">* &#x5185;&#x8054;&#x6807;&#x7B7E;</div><div class="line">	* span</div><div class="line">* &#x6807;&#x7B7E;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;</div><div class="line">* &#x6807;&#x7B7E;&#x5B58;&#x5728;&#x7684;&#x610F;&#x4E49;&#xFF1A;css&#x3001;js&#x64CD;&#x4F5C;</div><div class="line"></div><div class="line"># html&#x6807;&#x7B7E;&#x8868;&#x683C;</div><div class="line"></div><div class="line"></div><div class="line">| &#x5C5E;&#x6027; | &#x63CF;&#x8FF0; |</div><div class="line">| :---: | :---: |</div><div class="line">| class | &#x4E3A;html&#x5143;&#x7D20;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7C7B;&#x540D;&#xFF08;classname&#xFF09;(&#x7C7B;&#x540D;&#x4ECE;&#x6837;&#x5F0F;&#x6587;&#x4EF6;&#x5F15;&#x5165;) |</div><div class="line">| id | &#x5B9A;&#x4E49;&#x5143;&#x7D20;&#x7684;&#x552F;&#x4E00;id |</div><div class="line">| style | &#x89C4;&#x5B9A;&#x5143;&#x7D20;&#x7684;&#x884C;&#x5185;&#x6837;&#x5F0F;&#xFF08;inline style&#xFF09; title |</div><div class="line">| title | &#x63CF;&#x8FF0;&#x4E86;&#x5143;&#x7D20;&#x7684;&#x989D;&#x5916;&#x4FE1;&#x606F; (&#x4F5C;&#x4E3A;&#x5DE5;&#x5177;&#x6761;&#x4F7F;&#x7528;) |</div><div class="line">| ```<span class="tag">&lt;<span class="name">html</span>&gt;</span>``` | &#x5B9A;&#x4E49;HTML&#x6587;&#x6863; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">head</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x4E86;&#x6587;&#x6863;&#x7684;&#x4FE1;&#x606F; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">title</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x4E86;&#x6587;&#x6863;&#x7684;&#x6807;&#x9898; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">base</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x4E86;&#x9875;&#x9762;&#x94FE;&#x63A5;&#x6807;&#x7B7E;&#x7684;&#x9ED8;&#x8BA4;&#x94FE;&#x63A5;&#x5730;&#x5740; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">link</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x6587;&#x6863;&#x548C;&#x5916;&#x90E8;&#x8D44;&#x6E90;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">meta</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x4E86;HTML&#x6587;&#x6863;&#x4E2D;&#x7684;&#x5143;&#x6570;&#x636E; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="xml">``` | &#x5B9A;&#x4E49;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6; |</span></div><div class="line">| ```<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="xml">``` | &#x5B9A;&#x4E49;&#x4E86;HTML&#x6587;&#x6863;&#x7684;&#x6837;&#x5F0F;&#x6587;&#x4EF6; |</span></div><div class="line">| ```<span class="tag">&lt;<span class="name">body</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x6587;&#x6863;&#x7684;&#x4E3B;&#x4F53; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">h1</span>&gt;</span> to <span class="tag">&lt;<span class="name">h6</span>&gt;</span>``` | &#x5B9A;&#x4E49; |</div><div class="line">| ```<span class="tag">&lt;<span class="name">hr</span>&gt;</span>``` | &#x5B9A;&#x4E49;&#x6C34;&#x5E73;&#x7EBF; |</div><div class="line">| ```<span class="comment">&lt;!--&gt;``` | &#x5B9A;&#x4E49;&#x6CE8;&#x91CA; |</span></div><div class="line">| ```&lt;p&gt;``` | &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6BB5;&#x843D; |</div><div class="line">| ```&lt;br&gt;``` | &#x63D2;&#x5165;&#x5355;&#x4E2A;&#x6298;&#x884C;&#xFF08;&#x6362;&#x884C;&#xFF09; |</div><div class="line">| ```&lt;a&gt;``` | &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8D85;&#x7EA7;&#x94FE;&#x63A5; |</div><div class="line">| ```&lt;img&gt;``` | &#x5B9A;&#x4E49;&#x56FE;&#x50CF; |</div><div class="line">| ```&lt;map&gt;``` | &#x5B9A;&#x4E49;&#x56FE;&#x50CF;&#x5730;&#x56FE; |</div><div class="line">| ```&lt;area&gt;``` | &#x5B9A;&#x4E49;&#x56FE;&#x50CF;&#x5730;&#x56FE;&#x4E2D;&#x7684;&#x53EF;&#x70B9;&#x51FB;&#x533A;&#x57DF; |</div><div class="line">| ```&lt;table&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C; |</div><div class="line">| ```&lt;th&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x7684;&#x8868;&#x5934; |</div><div class="line">| ```&lt;tr&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x7684;&#x884C; |</div><div class="line">| ```&lt;td&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x5355;&#x5143; |</div><div class="line">| ```&lt;caption&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x6807;&#x9898; |</div><div class="line">| ```&lt;colgroup&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x5217;&#x7684;&#x7EC4; |</div><div class="line">| ```&lt;col&gt;``` | &#x5B9A;&#x4E49;&#x7528;&#x4E8E;&#x8868;&#x683C;&#x5217;&#x7684;&#x5C5E;&#x6027; |</div><div class="line">| ```&lt;thead&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x7684;&#x9875;&#x7709; |</div><div class="line">| ```&lt;tbody&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x7684;&#x4E3B;&#x4F53; |</div><div class="line">| ```&lt;tfoot&gt;``` | &#x5B9A;&#x4E49;&#x8868;&#x683C;&#x7684;&#x9875;&#x811A; |</div><div class="line">| ```&lt;ol&gt;``` | &#x5B9A;&#x4E49;&#x6709;&#x5E8F;&#x5217;&#x8868; |</div><div class="line">| ```&lt;ul&gt;``` | &#x5B9A;&#x4E49;&#x65E0;&#x5E8F;&#x5217;&#x8868; |</div><div class="line">| ```&lt;li&gt;``` | &#x5B9A;&#x4E49;&#x5217;&#x8868;&#x9879; |</div><div class="line">| ```&lt;dl&gt;``` | &#x5B9A;&#x4E49;&#x5B9A;&#x4E49;&#x5217;&#x8868; |</div><div class="line">| ```&lt;dt&gt;``` | &#x81EA;&#x5B9A;&#x4E49;&#x5217;&#x8868;&#x9879;&#x76EE; |</div><div class="line">| ```&lt;dd&gt;``` | &#x5B9A;&#x4E49;&#x81EA;&#x5B9A;&#x5217;&#x8868;&#x4E49;&#x7684;&#x63CF;&#x8FF0; |</div><div class="line">| ```&lt;div&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x6587;&#x6863;&#x7684;&#x533A;&#x57DF;&#xFF0C;&#x5757;&#x7EA7;(block-level) |</div><div class="line">| ```&lt;span&gt;``` | &#x7528;&#x6765;&#x7EC4;&#x5408;&#x6587;&#x6863;&#x4E2D;&#x7684;&#x884C;&#x5185;&#x5143;&#x7D20;&#xFF0C;&#x5185;&#x8054;&#x5143;&#x7D20;(inline) |</div><div class="line">| ```&lt;div&gt;``` | &#x5B9A;&#x4E49;&#x6587;&#x6863;&#x533A;&#x5757;&#xFF0C;&#x5757;&#x7EA7;(block-level) |</div><div class="line">| ```&lt;span&gt;``` | &#x5B9A;&#x4E49;span&#xFF0C;&#x7528;&#x6765;&#x7EC4;&#x5408;&#x6587;&#x6863;&#x4E2D;&#x7684;&#x884C;&#x5185;&#x5143;&#x7D20;&#x3002; |</div><div class="line">| ```&lt;form&gt;``` | &#x5B9A;&#x4E49;&#x4F9B;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x8868;&#x5355; |</div><div class="line">| ```&lt;input&gt;``` | &#x5B9A;&#x4E49;&#x8F93;&#x5165;&#x57DF; |</div><div class="line">| ```&lt;textarea&gt;``` | &#x5B9A;&#x4E49;&#x6587;&#x672C;&#x57DF;(&#x4E00;&#x4E2A;&#x591A;&#x884C;&#x7684;&#x8F93;&#x5165;&#x63A7;&#x4EF6;) |</div><div class="line">| ```&lt;label&gt;``` | &#x5B9A;&#x4E49;&#x4E86;```&lt;input&gt;```&#x5143;&#x7D20;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x4E00;&#x822C;&#x4E3A;&#x8F93;&#x5165;&#x6807;&#x9898; |</div><div class="line">| ```&lt;fieldset&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7EC4;&#x76F8;&#x5173;&#x7684;&#x8868;&#x5355;&#x5143;&#x7D20;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5916;&#x6846;&#x5305;&#x542B;&#x8D77;&#x6765; |</div><div class="line">| ```&lt;legend&gt;``` | &#x5B9A;&#x4E49;&#x4E86;```&lt;fieldset&gt;```&#x5143;&#x7D20;&#x7684;&#x6807;&#x9898; |</div><div class="line">| ```&lt;select&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x4E0B;&#x62C9;&#x9009;&#x9879;&#x5217;&#x8868; |</div><div class="line">| ```&lt;optgroup&gt;``` | &#x5B9A;&#x4E49;&#x9009;&#x9879;&#x7EC4; |</div><div class="line">| ```&lt;option&gt;``` | &#x5B9A;&#x4E49;&#x4E0B;&#x62C9;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x9009;&#x9879; |</div><div class="line">| ```&lt;button&gt;``` | &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x70B9;&#x51FB;&#x6309;&#x94AE; |</div><div class="line">| ```&lt;datalist&gt;``` | &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x9884;&#x5148;&#x5B9A;&#x4E49;&#x7684;&#x8F93;&#x5165;&#x63A7;&#x4EF6;&#x9009;&#x9879;&#x5217;&#x8868; |</div><div class="line">| ```&lt;keygen&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x8868;&#x5355;&#x7684;&#x5BC6;&#x94A5;&#x5BF9;&#x751F;&#x6210;&#x5668;&#x5B57;&#x6BB5; |</div><div class="line">| ```&lt;output&gt;``` | &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8BA1;&#x7B97;&#x7ED3;&#x679C; |</div><div class="line">| ```&lt;iframe&gt;``` | &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5185;&#x8054;&#x7684;iframe |</div><div class="line">| ```&lt;script&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x811A;&#x672C; |</div><div class="line">| ```&lt;noscript&gt;``` | &#x5B9A;&#x4E49;&#x4E86;&#x4E0D;&#x652F;&#x6301;&#x811A;&#x672C;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x51FA;&#x7684;&#x6587;&#x672C; |</div><div class="line"></div><div class="line"># HTML&#x5B57;&#x7B26;&#x5B9E;&#x4F53;</div><div class="line"></div><div class="line">| &#x663E;&#x793A;&#x7ED3;&#x679C; | &#x63CF;&#x8FF0; | &#x5B9E;&#x4F53;&#x540D;&#x79F0; | &#x5B9E;&#x4F53;&#x7F16;&#x53F7; |</div><div class="line">| :---: | :---: | :---: | :---: |</div><div class="line">|  | &#x7A7A;&#x683C; | ```&amp;nbsp;``` | ```&amp;#160;``` |</div><div class="line">| &lt; | &#x5C0F;&#x4E8E;&#x53F7; | ```&amp;lt;``` | ```&amp;#60;``` |</div><div class="line">| &gt; | &#x5927;&#x4E8E;&#x53F7; | ```&amp;gt;``` | ```&amp;#62;``` |</div><div class="line">| &amp; | &#x548C;&#x53F7; | ```&amp;amp;``` | ```&amp;#38;``` |</div><div class="line">| &quot; | &#x5F15;&#x53F7; | ```&amp;quot;``` | ```&amp;#34;``` |</div><div class="line">| &apos; | &#x6487;&#x53F7; | ```&amp;apos;``` | ```(IE&#x4E0D;&#x652F;&#x6301;)``` |</div><div class="line">| &#xFFE0; | &#x5206; | ```&amp;cent;``` | ```&amp;#162;``` |</div><div class="line">| &#xA3; | &#x9551; | ```&amp;pound;``` | ```&amp;#163;``` |</div><div class="line">| &#xA5; | &#x65E5;&#x5706; | ```&amp;yen;``` | ```&amp;#165;``` |</div><div class="line">| &#x20AC; | &#x6B27;&#x5143; | ```&amp;euro;``` | ```&amp;#8364;``` |</div><div class="line">| &#xA7; | &#x5C0F;&#x8282; | ```&amp;sect;``` | ```&amp;#167;``` |</div><div class="line">| &#xA9; | &#x7248;&#x6743; | ```&amp;copy;``` | ```&amp;#169;``` |</div><div class="line">| &#xAE; | &#x6CE8;&#x518C;&#x5546;&#x6807; | ```&amp;reg;``` | ```&amp;#174;``` |</div><div class="line">| &#x2122; | &#x5546;&#x6807; | ```&amp;trade;``` | ```&amp;#8482;``` |</div><div class="line">| &#xD7; | &#x4E58;&#x53F7; | ```&amp;times;``` | ```&amp;#215;``` |</div><div class="line">| &#xF7; | &#x9664;&#x53F7; | ```&amp;divide;``` | ```&amp;#247;``` |</div><div class="line"></div><div class="line"></div><div class="line"># URL&#x7F16;&#x7801;&#x5B9E;&#x4F8B;</div><div class="line"></div><div class="line">| &#x5B57;&#x7B26; | URL |</div><div class="line">| :---: | :---: |</div><div class="line">| &#x20AC; | %80 |</div><div class="line">| &#xA3; | %A3 |</div><div class="line">| &#xA9; | %A9 |</div><div class="line">| &#xAE; | %AE |</div><div class="line">| &#xC0; | %C0 |</div><div class="line">| &#xC1; | %C1 |</div><div class="line">| &#xC2; | %C2 |</div><div class="line">| &#xC3; | %C3 |</div><div class="line">| &#xC4; | %C4 |</div><div class="line">| &#xC5; | %C5 |</div><div class="line"></div><div class="line"># &#x989C;&#x8272;</div><div class="line"></div><div class="line">| Color | Name | Name |</div><div class="line">| :---: | :---: | :---: |</div><div class="line">| AliceBlue | #F0F8FF | &lt;font color=&quot;#F0F8FF&quot;&gt;#F0F8FF&lt;/font&gt; |</div><div class="line">| AntiqueWhite | #FAEBD7 | &lt;font color=&quot;#FAEBD7&quot;&gt;#FAEBD7&lt;/font&gt; |</div><div class="line">| Aqua | #00FFFF | &lt;font color=&quot;#00FFFF&quot;&gt;#00FFFF&lt;/font&gt; |</div><div class="line">| Aquamarine | #7FFFD4 | &lt;font color=&quot;#7FFFD4&quot;&gt;#7FFFD4&lt;/font&gt; |</div><div class="line">| Azure | #F0FFFF | &lt;font color=&quot;#F0FFFF&quot;&gt;#F0FFFF&lt;/font&gt; |</div><div class="line">| Beige | #F5F5DC | &lt;font color=&quot;#F5F5DC&quot;&gt;#F5F5DC&lt;/font&gt; |</div><div class="line">| Bisque | #FFE4C4 | &lt;font color=&quot;#FFE4C4&quot;&gt;#FFE4C4&lt;/font&gt; |</div><div class="line">| Black | #000000 | &lt;font color=&quot;#000000&quot;&gt;#000000&lt;/font&gt; |</div><div class="line">| BlanchedAlmond | #FFEBCD | &lt;font color=&quot;#FFEBCD&quot;&gt;#FFEBCD&lt;/font&gt; |</div><div class="line">| Blue | #0000FF | &lt;font color=&quot;#0000FF&quot;&gt;#0000FF&lt;/font&gt; |</div><div class="line">| BlueViolet | #8A2BE2 | &lt;font color=&quot;#8A2BE2&quot;&gt;#8A2BE2&lt;/font&gt; |</div><div class="line">| Brown | #A52A2A | &lt;font color=&quot;#A52A2A&quot;&gt;#A52A2A&lt;/font&gt; |</div><div class="line">| BurlyWood | #DEB887 | &lt;font color=&quot;#DEB887&quot;&gt;#DEB887&lt;/font&gt; |</div><div class="line">| CadetBlue | #5F9EA0 | &lt;font color=&quot;#5F9EA0&quot;&gt;#5F9EA0&lt;/font&gt; |</div><div class="line">| Chartreuse | #7FFF00 | &lt;font color=&quot;#7FFF00&quot;&gt;#7FFF00&lt;/font&gt; |</div><div class="line">| Chocolate | #D2691E | &lt;font color=&quot;#D2691E&quot;&gt;#D2691E&lt;/font&gt; |</div><div class="line">| Coral | #FF7F50 | &lt;font color=&quot;#FF7F50&quot;&gt;#FF7F50&lt;/font&gt; |</div><div class="line">| CornflowerBlue | #6495ED | &lt;font color=&quot;#6495ED&quot;&gt;#6495ED&lt;/font&gt; |</div><div class="line">| Cornsilk | #FFF8DC | &lt;font color=&quot;#FFF8DC&quot;&gt;#FFF8DC&lt;/font&gt; |</div><div class="line">| Crimson | #DC143C | &lt;font color=&quot;#DC143C&quot;&gt;#DC143C&lt;/font&gt; |</div><div class="line">| Cyan | #00FFFF | &lt;font color=&quot;#00FFFF&quot;&gt;#00FFFF&lt;/font&gt; |</div><div class="line">| DarkBlue | #00008B | &lt;font color=&quot;#00008B&quot;&gt;#00008B&lt;/font&gt; |</div><div class="line">| DarkCyan | #008B8B | &lt;font color=&quot;#008B8B&quot;&gt;#008B8B&lt;/font&gt; |</div><div class="line">| DarkGoldenRod | #B8860B | &lt;font color=&quot;#B8860B&quot;&gt;#B8860B&lt;/font&gt; |</div><div class="line">| DarkGray | #A9A9A9 | &lt;font color=&quot;#A9A9A9&quot;&gt;#A9A9A9&lt;/font&gt; |</div><div class="line">| DarkGreen | #006400 | &lt;font color=&quot;#006400&quot;&gt;#006400&lt;/font&gt; |</div><div class="line">| DarkKhaki | #BDB76B | &lt;font color=&quot;#BDB76B&quot;&gt;#BDB76B&lt;/font&gt; |</div><div class="line">| DarkMagenta | #8B008B | &lt;font color=&quot;#8B008B&quot;&gt;#8B008B&lt;/font&gt; |</div><div class="line">| DarkOliveGreen | #556B2F | &lt;font color=&quot;#556B2F&quot;&gt;#556B2F&lt;/font&gt; |</div><div class="line">| DarkOrange | #FF8C00 | &lt;font color=&quot;#FF8C00&quot;&gt;#FF8C00&lt;/font&gt; |</div><div class="line">| DarkOrchid | #9932CC | &lt;font color=&quot;#9932CC&quot;&gt;#9932CC&lt;/font&gt; |</div><div class="line">| DarkRed | #8B0000 | &lt;font color=&quot;#8B0000&quot;&gt;#8B0000&lt;/font&gt; |</div><div class="line">| DarkSalmon | #E9967A | &lt;font color=&quot;#E9967A&quot;&gt;#E9967A&lt;/font&gt; |</div><div class="line">| DarkSeaGreen | #8FBC8F | &lt;font color=&quot;#8FBC8F&quot;&gt;#8FBC8F&lt;/font&gt; |</div><div class="line">| DarkSlateBlue | #483D8B | &lt;font color=&quot;#483D8B&quot;&gt;#483D8B&lt;/font&gt; |</div><div class="line">| DarkSlateGray | #2F4F4F | &lt;font color=&quot;#2F4F4F&quot;&gt;#2F4F4F&lt;/font&gt; |</div><div class="line">| DarkTurquoise | #00CED1 | &lt;font color=&quot;#00CED1&quot;&gt;#00CED1&lt;/font&gt; |</div><div class="line">| DarkViolet | #9400D3 | &lt;font color=&quot;#9400D3&quot;&gt;#9400D3&lt;/font&gt; |</div><div class="line">| DeepPink | #FF1493 | &lt;font color=&quot;#FF1493&quot;&gt;#FF1493&lt;/font&gt; |</div><div class="line">| DeepSkyBlue | #00BFFF | &lt;font color=&quot;#00BFFF&quot;&gt;#00BFFF&lt;/font&gt; |</div><div class="line">| DimGray | #696969 | &lt;font color=&quot;#696969&quot;&gt;#696969&lt;/font&gt; |</div><div class="line">| DodgerBlue | #1E90FF | &lt;font color=&quot;#1E90FF&quot;&gt;#1E90FF&lt;/font&gt; |</div><div class="line">| FireBrick | #B22222 | &lt;font color=&quot;#B22222&quot;&gt;#B22222&lt;/font&gt; |</div><div class="line">| FloralWhite | #FFFAF0 | &lt;font color=&quot;#FFFAF0&quot;&gt;#FFFAF0&lt;/font&gt; |</div><div class="line">| ForestGreen | #228B22 | &lt;font color=&quot;#228B22&quot;&gt;#228B22&lt;/font&gt; |</div><div class="line">| Fuchsia | #FF00FF | &lt;font color=&quot;#FF00FF&quot;&gt;#FF00FF&lt;/font&gt; |</div><div class="line">| Gainsboro | #DCDCDC | &lt;font color=&quot;#DCDCDC&quot;&gt;#DCDCDC&lt;/font&gt; |</div><div class="line">| GhostWhite | #F8F8FF | &lt;font color=&quot;#F8F8FF&quot;&gt;#F8F8FF&lt;/font&gt; |</div><div class="line">| Gold | #FFD700 | &lt;font color=&quot;#FFD700&quot;&gt;#FFD700&lt;/font&gt; |</div><div class="line">| GoldenRod | #DAA520 | &lt;font color=&quot;#DAA520&quot;&gt;#DAA520&lt;/font&gt; |</div><div class="line">| Gray | #808080 | &lt;font color=&quot;#808080&quot;&gt;#808080&lt;/font&gt; |</div><div class="line">| Green | #008000 | &lt;font color=&quot;#008000&quot;&gt;#008000&lt;/font&gt; |</div><div class="line">| GreenYellow | #ADFF2F | &lt;font color=&quot;#ADFF2F&quot;&gt;#ADFF2F&lt;/font&gt; |</div><div class="line">| HoneyDew | #F0FFF0 | &lt;font color=&quot;#F0FFF0&quot;&gt;#F0FFF0&lt;/font&gt; |</div><div class="line">| HotPink | #FF69B4 | &lt;font color=&quot;#FF69B4&quot;&gt;#FF69B4&lt;/font&gt; |</div><div class="line">| IndianRed | #CD5C5C | &lt;font color=&quot;#CD5C5C&quot;&gt;#CD5C5C&lt;/font&gt; |</div><div class="line">| Indigo | #4B0082 | &lt;font color=&quot;#4B0082&quot;&gt;#4B0082&lt;/font&gt; |</div><div class="line">| Ivory | #FFFFF0 | &lt;font color=&quot;#FFFFF0&quot;&gt;#FFFFF0&lt;/font&gt; |</div><div class="line">| Khaki | #F0E68C | &lt;font color=&quot;#F0E68C&quot;&gt;#F0E68C&lt;/font&gt; |</div><div class="line">| Lavender | #E6E6FA | &lt;font color=&quot;#E6E6FA&quot;&gt;#E6E6FA&lt;/font&gt; |</div><div class="line">| LavenderBlush | #FFF0F5 | &lt;font color=&quot;#FFF0F5&quot;&gt;#FFF0F5&lt;/font&gt; |</div><div class="line">| LawnGreen | #7CFC00 | &lt;font color=&quot;#7CFC00&quot;&gt;#7CFC00&lt;/font&gt; |</div><div class="line">| LemonChiffon | #FFFACD | &lt;font color=&quot;#FFFACD&quot;&gt;#FFFACD&lt;/font&gt; |</div><div class="line">| LightBlue | #ADD8E6 | &lt;font color=&quot;#ADD8E6&quot;&gt;#ADD8E6&lt;/font&gt; |</div><div class="line">| LightCoral | #F08080 | &lt;font color=&quot;#F08080&quot;&gt;#F08080&lt;/font&gt; |</div><div class="line">| LightCyan | #E0FFFF | &lt;font color=&quot;#E0FFFF&quot;&gt;#E0FFFF&lt;/font&gt; |</div><div class="line">| LightGoldenRodYellow | #FAFAD2 | &lt;font color=&quot;#FAFAD2&quot;&gt;#FAFAD2&lt;/font&gt; |</div><div class="line">| LightGray | #D3D3D3 | &lt;font color=&quot;#D3D3D3&quot;&gt;#D3D3D3&lt;/font&gt; |</div><div class="line">| LightGreen | #90EE90 | &lt;font color=&quot;#90EE90&quot;&gt;#90EE90&lt;/font&gt; |</div><div class="line">| LightPink | #FFB6C1 | &lt;font color=&quot;#FFB6C1&quot;&gt;#FFB6C1&lt;/font&gt; |</div><div class="line">| LightSalmon | #FFA07A | &lt;font color=&quot;#FFA07A&quot;&gt;#FFA07A&lt;/font&gt; |</div><div class="line">| LightSeaGreen | #20B2AA | &lt;font color=&quot;#20B2AA&quot;&gt;#20B2AA&lt;/font&gt; |</div><div class="line">| LightSkyBlue | #87CEFA | &lt;font color=&quot;#87CEFA&quot;&gt;#87CEFA&lt;/font&gt; |</div><div class="line">| LightSlateGray | #778899 | &lt;font color=&quot;#778899&quot;&gt;#778899&lt;/font&gt; |</div><div class="line">| LightSteelBlue | #B0C4DE | &lt;font color=&quot;#B0C4DE&quot;&gt;#B0C4DE&lt;/font&gt; |</div><div class="line">| LightYellow | #FFFFE0 | &lt;font color=&quot;#FFFFE0&quot;&gt;#FFFFE0&lt;/font&gt; |</div><div class="line">| Lime | #00FF00 | &lt;font color=&quot;#00FF00&quot;&gt;#00FF00&lt;/font&gt; |</div><div class="line">| LimeGreen | #32CD32 | &lt;font color=&quot;#32CD32&quot;&gt;#32CD32&lt;/font&gt; |</div><div class="line">| Linen | #FAF0E6 | &lt;font color=&quot;#FAF0E6&quot;&gt;#FAF0E6&lt;/font&gt; |</div><div class="line">| Magenta | #FF00FF | &lt;font color=&quot;#FF00FF&quot;&gt;#FF00FF&lt;/font&gt; |</div><div class="line">| Maroon | #800000 | &lt;font color=&quot;#800000&quot;&gt;#800000&lt;/font&gt; |</div><div class="line">| MediumAquaMarine | #66CDAA | &lt;font color=&quot;#66CDAA&quot;&gt;#66CDAA&lt;/font&gt; |</div><div class="line">| MediumBlue | #0000CD | &lt;font color=&quot;#0000CD&quot;&gt;#0000CD&lt;/font&gt; |</div><div class="line">| MediumOrchid | #BA55D3 | &lt;font color=&quot;#BA55D3&quot;&gt;#BA55D3&lt;/font&gt; |</div><div class="line">| MediumPurple | #9370DB | &lt;font color=&quot;#9370DB&quot;&gt;#9370DB&lt;/font&gt; |</div><div class="line">| MediumSeaGreen | #3CB371 | &lt;font color=&quot;#3CB371&quot;&gt;#3CB371&lt;/font&gt; |</div><div class="line">| MediumSlateBlue | #7B68EE | &lt;font color=&quot;#7B68EE&quot;&gt;#7B68EE&lt;/font&gt; |</div><div class="line">| MediumSpringGreen | #00FA9A | &lt;font color=&quot;#00FA9A&quot;&gt;#00FA9A&lt;/font&gt; |</div><div class="line">| MediumTurquoise | #48D1CC | &lt;font color=&quot;#48D1CC&quot;&gt;#48D1CC&lt;/font&gt; |</div><div class="line">| MediumVioletRed | #C71585 | &lt;font color=&quot;#C71585&quot;&gt;#C71585&lt;/font&gt; |</div><div class="line">| MidnightBlue | #191970 | &lt;font color=&quot;#191970&quot;&gt;#191970&lt;/font&gt; |</div><div class="line">| MintCream | #F5FFFA | &lt;font color=&quot;#F5FFFA&quot;&gt;#F5FFFA&lt;/font&gt; |</div><div class="line">| MistyRose | #FFE4E1 | &lt;font color=&quot;#FFE4E1&quot;&gt;#FFE4E1&lt;/font&gt; |</div><div class="line">| Moccasin | #FFE4B5 | &lt;font color=&quot;#FFE4B5&quot;&gt;#FFE4B5&lt;/font&gt; |</div><div class="line">| NavajoWhite | #FFDEAD | &lt;font color=&quot;#FFDEAD&quot;&gt;#FFDEAD&lt;/font&gt; |</div><div class="line">| Navy | #000080 | &lt;font color=&quot;#000080&quot;&gt;#000080&lt;/font&gt; |</div><div class="line">| OldLace | #FDF5E6 | &lt;font color=&quot;#FDF5E6&quot;&gt;#FDF5E6&lt;/font&gt; |</div><div class="line">| Olive | #808000 | &lt;font color=&quot;#808000&quot;&gt;#808000&lt;/font&gt; |</div><div class="line">| OliveDrab | #6B8E23 | &lt;font color=&quot;#6B8E23&quot;&gt;#6B8E23&lt;/font&gt; |</div><div class="line">| Orange | #FFA500 | &lt;font color=&quot;#FFA500&quot;&gt;#FFA500&lt;/font&gt; |</div><div class="line">| OrangeRed | #FF4500 | &lt;font color=&quot;#FF4500&quot;&gt;#FF4500&lt;/font&gt; |</div><div class="line">| Orchid | #DA70D6 | &lt;font color=&quot;#DA70D6&quot;&gt;#DA70D6&lt;/font&gt; |</div><div class="line">| PaleGoldenRod | #EEE8AA | &lt;font color=&quot;#EEE8AA&quot;&gt;#EEE8AA&lt;/font&gt; |</div><div class="line">| PaleGreen | #98FB98 | &lt;font color=&quot;#98FB98&quot;&gt;#98FB98&lt;/font&gt; |</div><div class="line">| PaleTurquoise | #AFEEEE | &lt;font color=&quot;#AFEEEE&quot;&gt;#AFEEEE&lt;/font&gt; |</div><div class="line">| PaleVioletRed | #DB7093 | &lt;font color=&quot;#DB7093&quot;&gt;#DB7093&lt;/font&gt; |</div><div class="line">| PapayaWhip | #FFEFD5 | &lt;font color=&quot;#FFEFD5&quot;&gt;#FFEFD5&lt;/font&gt; |</div><div class="line">| PeachPuff | #FFDAB9 | &lt;font color=&quot;#FFDAB9&quot;&gt;#FFDAB9&lt;/font&gt; |</div><div class="line">| Peru | #CD853F | &lt;font color=&quot;#CD853F&quot;&gt;#CD853F&lt;/font&gt; |</div><div class="line">| Pink | #FFC0CB | &lt;font color=&quot;#FFC0CB&quot;&gt;#FFC0CB&lt;/font&gt; |</div><div class="line">| Plum | #DDA0DD | &lt;font color=&quot;#DDA0DD&quot;&gt;#DDA0DD&lt;/font&gt; |</div><div class="line">| PowderBlue | #B0E0E6 | &lt;font color=&quot;#B0E0E6&quot;&gt;#B0E0E6&lt;/font&gt; |</div><div class="line">| Purple | #800080 | &lt;font color=&quot;#800080&quot;&gt;#800080&lt;/font&gt; |</div><div class="line">| Red | #FF0000 | &lt;font color=&quot;#FF0000&quot;&gt;#FF0000&lt;/font&gt; |</div><div class="line">| RosyBrown | #BC8F8F | &lt;font color=&quot;#BC8F8F&quot;&gt;#BC8F8F&lt;/font&gt; |</div><div class="line">| RoyalBlue | #4169E1 | &lt;font color=&quot;#4169E1&quot;&gt;#4169E1&lt;/font&gt; |</div><div class="line">| SaddleBrown | #8B4513 | &lt;font color=&quot;#8B4513&quot;&gt;#8B4513&lt;/font&gt; |</div><div class="line">| Salmon | #FA8072 | &lt;font color=&quot;#FA8072&quot;&gt;#FA8072&lt;/font&gt; |</div><div class="line">| SandyBrown | #F4A460 | &lt;font color=&quot;#F4A460&quot;&gt;#F4A460&lt;/font&gt; |</div><div class="line">| SeaGreen | #2E8B57 | &lt;font color=&quot;#2E8B57&quot;&gt;#2E8B57&lt;/font&gt; |</div><div class="line">| SeaShell | #FFF5EE | &lt;font color=&quot;#FFF5EE&quot;&gt;#FFF5EE&lt;/font&gt; |</div><div class="line">| Sienna | #A0522D | &lt;font color=&quot;#A0522D&quot;&gt;#A0522D&lt;/font&gt; |</div><div class="line">| Silver | #C0C0C0 | &lt;font color=&quot;#C0C0C0&quot;&gt;#C0C0C0&lt;/font&gt; |</div><div class="line">| SkyBlue | #87CEEB | &lt;font color=&quot;#87CEEB&quot;&gt;#87CEEB&lt;/font&gt; |</div><div class="line">| SlateBlue | #6A5ACD | &lt;font color=&quot;#6A5ACD&quot;&gt;#6A5ACD&lt;/font&gt; |</div><div class="line">| SlateGray | #708090 | &lt;font color=&quot;#708090&quot;&gt;#708090&lt;/font&gt; |</div><div class="line">| Snow | #FFFAFA | &lt;font color=&quot;#FFFAFA&quot;&gt;#FFFAFA&lt;/font&gt; |</div><div class="line">| SpringGreen | #00FF7F | &lt;font color=&quot;#00FF7F&quot;&gt;#00FF7F&lt;/font&gt; |</div><div class="line">| SteelBlue | #4682B4 | &lt;font color=&quot;#4682B4&quot;&gt;#4682B4&lt;/font&gt; |</div><div class="line">| Tan | #D2B48C | &lt;font color=&quot;#D2B48C&quot;&gt;#D2B48C&lt;/font&gt; |</div><div class="line">| Teal | #008080 | &lt;font color=&quot;#008080&quot;&gt;#008080&lt;/font&gt; |</div><div class="line">| Thistle | #D8BFD8 | &lt;font color=&quot;#D8BFD8&quot;&gt;#D8BFD8&lt;/font&gt; |</div><div class="line">| Tomato | #FF6347 | &lt;font color=&quot;#FF6347&quot;&gt;#FF6347&lt;/font&gt; |</div><div class="line">| Turquoise | #40E0D0 | &lt;font color=&quot;#40E0D0&quot;&gt;#40E0D0&lt;/font&gt; |</div><div class="line">| Violet | #EE82EE | &lt;font color=&quot;#EE82EE&quot;&gt;#EE82EE&lt;/font&gt; |</div><div class="line">| Wheat | #F5DEB3 | &lt;font color=&quot;#F5DEB3&quot;&gt;#F5DEB3&lt;/font&gt; |</div><div class="line">| White | #FFFFFF | &lt;font color=&quot;#FFFFFF&quot;&gt;#FFFFFF&lt;/font&gt; |</div><div class="line">| WhiteSmoke | #F5F5F5 | &lt;font color=&quot;#F5F5F5&quot;&gt;#F5F5F5&lt;/font&gt; |</div><div class="line">| Yellow | #FFFF00 | &lt;font color=&quot;#FFFF00&quot;&gt;#FFFF00&lt;/font&gt; |</div><div class="line">| YellowGreen | #9ACD32 | &lt;font color=&quot;#9ACD32&quot;&gt;#9ACD32&lt;/font&gt; |</div><div class="line"></div><div class="line"># html &#x901F;&#x67E5;</div><div class="line"></div><div class="line">``` html</div><div class="line">HTML&#x57FA;&#x672C;&#x6587;&#x6863;&#xFF08;HTML Basic Document&#xFF09;</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;title&gt;Title of document goes here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">Visible text goes here...</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line"></div><div class="line">&#x57FA;&#x672C;&#x6807;&#x7B7E;(Basic Tags)</div><div class="line">&lt;h1&gt;Largest Heading&lt;/h1&gt;</div><div class="line">&lt;h2&gt; . . . &lt;/h2&gt;</div><div class="line">&lt;h3&gt; . . . &lt;/h3&gt;</div><div class="line">&lt;h4&gt; . . . &lt;/h4&gt;</div><div class="line">&lt;h5&gt; . . . &lt;/h5&gt;</div><div class="line">&lt;h6&gt;Smallest Heading&lt;/h6&gt;</div><div class="line"></div><div class="line">&lt;p&gt;This is a paragraph.&lt;/p&gt;</div><div class="line">&lt;br&gt; (line break)</div><div class="line">&lt;hr&gt; (horizontal rule)</div><div class="line">&lt;!-- This is a comment --&gt;</div><div class="line">&#x6587;&#x672C;&#x683C;&#x5F0F;&#x5316;&#xFF08;Formatting&#xFF09;</div><div class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span>Bold text<span class="tag">&lt;/<span class="name">b</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">code</span>&gt;</span>Computer code<span class="tag">&lt;/<span class="name">code</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>Emphasized text<span class="tag">&lt;/<span class="name">em</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">i</span>&gt;</span>Italic text<span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Keyboard input<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span>Preformatted text<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">small</span>&gt;</span>Smaller text<span class="tag">&lt;/<span class="name">small</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Important text<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">abbr</span>&gt;</span> (abbreviation)</div><div class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span> (contact information)</div><div class="line"><span class="tag">&lt;<span class="name">bdo</span>&gt;</span> (text direction)</div><div class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span> (a section quoted from another source)</div><div class="line"><span class="tag">&lt;<span class="name">cite</span>&gt;</span> (title of a work)</div><div class="line"><span class="tag">&lt;<span class="name">del</span>&gt;</span> (deleted text)</div><div class="line"><span class="tag">&lt;<span class="name">ins</span>&gt;</span> (inserted text)</div><div class="line"><span class="tag">&lt;<span class="name">sub</span>&gt;</span> (subscripted text)</div><div class="line"><span class="tag">&lt;<span class="name">sup</span>&gt;</span> (superscripted text)</div><div class="line">&#x94FE;&#x63A5;&#xFF08;Links&#xFF09;</div><div class="line">Ordinary link: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.example.com/&quot;</span>&gt;</span>Link-text goes here<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">Image-link: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.example.com/&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;URL&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Alternate Text&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">Mailto link: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;mailto:webmaster@example.com&quot;</span>&gt;</span>Send e-mail<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">Bookmark:</div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;tips&quot;</span>&gt;</span>Tips Section<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#tips&quot;</span>&gt;</span>Jump to the Tips Section<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line">&#x56FE;&#x7247;&#xFF08;Images&#xFF09;</div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;URL&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Alternate Text&quot;</span> <span class="attr">height</span>=<span class="string">&quot;42&quot;</span> <span class="attr">width</span>=<span class="string">&quot;42&quot;</span>&gt;</span></div><div class="line">&#x6837;&#x5F0F;&#xFF08;Styles/Sections&#xFF09;</div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="undefined"></span></div><div class="line">  h1 {color:red;}</div><div class="line">  p {color:blue;}</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>A block-level section in a document<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>An inline section in a document<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">Unordered list</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">Ordered list</div><div class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>First item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Second item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></div><div class="line">Definition list</div><div class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>Describe item 1<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>Describe item 2<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line">Tables</div><div class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>table header<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>table header<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>table data<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>table data<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"></div><div class="line">&#x6846;&#x67B6;&#xFF08;Iframe&#xFF09;</div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;demo_iframe.htm&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"></div><div class="line">&#x8868;&#x5355;&#xFF08;Forms&#xFF09;</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;demo_form.asp&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post/get&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span> <span class="attr">size</span>=<span class="string">&quot;40&quot;</span> <span class="attr">maxlength</span>=<span class="string">&quot;50&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">checked</span>=<span class="string">&quot;checked&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">checked</span>=<span class="string">&quot;checked&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Send&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;reset&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">option</span>&gt;</span>Apples<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">option</span> <span class="attr">selected</span>=<span class="string">&quot;selected&quot;</span>&gt;</span>Bananas<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherries<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;comment&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;60&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line">Entities</div><div class="line">&amp;lt; is the same as <span class="tag">&lt;</span></div><div class="line">&amp;<span class="attr">gt</span>; <span class="attr">is</span> <span class="attr">the</span> <span class="attr">same</span> <span class="attr">as</span> &gt;</div><div class="line">&#xA9; is the same as &#xA9;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/30/sysctl-tcp/" rel="next" title="TCP/IP及内核参数优化调优">
+                <i class="fa fa-chevron-left"></i> TCP/IP及内核参数优化调优
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/12/pycharm-keymap/" rel="prev" title="pycharm-mac 快捷键">
+                pycharm-mac 快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5简介"><span class="nav-number">2.</span> <span class="nav-text">HTML5简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是HTML"><span class="nav-number">2.1.</span> <span class="nav-text">什么是HTML?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-HTML5"><span class="nav-number">2.2.</span> <span class="nav-text">什么是 HTML5?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5-是如何起步的？"><span class="nav-number">2.3.</span> <span class="nav-text">HTML5 是如何起步的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签分类"><span class="nav-number">2.4.</span> <span class="nav-text">标签分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#head标签"><span class="nav-number">3.</span> <span class="nav-text">head标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#meta"><span class="nav-number">3.1.</span> <span class="nav-text">meta</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#title"><span class="nav-number">3.2.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link"><span class="nav-number">3.3.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#style"><span class="nav-number">3.4.</span> <span class="nav-text">style</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#script"><span class="nav-number">3.5.</span> <span class="nav-text">script</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#body标签"><span class="nav-number">4.</span> <span class="nav-text">body标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#textarea"><span class="nav-number">4.1.</span> <span class="nav-text">textarea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select"><span class="nav-number">4.2.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a"><span class="nav-number">4.3.</span> <span class="nav-text">a</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#img"><span class="nav-number">4.4.</span> <span class="nav-text">img</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">4.5.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">4.6.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#label"><span class="nav-number">4.7.</span> <span class="nav-text">label</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
