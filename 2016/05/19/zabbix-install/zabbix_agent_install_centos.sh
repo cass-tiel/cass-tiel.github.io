@@ -32,7 +32,7 @@ function addUser() {
     #创建zabbix用户
     useradd -s /sbin/nologin zabbix
     mkdir -p ${install_dir}
-    mkdir -p /var/log/zabbix
+    mkdir -p /data/logs/zabbix
 }
 
 function Install() {
@@ -61,7 +61,7 @@ function makeConf() {
     #编辑agent配置文件
     cat >${zabbix_dir}/etc/zabbix_agentd.conf <<EOF
 PidFile=/tmp/zabbix_agentd.pid
-LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFile=/data/logs/zabbix/zabbix_agentd.log
 LogFileSize=10
 DebugLevel=3
 EnableRemoteCommands=1

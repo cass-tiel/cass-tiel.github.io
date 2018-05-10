@@ -78,7 +78,7 @@
 <meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;#">
 <meta property="og:image" content="http://c.isme.pub/2016/05/09/gitlab-install-7/gitlab714/1.jpg">
 <meta property="og:image" content="http://c.isme.pub/2016/05/09/gitlab-install-7/gitlab714/2.jpg">
-<meta property="og:updated_time" content="2017-08-22T02:17:23.000Z">
+<meta property="og:updated_time" content="2018-05-10T04:39:15.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab7.14(中文版|英文版)编译安装部署文档（全）">
 <meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x5B89;&amp;#x88C5;gitlab&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x672C;&amp;#x6765;&amp;#x4EE5;&amp;#x4E3A;&amp;#x6574;&amp;#x4E2A;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4F1A;&amp;#x5F88;&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x7ED3;&amp;#">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-22T10:17:23+08:00">
-                2017-08-22
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T12:39:15+08:00">
+                2018-05-10
               </time>
             
           </span>
@@ -522,7 +522,7 @@
 <h2 id="&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;"><a href="#&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;" class="headerlink" title="&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;"></a>&#x521B;&#x5EFA;&#x542F;&#x52A8;&#x811A;&#x672C;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab</div><div class="line">sudo cp lib/support/init.d/gitlab.default.example /etc/default/gitlab</div><div class="line">sudo cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab</div><div class="line">sudo chmod +x /etc/init.d/gitlab</div><div class="line">sudo chkconfig --add gitlab</div><div class="line">sudo chkconfig gitlab on</div><div class="line"></div><div class="line"><span class="comment">##########################</span></div><div class="line">vim /etc/default/gitlab</div><div class="line">app_root=<span class="string">&quot;/data/<span class="variable">$app_user</span>/gitlab&quot;</span></div><div class="line"></div><div class="line"><span class="comment">#&#x65E0;&#x9700;&#x4E0B;&#x8F7D;</span></div><div class="line"><span class="comment">##sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/master/init/sysvinit/centos/gitlab-unicorn -P /etc/init.d/</span></div><div class="line"><span class="comment">##sudo mv /etc/init.d/gitlab-unicorn /etc/init.d/gitlab</span></div><div class="line"><span class="comment">##########################</span></div></pre></td></tr></table></figure>
 <h2 id="&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;"><a href="#&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;" class="headerlink" title="&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;[&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;]"></a>&#x590D;&#x5236;&#x914D;&#x7F6E;&#x6587;&#x4EF6;[&#x8FD9;&#x91CC;&#x4F7F;&#x7528;nginx&#x505A;&#x4E3A;WEB&#x670D;&#x52A1;]</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitlab</div><div class="line">sudo mkdir /usr/<span class="built_in">local</span>/nginx/conf/conf.d/ -p</div><div class="line">sudo cp lib/support/nginx/gitlab /usr/<span class="built_in">local</span>/nginx/conf/conf.d/</div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/conf/conf.d/</div><div class="line">sudo chown -R git:git .</div><div class="line">cp gitlab gitlab.conf</div><div class="line">vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</div></pre></td></tr></table></figure>
 <p>nginx&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user  git;</div><div class="line">worker_processes  4;</div><div class="line">events {</div><div class="line"> worker_connections  1024;</div><div class="line">}</div><div class="line"></div><div class="line">http {</div><div class="line"> includemime.types;</div><div class="line"> includeconf.d/*.conf;</div><div class="line">......</div><div class="line"></div><div class="line">sudo mkdir /var/<span class="built_in">log</span>/nginx</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user  git;</div><div class="line">worker_processes  4;</div><div class="line">events {</div><div class="line"> worker_connections  1024;</div><div class="line">}</div><div class="line"></div><div class="line">http {</div><div class="line"> includemime.types;</div><div class="line"> includeconf.d/*.conf;</div><div class="line">......</div><div class="line"></div><div class="line">sudo mkdir /data/logs/nginx</div></pre></td></tr></table></figure>
 <p>gitlab&#x865A;&#x62DF;&#x4E3B;&#x673A;&#x7684;&#x914D;&#x7F6E;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /usr/<span class="built_in">local</span>/nginx/conf/conf.d/gitlab.conf</div><div class="line">server {</div><div class="line"> listen 0.0.0.0:8050 default_server;</div><div class="line"> <span class="comment">#listen [::]:80 default_server;</span></div><div class="line"> server_name git.cass.com; </div><div class="line"></div><div class="line">location ~ ^/(assets)/ {</div><div class="line"> root /home/git/gitlab/public;</div><div class="line"> <span class="comment">#gzip_static on;</span></div></pre></td></tr></table></figure>
 <h2 id="&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;"><a href="#&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;" class="headerlink" title="&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;"></a>&#x62C9;&#x53D6;gitLab&#x9759;&#x6001;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su - git &amp;&amp; <span class="built_in">cd</span> ~/gitlab</div><div class="line">bundle <span class="built_in">exec</span> rake assets:precompile RAILS_ENV=production</div><div class="line">sudo service gitlab restart</div><div class="line">sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx</div></pre></td></tr></table></figure>
@@ -662,7 +662,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -673,7 +673,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -684,7 +684,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

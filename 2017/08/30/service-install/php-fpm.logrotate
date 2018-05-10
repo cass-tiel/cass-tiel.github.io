@@ -1,4 +1,4 @@
-/var/log/php/*.log {
+/data/logs/php/*.log {
     daily
     rotate 30
     ifempty
@@ -13,7 +13,7 @@
     postrotate
         /etc/init.d/php-fpm restart
         YESTERDAY=$(/bin/date --date '1 days ago' +'%Y%m%d')
-        cd /var/log/php
+        cd /data/logs/php
         LOG_FILE=$(ls -1 *.log-* | grep -v .tar.gz)
 
         for I in $LOG_FILE;do
@@ -25,6 +25,6 @@
             rm -f ${LOG_FULL_NAME}
         done
 
-        /bin/find /var/log/php -mtime +30 | xargs rm -rf
+        /bin/find /data/logs/php -mtime +30 | xargs rm -rf
     endscript
 }

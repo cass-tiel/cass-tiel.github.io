@@ -416,8 +416,8 @@
 <p>&#x4EE5;&#x4E0A;&#x5185;&#x5BB9;&#x8F6C;&#x8F7D;&#x4E8E;&#x8003;&#x8BD5;&#x5927;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x6211;&#x5199;&#x7684;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x91CA;&#x653E;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x5206;&#x4EAB;&#x7ED9;&#x5927;&#x5BB6;&#xFF1A;</p>
 <h1 id="vim-root-satools-freemem-sh"><a href="#vim-root-satools-freemem-sh" class="headerlink" title="vim /root/satools/freemem.sh"></a>vim /root/satools/freemem.sh</h1><p>#!/bin/bash</p>
 <p>used=<code>free -m | awk &apos;NR==2&apos; | awk &apos;{print $3}&apos;</code><br>free=<code>free -m | awk &apos;NR==2&apos; | awk &apos;{print $4}&apos;</code></p>
-<p>echo &#x201C;===========================&#x201D; &gt;&gt; /var/log/mem.log<br>date &gt;&gt; /var/log/mem.log<br>echo &#x201C;Memory usage | [Use&#xFF1A;${used}MB][Free&#xFF1A;${free}MB]&#x201D; &gt;&gt; /var/log/mem.log</p>
-<p>if [ $free -le 100 ] ; then<br>                sync &amp;&amp; echo 1 &gt; /proc/sys/vm/drop_caches<br>                sync &amp;&amp; echo 2 &gt; /proc/sys/vm/drop_caches<br>                sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches<br>                echo &#x201C;OK&#x201D; &gt;&gt; /var/log/mem.log<br>else<br>                echo &#x201C;Not required&#x201D; &gt;&gt; /var/log/mem.log<br>&#x5C06;&#x811A;&#x672C;&#x6DFB;&#x52A0;&#x5230;crond&#x4EFB;&#x52A1;&#xFF0C;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x3002;</p>
+<p>echo &#x201C;===========================&#x201D; &gt;&gt; /data/logs/mem.log<br>date &gt;&gt; /data/logs/mem.log<br>echo &#x201C;Memory usage | [Use&#xFF1A;${used}MB][Free&#xFF1A;${free}MB]&#x201D; &gt;&gt; /data/logs/mem.log</p>
+<p>if [ $free -le 100 ] ; then<br>                sync &amp;&amp; echo 1 &gt; /proc/sys/vm/drop_caches<br>                sync &amp;&amp; echo 2 &gt; /proc/sys/vm/drop_caches<br>                sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches<br>                echo &#x201C;OK&#x201D; &gt;&gt; /data/logs/mem.log<br>else<br>                echo &#x201C;Not required&#x201D; &gt;&gt; /data/logs/mem.log<br>&#x5C06;&#x811A;&#x672C;&#x6DFB;&#x52A0;&#x5230;crond&#x4EFB;&#x52A1;&#xFF0C;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x3002;</p>
 <h1 id="echo-&#x201C;-30-root-root-satools-freemem-sh&#x201D;-gt-gt-etc-crondtab"><a href="#echo-&#x201C;-30-root-root-satools-freemem-sh&#x201D;-gt-gt-etc-crondtab" class="headerlink" title="echo &#x201C;/30    * root /root/satools/freemem.sh&#x201D; &gt;&gt; /etc/crondtab"></a>echo &#x201C;<em>/30 </em> <em> </em> * root /root/satools/freemem.sh&#x201D; &gt;&gt; /etc/crondtab</h1>
       
     </div>
@@ -531,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -542,7 +542,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -553,7 +553,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

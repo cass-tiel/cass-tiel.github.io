@@ -1,4 +1,4 @@
-/var/log/nginx/*.log {
+/data/logs/nginx/*.log {
     daily
     rotate 30
     ifempty
@@ -17,7 +17,7 @@
     postrotate
         /etc/init.d/nginx reload
         YESTERDAY=$(/bin/date --date '1 days ago' +'%Y%m%d')
-        cd /var/log/nginx
+        cd /data/logs/nginx
         LOG_FILE=$(ls -1 *.log-* | grep -v .tar.gz)
 
         for I in ${LOG_FILE};do
@@ -29,5 +29,5 @@
             rm -f ${LOG_FULL_NAME}
         done
 
-        /bin/find /var/log/nginx/ -mtime +30 | xargs rm -rf
+        /bin/find /data/logs/nginx/ -mtime +30 | xargs rm -rf
     endscript

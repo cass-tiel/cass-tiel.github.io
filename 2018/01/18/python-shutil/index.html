@@ -455,6 +455,7 @@
 <p>shutil &#x5BF9;&#x538B;&#x7F29;&#x5305;&#x7684;&#x5904;&#x7406;&#x662F;&#x8C03;&#x7528; ZipFile &#x548C; TarFile &#x4E24;&#x4E2A;&#x6A21;&#x5757;&#x6765;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x8BE6;&#x7EC6;&#xFF1A;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> zipfile</div><div class="line"></div><div class="line"><span class="comment"># &#x538B;&#x7F29;</span></div><div class="line">z = zipfile.ZipFile(<span class="string">&apos;laxi.zip&apos;</span>, <span class="string">&apos;w&apos;</span>)</div><div class="line">z.write(<span class="string">&apos;a.log&apos;</span>)</div><div class="line">z.write(<span class="string">&apos;data.data&apos;</span>)</div><div class="line">z.close()</div><div class="line"></div><div class="line"><span class="comment"># &#x89E3;&#x538B;</span></div><div class="line">z = zipfile.ZipFile(<span class="string">&apos;laxi.zip&apos;</span>, <span class="string">&apos;r&apos;</span>)</div><div class="line">z.extractall(path=<span class="string">&apos;.&apos;</span>)</div><div class="line">z.close()</div><div class="line"></div><div class="line">zipfile&#x538B;&#x7F29;&#x89E3;&#x538B;&#x7F29;</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tarfile</div><div class="line"></div><div class="line"><span class="comment"># &#x538B;&#x7F29;</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t=tarfile.open(<span class="string">&apos;/tmp/egon.tar&apos;</span>,<span class="string">&apos;w&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t.add(<span class="string">&apos;/test1/a.py&apos;</span>,arcname=<span class="string">&apos;a.bak&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t.add(<span class="string">&apos;/test1/b.py&apos;</span>,arcname=<span class="string">&apos;b.bak&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># &#x89E3;&#x538B;</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t=tarfile.open(<span class="string">&apos;/tmp/egon.tar&apos;</span>,<span class="string">&apos;r&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t.extractall(<span class="string">&apos;/egon&apos;</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t.close()</div><div class="line"></div><div class="line">tarfile&#x538B;&#x7F29;&#x89E3;&#x538B;&#x7F29;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -575,7 +576,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -586,7 +587,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -597,7 +598,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

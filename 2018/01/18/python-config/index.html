@@ -435,6 +435,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#&#x5728;country&#x5185;&#x6DFB;&#x52A0;&#xFF08;append&#xFF09;&#x8282;&#x70B9;year2</span></div><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line">tree = ET.parse(<span class="string">&quot;a.xml&quot;</span>)</div><div class="line">root=tree.getroot()</div><div class="line"><span class="keyword">for</span> country <span class="keyword">in</span> root.findall(<span class="string">&apos;country&apos;</span>):</div><div class="line">    <span class="keyword">for</span> year <span class="keyword">in</span> country.findall(<span class="string">&apos;year&apos;</span>):</div><div class="line">        <span class="keyword">if</span> int(year.text) &gt; <span class="number">2000</span>:</div><div class="line">            year2=ET.Element(<span class="string">&apos;year2&apos;</span>)</div><div class="line">            year2.text=<span class="string">&apos;&#x65B0;&#x5E74;&apos;</span></div><div class="line">            year2.attrib={<span class="string">&apos;update&apos;</span>:<span class="string">&apos;yes&apos;</span>}</div><div class="line">            country.append(year2) <span class="comment">#&#x5F80;country&#x8282;&#x70B9;&#x4E0B;&#x6DFB;&#x52A0;&#x5B50;&#x8282;&#x70B9;</span></div><div class="line"></div><div class="line">tree.write(<span class="string">&apos;a.xml.swap&apos;</span>)</div></pre></td></tr></table></figure>
 <p>&#x81EA;&#x5DF1;&#x521B;&#x5EFA;xml&#x6587;&#x4EF6;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</div><div class="line"> </div><div class="line"> </div><div class="line">new_xml = ET.Element(<span class="string">&quot;namelist&quot;</span>)</div><div class="line">name = ET.SubElement(new_xml,<span class="string">&quot;name&quot;</span>,attrib={<span class="string">&quot;enrolled&quot;</span>:<span class="string">&quot;yes&quot;</span>})</div><div class="line">age = ET.SubElement(name,<span class="string">&quot;age&quot;</span>,attrib={<span class="string">&quot;checked&quot;</span>:<span class="string">&quot;no&quot;</span>})</div><div class="line">sex = ET.SubElement(name,<span class="string">&quot;sex&quot;</span>)</div><div class="line">sex.text = <span class="string">&apos;33&apos;</span></div><div class="line">name2 = ET.SubElement(new_xml,<span class="string">&quot;name&quot;</span>,attrib={<span class="string">&quot;enrolled&quot;</span>:<span class="string">&quot;no&quot;</span>})</div><div class="line">age = ET.SubElement(name2,<span class="string">&quot;age&quot;</span>)</div><div class="line">age.text = <span class="string">&apos;19&apos;</span></div><div class="line"> </div><div class="line">et = ET.ElementTree(new_xml) <span class="comment">#&#x751F;&#x6210;&#x6587;&#x6863;&#x5BF9;&#x8C61;</span></div><div class="line">et.write(<span class="string">&quot;test.xml&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>,xml_declaration=<span class="keyword">True</span>)</div><div class="line"> </div><div class="line">ET.dump(new_xml) <span class="comment">#&#x6253;&#x5370;&#x751F;&#x6210;&#x7684;&#x683C;&#x5F0F;</span></div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -559,7 +560,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -570,7 +571,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -581,7 +582,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

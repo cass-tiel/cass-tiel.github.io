@@ -646,6 +646,7 @@
 <li><a href="https://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="external">DaoCloud &#x52A0;&#x901F;&#x5668;</a></li>
 </ul>
 <h2 id="&#x66F4;&#x6362;&#x65B9;&#x5F0F;-3"><a href="#&#x66F4;&#x6362;&#x65B9;&#x5F0F;-3" class="headerlink" title="&#x66F4;&#x6362;&#x65B9;&#x5F0F;"></a>&#x66F4;&#x6362;&#x65B9;&#x5F0F;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /etc/docker</div><div class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">&apos;EOF&apos;</span></div><div class="line">{</div><div class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://uss7pbj4.mirror.aliyuncs.com&quot;</span>]</div><div class="line">}</div><div class="line">EOF</div><div class="line">sudo systemctl daemon-reload</div><div class="line">sudo systemctl restart docker</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -774,7 +775,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -785,7 +786,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -796,7 +797,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -435,6 +435,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> hmac</div><div class="line"></div><div class="line">h = hmac.new(<span class="string">&apos;alvin&apos;</span>.encode(<span class="string">&apos;utf8&apos;</span>))</div><div class="line">h.update(<span class="string">&apos;hello&apos;</span>.encode(<span class="string">&apos;utf8&apos;</span>))</div><div class="line">print(h.hexdigest())</div><div class="line"><span class="comment">#320df9832eab4c038b6c1d7ed73a5940</span></div></pre></td></tr></table></figure>
 <p>&#x6CE8;&#x610F;&#xFF01;&#x6CE8;&#x610F;&#xFF01;&#x6CE8;&#x610F;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#&#x8981;&#x60F3;&#x4FDD;&#x8BC1;hmac&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x4E00;&#x81F4;&#xFF0C;&#x5FC5;&#x987B;&#x4FDD;&#x8BC1;&#xFF1A;</span></div><div class="line"><span class="comment">#1:hmac.new&#x62EC;&#x53F7;&#x5185;&#x6307;&#x5B9A;&#x7684;&#x521D;&#x59CB;key&#x4E00;&#x6837;</span></div><div class="line"><span class="comment">#2:&#x65E0;&#x8BBA;update&#x591A;&#x5C11;&#x6B21;&#xFF0C;&#x6821;&#x9A8C;&#x7684;&#x5185;&#x5BB9;&#x7D2F;&#x52A0;&#x5230;&#x4E00;&#x8D77;&#x662F;&#x4E00;&#x6837;&#x7684;&#x5185;&#x5BB9;</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> hmac</div><div class="line"></div><div class="line">h1=hmac.new(<span class="string">b&apos;egon&apos;</span>)</div><div class="line">h1.update(<span class="string">b&apos;hello&apos;</span>)</div><div class="line">h1.update(<span class="string">b&apos;world&apos;</span>)</div><div class="line">print(h1.hexdigest())</div><div class="line"></div><div class="line">h2=hmac.new(<span class="string">b&apos;egon&apos;</span>)</div><div class="line">h2.update(<span class="string">b&apos;helloworld&apos;</span>)</div><div class="line">print(h2.hexdigest())</div><div class="line"></div><div class="line">h3=hmac.new(<span class="string">b&apos;egonhelloworld&apos;</span>)</div><div class="line">print(h3.hexdigest())</div><div class="line"></div><div class="line"><span class="string">&apos;&apos;&apos;</span></div><div class="line">f1bf38d054691688f89dcd34ac3c27f2</div><div class="line">f1bf38d054691688f89dcd34ac3c27f2</div><div class="line">bcca84edd9eeb86f30539922b28f3981</div><div class="line">&apos;&apos;&apos;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -555,7 +556,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -566,7 +567,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -577,7 +578,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

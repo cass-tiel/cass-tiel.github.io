@@ -474,6 +474,7 @@ os.popen*          &amp;#x2013;&amp;#">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"></div><div class="line">obj = subprocess.Popen([<span class="string">&quot;python&quot;</span>], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)</div><div class="line">obj.stdin.write(<span class="string">&apos;print 1 \n &apos;</span>)</div><div class="line">obj.stdin.write(<span class="string">&apos;print 2 \n &apos;</span>)</div><div class="line">obj.stdin.write(<span class="string">&apos;print 3 \n &apos;</span>)</div><div class="line">obj.stdin.write(<span class="string">&apos;print 4 \n &apos;</span>)</div><div class="line"></div><div class="line">out_error_list = obj.communicate()</div><div class="line"><span class="keyword">print</span> out_error_list</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"></div><div class="line">obj = subprocess.Popen([<span class="string">&quot;python&quot;</span>], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)</div><div class="line">out_error_list = obj.communicate(<span class="string">&apos;print &quot;hello&quot;&apos;</span>)</div><div class="line"><span class="keyword">print</span> out_error_list</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span>  subprocess</div><div class="line"></div><div class="line"><span class="string">&apos;&apos;&apos;</span></div><div class="line">sh-3.2# ls /Users/egon/Desktop |grep txt$</div><div class="line">mysql.txt</div><div class="line">tt.txt</div><div class="line">&#x4E8B;&#x7269;.txt</div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line">res1=subprocess.Popen(<span class="string">&apos;ls /Users/jieli/Desktop&apos;</span>,shell=<span class="keyword">True</span>,stdout=subprocess.PIPE)</div><div class="line">res=subprocess.Popen(<span class="string">&apos;grep txt$&apos;</span>,shell=<span class="keyword">True</span>,stdin=res1.stdout,</div><div class="line">                 stdout=subprocess.PIPE)</div><div class="line"></div><div class="line">print(res.stdout.read().decode(<span class="string">&apos;utf-8&apos;</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#&#x7B49;&#x540C;&#x4E8E;&#x4E0A;&#x9762;,&#x4F46;&#x662F;&#x4E0A;&#x9762;&#x7684;&#x4F18;&#x52BF;&#x5728;&#x4E8E;,&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x6D41;&#x53EF;&#x4EE5;&#x548C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x6D41;&#x4EA4;&#x4E92;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x722C;&#x866B;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x7136;&#x540E;&#x4EA4;&#x7ED9;grep</span></div><div class="line">res1=subprocess.Popen(<span class="string">&apos;ls /Users/jieli/Desktop |grep txt$&apos;</span>,shell=<span class="keyword">True</span>,stdout=subprocess.PIPE)</div><div class="line">print(res1.stdout.read().decode(<span class="string">&apos;utf-8&apos;</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#windows&#x4E0B;:</span></div><div class="line"><span class="comment"># dir | findstr &apos;test*&apos;</span></div><div class="line"><span class="comment"># dir | findstr &apos;txt$&apos;</span></div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line">res1=subprocess.Popen(<span class="string">r&apos;dir C:\Users\Administrator\PycharmProjects\test\&#x51FD;&#x6570;&#x5907;&#x8BFE;&apos;</span>,shell=<span class="keyword">True</span>,stdout=subprocess.PIPE)</div><div class="line">res=subprocess.Popen(<span class="string">&apos;findstr test*&apos;</span>,shell=<span class="keyword">True</span>,stdin=res1.stdout,</div><div class="line">                 stdout=subprocess.PIPE)</div><div class="line"></div><div class="line">print(res.stdout.read().decode(<span class="string">&apos;gbk&apos;</span>)) <span class="comment">#subprocess&#x4F7F;&#x7528;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x9ED8;&#x8BA4;&#x7F16;&#x7801;&#xFF0C;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x4E3A;bytes&#x7C7B;&#x578B;&#xFF0C;&#x5728;windows&#x4E0B;&#x9700;&#x8981;&#x7528;gbk&#x89E3;&#x7801;</span></div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -596,7 +597,7 @@ os.popen*          &amp;#x2013;&amp;#">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +608,7 @@ os.popen*          &amp;#x2013;&amp;#">
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -618,7 +619,7 @@ os.popen*          &amp;#x2013;&amp;#">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
