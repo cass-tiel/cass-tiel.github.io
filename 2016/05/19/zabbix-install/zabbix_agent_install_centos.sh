@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ver="3.2.1"
+ver="3.4.8"
 if [ ! -z $1 ]; then
     ver="$1"
 fi
@@ -69,6 +69,7 @@ LogRemoteCommands=1
 RefreshActiveChecks=60
 Server=${zabbix_server_ip}
 ServerActive=${zabbix_server_ip}
+HostMetadataItem=system.uname
 ListenPort=10050
 StartAgents=5
 AllowRoot=1
