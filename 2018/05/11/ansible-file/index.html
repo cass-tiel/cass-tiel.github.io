@@ -54,7 +54,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ansible," />
 
 
 
@@ -70,16 +70,16 @@
 
 
 
-<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta name="description" content="&amp;#x6458;&amp;#x8981;ansible file&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x53C2;&amp;#x6570;&amp;#x4EE5;&amp;#x53CA;&amp;#x7B80;&amp;#x5355;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ansible-file">
+<meta property="og:title" content="ansible-file模块使用">
 <meta property="og:url" content="http://c.isme.pub/2018/05/11/ansible-file/index.html">
 <meta property="og:site_name" content="Casstiel">
-<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;ansible file&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x53C2;&amp;#x6570;&amp;#x4EE5;&amp;#x53CA;&amp;#x7B80;&amp;#x5355;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
 <meta property="og:updated_time" content="2018-05-11T06:19:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ansible-file">
-<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta name="twitter:title" content="ansible-file模块使用">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;ansible file&amp;#x6A21;&amp;#x5757;&amp;#x7684;&amp;#x53C2;&amp;#x6570;&amp;#x4EE5;&amp;#x53CA;&amp;#x7B80;&amp;#x5355;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">
 
 
 
@@ -114,7 +114,7 @@
 
 
 
-  <title>ansible-file | Casstiel</title>
+  <title>ansible-file模块使用 | Casstiel</title>
   
 
 
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ansible-file</h1>
+          <h1 class="post-title" itemprop="name headline">ansible-file模块使用</h1>
         
 
         <div class="post-meta">
@@ -353,6 +353,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">ansible</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -385,8 +407,83 @@
       
 
       
-        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">file&#x6A21;&#x5757;</div><div class="line">&#x5728;&#x4E4B;&#x524D;ansible&#x547D;&#x4EE4;&#x884C;&#x7684;&#x65F6;&#x5019;&#x6709;copy&#x6A21;&#x5757;&#xFF0C;&#x5728;playbook&#x7684;&#x65F6;&#x4EE3;&#x81EA;&#x7136;&#x4E5F;&#x6709;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x6587;&#x4EF6;&#x7684;&#x62F7;&#x8D1D;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x4E2A;&#x65F6;&#x4EE3;&#x5B83;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x90A3;&#x4E48;&#x7B80;&#x5355;&#x3002;</div><div class="line"></div><div class="line">&#x6765;&#x81EA;&#x5B98;&#x65B9;&#x7684;&#x89E3;&#x91CA;&#xFF1A;</div><div class="line"></div><div class="line">file&#x6A21;&#x5757;&#x5B83;&#x5305;&#x542B;&#x4E86;&#x6587;&#x4EF6;&#x3001;&#x6587;&#x4EF6;&#x5939;&#x3001;&#x8D85;&#x7EA7;&#x94FE;&#x63A5;&#x7C7B;&#x7684;&#x521B;&#x7ACB;&#x3001;&#x62F7;&#x8D1D;&#x3001;&#x79FB;&#x52A8;&#x3001;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x3002;</div><div class="line"></div><div class="line">&#x5E38;&#x7528;&#x53C2;&#x6570;</div><div class="line">&#x53C2;&#x6570;&#x540D;	&#x662F;&#x5426;&#x5FC5;&#x987B;	&#x9ED8;&#x8BA4;&#x503C;	&#x9009;&#x9879;	&#x8BF4;&#x660E;</div><div class="line">follow	no	no	yes/no	&#x5982;&#x679C;&#x539F;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x662F;link&#xFF0C;&#x62F7;&#x8D1D;&#x540E;&#x4F9D;&#x65E7;&#x662F;link</div><div class="line">force	no	no	yes/no	&#x5F3A;&#x5236;&#x6267;&#x884C;&#xFF0C;&#x6CA1;&#x8BF4;&#x7684;</div><div class="line">group	no			&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7FA4;&#x7EC4;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</div><div class="line">mode	no			&#x7B49;&#x540C;&#x4E8E;chmod&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4E3A;&#x201C;u+rwx or u=rw,g=r,o=r&#x201D;</div><div class="line">owner	no			&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</div><div class="line">path	yes			&#x76EE;&#x6807;&#x8DEF;&#x5F84;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;dest,name&#x4EE3;&#x66FF;</div><div class="line">src	yes			&#x5F85;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;/&#x6587;&#x4EF6;&#x5939;&#x7684;&#x539F;&#x59CB;&#x4F4D;&#x7F6E;&#x3002;</div><div class="line">state	no	file	file/link/directory/hard/touch/absent	file&#x4EE3;&#x8868;&#x62F7;&#x8D1D;&#x540E;&#x662F;&#x6587;&#x4EF6;&#xFF1B;link&#x4EE3;&#x8868;&#x6700;&#x7EC8;&#x662F;&#x4E2A;&#x8F6F;&#x94FE;&#x63A5;&#xFF1B;directory&#x4EE3;&#x8868;&#x6587;&#x4EF6;&#x5939;&#xFF1B;hard&#x4EE3;&#x8868;&#x786C;&#x94FE;&#x63A5;&#xFF1B;touch&#x4EE3;&#x8868;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF1B;absent&#x4EE3;&#x8868;&#x5220;&#x9664;</div><div class="line">&#x6848;&#x4F8B;</div><div class="line"># &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x7EC4;&#x3001;&#x4EBA;&#x3001;&#x6743;&#x9650;&#x3002;</div><div class="line">- file: path=/etc/foo.conf owner=foo group=foo mode=0644</div><div class="line"># &#x64CD;&#x4F5C;&#x94FE;&#x63A5;&#x7684;&#x6848;&#x4F8B;</div><div class="line">- file: src=/file/to/link/to dest=/path/to/symlink owner=foo group=foo state=link</div><div class="line">#&#x53C2;&#x6570;&#x5316;&#x6848;&#x4F8B;</div><div class="line">- file: src=/tmp/{{ item.path }} dest={{ item.dest }} state=link</div><div class="line">  with_items:</div><div class="line">    - { path: &apos;x&apos;, dest: &apos;y&apos; }</div><div class="line">    - { path: &apos;z&apos;, dest: &apos;k&apos; }</div><div class="line"></div><div class="line"># &#x4F7F;&#x7528;touch&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#x5E76;&#x5B9A;&#x4E49;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u=rw,g=r,o=r&quot;</div><div class="line"></div><div class="line"># touch&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u+rw,g-wx,o-rwx&quot;</div><div class="line">&#x5982;&#x4F55;&#xFF1F;&#x662F;&#x5426;&#x8DDF;copy&#x5F88;&#x76F8;&#x4F3C;&#xFF1F;</div></pre></td></tr></table></figure>
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>ansible file&#x6A21;&#x5757;&#x7684;&#x53C2;&#x6570;&#x4EE5;&#x53CA;&#x7B80;&#x5355;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</p>
+<a id="more"></a>
+<h2 id="file"><a href="#file" class="headerlink" title="file"></a>file</h2><p>&#x5728;&#x4E4B;&#x524D;ansible&#x547D;&#x4EE4;&#x884C;&#x7684;&#x65F6;&#x5019;&#x6709;copy&#x6A21;&#x5757;&#xFF0C;&#x5728;playbook&#x7684;&#x65F6;&#x4EE3;&#x81EA;&#x7136;&#x4E5F;&#x6709;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x6587;&#x4EF6;&#x7684;&#x62F7;&#x8D1D;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x4E2A;&#x65F6;&#x4EE3;&#x5B83;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x90A3;&#x4E48;&#x7B80;&#x5355;&#x3002;</p>
+<p>&#x6765;&#x81EA;&#x5B98;&#x65B9;&#x7684;&#x89E3;&#x91CA;&#xFF1A;</p>
+<blockquote>
+<p>file&#x6A21;&#x5757;&#x5B83;&#x5305;&#x542B;&#x4E86;&#x6587;&#x4EF6;&#x3001;&#x6587;&#x4EF6;&#x5939;&#x3001;&#x8D85;&#x7EA7;&#x94FE;&#x63A5;&#x7C7B;&#x7684;&#x521B;&#x7ACB;&#x3001;&#x62F7;&#x8D1D;&#x3001;&#x79FB;&#x52A8;&#x3001;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x3002;</p>
+</blockquote>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;</th>
+<th style="text-align:center">&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">follow</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5982;&#x679C;&#x539F;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x662F;link&#xFF0C;&#x62F7;&#x8D1D;&#x540E;&#x4F9D;&#x65E7;&#x662F;link</td>
+</tr>
+<tr>
+<td style="text-align:center">force</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5F3A;&#x5236;&#x6267;&#x884C;&#xFF0C;&#x6CA1;&#x8BF4;&#x7684;</td>
+</tr>
+<tr>
+<td style="text-align:center">group</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7FA4;&#x7EC4;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</td>
+</tr>
+<tr>
+<td style="text-align:center">mode</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7B49;&#x540C;&#x4E8E;chmod&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4E3A;&#x201C;u+rwx or u=rw,g=r,o=r&#x201D;</td>
+</tr>
+<tr>
+<td style="text-align:center">owner</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</td>
+</tr>
+<tr>
+<td style="text-align:center">path</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x76EE;&#x6807;&#x8DEF;&#x5F84;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;dest,name&#x4EE3;&#x66FF;</td>
+</tr>
+<tr>
+<td style="text-align:center">src</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x5F85;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;/&#x6587;&#x4EF6;&#x5939;&#x7684;&#x539F;&#x59CB;&#x4F4D;&#x7F6E;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">file</td>
+<td style="text-align:center">file/link/directory/hard/touch/absent</td>
+<td style="text-align:center">file&#x4EE3;&#x8868;&#x62F7;&#x8D1D;&#x540E;&#x662F;&#x6587;&#x4EF6;&#xFF1B;link&#x4EE3;&#x8868;&#x6700;&#x7EC8;&#x662F;&#x4E2A;&#x8F6F;&#x94FE;&#x63A5;&#xFF1B;directory&#x4EE3;&#x8868;&#x6587;&#x4EF6;&#x5939;&#xFF1B;hard&#x4EE3;&#x8868;&#x786C;&#x94FE;&#x63A5;&#xFF1B;touch&#x4EE3;&#x8868;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF1B;absent&#x4EE3;&#x8868;&#x5220;&#x9664;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x4F8B;&#x5B50;"><a href="#&#x4F8B;&#x5B50;" class="headerlink" title="&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"># &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x7EC4;&#x3001;&#x4EBA;&#x3001;&#x6743;&#x9650;&#x3002;</div><div class="line">- file: path=/etc/foo.conf owner=foo group=foo mode=0644</div><div class="line"># &#x64CD;&#x4F5C;&#x94FE;&#x63A5;&#x7684;&#x6848;&#x4F8B;</div><div class="line">- file: src=/file/to/link/to dest=/path/to/symlink owner=foo group=foo state=link</div><div class="line">#&#x53C2;&#x6570;&#x5316;&#x6848;&#x4F8B;</div><div class="line">- file: src=/tmp/{{ item.path }} dest={{ item.dest }} state=link</div><div class="line">  with_items:</div><div class="line">    - { path: &apos;x&apos;, dest: &apos;y&apos; }</div><div class="line">    - { path: &apos;z&apos;, dest: &apos;k&apos; }</div><div class="line"></div><div class="line"># &#x4F7F;&#x7528;touch&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#x5E76;&#x5B9A;&#x4E49;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u=rw,g=r,o=r&quot;</div><div class="line"></div><div class="line"># touch&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u+rw,g-wx,o-rwx&quot;</div><div class="line"></div><div class="line"> - name: link Zabbix Agent Link</div><div class="line">   #shell: ln -s {{ install_dir }}/zabbix-{{ zabbix_version }} {{ zabbix_dir }}</div><div class="line">   file:</div><div class="line">    src: &quot;{{ install_dir }}/zabbix-{{ zabbix_version }}&quot;</div><div class="line">    dest: &quot;{{ zabbix_dir }}&quot;</div><div class="line">    owner: root</div><div class="line">    group: root</div><div class="line">    state: link</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -400,6 +497,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag"># ansible</a>
+          
+        </div>
       
 
       
@@ -499,7 +602,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -510,7 +613,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -521,7 +624,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -569,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#file"><span class="nav-number">1.1.</span> <span class="nav-text">file</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.1.2.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

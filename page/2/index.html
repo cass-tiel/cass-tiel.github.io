@@ -299,6 +299,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/05/07/strace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/07/strace/" itemprop="url">使用strace查故障</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T14:50:15+08:00">
+                2018-05-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-07T14:50:15+08:00">
+                2018-05-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p><a href="http://www.hokstad.com/5-simple-ways-to-troubleshoot-using-strace">&#x539F;&#x6587;&#x5730;&#x5740;</a></p>
+</blockquote>
+<h1 id="&#x4EC0;&#x4E48;&#x662F;strace"><a href="#&#x4EC0;&#x4E48;&#x662F;strace" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;strace?"></a>&#x4EC0;&#x4E48;&#x662F;strace?</h1><p>strace&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x8DDF;&#x8E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x6267;&#x884C;&#x3002;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x4ECE;&#x5934;&#x5230;&#x5C3E;&#x8DDF;&#x8E2A;binary&#x7684;&#x6267;&#x884C;&#xFF0C;&#x7136;&#x540E;&#x4EE5;&#x4E00;&#x884C;&#x6587;&#x672C;&#x8F93;&#x51FA;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x3002;</p>
+<h2 id="&#x5176;&#x5B9E;&#x5B83;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x66F4;&#x591A;&#xFF1A;"><a href="#&#x5176;&#x5B9E;&#x5B83;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x66F4;&#x591A;&#xFF1A;" class="headerlink" title="&#x5176;&#x5B9E;&#x5B83;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x66F4;&#x591A;&#xFF1A;"></a>&#x5176;&#x5B9E;&#x5B83;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x66F4;&#x591A;&#xFF1A;</h2><ul>
+<li>&#x53EF;&#x4EE5;&#x5BF9;&#x7279;&#x5B9A;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6216;&#x8005;&#x51E0;&#x7EC4;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;</li>
+<li>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7EDF;&#x8BA1;&#x7279;&#x5B9A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x8C03;&#x7528;&#x6B21;&#x6570;&#x3001;&#x8017;&#x8D39;&#x7684;&#x65F6;&#x95F4;&#x3001;&#x6210;&#x529F;&#x548C;&#x5931;&#x8D25;&#x7684;&#x6B21;&#x6570;&#x6765;&#x914D;&#x7F6E;(profile)&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x4F7F;&#x7528;I</li>
+<li>&#x8DDF;&#x8E2A;&#x53D1;&#x9001;&#x7ED9;&#x8FDB;&#x7A0B;&#x7684;&#x4FE1;&#x53F7;&#x91CF;</li>
+<li>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;pid&#x9644;&#x7740;(attach)&#x5230;&#x4EFB;&#x4F55;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5176;&#x5B83;Unix&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x7C7B;&#x4F3C;&#x4E8E;&#x201D;truss&#x201D;&#x3002;&#x5176;&#x5B83;&#x66F4;&#x590D;&#x6742;&#x7684;&#x662F;Sun&#x7684;Dtrace.</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/07/strace/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/05/04/systemd-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1768,164 +1914,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/03/16/system-operating/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Casstiel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Casstiel">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/16/system-operating/" itemprop="url">操作系统发展史</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T09:25:54+08:00">
-                2018-03-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-16T09:25:54+08:00">
-                2018-03-16
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x672C;&#x6587;&#x8F6C;&#x81EA;&#x7F51;&#x7EDC;&#xFF0C;&#x7B80;&#x8FF0;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x53D1;&#x5C55;&#x53F2;&#x3002;</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/16/system-operating/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1976,7 +1964,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1987,7 +1975,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1998,7 +1986,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
