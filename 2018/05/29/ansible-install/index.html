@@ -495,7 +495,40 @@ ansib">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Run the command if the specified file does not exist.</div><div class="line">ansible -i hosts all -m command -a &quot;/usr/bin/make_database.sh arg1 arg2 creates=/path/to/database&quot;</div></pre></td></tr></table></figure>
 <p>&#x5229;&#x7528;creates&#x53C2;&#x6570;&#xFF0C;&#x5224;&#x65AD;/path/to/database&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF0C;&#x5B58;&#x5728;&#x5C31;&#x8DF3;&#x8FC7;command&#x547D;&#x4EE4;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x5C31;&#x6267;&#x884C;command&#x547D;&#x4EE4;&#x3002;</p>
 <h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><p>&#x8FD9;&#x4E2A;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x795E;&#x5947;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x5B83;&#x4E5F;&#x662F;ansible&#x7684;&#x6838;&#x5FC3;&#x6A21;&#x5757;&#x4E4B;&#x4E00;&#x3002;&#x5B83;&#x8DDF;command&#x6A21;&#x5757;&#x4E00;&#x6837;&#x8D1F;&#x8D23;&#x5728;&#x88AB;ansible&#x63A7;&#x5236;&#x7684;&#x8282;&#x70B9;&#xFF08;&#x670D;&#x52A1;&#x5668;&#xFF09;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x884C;&#x3002;&#x5B83;&#x4E0E;command&#x6A21;&#x5757;&#x6709;&#x7740;&#x76F8;&#x4F3C;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4E5F;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x770B;&#x5B8C;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x5C06;&#x544A;&#x8BC9;&#x4F60;&#x7B54;&#x6848;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>parameter    required    default    choices    comments<br>chdir    no            &#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x8FD0;&#x884C;shell&#x4E4B;&#x524D;cd&#x5230;&#x67D0;&#x4E2A;&#x76EE;&#x5F55;<br>creates    no            &#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x5219;&#x4E0D;&#x8FD0;&#x884C;shell<br>removes    no            &#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x4E0D;&#x8FD0;&#x884C;shell</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">parameter</th>
+<th style="text-align:center">required</th>
+<th style="text-align:center">default</th>
+<th style="text-align:center">choices</th>
+<th style="text-align:center">comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">chdir</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x8FD0;&#x884C;shell&#x4E4B;&#x524D;cd&#x5230;&#x67D0;&#x4E2A;&#x76EE;&#x5F55;</td>
+</tr>
+<tr>
+<td style="text-align:center">creates</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x5219;&#x4E0D;&#x8FD0;&#x884C;shell</td>
+</tr>
+<tr>
+<td style="text-align:center">removes</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8DDF;command&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x4E0D;&#x8FD0;&#x884C;shell</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-1"><a href="#&#x6848;&#x4F8B;-1" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><p>&#x8BA9;&#x6240;&#x6709;&#x8282;&#x70B9;&#x8FD0;&#x884C;somescript.sh&#x5E76;&#x628A;log&#x8F93;&#x51FA;&#x5230;somelog.txt&#x3002;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ansible -i hosts all -m shell <span class="_">-a</span> <span class="string">&quot;sh somescript.sh &gt;&gt; somelog.txt&quot;</span></div></pre></td></tr></table></figure>
 <p>&#x5148;&#x8FDB;&#x5165;somedir/ &#xFF0C;&#x518D;&#x5728;somedir/&#x76EE;&#x5F55;&#x4E0B;&#x8BA9;&#x6240;&#x6709;&#x8282;&#x70B9;&#x8FD0;&#x884C;somescript.sh&#x5E76;&#x628A;log&#x8F93;&#x51FA;&#x5230;somelog.txt&#x3002;</p>
@@ -503,16 +536,330 @@ ansib">
 <p>&#x4F53;&#x9A8C;shell&#x548C;command&#x7684;&#x533A;&#x522B;,&#x5148;cd&#x5230;&#x67D0;&#x4E2A;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x6267;&#x884C;condifgure&#x7136;&#x540E;,&#x7F16;&#x8BD1;&#xFF0C;&#x7136;&#x540E;&#x5B89;&#x88C5;&#x3002;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ansible -i hosts all -m shell <span class="_">-a</span> <span class="string">&quot;./configure &amp;&amp; make &amp;&amp; make insatll&quot;</span> <span class="built_in">chdir</span>=/xxx/yyy/</div></pre></td></tr></table></figure>
 <h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><p>&#x7528;&#x4E8E;&#x5305;&#x7BA1;&#x7406;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-1"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-1" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;&#x503C;    &#x53C2;&#x6570;&#x8BF4;&#x660E;<br>conf_file    &#x4E0D;            &#x8BBE;&#x5B9A;&#x8FDC;&#x7A0B;yum&#x6267;&#x884C;&#x65F6;&#x6240;&#x4F9D;&#x8D56;&#x7684;yum&#x914D;&#x7F6E;&#x6587;&#x4EF6;<br>disable_gpg_check    &#x4E0D;    No    Yes/No    &#x5728;&#x5B89;&#x88C5;&#x5305;&#x524D;&#x68C0;&#x67E5;&#x5305;&#xFF0C;&#x53EA;&#x4F1A;&#x5F71;&#x54CD;state&#x53C2;&#x6570;&#x4E3A;present&#x6216;&#x8005;latest&#x7684;&#x65F6;&#x5019;<br>list    No            &#x53EA;&#x80FD;&#x7531;ansible&#x8C03;&#x7528;&#xFF0C;&#x4E0D;&#x652F;&#x6301;playbook&#xFF0C;&#x8FD9;&#x4E2A;&#x5E72;&#x5565;&#x7684;&#x5927;&#x5BB6;&#x90FD;&#x61C2;<br>name    Yes            &#x4F60;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x5305;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x4E5F;&#x80FD;&#x5982;&#x6B64;&#x4F7F;&#x7528;name=python=2.7&#x5B89;&#x88C5;python2.7<br>state    no    present    present/latest/absent    &#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x5B89;&#x88C5;&#x5305;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#xFF0C;present/latest&#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x5305;&#xFF0C;absent&#x7528;&#x4E8E;remove&#x5B89;&#x88C5;&#x5305;<br>update_cache    no    no    yes/no    &#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x5305;&#x524D;&#x6267;&#x884C;&#x66F4;&#x65B0;list,&#x53EA;&#x4F1A;&#x5F71;&#x54CD;state&#x53C2;&#x6570;&#x4E3A;present/latest&#x7684;&#x65F6;&#x5019;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-1"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-1" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">conf_file</td>
+<td style="text-align:center">&#x4E0D;</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8BBE;&#x5B9A;&#x8FDC;&#x7A0B;yum&#x6267;&#x884C;&#x65F6;&#x6240;&#x4F9D;&#x8D56;&#x7684;yum&#x914D;&#x7F6E;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td style="text-align:center">disable_gpg_check</td>
+<td style="text-align:center">&#x4E0D;</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes/No</td>
+<td style="text-align:center">&#x5728;&#x5B89;&#x88C5;&#x5305;&#x524D;&#x68C0;&#x67E5;&#x5305;&#xFF0C;&#x53EA;&#x4F1A;&#x5F71;&#x54CD;state&#x53C2;&#x6570;&#x4E3A;present&#x6216;&#x8005;latest&#x7684;&#x65F6;&#x5019;</td>
+</tr>
+<tr>
+<td style="text-align:center">list</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x53EA;&#x80FD;&#x7531;ansible&#x8C03;&#x7528;&#xFF0C;&#x4E0D;&#x652F;&#x6301;playbook&#xFF0C;&#x8FD9;&#x4E2A;&#x5E72;&#x5565;&#x7684;&#x5927;&#x5BB6;&#x90FD;&#x61C2;</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x4F60;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x5305;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x4E5F;&#x80FD;&#x5982;&#x6B64;&#x4F7F;&#x7528;name=python=2.7&#x5B89;&#x88C5;python2.7</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">present</td>
+<td style="text-align:center">present/latest/absent</td>
+<td style="text-align:center">&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x5B89;&#x88C5;&#x5305;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#xFF0C;present/latest&#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x5305;&#xFF0C;absent&#x7528;&#x4E8E;remove&#x5B89;&#x88C5;&#x5305;</td>
+</tr>
+<tr>
+<td style="text-align:center">update_cache</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x5305;&#x524D;&#x6267;&#x884C;&#x66F4;&#x65B0;list,&#x53EA;&#x4F1A;&#x5F71;&#x54CD;state&#x53C2;&#x6570;&#x4E3A;present/latest&#x7684;&#x65F6;&#x5019;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-2"><a href="#&#x6848;&#x4F8B;-2" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- name: &#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;apache</div><div class="line">  yum: name=httpd state=latest</div><div class="line"></div><div class="line">- name: &#x79FB;&#x9664;apache</div><div class="line">  yum: name=httpd state=absent</div><div class="line"></div><div class="line">- name: &#x5B89;&#x88C5;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7248;&#x672C;&#x7684;apache</div><div class="line">  yum: name=httpd-2.2.29-1.4.amzn1 state=present</div><div class="line"></div><div class="line">- name: &#x5347;&#x7EA7;&#x6240;&#x6709;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</div><div class="line">  yum: name=* state=latest</div><div class="line"></div><div class="line">- name: &#x4ECE;&#x4E00;&#x4E2A;&#x8FDC;&#x7A0B;yum&#x4ED3;&#x5E93;&#x5B89;&#x88C5;nginx</div><div class="line">  yum: name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present</div><div class="line"></div><div class="line">- name: &#x4ECE;&#x672C;&#x5730;&#x4ED3;&#x5E93;&#x5B89;&#x88C5;nginx</div><div class="line">  yum: name=/usr/<span class="built_in">local</span>/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present</div><div class="line"></div><div class="line">- name: &#x5B89;&#x88C5;&#x6574;&#x4E2A;Development tools&#x76F8;&#x5173;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</div><div class="line">  yum: name=<span class="string">&quot;@Development tools&quot;</span> state=present</div></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- name: Install Base Require Software</div><div class="line">  yum:</div><div class="line">   name: <span class="string">&quot;{{ item }}&quot;</span></div><div class="line">   state: present</div><div class="line">  with_items:</div><div class="line">   - gcc</div><div class="line">   - fping</div><div class="line">  ignore_errors: yes</div></pre></td></tr></table></figure>
 <h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><p>&#x8FD9;&#x4E2A;&#x6A21;&#x5757;&#x662F;ubuntu&#x4F5C;&#x4E3A;&#x8FDC;&#x7AEF;&#x8282;&#x70B9;&#x7684;OS&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7528;&#x7684;&#x6700;&#x591A;&#x7684;&#x3002;Apt&#x662F;&#x5565;&#x5C31;&#x4E0D;&#x591A;&#x8BF4;&#x4E86;&#xFF0C;ubuntu/debian&#x7684;&#x5305;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-2"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-2" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;&#x503C;    &#x53C2;&#x6570;&#x8BF4;&#x660E;<br>cache_valid_time    no            &#x5982;&#x679C;update_cache&#x53C2;&#x6570;&#x8D77;&#x4F5C;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x624D;&#x4F1A;&#x8D77;&#x4F5C;&#x7528;&#x3002;&#x5176;&#x7528;&#x6765;&#x63A7;&#x5236;update_cache&#x7684;&#x6574;&#x4F53;&#x6709;&#x6548;&#x65F6;&#x95F4;<br>deb    no            &#x8FD9;&#x4E2A;&#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x8FDC;&#x7A0B;&#x673A;&#x5668;&#x4E0A;&#x7684;.deb&#x540E;&#x7F00;&#x7684;&#x8F6F;&#x4EF6;&#x5305;<br>default_release    no            &#x7B49;&#x540C;&#x4E8E;apt&#x547D;&#x4EE4;&#x7684;-t&#x9009;&#x9879;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x591A;&#x8BF4;&#x4E86;<br>force    no    no    yes/no    &#x5F3A;&#x5236;&#x6267;&#x884C;apt install/remove<br>install_recommends    no    Ture    yes/no    &#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x8FDC;&#x7A0B;&#x7535;&#x8111;&#x4E0A;&#x662F;&#x5426;&#x53EA;&#x662F;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x8FD8;&#x662F;&#x4E0B;&#x8F7D;&#x540E;&#x5B89;&#x88C5;&#xFF0C;&#x9ED8;&#x8BA4;&#x53C2;&#x6570;&#x4E3A;true,&#x8BBE;&#x7F6E;&#x4E3A;false&#x7684;&#x65F6;&#x5019;&#x5149;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x4E0D;&#x5B89;&#x88C5;<br>name    no            apt&#x8981;&#x4E0B;&#x8F7D;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x540D;&#x5B57;&#xFF0C;&#x652F;&#x6301;name=git=1.6 &#x8FD9;&#x79CD;&#x5236;&#x5B9A;&#x7248;&#x672C;&#x7684;&#x6A21;&#x5F0F;<br>purge    no        yes/no    &#x5982;&#x679C;state&#x53C2;&#x6570;&#x503C;&#x4E3A;absent,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;yes&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x4F1A;&#x5F3A;&#x884C;&#x5E72;&#x51C0;&#x7684;&#x5378;&#x8F7D;<br>state    no    present    latest/absent/present    &#x5B9A;&#x4E49;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#xFF0C;latest&#x65F6;&#x4E3A;&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x8F6F;&#x4EF6;<br>update_cache    no        yes/no    &#x5F53;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;yes&#x7684;&#x65F6;&#x5019;&#x7B49;&#x4E8E;apt-get update<br>upgrade    no    yes    yes/safe/full/dist    &#x5982;&#x679C;&#x53C2;&#x6570;&#x4E3A;yes&#x6216;&#x8005;safe&#xFF0C;&#x7B49;&#x540C;&#x4E8E;apt-get upgrade.&#x5982;&#x679C;&#x662F;full&#x5C31;&#x662F;&#x5B8C;&#x6574;&#x66F4;&#x65B0;&#x3002;&#x5982;&#x679C;&#x662F;dist&#x7B49;&#x4E8E;apt-get dist-upgrade&#x3002;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-2"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-2" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cache_valid_time</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x5982;&#x679C;update_cache&#x53C2;&#x6570;&#x8D77;&#x4F5C;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x624D;&#x4F1A;&#x8D77;&#x4F5C;&#x7528;&#x3002;&#x5176;&#x7528;&#x6765;&#x63A7;&#x5236;update_cache&#x7684;&#x6574;&#x4F53;&#x6709;&#x6548;&#x65F6;&#x95F4;</td>
+</tr>
+<tr>
+<td style="text-align:center">deb</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8FD9;&#x4E2A;&#x7528;&#x4E8E;&#x5B89;&#x88C5;&#x8FDC;&#x7A0B;&#x673A;&#x5668;&#x4E0A;&#x7684;.deb&#x540E;&#x7F00;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</td>
+</tr>
+<tr>
+<td style="text-align:center">default_release</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7B49;&#x540C;&#x4E8E;apt&#x547D;&#x4EE4;&#x7684;-t&#x9009;&#x9879;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x591A;&#x8BF4;&#x4E86;</td>
+</tr>
+<tr>
+<td style="text-align:center">force</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5F3A;&#x5236;&#x6267;&#x884C;apt install/remove</td>
+</tr>
+<tr>
+<td style="text-align:center">install_recommends</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">Ture</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x8FDC;&#x7A0B;&#x7535;&#x8111;&#x4E0A;&#x662F;&#x5426;&#x53EA;&#x662F;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x8FD8;&#x662F;&#x4E0B;&#x8F7D;&#x540E;&#x5B89;&#x88C5;&#xFF0C;&#x9ED8;&#x8BA4;&#x53C2;&#x6570;&#x4E3A;true,&#x8BBE;&#x7F6E;&#x4E3A;false&#x7684;&#x65F6;&#x5019;&#x5149;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x4E0D;&#x5B89;&#x88C5;</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">apt&#x8981;&#x4E0B;&#x8F7D;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x540D;&#x5B57;&#xFF0C;&#x652F;&#x6301;name=git=1.6 &#x8FD9;&#x79CD;&#x5236;&#x5B9A;&#x7248;&#x672C;&#x7684;&#x6A21;&#x5F0F;</td>
+</tr>
+<tr>
+<td style="text-align:center">purge</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5982;&#x679C;state&#x53C2;&#x6570;&#x503C;&#x4E3A;absent,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;yes&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C06;&#x4F1A;&#x5F3A;&#x884C;&#x5E72;&#x51C0;&#x7684;&#x5378;&#x8F7D;</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">present</td>
+<td style="text-align:center">latest/absent/present</td>
+<td style="text-align:center">&#x5B9A;&#x4E49;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#xFF0C;latest&#x65F6;&#x4E3A;&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x8F6F;&#x4EF6;</td>
+</tr>
+<tr>
+<td style="text-align:center">update_cache</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5F53;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;yes&#x7684;&#x65F6;&#x5019;&#x7B49;&#x4E8E;apt-get update</td>
+</tr>
+<tr>
+<td style="text-align:center">upgrade</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">yes/safe/full/dist</td>
+<td style="text-align:center">&#x5982;&#x679C;&#x53C2;&#x6570;&#x4E3A;yes&#x6216;&#x8005;safe&#xFF0C;&#x7B49;&#x540C;&#x4E8E;apt-get upgrade.&#x5982;&#x679C;&#x662F;full&#x5C31;&#x662F;&#x5B8C;&#x6574;&#x66F4;&#x65B0;&#x3002;&#x5982;&#x679C;&#x662F;dist&#x7B49;&#x4E8E;apt-get dist-upgrade&#x3002;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-3"><a href="#&#x6848;&#x4F8B;-3" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x5728;&#x5B89;&#x88C5;foo&#x8F6F;&#x4EF6;&#x5305;&#x524D;&#x66F4;&#x65B0;&#x7136;&#x540E;&#x5B89;&#x88C5;foo</span></div><div class="line">- apt: name=foo update_cache=yes</div><div class="line"></div><div class="line"><span class="comment"># &#x79FB;&#x9664;foo&#x8F6F;&#x4EF6;&#x5305;</span></div><div class="line">- apt: name=foo state=absent</div><div class="line"></div><div class="line"><span class="comment"># &#x5B89;&#x88C5;foo&#x8F6F;&#x4EF6;&#x5305;</span></div><div class="line">- apt: name=foo state=present</div><div class="line"></div><div class="line"><span class="comment"># &#x5B89;&#x88C5;foo 1.0&#x8F6F;&#x4EF6;&#x5305;</span></div><div class="line">- apt: name=foo=1.00 state=present</div><div class="line"></div><div class="line"><span class="comment"># &#x5B89;&#x88C5;nginx&#x6700;&#x65B0;&#x7684;&#x540D;&#x5B57;&#x4E3A;squeeze-backport&#x53D1;&#x5E03;&#x5305;&#xFF0C;&#x5E76;&#x4E14;&#x5B89;&#x88C5;&#x524D;&#x6267;&#x884C;&#x66F4;&#x65B0;</span></div><div class="line">- apt: name=nginx state=latest default_release=squeeze-backports update_cache=yes</div><div class="line"></div><div class="line"><span class="comment"># &#x53EA;&#x4E0B;&#x8F7D;openjdk-6-jdk&#x6700;&#x65B0;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x4E0D;&#x5B89;&#x88C5;</span></div><div class="line">- apt: name=openjdk-6-jdk state=latest install_recommends=no</div><div class="line"></div><div class="line"><span class="comment"># &#x5B89;&#x88C5;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;&#x5230;&#x6700;&#x65B0;&#x7248;&#x672C;</span></div><div class="line">- apt: upgrade=dist</div><div class="line"></div><div class="line"><span class="comment"># &#x66F4;&#x65B0;apt-get&#x7684;list</span></div><div class="line">- apt: update_cache=yes</div><div class="line"></div><div class="line"><span class="comment"># 3600&#x79D2;&#x540E;&#x505C;&#x6B62;update_cache</span></div><div class="line">- apt: update_cache=yes cache_valid_time=3600</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># &#x5B89;&#x88C5;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;/tmp/mypackage.deb&#x8F6F;&#x4EF6;&#x5305;</span></div><div class="line">- apt: deb=/tmp/mypackage.deb</div></pre></td></tr></table></figure>
 <h2 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h2><h2 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h2><p>copy&#x6A21;&#x5757;&#x5728;ansible&#x91CC;&#x7684;&#x89D2;&#x8272;&#x5C31;&#x662F;&#x628A;ansible&#x6267;&#x884C;&#x673A;&#x5668;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x3002;<br>&#x4E0E;fetch&#x6A21;&#x5757;&#x76F8;&#x53CD;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-3"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-3" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;    &#x8BF4;&#x660E;<br>src    no            &#x7528;&#x4E8E;&#x5B9A;&#x4F4D;ansible&#x6267;&#x884C;&#x7684;&#x673A;&#x5668;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x62F7;&#x8D1D;&#x7684;&#x662F;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x90A3;&#x4E48;&#x6587;&#x4EF6;&#x5939;&#x4F1A;&#x6574;&#x4F53;&#x62F7;&#x8D1D;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x5C3E;&#x662F;&#x201D;/&#x201D;,&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x7684;&#x4E1C;&#x897F;&#x88AB;&#x8003;&#x8FC7;&#x53BB;&#x3002;&#x4E00;&#x5207;&#x7684;&#x611F;&#x89C9;&#x5F88;&#x50CF;rsync<br>content    no            &#x7528;&#x6765;&#x66FF;&#x4EE3;src&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x5185;<br>dest    yes            &#x7528;&#x4E8E;&#x5B9A;&#x4F4D;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;src&#x6307;&#x5411;&#x7684;&#x662F;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E5F;&#x5FC5;&#x987B;&#x662F;&#x6307;&#x5411;&#x6587;&#x4EF6;&#x5939;<br>backup    no    no    yes/no    &#x5907;&#x4EFD;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x539F;&#x59CB;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x62F7;&#x8D1D;&#x4E4B;&#x524D;&#x3002;&#x5982;&#x679C;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#x610F;&#x5916;&#xFF0C;&#x539F;&#x59CB;&#x6587;&#x4EF6;&#x8FD8;&#x80FD;&#x4F7F;&#x7528;&#x3002;<br>directory_mode    no            &#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x5939;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BBE;&#x5B9A;&#x540E;&#xFF0C;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x65B0;&#x5EFA;&#x7684;&#x6587;&#x4EF6;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D;&#x3002;&#x800C;&#x8001;&#x65E7;&#x7684;&#x4E0D;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D;<br>follow    no    no    yes/no    &#x5F53;&#x62F7;&#x8D1D;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x6709;link&#x5B58;&#x5728;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x90A3;&#x4E48;&#x62F7;&#x8D1D;&#x8FC7;&#x53BB;&#x7684;&#x4E5F;&#x4F1A;&#x6709;link<br>force    no    yes    yes/no    &#x9ED8;&#x8BA4;&#x4E3A;yes,&#x4F1A;&#x8986;&#x76D6;&#x8FDC;&#x7A0B;&#x7684;&#x5185;&#x5BB9;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x6587;&#x4EF6;&#xFF08;&#x53EF;&#x80FD;&#x6587;&#x4EF6;&#x540D;&#x4E00;&#x6837;&#xFF09;&#x3002;&#x5982;&#x679C;&#x662F;no&#xFF0C;&#x5C31;&#x4E0D;&#x4F1A;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x8FDC;&#x7A0B;&#x6709;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;<br>group    no            &#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7FA4;&#x7EC4;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;<br>mode    no            &#x7B49;&#x540C;&#x4E8E;chmod&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4E3A;&#x201C;u+rwx or u=rw,g=r,o=r&#x201D;<br>owner    no            &#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-3"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-3" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">src</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7528;&#x4E8E;&#x5B9A;&#x4F4D;ansible&#x6267;&#x884C;&#x7684;&#x673A;&#x5668;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x62F7;&#x8D1D;&#x7684;&#x662F;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x90A3;&#x4E48;&#x6587;&#x4EF6;&#x5939;&#x4F1A;&#x6574;&#x4F53;&#x62F7;&#x8D1D;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x5C3E;&#x662F;&#x201D;/&#x201D;,&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x7684;&#x4E1C;&#x897F;&#x88AB;&#x8003;&#x8FC7;&#x53BB;&#x3002;&#x4E00;&#x5207;&#x7684;&#x611F;&#x89C9;&#x5F88;&#x50CF;rsync</td>
+</tr>
+<tr>
+<td style="text-align:center">content</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7528;&#x6765;&#x66FF;&#x4EE3;src&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x5185;</td>
+</tr>
+<tr>
+<td style="text-align:center">dest</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7528;&#x4E8E;&#x5B9A;&#x4F4D;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;src&#x6307;&#x5411;&#x7684;&#x662F;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E5F;&#x5FC5;&#x987B;&#x662F;&#x6307;&#x5411;&#x6587;&#x4EF6;&#x5939;</td>
+</tr>
+<tr>
+<td style="text-align:center">backup</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5907;&#x4EFD;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x539F;&#x59CB;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x62F7;&#x8D1D;&#x4E4B;&#x524D;&#x3002;&#x5982;&#x679C;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#x610F;&#x5916;&#xFF0C;&#x539F;&#x59CB;&#x6587;&#x4EF6;&#x8FD8;&#x80FD;&#x4F7F;&#x7528;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">directory_mode</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x53EA;&#x80FD;&#x7528;&#x4E8E;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x5939;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BBE;&#x5B9A;&#x540E;&#xFF0C;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x65B0;&#x5EFA;&#x7684;&#x6587;&#x4EF6;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D;&#x3002;&#x800C;&#x8001;&#x65E7;&#x7684;&#x4E0D;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D;</td>
+</tr>
+<tr>
+<td style="text-align:center">follow</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x5F53;&#x62F7;&#x8D1D;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x6709;link&#x5B58;&#x5728;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x90A3;&#x4E48;&#x62F7;&#x8D1D;&#x8FC7;&#x53BB;&#x7684;&#x4E5F;&#x4F1A;&#x6709;link</td>
+</tr>
+<tr>
+<td style="text-align:center">force</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x9ED8;&#x8BA4;&#x4E3A;yes,&#x4F1A;&#x8986;&#x76D6;&#x8FDC;&#x7A0B;&#x7684;&#x5185;&#x5BB9;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x6587;&#x4EF6;&#xFF08;&#x53EF;&#x80FD;&#x6587;&#x4EF6;&#x540D;&#x4E00;&#x6837;&#xFF09;&#x3002;&#x5982;&#x679C;&#x662F;no&#xFF0C;&#x5C31;&#x4E0D;&#x4F1A;&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x8FDC;&#x7A0B;&#x6709;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td style="text-align:center">group</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7FA4;&#x7EC4;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</td>
+</tr>
+<tr>
+<td style="text-align:center">mode</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7B49;&#x540C;&#x4E8E;chmod&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4E3A;&#x201C;u+rwx or u=rw,g=r,o=r&#x201D;</td>
+</tr>
+<tr>
+<td style="text-align:center">owner</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x62E5;&#x6709;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-4"><a href="#&#x6848;&#x4F8B;-4" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x628A;/srv/myfiles/foo.conf&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;/etc/foo.conf&#xFF0C;&#x5E76;&#x4E14;&#x5B83;&#x7684;&#x62E5;&#x6709;&#x8005;&#x662F;foo&#xFF0C;&#x62E5;&#x6709;&#x5B83;&#x7684;&#x7FA4;&#x7EC4;&#x662F;foo&#xFF0C;&#x6743;&#x9650;&#x662F;0644</span></div><div class="line">- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=0644</div><div class="line"></div><div class="line"><span class="comment"># &#x8DDF;&#x4E0A;&#x9762;&#x7684;&#x6848;&#x4F8B;&#x4E00;&#x6837;&#xFF0C;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x53EA;&#x662F;&#x6743;&#x9650;&#x7684;&#x5199;&#x6CD5;</span></div><div class="line">- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=<span class="string">&quot;u=rw,g=r,o=r&quot;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6743;&#x9650;&#x7684;&#x5199;&#x6CD5;</span></div><div class="line">- copy: src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=<span class="string">&quot;u+rw,g-wx,o-rwx&quot;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x62F7;&#x8D1D;/mine/ntp.conf&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;/etc/ntp.conf&#xFF0C;&#x5E76;&#x4E14;&#x5907;&#x4EFD;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;/etc/ntp.conf&#x3002;</span></div><div class="line">- copy: src=/mine/ntp.conf dest=/etc/ntp.conf owner=root group=root mode=644 backup=yes</div></pre></td></tr></table></figure>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#x53C2;&#x6570;&#x540D;	&#x53C2;&#x6570;&#x8BF4;&#x660E;	&#x8FD4;&#x56DE;&#x503C;	&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;	&#x6837;&#x4F8B;</div><div class="line">src	&#x4F4D;&#x4E8E;ansible&#x6267;&#x884C;&#x673A;&#x4E0A;&#x7684;&#x4F4D;&#x7F6E;	changed	string	/home/httpd/.ansible/tmp/ansible-tmp-1423796390.97-147729857856000/<span class="built_in">source</span></div><div class="line">backup_file	&#x5C06;&#x539F;&#x6587;&#x4EF6;&#x5907;&#x4EFD;	changed and <span class="keyword">if</span> backup=yes	string	/path/to/file.txt.2015-02-12@22:09~</div><div class="line">uid	&#x5728;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x62E5;&#x6709;&#x8005;&#x7684;ID	success	int	100</div><div class="line">dest	&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x76EE;&#x6807;&#x76EE;&#x5F55;&#x6216;&#x6587;&#x4EF6;	success	string	/path/to/file.txt</div><div class="line">checksum	&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x540E;&#x7684;checksum&#x503C;	success	string	6e642bb8dd5c2e027bf21dd923337cbb4214f827</div><div class="line">md5sum	&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x540E;&#x7684;md5 checksum&#x503C;	when supported	string	2a5aeecc61dc98c4d780b14b330e3282</div><div class="line">state	&#x6267;&#x884C;&#x540E;&#x7684;&#x72B6;&#x6001;	success	string	file</div><div class="line">gid	&#x6267;&#x884C;&#x540E;&#x62E5;&#x6709;&#x6587;&#x4EF6;&#x5939;&#x3001;&#x6587;&#x4EF6;&#x7684;&#x7FA4;&#x7EC4;ID	success	int	100</div><div class="line">mode	&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x7684;&#x6743;&#x9650;	success	string	0644</div><div class="line">owner	&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x6240;&#x6709;&#x8005;&#x7684;&#x540D;&#x5B57;	success	string	httpd</div><div class="line">group	&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x6240;&#x6709;&#x7FA4;&#x7EC4;&#x7684;&#x540D;&#x5B57;	success	string	httpd</div><div class="line">size	&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x5927;&#x5C0F;	success	int	1220</div></pre></td></tr></table></figure>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x503C;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+<th style="text-align:center">&#x8FD4;&#x56DE;&#x503C;</th>
+<th style="text-align:center">&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;</th>
+<th style="text-align:center">&#x6837;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">src</td>
+<td style="text-align:center">&#x4F4D;&#x4E8E;ansible&#x6267;&#x884C;&#x673A;&#x4E0A;&#x7684;&#x4F4D;&#x7F6E;</td>
+<td style="text-align:center">changed</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">/home/httpd/.ansible/tmp/ansible-tmp-1423796390.97-147729857856000/source</td>
+</tr>
+<tr>
+<td style="text-align:center">backup_file</td>
+<td style="text-align:center">&#x5C06;&#x539F;&#x6587;&#x4EF6;&#x5907;&#x4EFD;</td>
+<td style="text-align:center">changed and if backup=yes</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">/path/to/file.txt.2015-02-12@22:09~</td>
+</tr>
+<tr>
+<td style="text-align:center">uid</td>
+<td style="text-align:center">&#x5728;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x62E5;&#x6709;&#x8005;&#x7684;ID</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">dest</td>
+<td style="text-align:center">&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;&#x76EE;&#x6807;&#x76EE;&#x5F55;&#x6216;&#x6587;&#x4EF6;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">/path/to/file.txt</td>
+</tr>
+<tr>
+<td style="text-align:center">checksum</td>
+<td style="text-align:center">&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x540E;&#x7684;checksum&#x503C;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">6e642bb8dd5c2e027bf21dd923337cbb4214f827</td>
+</tr>
+<tr>
+<td style="text-align:center">md5sum</td>
+<td style="text-align:center">&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x540E;&#x7684;md5 checksum&#x503C;</td>
+<td style="text-align:center">when supported</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">2a5aeecc61dc98c4d780b14b330e3282</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x7684;&#x72B6;&#x6001;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">file</td>
+</tr>
+<tr>
+<td style="text-align:center">gid</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x62E5;&#x6709;&#x6587;&#x4EF6;&#x5939;&#x3001;&#x6587;&#x4EF6;&#x7684;&#x7FA4;&#x7EC4;ID</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">mode</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x7684;&#x6743;&#x9650;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">0644</td>
+</tr>
+<tr>
+<td style="text-align:center">owner</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x6240;&#x6709;&#x8005;&#x7684;&#x540D;&#x5B57;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">httpd</td>
+</tr>
+<tr>
+<td style="text-align:center">group</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x6240;&#x6709;&#x7FA4;&#x7EC4;&#x7684;&#x540D;&#x5B57;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">httpd</td>
+</tr>
+<tr>
+<td style="text-align:center">size</td>
+<td style="text-align:center">&#x6267;&#x884C;&#x540E;&#x6587;&#x4EF6;&#x5927;&#x5C0F;</td>
+<td style="text-align:center">success</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">1220</td>
+</tr>
+</tbody>
+</table>
 <h2 id="file"><a href="#file" class="headerlink" title="file"></a>file</h2><p>&#x5728;&#x4E4B;&#x524D;ansible&#x547D;&#x4EE4;&#x884C;&#x7684;&#x65F6;&#x5019;&#x6709;copy&#x6A21;&#x5757;&#xFF0C;&#x5728;playbook&#x7684;&#x65F6;&#x4EE3;&#x81EA;&#x7136;&#x4E5F;&#x6709;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x6587;&#x4EF6;&#x7684;&#x62F7;&#x8D1D;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x4E2A;&#x65F6;&#x4EE3;&#x5B83;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x90A3;&#x4E48;&#x7B80;&#x5355;&#x3002;</p>
 <p>&#x6765;&#x81EA;&#x5B98;&#x65B9;&#x7684;&#x89E3;&#x91CA;&#xFF1A;</p>
 <blockquote>
@@ -582,20 +929,123 @@ ansib">
 <td style="text-align:center">state</td>
 <td style="text-align:center">no</td>
 <td style="text-align:center">file</td>
-<td style="text-align:center">file/link/directory/hard/touch/absent</td>
-<td style="text-align:center">file&#x4EE3;&#x8868;&#x62F7;&#x8D1D;&#x540E;&#x662F;&#x6587;&#x4EF6;&#xFF1B;link&#x4EE3;&#x8868;&#x6700;&#x7EC8;&#x662F;&#x4E2A;&#x8F6F;&#x94FE;&#x63A5;&#xFF1B;directory&#x4EE3;&#x8868;&#x6587;&#x4EF6;&#x5939;&#xFF1B;hard&#x4EE3;&#x8868;&#x786C;&#x94FE;&#x63A5;&#xFF1B;touch&#x4EE3;&#x8868;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF1B;absent&#x4EE3;&#x8868;&#x5220;&#x9664;</td>
+<td style="text-align:center">file/link/directory/<br>hard/touch/absent</td>
+<td style="text-align:center">file&#x4EE3;&#x8868;&#x62F7;&#x8D1D;&#x540E;&#x662F;&#x6587;&#x4EF6;&#xFF1B;<br>link&#x4EE3;&#x8868;&#x6700;&#x7EC8;&#x662F;&#x4E2A;&#x8F6F;&#x94FE;&#x63A5;&#xFF1B;<br>directory&#x4EE3;&#x8868;&#x6587;&#x4EF6;&#x5939;&#xFF1B;<br>hard&#x4EE3;&#x8868;&#x786C;&#x94FE;&#x63A5;&#xFF1B;<br>touch&#x4EE3;&#x8868;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF1B;<br>absent&#x4EE3;&#x8868;&#x5220;&#x9664;</td>
 </tr>
 </tbody>
 </table>
 <h3 id="&#x4F8B;&#x5B50;"><a href="#&#x4F8B;&#x5B50;" class="headerlink" title="&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"># &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x7EC4;&#x3001;&#x4EBA;&#x3001;&#x6743;&#x9650;&#x3002;</div><div class="line">- file: path=/etc/foo.conf owner=foo group=foo mode=0644</div><div class="line"># &#x64CD;&#x4F5C;&#x94FE;&#x63A5;&#x7684;&#x6848;&#x4F8B;</div><div class="line">- file: src=/file/to/link/to dest=/path/to/symlink owner=foo group=foo state=link</div><div class="line">#&#x53C2;&#x6570;&#x5316;&#x6848;&#x4F8B;</div><div class="line">- file: src=/tmp/{{ item.path }} dest={{ item.dest }} state=link</div><div class="line">  with_items:</div><div class="line">    - { path: &apos;x&apos;, dest: &apos;y&apos; }</div><div class="line">    - { path: &apos;z&apos;, dest: &apos;k&apos; }</div><div class="line"></div><div class="line"># &#x4F7F;&#x7528;touch&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#x5E76;&#x5B9A;&#x4E49;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u=rw,g=r,o=r&quot;</div><div class="line"></div><div class="line"># touch&#x4E00;&#x4E2A;&#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;&#x6743;&#x9650;</div><div class="line">- file: path=/etc/foo.conf state=touch mode=&quot;u+rw,g-wx,o-rwx&quot;</div><div class="line"></div><div class="line"> - name: link Zabbix Agent Link</div><div class="line">   #shell: ln -s {{ install_dir }}/zabbix-{{ zabbix_version }} {{ zabbix_dir }}</div><div class="line">   file:</div><div class="line">    src: &quot;{{ install_dir }}/zabbix-{{ zabbix_version }}&quot;</div><div class="line">    dest: &quot;{{ zabbix_dir }}&quot;</div><div class="line">    owner: root</div><div class="line">    group: root</div><div class="line">    state: link</div></pre></td></tr></table></figure>
 <h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p>template&#x4F7F;&#x7528;&#x4E86;Jinjia2&#x683C;&#x5F0F;&#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x6A21;&#x7248;&#xFF0C;&#x8FDB;&#x884C;&#x6587;&#x6863;&#x5185;&#x53D8;&#x91CF;&#x7684;&#x66FF;&#x6362;&#x7684;&#x6A21;&#x5757;&#x3002;&#x5B83;&#x7684;&#x6BCF;&#x6B21;&#x4F7F;&#x7528;&#x90FD;&#x4F1A;&#x88AB;ansible&#x6807;&#x8BB0;&#x4E3A;&#x201D;changed&#x201D;&#x72B6;&#x6001;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-5"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-5" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;    &#x8BF4;&#x660E;<br>backup    no    no    yes/no    &#x5EFA;&#x7ACB;&#x4E2A;&#x5305;&#x62EC;timestamp&#x5728;&#x5185;&#x7684;&#x6587;&#x4EF6;&#x5907;&#x4EFD;&#xFF0C;&#x4EE5;&#x5907;&#x4E0D;&#x65F6;&#x4E4B;&#x9700;.<br>dest    yes            &#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x7528;&#x4E8E;&#x653E;&#x7F6E;template&#x6587;&#x4EF6;&#x3002;<br>group    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x7684;template&#x6587;&#x4EF6;&#x7684;&#x6240;&#x5C5E;&#x7528;&#x6237;&#x7EC4;<br>mode    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;template&#x6587;&#x4EF6;&#x6743;&#x9650;&#x3002;&#x7C7B;&#x4F3C;Linux&#x4E2D;chmod&#x7684;&#x7528;&#x6CD5;<br>owner    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;template&#x6587;&#x4EF6;&#x6240;&#x5C5E;&#x7528;&#x6237;<br>src    yes            &#x672C;&#x5730;Jinjia2&#x6A21;&#x7248;&#x7684;template&#x6587;&#x4EF6;&#x4F4D;&#x7F6E;&#x3002;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-5"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-5" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>backup    no    no    yes/no    &#x5EFA;&#x7ACB;&#x4E2A;&#x5305;&#x62EC;timestamp&#x5728;&#x5185;&#x7684;&#x6587;&#x4EF6;&#x5907;&#x4EFD;&#xFF0C;&#x4EE5;&#x5907;&#x4E0D;&#x65F6;&#x4E4B;&#x9700;.<br>dest    yes            &#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x7528;&#x4E8E;&#x653E;&#x7F6E;template&#x6587;&#x4EF6;&#x3002;<br>group    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x7684;template&#x6587;&#x4EF6;&#x7684;&#x6240;&#x5C5E;&#x7528;&#x6237;&#x7EC4;<br>mode    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;template&#x6587;&#x4EF6;&#x6743;&#x9650;&#x3002;&#x7C7B;&#x4F3C;Linux&#x4E2D;chmod&#x7684;&#x7528;&#x6CD5;<br>owner    no            &#x8BBE;&#x7F6E;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x4E0A;&#x7684;template&#x6587;&#x4EF6;&#x6240;&#x5C5E;&#x7528;&#x6237;<br>src    yes            &#x672C;&#x5730;Jinjia2&#x6A21;&#x7248;&#x7684;template&#x6587;&#x4EF6;&#x4F4D;&#x7F6E;&#x3002;</p>
 <h3 id="&#x6848;&#x4F8B;-5"><a href="#&#x6848;&#x4F8B;-5" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x628A;/mytemplates/foo.j2&#x6587;&#x4EF6;&#x7ECF;&#x8FC7;&#x586B;&#x5199;&#x53C2;&#x6570;&#x540E;&#xFF0C;&#x590D;&#x5236;&#x5230;&#x8FDC;&#x7A0B;&#x8282;&#x70B9;&#x7684;/etc/file.conf&#xFF0C;&#x6587;&#x4EF6;&#x6743;&#x9650;&#x76F8;&#x5173;&#x7565;&#x8FC7;</span></div><div class="line">- template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode=0644</div><div class="line"></div><div class="line"><span class="comment"># &#x8DDF;&#x4E0A;&#x9762;&#x4E00;&#x6837;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x6587;&#x4EF6;&#x6743;&#x9650;&#x8BBE;&#x7F6E;&#x65B9;&#x5F0F;</span></div><div class="line">- template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode=<span class="string">&quot;u=rw,g=r,o=r&quot;</span></div></pre></td></tr></table></figure>
 <h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><p>service&#x6A21;&#x5757;&#x8BF4;&#x767D;&#x4E86;&#xFF0C;&#x5C31;&#x662F;Linux&#x4E0B;&#x7684;service&#x547D;&#x4EE4;&#x3002;&#x4F46;&#x662F;&#x5B83;&#x66F4;&#x7B80;&#x5355;&#x3002;&#x8FD9;&#x4E2A;&#x662F;playbook&#x4E2D;&#x7528;&#x7684;&#x975E;&#x5E38;&#x591A;&#x7684;&#x6A21;&#x5757;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-6"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-6" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;    &#x8BF4;&#x660E;<br>enabled    no        yes/no    &#x542F;&#x52A8;os&#x540E;&#x542F;&#x52A8;&#x5BF9;&#x5E94;service&#x7684;&#x9009;&#x9879;&#x3002;&#x4F7F;&#x7528;service&#x6A21;&#x5757;&#x7684;&#x65F6;&#x5019;&#xFF0C;enabled&#x548C;state&#x81F3;&#x5C11;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x88AB;&#x5B9A;&#x4E49;<br>name    yes            &#x9700;&#x8981;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;service&#x540D;&#x5B57;<br>state    no        stared/stoped/restarted/reloaded    service&#x6700;&#x7EC8;&#x64CD;&#x4F5C;&#x540E;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-6"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-6" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">enabled</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">yes/no</td>
+<td style="text-align:center">&#x542F;&#x52A8;os&#x540E;&#x542F;&#x52A8;&#x5BF9;&#x5E94;service&#x7684;&#x9009;&#x9879;&#x3002;&#x4F7F;&#x7528;service&#x6A21;&#x5757;&#x7684;&#x65F6;&#x5019;&#xFF0C;enabled&#x548C;state&#x81F3;&#x5C11;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x88AB;&#x5B9A;&#x4E49;</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x9700;&#x8981;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;service&#x540D;&#x5B57;</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">stared/stoped/restarted/reloaded</td>
+<td style="text-align:center">service&#x6700;&#x7EC8;&#x64CD;&#x4F5C;&#x540E;&#x7684;&#x72B6;&#x6001;&#x3002;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-6"><a href="#&#x6848;&#x4F8B;-6" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x4E0D;&#x7BA1;&#x5F53;&#x524D;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#xFF0C;&#x542F;&#x52A8;apache</span></div><div class="line">- service: name=httpd state=started</div><div class="line"></div><div class="line"><span class="comment"># &#x4E0D;&#x7BA1;&#x5F53;&#x524D;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#xFF0C;&#x505C;&#x6B62;apache</span></div><div class="line">- service: name=httpd state=stopped</div><div class="line"></div><div class="line"><span class="comment"># &#x4E0D;&#x7BA1;&#x5F53;&#x524D;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#xFF0C;&#x91CD;&#x542F;apache</span></div><div class="line">- service: name=httpd state=restarted</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># &#x7CFB;&#x7EDF;&#x91CD;&#x542F;&#x540E;&#xFF0C;&#x542F;&#x52A8;apache</span></div><div class="line">- service: name=httpd enabled=yes</div></pre></td></tr></table></figure>
 <h2 id="wait-for"><a href="#wait-for" class="headerlink" title="wait_for"></a>wait_for</h2><p>&#x5F53;&#x4F60;&#x5229;&#x7528;service &#x542F;&#x52A8;tomcat&#xFF0C;&#x6216;&#x6570;&#x636E;&#x5E93;&#x540E;&#xFF0C;&#x4ED6;&#x4EEC;&#x771F;&#x7684;&#x542F;&#x6765;&#x4E86;&#x4E48;&#xFF1F;&#x8FD9;&#x4E2A;&#x4F60;&#x662F;&#x5426;&#x60F3;&#x786E;&#x8BA4;&#x4E0B;&#xFF1F;<br>wait_for&#x6A21;&#x5757;&#x5C31;&#x662F;&#x5E72;&#x8FD9;&#x4E2A;&#x7684;&#x3002;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x4E8B;&#x60C5;&#x53D1;&#x751F;&#xFF0C;&#x7136;&#x540E;&#x7EE7;&#x7EED;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x7B49;&#x5F85;&#x67D0;&#x4E2A;&#x7AEF;&#x53E3;&#x88AB;&#x5360;&#x7528;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x505A;&#x4E0B;&#x9762;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x8D85;&#x65F6;&#x540E;&#x505A;&#x53E6;&#x5916;&#x7684;&#x4E8B;&#x3002;</p>
-<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-7"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-7" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><p>&#x53C2;&#x6570;&#x540D;    &#x662F;&#x5426;&#x5FC5;&#x987B;    &#x9ED8;&#x8BA4;&#x503C;    &#x9009;&#x9879;    &#x8BF4;&#x660E;<br>connect_timeout    no    5        &#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x4E8B;&#x60C5;&#x53D1;&#x751F;&#x524D;&#x7B49;&#x5F85;&#x94FE;&#x63A5;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;&#x79D2;<br>delay    no            &#x5EF6;&#x65F6;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x61C2;&#xFF0C;&#x5728;&#x505A;&#x4E0B;&#x4E00;&#x4E2A;&#x4E8B;&#x60C5;&#x524D;&#x5EF6;&#x65F6;&#x591A;&#x5C11;&#x79D2;<br>host    no    127.0.0.1        &#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x6A21;&#x5757;&#x7684;host<br>path    no            &#x5F53;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x4E8E;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x624D;&#x7EE7;&#x7EED;&#x3002;<br>port    no            &#x7AEF;&#x53E3;&#x53F7;&#xFF0C;&#x5982;8080<br>state    no    started    present/started/stopped/absent    &#x5BF9;&#x8C61;&#x662F;&#x7AEF;&#x53E3;&#x7684;&#x65F6;&#x5019;start&#x72B6;&#x6001;&#x4F1A;&#x786E;&#x4FDD;&#x7AEF;&#x53E3;&#x662F;&#x6253;&#x5F00;&#x7684;&#xFF0C;stoped&#x72B6;&#x6001;&#x4F1A;&#x786E;&#x8BA4;&#x7AEF;&#x53E3;&#x662F;&#x5173;&#x95ED;&#x7684;;&#x5BF9;&#x8C61;&#x662F;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;present&#x6216;&#x8005;started&#x4F1A;&#x786E;&#x8BA4;&#x6587;&#x4EF6;&#x662F;&#x5B58;&#x5728;&#x7684;&#xFF0C;&#x800C;absent&#x4F1A;&#x786E;&#x8BA4;&#x6587;&#x4EF6;&#x662F;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x3002;</p>
+<h3 id="&#x5E38;&#x7528;&#x53C2;&#x6570;-7"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;-7" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:center">&#x662F;&#x5426;&#x5FC5;&#x987B;</th>
+<th style="text-align:center">&#x9ED8;&#x8BA4;&#x503C;</th>
+<th style="text-align:center">&#x9009;&#x9879;&#x503C;</th>
+<th style="text-align:center">&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">connect_timeout</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x4E8B;&#x60C5;&#x53D1;&#x751F;&#x524D;&#x7B49;&#x5F85;&#x94FE;&#x63A5;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;&#x79D2;</td>
+</tr>
+<tr>
+<td style="text-align:center">delay</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x5EF6;&#x65F6;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x61C2;&#xFF0C;&#x5728;&#x505A;&#x4E0B;&#x4E00;&#x4E2A;&#x4E8B;&#x60C5;&#x524D;&#x5EF6;&#x65F6;&#x591A;&#x5C11;&#x79D2;</td>
+</tr>
+<tr>
+<td style="text-align:center">host</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">127.0.0.1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x6A21;&#x5757;&#x7684;host</td>
+</tr>
+<tr>
+<td style="text-align:center">path</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x5F53;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x4E8E;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x624D;&#x7EE7;&#x7EED;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">port</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">&#x7AEF;&#x53E3;&#x53F7;&#xFF0C;&#x5982;8080</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">started</td>
+<td style="text-align:center">present/started/<br>stopped/absent</td>
+<td style="text-align:center">&#x5BF9;&#x8C61;&#x662F;&#x7AEF;&#x53E3;&#x7684;&#x65F6;&#x5019;start&#x72B6;&#x6001;&#x4F1A;&#x786E;&#x4FDD;&#x7AEF;&#x53E3;&#x662F;&#x6253;&#x5F00;&#x7684;&#xFF0C;<br>stoped&#x72B6;&#x6001;&#x4F1A;&#x786E;&#x8BA4;&#x7AEF;&#x53E3;&#x662F;&#x5173;&#x95ED;&#x7684;;<br>&#x5BF9;&#x8C61;&#x662F;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;present&#x6216;&#x8005;started&#x4F1A;&#x786E;&#x8BA4;&#x6587;&#x4EF6;&#x662F;&#x5B58;&#x5728;&#x7684;&#xFF0C;<br>&#x800C;absent&#x4F1A;&#x786E;&#x8BA4;&#x6587;&#x4EF6;&#x662F;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x3002;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="&#x6848;&#x4F8B;-7"><a href="#&#x6848;&#x4F8B;-7" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 10&#x79D2;&#x540E;&#x5728;&#x5F53;&#x524D;&#x4E3B;&#x673A;&#x5F00;&#x59CB;&#x68C0;&#x67E5;8000&#x7AEF;&#x53E3;&#xFF0C;&#x76F4;&#x5230;&#x7AEF;&#x53E3;&#x542F;&#x52A8;&#x540E;&#x8FD4;&#x56DE;</span></div><div class="line">- wait_for: port=8000 delay=10</div><div class="line"></div><div class="line"><span class="comment"># &#x68C0;&#x67E5;path=/tmp/foo&#x76F4;&#x5230;&#x6587;&#x4EF6;&#x5B58;&#x5728;&#x540E;&#x7EE7;&#x7EED;</span></div><div class="line">- wait_for: path=/tmp/foo</div><div class="line"></div><div class="line"><span class="comment"># &#x76F4;&#x5230;/var/lock/file.lock&#x79FB;&#x9664;&#x540E;&#x7EE7;&#x7EED;</span></div><div class="line">- wait_for: path=/var/lock/file.lock state=absent</div><div class="line"></div><div class="line"><span class="comment"># &#x76F4;&#x5230;/proc/3466/status&#x79FB;&#x9664;&#x540E;&#x7EE7;&#x7EED;</span></div><div class="line">- wait_for: path=/proc/3466/status state=absent</div></pre></td></tr></table></figure>
 
       
