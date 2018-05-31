@@ -54,7 +54,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="vpc," />
 
 
 
@@ -70,16 +70,16 @@
 
 
 
-<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta name="description" content="&amp;#x6458;&amp;#x8981;vpc&amp;#x8FC1;&amp;#x79FB;&amp;#x5DF2;&amp;#x7ECF;&amp;#x5DF2;&amp;#x7ECF;&amp;#x4E0D;&amp;#x662F;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x4E86;&amp;#xFF0C;&amp;#x8FD9;&amp;#x6B21;&amp;#x7531;&amp;#x4E8E;&amp;#x662F;&amp;#x5168;&amp;#x7A0B;&amp;#x4E00;&amp;#x4E2A;&amp;#x4E">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vpc-build">
+<meta property="og:title" content="阿里云vpc迁移过程整理">
 <meta property="og:url" content="http://c.isme.pub/2018/05/16/vpc-build/index.html">
 <meta property="og:site_name" content="Casstiel">
-<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;vpc&amp;#x8FC1;&amp;#x79FB;&amp;#x5DF2;&amp;#x7ECF;&amp;#x5DF2;&amp;#x7ECF;&amp;#x4E0D;&amp;#x662F;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x4E86;&amp;#xFF0C;&amp;#x8FD9;&amp;#x6B21;&amp;#x7531;&amp;#x4E8E;&amp;#x662F;&amp;#x5168;&amp;#x7A0B;&amp;#x4E00;&amp;#x4E2A;&amp;#x4E">
 <meta property="og:updated_time" content="2018-05-16T07:31:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vpc-build">
-<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x5F85;&amp;#x7EED;&amp;#x3002;&amp;#x3002;&amp;#x3002;">
+<meta name="twitter:title" content="阿里云vpc迁移过程整理">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;vpc&amp;#x8FC1;&amp;#x79FB;&amp;#x5DF2;&amp;#x7ECF;&amp;#x5DF2;&amp;#x7ECF;&amp;#x4E0D;&amp;#x662F;&amp;#x7B2C;&amp;#x4E00;&amp;#x6B21;&amp;#x4E86;&amp;#xFF0C;&amp;#x8FD9;&amp;#x6B21;&amp;#x7531;&amp;#x4E8E;&amp;#x662F;&amp;#x5168;&amp;#x7A0B;&amp;#x4E00;&amp;#x4E2A;&amp;#x4E">
 
 
 
@@ -114,7 +114,7 @@
 
 
 
-  <title>vpc-build | Casstiel</title>
+  <title>阿里云vpc迁移过程整理 | Casstiel</title>
   
 
 
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vpc-build</h1>
+          <h1 class="post-title" itemprop="name headline">阿里云vpc迁移过程整理</h1>
         
 
         <div class="post-meta">
@@ -353,6 +353,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vpc/" itemprop="url" rel="index">
+                    <span itemprop="name">vpc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -385,8 +407,313 @@
       
 
       
-        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br><a id="more"></a></p>
-
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>vpc&#x8FC1;&#x79FB;&#x5DF2;&#x7ECF;&#x5DF2;&#x7ECF;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x4E86;&#xFF0C;&#x8FD9;&#x6B21;&#x7531;&#x4E8E;&#x662F;&#x5168;&#x7A0B;&#x4E00;&#x4E2A;&#x4EBA;&#x4E3B;&#x5BFC;&#x4E0E;&#x5EFA;&#x8BBE;&#xFF0C;&#x56E0;&#x6B64;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;&#x7684;&#x6BD4;&#x8F83;&#x8BE6;&#x7EC6;&#x3002;</p>
+<h2 id="&#x8FC1;&#x79FB;&#x80CC;&#x666F;"><a href="#&#x8FC1;&#x79FB;&#x80CC;&#x666F;" class="headerlink" title="&#x8FC1;&#x79FB;&#x80CC;&#x666F;"></a>&#x8FC1;&#x79FB;&#x80CC;&#x666F;</h2><p>&#x4E91;&#x670D;&#x52A1;&#x662F;&#x76EE;&#x524D;&#x5F88;&#x591A;&#x521B;&#x4E1A;&#x516C;&#x53F8;&#x4EE5;&#x53CA;&#x4E2D;&#x5C0F;&#x516C;&#x53F8;&#x7684;&#x9996;&#x9009;&#x670D;&#x52A1;&#xFF0C;&#x5B83;&#x4E0E;&#x4F20;&#x7EDF;idc&#x76F8;&#x6BD4;&#x6709;&#x5F88;&#x591A;&#x4F18;&#x52BF;&#xFF0C;&#x800C;&#x5F88;&#x591A;&#x516C;&#x53F8;&#x521D;&#x671F;&#x5E76;&#x4E0D;&#x91CD;&#x89C6;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x7684;&#x7EC4;&#x5EFA;&#x4EE5;&#x53CA;&#x8FD0;&#x7EF4;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x901A;&#x5E38;&#x6765;&#x8BF4;&#x5728;&#x5F88;&#x957F;&#x7684;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x91CC;&#xFF0C;&#x90FD;&#x662F;&#x7531;&#x5F00;&#x53D1;&#x6765;&#x5EFA;&#x8BBE;&#x548C;&#x7BA1;&#x7406;&#xFF08;&#x6216;&#x8BB8;&#x4E2D;&#x95F4;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x521D;&#x7EA7;&#x8FD0;&#x7EF4;&#x7684;&#x53C2;&#x4E0E;&#xFF09;&#xFF0C;&#x76F4;&#x5230;&#x4E1A;&#x52A1;&#x4EE5;&#x53CA;&#x6280;&#x672F;&#x56E2;&#x961F;&#x8FBE;&#x5230;&#x4E00;&#x4E2A;&#x89C4;&#x6A21;&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x4F1A;&#x6709;&#x6709;&#x53EF;&#x80FD;&#x6210;&#x719F;&#x7684;&#x8FD0;&#x7EF4;&#x52A0;&#x5165;&#x8FDB;&#x6765;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x8FD0;&#x7EF4;&#x9762;&#x5BF9;&#x7684;&#x5219;&#x662F;&#x4E00;&#x5927;&#x5806;&#x70C2;&#x644A;&#x5B50;&#x3002;</p>
+<a id="more"></a>
+<h2 id="vpc&#x8FC1;&#x79FB;"><a href="#vpc&#x8FC1;&#x79FB;" class="headerlink" title="vpc&#x8FC1;&#x79FB;"></a>vpc&#x8FC1;&#x79FB;</h2><p>&#x4EC0;&#x4E48;&#x662F;vpc&#x8FC1;&#x79FB;&#x5462;&#xFF1F;</p>
+<p>&#x7ECF;&#x5178;&#x7F51;&#x7EDC;&#x8FC1;&#x79FB;&#x5230;&#x79C1;&#x6709;&#x7F51;&#x7EDC;</p>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x8981;vpc&#x8FC1;&#x79FB;<br>&#x4EC0;&#x4E48;&#x4EBA;&#x4F1A;&#x95EE;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;</p>
+<h1 id="vpc&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;"><a href="#vpc&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;" class="headerlink" title="vpc&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;"></a>vpc&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;</h1><ul>
+<li>&#x521B;&#x5EFA;vpc&#x4EE5;&#x53CA;&#x4EA4;&#x6362;&#x673A;&#xFF08;172.16.0.0/12&#xFF09;<ul>
+<li>BaseManager &#x8FD0;&#x7EF4;&#x57FA;&#x7840;&#x7BA1;&#x7406;&#x73AF;&#x5883;&#xFF08;172.16.1.0/21&#xFF09;<ul>
+<li>manager:172.16.1.0/24:&#x5B50;&#x7F51;21&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2e&#x533A;&#xFF09;</li>
+</ul>
+</li>
+<li>TestDev &#x6D4B;&#x8BD5;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF08;172.16.8.0/21&#xFF09;<ul>
+<li>Dev:172.16.8.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2e&#x533A;&#xFF09;<ul>
+<li>test_dev:172.16.9.0/24&#xFF08;&#x534E;&#x5317;2a&#x533A;&#xFF09;</li>
+<li>test_dev:172.16.10.0/24&#xFF08;&#x534E;&#x5317;2b&#x533A;&#xFF09;</li>
+</ul>
+</li>
+<li>Test:172.16.12.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2e&#x533A;&#xFF09;</li>
+</ul>
+</li>
+<li>ProdGamma &#x7EBF;&#x4E0A;&#x751F;&#x4EA7;&#x73AF;&#x5883;(172.17.1.0/16)<ul>
+<li>Gamma:172.17.1.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2e&#x533A;&#xFF09;</li>
+<li>prod_gamma:172.17.2.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2b&#x533A;&#xFF09;</li>
+<li>prod_gamma:172.17.3.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2a&#x533A;&#xFF09;</li>
+<li>Prod:172.16.8.0/24:&#x5B50;&#x7F51;22&#x4F4D;&#x9884;&#x7559;&#xFF08;&#x534E;&#x5317;2e&#x533A;&#xFF09;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x521B;&#x5EFA;nat&#x7F51;&#x5173;<ul>
+<li>BaseManager</li>
+<li>&#x7ED1;&#x5B9A;&#x5F39;&#x6027;ip&#x5230;BaseManager</li>
+<li>TestDev</li>
+<li>&#x7ED1;&#x5B9A;&#x5F39;&#x6027;ip&#x5230;TestDev</li>
+<li>ProdGamma</li>
+<li>&#x7ED1;&#x5B9A;&#x5F39;&#x6027;ip&#x5230;ProdGamma</li>
+</ul>
+</li>
+<li>&#x521B;&#x5EFA;vpc&#x4E92;&#x8054;&#x9AD8;&#x901F;&#x901A;&#x9053;<ul>
+<li>BaseManager to TestDev</li>
+<li>BaseManager to ProdGamma</li>
+</ul>
+</li>
+<li>&#x521B;&#x5EFA;&#x5B89;&#x5168;&#x7EC4;<ul>
+<li>BaseManager</li>
+<li>TestDev</li>
+<li>ProdGamma</li>
+</ul>
+</li>
+<li>&#x521B;&#x5EFA;&#x6A21;&#x677F;&#x673A;</li>
+</ul>
+<h1 id="&#x6A21;&#x677F;&#x673A;&#x6784;&#x5EFA;&#x8BB0;&#x5F55;"><a href="#&#x6A21;&#x677F;&#x673A;&#x6784;&#x5EFA;&#x8BB0;&#x5F55;" class="headerlink" title="&#x6A21;&#x677F;&#x673A;&#x6784;&#x5EFA;&#x8BB0;&#x5F55;"></a>&#x6A21;&#x677F;&#x673A;&#x6784;&#x5EFA;&#x8BB0;&#x5F55;</h1><ul>
+<li>&#x7CFB;&#x7EDF; Centos7.4</li>
+<li>&#x5347;&#x7EA7;kernel </li>
+<li>&#x5185;&#x6838;&#x7248;&#x672C; 3.10.0-693.21.1.el7.x86_64</li>
+<li>yum update</li>
+<li>&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x73AF;&#x5883;&#x5E93;&#xFF08;gcc cmake lib&#x7B49;&#xFF09;</li>
+<li>&#x4FEE;&#x6539;sshd&#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;9555</li>
+<li>&#x5173;&#x95ED;iptables</li>
+<li>&#x4FEE;&#x6539;history&#x8BB0;&#x5F55;&#xFF0C;&#x663E;&#x793A;&#x65F6;&#x95F4;&#x6233;</li>
+<li>&#x5F00;&#x542F;rc.local&#x8FD0;&#x884C;</li>
+<li>&#x9ED8;&#x8BA4;&#x670D;&#x52A1;&#x5B89;&#x88C5;<ul>
+<li>nginx 1.13.10</li>
+<li>java 8u77</li>
+<li>pinpoint 1.6.0</li>
+<li>mongo-client</li>
+<li>mysql-client</li>
+<li>python 3.6.5</li>
+</ul>
+</li>
+<li>&#x670D;&#x52A1;&#x90E8;&#x7F72;&#x89C4;&#x8303;<ul>
+<li>&#x91CD;&#x8981;&#x670D;&#x52A1;&#x5168;&#x90E8;&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;&#xFF0C;&#x666E;&#x901A;&#x670D;&#x52A1;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;yum&#x5B89;&#x88C5;</li>
+<li>&#x670D;&#x52A1;&#x5B9E;&#x9645;&#x76EE;&#x5F55;&#x5B89;&#x88C5;&#x5230;/usr/local/product&#xFF0C;&#x5E26;&#x7248;&#x672C;&#x53F7;</li>
+<li>&#x670D;&#x52A1;&#x8F6F;&#x94FE;&#x5230;/usr/local/&#x4E0B;&#xFF0C;&#x4E0D;&#x5E26;&#x7248;&#x672C;&#x53F7;</li>
+<li>&#x670D;&#x52A1;&#x65E5;&#x5FD7;&#x7EDF;&#x4E00;&#x5230;/data/logs/&#x670D;&#x52A1;&#x76EE;&#x5F55;&#x4E0B;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x547D;&#x4EE4;&#x3001;&#x811A;&#x672C;&#x653E;&#x5230;/usr/local/sbin&#x4E0B;</li>
+</ul>
+</li>
+<li>&#x4FEE;&#x6539;pinpoint&#x90E8;&#x7F72;&#x4F4D;&#x7F6E;&#xFF0C;&#x4FEE;&#x6539;pinpoint&#x65E5;&#x5FD7;&#x4F4D;&#x7F6E;</li>
+<li><p>crontab&#x6DFB;&#x52A0;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">* python pip&#x6E90; &#x9ED8;&#x8BA4;&#x6A21;&#x5757;</div><div class="line">* &#x5B89;&#x88C5;supervisord&#xFF0C;&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</div><div class="line">* &#x5B89;&#x88C5;&#x963F;&#x91CC;&#x4E91;&#x65E5;&#x5FD7;&#x670D;&#x52A1;Logtail&#xFF0C;&#x672A;&#x8BBE;&#x7F6E;&#x5F00;&#x673A;&#x81EA;&#x542F;</div><div class="line">* &#x7531;&#x4E8E;&#x6240;&#x6709;&#x673A;&#x5668;&#x9700;&#x8981;&#x4F7F;&#x7528;jumpserver&#x5821;&#x5792;&#x673A;&#x767B;&#x5F55;&#xFF0C;&#x56E0;&#x6B64;&#x65E0;&#x9700;&#x5F00;&#x542F;rsyslog&#x65E5;&#x5FD7;&#x5BA1;&#x8BA1;</div><div class="line">* &#x6CE8;&#x91CA;sudoers&#x4E2D;tty&#x914D;&#x7F6E;</div><div class="line">* nginx&#x6DFB;&#x52A0;80&#x7AEF;&#x53E3;&#x9ED8;&#x8BA4;&#x5065;&#x5EB7;&#x68C0;&#x67E5;&#x865A;&#x62DF;&#x4E3B;&#x673A;</div><div class="line">* &#x6DFB;&#x52A0;jumpserver&#x9ED8;&#x8BA4;&#x7528;&#x6237;</div><div class="line">	* jumproot</div><div class="line">	* jumpread&#xFF0C;&#x6DFB;&#x52A0;&#x5230;services&#x7EC4;</div><div class="line">* &#x6574;&#x5408;zabbix-agent</div><div class="line">* &#x5B89;&#x88C5;```yum install -y fping nmap iperf iftop iotop ifstat iptraf</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>tuned&#x4F18;&#x5316;profile</p>
+</li>
+<li>&#x5173;&#x95ED;NetworkManager</li>
+<li>&#x5F00;&#x542F;&#x4E86;dns&#x7F13;&#x5B58;&#x670D;&#x52A1;&#xFF08;nscd&#xFF09;</li>
+<li>&#x6DFB;&#x52A0;&#x6E05;&#x7406;&#x65E5;&#x5FD7;&#x811A;&#x672C;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">	* /data/logs/*/*.log</div><div class="line">	* &#x4FDD;&#x7559;7&#x5929;</div><div class="line">	* &#x624B;&#x52A8;&#x6267;&#x884C;</div><div class="line">* &#x6574;&#x5408;&#x4E86;nas&#x76D8;&#x6302;&#x8F7D;&#xFF0C;&#x624B;&#x52A8;&#x6267;&#x884C;&#xFF08;&#x963F;&#x91CC;&#x4E91;&#x6587;&#x4EF6;&#x5B58;&#x50A8;nas&#x670D;&#x52A1;&#xFF09;</div><div class="line">	* nas&#x5B58;&#x50A8;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x6302;&#x8F7D;&#x70B9;&#x624D;&#x80FD;&#x4F7F;&#x7528;</div><div class="line">	* &#x6302;&#x8F7D;&#x70B9;&#x7ED1;&#x5B9A;vpc&#x4E0B;&#x7684;&#x4EA4;&#x6362;&#x673A;</div><div class="line">	* nas&#x5B58;&#x50A8;&#x76EE;&#x524D;&#x53EA;&#x652F;&#x6301;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x4E24;&#x4E2A;&#x6302;&#x8F7D;&#x70B9;</div><div class="line">	* &#x9ED8;&#x8BA4;&#x7ED1;&#x5B9A;&#x5728;BaseManager&#x4E0B;172.16.1.0/24&#x4EA4;&#x6362;&#x673A;&#x4E0A;</div><div class="line">	* &#x6709;&#x5176;&#x4ED6;&#x533A;&#x57DF;&#x9700;&#x8981;&#x53EF;&#x4E34;&#x65F6;&#x8BBE;&#x7F6E;&#x6302;&#x8F7D;&#x70B9;</div><div class="line">	* ansible&#x673A;&#x5668;&#x914D;&#x7F6E;&#x8BA1;&#x5212;&#x4EFB;&#x52A1;&#xFF0C;&#x6BCF;&#x5929;&#x51CC;&#x6668;4&#x70B9;umount&#x6240;&#x6709;&#x673A;&#x5668;&#x7684;&#x6302;&#x8F7D;&#x4EE5;&#x514D;&#x9020;&#x6210;&#x6027;&#x80FD;&#x635F;&#x5931;</div><div class="line">* &#x5347;&#x7EA7;openssl&#x3001;openssl-devel</div><div class="line">* &#x4F7F;&#x7528;trash-cli&#x91CD;&#x65B0;&#x5B9A;&#x4E49;rm&#x547D;&#x4EE4;&#xFF0C;&#x9632;&#x6B62;&#x8BEF;&#x5220;&#xFF0C;&#x6E05;&#x7406;&#x56DE;&#x6536;&#x7AD9;&#x7B49;</div><div class="line">	* rm! &#x7CFB;&#x7EDF;&#x539F;rm&#x547D;&#x4EE4;</div><div class="line">	* rm | RM | r &#x6587;&#x4EF6;&#x79FB;&#x81F3;&#x56DE;&#x6536;&#x7AD9;</div><div class="line">	* rl &#x5217;&#x51FA;&#x56DE;&#x6536;&#x7AD9;&#x6587;&#x4EF6;</div><div class="line">	* ul &#x6062;&#x590D;&#x5220;&#x9664;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x76EE;&#x524D;&#x53EA;&#x80FD;&#x5355;&#x4E2A;&#x6062;&#x590D;</div><div class="line">	* cleartrash ```$days``` &#x6E05;&#x7406;```$days```&#x4E4B;&#x524D;&#x7684;&#x56DE;&#x6536;&#x7AD9;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x52A0;&#x65F6;&#x95F4;&#x5168;&#x90E8;&#x6E05;&#x9664;</div><div class="line">* &#x66F4;&#x65B0;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B89;&#x88C5;redis&#x5BA2;&#x6237;&#x7AEF;&#x3001;&#x66F4;&#x65B0;&#x5185;&#x6838;&#x7248;&#x672C;</div><div class="line">* &#x66F4;&#x65B0;&#x521D;&#x59CB;&#x5316;&#x914D;&#x7F6E;&#x4E0D;&#x540C;&#x73AF;&#x5883;pinpoint&#x7684;ip&#x914D;&#x7F6E;</div><div class="line"></div><div class="line">## root&#x5BC6;&#x7801;&#x8BBE;&#x7F6E;</div><div class="line"></div><div class="line">* root&#x7528;&#x6237;&#x6DFB;&#x52A0;ansible&#x7BA1;&#x7406;&#x5BC6;&#x94A5;</div><div class="line">* &#x7981;&#x6B62;root&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</div></pre></td></tr></table></figure></li>
+</ul>
+<p>npik!chuM}vesB11sx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## services &#x521B;&#x5EFA;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#x7528;&#x6237;&#x4EE5;&#x53CA;&#x7528;&#x6237;&#x7EC4;</div><div class="line"></div><div class="line">* services&#x6DFB;&#x52A0;&#x53D1;&#x5E03;&#x7BA1;&#x7406;key</div><div class="line"></div><div class="line">``` bash</div><div class="line">root@pts/0 $id services</div><div class="line">uid=1000(services) gid=1000(services) groups=1000(services)</div></pre></td></tr></table></figure></p>
+<h2 id="devops-&#x521B;&#x5EFA;&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;&#x8D26;&#x53F7;"><a href="#devops-&#x521B;&#x5EFA;&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;&#x8D26;&#x53F7;" class="headerlink" title="devops &#x521B;&#x5EFA;&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;&#x8D26;&#x53F7;"></a>devops &#x521B;&#x5EFA;&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;&#x8D26;&#x53F7;</h2><ul>
+<li>&#x5BC6;&#x7801;&#xFF1A;vsNdne3m-&gt;dqiImuq6</li>
+<li>devops&#x7528;&#x6237;&#x6DFB;&#x52A0;key&#x4E0E;root&#x7528;&#x6237;&#x4E00;&#x81F4;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root@pts/0 <span class="variable">$id</span> devops</div><div class="line">uid=1001(devops) gid=1001(devops) groups=1001(devops),10(wheel)</div><div class="line"></div><div class="line">root@pts/0 <span class="variable">$grep</span> wheel /etc/sudoers</div><div class="line">%wheel	ALL=(ALL)	NOPASSWD: ALL</div></pre></td></tr></table></figure>
+<h2 id="bashrc"><a href="#bashrc" class="headerlink" title="bashrc"></a>bashrc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Moss bashrc - START</span></div><div class="line"><span class="built_in">alias</span> vi=<span class="string">&apos;vim&apos;</span></div><div class="line"><span class="built_in">alias</span> grep=<span class="string">&apos;grep --color&apos;</span></div><div class="line"><span class="built_in">alias</span> dstat=<span class="string">&apos;dstat -cdlmnpsy&apos;</span></div><div class="line"><span class="built_in">alias</span> d=<span class="string">&apos;dirs -v | head -10&apos;</span></div><div class="line"><span class="built_in">alias</span> l=<span class="string">&apos;ls -lah --color&apos;</span></div><div class="line"><span class="built_in">alias</span> la=<span class="string">&apos;ls -lAh --color&apos;</span></div><div class="line"><span class="built_in">alias</span> ll=<span class="string">&apos;ls -lh --color&apos;</span></div><div class="line"><span class="built_in">alias</span> ls=<span class="string">&apos;ls --color&apos;</span></div><div class="line"><span class="built_in">alias</span> lsa=<span class="string">&apos;ls -lah --color&apos;</span></div><div class="line"><span class="built_in">alias</span> rm!=<span class="string">&apos;/bin/rm -vi&apos;</span></div><div class="line"><span class="built_in">alias</span> rm=trash-put</div><div class="line"><span class="built_in">alias</span> RM=trash-put</div><div class="line"><span class="built_in">alias</span> r=trash-put</div><div class="line"><span class="built_in">alias</span> rl=trash-list</div><div class="line"><span class="built_in">alias</span> ur=trash-restore</div><div class="line"><span class="built_in">alias</span> cleartrash=trash-empty</div><div class="line"><span class="built_in">export</span> PROMPT_COMMAND=<span class="string">&apos;RETRN_VAL=$?;logger -p authpriv.debug &quot;$(who -u am i): $(history 1 | sed &quot;s/^[ ]*[0-9]+[ ]*//&quot; ) [$PWD][$RETRN_VAL]&quot;&apos;</span></div><div class="line"><span class="comment"># Moss bashrc - END</span></div></pre></td></tr></table></figure>
+<h2 id="vimrc"><a href="#vimrc" class="headerlink" title="vimrc"></a>vimrc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">&quot; Moss vimrc - START</span></div><div class="line">syntax on</div><div class="line">set background=dark</div><div class="line">set showcmd</div><div class="line">set nobackup</div><div class="line">set ts=4</div><div class="line">set tabstop=4</div><div class="line">set shiftwidth=4</div><div class="line">set softtabstop=4</div><div class="line">set paste</div><div class="line">set laststatus=2</div><div class="line">set statusline=%F%m%r%h%w\ [FORMAT=%{&amp;ff}]\ [TYPE=%Y]\ [POS=%l/%L,%v][%p%%]</div><div class="line">&quot; Moss vimrc - END</div></pre></td></tr></table></figure>
+<h2 id="profile-d"><a href="#profile-d" class="headerlink" title="profile.d"></a>profile.d</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># history</div><div class="line">export HISTTIMEFORMAT=&apos;%Y-%m-%d %H:%M:%S | &apos;</div><div class="line">export HISTSIZE=50000</div><div class="line"># path</div><div class="line">export PATH=&quot;/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/nginx/sbin:/usr/local/python/bin&quot;</div></pre></td></tr></table></figure>
+<h2 id="tcp&#x3001;&#x5185;&#x6838;&#x53C2;&#x6570;&#x4F18;&#x5316;"><a href="#tcp&#x3001;&#x5185;&#x6838;&#x53C2;&#x6570;&#x4F18;&#x5316;" class="headerlink" title="tcp&#x3001;&#x5185;&#x6838;&#x53C2;&#x6570;&#x4F18;&#x5316;"></a>tcp&#x3001;&#x5185;&#x6838;&#x53C2;&#x6570;&#x4F18;&#x5316;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"># Moss sysctl - START</div><div class="line">net.ipv4.ip_forward = 0</div><div class="line">net.ipv4.conf.default.accept_source_route = 0</div><div class="line">kernel.core_uses_pid = 1</div><div class="line">kernel.msgmnb = 65536</div><div class="line">kernel.msgmax = 65536</div><div class="line">net.ipv4.tcp_timestamps                            = 1</div><div class="line">net.core.somaxconn                                 = 4096</div><div class="line">net.core.rmem_default                              = 262144</div><div class="line">net.core.wmem_default                              = 262144</div><div class="line">net.core.rmem_max                                  = 16777216</div><div class="line">net.core.wmem_max                                  = 16777216</div><div class="line">net.ipv4.tcp_rmem                                  = 4096 4096 16777216</div><div class="line">net.ipv4.tcp_wmem                                  = 4096 4096 16777216</div><div class="line">net.ipv4.tcp_mem                                   = 786432 2097152 3145728</div><div class="line">net.ipv4.tcp_max_syn_backlog                       = 16384</div><div class="line">net.core.netdev_max_backlog                        = 20000</div><div class="line">net.ipv4.tcp_fin_timeout                           = 10</div><div class="line">net.ipv4.tcp_tw_reuse                              = 1</div><div class="line">net.ipv4.tcp_tw_recycle                            = 0</div><div class="line">#net.netfilter.nf_conntrack_tcp_timeout_established = 1200</div><div class="line">#net.netfilter.nf_conntrack_max                     = 1048576</div><div class="line">net.ipv4.tcp_max_tw_buckets = 180000</div><div class="line">net.ipv4.ip_local_port_range                       = 1024 65535</div><div class="line">vm.swappiness                                      = 0</div><div class="line">vm.dirty_ratio                                     = 20</div><div class="line">vm.dirty_background_ratio                          = 10</div><div class="line">vm.overcommit_memory                               = 1</div><div class="line"># Moss sysctl - END</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x9650;&#x5236;"><a href="#&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x9650;&#x5236;" class="headerlink" title="&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x9650;&#x5236;"></a>&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x9650;&#x5236;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root soft nofile 65535</div><div class="line">root hard nofile 65535</div><div class="line">* soft nofile 65535</div><div class="line">* hard nofile 65535</div></pre></td></tr></table></figure>
+<h2 id="&#x4FEE;&#x6539;PS1"><a href="#&#x4FEE;&#x6539;PS1" class="headerlink" title="&#x4FEE;&#x6539;PS1"></a>&#x4FEE;&#x6539;PS1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PS1=&quot;\033[1;33m\H \033[1;32m[\w] \033[1;35m\D{%Y-%m-%d %T}\n\[\033[1;36m\]\u@pts/\l \[\033[00m\]$&quot;</div><div class="line">``` </div><div class="line"></div><div class="line">## rc.local</div></pre></td></tr></table></figure>
+<p>/usr/lib/systemd/system/rc-local.service<br>/etc/rc.d/rc.local<br>systemctl enable rc-local<br>systemctl start rc-local<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## java</div><div class="line"></div><div class="line">* &#x7248;&#x672C;&#xFF1A;8u77</div><div class="line">* /usr/java/jdk1.8.0_77/jre/lib/security&#x4E0B;&#x9762;&#x4E24;&#x4E2A;jar&#x5305;&#x66FF;&#x6362;</div><div class="line">* java.security&#x4E2D;random&#x6539;&#x6210;urandom &#x5F85;&#x786E;&#x8BA4;</div></pre></td></tr></table></figure></p>
+<p>export JAVA_HOME=&#x201D;/usr/local/jdk8&#x201D;<br>export JRE_HOME=&#x201D;$JAVA_HOME/jre&#x201D;<br>export PATH=&#x201D;$PATH:$JAVA_HOME/bin&#x201D;<br>export CLASSPATH=./:$JAVA_HOME/lib:$JRE_HOME/lib<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## &#x91CD;&#x65B0;&#x5B9A;&#x4E49;rm&#x547D;&#x4EE4;</div><div class="line"></div><div class="line">* &#x4F7F;&#x7528;trash-cli&#x91CD;&#x65B0;&#x5B9A;&#x4E49;rm</div><div class="line">* &#x5B98;&#x65B9;&#x6587;&#x6863;&#x6682;&#x65F6;&#x4E0D;&#x5EFA;&#x8BAE;&#x8FD9;&#x4E48;&#x505A;</div></pre></td></tr></table></figure></p>
+<p>trash-put    &#x5C06;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x79FB;&#x5165;&#x56DE;&#x6536;&#x7AD9;<br>trash-empty    &#x6E05;&#x7A7A;&#x56DE;&#x6536;&#x7AD9;<br>trash-list    &#x5217;&#x51FA;&#x56DE;&#x6536;&#x7AD9;&#x4E2D;&#x7684;&#x6587;&#x4EF6;<br>restore-trash    &#x8FD8;&#x539F;&#x56DE;&#x6536;&#x7AD9;&#x4E2D;&#x7684;&#x6587;&#x4EF6;<br>trash-rm    &#x5220;&#x9664;&#x56DE;&#x6536;&#x7AD9;&#x4E2D;&#x7684;&#x5355;&#x4E2A;&#x6587;&#x4EF6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">``` bash</div><div class="line">alias rm!=&apos;/bin/rm -vi&apos;</div><div class="line">alias rm=trash-put</div><div class="line">alias RM=trash-put</div><div class="line">alias r=trash-put</div><div class="line">alias rl=trash-list</div><div class="line">alias ur=trash-restore</div><div class="line">alias cleartrash=trash-empty</div></pre></td></tr></table></figure></p>
+<h3 id="&#x4EE5;&#x4E0B;&#x5E9F;&#x5F03;"><a href="#&#x4EE5;&#x4E0B;&#x5E9F;&#x5F03;" class="headerlink" title="&#x4EE5;&#x4E0B;&#x5E9F;&#x5F03;"></a>&#x4EE5;&#x4E0B;&#x5E9F;&#x5F03;</h3><ul>
+<li>&#x6DFB;&#x52A0;&#x56DE;&#x6536;&#x7AD9;</li>
+<li>&#x9632;&#x6B62;&#x8BEF;&#x5220;</li>
+<li>&#x6E05;&#x7406;&#x56DE;&#x6536;&#x7AD9;&#x529F;&#x80FD;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">TRASH=<span class="string">&quot;/data/.trash&quot;</span></div><div class="line">mkdir -p /data/.trash  </div><div class="line"><span class="built_in">alias</span> rm!=<span class="string">&apos;/bin/rm -vi&apos;</span></div><div class="line"><span class="built_in">alias</span> rm=trash</div><div class="line"><span class="built_in">alias</span> r=trash</div><div class="line"><span class="built_in">alias</span> RM=trash</div><div class="line"><span class="built_in">alias</span> rl=<span class="string">&apos;ls -l /data/.trash&apos;</span></div><div class="line"><span class="built_in">alias</span> ur=undelfile</div><div class="line">  </div><div class="line"><span class="function"><span class="title">undelfile</span></span>()</div><div class="line">{</div><div class="line">    mv -i /data/.trash/<span class="variable">$@</span> ./</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="title">trash</span></span>()</div><div class="line">{</div><div class="line">    mv <span class="variable">$@</span> /data/.trash/</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="title">cleartrash</span></span>()</div><div class="line">{</div><div class="line">   <span class="built_in">read</span> -p <span class="string">&quot;clear sure?[n]&quot;</span> confirm</div><div class="line">   [ <span class="variable">$confirm</span> == <span class="string">&apos;y&apos;</span> ] || [ <span class="variable">$confirm</span> == <span class="string">&apos;Y&apos;</span> ] &amp;&amp; /usr/bin/rm -rf /data/.trash/*</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;"><a href="#&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;" class="headerlink" title="&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;"></a>&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;</h2><ul>
+<li>&#x8DEF;&#x5F84;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### system</div><div class="line"></div><div class="line">* &#x7B2C;&#x4E00;&#x6B21;&#x5F00;&#x673A;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x4E3B;&#x673A;&#x540D;</div><div class="line">* &#x518D;&#x6B21;&#x5F00;&#x673A;&#x4E0D;&#x4F1A;&#x91CD;&#x590D;&#x8FD0;&#x884C;</div><div class="line">* &#x53EF;&#x65E0;&#x9650;&#x6B21;&#x624B;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x7B2C;&#x4E00;&#x4F20;&#x53C2;&#x4E3A;hostname&#x6700;&#x540E;&#x4E00;&#x6BB5;&#x4E1A;&#x52A1;&#x540D;</div><div class="line">* &#x963F;&#x91CC;&#x4E91;&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x4E3B;&#x673A;&#x540D;&#x8C8C;&#x4F3C;&#x4F1A;&#x5728;rc.local&#x4E4B;&#x540E;&#x8FD0;&#x884C;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x5F00;&#x673A;&#x540E;&#x624B;&#x52A8;&#x4F20;&#x53C2;&#x8FD0;&#x884C;&#x4E00;&#x6B21;</div><div class="line"></div><div class="line">``` bash</div><div class="line">cat init_system</div><div class="line">#!/bin/bash</div><div class="line"># comment: system init scripts #</div><div class="line"># date: 2018-05-03</div><div class="line"></div><div class="line">if [ ! -z $1 ]; then</div><div class="line">	project=&quot;.$1&quot;</div><div class="line">else</div><div class="line">	[ -f /hostname ] &amp;&amp; exit</div><div class="line">fi</div><div class="line">exist=$(ifconfig | grep -c eth1)</div><div class="line"></div><div class="line">if [ $exist -eq 1 ]; then</div><div class="line">    localip=$(ifconfig eth1 | awk &apos;/inet/{print $2}&apos;)</div><div class="line">	types=&quot;class&quot;</div><div class="line">else</div><div class="line">    localip=$(ifconfig eth0 | awk &apos;/inet/{print $2}&apos;)</div><div class="line">	env=$(echo ${localip} | awk -F&apos;.&apos; &apos;{print $2}&apos;)</div><div class="line">	subnet=$(echo ${localip} | awk -F&apos;.&apos; &apos;{print $3}&apos;)</div><div class="line">	types=&quot;vpc&quot;</div><div class="line">	case $env in</div><div class="line">		&quot;16&quot;)</div><div class="line">    		case $subnet in</div><div class="line">    		    &quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;)</div><div class="line">					region=&quot;manager&quot;</div><div class="line">    		        ;;</div><div class="line">    		    &quot;8&quot;|&quot;9&quot;|&quot;10&quot;|&quot;11&quot;)</div><div class="line">					region=&quot;dev&quot;</div><div class="line">    		        ;;</div><div class="line">    		    &quot;12&quot;|&quot;13&quot;|&quot;14&quot;|&quot;15&quot;)</div><div class="line">					region=&quot;test&quot;</div><div class="line">    		        ;;</div><div class="line">    		    *)</div><div class="line">					region=&quot;other&quot;</div><div class="line">    		        ;;</div><div class="line">    		esac</div><div class="line">			;;</div><div class="line">		&quot;17&quot;)</div><div class="line">    		case $subnet in</div><div class="line">    		    &quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;)</div><div class="line">					region=&quot;gamma&quot;</div><div class="line">    		        ;;</div><div class="line">    		    &quot;8&quot;|&quot;9&quot;|&quot;10&quot;|&quot;11&quot;|&quot;12&quot;|&quot;13&quot;|&quot;14&quot;|&quot;15&quot;)</div><div class="line">					region=&quot;prod&quot;</div><div class="line">    		        ;;</div><div class="line">    		    *)</div><div class="line">					region=&quot;other&quot;</div><div class="line">    		        ;;</div><div class="line">    		esac</div><div class="line">			;;</div><div class="line">    	*)</div><div class="line">			region=&quot;other&quot;</div><div class="line">    	    ;;</div><div class="line">	esac</div><div class="line">fi</div><div class="line"></div><div class="line">ciHostname=&quot;ecs.ali-bj-${types}.${region}.$localip$project&quot;</div><div class="line">hostname ${ciHostname}</div><div class="line">echo ${ciHostname} | tee /etc/hostname /hostname</div><div class="line">sed -i &quot;/127.0.0.1/s/ ecs.*$//&quot; /etc/hosts</div><div class="line">sed -i &quot;/ecs.*/d&quot; /etc/hosts</div><div class="line">flag=$(grep &quot;^${localip} ${ciHostname}&quot; /etc/hosts | wc -l)</div><div class="line">if [ ${flag} -eq 0 ]; then</div><div class="line">	echo ${localip} ${ciHostname} &gt;&gt; /etc/hosts</div><div class="line">fi</div><div class="line">localflag=$(grep &quot;127.0.0.1&quot; /etc/hosts | grep ${ciHostname} | wc -l)</div><div class="line">if [ ${localflag} -eq 0 ]; then</div><div class="line">	sed -i &quot;/127.0.0.1/s/$/ ${ciHostname}/&quot; /etc/hosts</div><div class="line">fi</div></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="disk-db"><a href="#disk-db" class="headerlink" title="disk db"></a>disk db</h3><ul>
+<li>&#x5F00;&#x673A;&#x540E;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6267;&#x884C;</li>
+<li>&#x9ED8;&#x8BA4;&#x521D;&#x59CB;&#x5316;*db&#x78C1;&#x76D8;&#x6302;&#x8F7D;&#x5230;/data&#x76EE;&#x5F55;</li>
+<li>&#x521D;&#x59CB;&#x5316;/data&#x4E0B;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x6743;&#x9650;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">cat init_disk</div><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># comment: *db disk init scripts #</span></div><div class="line"><span class="comment"># date: 2018-05-07</span></div><div class="line"></div><div class="line">partition=$(fdisk <span class="_">-l</span> |grep db | grep Disk | grep dev | tail -n 1 | awk <span class="string">&apos;{print $2}&apos;</span> | sed <span class="_">-e</span> s/://g)</div><div class="line"><span class="built_in">echo</span> <span class="variable">${partition}</span></div><div class="line"><span class="keyword">if</span> [ ! -z <span class="variable">${partition}</span> ]; <span class="keyword">then</span></div><div class="line">	fdisk <span class="variable">$partition</span> &lt;&lt;EOF</div><div class="line">n</div><div class="line">p</div><div class="line">1</div><div class="line"></div><div class="line"></div><div class="line">w</div><div class="line">EOF</div><div class="line">	mkfs.ext4 <span class="variable">$partition</span><span class="string">&apos;1&apos;</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$partition</span>&quot;</span><span class="string">&quot;1       /data   ext4    defaults    0 0&quot;</span> &gt;&gt; /etc/fstab</div><div class="line">	mount <span class="_">-a</span></div><div class="line">	df -h</div><div class="line"><span class="keyword">else</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">&quot;not found disk *db!&quot;</span></div><div class="line">	<span class="built_in">exit</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line">mkdir -p /data/home/{install,services,shell,tmp}</div><div class="line">mkdir -p /data/logs/{nginx,pinpoint,supervisor,zabbix}</div><div class="line">mkdir -p /data/{web,backup}</div><div class="line">chown services.services -R /data/home/</div><div class="line"><span class="built_in">echo</span> <span class="string">&quot;ok&quot;</span> &gt; /data/web/index.html</div><div class="line">chown www.www -R /data/web/</div><div class="line">chown www.www -R /data/logs/nginx</div></pre></td></tr></table></figure>
+<h2 id="clear-log"><a href="#clear-log" class="headerlink" title="clear_log"></a>clear_log</h2><ul>
+<li>&#x624B;&#x52A8;&#x6267;&#x884C;&#x6E05;&#x9664;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">``` bash</div><div class="line">#!/bin/bash</div><div class="line"># comment: clear log scripts #</div><div class="line"># date: 2018-05-14</div><div class="line"></div><div class="line">logDir=&quot;/data/logs&quot;</div><div class="line"></div><div class="line">find ${logDir} -name &quot;*.log&quot; -type f -mtime +7 | xargs rm -f</div></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="logrotate"><a href="#logrotate" class="headerlink" title="logrotate"></a>logrotate</h2><ul>
+<li>&#x65B0;&#x589E;/usr/local/logrotate/*&#xFF0C;&#x7528;&#x4E8E;&#x4E00;&#x4E9B;&#x670D;&#x52A1;&#x7684;&#x65E5;&#x5FD7;&#x5207;&#x5272;</li>
+<li>&#x65B0;&#x589E;&#x8BA1;&#x5212;&#x4EFB;&#x52A1;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E0D;&#x542F;&#x7528;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">cat nginx</div><div class="line">/data/logs/nginx/*.log {</div><div class="line">    daily</div><div class="line">    rotate 30</div><div class="line">    ifempty</div><div class="line">    <span class="comment">#compress</span></div><div class="line">    dateext</div><div class="line">    dateformat -%Y%m%d</div><div class="line">    missingok</div><div class="line">    nomail</div><div class="line">    noolddir</div><div class="line">    sharedscripts</div><div class="line"></div><div class="line">    prerotate</div><div class="line">		systemctl reload nginx</div><div class="line">    endscript</div><div class="line"></div><div class="line">    postrotate</div><div class="line">		systemctl reload nginx</div><div class="line">        YESTERDAY=$(/bin/date --date <span class="string">&apos;1 days ago&apos;</span> +<span class="string">&apos;%Y%m%d&apos;</span>)</div><div class="line">		<span class="built_in">cd</span> /data/logs/nginx/</div><div class="line">        LOG_FILE=$(ls -1 *.log-* | grep -v .tar.gz)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> I <span class="keyword">in</span> <span class="variable">${LOG_FILE}</span>;<span class="keyword">do</span></div><div class="line">            LOG_FILE_NAME=$(<span class="built_in">echo</span> <span class="variable">${I}</span> | awk -F <span class="string">&apos;.log-&apos;</span> <span class="string">&apos;{print $1}&apos;</span>)</div><div class="line">            LOG_FULL_NAME=<span class="variable">${LOG_FILE_NAME}</span>.log-<span class="variable">${YESTERDAY}</span></div><div class="line">            mv <span class="variable">${I}</span> <span class="variable">${LOG_FULL_NAME}</span></div><div class="line"></div><div class="line">            /bin/tar czf <span class="variable">${LOG_FULL_NAME}</span>.tar.gz <span class="variable">${LOG_FULL_NAME}</span></div><div class="line">            rm <span class="_">-f</span> <span class="variable">${LOG_FULL_NAME}</span></div><div class="line">        <span class="keyword">done</span></div><div class="line"></div><div class="line">        /bin/find /data/logs/nginx/ -mtime +30 | xargs rm -rf</div><div class="line">    endscript</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x96C6;&#x6210;nas&#x6302;&#x8F7D;"><a href="#&#x96C6;&#x6210;nas&#x6302;&#x8F7D;" class="headerlink" title="&#x96C6;&#x6210;nas&#x6302;&#x8F7D;"></a>&#x96C6;&#x6210;nas&#x6302;&#x8F7D;</h2><ul>
+<li>&#x5B89;&#x88C5;&#x4F9D;&#x8D56;<ul>
+<li>CentOS&#xFF1A;sudo yum install nfs-utils</li>
+<li>Ubuntu &#x6216; Debian&#xFF1A;sudo apt-get install nfs-common</li>
+</ul>
+</li>
+<li>&#x6302;&#x8F7D;&#x4EE5;&#x53CA;&#x5378;&#x8F7D;&#x811A;&#x672C;<ul>
+<li>nas</li>
+<li>unas</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">cat nas</div><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># comment: mount nas scripts #</span></div><div class="line"><span class="comment"># date: 2018-05-14</span></div><div class="line"></div><div class="line">[ ! <span class="_">-d</span> <span class="string">&quot;/data/nas&quot;</span> ] &amp;&amp; mkdir -p /data/nas</div><div class="line">flag=$(df -h | grep <span class="string">&quot;data/nas&quot;</span> | wc <span class="_">-l</span>)</div><div class="line"><span class="keyword">if</span> [ <span class="variable">${flag}</span> <span class="_">-eq</span> 0 ]; <span class="keyword">then</span></div><div class="line">	mount -t nfs -o vers=3,nolock,proto=tcp 18df2499ac-fjs14.cn-beijing.nas.aliyuncs.com:/  /data/nas/</div><div class="line"><span class="keyword">else</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">&quot;nas already mounted!&quot;</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line">cat unas</div><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment"># comment: umount nas scripts #</span></div><div class="line"><span class="comment"># date: 2018-05-14</span></div><div class="line"></div><div class="line">flag=$(df -h | grep <span class="string">&quot;data/nas&quot;</span> | wc <span class="_">-l</span>)</div><div class="line"><span class="keyword">if</span> [ <span class="variable">${flag}</span> <span class="_">-eq</span> 0 ]; <span class="keyword">then</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">&quot;nas already unmounted!&quot;</span></div><div class="line"><span class="keyword">else</span></div><div class="line">	umount /data/nas</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<h2 id="&#x6A21;&#x677F;&#x673A;&#x76EE;&#x524D;&#x81EA;&#x542F;&#x8FDB;&#x7A0B;&#x89E3;&#x6790;"><a href="#&#x6A21;&#x677F;&#x673A;&#x76EE;&#x524D;&#x81EA;&#x542F;&#x8FDB;&#x7A0B;&#x89E3;&#x6790;" class="headerlink" title="&#x6A21;&#x677F;&#x673A;&#x76EE;&#x524D;&#x81EA;&#x542F;&#x8FDB;&#x7A0B;&#x89E3;&#x6790;"></a>&#x6A21;&#x677F;&#x673A;&#x76EE;&#x524D;&#x81EA;&#x542F;&#x8FDB;&#x7A0B;&#x89E3;&#x6790;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">systemd&#x2500;&#x252C;&#x2500;AliYunDun&#x2500;&#x2500;&#x2500;15*[{AliYunDun}] <span class="comment"># &#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;</span></div><div class="line">        &#x251C;&#x2500;AliYunDunUpdate&#x2500;&#x2500;&#x2500;3*[{AliYunDunUpdate}] <span class="comment"># &#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;</span></div><div class="line">        &#x251C;&#x2500;2*[agetty] <span class="comment"># &#x7EC8;&#x7AEF;tty</span></div><div class="line">        &#x251C;&#x2500;aliyun-service&#x2500;&#x2500;&#x2500;6*[{aliyun-service}] <span class="comment"># &#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;</span></div><div class="line">        &#x251C;&#x2500;atd <span class="comment"># &#x8BA1;&#x5212;&#x4EFB;&#x52A1;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</span></div><div class="line">        &#x251C;&#x2500;auditd&#x2500;&#x2500;&#x2500;{auditd} <span class="comment"># linux&#x5B89;&#x5168;&#x5BA1;&#x8BA1;&#x5DE5;&#x5177;</span></div><div class="line">        &#x251C;&#x2500;chronyd <span class="comment"># centos7&#x65F6;&#x95F4;&#x540C;&#x6B65;&#x670D;&#x52A1;</span></div><div class="line">        &#x251C;&#x2500;crond <span class="comment"># &#x8BA1;&#x5212;&#x4EFB;&#x52A1;</span></div><div class="line">        &#x251C;&#x2500;dbus-daemon <span class="comment"># D-Bus&#x7684;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;IP&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x8DEF;&#x7531;&#x5668;</span></div><div class="line">        &#x251C;&#x2500;dhclient <span class="comment"># &#x81EA;&#x52A8;&#x83B7;&#x53D6;ip</span></div><div class="line">        &#x251C;&#x2500;nscd&#x2500;&#x2500;&#x2500;16*[{nscd}] <span class="comment"># &#x7F13;&#x5B58;&#x670D;&#x52A1;</span></div><div class="line">        &#x251C;&#x2500;polkitd&#x2500;&#x2500;&#x2500;5*[{polkitd}]</div><div class="line">        &#x251C;&#x2500;rsyslogd&#x2500;&#x2500;&#x2500;2*[{rsyslogd}] <span class="comment"># &#x65E5;&#x5FD7;</span></div><div class="line">        &#x251C;&#x2500;sshd&#x2500;&#x252C;&#x2500;sshd&#x2500;&#x2500;&#x2500;sshd <span class="comment"># sshd</span></div><div class="line">        &#x2502;      &#x2514;&#x2500;sshd&#x2500;&#x2500;&#x2500;sshd&#x2500;&#x2500;&#x2500;bash&#x2500;&#x2500;&#x2500;sudo&#x2500;&#x2500;&#x2500;su&#x2500;&#x2500;&#x2500;bash&#x2500;&#x2500;&#x2500;pstree</div><div class="line">        &#x251C;&#x2500;systemd-journal <span class="comment"># systemd&#x65E5;&#x5FD7;&#x670D;&#x52A1;</span></div><div class="line">        &#x251C;&#x2500;systemd-logind <span class="comment"># systemd &#x7684;cgroup&#x7BA1;&#x7406;&#x5BF9;&#x8C61;</span></div><div class="line">        &#x251C;&#x2500;systemd-udevd <span class="comment"># &#x76D1;&#x542C;&#x5185;&#x6838;&#x53D1;&#x51FA;&#x7684;&#x8BBE;&#x5907;&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x6839;&#x636E;udev&#x89C4;&#x5219;&#x5904;&#x7406;&#x6BCF;&#x4E2A;&#x4E8B;&#x4EF6;</span></div><div class="line">        &#x251C;&#x2500;tuned&#x2500;&#x2500;&#x2500;4*[{tuned}]	<span class="comment"># profile&#x4F18;&#x5316;</span></div><div class="line">        &#x251C;&#x2500;wrapper&#x2500;&#x252C;&#x2500;java&#x2500;&#x2500;&#x2500;14*[{java}] <span class="comment"># &#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;</span></div><div class="line">        &#x2502;         &#x2514;&#x2500;{wrapper}</div><div class="line">        &#x2514;&#x2500;zabbix_agentd&#x2500;&#x2500;&#x2500;7*[zabbix_agentd] <span class="comment"># zabbix-agent</span></div></pre></td></tr></table></figure>
+<h2 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a>Ansible</h2><ul>
+<li>ansible</li>
+<li>jumpserver</li>
+<li>nginx-proxy</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">cat ansible.cfg</div><div class="line">[defaults]</div><div class="line">inventory = /etc/ansible/hosts</div><div class="line">remote_tmp = $HOME/.ansible/tmp</div><div class="line">roles_path = /data/ansible/roles:/etc/ansible/roles</div><div class="line">transport = smart</div><div class="line">gathering = smart</div><div class="line">fact_caching_timeout = 30</div><div class="line">require_sudo = False</div><div class="line">module_name = shell</div><div class="line">private_key_file = /root/.ssh/id_rsa</div><div class="line">ansible_managed = Ansible managed: {file} modified on %Y-%m-%d %H:%M:%S by {uid} on {host}</div><div class="line">#action_plugins = /data/ansible/ansible_plugins/action_plugins</div><div class="line">#connection_plugins = /data/ansible/ansible_plugins/connection_plugins</div><div class="line">#lookup_plugins = /data/ansible/ansible_plugins/lookup_plugins</div><div class="line">#vars_plugins = /data/ansible/ansible_plugins/vars_plugins</div><div class="line">#filter_plugins = /data/ansible/ansible_plugins/filter_plugins</div><div class="line">nocolor = 0</div><div class="line">fact_caching = memory</div><div class="line">host_key_checking = False</div><div class="line">timeout = 10</div><div class="line">pattern = *</div><div class="line">forks = 20</div><div class="line">poll_interval = 15</div><div class="line">remote_user = devops</div><div class="line">remote_port = 9555</div><div class="line">log_path = /data/logs/ansible/ansible.log</div><div class="line"></div><div class="line">[inventory]</div><div class="line"></div><div class="line">[privilege_escalation]</div><div class="line">become=True</div><div class="line">become_exe=sudo</div><div class="line">become_method=sudo</div><div class="line">become_user=root</div><div class="line">become_ask_pass=False</div><div class="line"></div><div class="line">[paramiko_connection]</div><div class="line">record_host_keys=False</div><div class="line"></div><div class="line">[ssh_connection]</div><div class="line">pipelining = True</div><div class="line"></div><div class="line">[persistent_connection]</div><div class="line">[accelerate]</div><div class="line">accelerate_port = 5099</div><div class="line">accelerate_timeout = 30</div><div class="line">accelerate_connect_timeout = 5.0</div><div class="line">accelerate_daemon_timeout = 30</div><div class="line">#accelerate_multi_key = yes</div><div class="line"></div><div class="line">[selinux]</div><div class="line">[colors]</div><div class="line">[diff]</div></pre></td></tr></table></figure>
+<h2 id="&#x670D;&#x52A1;supervisor&#x914D;&#x7F6E;"><a href="#&#x670D;&#x52A1;supervisor&#x914D;&#x7F6E;" class="headerlink" title="&#x670D;&#x52A1;supervisor&#x914D;&#x7F6E;"></a>&#x670D;&#x52A1;supervisor&#x914D;&#x7F6E;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">[program:jumpcoco]</div><div class="line">environment=LANG=&quot;en_US.utf8&quot;, LC_ALL=&quot;en_US.UTF-8&quot;, LC_LANG=&quot;en_US.UTF-8&quot;</div><div class="line">directory = /usr/local/coco/</div><div class="line">command = bash /usr/local/sbin/coco</div><div class="line">user = root</div><div class="line">autostart = true</div><div class="line">autorestart = true</div><div class="line">stopsignal=QUIT</div><div class="line">stopwaitsecs=10</div><div class="line">stopasgroup=true</div><div class="line">killasgroup=true</div><div class="line">stdout_logfile = /data/logs/supervisor/coco.log</div><div class="line">stderr_logfile = /data/logs/supervisor/coco_err.log</div><div class="line"></div><div class="line"></div><div class="line">[program:jumpserver]</div><div class="line">environment=LANG=&quot;en_US.utf8&quot;, LC_ALL=&quot;en_US.UTF-8&quot;, LC_LANG=&quot;en_US.UTF-8&quot;</div><div class="line">directory = /usr/local/jumpserver/</div><div class="line">command = bash /usr/local/sbin/jumpserver</div><div class="line">user = root</div><div class="line">autostart = true</div><div class="line">autorestart = true</div><div class="line">stdout_logfile = /data/logs/supervisor/jumpserver.log</div><div class="line">stderr_logfile = /data/logs/supervisor/jumpserver_err.log</div><div class="line"></div><div class="line">[program:jenkins]</div><div class="line">environment=LANG=&quot;en_US.utf8&quot;, LC_ALL=&quot;en_US.UTF-8&quot;, LC_LANG=&quot;en_US.UTF-8&quot;, JENKINS_HOME=&quot;/data/jenkins/home&quot;, JAVA_HOME=&quot;/usr/local/jdk8&quot;, JRE_HOME=&quot;/usr/local/jdk8/jre&quot;, PATH=&apos;$PATH:/usr/local/maven/bin:/usr/local/jdk8/bin&apos;, CLASSPATH=&quot;./:/usr/local/jdk8/lib:/usr/local/jdk8/jre/lib&quot;</div><div class="line">directory = /data/jenkins/war/</div><div class="line">command = /usr/local/jdk8/bin/java -jar jenkins.war</div><div class="line">user = jenkins</div><div class="line">autostart = true</div><div class="line">autorestart = true</div><div class="line">stdout_logfile = /data/logs/supervisor/jenkins.log</div><div class="line">stderr_logfile = /data/logs/supervisor/jenkins_err.log</div></pre></td></tr></table></figure>
+<h1 id="&#x8FC1;&#x79FB;&#x8FDB;&#x5C55;"><a href="#&#x8FC1;&#x79FB;&#x8FDB;&#x5C55;" class="headerlink" title="&#x8FC1;&#x79FB;&#x8FDB;&#x5C55;"></a>&#x8FC1;&#x79FB;&#x8FDB;&#x5C55;</h1><ul>
+<li>&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;&#x670D;&#x52A1;&#x5668;<ul>
+<li>ansible<ul>
+<li>playbook<ul>
+<li>zabbix-agent&#x5B89;&#x88C5;</li>
+<li>&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;&#x66F4;&#x65B0;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>jumpserver</li>
+<li>nginx-proxy &#x7EDF;&#x4E00;nginx&#x4EE3;&#x7406;</li>
+</ul>
+</li>
+<li>jira&#x8FC1;&#x79FB;&#x5B8C;&#x6210;</li>
+<li>wiki&#x8FC1;&#x79FB;&#x5B8C;&#x6210;</li>
+<li>jira&#x3001;wiki&#x6570;&#x636E;&#x5E93;&#x8FC1;&#x79FB;vpc&#x5B8C;&#x6210;</li>
+<li>zabbix &#x642D;&#x5EFA;&#x5B8C;&#x6210;<ul>
+<li>zabbix.devops.kaishustory.com</li>
+<li>admin/Kaishu2099=</li>
+<li>agent&#x90E8;&#x7F72;&#x5B8C;&#x6210;</li>
+<li><a href="http://docs.grafana.org/installation/rpm/" target="_blank" rel="external">grafana&#x5B89;&#x88C5;</a></li>
+<li>grafana.devops.kaishustory.com</li>
+<li><a href="http://play.grafana-zabbix.org/d/000000003/grafana-zabbix-demo?" target="_blank" rel="external">http://play.grafana-zabbix.org/d/000000003/grafana-zabbix-demo?</a></li>
+</ul>
+</li>
+<li>jenkins &#x90E8;&#x5206;&#x8FC1;&#x79FB;&#x5B8C;&#x6210;</li>
+<li>svn &#x8FC1;&#x79FB;&#x4E2D;</li>
+<li>ldap &#x5F85;&#x5B9A;</li>
+<li>dns &#x5F85;&#x5B9A;</li>
+<li>vpn &#x8FC1;&#x79FB;&#x5B8C;&#x6210;</li>
+</ul>
+<h2 id="grafana"><a href="#grafana" class="headerlink" title="grafana"></a>grafana</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grafana-cli plugins list-remote</div><div class="line">grafana-cli plugins install alexanderzobnin-zabbix-app</div><div class="line">grafana-cli plugins install grafana-clock-panel</div></pre></td></tr></table></figure>
+<h1 id="&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;"><a href="#&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;"></a>&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;</h1><ul>
+<li><p>&#x6A21;&#x677F;&#x673A;&#x955C;&#x50CF;&#x547D;&#x540D;&#x89C4;&#x5219;&#xFF1A;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* &#x5982;&#xFF1A;```ks-template-20180515</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>&#x963F;&#x91CC;&#x4E91;vpc&#x5F00;&#x673A;&#x4F1A;&#x81EA;&#x52A8;&#x968F;&#x673A;&#x751F;&#x6210;vpc&#x4EA4;&#x6362;&#x673A;&#x7F51;&#x6BB5;&#x5185;ip</p>
+</li>
+<li>&#x5982;&#x9700;&#x4FEE;&#x6539;&#x5230;&#x6307;&#x5B9A;ip&#x7684;&#x6D41;&#x7A0B;<ul>
+<li>&#x5728;&#x963F;&#x91CC;&#x4E91;&#x540E;&#x53F0;&#x505C;&#x6B62;&#x4E3B;&#x673A;</li>
+<li>&#x505C;&#x6B62;&#x540E;&#x4ECE;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x7684;&#x66F4;&#x591A;&#x83DC;&#x5355;&#x4E2D;&#x9009;&#x53D6;&#x4FEE;&#x6539;&#x79C1;&#x6709;ip</li>
+<li>&#x4FEE;&#x6539;&#x5230;&#x5F53;&#x524D;vpc&#x4EA4;&#x6362;&#x673A;&#x7F51;&#x6BB5;&#x7684;&#x5176;&#x4ED6;ip&#x540E;&#x5F00;&#x673A;</li>
+</ul>
+</li>
+<li><p>&#x65B0;&#x5F00;&#x673A;&#x5668;&#x6216;&#x4FEE;&#x6539;&#x79C1;&#x6709;ip&#x540E;</p>
+<ul>
+<li>&#x52A0;&#x5230;jumpserver&#x8D44;&#x4EA7;&#x4E2D;&#x6216;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x4FE1;&#x606F;</li>
+<li><p>&#x901A;&#x8FC7;jumpserver&#x767B;&#x5F55;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;</p>
+<ul>
+<li><p>&#x6267;&#x884C; <figure class="highlight plain"><figcaption><span>&quot;&#x4E3B;&#x673A;&#x4E1A;&#x52A1;&#x5206;&#x7EC4;&quot;```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* &#x5982;&#x662F;&#x65B0;&#x5F00;&#x673A;&#x5668;&#x5E76;&#x4E14;&#x5206;&#x914D;&#x4E86;&#x6570;&#x636E;&#x76D8;&#xFF0C;&#x6267;&#x884C;```init_disk</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>&#x6267;&#x884C;&#x91CD;&#x542F;zabbix_agent<code>systemctl restart zabbix-agent</code></p>
+</li>
+<li>&#x786E;&#x8BA4;&#x81EA;&#x52A8;&#x6CE8;&#x518C;&#x5230;zabbix-server&#x4E2D;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="vpc&#x73B0;&#x6709;&#x8FD0;&#x7EF4;&#x8D44;&#x4EA7;&#x76D8;&#x70B9;"><a href="#vpc&#x73B0;&#x6709;&#x8FD0;&#x7EF4;&#x8D44;&#x4EA7;&#x76D8;&#x70B9;" class="headerlink" title="vpc&#x73B0;&#x6709;&#x8FD0;&#x7EF4;&#x8D44;&#x4EA7;&#x76D8;&#x70B9;"></a>vpc&#x73B0;&#x6709;&#x8FD0;&#x7EF4;&#x8D44;&#x4EA7;&#x76D8;&#x70B9;</h1><h2 id="ansible-amp-jumpserver-amp-nginx-proxy-manager"><a href="#ansible-amp-jumpserver-amp-nginx-proxy-manager" class="headerlink" title="ansible &amp; jumpserver &amp; nginx-proxy [manager]"></a>ansible &amp; jumpserver &amp; nginx-proxy [manager]</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.1.1</li>
+<li>ansible<ul>
+<li>&#x914D;&#x7F6E;&#x76EE;&#x5F55;&#xFF1A;/etc/ansible</li>
+<li>playbook&#x76EE;&#x5F55;&#xFF1A;/data/ansible/</li>
+</ul>
+</li>
+<li>jumpserver<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;jump.devops.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/KS@jump2099=</li>
+<li>&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#xFF1A;supervisor</li>
+<li>&#x53D1;&#x90AE;&#x4EF6;&#x90AE;&#x7BB1;&#xFF1A;monitor@ksjgs.com/KS@Yw20182099=</li>
+<li>redis&#xFF1A;127.0.0.1/KSjumpserver2099</li>
+<li>mysql&#x5730;&#x5740;&#xFF1A;rm-2ze95o169cdyr1az5.mysql.rds.aliyuncs.com</li>
+<li>db&#x8D26;&#x53F7;&#xFF1A;jumpserver/KS@jumpserver&amp;2099=</li>
+</ul>
+</li>
+<li>nginx-proxy<ul>
+<li>&#x4F5C;&#x7528;&#xFF1A;&#x7528;&#x4E8E;&#x4EE3;&#x7406;BaseManager&#x533A;&#x57DF;&#x4E2D;&#x7684;&#x6240;&#x6709;web</li>
+<li>&#x5185;&#x7F51;&#x4EE3;&#x7406;&#x672C;&#x673A;&#xFF1A;172.16.1.1</li>
+<li>&#x516C;&#x7F51;&#x4EE3;&#x7406;slb&#xFF1A;47.95.45.162</li>
+<li>&#x865A;&#x62DF;&#x4E3B;&#x673A;vhosts&#x76EE;&#x5F55;&#xFF1A;/usr/local/nginx/conf/vhosts</li>
+<li>&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF1A;/data/logs/nginx</li>
+</ul>
+</li>
+</ul>
+<h2 id="zabbix-amp-grafana"><a href="#zabbix-amp-grafana" class="headerlink" title="zabbix &amp; grafana"></a>zabbix &amp; grafana</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.1.4</li>
+<li>zabbix&#xFF1A;<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;zabbix.devops.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Kaishu2099=</li>
+<li>mysql&#x5730;&#x5740;&#xFF1A;rm-2ze95o169cdyr1az5.mysql.rds.aliyuncs.com</li>
+<li>db&#x8D26;&#x53F7;&#xFF1A;zabbix/n2Ozqzfk5jgD</li>
+<li>&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF1A;/data/logs/zabbix</li>
+</ul>
+</li>
+<li>grafana&#xFF1A;<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;grafana.devops.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Kaishu2099=</li>
+</ul>
+</li>
+</ul>
+<h2 id="openvpn"><a href="#openvpn" class="headerlink" title="openvpn"></a>openvpn</h2><ul>
+<li>&#x673A;&#x5668;ip<ul>
+<li>&#x5185;&#x7F51;&#xFF1A;172.16.1.10</li>
+<li>&#x5F39;&#x6027;ip&#xFF1A;39.107.86.45</li>
+</ul>
+</li>
+<li>&#x914D;&#x7F6E;&#x76EE;&#x5F55;&#xFF1A;/etc/openvpn/</li>
+</ul>
+<h2 id="jenkins-amp-sonarqube"><a href="#jenkins-amp-sonarqube" class="headerlink" title="jenkins &amp; sonarqube"></a>jenkins &amp; sonarqube</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.1.3</li>
+<li>jenkins<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;jenkins.devops.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Ks@admin2099</li>
+<li>jenkins_home&#xFF1A;/data/jenkins/home</li>
+</ul>
+</li>
+<li>sonarqube<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;sonar.devops.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Ks@Sq&amp;^%2099</li>
+<li>guest&#x8D26;&#x53F7;&#xFF1A;guest/Ks@guest2099</li>
+<li>&#x90E8;&#x7F72;&#x76EE;&#x5F55;&#xFF1A;/data/sonarqube/</li>
+</ul>
+</li>
+</ul>
+<h2 id="jira-amp-wiki"><a href="#jira-amp-wiki" class="headerlink" title="jira &amp; wiki"></a>jira &amp; wiki</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.1.167</li>
+<li>jira&#xFF1A;<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;jira.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Kaishu2099=</li>
+<li>mysql&#x5730;&#x5740;&#xFF1A;rm-2ze95o169cdyr1az5.mysql.rds.aliyuncs.com</li>
+<li>db&#x8D26;&#x53F7;&#xFF1A;jira/Jira2099</li>
+</ul>
+</li>
+<li>wiki&#xFF1A;<ul>
+<li>&#x57DF;&#x540D;&#xFF1A;wiki.kaishustory.com</li>
+<li>&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x53F7;&#xFF1A;admin/Kaishu2099</li>
+<li>mysql&#x5730;&#x5740;&#xFF1A;rm-2ze95o169cdyr1az5.mysql.rds.aliyuncs.com</li>
+<li>db&#x8D26;&#x53F7;&#xFF1A;jira/Jira2099</li>
+</ul>
+</li>
+</ul>
+<h2 id="nginx-proxy-dev-and-test"><a href="#nginx-proxy-dev-and-test" class="headerlink" title="nginx-proxy [dev and test]"></a>nginx-proxy [dev and test]</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.12.1</li>
+<li>&#x4F5C;&#x7528;&#xFF1A;&#x4EE3;&#x7406;&#x6D4B;&#x8BD5;&#x5F00;&#x53D1;&#x73AF;&#x5883;web</li>
+</ul>
+<h2 id="&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;rds"><a href="#&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;rds" class="headerlink" title="&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;rds"></a>&#x8FD0;&#x7EF4;&#x7BA1;&#x7406;rds</h2><ul>
+<li>&#x5730;&#x5740;&#xFF1A;rm-2ze95o169cdyr1az5.mysql.rds.aliyuncs.com</li>
+<li>&#x8D26;&#x53F7;&#xFF1A;ksadmin/Ks@rds2099@#$my</li>
+</ul>
+<h2 id="pinpoint-amp-dubbo-amp-zookeeper"><a href="#pinpoint-amp-dubbo-amp-zookeeper" class="headerlink" title="pinpoint &amp; dubbo &amp; zookeeper"></a>pinpoint &amp; dubbo &amp; zookeeper</h2><ul>
+<li>&#x673A;&#x5668;ip&#xFF1A;172.16.12.202</li>
+<li>&#x4F5C;&#x7528;<ul>
+<li>pinpoint &#x5305;&#x542B;hbase</li>
+<li>&#x6D4B;&#x8BD5;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x7EDF;&#x4E00;dubbo</li>
+<li>&#x6D4B;&#x8BD5;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E24;&#x4E2A;zookeeper</li>
+</ul>
+</li>
+</ul>
+<h2 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h2>
       
     </div>
     
@@ -400,6 +727,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vpc/" rel="tag"># vpc</a>
+          
+        </div>
       
 
       
@@ -510,7 +843,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -521,7 +854,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -569,7 +902,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移背景"><span class="nav-number">1.1.</span> <span class="nav-text">迁移背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vpc迁移"><span class="nav-number">1.2.</span> <span class="nav-text">vpc迁移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vpc构建过程记录"><span class="nav-number">2.</span> <span class="nav-text">vpc构建过程记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板机构建记录"><span class="nav-number">3.</span> <span class="nav-text">模板机构建记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#devops-创建运维管理账号"><span class="nav-number">3.1.</span> <span class="nav-text">devops 创建运维管理账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bashrc"><span class="nav-number">3.2.</span> <span class="nav-text">bashrc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vimrc"><span class="nav-number">3.3.</span> <span class="nav-text">vimrc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#profile-d"><span class="nav-number">3.4.</span> <span class="nav-text">profile.d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp、内核参数优化"><span class="nav-number">3.5.</span> <span class="nav-text">tcp、内核参数优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文件句柄限制"><span class="nav-number">3.6.</span> <span class="nav-text">修改文件句柄限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改PS1"><span class="nav-number">3.7.</span> <span class="nav-text">修改PS1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以下废弃"><span class="nav-number">3.7.1.</span> <span class="nav-text">以下废弃</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统初始化脚本"><span class="nav-number">3.8.</span> <span class="nav-text">系统初始化脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#disk-db"><span class="nav-number">3.8.1.</span> <span class="nav-text">disk db</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear-log"><span class="nav-number">3.9.</span> <span class="nav-text">clear_log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#logrotate"><span class="nav-number">3.10.</span> <span class="nav-text">logrotate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成nas挂载"><span class="nav-number">3.11.</span> <span class="nav-text">集成nas挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板机目前自启进程解析"><span class="nav-number">3.12.</span> <span class="nav-text">模板机目前自启进程解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible"><span class="nav-number">3.13.</span> <span class="nav-text">Ansible</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务supervisor配置"><span class="nav-number">3.14.</span> <span class="nav-text">服务supervisor配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迁移进展"><span class="nav-number">4.</span> <span class="nav-text">迁移进展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grafana"><span class="nav-number">4.1.</span> <span class="nav-text">grafana</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用模板镜像开机流程"><span class="nav-number">5.</span> <span class="nav-text">使用模板镜像开机流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vpc现有运维资产盘点"><span class="nav-number">6.</span> <span class="nav-text">vpc现有运维资产盘点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ansible-amp-jumpserver-amp-nginx-proxy-manager"><span class="nav-number">6.1.</span> <span class="nav-text">ansible & jumpserver & nginx-proxy [manager]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zabbix-amp-grafana"><span class="nav-number">6.2.</span> <span class="nav-text">zabbix & grafana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openvpn"><span class="nav-number">6.3.</span> <span class="nav-text">openvpn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jenkins-amp-sonarqube"><span class="nav-number">6.4.</span> <span class="nav-text">jenkins & sonarqube</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jira-amp-wiki"><span class="nav-number">6.5.</span> <span class="nav-text">jira & wiki</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-proxy-dev-and-test"><span class="nav-number">6.6.</span> <span class="nav-text">nginx-proxy [dev and test]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运维管理rds"><span class="nav-number">6.7.</span> <span class="nav-text">运维管理rds</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pinpoint-amp-dubbo-amp-zookeeper"><span class="nav-number">6.8.</span> <span class="nav-text">pinpoint & dubbo & zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svn"><span class="nav-number">6.9.</span> <span class="nav-text">svn</span></a></li></ol></li></ol></div>
             
 
           </div>

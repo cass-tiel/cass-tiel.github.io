@@ -318,7 +318,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/29/ansible-install/" itemprop="url">ansible安装配置</a></h1>
+                <a class="post-title-link" href="/2018/05/29/ansible-install/" itemprop="url">ansible安装配置以及一些常用模块</a></h1>
         
 
         <div class="post-meta">
@@ -591,7 +591,8 @@
 
       
         
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>shell&#x4E2D;&#x622A;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x6709;&#x5F88;&#x591A;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># ```${expression}```&#x4E00;&#x5171;&#x6709;9&#x79CD;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</div><div class="line"></div><div class="line">``` bash</div><div class="line"># &#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;</div><div class="line">## &#x6700;&#x5C0F;&#x9650;&#x5EA6;&#x4ECE;&#x540E;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter%word} </div><div class="line">## &#x6700;&#x5927;&#x9650;&#x5EA6;&#x4ECE;&#x540E;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter%%word} </div><div class="line">## &#x6700;&#x5C0F;&#x9650;&#x5EA6;&#x4ECE;&#x524D;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter#word} </div><div class="line">## &#x6700;&#x5927;&#x9650;&#x5EA6;&#x4ECE;&#x524D;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter##word} </div><div class="line"></div><div class="line"># &#x83B7;&#x5F97;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</div><div class="line">${#parameter}</div><div class="line"></div><div class="line"># &#x7F3A;&#x7701;&#x503C;&#x7684;&#x66FF;&#x6362;</div><div class="line">${parameter:-word}</div><div class="line">${parameter:=word}</div><div class="line">${parameter:?word}</div><div class="line">${parameter:+word}</div></pre></td></tr></table></figure></p>
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>shell&#x4E2D;&#x622A;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x6709;&#x5F88;&#x591A;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<em>sed&#x3001;awk&#x3001;cut</em>&#x6765;&#x8FDB;&#x884C;&#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;&#xFF0C;&#x672C;&#x6587;&#x4F7F;&#x7528;&#x7684;&#x662F;shell&#x4E2D;&#x5B57;&#x7B26;&#x4E32;&#x672C;&#x8EAB;&#x5177;&#x6709;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;&#x65B9;&#x6CD5;</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight plain"><figcaption><span>&#x4E00;&#x5171;&#x6709;9&#x79CD;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">``` bash</div><div class="line"># &#x5B57;&#x7B26;&#x4E32;&#x5207;&#x5272;</div><div class="line">## &#x6700;&#x5C0F;&#x9650;&#x5EA6;&#x4ECE;&#x540E;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter%word} </div><div class="line">## &#x6700;&#x5927;&#x9650;&#x5EA6;&#x4ECE;&#x540E;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter%%word} </div><div class="line">## &#x6700;&#x5C0F;&#x9650;&#x5EA6;&#x4ECE;&#x524D;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter#word} </div><div class="line">## &#x6700;&#x5927;&#x9650;&#x5EA6;&#x4ECE;&#x524D;&#x9762;&#x622A;&#x53D6;word</div><div class="line">${parameter##word} </div><div class="line"></div><div class="line"># &#x83B7;&#x5F97;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</div><div class="line">${#parameter}</div><div class="line"></div><div class="line"># &#x7F3A;&#x7701;&#x503C;&#x7684;&#x66FF;&#x6362;</div><div class="line">${parameter:-word}</div><div class="line">${parameter:=word}</div><div class="line">${parameter:?word}</div><div class="line">${parameter:+word}</div></pre></td></tr></table></figure></h1>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/25/shell-split/#more" rel="contents">
@@ -980,7 +981,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/16/vpc-build/" itemprop="url">vpc-build</a></h1>
+                <a class="post-title-link" href="/2018/05/16/vpc-build/" itemprop="url">阿里云vpc迁移过程整理</a></h1>
         
 
         <div class="post-meta">
@@ -1015,6 +1016,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vpc/" itemprop="url" rel="index">
+                    <span itemprop="name">vpc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1043,7 +1066,8 @@
 
       
         
-          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x5F85;&#x7EED;&#x3002;&#x3002;&#x3002;<br></p>
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>vpc&#x8FC1;&#x79FB;&#x5DF2;&#x7ECF;&#x5DF2;&#x7ECF;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x4E86;&#xFF0C;&#x8FD9;&#x6B21;&#x7531;&#x4E8E;&#x662F;&#x5168;&#x7A0B;&#x4E00;&#x4E2A;&#x4EBA;&#x4E3B;&#x5BFC;&#x4E0E;&#x5EFA;&#x8BBE;&#xFF0C;&#x56E0;&#x6B64;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x8BB0;&#x5F55;&#x7684;&#x6BD4;&#x8F83;&#x8BE6;&#x7EC6;&#x3002;</p>
+<h2 id="&#x8FC1;&#x79FB;&#x80CC;&#x666F;"><a href="#&#x8FC1;&#x79FB;&#x80CC;&#x666F;" class="headerlink" title="&#x8FC1;&#x79FB;&#x80CC;&#x666F;"></a>&#x8FC1;&#x79FB;&#x80CC;&#x666F;</h2><p>&#x4E91;&#x670D;&#x52A1;&#x662F;&#x76EE;&#x524D;&#x5F88;&#x591A;&#x521B;&#x4E1A;&#x516C;&#x53F8;&#x4EE5;&#x53CA;&#x4E2D;&#x5C0F;&#x516C;&#x53F8;&#x7684;&#x9996;&#x9009;&#x670D;&#x52A1;&#xFF0C;&#x5B83;&#x4E0E;&#x4F20;&#x7EDF;idc&#x76F8;&#x6BD4;&#x6709;&#x5F88;&#x591A;&#x4F18;&#x52BF;&#xFF0C;&#x800C;&#x5F88;&#x591A;&#x516C;&#x53F8;&#x521D;&#x671F;&#x5E76;&#x4E0D;&#x91CD;&#x89C6;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x7684;&#x7EC4;&#x5EFA;&#x4EE5;&#x53CA;&#x8FD0;&#x7EF4;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x901A;&#x5E38;&#x6765;&#x8BF4;&#x5728;&#x5F88;&#x957F;&#x7684;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x91CC;&#xFF0C;&#x90FD;&#x662F;&#x7531;&#x5F00;&#x53D1;&#x6765;&#x5EFA;&#x8BBE;&#x548C;&#x7BA1;&#x7406;&#xFF08;&#x6216;&#x8BB8;&#x4E2D;&#x95F4;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x521D;&#x7EA7;&#x8FD0;&#x7EF4;&#x7684;&#x53C2;&#x4E0E;&#xFF09;&#xFF0C;&#x76F4;&#x5230;&#x4E1A;&#x52A1;&#x4EE5;&#x53CA;&#x6280;&#x672F;&#x56E2;&#x961F;&#x8FBE;&#x5230;&#x4E00;&#x4E2A;&#x89C4;&#x6A21;&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x4F1A;&#x6709;&#x6709;&#x53EF;&#x80FD;&#x6210;&#x719F;&#x7684;&#x8FD0;&#x7EF4;&#x52A0;&#x5165;&#x8FDB;&#x6765;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x8FD0;&#x7EF4;&#x9762;&#x5BF9;&#x7684;&#x5219;&#x662F;&#x4E00;&#x5927;&#x5806;&#x70C2;&#x644A;&#x5B50;&#x3002;</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/16/vpc-build/#more" rel="contents">
@@ -1889,7 +1913,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1900,7 +1924,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
