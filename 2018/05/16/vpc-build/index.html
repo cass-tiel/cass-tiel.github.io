@@ -722,25 +722,23 @@
 </ul>
 <h2 id="grafana"><a href="#grafana" class="headerlink" title="grafana"></a>grafana</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grafana-cli plugins list-remote</div><div class="line">grafana-cli plugins install alexanderzobnin-zabbix-app</div><div class="line">grafana-cli plugins install grafana-clock-panel</div></pre></td></tr></table></figure>
 <h1 id="&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;"><a href="#&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;"></a>&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x955C;&#x50CF;&#x5F00;&#x673A;&#x6D41;&#x7A0B;</h1><ul>
-<li><p>&#x6A21;&#x677F;&#x673A;&#x955C;&#x50CF;&#x547D;&#x540D;&#x89C4;&#x5219;&#xFF1A;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* &#x5982;&#xFF1A;```ks-template-20180515</div></pre></td></tr></table></figure></p>
+<li>&#x6A21;&#x677F;&#x673A;&#x955C;&#x50CF;&#x547D;&#x540D;&#x89C4;&#x5219;&#xFF1A;<em>ks-template-%Y%m%d</em><ul>
+<li>&#x5982;&#xFF1A; <em>ks-template-20180515</em></li>
+</ul>
 </li>
-<li><p>&#x963F;&#x91CC;&#x4E91;vpc&#x5F00;&#x673A;&#x4F1A;&#x81EA;&#x52A8;&#x968F;&#x673A;&#x751F;&#x6210;vpc&#x4EA4;&#x6362;&#x673A;&#x7F51;&#x6BB5;&#x5185;ip</p>
-</li>
+<li>&#x963F;&#x91CC;&#x4E91;vpc&#x5F00;&#x673A;&#x4F1A;&#x81EA;&#x52A8;&#x968F;&#x673A;&#x751F;&#x6210;vpc&#x4EA4;&#x6362;&#x673A;&#x7F51;&#x6BB5;&#x5185;ip</li>
 <li>&#x5982;&#x9700;&#x4FEE;&#x6539;&#x5230;&#x6307;&#x5B9A;ip&#x7684;&#x6D41;&#x7A0B;<ul>
 <li>&#x5728;&#x963F;&#x91CC;&#x4E91;&#x540E;&#x53F0;&#x505C;&#x6B62;&#x4E3B;&#x673A;</li>
 <li>&#x505C;&#x6B62;&#x540E;&#x4ECE;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x7684;&#x66F4;&#x591A;&#x83DC;&#x5355;&#x4E2D;&#x9009;&#x53D6;&#x4FEE;&#x6539;&#x79C1;&#x6709;ip</li>
 <li>&#x4FEE;&#x6539;&#x5230;&#x5F53;&#x524D;vpc&#x4EA4;&#x6362;&#x673A;&#x7F51;&#x6BB5;&#x7684;&#x5176;&#x4ED6;ip&#x540E;&#x5F00;&#x673A;</li>
 </ul>
 </li>
-<li><p>&#x65B0;&#x5F00;&#x673A;&#x5668;&#x6216;&#x4FEE;&#x6539;&#x79C1;&#x6709;ip&#x540E;</p>
-<ul>
+<li>&#x65B0;&#x5F00;&#x673A;&#x5668;&#x6216;&#x4FEE;&#x6539;&#x79C1;&#x6709;ip&#x540E;<ul>
 <li>&#x52A0;&#x5230;jumpserver&#x8D44;&#x4EA7;&#x4E2D;&#x6216;&#x4FEE;&#x6539;&#x539F;&#x6709;&#x4FE1;&#x606F;</li>
-<li><p>&#x901A;&#x8FC7;jumpserver&#x767B;&#x5F55;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;</p>
-<ul>
-<li><p>&#x6267;&#x884C; <figure class="highlight plain"><figcaption><span>&quot;&#x4E3B;&#x673A;&#x4E1A;&#x52A1;&#x5206;&#x7EC4;&quot;```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* &#x5982;&#x662F;&#x65B0;&#x5F00;&#x673A;&#x5668;&#x5E76;&#x4E14;&#x5206;&#x914D;&#x4E86;&#x6570;&#x636E;&#x76D8;&#xFF0C;&#x6267;&#x884C;```init_disk</div></pre></td></tr></table></figure></p>
-</li>
-<li><p>&#x6267;&#x884C;&#x91CD;&#x542F;zabbix_agent<code>systemctl restart zabbix-agent</code></p>
-</li>
+<li>&#x901A;&#x8FC7;jumpserver&#x767B;&#x5F55;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;<ul>
+<li>&#x6267;&#x884C; <em>init_system &#x201C;&#x4E3B;&#x673A;&#x4E1A;&#x52A1;&#x5206;&#x7EC4;&#x201D;</em></li>
+<li>&#x5982;&#x662F;&#x65B0;&#x5F00;&#x673A;&#x5668;&#x5E76;&#x4E14;&#x5206;&#x914D;&#x4E86;&#x6570;&#x636E;&#x76D8;&#xFF0C;&#x6267;&#x884C; <em>init_disk</em></li>
+<li>&#x6267;&#x884C;&#x91CD;&#x542F;zabbix_agent <em>systemctl restart zabbix-agent</em></li>
 <li>&#x786E;&#x8BA4;&#x81EA;&#x52A8;&#x6CE8;&#x518C;&#x5230;zabbix-server&#x4E2D;</li>
 </ul>
 </li>
