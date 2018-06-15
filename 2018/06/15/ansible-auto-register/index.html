@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible,etcd,confd," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;ansible&amp;#x4E0E;agent&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x901A;&amp;#x4FE1;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x662F;openssh&amp;#xFF0C;&amp;#x6BCF;&amp;#x6B21;&amp;#x65B0;&amp;#x589E;&amp;#x673A;&amp;#x5668;&amp;#x4E4B;&amp;#x54">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ansible自动注册">
+<meta property="og:url" content="http://c.isme.pub/2018/06/15/ansible-auto-register/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;ansible&amp;#x4E0E;agent&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x901A;&amp;#x4FE1;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x662F;openssh&amp;#xFF0C;&amp;#x6BCF;&amp;#x6B21;&amp;#x65B0;&amp;#x589E;&amp;#x673A;&amp;#x5668;&amp;#x4E4B;&amp;#x54">
+<meta property="og:updated_time" content="2018-06-15T08:52:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ansible自动注册">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x7531;&amp;#x4E8E;ansible&amp;#x4E0E;agent&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x901A;&amp;#x4FE1;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x662F;openssh&amp;#xFF0C;&amp;#x6BCF;&amp;#x6B21;&amp;#x65B0;&amp;#x589E;&amp;#x673A;&amp;#x5668;&amp;#x4E4B;&amp;#x54">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/06/15/ansible-auto-register/"/>
+
+
+
+
+
+  <title>ansible自动注册 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/06/15/ansible-auto-register/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ansible自动注册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-15T16:52:07+08:00">
+                2018-06-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-15T16:52:07+08:00">
+                2018-06-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">ansible</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x7531;&#x4E8E;ansible&#x4E0E;agent&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x4F7F;&#x7528;&#x7684;&#x662F;openssh&#xFF0C;&#x6BCF;&#x6B21;&#x65B0;&#x589E;&#x673A;&#x5668;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x5728;ansible&#x7684;inventory&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x65B0;&#x589E;&#x673A;&#x5668;&#x7684;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x914D;&#x7F6E;&#x8D77;&#x6765;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x662F;&#x4E00;&#x65E6;&#x77ED;&#x65F6;&#x95F4;&#x65B0;&#x589E;&#x5927;&#x91CF;&#x673A;&#x5668;&#x3001;&#x6216;&#x8005;&#x662F;&#x957F;&#x65F6;&#x95F4;&#x7684;&#x7EF4;&#x62A4;&#x8FC7;&#x7A0B;&#x4E2D;&#x96BE;&#x514D;&#x4F1A;&#x6709;&#x9057;&#x6F0F;&#x6216;&#x914D;&#x7F6E;&#x91CD;&#x590D;&#x7684;&#x60C5;&#x51B5;&#x51FA;&#x73B0;&#xFF0C;&#x56E0;&#x6B64;&#x7C7B;&#x4F3C;salt&#x7684;agent&#x81EA;&#x52A8;&#x5411;server&#x6CE8;&#x518C;&#x7684;&#x529F;&#x80FD;&#x5C31;&#x663E;&#x5F97;&#x5341;&#x5206;&#x91CD;&#x8981;&#x3002;</p>
+<p>&#x76EE;&#x524D;&#x4E3A;&#x81F3;&#x8FD8;&#x672A;&#x53D1;&#x73B0;&#x4E16;&#x9762;&#x4E0A;&#x6709;&#x8FD9;&#x79CD;&#x7C7B;&#x4F3C;saltstack&#x7684;agent&#x81EA;&#x52A8;&#x5411;server&#x7AEF;&#x81EA;&#x52A8;&#x6CE8;&#x518C;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x5176;&#x5B9E;&#x5B9E;&#x73B0;&#x8D77;&#x6765;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x73B0;&#x6709;&#x7684;ansible&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7528;&#x5230;&#x51E0;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x4EE5;&#x53CA;&#x624B;&#x5199;&#x51E0;&#x4E2A;&#x811A;&#x672C;&#x5C31;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x4F60;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x597D;&#x7684;&#x89C4;&#x5219;&#x5B9E;&#x73B0;&#x81EA;&#x52A8;&#x6CE8;&#x518C;&#x3002;</p>
+<h2 id="&#x9700;&#x8981;&#x7528;&#x5230;&#x7684;&#x670D;&#x52A1;"><a href="#&#x9700;&#x8981;&#x7528;&#x5230;&#x7684;&#x670D;&#x52A1;" class="headerlink" title="&#x9700;&#x8981;&#x7528;&#x5230;&#x7684;&#x670D;&#x52A1;"></a>&#x9700;&#x8981;&#x7528;&#x5230;&#x7684;&#x670D;&#x52A1;</h2><ul>
+<li>ansible</li>
+<li>etcd</li>
+<li>confd</li>
+<li>python or shell</li>
+</ul>
+<a id="more"></a>
+<h2 id="&#x539F;&#x7406;&#x5206;&#x6790;"><a href="#&#x539F;&#x7406;&#x5206;&#x6790;" class="headerlink" title="&#x539F;&#x7406;&#x5206;&#x6790;"></a>&#x539F;&#x7406;&#x5206;&#x6790;</h2><ul>
+<li>&#x91C7;&#x7528;etcd&#x4F5C;&#x4E3A;&#x8282;&#x70B9;&#x53D1;&#x73B0;&#x6570;&#x636E;&#x5E93;</li>
+<li>&#x63D0;&#x524D;&#x5B9A;&#x4E49;&#x597D;etcd&#x6570;&#x636E;&#x5E93;&#x7684;&#x76EE;&#x5F55;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+<li>&#x5236;&#x4F5C;&#x6A21;&#x677F;&#x673A;&#xFF0C;&#x914D;&#x7F6E;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x811A;&#x672C;</li>
+<li>&#x901A;&#x8FC7;confd&#x7684;&#x76D1;&#x63A7;&#x529F;&#x80FD;&#x76D1;&#x63A7;etcd&#x76F8;&#x5173;&#x6570;&#x636E;&#xFF0C;&#x5B9E;&#x65F6;&#x751F;&#x6210;ansible&#x7684;inventory&#x6587;&#x4EF6;</li>
+</ul>
+<blockquote>
+<p>&#x672C;&#x6587;&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x8FC7;&#x7A0B;&#x6781;&#x4E3A;&#x7B80;&#x5355;</p>
+<p>etcd&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x5B9A;&#x4E49;&#x8FD8;&#x5F88;&#x7B80;&#x964B;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x4EE5;&#x53CA;&#x811A;&#x672C;&#x7684;&#x7F16;&#x5199;&#x81EA;&#x7531;&#x5EA6;&#x975E;&#x5E38;&#x9AD8;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x6309;&#x7167;&#x4F60;&#x7684;&#x60C5;&#x51B5;&#x8FDB;&#x884C;&#x4FEE;&#x6539;</p>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x672C;&#x6587;&#x53EA;&#x662F;&#x4F53;&#x73B0;&#x4E00;&#x4E2A;&#x601D;&#x8DEF;&#xFF0C;&#x6216;&#x8005;&#x4E5F;&#x53EF;&#x4EE5;&#x8BF4;&#x53EA;&#x662F;etcd+confd&#x914D;&#x7F6E;&#x7BA1;&#x7406;&#x7684;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x800C;&#x5DF2;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x8BB0;&#x5F55;&#x7684;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x90E8;&#x5206;&#x6CA1;&#x6709;&#x4F53;&#x73B0;&#xFF0C;&#x8BF7;&#x4F60;&#x81EA;&#x5DF1;&#x6CE8;&#x610F;&#xFF1B;&#x672C;&#x6587;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;</p>
+</blockquote>
+<h1 id="&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><a href="#&#x5B89;&#x88C5;&#x914D;&#x7F6E;" class="headerlink" title="&#x5B89;&#x88C5;&#x914D;&#x7F6E;"></a>&#x5B89;&#x88C5;&#x914D;&#x7F6E;</h1><h2 id="ansible"><a href="#ansible" class="headerlink" title="ansible"></a>ansible</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install ansible</div></pre></td></tr></table></figure>
+<h2 id="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># /etc/ansible/ansible.cfg</span></div><div class="line">[defaults]</div><div class="line">inventory = /etc/ansible/hosts</div><div class="line">remote_tmp = <span class="variable">$HOME</span>/.ansible/tmp</div><div class="line">roles_path = /data/ansible/roles:/etc/ansible/roles</div><div class="line">transport = smart</div><div class="line">gathering = smart</div><div class="line">fact_caching_timeout = 30</div><div class="line">require_sudo = False</div><div class="line">module_name = shell</div><div class="line">private_key_file = /root/.ssh/id_rsa</div><div class="line">ansible_managed = Ansible managed: {file} modified on %Y-%m-%d %H:%M:%S by {uid} on {host}</div><div class="line">nocolor = 0</div><div class="line">fact_caching = memory</div><div class="line">host_key_checking = False</div><div class="line">timeout = 10</div><div class="line">pattern = *</div><div class="line">forks = 20</div><div class="line">poll_interval = 15</div><div class="line">remote_user = devops</div><div class="line">remote_port = 9555</div><div class="line">log_path = /data/logs/ansible/ansible.log</div><div class="line"></div><div class="line">[inventory]</div><div class="line"></div><div class="line">[privilege_escalation]</div><div class="line">become=True</div><div class="line">become_exe=sudo</div><div class="line">become_method=sudo</div><div class="line">become_user=root</div><div class="line">become_ask_pass=False</div><div class="line"></div><div class="line">[paramiko_connection]</div><div class="line">record_host_keys=False</div><div class="line"></div><div class="line">[ssh_connection]</div><div class="line">pipelining = True</div><div class="line"></div><div class="line">[accelerate]</div><div class="line">accelerate_port = 5099</div><div class="line">accelerate_timeout = 30</div><div class="line">accelerate_connect_timeout = 5.0</div><div class="line">accelerate_daemon_timeout = 30</div></pre></td></tr></table></figure>
+<h1 id="etcd&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><a href="#etcd&#x5B89;&#x88C5;&#x914D;&#x7F6E;" class="headerlink" title="etcd&#x5B89;&#x88C5;&#x914D;&#x7F6E;"></a>etcd&#x5B89;&#x88C5;&#x914D;&#x7F6E;</h1><h2 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">LOCAL_DIR=<span class="string">&quot;/usr/local/src&quot;</span></div><div class="line"></div><div class="line">ETCD_VER=<span class="string">&quot;v3.3.6&quot;</span></div><div class="line">DOWNLOAD_URL=<span class="string">&quot;https://github.com/coreos/etcd/releases/download&quot;</span></div><div class="line"></div><div class="line"><span class="built_in">cd</span> <span class="variable">${LOCAL_DIR}</span> &amp;&amp; curl -L <span class="variable">${DOWNLOAD_URL}</span>/<span class="variable">${ETCD_VER}</span>/etcd-<span class="variable">${ETCD_VER}</span>-linux-amd64.tar.gz -o <span class="variable">${LOCAL_DIR}</span>/etcd-<span class="variable">${ETCD_VER}</span>-linux-amd64.tar.gz</div><div class="line"></div><div class="line">mkdir -p <span class="variable">${LOCAL_DIR}</span>/etcd &amp;&amp; tar xzvf <span class="variable">${LOCAL_DIR}</span>/etcd-<span class="variable">${ETCD_VER}</span>-linux-amd64.tar.gz -C <span class="variable">${LOCAL_DIR}</span>/etcd --strip-components=1</div><div class="line"></div><div class="line"><span class="built_in">cd</span> <span class="variable">${LOCAL_DIR}</span>/etcd/ &amp;&amp; cp etcd etcdctl /usr/<span class="built_in">local</span>/bin</div><div class="line">etcd -version</div></pre></td></tr></table></figure>
+<h2 id="systemd&#x914D;&#x7F6E;"><a href="#systemd&#x914D;&#x7F6E;" class="headerlink" title="systemd&#x914D;&#x7F6E;"></a>systemd&#x914D;&#x7F6E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">mkdir /etc/etcd/</div><div class="line"></div><div class="line">tee /etc/etcd/etcd.conf &lt;&lt;-<span class="string">&apos;EOF&apos;</span></div><div class="line"><span class="comment"># [member]</span></div><div class="line">ETCD_NAME=<span class="string">&quot;infra1&quot;</span></div><div class="line">ETCD_IP=<span class="string">&quot;172.16.1.1&quot;</span></div><div class="line">ETCD_DATA_DIR=<span class="string">&quot;/data/infra.etcd/&quot;</span></div><div class="line"><span class="comment">#ETCD_WAL_DIR=&quot;&quot;</span></div><div class="line"><span class="comment">#ETCD_SNAPSHOT_COUNT=&quot;10000&quot;</span></div><div class="line"><span class="comment">#ETCD_HEARTBEAT_INTERVAL=&quot;100&quot;</span></div><div class="line"><span class="comment">#ETCD_ELECTION_TIMEOUT=&quot;1000&quot;</span></div><div class="line">ETCD_LISTEN_PEER_URLS=<span class="string">&quot;http://172.16.1.1:2380&quot;</span></div><div class="line">ETCD_LISTEN_CLIENT_URLS=<span class="string">&quot;http://172.16.1.1:2379,http://127.0.0.1:2379&quot;</span></div><div class="line"><span class="comment">#ETCD_MAX_SNAPSHOTS=&quot;5&quot;</span></div><div class="line"><span class="comment">#ETCD_MAX_WALS=&quot;5&quot;</span></div><div class="line"><span class="comment">#ETCD_CORS=&quot;&quot;</span></div><div class="line"></div><div class="line"><span class="comment"># [cluster]</span></div><div class="line">ETCD_INITIAL_ADVERTISE_PEER_URLS=<span class="string">&quot;http://172.16.1.1:2380&quot;</span></div><div class="line">ETCD_INITIAL_CLUSTER=<span class="string">&quot;infra1=http://172.16.1.1:2380&quot;</span></div><div class="line">ETCD_INITIAL_CLUSTER_STATE=<span class="string">&quot;new&quot;</span></div><div class="line">ETCD_INITIAL_CLUSTER_TOKEN=<span class="string">&quot;etcd-cluster-test&quot;</span></div><div class="line">ETCD_ADVERTISE_CLIENT_URLS=<span class="string">&quot;http://172.16.1.1:2379&quot;</span></div><div class="line">EOF</div></pre></td></tr></table></figure>
+<p>&#x4FEE;&#x6539; <strong>/usr/lib/systemd/system/etcd.service</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">tee  /usr/lib/systemd/system/etcd.service &lt;&lt;-<span class="string">&apos;EOF&apos;</span></div><div class="line">[Unit]</div><div class="line">Description=Etcd Server</div><div class="line">After=network.target</div><div class="line">After=network-online.target</div><div class="line">Wants=network-online.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=notify</div><div class="line">NotifyAccess=all</div><div class="line">WorkingDirectory=/</div><div class="line">EnvironmentFile=-/etc/etcd/etcd.conf</div><div class="line">User=root</div><div class="line"></div><div class="line"><span class="comment"># set GOMAXPROCS to number of processors</span></div><div class="line">ExecStart=/bin/bash -c <span class="string">&quot;GOMAXPROCS=<span class="variable">$(nproc)</span> /usr/local/bin/etcd --name=\&quot;<span class="variable">${ETCD_NAME}</span>\&quot; --data-dir=\&quot;<span class="variable">${ETCD_DATA_DIR}</span>\&quot; --listen-client-urls=\&quot;<span class="variable">${ETCD_LISTEN_CLIENT_URLS}</span>\&quot; --listen-peer-urls=\&quot;<span class="variable">${ETCD_LISTEN_PEER_URLS}</span>\&quot; --advertise-client-urls=\&quot;<span class="variable">${ETCD_ADVERTISE_CLIENT_URLS}</span>\&quot; --initial-advertise-peer-urls=\&quot;<span class="variable">${ETCD_INITIAL_ADVERTISE_PEER_URLS}</span>\&quot; --initial-cluster=\&quot;<span class="variable">${ETCD_INITIAL_CLUSTER}</span>\&quot; --initial-cluster-state=\&quot;<span class="variable">${ETCD_INITIAL_CLUSTER_STATE}</span>\&quot; --initial-cluster-token=\&quot;<span class="variable">${ETCD_INITIAL_CLUSTER_TOKEN}</span>\&quot;&quot;</span></div><div class="line">Restart=on-failure</div><div class="line">LimitNOFILE=65536</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<p>&#x542F;&#x52A8;&#x670D;&#x52A1;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl <span class="built_in">enable</span> etcd.service</div><div class="line">systemctl start etcd.service</div></pre></td></tr></table></figure>
+<h2 id="&#x914D;&#x7F6E;"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h2><h3 id="etcd&#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7684;api2&#x63A5;&#x53E3;"><a href="#etcd&#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7684;api2&#x63A5;&#x53E3;" class="headerlink" title="etcd&#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7684;api2&#x63A5;&#x53E3;"></a>etcd&#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7684;api2&#x63A5;&#x53E3;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ETCDCTL_API=2</div></pre></td></tr></table></figure>
+<h3 id="&#x521B;&#x5EFA;etcd&#x76EE;&#x5F55;&#x6570;&#x636E;&#x7ED3;&#x6784;"><a href="#&#x521B;&#x5EFA;etcd&#x76EE;&#x5F55;&#x6570;&#x636E;&#x7ED3;&#x6784;" class="headerlink" title="&#x521B;&#x5EFA;etcd&#x76EE;&#x5F55;&#x6570;&#x636E;&#x7ED3;&#x6784;"></a>&#x521B;&#x5EFA;etcd&#x76EE;&#x5F55;&#x6570;&#x636E;&#x7ED3;&#x6784;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">etcdctl mkdir /ansible/default</div><div class="line">etcdctl mkdir /ansible/default/<span class="built_in">test</span></div><div class="line">etcdctl mkdir /ansible/default/dev</div><div class="line">etcdctl mkdir /ansible/default/gamma</div><div class="line">etcdctl mkdir /ansible/default/prod</div><div class="line">etcdctl mkdir /ansible/default/zookeeper</div><div class="line">etcdctl mkdir /ansible/custom</div></pre></td></tr></table></figure>
+<ul>
+<li>/ansible/default/* &#x7528;&#x4E8E;&#x9ED8;&#x8BA4;&#x7684;&#x6570;&#x636E;&#x5B58;&#x50A8;</li>
+<li>/ansible/custom &#x9884;&#x7559;&#x4F5C;&#x4E3A;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x914D;&#x7F6E;</li>
+</ul>
+<h1 id="confd&#x5B89;&#x88C5;&#x914D;&#x7F6E;"><a href="#confd&#x5B89;&#x88C5;&#x914D;&#x7F6E;" class="headerlink" title="confd&#x5B89;&#x88C5;&#x914D;&#x7F6E;"></a>confd&#x5B89;&#x88C5;&#x914D;&#x7F6E;</h1><h2 id="&#x5B89;&#x88C5;-1"><a href="#&#x5B89;&#x88C5;-1" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CONFD_VER=<span class="string">&quot;0.16.0&quot;</span></div><div class="line">curl -L https://github.com/kelseyhightower/confd/releases/download/v<span class="variable">${CONFD_VER}</span>/confd-<span class="variable">${CONFD_VER}</span>-linux-amd64 -o /usr/<span class="built_in">local</span>/bin/confd</div><div class="line"></div><div class="line">chmod +x /usr/<span class="built_in">local</span>/bin/confd</div><div class="line">confd --version</div></pre></td></tr></table></figure>
+<h2 id="&#x914D;&#x7F6E;-1"><a href="#&#x914D;&#x7F6E;-1" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mkdir -p /etc/confd/{conf.d,templates}</div><div class="line"></div><div class="line">tee  /etc/confd/confd.toml &lt;&lt;-<span class="string">&apos;EOF&apos;</span></div><div class="line">backend = <span class="string">&quot;etcd&quot;</span></div><div class="line">confdir = <span class="string">&quot;/etc/confd&quot;</span></div><div class="line"><span class="built_in">log</span>-level = <span class="string">&quot;debug&quot;</span></div><div class="line">interval = 1</div><div class="line">nodes = [</div><div class="line">  <span class="string">&quot;http://0.0.0.0:2379&quot;</span>,</div><div class="line">]</div><div class="line">prefix = <span class="string">&quot;/&quot;</span></div><div class="line">scheme = <span class="string">&quot;https&quot;</span></div><div class="line">EOF</div><div class="line"></div><div class="line"></div><div class="line">tee  /usr/lib/systemd/system/confd.service &lt;&lt;-<span class="string">&apos;EOF&apos;</span></div><div class="line">[Unit]</div><div class="line">Description=Confd Server</div><div class="line">After=etcd.service</div><div class="line"></div><div class="line">[Service]</div><div class="line">User=root</div><div class="line">ExecStart=/usr/<span class="built_in">local</span>/bin/confd</div><div class="line">Restart=always</div><div class="line">LimitNOFILE=65536</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=basic.target</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">cat conf.d/ansible.toml</div><div class="line">[template]</div><div class="line">src = <span class="string">&quot;ansible.cfg.tmpl&quot;</span></div><div class="line">dest = <span class="string">&quot;/etc/ansible/h&quot;</span></div><div class="line">keys = [</div><div class="line">    <span class="string">&quot;/ansible/default&quot;</span>,</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment"># &#x8FD9;&#x91CC;&#x751F;&#x6210;&#x7684;&#x914D;&#x7F6E;/etc/ansible/h &#x6682;&#x65F6;&#x5148;&#x4E0D;&#x751F;&#x6210;&#x6B63;&#x5F0F;&#x7684;inventory&#x914D;&#x7F6E;</span></div><div class="line"></div><div class="line">cat templates/ansible.cfg.tmpl</div><div class="line">{{ range <span class="variable">$dir</span> := lsdir <span class="string">&quot;/ansible/default&quot;</span> -}}</div><div class="line">[{{ base <span class="variable">$dir</span> -}} ]</div><div class="line">{{ <span class="variable">$custdir</span> := <span class="built_in">printf</span> <span class="string">&quot;/ansible/default/%s/*&quot;</span> <span class="variable">$dir</span> -}}</div><div class="line">{{ range gets <span class="variable">$custdir</span> -}}</div><div class="line">{{ <span class="variable">$data</span> := json .Value -}}</div><div class="line">{{ <span class="variable">$data</span>.name }} ansible_ssh_host={{ <span class="variable">$data</span>.ip }}</div><div class="line">{{ end }}</div><div class="line">{{ end }}</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#{{ base .Key }} ansible_ssh_host={{ $data.ip }}</span></div></pre></td></tr></table></figure>
+<h2 id="&#x542F;&#x52A8;"><a href="#&#x542F;&#x52A8;" class="headerlink" title="&#x542F;&#x52A8;"></a>&#x542F;&#x52A8;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl <span class="built_in">enable</span> confd</div><div class="line">systemctl start confd</div></pre></td></tr></table></figure>
+<h1 id="&#x6CE8;&#x518C;&#x811A;&#x672C;"><a href="#&#x6CE8;&#x518C;&#x811A;&#x672C;" class="headerlink" title="&#x6CE8;&#x518C;&#x811A;&#x672C;"></a>&#x6CE8;&#x518C;&#x811A;&#x672C;</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x811A;&#x672C;&#x76EE;&#x524D;&#x5199;&#x7684;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x540E;&#x7EED;&#x8FD8;&#x4F1A;&#x8FDB;&#x884C;&#x4FEE;&#x6539;</span></div><div class="line"><span class="comment"># &#x6211;&#x7684;&#x6240;&#x6709;&#x673A;&#x5668;&#x4E3B;&#x673A;&#x540D;&#x662F;&#x91C7;&#x7528;&#x7684;&#x6807;&#x51C6;&#x5B9A;&#x4E49;&#x683C;&#x5F0F;</span></div><div class="line"><span class="comment"># ecs.ali-bj-vpc.manager.172.16.1.1.ansible</span></div><div class="line">cat set.sh</div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">env=$(hostname | awk -F<span class="string">&apos;.&apos;</span> <span class="string">&apos;{print $3}&apos;</span>)</div><div class="line">ip=$(hostname | awk -F<span class="string">&apos;.&apos;</span> <span class="string">&apos;{print $4&quot;.&quot;$5&quot;.&quot;$6&quot;.&quot;$7}&apos;</span>)</div><div class="line">key=$(hostname | awk -F<span class="string">&apos;.&apos;</span> <span class="string">&apos;{print $NF}&apos;</span>)</div><div class="line">url=<span class="string">&quot;http://172.16.1.1:2379/v2/keys/ansible/default&quot;</span></div><div class="line"><span class="comment">#env=&quot;zookeeper&quot;</span></div><div class="line">curl -X PUT <span class="string">&quot;<span class="variable">${url}</span>/<span class="variable">${env}</span>/<span class="variable">${ip}</span>&quot;</span> <span class="_">-d</span> value=<span class="string">&quot;{\&quot;ip\&quot;:\&quot;<span class="variable">${ip}</span>\&quot;,\&quot;name\&quot;:\&quot;<span class="variable">${env}</span>-<span class="variable">${key}</span>\&quot;}&quot;</span></div><div class="line"><span class="built_in">echo</span> curl -X PUT <span class="string">&quot;<span class="variable">${url}</span>/<span class="variable">${env}</span>/<span class="variable">${ip}</span>&quot;</span> <span class="_">-d</span> value=<span class="string">&quot;{\&quot;ip\&quot;:\&quot;<span class="variable">${ip}</span>\&quot;,\&quot;name\&quot;:\&quot;<span class="variable">${env}</span>-<span class="variable">${key}</span>\&quot;}&quot;</span></div></pre></td></tr></table></figure>
+<h1 id="&#x672A;&#x6765;&#x5C55;&#x671B;"><a href="#&#x672A;&#x6765;&#x5C55;&#x671B;" class="headerlink" title="&#x672A;&#x6765;&#x5C55;&#x671B;"></a>&#x672A;&#x6765;&#x5C55;&#x671B;</h1><ul>
+<li>&#x76EE;&#x524D;&#x6574;&#x4E2A;&#x7ED3;&#x6784;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x751F;&#x6210;&#x7684;inventory&#x6587;&#x4EF6;&#x7ED3;&#x6784;&#x8FD8;&#x5F88;&#x539F;&#x59CB;</li>
+<li>&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x4E2D;&#x540E;&#x7EED;&#x7684;&#x914D;&#x7F6E;&#x8FC7;&#x7A0B;&#x8FD8;&#x662F;&#x6709;&#x4E9B;&#x9EBB;&#x70E6;</li>
+<li>&#x540E;&#x7EED;&#x4F1A;&#x66F4;&#x65B0;&#x7684;&#x4E00;&#x4E9B;&#x529F;&#x80FD;&#xFF08;&#x5982;&#x679C;&#x6709;&#x65F6;&#x95F4;&#x548C;&#x5174;&#x8DA3;&#x7684;&#x8BDD;&#xFF09;<ul>
+<li>&#x6570;&#x636E;&#x4E2D;&#x7AEF;&#x53E3;&#x7684;&#x914D;&#x7F6E;</li>
+<li>&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;custom&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+<li>&#x547D;&#x4EE4;&#x884C;&#x7BA1;&#x7406;&#x5DE5;&#x5177;</li>
+<li>web&#x7BA1;&#x7406;&#x529F;&#x80FD;</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag"># ansible</a>
+          
+            <a href="/tags/etcd/" rel="tag"># etcd</a>
+          
+            <a href="/tags/confd/" rel="tag"># confd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/ansible-install/" rel="next" title="ansible安装配置以及一些常用模块">
+                <i class="fa fa-chevron-left"></i> ansible安装配置以及一些常用模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">101</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要用到的服务"><span class="nav-number">1.1.</span> <span class="nav-text">需要用到的服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析"><span class="nav-number">1.2.</span> <span class="nav-text">原理分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装配置"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ansible"><span class="nav-number">2.1.</span> <span class="nav-text">ansible</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etcd安装配置"><span class="nav-number">3.</span> <span class="nav-text">etcd安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemd配置"><span class="nav-number">3.2.</span> <span class="nav-text">systemd配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etcd采用默认的api2接口"><span class="nav-number">3.3.1.</span> <span class="nav-text">etcd采用默认的api2接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建etcd目录数据结构"><span class="nav-number">3.3.2.</span> <span class="nav-text">创建etcd目录数据结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#confd安装配置"><span class="nav-number">4.</span> <span class="nav-text">confd安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-1"><span class="nav-number">4.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">4.3.</span> <span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册脚本"><span class="nav-number">5.</span> <span class="nav-text">注册脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未来展望"><span class="nav-number">6.</span> <span class="nav-text">未来展望</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
