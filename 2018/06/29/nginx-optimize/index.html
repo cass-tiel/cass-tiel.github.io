@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,nginx," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;&amp;#x8FD9;&amp;#x91CC;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx优化（https，keepalive）">
+<meta property="og:url" content="http://c.isme.pub/2018/06/29/nginx-optimize/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;&amp;#x8FD9;&amp;#x91CC;">
+<meta property="og:updated_time" content="2018-06-29T05:09:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx优化（https，keepalive）">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x672C;&amp;#x6587;&amp;#x8F6C;&amp;#x81EA;&amp;#x8FD9;&amp;#x91CC;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/06/29/nginx-optimize/"/>
+
+
+
+
+
+  <title>nginx优化（https，keepalive） | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/06/29/nginx-optimize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx优化（https，keepalive）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T13:09:09+08:00">
+                2018-06-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-29T13:09:09+08:00">
+                2018-06-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p>&#x672C;&#x6587;&#x8F6C;&#x81EA;<a href="https://lanjingling.github.io/2016/06/11/nginx-https-keepalived-youhua/" target="_blank" rel="external">&#x8FD9;&#x91CC;</a></p>
+</blockquote>
+<a id="more"></a>
+<h1 id="nginx&#x4E4B;tcp-nopush&#x3001;tcp-nodelay&#x3001;sendfile"><a href="#nginx&#x4E4B;tcp-nopush&#x3001;tcp-nodelay&#x3001;sendfile" class="headerlink" title="nginx&#x4E4B;tcp_nopush&#x3001;tcp_nodelay&#x3001;sendfile"></a>nginx&#x4E4B;tcp_nopush&#x3001;tcp_nodelay&#x3001;sendfile</h1><h2 id="TCP-NODELAY"><a href="#TCP-NODELAY" class="headerlink" title="TCP_NODELAY"></a>TCP_NODELAY</h2><p>&#x4F60;&#x600E;&#x4E48;&#x53EF;&#x4EE5;&#x5F3A;&#x5236; socket &#x5728;&#x5B83;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x91CC;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;</p>
+<p>&#x4E00;&#x4E2A;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F; TCP &#x5806;&#x6808;&#x7684; TCP_NODELAY&#x9009;&#x9879;&#x3002;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7ACB;&#x5373;&#x53D1;&#x9001;&#x51FA;&#x53BB;&#x3002;</p>
+<p>Nginx&#x7684; TCP_NODELAY &#x9009;&#x9879;&#x4F7F;&#x5F97;&#x5728;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x65B0;&#x7684; socket &#x65F6;&#x589E;&#x52A0;&#x4E86;TCP_NODELAY&#x9009;&#x9879;&#x3002;&#x4F46;&#x8FD9;&#x65F6;&#x4F1A;&#x9020;&#x6210;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ul>
+<li>&#x7EC8;&#x7AEF;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6BCF;&#x4EA7;&#x751F;&#x4E00;&#x6B21;&#x64CD;&#x4F5C;&#x5C31;&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x5305;</li>
+<li>&#x800C;&#x5178;&#x578B;&#x60C5;&#x51B5;&#x4E0B;&#x4E00;&#x4E2A;&#x5305;&#x4F1A;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x6570;&#x636E;&#x4EE5;&#x53CA;40&#x4E2A;&#x5B57;&#x8282;&#x957F;&#x7684;&#x5305;&#x5934;&#xFF0C;&#x4E8E;&#x662F;&#x4EA7;&#x751F;4000%&#x7684;&#x8FC7;&#x8F7D;&#xFF0C;&#x5F88;&#x8F7B;&#x6613;&#x5730;&#x5C31;&#x80FD;&#x4EE4;&#x7F51;&#x7EDC;&#x53D1;&#x751F;&#x62E5;&#x585E;&#x3002;</li>
+<li>&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;TCP&#x5806;&#x6808;&#x5B9E;&#x73B0;&#x4E86;&#x7B49;&#x5F85;&#x6570;&#x636E; 0.2&#x79D2;&#x949F;&#xFF0C;&#x56E0;&#x6B64;&#x64CD;&#x4F5C;&#x540E;&#x5B83;&#x4E0D;&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5305;&#xFF0C;&#x800C;&#x662F;&#x5C06;&#x8FD9;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x7684;&#x6570;&#x636E;&#x6253;&#x6210;&#x4E00;&#x4E2A;&#x5927;&#x7684;&#x5305;&#x3002;</li>
+<li>&#x8FD9;&#x4E00;&#x673A;&#x5236;&#x662F;&#x7531;Nagle&#x7B97;&#x6CD5;&#x4FDD;&#x8BC1;&#x3002;</li>
+</ul>
+<hr>
+<ul>
+<li>Nagle&#x5316;&#x540E;&#x6765;&#x6210;&#x4E86;&#x4E00;&#x79CD;&#x6807;&#x51C6;&#x5E76;&#x4E14;&#x7ACB;&#x5373;&#x5728;&#x56E0;&#x7279;&#x7F51;&#x4E0A;&#x5F97;&#x4EE5;&#x5B9E;&#x73B0;&#x3002;&#x5B83;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x6210;&#x4E3A;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x4E86;&#xFF0C;&#x4F46;&#x6709;&#x4E9B;&#x573A;&#x5408;&#x4E0B;&#x628A;&#x8FD9;&#x4E00;&#x9009;&#x9879;&#x5173;&#x6389;&#x4E5F;&#x662F;&#x5408;&#x4E4E;&#x9700;&#x8981;&#x7684;&#x3002;</li>
+<li>&#x73B0;&#x5728;&#x5047;&#x8BBE;&#x67D0;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53D1;&#x51FA;&#x4E86;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;&#x5E0C;&#x671B;&#x53D1;&#x9001;&#x5C0F;&#x5757;&#x6570;&#x636E;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x7ACB;&#x5373;&#x53D1;&#x9001;&#x6570;&#x636E;&#x6216;&#x8005;&#x7B49;&#x5F85;&#x4EA7;&#x751F;&#x66F4;&#x591A;&#x7684;&#x6570;&#x636E;&#x7136;&#x540E;&#x518D;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x4E24;&#x79CD;&#x7B56;&#x7565;&#x3002; </li>
+<li>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x9A6C;&#x4E0A;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48;&#x4EA4;&#x4E92;&#x6027;&#x7684;&#x4EE5;&#x53CA;&#x5BA2;&#x6237;/&#x670D;&#x52A1;&#x5668;&#x578B;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5C06;&#x6781;&#x5927;&#x5730;&#x53D7;&#x76CA;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x7ACB;&#x5373;&#x53D1;&#x51FA;&#x90A3;&#x4E48;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x4E5F;&#x4F1A;&#x5FEB;&#x4E00;&#x4E9B;&#x3002;</li>
+<li>&#x4EE5;&#x4E0A;&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x5957;&#x63A5;&#x5B57;&#x7684; TCP_NODELAY = on &#x9009;&#x9879;&#x6765;&#x5B8C;&#x6210;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x7981;&#x7528;&#x4E86;Nagle &#x7B97;&#x6CD5;&#x3002;&#xFF08;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;0.2s&#xFF09;</li>
+</ul>
+<h2 id="TCP-NOPUSH"><a href="#TCP-NOPUSH" class="headerlink" title="TCP_NOPUSH"></a>TCP_NOPUSH</h2><p>&#x5728; nginx &#x4E2D;&#xFF0C;tcp_nopush &#x914D;&#x7F6E;&#x548C; tcp_nodelay &#x201C;&#x4E92;&#x65A5;&#x201D;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x6570;&#x636E;&#x7684;&#x5305;&#x5927;&#x5C0F;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5B83;&#x4E0D;&#x662F;&#x6309;&#x65F6;&#x95F4;&#x7D2F;&#x8BA1; 0.2 &#x79D2;&#x540E;&#x53D1;&#x9001;&#x5305;&#xFF0C;&#x800C;&#x662F;&#x5F53;&#x5305;&#x7D2F;&#x8BA1;&#x5230;&#x4E00;&#x5B9A;&#x5927;&#x5C0F;&#x540E;&#x5C31;&#x53D1;&#x9001;&#x3002;</p>
+<blockquote>
+<p>&#x6CE8;&#xFF1A;&#x5728; nginx &#x4E2D;&#xFF0C;tcp_nopush &#x5FC5;&#x987B;&#x548C; sendfile &#x642D;&#x914D;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<h1 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile"></a>sendfile</h1><p>&#x73B0;&#x5728;&#x6D41;&#x884C;&#x7684;web &#x670D;&#x52A1;&#x5668;&#x91CC;&#x9762;&#x90FD;&#x63D0;&#x4F9B; sendfile&#x9009;&#x9879;&#x7528;&#x6765;&#x63D0;&#x9AD8;&#x670D;&#x52A1;&#x5668;&#x6027;&#x80FD;&#xFF0C;&#x90A3;&#x5230;&#x5E95; sendfile&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x600E;&#x4E48;&#x5F71;&#x54CD;&#x6027;&#x80FD;&#x7684;&#x5462;&#xFF1F;</p>
+<p>sendfile&#x5B9E;&#x9645;&#x4E0A;&#x662F; Linux2.0+&#x4EE5;&#x540E;&#x7684;&#x63A8;&#x51FA;&#x7684;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;web&#x670D;&#x52A1;&#x5668;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x6574;&#x81EA;&#x8EAB;&#x7684;&#x914D;&#x7F6E;&#x6765;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5229;&#x7528; sendfile&#x8FD9;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x4E0D;&#x7528; sendfile&#x7684;&#x4F20;&#x7EDF;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">read(file,tmp_buf, len);</div><div class="line">write(socket,tmp_buf, len);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x786C;&#x76D8; &gt;&gt; kernel buffer &gt;&gt; user buffer&gt;&gt; kernel socket buffer &gt;&gt;&#x534F;&#x8BAE;&#x6808;</p>
+</blockquote>
+<h2 id="&#x4E00;&#x822C;&#x6765;&#x8BF4;"><a href="#&#x4E00;&#x822C;&#x6765;&#x8BF4;" class="headerlink" title="&#x4E00;&#x822C;&#x6765;&#x8BF4;"></a>&#x4E00;&#x822C;&#x6765;&#x8BF4;</h2><p>&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x5E94;&#x7528;&#x662F;&#x901A;&#x8FC7;&#x8BFB;&#x786C;&#x76D8;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x5199;&#x6570;&#x636E;&#x5230;socket &#x6765;&#x5B8C;&#x6210;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x7684;&#x3002;&#x4E0A;&#x9762;2&#x884C;&#x7528;&#x4EE3;&#x7801;&#x89E3;&#x91CA;&#x4E86;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0A;&#x9762;2&#x884C;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x63A9;&#x76D6;&#x4E86;&#x5E95;&#x5C42;&#x7684;&#x5F88;&#x591A;&#x64CD;&#x4F5C;&#x3002;&#x6765;&#x770B;&#x770B;&#x5E95;&#x5C42;&#x662F;&#x600E;&#x4E48;&#x6267;&#x884C;&#x4E0A;&#x9762;2&#x884C;&#x4EE3;&#x7801;&#x7684;&#xFF1A;</p>
+<ul>
+<li>&#x7CFB;&#x7EDF;&#x8C03;&#x7528; read()&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF1A;&#x4ECE; user mode &#x5207;&#x6362;&#x5230; kernel mode&#xFF0C;&#x7136;&#x540E; DMA &#x6267;&#x884C;&#x62F7;&#x8D1D;&#xFF0C;&#x628A;&#x6587;&#x4EF6;&#x6570;&#x636E;&#x4ECE;&#x786C;&#x76D8;&#x8BFB;&#x5230;&#x4E00;&#x4E2A; kernel buffer &#x91CC;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x4ECE; kernel buffer&#x62F7;&#x8D1D;&#x5230; user buffer&#xFF0C;&#x7136;&#x540E;&#x7CFB;&#x7EDF;&#x8C03;&#x7528; read() &#x8FD4;&#x56DE;&#xFF0C;&#x8FD9;&#x65F6;&#x53C8;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF1A;&#x4ECE;kernel mode &#x5207;&#x6362;&#x5230; user mode&#x3002;</li>
+<li>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;write()&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF1A;&#x4ECE; user mode&#x5207;&#x6362;&#x5230; kernel mode&#xFF0C;&#x7136;&#x540E;&#x628A;&#x6B65;&#x9AA4;2&#x8BFB;&#x5230; user buffer&#x7684;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x5230; kernel buffer&#xFF08;&#x6570;&#x636E;&#x7B2C;2&#x6B21;&#x62F7;&#x8D1D;&#x5230; kernel buffer&#xFF09;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x6B21;&#x662F;&#x4E2A;&#x4E0D;&#x540C;&#x7684; kernel buffer&#xFF0C;&#x8FD9;&#x4E2A; buffer&#x548C; socket&#x76F8;&#x5173;&#x8054;&#x3002;</li>
+<li>&#x7CFB;&#x7EDF;&#x8C03;&#x7528; write()&#x8FD4;&#x56DE;&#xFF0C;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF1A;&#x4ECE; kernel mode &#x5207;&#x6362;&#x5230; user mode&#xFF08;&#x7B2C;4&#x6B21;&#x5207;&#x6362;&#x4E86;&#xFF09;&#xFF0C;&#x7136;&#x540E; DMA &#x4ECE; kernel buffer&#x62F7;&#x8D1D;&#x6570;&#x636E;&#x5230;&#x534F;&#x8BAE;&#x6808;&#xFF08;&#x7B2C;4&#x6B21;&#x62F7;&#x8D1D;&#x4E86;&#xFF09;&#x3002;</li>
+</ul>
+<p>&#x4E0A;&#x9762;4&#x4E2A;&#x6B65;&#x9AA4;&#x6709;4&#x6B21;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF0C;&#x6709;4&#x6B21;&#x62F7;&#x8D1D;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x5982;&#x679C;&#x80FD;&#x51CF;&#x5C11;&#x5207;&#x6362;&#x6B21;&#x6570;&#x548C;&#x62F7;&#x8D1D;&#x6B21;&#x6570;&#x5C06;&#x4F1A;&#x6709;&#x6548;&#x63D0;&#x5347;&#x6027;&#x80FD;&#x3002;&#x5728;kernel2.0+ &#x7248;&#x672C;&#x4E2D;&#xFF0C;&#x7CFB;&#x7EDF;&#x8C03;&#x7528; sendfile() &#x5C31;&#x662F;&#x7528;&#x6765;&#x7B80;&#x5316;&#x4E0A;&#x9762;&#x6B65;&#x9AA4;&#x63D0;&#x5347;&#x6027;&#x80FD;&#x7684;&#x3002;sendfile() &#x4E0D;&#x4F46;&#x80FD;&#x51CF;&#x5C11;&#x5207;&#x6362;&#x6B21;&#x6570;&#x800C;&#x4E14;&#x8FD8;&#x80FD;&#x51CF;&#x5C11;&#x62F7;&#x8D1D;&#x6B21;&#x6570;&#x3002;</p>
+<h2 id="&#x518D;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x7528;-sendfile-&#x6765;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x7684;&#x8FC7;&#x7A0B;&#xFF1A;"><a href="#&#x518D;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x7528;-sendfile-&#x6765;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x7684;&#x8FC7;&#x7A0B;&#xFF1A;" class="headerlink" title="&#x518D;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x7528; sendfile()&#x6765;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x7684;&#x8FC7;&#x7A0B;&#xFF1A;"></a>&#x518D;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x7528; sendfile()&#x6765;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x7684;&#x8FC7;&#x7A0B;&#xFF1A;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sendfile(socket,file, len);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x786C;&#x76D8; &gt;&gt; kernel buffer (&#x5FEB;&#x901F;&#x62F7;&#x8D1D;&#x5230;kernelsocket buffer) &gt;&gt;&#x534F;&#x8BAE;&#x6808;</p>
+</blockquote>
+<ul>
+<li>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;sendfile()&#x901A;&#x8FC7; DMA&#x628A;&#x786C;&#x76D8;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x5230; kernel buffer&#xFF0C;&#x7136;&#x540E;&#x6570;&#x636E;&#x88AB; kernel&#x76F4;&#x63A5;&#x62F7;&#x8D1D;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x4E0E; socket&#x76F8;&#x5173;&#x7684; kernel buffer&#x3002;&#x8FD9;&#x91CC;&#x6CA1;&#x6709; user mode&#x548C; kernel mode&#x4E4B;&#x95F4;&#x7684;&#x5207;&#x6362;&#xFF0C;&#x5728; kernel&#x4E2D;&#x76F4;&#x63A5;&#x5B8C;&#x6210;&#x4E86;&#x4ECE;&#x4E00;&#x4E2A; buffer&#x5230;&#x53E6;&#x4E00;&#x4E2A; buffer&#x7684;&#x62F7;&#x8D1D;&#x3002;</li>
+<li>DMA &#x628A;&#x6570;&#x636E;&#x4ECE; kernelbuffer &#x76F4;&#x63A5;&#x62F7;&#x8D1D;&#x7ED9;&#x534F;&#x8BAE;&#x6808;&#xFF0C;&#x6CA1;&#x6709;&#x5207;&#x6362;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x6570;&#x636E;&#x4ECE; user mode &#x62F7;&#x8D1D;&#x5230; kernel mode&#xFF0C;&#x56E0;&#x4E3A;&#x6570;&#x636E;&#x5C31;&#x5728; kernel &#x91CC;&#x3002;</li>
+</ul>
+<p>&#x6B65;&#x9AA4;&#x51CF;&#x5C11;&#x4E86;&#xFF0C;&#x5207;&#x6362;&#x51CF;&#x5C11;&#x4E86;&#xFF0C;&#x62F7;&#x8D1D;&#x51CF;&#x5C11;&#x4E86;&#xFF0C;&#x81EA;&#x7136;&#x6027;&#x80FD;&#x5C31;&#x63D0;&#x5347;&#x4E86;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x8BF4;&#x5728;Nginx &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x6253;&#x5F00; sendfile on &#x9009;&#x9879;&#x80FD;&#x63D0;&#x9AD8; web server&#x6027;&#x80FD;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<blockquote>
+<p>&#x7EFC;&#x4E0A;&#xFF0C;&#x8FD9;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x90FD;&#x5E94;&#x8BE5;&#x914D;&#x7F6E;&#x6210;on&#xFF1A;sendfile on; tcp_nopush on; tcp_nodelay on;</p>
+</blockquote>
+<h1 id="nginx&#x957F;&#x8FDE;&#x63A5;&#x2014;&#x2014;keepalive"><a href="#nginx&#x957F;&#x8FDE;&#x63A5;&#x2014;&#x2014;keepalive" class="headerlink" title="nginx&#x957F;&#x8FDE;&#x63A5;&#x2014;&#x2014;keepalive"></a>nginx&#x957F;&#x8FDE;&#x63A5;&#x2014;&#x2014;keepalive</h1><p>&#x5F53;&#x4F7F;&#x7528;nginx&#x4F5C;&#x4E3A;&#x53CD;&#x5411;&#x4EE3;&#x7406;&#x65F6;&#xFF0C;&#x4E3A;&#x4E86;&#x652F;&#x6301;&#x957F;&#x8FDE;&#x63A5;&#xFF0C;&#x9700;&#x8981;&#x505A;&#x5230;&#x4E24;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x4ECE;client&#x5230;nginx&#x7684;&#x8FDE;&#x63A5;&#x662F;&#x957F;&#x8FDE;&#x63A5;</li>
+<li>&#x4ECE;nginx&#x5230;server&#x7684;&#x8FDE;&#x63A5;&#x662F;&#x957F;&#x8FDE;&#x63A5;</li>
+</ul>
+<h2 id="&#x4FDD;&#x6301;&#x548C;client&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;"><a href="#&#x4FDD;&#x6301;&#x548C;client&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;" class="headerlink" title="&#x4FDD;&#x6301;&#x548C;client&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;"></a>&#x4FDD;&#x6301;&#x548C;client&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;</h2><ul>
+<li>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;nginx&#x5DF2;&#x7ECF;&#x81EA;&#x52A8;&#x5F00;&#x542F;&#x4E86;&#x5BF9;client&#x8FDE;&#x63A5;&#x7684;keep alive&#x652F;&#x6301;&#xFF08;&#x540C;&#x65F6;client&#x53D1;&#x9001;&#x7684;HTTP&#x8BF7;&#x6C42;&#x8981;&#x6C42;keep alive&#xFF09;&#x3002;</li>
+<li>&#x4E00;&#x822C;&#x573A;&#x666F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x6BD4;&#x8F83;&#x7279;&#x6B8A;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x8FD8;&#x662F;&#x6709;&#x5FC5;&#x8981;&#x8C03;&#x6574;&#x4E2A;&#x522B;&#x53C2;&#x6570;&#xFF08;keepalive_timeout&#x548C;keepalive_requests&#xFF09;&#x3002;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">http {</div><div class="line">    keepalive_timeout  120s 120s;</div><div class="line">    keepalive_requests 10000;</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="keepalive-timeout"><a href="#keepalive-timeout" class="headerlink" title="keepalive_timeout"></a>keepalive_timeout</h3><p>&#x8BED;&#x6CD5;:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keepalive_timeout timeout [header_timeout];</div></pre></td></tr></table></figure>
+<ul>
+<li>&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x8BBE;&#x7F6E;keep-alive&#x5BA2;&#x6237;&#x7AEF;&#x8FDE;&#x63A5;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4FDD;&#x6301;&#x5F00;&#x542F;&#x7684;&#x8D85;&#x65F6;&#x503C;&#xFF08;&#x9ED8;&#x8BA4;75s&#xFF09;&#xFF1B;&#x503C;&#x4E3A;0&#x4F1A;&#x7981;&#x7528;keep-alive&#x5BA2;&#x6237;&#x7AEF;&#x8FDE;&#x63A5;&#xFF1B;</li>
+<li>&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x53EF;&#x9009;&#x3001;&#x5728;&#x54CD;&#x5E94;&#x7684;header&#x57DF;&#x4E2D;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x503C;&#x201C;Keep-Alive: timeout=time&#x201D;&#xFF1B;&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;&#xFF1B;</li>
+</ul>
+<blockquote>
+<p>&#x6CE8;&#xFF1A;keepalive_timeout&#x9ED8;&#x8BA4;75s&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x4E5F;&#x591F;&#x7528;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x8BF7;&#x6C42;&#x6BD4;&#x8F83;&#x5927;&#x7684;&#x5185;&#x90E8;&#x670D;&#x52A1;&#x5668;&#x901A;&#x8BAF;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x9002;&#x5F53;&#x52A0;&#x5927;&#x4E3A;120s&#x6216;&#x8005;300s&#xFF1B;</p>
+</blockquote>
+<h3 id="keepalive-requests"><a href="#keepalive-requests" class="headerlink" title="keepalive_requests"></a>keepalive_requests</h3><ul>
+<li>keepalive_requests&#x6307;&#x4EE4;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;keep-alive&#x8FDE;&#x63A5;&#x4E0A;&#x53EF;&#x4EE5;&#x670D;&#x52A1;&#x7684;&#x8BF7;&#x6C42;&#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#xFF0C;&#x5F53;&#x6700;&#x5927;&#x8BF7;&#x6C42;&#x6570;&#x91CF;&#x8FBE;&#x5230;&#x65F6;&#xFF0C;&#x8FDE;&#x63A5;&#x88AB;&#x5173;&#x95ED;&#x3002;&#x9ED8;&#x8BA4;&#x662F;100&#x3002;</li>
+<li>&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;&#xFF0C;&#x662F;&#x6307;&#x4E00;&#x4E2A;keep alive&#x5EFA;&#x7ACB;&#x4E4B;&#x540E;&#xFF0C;nginx&#x5C31;&#x4F1A;&#x4E3A;&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x8BB0;&#x5F55;&#x8FD9;&#x4E2A;keep alive&#x7684;&#x957F;&#x8FDE;&#x63A5;&#x4E0A;&#x5DF2;&#x7ECF;&#x63A5;&#x6536;&#x5E76;&#x5904;&#x7406;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x7684;&#x6570;&#x91CF;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x8FBE;&#x5230;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x7684;&#x6700;&#x5927;&#x503C;&#x65F6;&#xFF0C;&#x5219;nginx&#x4F1A;&#x5F3A;&#x884C;&#x5173;&#x95ED;&#x8FD9;&#x4E2A;&#x957F;&#x8FDE;&#x63A5;&#xFF0C;&#x903C;&#x8FEB;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x5F97;&#x4E0D;&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x65B0;&#x7684;&#x957F;&#x8FDE;&#x63A5;&#x3002;</li>
+<li>&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x5F53;QPS(&#x6BCF;&#x79D2;&#x8BF7;&#x6C42;&#x6570;)&#x4E0D;&#x662F;&#x5F88;&#x9AD8;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;100&#x51D1;&#x5408;&#x591F;&#x7528;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;QPS&#x6BD4;&#x8F83;&#x9AD8;&#xFF08;&#x6BD4;&#x5982;&#x8D85;&#x8FC7;10000QPS&#xFF0C;&#x751A;&#x81F3;&#x8FBE;&#x5230;30000,50000&#x751A;&#x81F3;&#x66F4;&#x9AD8;) &#x7684;&#x573A;&#x666F;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;100&#x5C31;&#x663E;&#x5F97;&#x592A;&#x4F4E;&#x3002;</li>
+<li>&#x7B80;&#x5355;&#x8BA1;&#x7B97;&#x4E00;&#x4E0B;&#xFF0C;QPS=10000&#x65F6;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6BCF;&#x79D2;&#x53D1;&#x9001;10000&#x4E2A;&#x8BF7;&#x6C42;(&#x901A;&#x5E38;&#x5EFA;&#x7ACB;&#x6709;&#x591A;&#x4E2A;&#x957F;&#x8FDE;&#x63A5;)&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDE;&#x63A5;&#x53EA;&#x80FD;&#x6700;&#x591A;&#x8DD1;100&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x5E73;&#x5747;&#x6BCF;&#x79D2;&#x949F;&#x5C31;&#x4F1A;&#x6709;100&#x4E2A;&#x957F;&#x8FDE;&#x63A5;&#x56E0;&#x6B64;&#x88AB;nginx&#x5173;&#x95ED;&#x3002;</li>
+<li>&#x540C;&#x6837;&#x610F;&#x5473;&#x7740;&#x4E3A;&#x4E86;&#x4FDD;&#x6301;QPS&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x5F97;&#x4E0D;&#x6BCF;&#x79D2;&#x4E2D;&#x91CD;&#x65B0;&#x65B0;&#x5EFA;100&#x4E2A;&#x8FDE;&#x63A5;&#x3002;</li>
+<li>&#x56E0;&#x6B64;&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x6709;&#x5927;&#x91CF;&#x7684;TIME_WAIT&#x7684;socket&#x8FDE;&#x63A5;(&#x5373;&#x4F7F;&#x6B64;&#x65F6;keep alive&#x5DF2;&#x7ECF;&#x5728;client&#x548C;nginx&#x4E4B;&#x95F4;&#x751F;&#x6548;)&#x3002;&#x56E0;&#x6B64;&#x5BF9;&#x4E8E;QPS&#x8F83;&#x9AD8;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x975E;&#x5E38;&#x6709;&#x5FC5;&#x8981;&#x52A0;&#x5927;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x51FA;&#x73B0;&#x5927;&#x91CF;&#x8FDE;&#x63A5;&#x88AB;&#x751F;&#x6210;&#x518D;&#x629B;&#x5F03;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x51CF;&#x5C11;TIME_WAIT&#x3002;</li>
+</ul>
+<h2 id="&#x4FDD;&#x6301;&#x548C;server&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;"><a href="#&#x4FDD;&#x6301;&#x548C;server&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;" class="headerlink" title="&#x4FDD;&#x6301;&#x548C;server&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;"></a>&#x4FDD;&#x6301;&#x548C;server&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF1A;</h2><p>&#x4E3A;&#x4E86;&#x8BA9;nginx&#x548C;&#x540E;&#x7AEF;server&#xFF08;nginx&#x79F0;&#x4E3A;upstream&#xFF09;&#x4E4B;&#x95F4;&#x4FDD;&#x6301;&#x957F;&#x8FDE;&#x63A5;&#xFF0C;&#x5178;&#x578B;&#x8BBE;&#x7F6E;&#x5982;&#x4E0B;&#xFF1A;&#xFF08;&#x9ED8;&#x8BA4;nginx&#x8BBF;&#x95EE;&#x540E;&#x7AEF;&#x90FD;&#x662F;&#x7528;&#x7684;&#x77ED;&#x8FDE;&#x63A5;(HTTP1.0)&#xFF0C;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x6765;&#x4E86;&#xFF0C;Nginx &#x65B0;&#x5F00;&#x4E00;&#x4E2A;&#x7AEF;&#x53E3;&#x548C;&#x540E;&#x7AEF;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF0C;&#x540E;&#x7AEF;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x4E3B;&#x52A8;&#x5173;&#x95ED;&#x8BE5;&#x94FE;&#x63A5;&#xFF09;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">http {</div><div class="line">    upstream  BACKEND {</div><div class="line">        server   192.168.0.1&#xFF1A;8080  weight=1 max_fails=2 fail_timeout=30s;</div><div class="line">        server   192.168.0.2&#xFF1A;8080  weight=1 max_fails=2 fail_timeout=30s;</div><div class="line">        keepalive 300;        // &#x8FD9;&#x4E2A;&#x5F88;&#x91CD;&#x8981;&#xFF01;</div><div class="line">    }</div><div class="line">server {</div><div class="line">        listen 8080 default_server;</div><div class="line">        server_name &quot;&quot;;</div><div class="line">        location /  {</div><div class="line">            proxy_pass http://BACKEND;</div><div class="line">            proxy_set_header Host  $Host;</div><div class="line">            proxy_set_header x-forwarded-for $remote_addr;</div><div class="line">            proxy_set_header X-Real-IP $remote_addr;</div><div class="line">            add_header Cache-Control no-store;</div><div class="line">            add_header Pragma  no-cache;</div><div class="line">            proxy_http_version 1.1;         // &#x8FD9;&#x4E24;&#x4E2A;&#x6700;&#x597D;&#x4E5F;&#x8BBE;&#x7F6E;</div><div class="line">            proxy_set_header Connection &quot;&quot;;</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="location&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#xFF1A;"><a href="#location&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#xFF1A;" class="headerlink" title="location&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#xFF1A;"></a>location&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">http {</div><div class="line">    server {</div><div class="line">        location /  {</div><div class="line">            proxy_http_version 1.1; // &#x8FD9;&#x4E24;&#x4E2A;&#x6700;&#x597D;&#x4E5F;&#x8BBE;&#x7F6E;</div><div class="line">            proxy_set_header Connection &quot;&quot;;</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>HTTP&#x534F;&#x8BAE;&#x4E2D;&#x5BF9;&#x957F;&#x8FDE;&#x63A5;&#x7684;&#x652F;&#x6301;&#x662F;&#x4ECE;1.1&#x7248;&#x672C;&#x4E4B;&#x540E;&#x624D;&#x6709;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6700;&#x597D;&#x901A;&#x8FC7;proxy_http_version&#x6307;&#x4EE4;&#x8BBE;&#x7F6E;&#x4E3A;&#x201D;1.1&#x201D;&#xFF1B;<br>&#x800C;&#x201D;Connection&#x201D; header&#x5E94;&#x8BE5;&#x88AB;&#x6E05;&#x7406;&#x3002;&#x6E05;&#x7406;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x6211;&#x7684;&#x7406;&#x89E3;&#xFF0C;&#x662F;&#x6E05;&#x7406;&#x4ECE;client&#x8FC7;&#x6765;&#x7684;http header&#xFF0C;&#x56E0;&#x4E3A;&#x5373;&#x4F7F;&#x662F;client&#x548C;nginx&#x4E4B;&#x95F4;&#x662F;&#x77ED;&#x8FDE;&#x63A5;&#xFF0C;nginx&#x548C;upstream&#x4E4B;&#x95F4;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x5F00;&#x542F;&#x957F;&#x8FDE;&#x63A5;&#x7684;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x5FC5;&#x987B;&#x6E05;&#x7406;&#x6765;&#x81EA;client&#x8BF7;&#x6C42;&#x4E2D;&#x7684;&#x201D;Connection&#x201D; header&#x3002;<br>2&#xFF09;upstream&#x4E2D;&#x7684;keepalive&#x8BBE;&#x7F6E;&#xFF1A;<br>&#x6B64;&#x5904;keepalive&#x7684;&#x542B;&#x4E49;&#x4E0D;&#x662F;&#x5F00;&#x542F;&#x3001;&#x5173;&#x95ED;&#x957F;&#x8FDE;&#x63A5;&#x7684;&#x5F00;&#x5173;&#xFF1B;&#x4E5F;&#x4E0D;&#x662F;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x7684;timeout&#xFF1B;&#x66F4;&#x4E0D;&#x662F;&#x8BBE;&#x7F6E;&#x957F;&#x8FDE;&#x63A5;&#x6C60;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#x3002;&#x5B98;&#x65B9;&#x89E3;&#x91CA;&#xFF1A;</p>
+<p>The connections parameter sets the maximum number of idle keepalive connections to upstream servers connections&#xFF08;&#x8BBE;&#x7F6E;&#x5230;upstream&#x670D;&#x52A1;&#x5668;&#x7684;&#x7A7A;&#x95F2;keepalive&#x8FDE;&#x63A5;&#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#xFF09;<br>When this number is exceeded, the least recently used connections are closed. &#xFF08;&#x5F53;&#x8FD9;&#x4E2A;&#x6570;&#x91CF;&#x88AB;&#x7A81;&#x7834;&#x65F6;&#xFF0C;&#x6700;&#x8FD1;&#x4F7F;&#x7528;&#x6700;&#x5C11;&#x7684;&#x8FDE;&#x63A5;&#x5C06;&#x88AB;&#x5173;&#x95ED;&#xFF09;<br>It should be particularly noted that the keepalive directive does not limit the total number of connections to upstream servers that an nginx worker process can open.&#xFF08;&#x7279;&#x522B;&#x63D0;&#x9192;&#xFF1A;keepalive&#x6307;&#x4EE4;&#x4E0D;&#x4F1A;&#x9650;&#x5236;&#x4E00;&#x4E2A;nginx worker&#x8FDB;&#x7A0B;&#x5230;upstream&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x7684;&#x603B;&#x6570;&#x91CF;&#xFF09;<br>&#x6211;&#x4EEC;&#x5148;&#x5047;&#x8BBE;&#x4E00;&#x4E2A;&#x573A;&#x666F;&#xFF1A; &#x6709;&#x4E00;&#x4E2A;HTTP&#x670D;&#x52A1;&#xFF0C;&#x4F5C;&#x4E3A;upstream&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#xFF0C;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x4E3A;100&#x6BEB;&#x79D2;&#x3002;&#x5982;&#x679C;&#x8981;&#x8FBE;&#x5230;10000 QPS&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5728;nginx&#x548C;upstream&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x5EFA;&#x7ACB;&#x5927;&#x7EA6;1000&#x6761;HTTP&#x8FDE;&#x63A5;&#x3002;nginx&#x4E3A;&#x6B64;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x6C60;&#xFF0C;&#x7136;&#x540E;&#x8BF7;&#x6C42;&#x8FC7;&#x6765;&#x65F6;&#x4E3A;&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#xFF0C;&#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x65F6;&#x56DE;&#x6536;&#x8FDE;&#x63A5;&#x653E;&#x5165;&#x8FDE;&#x63A5;&#x6C60;&#x4E2D;&#xFF0C;&#x8FDE;&#x63A5;&#x7684;&#x72B6;&#x6001;&#x4E5F;&#x5C31;&#x66F4;&#x6539;&#x4E3A;idle&#x3002;&#x6211;&#x4EEC;&#x518D;&#x5047;&#x8BBE;&#x8FD9;&#x4E2A;upstream&#x670D;&#x52A1;&#x5668;&#x7684;keepalive&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x6BD4;&#x8F83;&#x5C0F;&#xFF0C;&#x6BD4;&#x5982;&#x5E38;&#x89C1;&#x7684;10.</p>
+<p>A&#x3001;&#x5047;&#x8BBE;&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;&#x662F;&#x5747;&#x5300;&#x800C;&#x5E73;&#x7A33;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;1000&#x6761;&#x8FDE;&#x63A5;&#x5E94;&#x8BE5;&#x90FD;&#x662F;&#x4E00;&#x653E;&#x56DE;&#x8FDE;&#x63A5;&#x6C60;&#x5C31;&#x7ACB;&#x5373;&#x88AB;&#x540E;&#x7EED;&#x8BF7;&#x6C42;&#x7533;&#x8BF7;&#x4F7F;&#x7528;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;idle&#x7EBF;&#x7A0B;&#x4F1A;&#x975E;&#x5E38;&#x7684;&#x5C11;&#xFF0C;&#x8D8B;&#x8FDB;&#x4E8E;&#x96F6;&#xFF0C;&#x4E0D;&#x4F1A;&#x9020;&#x6210;&#x8FDE;&#x63A5;&#x6570;&#x91CF;&#x53CD;&#x590D;&#x9707;&#x8361;&#x3002;</p>
+<p>B&#x3001;&#x663E;&#x793A;&#x4E2D;&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;&#x4E0D;&#x53EF;&#x80FD;&#x5E73;&#x7A33;&#xFF0C;&#x6211;&#x4EEC;&#x4EE5;10&#x6BEB;&#x79D2;&#x4E3A;&#x4E00;&#x4E2A;&#x5355;&#x4F4D;&#xFF0C;&#x6765;&#x770B;&#x8FDE;&#x63A5;&#x7684;&#x60C5;&#x51B5;(&#x6CE8;&#x610F;&#x573A;&#x666F;&#x662F;1000&#x4E2A;&#x7EBF;&#x7A0B;+100&#x6BEB;&#x79D2;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#xFF0C;&#x6BCF;&#x79D2;&#x6709;10000&#x4E2A;&#x8BF7;&#x6C42;&#x5B8C;&#x6210;)&#xFF0C;&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x5E94;&#x7B54;&#x59CB;&#x7EC8;&#x90FD;&#x662F;&#x5E73;&#x7A33;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x8BF7;&#x6C42;&#x4E0D;&#x5E73;&#x7A33;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;10&#x6BEB;&#x79D2;&#x53EA;&#x6709;50,&#x7B2C;&#x4E8C;&#x4E2A;10&#x6BEB;&#x79D2;&#x6709;150&#xFF1A;</p>
+<p>&#x4E0B;&#x4E00;&#x4E2A;10&#x6BEB;&#x79D2;&#xFF0C;&#x6709;100&#x4E2A;&#x8FDE;&#x63A5;&#x7ED3;&#x675F;&#x8BF7;&#x6C42;&#x56DE;&#x6536;&#x8FDE;&#x63A5;&#x5230;&#x8FDE;&#x63A5;&#x6C60;&#xFF0C;&#x4F46;&#x662F;&#x5047;&#x8BBE;&#x6B64;&#x65F6;&#x8BF7;&#x6C42;&#x4E0D;&#x5747;&#x5300;10&#x6BEB;&#x79D2;&#x5185;&#x6CA1;&#x6709;&#x9884;&#x8BA1;&#x7684;100&#x4E2A;&#x8BF7;&#x6C42;&#x8FDB;&#x6765;&#xFF0C;&#x800C;&#x662F;&#x53EA;&#x6709;50&#x4E2A;&#x8BF7;&#x6C42;&#x3002;&#x6CE8;&#x610F;&#x6B64;&#x65F6;&#x8FDE;&#x63A5;&#x6C60;&#x56DE;&#x6536;&#x4E86;100&#x4E2A;&#x8FDE;&#x63A5;&#x53C8;&#x5206;&#x914D;&#x51FA;&#x53BB;50&#x4E2A;&#x8FDE;&#x63A5;&#xFF0C;&#x56E0;&#x6B64;&#x8FDE;&#x63A5;&#x6C60;&#x5185;&#x6709;50&#x4E2A;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x3002;<br>&#x7136;&#x540E;&#x6CE8;&#x610F;&#x770B;keepalive=10&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x8FDE;&#x63A5;&#x6C60;&#x4E2D;&#x6700;&#x591A;&#x5BB9;&#x8BB8;&#x4FDD;&#x7559;&#x6709;10&#x4E2A;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x3002;&#x56E0;&#x6B64;nginx&#x4E0D;&#x5F97;&#x4E0D;&#x5C06;&#x8FD9;50&#x4E2A;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x4E2D;&#x7684;40&#x4E2A;&#x5173;&#x95ED;&#xFF0C;&#x53EA;&#x7559;&#x4E0B;10&#x4E2A;&#x3002;<br>&#x518D;&#x4E0B;&#x4E00;&#x4E2A;10&#x4E2A;&#x6BEB;&#x79D2;&#xFF0C;&#x6709;150&#x4E2A;&#x8BF7;&#x6C42;&#x8FDB;&#x6765;&#xFF0C;&#x6709;100&#x4E2A;&#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x4EFB;&#x52A1;&#x91CA;&#x653E;&#x8FDE;&#x63A5;&#x3002;150 - 100 = 50,&#x7A7A;&#x7F3A;&#x4E86;50&#x4E2A;&#x8FDE;&#x63A5;&#xFF0C;&#x51CF;&#x6389;&#x524D;&#x9762;&#x8FDE;&#x63A5;&#x6C60;&#x4FDD;&#x7559;&#x7684;10&#x4E2A;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#xFF0C;nginx&#x4E0D;&#x5F97;&#x4E0D;&#x65B0;&#x5EFA;40&#x4E2A;&#x65B0;&#x8FDE;&#x63A5;&#x6765;&#x6EE1;&#x8DB3;&#x8981;&#x6C42;&#x3002;<br>C&#x3001;&#x540C;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x5047;&#x8BBE;&#x76F8;&#x5E94;&#x4E0D;&#x5747;&#x8861;&#x4E5F;&#x4F1A;&#x51FA;&#x73B0;&#x4E0A;&#x9762;&#x7684;&#x8FDE;&#x63A5;&#x6570;&#x6CE2;&#x52A8;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x9020;&#x6210;&#x8FDE;&#x63A5;&#x6570;&#x91CF;&#x53CD;&#x590D;&#x9707;&#x8361;&#x7684;&#x4E00;&#x4E2A;&#x63A8;&#x624B;&#xFF0C;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;keepalive &#x8FD9;&#x4E2A;&#x6700;&#x5927;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x6570;&#x3002;&#x6BD5;&#x7ADF;&#x8FDE;&#x63A5;&#x6C60;&#x4E2D;&#x7684;1000&#x4E2A;&#x8FDE;&#x63A5;&#x5728;&#x9891;&#x7E41;&#x5229;&#x7528;&#x65F6;&#xFF0C;&#x51FA;&#x73B0;&#x77ED;&#x65F6;&#x95F4;&#x5185;&#x591A;&#x4F59;10&#x4E2A;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x7684;&#x6982;&#x7387;&#x5B9E;&#x5728;&#x592A;&#x9AD8;&#x3002;&#x56E0;&#x6B64;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x51FA;&#x73B0;&#x4E0A;&#x9762;&#x7684;&#x8FDE;&#x63A5;&#x9707;&#x8361;&#xFF0C;&#x5FC5;&#x987B;&#x8003;&#x8651;&#x52A0;&#x5927;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x573A;&#x666F;&#x5982;&#x679C;&#x5C06;keepalive&#x8BBE;&#x7F6E;&#x4E3A;100&#x6216;&#x8005;200,&#x5C31;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x6709;&#x6548;&#x7684;&#x7F13;&#x51B2;&#x8BF7;&#x6C42;&#x548C;&#x5E94;&#x7B54;&#x4E0D;&#x5747;&#x5300;&#x3002;</p>
+<p>&#x603B;&#x7ED3;&#xFF1A;<br>keepalive &#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E00;&#x5B9A;&#x8981;&#x5C0F;&#x5FC3;&#x8BBE;&#x7F6E;&#xFF0C;&#x5C24;&#x5176;&#x5BF9;&#x4E8E;QPS&#x6BD4;&#x8F83;&#x9AD8;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x63A8;&#x8350;&#x5148;&#x505A;&#x4E00;&#x4E0B;&#x4F30;&#x7B97;&#xFF0C;&#x6839;&#x636E;QPS&#x548C;&#x5E73;&#x5747;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x5927;&#x4F53;&#x80FD;&#x8BA1;&#x7B97;&#x51FA;&#x9700;&#x8981;&#x7684;&#x957F;&#x8FDE;&#x63A5;&#x7684;&#x6570;&#x91CF;&#x3002;&#x6BD4;&#x5982;&#x524D;&#x9762;10000 QPS&#x548C;100&#x6BEB;&#x79D2;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x5C31;&#x53EF;&#x4EE5;&#x63A8;&#x7B97;&#x51FA;&#x9700;&#x8981;&#x7684;&#x957F;&#x8FDE;&#x63A5;&#x6570;&#x91CF;&#x5927;&#x6982;&#x662F;1000. &#x7136;&#x540E;&#x5C06;keepalive&#x8BBE;&#x7F6E;&#x4E3A;&#x8FD9;&#x4E2A;&#x957F;&#x8FDE;&#x63A5;&#x6570;&#x91CF;&#x7684;10%&#x5230;30%&#x3002;&#x6BD4;&#x8F83;&#x61D2;&#x7684;&#x540C;&#x5B66;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8BBE;&#x7F6E;&#x4E3A;keepalive=1000&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x4E00;&#x822C;&#x90FD;OK&#x7684;&#x4E86;&#x3002;</p>
+<p>3&#x3001;&#x7EFC;&#x4E0A;&#xFF0C;&#x51FA;&#x73B0;&#x5927;&#x91CF;TIME_WAIT&#x7684;&#x60C5;&#x51B5;<br>1&#xFF09;&#x5BFC;&#x81F4; nginx&#x7AEF;&#x51FA;&#x73B0;&#x5927;&#x91CF;TIME_WAIT&#x7684;&#x60C5;&#x51B5;&#x6709;&#x4E24;&#x79CD;&#xFF1A;</p>
+<p>keepalive_requests&#x8BBE;&#x7F6E;&#x6BD4;&#x8F83;&#x5C0F;&#xFF0C;&#x9AD8;&#x5E76;&#x53D1;&#x4E0B;&#x8D85;&#x8FC7;&#x6B64;&#x503C;&#x540E;nginx&#x4F1A;&#x5F3A;&#x5236;&#x5173;&#x95ED;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x4FDD;&#x6301;&#x7684;keepalive&#x957F;&#x8FDE;&#x63A5;&#xFF1B;&#xFF08;&#x4E3B;&#x52A8;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x540E;&#x5BFC;&#x81F4;nginx&#x51FA;&#x73B0;TIME_WAIT&#xFF09;<br>keepalive&#x8BBE;&#x7F6E;&#x7684;&#x6BD4;&#x8F83;&#x5C0F;&#xFF08;&#x7A7A;&#x95F2;&#x6570;&#x592A;&#x5C0F;&#xFF09;&#xFF0C;&#x5BFC;&#x81F4;&#x9AD8;&#x5E76;&#x53D1;&#x4E0B;nginx&#x4F1A;&#x9891;&#x7E41;&#x51FA;&#x73B0;&#x8FDE;&#x63A5;&#x6570;&#x9707;&#x8361;&#xFF08;&#x8D85;&#x8FC7;&#x8BE5;&#x503C;&#x4F1A;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#xFF09;&#xFF0C;&#x4E0D;&#x505C;&#x7684;&#x5173;&#x95ED;&#x3001;&#x5F00;&#x542F;&#x548C;&#x540E;&#x7AEF;server&#x4FDD;&#x6301;&#x7684;keepalive&#x957F;&#x8FDE;&#x63A5;&#xFF1B;<br>2&#xFF09;&#x5BFC;&#x81F4;&#x540E;&#x7AEF;server&#x7AEF;&#x51FA;&#x73B0;&#x5927;&#x91CF;TIME_WAIT&#x7684;&#x60C5;&#x51B5;&#xFF1A;<br>nginx&#x6CA1;&#x6709;&#x6253;&#x5F00;&#x548C;&#x540E;&#x7AEF;&#x7684;&#x957F;&#x8FDE;&#x63A5;&#xFF0C;&#x5373;&#xFF1A;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;proxy_http_version 1.1;&#x548C;proxy_set_header Connection &#x201C;&#x201D;;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x540E;&#x7AEF;server&#x6BCF;&#x6B21;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#xFF0C;&#x9AD8;&#x5E76;&#x53D1;&#x4E0B;&#x5C31;&#x4F1A;&#x51FA;&#x73B0;server&#x7AEF;&#x51FA;&#x73B0;&#x5927;&#x91CF;TIME_WAIT</p>
+<p>&#x4E09;&#x3001;nginx&#x914D;&#x7F6E;https<br>1&#x3001;&#x914D;&#x7F6E;</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>server {<br>    listen                  80  default_server;<br>    listen          443 ssl;<br>    server_name     toutiao.iqiyi.com  toutiao.qiyi.domain m.toutiao.iqiyi.com;<br>    root            /data/none;<br>    index           index.php index.html index.htm;</p>
+<pre><code>###ssl settings start
+ssl_protocols                   TLSv1 TLSv1.1 TLSv1.2;
+ssl_certificate                 /usr/local/nginx/conf/server.pem;
+ssl_certificate_key             /usr/local/nginx/conf/server.key;
+ssl_session_cache               shared:SSL:10m;
+ssl_session_timeout             10m;
+ssl_ciphers ALL:!kEDH!ADH:RC4+RSA:+HIGH:+EXP;
+ssl_prefer_server_ciphers       on;
+###ssl settings end
+</code></pre><p>&#x2026;<br>2&#x3001;&#x6027;&#x80FD;&#x6BD4;&#x8F83;&#xFF1A;<br>&#x901A;&#x8FC7;https&#x8BBF;&#x95EE;Nginx&#x4E00;&#x822C;&#x4F1A;&#x6BD4;http&#x8BBF;&#x95EE;&#x6162;30%&#xFF08;https&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;&#x4E3B;&#x8981;&#x662F;&#x8017;Nginx&#x670D;&#x52A1;&#x5668;&#x7684;cpu&#xFF09;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x5B9E;&#x9A8C;&#x9A8C;&#x8BC1;&#xFF1A;</p>
+<p>nginx&#x540E;&#x7AEF;&#x6302;&#x4E86;5&#x53F0;java&#x670D;&#x52A1;&#x5668;&#xFF0C;java&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x6709;&#x4E2A;&#x7B80;&#x5355;&#x7684;java&#x7A0B;&#x5E8F;&#xFF0C;&#x4ECE;redis&#x7F13;&#x5B58;&#x968F;&#x673A;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;value&#x503C;&#x8F93;&#x51FA;&#x5230;&#x524D;&#x7AEF;&#xFF1B;&#xFF08;&#x6302;&#x7684;java&#x670D;&#x52A1;&#x5668;&#x8D8A;&#x591A;&#xFF0C;&#x5BF9;nginx&#x538B;&#x529B;&#x8D8A;&#x5927;&#xFF09;<br>&#x538B;&#x6D4B;nginx&#xFF0C;3000&#x5E76;&#x53D1;&#xFF0C;&#x4E00;&#x5171;&#x8BF7;&#x6C42;30000&#x6B21;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x90FD;&#x662F;200&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8FDB;&#x884C;&#x5BF9;&#x6BD4;&#xFF1B;<br>&#x5B9E;&#x9A8C;&#x7ED3;&#x679C;&#xFF1A;<br>A&#x3001;&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8F7D;&#x5BF9;&#x6BD4;&#xFF1A;<br>https&#x8BBF;&#x95EE;&#xFF0C;&#x670D;&#x52A1;&#x5668;cpu&#x6700;&#x9AD8;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;20%&#xFF0C;&#x800C;http&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x670D;&#x52A1;&#x5668;cpu&#x57FA;&#x672C;&#x5728;1%&#x5DE6;&#x53F3;&#xFF1B;&#x65E0;&#x8BBA;&#x90A3;&#x79CD;&#x8BBF;&#x95EE;&#xFF0C;nginx&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8F7D;&#x3001;&#x5185;&#x5B58;&#x90FD;&#x4E0D;&#x9AD8;&#xFF1B;<br>B&#x3001;nginx&#x541E;&#x5410;&#x91CF;&#x5BF9;&#x6BD4;&#xFF08;qps&#xFF09;&#xFF1A;<br>&#x2022; https&#x8BBF;&#x95EE;&#xFF0C;30000&#x6B21;&#x8BF7;&#x6C42;&#x82B1;&#x4E86;28s&#xFF1B;&#xFF08;&#x662F;http&#x7684;3&#x500D;&#xFF09;<br>&#x2022; http&#x8BBF;&#x95EE;&#xFF0C;30000&#x6B21;&#x8BF7;&#x6C42;&#x82B1;&#x4E86;9s&#xFF1B;<br>&#x7EDF;&#x8BA1;qps&#x65F6;&#xFF0C;&#x6BCF;&#x6B21;&#x6E05;&#x7A7A;nginx&#x65E5;&#x5FD7;&#xFF0C;&#x7136;&#x540E;&#x52A0;&#x538B;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x67E5;&#x770B;qps&#xFF1A;</p>
+<p>1<br>2</p>
+<h1 id="cat-log-2-3000https-grep-&#x2018;-api-news-v1-info-newsId-&#x2019;-awk-&#x2018;-print-3-&#x2019;-uniq-wc-l"><a href="#cat-log-2-3000https-grep-&#x2018;-api-news-v1-info-newsId-&#x2019;-awk-&#x2018;-print-3-&#x2019;-uniq-wc-l" class="headerlink" title="cat log.2.3000https | grep &#x2018;/api/news/v1/info?newsId=&#x2019; | awk &#x2018;{print$3}&#x2019;| uniq | wc -l"></a>cat log.2.3000https | grep &#x2018;/api/news/v1/info?newsId=&#x2019; | awk &#x2018;{print$3}&#x2019;| uniq | wc -l</h1><p>37</p>
+<p>&#x6CE8;&#xFF1A;&#x4E0D;&#x80FD;&#x6301;&#x7EED;&#x52A0;&#x538B;&#xFF0C;&#x5426;&#x5219;&#x65E0;&#x9650;&#x52A0;&#x5927;&#x538B;&#x529B;&#x540E;&#x5F80;&#x5F80;&#x662F;&#x540E;&#x7AEF;java&#x670D;&#x52A1;&#x51FA;&#x73B0;&#x74F6;&#x9888;&#xFF0C;&#x5BFC;&#x81F4;&#x8FD4;&#x56DE;&#x7ED9;nginx&#x7684;&#x54CD;&#x5E94;&#x53D8;&#x6162;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x5F97;nginx&#x538B;&#x529B;&#x53D8;&#x5C0F;&#x3002;<br>3&#x3001;&#x4F18;&#x5316;&#xFF1A;<br>Nginx&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;DHE&#x7B97;&#x6CD5;&#x6765;&#x4EA7;&#x751F;&#x5BC6;&#x5319;&#xFF0C;&#x8BE5;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#x6548;&#x7387;&#x5F88;&#x4F4E;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF0C;&#x5220;&#x6389;&#x4E86;kEDH&#x7B97;&#x6CD5;&#x3002;<br>ssl_ciphers ALL:!kEDH!ADH:RC4+RSA:+HIGH:+EXP;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/ansible-auto-register/" rel="next" title="ansible自动注册">
+                <i class="fa fa-chevron-left"></i> ansible自动注册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx之tcp-nopush、tcp-nodelay、sendfile"><span class="nav-number">2.</span> <span class="nav-text">nginx之tcp_nopush、tcp_nodelay、sendfile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-NODELAY"><span class="nav-number">2.1.</span> <span class="nav-text">TCP_NODELAY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-NOPUSH"><span class="nav-number">2.2.</span> <span class="nav-text">TCP_NOPUSH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sendfile"><span class="nav-number">3.</span> <span class="nav-text">sendfile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般来说"><span class="nav-number">3.1.</span> <span class="nav-text">一般来说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再来看一下用-sendfile-来进行网络传输的过程："><span class="nav-number">3.2.</span> <span class="nav-text">再来看一下用 sendfile()来进行网络传输的过程：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx长连接——keepalive"><span class="nav-number">4.</span> <span class="nav-text">nginx长连接——keepalive</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保持和client的长连接："><span class="nav-number">4.1.</span> <span class="nav-text">保持和client的长连接：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keepalive-timeout"><span class="nav-number">4.1.1.</span> <span class="nav-text">keepalive_timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keepalive-requests"><span class="nav-number">4.1.2.</span> <span class="nav-text">keepalive_requests</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保持和server的长连接："><span class="nav-number">4.2.</span> <span class="nav-text">保持和server的长连接：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#location中有两个参数需要设置："><span class="nav-number">4.2.1.</span> <span class="nav-text">location中有两个参数需要设置：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cat-log-2-3000https-grep-‘-api-news-v1-info-newsId-’-awk-‘-print-3-’-uniq-wc-l"><span class="nav-number">5.</span> <span class="nav-text">cat log.2.3000https | grep ‘/api/news/v1/info?newsId=’ | awk ‘{print$3}’| uniq | wc -l</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
