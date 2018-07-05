@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,requests," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E00;&amp;#x76F4;&amp;#x90FD;&amp;#x60F3;&amp;#x5B66;&amp;#x4E60;&amp;#x4E00;&amp;#x4E0B;python&amp;#x722C;&amp;#x866B;&amp;#x7684;&amp;#x76F8;&amp;#x5173;&amp;#x77E5;&amp;#x8BC6;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x82E6;&amp;#x4E8E;&amp;#x4E00;&amp;#x76F4;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识爬虫以及requests模块">
+<meta property="og:url" content="http://c.isme.pub/2018/07/04/reptile-requests/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E00;&amp;#x76F4;&amp;#x90FD;&amp;#x60F3;&amp;#x5B66;&amp;#x4E60;&amp;#x4E00;&amp;#x4E0B;python&amp;#x722C;&amp;#x866B;&amp;#x7684;&amp;#x76F8;&amp;#x5173;&amp;#x77E5;&amp;#x8BC6;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x82E6;&amp;#x4E8E;&amp;#x4E00;&amp;#x76F4;&amp;#">
+<meta property="og:updated_time" content="2018-07-04T03:43:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识爬虫以及requests模块">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#x4E00;&amp;#x76F4;&amp;#x90FD;&amp;#x60F3;&amp;#x5B66;&amp;#x4E60;&amp;#x4E00;&amp;#x4E0B;python&amp;#x722C;&amp;#x866B;&amp;#x7684;&amp;#x76F8;&amp;#x5173;&amp;#x77E5;&amp;#x8BC6;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x82E6;&amp;#x4E8E;&amp;#x4E00;&amp;#x76F4;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/07/04/reptile-requests/"/>
+
+
+
+
+
+  <title>初识爬虫以及requests模块 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/07/04/reptile-requests/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初识爬虫以及requests模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-04T11:43:23+08:00">
+                2018-07-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-07-04T11:43:23+08:00">
+                2018-07-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/requests/" itemprop="url" rel="index">
+                    <span itemprop="name">requests</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>&#x4E00;&#x76F4;&#x90FD;&#x60F3;&#x5B66;&#x4E60;&#x4E00;&#x4E0B;python&#x722C;&#x866B;&#x7684;&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#xFF0C;&#x4F46;&#x662F;&#x82E6;&#x4E8E;&#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x65F6;&#x95F4;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x975E;&#x5E38;&#x611F;&#x8C22;&#x8FD9;&#x6B21;&#x80FD;&#x591F;&#x8DEF;&#x98DE;&#x5B66;&#x9662;&#x5B66;&#x4E60;&#x5230;&#x722C;&#x866B;&#x77E5;&#x8BC6;&#x7684;&#x673A;&#x4F1A;&#x3002;</p>
+<a id="more"></a>
+<h1 id="&#x4EC0;&#x4E48;&#x662F;&#x722C;&#x866B;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x722C;&#x866B;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x722C;&#x866B;"></a>&#x4EC0;&#x4E48;&#x662F;&#x722C;&#x866B;</h1><p>&#x7F51;&#x7EDC;&#x722C;&#x866B;&#xFF08;&#x53C8;&#x88AB;&#x79F0;&#x4E3A;&#x7F51;&#x9875;&#x8718;&#x86DB;&#xFF0C;&#x7F51;&#x7EDC;&#x673A;&#x5668;&#x4EBA;&#xFF0C;&#x5728;FOAF&#x793E;&#x533A;&#x4E2D;&#x95F4;&#xFF0C;&#x66F4;&#x7ECF;&#x5E38;&#x7684;&#x79F0;&#x4E3A;&#x7F51;&#x9875;&#x8FFD;&#x9010;&#x8005;&#xFF09;&#xFF0C;&#x662F;&#x4E00;&#x79CD;&#x6309;&#x7167;&#x4E00;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x81EA;&#x52A8;&#x5730;&#x6293;&#x53D6;&#x4E07;&#x7EF4;&#x7F51;&#x4FE1;&#x606F;&#x7684;&#x7A0B;&#x5E8F;&#x6216;&#x8005;&#x811A;&#x672C;&#x3002;&#x53E6;&#x5916;&#x4E00;&#x4E9B;&#x4E0D;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x540D;&#x5B57;&#x8FD8;&#x6709;&#x8682;&#x8681;&#x3001;&#x81EA;&#x52A8;&#x7D22;&#x5F15;&#x3001;&#x6A21;&#x62DF;&#x7A0B;&#x5E8F;&#x6216;&#x8005;&#x8815;&#x866B;&#x3002;</p>
+<ul>
+<li>&#x901A;&#x8FC7;&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#xFF0C;&#x6839;&#x636E;url&#x83B7;&#x53D6;&#x7F51;&#x7AD9;&#x4FE1;&#x606F;</li>
+<li>&#x4F2A;&#x9020;&#x6D4F;&#x89C8;&#x5668;&#x60F3;&#x67D0;&#x4E2A;&#x5730;&#x5740;&#x53D1;&#x9001;http&#x8BF7;&#x6C42;&#xFF0C;&#x83B7;&#x53D6;&#x8FD4;&#x56DE;&#x7684;&#x5B57;&#x7B26;&#x4E32;</li>
+</ul>
+<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><p>Python&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#xFF1A;urllib&#x3001;urllib2&#x3001;httplib&#x7B49;&#x6A21;&#x5757;&#x4EE5;&#x4F9B;Http&#x8BF7;&#x6C42;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x975E;&#x5E38;&#x4E0D;&#x65B9;&#x4FBF;&#x3002;</p>
+<p>Requests &#x662F;&#x4F7F;&#x7528; <em>Apache2 Licensed</em> &#x8BB8;&#x53EF;&#x8BC1;&#x7684;&#xFF0C;&#x57FA;&#x4E8E;Python&#x5F00;&#x53D1;&#x7684;HTTP&#x5E93;&#xFF0C;&#x5176;&#x5728;Python&#x5185;&#x7F6E;&#x6A21;&#x5757;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x8FDB;&#x884C;&#x4E86;&#x9AD8;&#x5EA6;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x5F97;Pythoner&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x53D8;&#x5F97;&#x7F8E;&#x597D;&#x4E86;&#x8BB8;&#x591A;&#xFF0C;&#x4F7F;&#x7528;Requests&#x53EF;&#x4EE5;&#x8F7B;&#x800C;&#x6613;&#x4E3E;&#x7684;&#x5B8C;&#x6210;&#x6D4F;&#x89C8;&#x5668;&#x53EF;&#x6709;&#x7684;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h2><h3 id="GET&#x8BF7;&#x6C42;"><a href="#GET&#x8BF7;&#x6C42;" class="headerlink" title="GET&#x8BF7;&#x6C42;"></a>GET&#x8BF7;&#x6C42;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x65E0;&#x53C2;&#x6570;</span></div><div class="line"> </div><div class="line"><span class="keyword">import</span> requests</div><div class="line"> </div><div class="line">ret = requests.get(url=<span class="string">&quot;http://c.isme.pub&quot;</span>)</div><div class="line"> </div><div class="line">print(ret.url)</div><div class="line">print(ret.text)</div><div class="line"></div><div class="line"><span class="comment"># &#x6709;&#x53C2;&#x6570;</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"> </div><div class="line">params = {<span class="string">&apos;key1&apos;</span>: <span class="string">&apos;value1&apos;</span>, <span class="string">&apos;key2&apos;</span>: <span class="string">&apos;value2&apos;</span>}</div><div class="line">ret = requests.get(url=<span class="string">&quot;http://c.isme.pub&quot;</span>, params= params)</div><div class="line"> </div><div class="line">print(ret.url)</div><div class="line">print(ret.text)</div></pre></td></tr></table></figure>
+<h3 id="POST&#x8BF7;&#x6C42;"><a href="#POST&#x8BF7;&#x6C42;" class="headerlink" title="POST&#x8BF7;&#x6C42;"></a>POST&#x8BF7;&#x6C42;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x57FA;&#x672C;POST&#x5B9E;&#x4F8B;</span></div><div class="line"> </div><div class="line"><span class="keyword">import</span> requests</div><div class="line"> </div><div class="line">data = {<span class="string">&apos;key1&apos;</span>: <span class="string">&apos;value1&apos;</span>, <span class="string">&apos;key2&apos;</span>: <span class="string">&apos;value2&apos;</span>}</div><div class="line">ret = requests.post(url=<span class="string">&quot;http://c.isme.pub&quot;</span>, data=data)</div><div class="line"> </div><div class="line">print(ret.text)</div><div class="line"> </div><div class="line"><span class="comment"># &#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x5934;&#x548C;&#x6570;&#x636E;&#x5B9E;&#x4F8B;</span></div><div class="line"> </div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> json</div><div class="line"> </div><div class="line">url = <span class="string">&quot;http://c.isme.pub&quot;</span></div><div class="line">data = {<span class="string">&apos;some&apos;</span>: <span class="string">&apos;data&apos;</span>}</div><div class="line">headers = {<span class="string">&apos;content-type&apos;</span>: <span class="string">&apos;application/json&apos;</span>}</div><div class="line"> </div><div class="line">ret = requests.post(url = url, data=json.dumps(payload), headers=headers)</div><div class="line"> </div><div class="line">print(ret.text)</div><div class="line">print(ret.cookies)</div></pre></td></tr></table></figure>
+<h3 id="&#x5176;&#x4ED6;&#x8BF7;&#x6C42;"><a href="#&#x5176;&#x4ED6;&#x8BF7;&#x6C42;" class="headerlink" title="&#x5176;&#x4ED6;&#x8BF7;&#x6C42;"></a>&#x5176;&#x4ED6;&#x8BF7;&#x6C42;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">requests.get(url, params=<span class="keyword">None</span>, **kwargs)</div><div class="line">requests.post(url, data=<span class="keyword">None</span>, json=<span class="keyword">None</span>, **kwargs)</div><div class="line">requests.put(url, data=<span class="keyword">None</span>, **kwargs)</div><div class="line">requests.head(url, **kwargs)</div><div class="line">requests.delete(url, **kwargs)</div><div class="line">requests.patch(url, data=<span class="keyword">None</span>, **kwargs)</div><div class="line">requests.options(url, **kwargs)</div><div class="line"></div><div class="line"><span class="comment"># &#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x5747;&#x662F;&#x5728;&#x6B64;&#x65B9;&#x6CD5;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x6784;&#x5EFA;</span></div><div class="line">requests.request(method, url, **kwargs)</div></pre></td></tr></table></figure>
+<h2 id="&#x5E38;&#x7528;&#x53C2;&#x6570;"><a href="#&#x5E38;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x5E38;&#x7528;&#x53C2;&#x6570;"></a>&#x5E38;&#x7528;&#x53C2;&#x6570;</h2><ul>
+<li>method: &#x5411;url&#x53D1;&#x9001;http&#x8BF7;&#x6C42;&#x7684;&#x65B9;&#x6CD5;<ul>
+<li>requests.get requests.post get &#x548C; post&#x7684;&#x672C;&#x8D28;&#x5C31;&#x662F;method</li>
+</ul>
+</li>
+<li>url: &#x8BBF;&#x95EE;&#x7684;url</li>
+<li>params: get&#x8BF7;&#x6C42;&#x65F6;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#xFF0C;post&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;</li>
+<li>data: post&#x8BF7;&#x6C42;&#x65F6;&#x4F20;&#x9012;&#x7684;&#x8BF7;&#x6C42;&#x4F53;<ul>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x663E;&#x793A;&#x7684;form data</li>
+<li>data=json.dumps() == json</li>
+</ul>
+</li>
+<li>json: &#x8BF7;&#x6C42;&#x65F6;&#x53D1;&#x9001;&#x7684;json&#x6570;&#x636E;&#xFF08;json.dumps&#xFF09;<ul>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x663E;&#x793A;&#x7684; request payload</li>
+</ul>
+</li>
+<li>headers: &#x8BF7;&#x6C42;&#x5934;</li>
+<li>cookies: &#x8BF7;&#x6C42;&#x65F6;&#x4F7F;&#x7528;&#x7684;cookies</li>
+<li>proxies: &#x4EE3;&#x7406;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">proxies = {</div><div class="line"><span class="string">&quot;http&quot;</span>: <span class="string">&quot;192.168.1.1:80&quot;</span>,</div><div class="line"><span class="string">&quot;http&quot;</span>: <span class="string">&quot;192.168.1.2:8080&quot;</span>,</div><div class="line"><span class="string">&quot;https&quot;</span>: <span class="string">&quot;172.16.1.4:8829&quot;</span>,</div><div class="line"><span class="string">&quot;http://10.20.1.128&quot;</span>: <span class="string">&quot;http://10.0.0.1:5332&quot;</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<ul>
+<li>files: &#x4E0A;&#x4F20;&#x6587;&#x4EF6;<ul>
+<li>&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x5B57;&#x5178;&#x6216;&#x8005;&#x5143;&#x7EC4;</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">file_dict = {</div><div class="line">	<span class="string">&apos;f1&apos;</span>: open(<span class="string">&apos;readme&apos;</span>,<span class="string">&apos;rb&apos;</span>)</div><div class="line">}</div><div class="line">url = <span class="string">&apos;http://c.isme.pub&apos;</span></div><div class="line">requests.request(<span class="string">&apos;method&apos;</span>=<span class="string">&apos;POST&apos;</span>,</div><div class="line">url = url,</div><div class="line">files = file_dict)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x5236;&#x53D1;&#x9001;&#x6587;&#x4EF6;&#x7684;&#x6587;&#x4EF6;&#x540D;</span></div><div class="line">file_dict = {</div><div class="line">	<span class="string">&apos;f1&apos;</span>: (<span class="string">&apos;text.txt&apos;</span>, open(<span class="string">&apos;readme&apos;</span>,<span class="string">&apos;rb&apos;</span>))</div><div class="line">}</div><div class="line"></div><div class="line">file_dict = {</div><div class="line">	<span class="string">&apos;f1&apos;</span>: (<span class="string">&apos;text.txt&apos;</span>, <span class="string">&apos;xxxxxxxxxxxxxxaddsad&apos;</span>)</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">## &#x5E26;&#x7740;&#x6587;&#x4EF6;&#x7684;&#x8BF7;&#x6C42;&#x5934;</span></div><div class="line">file_dict = {</div><div class="line">	<span class="string">&apos;f1&apos;</span>: (<span class="string">&apos;text.txt&apos;</span>, <span class="string">&apos;xxxxxxxxxxxxxxaddsad&apos;</span>,<span class="string">&apos;application/text&apos;</span>,{<span class="string">&apos;k1&apos;</span>:<span class="string">&apos;0&apos;</span>})</div><div class="line">}</div></pre></td></tr></table></figure>
+<ul>
+<li>auth: &#x57FA;&#x672C;http&#x8BA4;&#x8BC1;&#xFF08;Basic/Digest/Custom&#xFF09;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> requests.auth <span class="keyword">import</span> HTTPBasicAuth, HTTPDigestAuth</div><div class="line"></div><div class="line">ret = requests.get(</div><div class="line">	url = <span class="string">&quot;http://c.isme.pub&quot;</span>,</div><div class="line">	auth = HTTPBasicAuth(<span class="string">&apos;user&apos;</span>,<span class="string">&apos;passwd&apos;</span>)</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li>timeout &#x8D85;&#x65F6;&#x65F6;&#x95F4;</li>
+<li>allow_redirects: &#x9ED8;&#x8BA4;True &#x662F;&#x5426;&#x5141;&#x8BB8;&#x91CD;&#x5B9A;&#x5411;</li>
+<li>stream: &#x4E0B;&#x8F7D;&#x5927;&#x6587;&#x4EF6;&#x65F6;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">ret = requests(url=url, stream=True)</div><div class="line">for i in r.iter_content():</div><div class="line">	print(i)</div><div class="line">from contextlib import closong</div><div class="line">with closing(requests.get(url=url,stream=True)) as r:</div><div class="line">	for i in r.iter_content():</div><div class="line">		print(i)</div><div class="line">		</div><div class="line">``` 	</div><div class="line"></div><div class="line">* cert: &#x8BC1;&#x4E66;&#xFF08;&#x4E00;&#x822C;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x7684;&#x8BC1;&#x4E66;&#x65F6;&#x4F7F;&#x7528;&#xFF09;</div><div class="line">* verify: &#x4F7F;&#x7528;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x8BC1;&#x4E66;&#x7684;&#x65F6;&#x5019;&#x786E;&#x8BA4;&#x662F;&#x5426;&#x7EE7;&#x7EED;&#x8BBF;&#x95EE;</div><div class="line"></div><div class="line"></div><div class="line">## &#x5B9E;&#x4F8B;</div><div class="line"></div><div class="line">### &#x767B;&#x5F55;&#x6C7D;&#x8F66;&#x4E4B;&#x5BB6;&#x5E76;&#x83B7;&#x53D6;&#x65B0;&#x95FB;&#x4FE1;&#x606F;</div><div class="line"></div><div class="line">``` python</div><div class="line">import requests</div><div class="line">from bs4 import BeautifulSoup</div><div class="line"></div><div class="line"># &#x65B0;&#x95FB;&#x9875;&#x9762;</div><div class="line">ret = requests.get(url=&apos;https://www.autohome.com.cn/news/&apos;)</div><div class="line"># &#x68C0;&#x6D4B;&#x662F;&#x4EC0;&#x4E48;&#x7F16;&#x7801;</div><div class="line">#print(ret.apparent_encoding)</div><div class="line"># &#x8BBE;&#x7F6E;&#x7F16;&#x7801;</div><div class="line">#ret.encoding=&apos;gbk&apos;</div><div class="line">ret.encoding = ret.apparent_encoding</div><div class="line">#print(ret.content)</div><div class="line">#print(ret.text)</div><div class="line"></div><div class="line"># &#x89E3;&#x6790;&#xFF0C;&#x83B7;&#x53D6;&#x60F3;&#x8981;&#x7684;&#x5185;&#x5BB9; &apos;html.parser&apos;&#x662F;&#x89E3;&#x6790;&#x5668;&#xFF0C;lxml&#x66F4;&#x5FEB;</div><div class="line">soup = BeautifulSoup(ret.text,&apos;html.parser&apos;)</div><div class="line">div = soup.find(name=&apos;div&apos;, id=&apos;auto-channel-lazyload-article&apos;)</div><div class="line">li_list = div.find_all(name=&apos;li&apos;)</div><div class="line">for li in li_list:</div><div class="line">    h3 = li.find(name=&apos;h3&apos;)</div><div class="line">    if not h3:</div><div class="line">        continue</div><div class="line">    a = li.find(name=&apos;a&apos;)</div><div class="line">    #print(a.attrs[&quot;href&quot;])</div><div class="line">    print(&quot;=&quot;*20)</div><div class="line">    print(h3.text)</div><div class="line">    print(a.get(&apos;href&apos;))</div><div class="line">    p = li.find(name=&apos;p&apos;)</div><div class="line">    print(p.text)</div><div class="line">    # &#x83B7;&#x53D6;&#x56FE;&#x7247;</div><div class="line">    img = li.find(name=&apos;img&apos;)</div><div class="line">    # bs4&#x7684;&#x5176;&#x4ED6;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</div><div class="line">    # img = li.find(name=&apos;img&apos;,id=&apos;xxx&apos;,_class=&apos;asd&apos;)</div><div class="line">    # img = li.find(name=&apos;img&apos;,attrs={&apos;id&apos;:&apos;xxx&apos;,&apos;class&apos;:&apos;asd&apos;})</div><div class="line">    src = img.get(&apos;src&apos;)</div><div class="line">    file_name = src.rsplit(&quot;__&quot;, maxsplit=1)[1]</div><div class="line">    ret_img = requests.get(url=&quot;https:&quot; + src)</div><div class="line">    with open(file_name,&apos;wb&apos;) as f:</div><div class="line">        f.write(ret_img.content)</div></pre></td></tr></table></figure>
+<h3 id="&#x81EA;&#x52A8;&#x767B;&#x5F55;&#x62BD;&#x5C49;&#x5E76;&#x70B9;&#x8D5E;"><a href="#&#x81EA;&#x52A8;&#x767B;&#x5F55;&#x62BD;&#x5C49;&#x5E76;&#x70B9;&#x8D5E;" class="headerlink" title="&#x81EA;&#x52A8;&#x767B;&#x5F55;&#x62BD;&#x5C49;&#x5E76;&#x70B9;&#x8D5E;"></a>&#x81EA;&#x52A8;&#x767B;&#x5F55;&#x62BD;&#x5C49;&#x5E76;&#x70B9;&#x8D5E;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">headers = {</div><div class="line">    <span class="string">&quot;User-agent&quot;</span> : <span class="string">&apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&apos;</span></div><div class="line">}</div><div class="line">data = {</div><div class="line">    <span class="string">&apos;phone&apos;</span>:<span class="string">&apos;8617600806797&apos;</span>,</div><div class="line">    <span class="string">&apos;password&apos;</span>:<span class="string">&quot;xxx&quot;</span>,</div><div class="line">    <span class="string">&apos;oneMonth&apos;</span>:<span class="string">&apos;1&apos;</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># &#x7B2C;&#x4E00;&#x6B21;&#x8BBF;&#x95EE;&#x83B7;&#x53D6;&#x672A;&#x6388;&#x6743;&#x7684;cookie</span></div><div class="line">r0 = requests.get(url=<span class="string">&apos;https://dig.chouti.com/&apos;</span>, headers = headers)</div><div class="line">r0_cookie = r0.cookies.get_dict()</div><div class="line"><span class="comment"># &#x53D1;&#x9001;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;&#x8BA4;&#x8BC1;</span></div><div class="line">ret = requests.post(url=<span class="string">&apos;https://dig.chouti.com/login&apos;</span>,data= data, headers = headers,cookies = r0_cookie)</div><div class="line">print(ret.text)</div><div class="line"></div><div class="line">index = requests.get(url=<span class="string">&apos;https://dig.chouti.com/&apos;</span>, headers = headers)</div><div class="line">soup = BeautifulSoup(index.text, <span class="string">&apos;html.parser&apos;</span>)</div><div class="line">div = soup.find(name=<span class="string">&apos;div&apos;</span>,id=<span class="string">&apos;content-list&apos;</span>)</div><div class="line">items = div.find_all(attrs={<span class="string">&apos;class&apos;</span>:<span class="string">&apos;item&apos;</span>})</div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> items:</div><div class="line">    tag = item.find(name=<span class="string">&apos;div&apos;</span>,attrs={<span class="string">&apos;class&apos;</span>:<span class="string">&apos;part2&apos;</span>})</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> tag:</div><div class="line">        <span class="keyword">continue</span></div><div class="line">    nid = tag.get(<span class="string">&apos;share-linkid&apos;</span>)</div><div class="line">    print(nid)</div><div class="line">    r1 = requests.post(url=<span class="string">&apos;https://dig.chouti.com/link/vote?linksId=%s&apos;</span> %nid,headers = headers, cookies=r0_cookie)</div><div class="line">    print(r1.text)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/requests/" rel="tag"># requests</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/29/nginx-optimize/" rel="next" title="nginx优化（https，keepalive）">
+                <i class="fa fa-chevron-left"></i> nginx优化（https，keepalive）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是爬虫"><span class="nav-number">2.</span> <span class="nav-text">什么是爬虫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Requests"><span class="nav-number">3.</span> <span class="nav-text">Requests</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">3.1.</span> <span class="nav-text">常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET请求"><span class="nav-number">3.1.1.</span> <span class="nav-text">GET请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST请求"><span class="nav-number">3.1.2.</span> <span class="nav-text">POST请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他请求"><span class="nav-number">3.1.3.</span> <span class="nav-text">其他请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用参数"><span class="nav-number">3.2.</span> <span class="nav-text">常用参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动登录抽屉并点赞"><span class="nav-number">3.2.1.</span> <span class="nav-text">自动登录抽屉并点赞</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
