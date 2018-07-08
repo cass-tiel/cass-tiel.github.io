@@ -299,6 +299,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/05/20/Ten-Commond-Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/20/Ten-Commond-Linux/" itemprop="url">用十条命令在一分钟内检查 Linux 服务器性能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-20T15:29:50+08:00">
+                2016-05-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T14:21:50+08:00">
+                2018-05-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><blockquote>
+<p>&#x8F6C;&#x81EA;OSChina</p>
+</blockquote>
+<p>&#x5982;&#x679C;&#x4F60;&#x7684;Linux&#x670D;&#x52A1;&#x5668;&#x7A81;&#x7136;&#x8D1F;&#x8F7D;&#x66B4;&#x589E;&#xFF0C;&#x544A;&#x8B66;&#x77ED;&#x4FE1;&#x5FEB;&#x53D1;&#x7206;&#x4F60;&#x7684;&#x624B;&#x673A;&#xFF0C;&#x5982;&#x4F55;&#x5728;&#x6700;&#x77ED;&#x65F6;&#x95F4;&#x5185;&#x627E;&#x51FA;Linux&#x6027;&#x80FD;&#x95EE;&#x9898;&#x6240;&#x5728;&#xFF1F;&#x6765;&#x770B;Netflix&#x6027;&#x80FD;&#x5DE5;&#x7A0B;&#x56E2;&#x961F;&#x7684;&#x8FD9;&#x7BC7;&#x535A;&#x6587;&#xFF0C;&#x770B;&#x5B83;&#x4EEC;&#x901A;&#x8FC7;&#x5341;&#x6761;&#x547D;&#x4EE4;&#x5728;&#x4E00;&#x5206;&#x949F;&#x5185;&#x5BF9;&#x673A;&#x5668;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x8FDB;&#x884C;&#x8BCA;&#x65AD;&#x3002;<br>&#x6982;&#x8FF0;</p>
+<p>&#x901A;&#x8FC7;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;1&#x5206;&#x949F;&#x5185;&#x5BF9;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#x6709;&#x4E2A;&#x5927;&#x81F4;&#x7684;&#x4E86;&#x89E3;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">uptime</div><div class="line">dmesg | tail</div><div class="line">vmstat 1</div><div class="line">mpstat -P ALL 1</div><div class="line">pidstat 1</div><div class="line">iostat -xz 1</div><div class="line">free -m</div><div class="line">sar -n DEV 1</div><div class="line">sar -n TCP,ETCP 1</div><div class="line">top</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/20/Ten-Commond-Linux/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2016/05/19/zabbix-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1040,7 +1214,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">105</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
