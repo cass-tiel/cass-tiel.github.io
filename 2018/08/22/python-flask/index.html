@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,flask," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;Flask&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E;Python&amp;#x5F00;&amp;#x53D1;&amp;#x5E76;&amp;#x4E14;&amp;#x4F9D;&amp;#x8D56;jinja2&amp;#x6A21;&amp;#x677F;&amp;#x548C;Werkzeug WSGI&amp;#x670D;&amp;#x52A1;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask框架">
+<meta property="og:url" content="http://c.isme.pub/2018/08/22/python-flask/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;Flask&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E;Python&amp;#x5F00;&amp;#x53D1;&amp;#x5E76;&amp;#x4E14;&amp;#x4F9D;&amp;#x8D56;jinja2&amp;#x6A21;&amp;#x677F;&amp;#x548C;Werkzeug WSGI&amp;#x670D;&amp;#x52A1;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#">
+<meta property="og:image" content="http://c.isme.pub/2018/08/22/python-flask/1.png">
+<meta property="og:updated_time" content="2018-08-22T06:59:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask框架">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;Flask&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E;Python&amp;#x5F00;&amp;#x53D1;&amp;#x5E76;&amp;#x4E14;&amp;#x4F9D;&amp;#x8D56;jinja2&amp;#x6A21;&amp;#x677F;&amp;#x548C;Werkzeug WSGI&amp;#x670D;&amp;#x52A1;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#">
+<meta name="twitter:image" content="http://c.isme.pub/2018/08/22/python-flask/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/22/python-flask/"/>
+
+
+
+
+
+  <title>Flask框架 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/22/python-flask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T14:59:53+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-22T14:59:53+08:00">
+                2018-08-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Flask&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;Python&#x5F00;&#x53D1;&#x5E76;&#x4E14;&#x4F9D;&#x8D56;jinja2&#x6A21;&#x677F;&#x548C;Werkzeug WSGI&#x670D;&#x52A1;&#x7684;&#x4E00;&#x4E2A;&#x5FAE;&#x578B;&#x6846;&#x67B6;&#xFF0C;&#x5BF9;&#x4E8E;Werkzeug&#x672C;&#x8D28;&#x662F;Socket&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x5176;&#x7528;&#x4E8E;&#x63A5;&#x6536;http&#x8BF7;&#x6C42;&#x5E76;&#x5BF9;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x9884;&#x5904;&#x7406;&#xFF0C;&#x7136;&#x540E;&#x89E6;&#x53D1;Flask&#x6846;&#x67B6;&#xFF0C;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x57FA;&#x4E8E;Flask&#x6846;&#x67B6;&#x63D0;&#x4F9B;&#x7684;&#x529F;&#x80FD;&#x5BF9;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x7ED9;&#x7528;&#x6237;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x8FD4;&#x56DE;&#x7ED9;&#x7528;&#x6237;&#x590D;&#x6742;&#x7684;&#x5185;&#x5BB9;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x501F;&#x52A9;jinja2&#x6A21;&#x677F;&#x6765;&#x5B9E;&#x73B0;&#x5BF9;&#x6A21;&#x677F;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5373;&#xFF1A;&#x5C06;&#x6A21;&#x677F;&#x548C;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6E32;&#x67D3;&#xFF0C;&#x5C06;&#x6E32;&#x67D3;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x8FD4;&#x56DE;&#x7ED9;&#x7528;&#x6237;&#x6D4F;&#x89C8;&#x5668;&#x3002;</p>
+<p>&#x201C;&#x5FAE;&#x201D;(micro)&#x5E76;&#x4E0D;&#x8868;&#x793A;&#x4F60;&#x9700;&#x8981;&#x628A;&#x6574;&#x4E2A;Web&#x5E94;&#x7528;&#x585E;&#x8FDB;&#x5355;&#x4E2A;Python&#x6587;&#x4EF6;&#xFF08;&#x867D;&#x7136;&#x786E;&#x5B9E;&#x53EF;&#x4EE5;&#xFF09;,&#x4E5F;&#x4E0D;&#x610F;&#x5473;&#x7740; Flask &#x5728;&#x529F;&#x80FD;&#x4E0A;&#x6709;&#x6240;&#x6B20;&#x7F3A;&#x3002;&#x5FAE;&#x6846;&#x67B6;&#x4E2D;&#x7684;&#x201D;&#x5FAE;&#x201D;&#x610F;&#x5473;&#x7740;Flask&#x65E8;&#x5728;&#x4FDD;&#x6301;&#x6838;&#x5FC3;&#x7B80;&#x5355;&#x800C;&#x6613;&#x4E8E;&#x6269;&#x5C55;&#x3002;Flask&#x4E0D;&#x4F1A;&#x66FF;&#x4F60;&#x505A;&#x51FA;&#x592A;&#x591A;&#x51B3;&#x7B56;&#x2014;&#x2014;&#x6BD4;&#x5982;&#x4F7F;&#x7528;&#x4F55;&#x79CD;&#x6570;&#x636E;&#x5E93;&#x3002;&#x800C;&#x90A3;&#x4E9B;Flask&#x6240;&#x9009;&#x62E9;&#x7684;&#x2014;&#x2014;&#x6BD4;&#x5982;&#x4F7F;&#x7528;&#x4F55;&#x79CD;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x2014;&#x2014;&#x5219;&#x5F88;&#x5BB9;&#x6613;&#x66FF;&#x6362;&#x3002;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#x7684;&#x4E00;&#x5207;&#x90FD;&#x7531;&#x53EF;&#x7531;&#x4F60;&#x638C;&#x63E1;&#x3002;&#x5982;&#x6B64;&#xFF0C;Flask&#x53EF;&#x4EE5;&#x4E0E;&#x60A8;&#x73E0;&#x8054;&#x74A7;&#x5408;&#x3002;</p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Flask&#x4E0D;&#x5305;&#x542B;&#x6570;&#x636E;&#x5E93;&#x62BD;&#x8C61;&#x5C42;&#x3001;&#x8868;&#x5355;&#x9A8C;&#x8BC1;&#xFF0C;&#x6216;&#x662F;&#x5176;&#x5B83;&#x4EFB;&#x4F55;&#x5DF2;&#x6709;&#x591A;&#x79CD;&#x5E93;&#x53EF;&#x4EE5;&#x80DC;&#x4EFB;&#x7684;&#x529F;&#x80FD;&#x3002;&#x7136;&#x800C;&#xFF0C;Flask &#x652F;&#x6301;&#x7528;&#x6269;&#x5C55;&#x6765;&#x7ED9;&#x5E94;&#x7528;&#x6DFB;&#x52A0;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#xFF0C;&#x5982;&#x540C;&#x662F; Flask &#x672C;&#x8EAB;&#x5B9E;&#x73B0;&#x7684;&#x4E00;&#x6837;&#x3002;&#x4F17;&#x591A;&#x7684;&#x6269;&#x5C55;&#x63D0;&#x4F9B;&#x4E86;&#x6570;&#x636E;&#x5E93;&#x96C6;&#x6210;&#x3001;&#x8868;&#x5355;&#x9A8C;&#x8BC1;&#x3001;&#x4E0A;&#x4F20;&#x5904;&#x7406;&#x3001;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5F00;&#x653E;&#x8BA4;&#x8BC1;&#x6280;&#x672F;&#x7B49;&#x529F;&#x80FD;&#x3002;Flask &#x4E5F;&#x8BB8;&#x662F;&#x201C;&#x5FAE;&#x5C0F;&#x201D;&#x7684;&#xFF0C;&#x4F46;&#x5B83;&#x5DF2;&#x51C6;&#x5907;&#x597D;&#x5728;&#x9700;&#x6C42;&#x7E41;&#x6742;&#x7684;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x6295;&#x5165;&#x4F7F;&#x7528;&#x3002;</p>
+<ul>
+<li>&#x914D;&#x7F6E;&#x6587;&#x4EF6;</li>
+<li>&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;</li>
+<li>&#x6A21;&#x677F;&#x8BED;&#x8A00;</li>
+<li>&#x8BF7;&#x6C42;&amp;&#x54CD;&#x5E94;</li>
+<li>session&amp;cookie</li>
+<li>&#x95EA;&#x73B0;</li>
+<li>&#x84DD;&#x56FE;</li>
+<li>&#x8BF7;&#x6C42;&#x6269;&#x5C55;&#xFF08;django&#x4E2D;&#x95F4;&#x4EF6;&#xFF09;</li>
+<li>&#x4E2D;&#x95F4;&#x4EF6;</li>
+</ul>
+<a id="more"></a>
+<h1 id="&#x5E38;&#x89C1;&#x7684;web&#x6846;&#x67B6;"><a href="#&#x5E38;&#x89C1;&#x7684;web&#x6846;&#x67B6;" class="headerlink" title="&#x5E38;&#x89C1;&#x7684;web&#x6846;&#x67B6;"></a>&#x5E38;&#x89C1;&#x7684;web&#x6846;&#x67B6;</h1><ul>
+<li>Django&#xFF1A;&#x6709;&#x5F88;&#x591A;&#x7EC4;&#x4EF6;<ul>
+<li>ORM</li>
+<li>Form</li>
+<li>ModelForm</li>
+<li>&#x7F13;&#x5B58;</li>
+<li>Session</li>
+<li>&#x4E2D;&#x95F4;&#x4EF6;</li>
+<li>&#x4FE1;&#x53F7;</li>
+</ul>
+</li>
+<li>Flask&#xFF1A;&#x77ED;&#x5C0F;&#x7CBE;&#x608D;&#xFF0C;&#x5185;&#x90E8;&#x6CA1;&#x6709;&#x592A;&#x591A;&#x7EC4;&#x4EF6;&#xFF0C;&#x7B2C;&#x4E09;&#x65B9;&#x7EC4;&#x4EF6;&#x4E30;&#x5BCC;</li>
+<li>Tornado&#xFF1A;&#x5F02;&#x6B65;&#x975E;&#x963B;&#x585E;&#xFF08;node.js&#xFF09;</li>
+</ul>
+<h1 id="Web&#x6846;&#x67B6;&#x672C;&#x8D28;"><a href="#Web&#x6846;&#x67B6;&#x672C;&#x8D28;" class="headerlink" title="Web&#x6846;&#x67B6;&#x672C;&#x8D28;"></a>Web&#x6846;&#x67B6;&#x672C;&#x8D28;</h1><p>&#x4F17;&#x6240;&#x5468;&#x77E5;&#xFF0C;&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x7684;Web&#x5E94;&#x7528;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;socket&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x7528;&#x6237;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;socket&#x5BA2;&#x6237;&#x7AEF;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line">  </div><div class="line"><span class="keyword">import</span> socket</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_request</span><span class="params">(client)</span>:</span></div><div class="line">    buf = client.recv(<span class="number">1024</span>)</div><div class="line">    client.send(<span class="string">&quot;HTTP/1.1 200 OK\r\n\r\n&quot;</span>)</div><div class="line">    client.send(<span class="string">&quot;Hello, Seven&quot;</span>)</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    sock.bind((<span class="string">&apos;localhost&apos;</span>,<span class="number">8000</span>))</div><div class="line">    sock.listen(<span class="number">5</span>)</div><div class="line">  </div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        connection, address = sock.accept()</div><div class="line">        handle_request(connection)</div><div class="line">        connection.close()</div><div class="line">  </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x8FF0;&#x901A;&#x8FC7;socket&#x6765;&#x5B9E;&#x73B0;&#x4E86;&#x5176;&#x672C;&#x8D28;&#xFF0C;&#x800C;&#x5BF9;&#x4E8E;&#x771F;&#x5B9E;&#x5F00;&#x53D1;&#x4E2D;&#x7684;python web&#x7A0B;&#x5E8F;&#x6765;&#x8BF4;&#xFF0C;&#x4E00;&#x822C;&#x4F1A;&#x5206;&#x4E3A;&#x4E24;&#x90E8;&#x5206;&#xFF1A;&#x670D;&#x52A1;&#x5668;&#x7A0B;&#x5E8F;&#x548C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;&#x670D;&#x52A1;&#x5668;&#x7A0B;&#x5E8F;&#x8D1F;&#x8D23;&#x5BF9;socket&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x5C01;&#x88C5;&#xFF0C;&#x5E76;&#x5728;&#x8BF7;&#x6C42;&#x5230;&#x6765;&#x65F6;&#xFF0C;&#x5BF9;&#x8BF7;&#x6C42;&#x7684;&#x5404;&#x79CD;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6574;&#x7406;&#x3002;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5219;&#x8D1F;&#x8D23;&#x5177;&#x4F53;&#x7684;&#x903B;&#x8F91;&#x5904;&#x7406;&#x3002;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x5F00;&#x53D1;&#xFF0C;&#x5C31;&#x51FA;&#x73B0;&#x4E86;&#x4F17;&#x591A;&#x7684;Web&#x6846;&#x67B6;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;Django&#x3001;Flask&#x3001;web.py &#x7B49;&#x3002;&#x4E0D;&#x540C;&#x7684;&#x6846;&#x67B6;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x8BBA;&#x5982;&#x4F55;&#xFF0C;&#x5F00;&#x53D1;&#x51FA;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x8981;&#x548C;&#x670D;&#x52A1;&#x5668;&#x7A0B;&#x5E8F;&#x914D;&#x5408;&#xFF0C;&#x624D;&#x80FD;&#x4E3A;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x7A0B;&#x5E8F;&#x5C31;&#x9700;&#x8981;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x6846;&#x67B6;&#x63D0;&#x4F9B;&#x4E0D;&#x540C;&#x7684;&#x652F;&#x6301;&#x3002;&#x8FD9;&#x6837;&#x6DF7;&#x4E71;&#x7684;&#x5C40;&#x9762;&#x65E0;&#x8BBA;&#x5BF9;&#x4E8E;&#x670D;&#x52A1;&#x5668;&#x8FD8;&#x662F;&#x6846;&#x67B6;&#xFF0C;&#x90FD;&#x662F;&#x4E0D;&#x597D;&#x7684;&#x3002;&#x5BF9;&#x670D;&#x52A1;&#x5668;&#x6765;&#x8BF4;&#xFF0C;&#x9700;&#x8981;&#x652F;&#x6301;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x6846;&#x67B6;&#xFF0C;&#x5BF9;&#x6846;&#x67B6;&#x6765;&#x8BF4;&#xFF0C;&#x53EA;&#x6709;&#x652F;&#x6301;&#x5B83;&#x7684;&#x670D;&#x52A1;&#x5668;&#x624D;&#x80FD;&#x88AB;&#x5F00;&#x53D1;&#x51FA;&#x7684;&#x5E94;&#x7528;&#x4F7F;&#x7528;&#x3002;&#x8FD9;&#x65F6;&#x5019;&#xFF0C;&#x6807;&#x51C6;&#x5316;&#x5C31;&#x53D8;&#x5F97;&#x5C24;&#x4E3A;&#x91CD;&#x8981;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BBE;&#x7ACB;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#xFF0C;&#x53EA;&#x8981;&#x670D;&#x52A1;&#x5668;&#x7A0B;&#x5E8F;&#x652F;&#x6301;&#x8FD9;&#x4E2A;&#x6807;&#x51C6;&#xFF0C;&#x6846;&#x67B6;&#x4E5F;&#x652F;&#x6301;&#x8FD9;&#x4E2A;&#x6807;&#x51C6;&#xFF0C;&#x90A3;&#x4E48;&#x4ED6;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x4F7F;&#x7528;&#x3002;&#x4E00;&#x65E6;&#x6807;&#x51C6;&#x786E;&#x5B9A;&#xFF0C;&#x53CC;&#x65B9;&#x5404;&#x81EA;&#x5B9E;&#x73B0;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x66F4;&#x591A;&#x652F;&#x6301;&#x6807;&#x51C6;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x6846;&#x67B6;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x66F4;&#x591A;&#x652F;&#x6301;&#x6807;&#x51C6;&#x7684;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<p>WSGI&#xFF08;Web Server Gateway Interface&#xFF09;&#x662F;&#x4E00;&#x79CD;&#x89C4;&#x8303;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x4F7F;&#x7528;python&#x7F16;&#x5199;&#x7684;web app&#x4E0E;web server&#x4E4B;&#x95F4;&#x63A5;&#x53E3;&#x683C;&#x5F0F;&#xFF0C;&#x5B9E;&#x73B0;web app&#x4E0E;web server&#x95F4;&#x7684;&#x89E3;&#x8026;&#x3002;</p>
+<p>python&#x6807;&#x51C6;&#x5E93;&#x63D0;&#x4F9B;&#x7684;&#x72EC;&#x7ACB;WSGI&#x670D;&#x52A1;&#x5668;&#x79F0;&#x4E3A;wsgiref&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> wsgiref.simple_server <span class="keyword">import</span> make_server</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">RunServer</span><span class="params">(environ, start_response)</span>:</span></div><div class="line">    start_response(<span class="string">&apos;200 OK&apos;</span>, [(<span class="string">&apos;Content-Type&apos;</span>, <span class="string">&apos;text/html&apos;</span>)])</div><div class="line">    <span class="keyword">return</span> [bytes(<span class="string">&apos;&lt;h1&gt;Hello, web!&lt;/h1&gt;&apos;</span>, encoding=<span class="string">&apos;utf-8&apos;</span>), ]</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    httpd = make_server(<span class="string">&apos;&apos;</span>, <span class="number">8000</span>, RunServer)</div><div class="line">    print(<span class="string">&quot;Serving HTTP on port 8000...&quot;</span>)</div><div class="line">    httpd.serve_forever()</div></pre></td></tr></table></figure>
+<p>werkzeug</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> werkzeug.wrappers <span class="keyword">import</span> Request, Response</div><div class="line"></div><div class="line"><span class="meta">@Request.application</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">return</span> Response(<span class="string">&apos;Hello World!&apos;</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    <span class="keyword">from</span> werkzeug.serving <span class="keyword">import</span> run_simple</div><div class="line">    run_simple(<span class="string">&apos;localhost&apos;</span>, <span class="number">4000</span>, hello)</div></pre></td></tr></table></figure>
+<h1 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h1><h2 id="&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a href="#&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="headerlink" title="&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>&#x57FA;&#x672C;&#x4F7F;&#x7528;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</div><div class="line">app = Flask(__name__)</div><div class="line"> </div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;Hello World!&apos;</span></div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">flask&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;&#x4E00;&#x4E2A;flask.config.Config&#x5BF9;&#x8C61;&#xFF08;&#x7EE7;&#x627F;&#x5B57;&#x5178;&#xFF09;,&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x4E3A;&#xFF1A;</div><div class="line">    {</div><div class="line">        <span class="string">&apos;DEBUG&apos;</span>:                                get_debug_flag(default=<span class="keyword">False</span>),  &#x662F;&#x5426;&#x5F00;&#x542F;Debug&#x6A21;&#x5F0F;</div><div class="line">        <span class="string">&apos;TESTING&apos;</span>:                              <span class="keyword">False</span>,                          &#x662F;&#x5426;&#x5F00;&#x542F;&#x6D4B;&#x8BD5;&#x6A21;&#x5F0F;</div><div class="line">        <span class="string">&apos;PROPAGATE_EXCEPTIONS&apos;</span>:                 <span class="keyword">None</span>,                          </div><div class="line">        <span class="string">&apos;PRESERVE_CONTEXT_ON_EXCEPTION&apos;</span>:        <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;SECRET_KEY&apos;</span>:                           <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;PERMANENT_SESSION_LIFETIME&apos;</span>:           timedelta(days=<span class="number">31</span>),</div><div class="line">        <span class="string">&apos;USE_X_SENDFILE&apos;</span>:                       <span class="keyword">False</span>,</div><div class="line">        <span class="string">&apos;LOGGER_NAME&apos;</span>:                          <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;LOGGER_HANDLER_POLICY&apos;</span>:               <span class="string">&apos;always&apos;</span>,</div><div class="line">        <span class="string">&apos;SERVER_NAME&apos;</span>:                          <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;APPLICATION_ROOT&apos;</span>:                     <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;SESSION_COOKIE_NAME&apos;</span>:                  <span class="string">&apos;session&apos;</span>,</div><div class="line">        <span class="string">&apos;SESSION_COOKIE_DOMAIN&apos;</span>:                <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;SESSION_COOKIE_PATH&apos;</span>:                  <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;SESSION_COOKIE_HTTPONLY&apos;</span>:              <span class="keyword">True</span>,</div><div class="line">        <span class="string">&apos;SESSION_COOKIE_SECURE&apos;</span>:                <span class="keyword">False</span>,</div><div class="line">        <span class="string">&apos;SESSION_REFRESH_EACH_REQUEST&apos;</span>:         <span class="keyword">True</span>,</div><div class="line">        <span class="string">&apos;MAX_CONTENT_LENGTH&apos;</span>:                   <span class="keyword">None</span>,</div><div class="line">        <span class="string">&apos;SEND_FILE_MAX_AGE_DEFAULT&apos;</span>:            timedelta(hours=<span class="number">12</span>),</div><div class="line">        <span class="string">&apos;TRAP_BAD_REQUEST_ERRORS&apos;</span>:              <span class="keyword">False</span>,</div><div class="line">        <span class="string">&apos;TRAP_HTTP_EXCEPTIONS&apos;</span>:                 <span class="keyword">False</span>,</div><div class="line">        <span class="string">&apos;EXPLAIN_TEMPLATE_LOADING&apos;</span>:             <span class="keyword">False</span>,</div><div class="line">        <span class="string">&apos;PREFERRED_URL_SCHEME&apos;</span>:                 <span class="string">&apos;http&apos;</span>,</div><div class="line">        <span class="string">&apos;JSON_AS_ASCII&apos;</span>:                        <span class="keyword">True</span>,</div><div class="line">        <span class="string">&apos;JSON_SORT_KEYS&apos;</span>:                       <span class="keyword">True</span>,</div><div class="line">        <span class="string">&apos;JSONIFY_PRETTYPRINT_REGULAR&apos;</span>:          <span class="keyword">True</span>,</div><div class="line">        <span class="string">&apos;JSONIFY_MIMETYPE&apos;</span>:                     <span class="string">&apos;application/json&apos;</span>,</div><div class="line">        <span class="string">&apos;TEMPLATES_AUTO_RELOAD&apos;</span>:                <span class="keyword">None</span>,</div><div class="line">    }</div><div class="line"> </div><div class="line">&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;</div><div class="line">    app.config[<span class="string">&apos;DEBUG&apos;</span>] = <span class="keyword">True</span></div><div class="line"> </div><div class="line">    PS&#xFF1A; &#x7531;&#x4E8E;Config&#x5BF9;&#x8C61;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x5B57;&#x5178;&#xFF0C;&#x6240;&#x4EE5;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;app.config.update(...)</div><div class="line"> </div><div class="line">&#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;</div><div class="line">    app.config.from_pyfile(<span class="string">&quot;python&#x6587;&#x4EF6;&#x540D;&#x79F0;&quot;</span>)</div><div class="line">        &#x5982;&#xFF1A;</div><div class="line">            settings.py</div><div class="line">                DEBUG = <span class="keyword">True</span></div><div class="line"> </div><div class="line">            app.config.from_pyfile(<span class="string">&quot;settings.py&quot;</span>)</div><div class="line"> </div><div class="line">    app.config.from_envvar(<span class="string">&quot;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x540D;&#x79F0;&quot;</span>)</div><div class="line">        &#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x4E3A;python&#x6587;&#x4EF6;&#x540D;&#x79F0;&#x540D;&#x79F0;&#xFF0C;&#x5185;&#x90E8;&#x8C03;&#x7528;from_pyfile&#x65B9;&#x6CD5;</div><div class="line"> </div><div class="line"> </div><div class="line">    app.config.from_json(<span class="string">&quot;json&#x6587;&#x4EF6;&#x540D;&#x79F0;&quot;</span>)</div><div class="line">        JSON&#x6587;&#x4EF6;&#x540D;&#x79F0;&#xFF0C;&#x5FC5;&#x987B;&#x662F;json&#x683C;&#x5F0F;&#xFF0C;&#x56E0;&#x4E3A;&#x5185;&#x90E8;&#x4F1A;&#x6267;&#x884C;json.loads</div><div class="line"> </div><div class="line">    app.config.from_mapping({<span class="string">&apos;DEBUG&apos;</span>:<span class="keyword">True</span>})</div><div class="line">        &#x5B57;&#x5178;&#x683C;&#x5F0F;</div><div class="line"> </div><div class="line">    app.config.from_object(<span class="string">&quot;python&#x7C7B;&#x6216;&#x7C7B;&#x7684;&#x8DEF;&#x5F84;&quot;</span>)</div><div class="line"> </div><div class="line">        app.config.from_object(<span class="string">&apos;pro_flask.settings.TestingConfig&apos;</span>)</div><div class="line"> </div><div class="line">        settings.py</div><div class="line"> </div><div class="line">            <span class="class"><span class="keyword">class</span> <span class="title">Config</span><span class="params">(object)</span>:</span></div><div class="line">                DEBUG = <span class="keyword">False</span></div><div class="line">                TESTING = <span class="keyword">False</span></div><div class="line">                DATABASE_URI = <span class="string">&apos;sqlite://:memory:&apos;</span></div><div class="line"> </div><div class="line">            <span class="class"><span class="keyword">class</span> <span class="title">ProductionConfig</span><span class="params">(Config)</span>:</span></div><div class="line">                DATABASE_URI = <span class="string">&apos;mysql://user@localhost/foo&apos;</span></div><div class="line"> </div><div class="line">            <span class="class"><span class="keyword">class</span> <span class="title">DevelopmentConfig</span><span class="params">(Config)</span>:</span></div><div class="line">                DEBUG = <span class="keyword">True</span></div><div class="line"> </div><div class="line">            <span class="class"><span class="keyword">class</span> <span class="title">TestingConfig</span><span class="params">(Config)</span>:</span></div><div class="line">                TESTING = <span class="keyword">True</span></div><div class="line"> </div><div class="line">        PS: &#x4ECE;sys.path&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x8DEF;&#x5F84;&#x5F00;&#x59CB;&#x5199;</div><div class="line">     </div><div class="line"> </div><div class="line">    PS: settings.py&#x6587;&#x4EF6;&#x9ED8;&#x8BA4;&#x8DEF;&#x5F84;&#x8981;&#x653E;&#x5728;&#x7A0B;&#x5E8F;root_path&#x76EE;&#x5F55;&#xFF0C;&#x5982;&#x679C;instance_relative_config&#x4E3A;<span class="keyword">True</span>&#xFF0C;&#x5219;&#x5C31;&#x662F;instance_path&#x76EE;&#x5F55;</div></pre></td></tr></table></figure>
+<h2 id="&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;"><a href="#&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;" class="headerlink" title="&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;"></a>&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;</h2><ul>
+<li>@app.route(&#x2018;/user/<username>&#x2018;)</username></li>
+<li>@app.route(&#x2018;/post/<int:post_id>&#x2018;)</int:post_id></li>
+<li>@app.route(&#x2018;/post/<float:post_id>&#x2018;)</float:post_id></li>
+<li>@app.route(&#x2018;/post/<path:path>&#x2018;)</path:path></li>
+<li>@app.route(&#x2018;/login&#x2019;, methods=[&#x2018;GET&#x2019;, &#x2018;POST&#x2019;])</li>
+<li>@app.route(&#x2018;/index/<int:nid>&#x2018;, methods=[&#x2018;GET&#x2019;, &#x2018;POST&#x2019;],endpoint=&#x2019;index&#x2019;)</int:nid></li>
+<li>url_for&#x53CD;&#x5411;&#x89E3;&#x6790;url</li>
+</ul>
+<p>&#x5E38;&#x7528;&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;&#x6709;&#x4EE5;&#x4E0A;&#x4E94;&#x79CD;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&#x4E00;&#x4E0B;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x6765;&#x5904;&#x7406;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">DEFAULT_CONVERTERS = {</div><div class="line">    <span class="string">&apos;default&apos;</span>:          UnicodeConverter,</div><div class="line">    <span class="string">&apos;string&apos;</span>:           UnicodeConverter,</div><div class="line">    <span class="string">&apos;any&apos;</span>:              AnyConverter,</div><div class="line">    <span class="string">&apos;path&apos;</span>:             PathConverter,</div><div class="line">    <span class="string">&apos;int&apos;</span>:              IntegerConverter,</div><div class="line">    <span class="string">&apos;float&apos;</span>:            FloatConverter,</div><div class="line">    <span class="string">&apos;uuid&apos;</span>:             UUIDConverter,</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x539F;&#x7406;"><a href="#&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x539F;&#x7406;" class="headerlink" title="&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x539F;&#x7406;"></a>&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x539F;&#x7406;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">auth</span><span class="params">(func)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&apos;before&apos;</span>)</div><div class="line">        result = func(*args, **kwargs)</div><div class="line">        print(<span class="string">&apos;after&apos;</span>)</div><div class="line">        <span class="keyword">return</span> result</div><div class="line"></div><div class="line">    <span class="keyword">return</span> inner</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/index.html&apos;,methods=[&apos;GET&apos;,&apos;POST&apos;],endpoint=&apos;index&apos;)</span></div><div class="line"><span class="meta">@auth</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;Index&apos;</span></div><div class="line"></div><div class="line">&#x6216;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&quot;Index&quot;</span></div><div class="line"></div><div class="line">self.add_url_rule(rule=<span class="string">&apos;/index.html&apos;</span>, endpoint=<span class="string">&quot;index&quot;</span>, view_func=index, methods=[<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;POST&quot;</span>])</div><div class="line"><span class="keyword">or</span></div><div class="line">app.add_url_rule(rule=<span class="string">&apos;/index.html&apos;</span>, endpoint=<span class="string">&quot;index&quot;</span>, view_func=index, methods=[<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;POST&quot;</span>])</div><div class="line">app.view_functions[<span class="string">&apos;index&apos;</span>] = index</div><div class="line"></div><div class="line"></div><div class="line">&#x6216;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">auth</span><span class="params">(func)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&apos;before&apos;</span>)</div><div class="line">        result = func(*args, **kwargs)</div><div class="line">        print(<span class="string">&apos;after&apos;</span>)</div><div class="line">        <span class="keyword">return</span> result</div><div class="line"></div><div class="line"><span class="keyword">return</span> inner</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span><span class="params">(views.View)</span>:</span></div><div class="line">    methods = [<span class="string">&apos;GET&apos;</span>]</div><div class="line">    decorators = [auth, ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch_request</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">&apos;Index&apos;</span>)</div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;Index!&apos;</span></div><div class="line"></div><div class="line">app.add_url_rule(<span class="string">&apos;/index&apos;</span>, view_func=IndexView.as_view(name=<span class="string">&apos;index&apos;</span>))  <span class="comment"># name=endpoint</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#x6216;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span><span class="params">(views.MethodView)</span>:</span></div><div class="line">    methods = [<span class="string">&apos;GET&apos;</span>]</div><div class="line">    decorators = [auth, ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;Index.GET&apos;</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;Index.POST&apos;</span></div><div class="line"></div><div class="line"></div><div class="line">app.add_url_rule(<span class="string">&apos;/index&apos;</span>, view_func=IndexView.as_view(name=<span class="string">&apos;index&apos;</span>))  <span class="comment"># name=endpoint</span></div></pre></td></tr></table></figure>
+<p>@app.route&#x548C;app.add_url_rule&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>rule,                       URL&#x89C4;&#x5219;</li>
+<li>view_func,                  &#x89C6;&#x56FE;&#x51FD;&#x6570;&#x540D;&#x79F0;</li>
+<li>defaults=None,              &#x9ED8;&#x8BA4;&#x503C;,&#x5F53;URL&#x4E2D;&#x65E0;&#x53C2;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x9700;&#x8981;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;defaults={&#x2018;k&#x2019;:&#x2019;v&#x2019;}&#x4E3A;&#x51FD;&#x6570;&#x63D0;&#x4F9B;&#x53C2;&#x6570;</li>
+<li>endpoint=None,              &#x540D;&#x79F0;&#xFF0C;&#x7528;&#x4E8E;&#x53CD;&#x5411;&#x751F;&#x6210;URL&#xFF0C;&#x5373;&#xFF1A; url_for(&#x2018;&#x540D;&#x79F0;&#x2019;)</li>
+<li>methods=None,               &#x5141;&#x8BB8;&#x7684;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF0C;&#x5982;&#xFF1A;[&#x201C;GET&#x201D;,&#x201D;POST&#x201D;]</li>
+<li>strict_slashes=None,        &#x5BF9;URL&#x6700;&#x540E;&#x7684; / &#x7B26;&#x53F7;&#x662F;&#x5426;&#x4E25;&#x683C;&#x8981;&#x6C42;&#xFF0C;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.route(&apos;/index&apos;,strict_slashes=False)&#xFF0C;</span></div><div class="line">    &#x8BBF;&#x95EE; http://www.xx.com/index/ &#x6216; http://www.xx.com/index&#x5747;&#x53EF;</div><div class="line"><span class="meta">@app.route(&apos;/index&apos;,strict_slashes=True)</span></div><div class="line">    &#x4EC5;&#x8BBF;&#x95EE; http://www.xx.com/index </div><div class="line">```   </div><div class="line"></div><div class="line">* redirect_to=<span class="keyword">None</span>,           &#x91CD;&#x5B9A;&#x5411;&#x5230;&#x6307;&#x5B9A;&#x5730;&#x5740;</div><div class="line"></div><div class="line">``` python</div><div class="line"><span class="meta">@app.route(&apos;/index/&lt;int:nid&gt;&apos;, redirect_to=&apos;/home/&lt;nid&gt;&apos;)</span></div><div class="line">&#x6216;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(adapter, nid)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&quot;/home/888&quot;</span></div><div class="line"><span class="meta">@app.route(&apos;/index/&lt;int:nid&gt;&apos;, redirect_to=func)</span></div></pre></td></tr></table></figure>
+<ul>
+<li>subdomain=None,             &#x5B50;&#x57DF;&#x540D;&#x8BBF;&#x95EE;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, views, url_for</div><div class="line"></div><div class="line">app = Flask(import_name=__name__)</div><div class="line">app.config[<span class="string">&apos;SERVER_NAME&apos;</span>] = <span class="string">&apos;wupeiqi.com:5000&apos;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&quot;/&quot;, subdomain=&quot;admin&quot;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">static_index</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;Flask supports static subdomains</span></div><div class="line">    This is available at static.your-domain.tld&quot;&quot;&quot;</div><div class="line">    <span class="keyword">return</span> <span class="string">&quot;static.your-domain.tld&quot;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&quot;/dynamic&quot;, subdomain=&quot;&lt;username&gt;&quot;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">username_index</span><span class="params">(username)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;Dynamic subdomains are also supported</span></div><div class="line">    Try going to user1.your-domain.tld/dynamic&quot;&quot;&quot;</div><div class="line">    <span class="keyword">return</span> username + <span class="string">&quot;.your-domain.tld&quot;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h3 id="&#x81EA;&#x5B9A;&#x5236;&#x6B63;&#x5219;&#x8DEF;&#x7531;&#x5339;&#x914D;"><a href="#&#x81EA;&#x5B9A;&#x5236;&#x6B63;&#x5219;&#x8DEF;&#x7531;&#x5339;&#x914D;" class="headerlink" title="&#x81EA;&#x5B9A;&#x5236;&#x6B63;&#x5219;&#x8DEF;&#x7531;&#x5339;&#x914D;"></a>&#x81EA;&#x5B9A;&#x5236;&#x6B63;&#x5219;&#x8DEF;&#x7531;&#x5339;&#x914D;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, views, url_for</div><div class="line"><span class="keyword">from</span> werkzeug.routing <span class="keyword">import</span> BaseConverter</div><div class="line"></div><div class="line">app = Flask(import_name=__name__)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegexConverter</span><span class="params">(BaseConverter)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line">    &#x81EA;&#x5B9A;&#x4E49;URL&#x5339;&#x914D;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, map, regex)</span>:</span></div><div class="line">        super(RegexConverter, self).__init__(map)</div><div class="line">        self.regex = regex</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_python</span><span class="params">(self, value)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line">        &#x8DEF;&#x7531;&#x5339;&#x914D;&#x65F6;&#xFF0C;&#x5339;&#x914D;&#x6210;&#x529F;&#x540E;&#x4F20;&#x9012;&#x7ED9;&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x4E2D;&#x53C2;&#x6570;&#x7684;&#x503C;</div><div class="line">        :param value: </div><div class="line">        :return: </div><div class="line">        &quot;&quot;&quot;</div><div class="line">        <span class="keyword">return</span> int(value)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_url</span><span class="params">(self, value)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line">        &#x4F7F;&#x7528;url_for&#x53CD;&#x5411;&#x751F;&#x6210;URL&#x65F6;&#xFF0C;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7ECF;&#x8FC7;&#x8BE5;&#x65B9;&#x6CD5;&#x5904;&#x7406;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x7528;&#x4E8E;&#x751F;&#x6210;URL&#x4E2D;&#x7684;&#x53C2;&#x6570;</div><div class="line">        :param value: </div><div class="line">        :return: </div><div class="line">        &quot;&quot;&quot;</div><div class="line">        val = super(RegexConverter, self).to_url(value)</div><div class="line">        <span class="keyword">return</span> val</div><div class="line"></div><div class="line"><span class="comment"># &#x6DFB;&#x52A0;&#x5230;flask&#x4E2D;</span></div><div class="line">app.url_map.converters[<span class="string">&apos;regex&apos;</span>] = RegexConverter</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/index/&lt;regex(&quot;\d+&quot;):nid&gt;&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(nid)</span>:</span></div><div class="line">    print(url_for(<span class="string">&apos;index&apos;</span>, nid=<span class="string">&apos;888&apos;</span>))</div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;Index&apos;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x6A21;&#x677F;"><a href="#&#x6A21;&#x677F;" class="headerlink" title="&#x6A21;&#x677F;"></a>&#x6A21;&#x677F;</h2><h3 id="&#x6A21;&#x677F;&#x7684;&#x4F7F;&#x7528;"><a href="#&#x6A21;&#x677F;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x6A21;&#x677F;&#x7684;&#x4F7F;&#x7528;"></a>&#x6A21;&#x677F;&#x7684;&#x4F7F;&#x7528;</h3><p>Flask&#x4F7F;&#x7528;&#x7684;&#x662F;Jinja2&#x6A21;&#x677F;&#xFF0C;&#x6240;&#x4EE5;&#x5176;&#x8BED;&#x6CD5;&#x548C;Django&#x65E0;&#x5DEE;&#x522B;</p>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x677F;&#x65B9;&#x6CD5;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x677F;&#x65B9;&#x6CD5;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x677F;&#x65B9;&#x6CD5;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x677F;&#x65B9;&#x6CD5;</h3><p>Flask&#x4E2D;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x677F;&#x65B9;&#x6CD5;&#x7684;&#x65B9;&#x5F0F;&#x548C;Bottle&#x76F8;&#x4F3C;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5E76;&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x7684;&#x5F62;&#x5F0F;&#x4F20;&#x5165;render_template&#xFF0C;&#x5982;</p>
+<p>html</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head lang=&quot;en&quot;&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&lt;/h1&gt;</div><div class="line">    {{ww()|safe}}</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>run.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</div><div class="line">app = Flask(__name__)</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wupeiqi</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;&lt;h1&gt;Wupeiqi&lt;/h1&gt;&apos;</span></div><div class="line"> </div><div class="line"><span class="meta">@app.route(&apos;/login&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">&apos;login.html&apos;</span>, ww=wupeiqi)</div><div class="line"> </div><div class="line">app.run()</div></pre></td></tr></table></figure>
+<p>&#x5176;&#x4ED6;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Title&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line"></div><div class="line">    {% macro input(name, type=&apos;text&apos;, value=&apos;&apos;) %}</div><div class="line">        &lt;input type=&quot;{{ type }}&quot; name=&quot;{{ name }}&quot; value=&quot;{{ value }}&quot;&gt;</div><div class="line">    {% endmacro %}</div><div class="line"></div><div class="line">    {{ input(&apos;n1&apos;) }}</div><div class="line"></div><div class="line">    {% include &apos;tp.html&apos; %}</div><div class="line"></div><div class="line">    &lt;h1&gt;asdf{{ v.k1}}&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF1A;Markup&#x7B49;&#x4EF7;django&#x7684;mark_safe</p>
+</blockquote>
+<h2 id="&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;"><a href="#&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;" class="headerlink" title="&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;"></a>&#x8BF7;&#x6C42;&#x548C;&#x54CD;&#x5E94;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> redirect</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> make_response</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/login.html&apos;, methods=[&apos;GET&apos;, &quot;POST&quot;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line"></div><div class="line">    <span class="comment"># &#x8BF7;&#x6C42;&#x76F8;&#x5173;&#x4FE1;&#x606F;</span></div><div class="line">    <span class="comment"># request.method</span></div><div class="line">    <span class="comment"># request.args</span></div><div class="line">    <span class="comment"># request.form</span></div><div class="line">    <span class="comment"># request.values</span></div><div class="line">    <span class="comment"># request.cookies</span></div><div class="line">    <span class="comment"># request.headers</span></div><div class="line">    <span class="comment"># request.path</span></div><div class="line">    <span class="comment"># request.full_path</span></div><div class="line">    <span class="comment"># request.script_root</span></div><div class="line">    <span class="comment"># request.url</span></div><div class="line">    <span class="comment"># request.base_url</span></div><div class="line">    <span class="comment"># request.url_root</span></div><div class="line">    <span class="comment"># request.host_url</span></div><div class="line">    <span class="comment"># request.host</span></div><div class="line">    <span class="comment"># request.files</span></div><div class="line">    <span class="comment"># obj = request.files[&apos;the_file_name&apos;]</span></div><div class="line">    <span class="comment"># obj.save(&apos;/var/www/uploads/&apos; + secure_filename(f.filename))</span></div><div class="line"></div><div class="line">    <span class="comment"># &#x54CD;&#x5E94;&#x76F8;&#x5173;&#x4FE1;&#x606F;</span></div><div class="line">    <span class="comment"># return &quot;&#x5B57;&#x7B26;&#x4E32;&quot;</span></div><div class="line">    <span class="comment"># return render_template(&apos;html&#x6A21;&#x677F;&#x8DEF;&#x5F84;&apos;,**{})</span></div><div class="line">    <span class="comment"># return redirect(&apos;/index.html&apos;)</span></div><div class="line"></div><div class="line">    <span class="comment"># response = make_response(render_template(&apos;index.html&apos;))</span></div><div class="line">    <span class="comment"># response&#x662F;flask.wrappers.Response&#x7C7B;&#x578B;</span></div><div class="line">    <span class="comment"># response.delete_cookie(&apos;key&apos;)</span></div><div class="line">    <span class="comment"># response.set_cookie(&apos;key&apos;, &apos;value&apos;)</span></div><div class="line">    <span class="comment"># response.headers[&apos;X-Something&apos;] = &apos;A value&apos;</span></div><div class="line">    <span class="comment"># return response</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="string">&quot;&#x5185;&#x5BB9;&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>&#x9664;&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x4E4B;&#x5916;,&#x8FD8;&#x6709;&#x4E00;&#x4E2A;session&#x5BF9;&#x8C61;.&#x5B83;&#x5141;&#x8BB8;&#x4F60;&#x5728;&#x4E0D;&#x540C;&#x8BF7;&#x6C42;&#x95F4;&#x5B58;&#x50A8;&#x7279;&#x5B9A;&#x7528;&#x6237;&#x7684;&#x4FE1;&#x606F;,&#x5B83;&#x662F;&#x5728;Cookies&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5B9E;&#x73B0;&#x7684;,&#x5E76;&#x4E14;&#x5BF9;Cookies&#x8FDB;&#x884C;&#x5BC6;&#x94A5;&#x7B7E;&#x540D;&#x8981;&#x4F7F;&#x7528;&#x4F1A;&#x8BDD;,&#x4F60;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5BC6;&#x94A5;.</p>
+<ul>
+<li>&#x8BBE;&#x7F6E; session[&#x2018;username&#x2019;] &#xFF1D; &#x2018;xxx&#x2019;</li>
+<li><p>&#x5220;&#x9664; session.pop(&#x2018;username&#x2019;, None)</p>
+</li>
+<li><p>&#x8BBE;&#x7F6E;cookie&#x65F6;&#xFF0C;&#x5982;&#x4F55;&#x8BBE;&#x5B9A;&#x5173;&#x95ED;&#x6D4F;&#x89C8;&#x5668;&#x5219;cookie&#x5931;&#x6548;</p>
+<ul>
+<li>response.set_cookie(&#x2018;k&#x2019;,&#x2019;v&#x2019;,exipre=None)</li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x57FA;&#x672C;&#x4F7F;&#x7528;-1"><a href="#&#x57FA;&#x672C;&#x4F7F;&#x7528;-1" class="headerlink" title="&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>&#x57FA;&#x672C;&#x4F7F;&#x7528;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, session, redirect, url_for, escape, request</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="string">&apos;username&apos;</span> <span class="keyword">in</span> session:</div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;Logged in as %s&apos;</span> % escape(session[<span class="string">&apos;username&apos;</span>])</div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;You are not logged in&apos;</span></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/login&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&apos;POST&apos;</span>:</div><div class="line">        session[<span class="string">&apos;username&apos;</span>] = request.form[<span class="string">&apos;username&apos;</span>]</div><div class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&apos;index&apos;</span>))</div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;&apos;&apos;</span></div><div class="line">        &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;</div><div class="line">            &lt;p&gt;&lt;input type=text name=username&gt;</div><div class="line">            &lt;p&gt;&lt;input type=submit value=Login&gt;</div><div class="line">        &lt;/form&gt;</div><div class="line">    &apos;&apos;&apos;</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/logout&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment"># remove the username from the session if it&apos;s there</span></div><div class="line">    session.pop(<span class="string">&apos;username&apos;</span>, <span class="keyword">None</span>)</div><div class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">&apos;index&apos;</span>))</div><div class="line"></div><div class="line"><span class="comment"># set the secret key.  keep this really secret:</span></div><div class="line">app.secret_key = <span class="string">&apos;dasji9dasd9qwdq8dh9qwdu&apos;</span></div></pre></td></tr></table></figure>
+<p>&#x81EA;&#x5B9A;&#x4E49;Session</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div></pre></td><td class="code"><pre><div class="line">pip3 install Flask-Session</div><div class="line"></div><div class="line">run.py</div><div class="line">    <span class="keyword">from</span> flask <span class="keyword">import</span> Flask</div><div class="line">    <span class="keyword">from</span> flask <span class="keyword">import</span> session</div><div class="line">    <span class="keyword">from</span> pro_flask.utils.session <span class="keyword">import</span> MySessionInterface</div><div class="line">    app = Flask(__name__)</div><div class="line"></div><div class="line">    app.secret_key = <span class="string">&apos;MIJ1d2i9f1fndunNIJN&apos;</span></div><div class="line">    app.session_interface = MySessionInterface()</div><div class="line"></div><div class="line"><span class="meta">    @app.route(&apos;/login.html&apos;, methods=[&apos;GET&apos;, &quot;POST&quot;])</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">        print(session)</div><div class="line">        session[<span class="string">&apos;user1&apos;</span>] = <span class="string">&apos;alex&apos;</span></div><div class="line">        session[<span class="string">&apos;user2&apos;</span>] = <span class="string">&apos;alex&apos;</span></div><div class="line">        <span class="keyword">del</span> session[<span class="string">&apos;user2&apos;</span>]</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="string">&quot;&#x5185;&#x5BB9;&quot;</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">        app.run()</div><div class="line"></div><div class="line">session.py</div><div class="line">    <span class="comment">#!/usr/bin/env python</span></div><div class="line">    <span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line">    <span class="keyword">import</span> uuid</div><div class="line">    <span class="keyword">import</span> json</div><div class="line">    <span class="keyword">from</span> flask.sessions <span class="keyword">import</span> SessionInterface</div><div class="line">    <span class="keyword">from</span> flask.sessions <span class="keyword">import</span> SessionMixin</div><div class="line">    <span class="keyword">from</span> itsdangerous <span class="keyword">import</span> Signer, BadSignature, want_bytes</div><div class="line"></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MySession</span><span class="params">(dict, SessionMixin)</span>:</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, initial=None, sid=None)</span>:</span></div><div class="line">            self.sid = sid</div><div class="line">            self.initial = initial</div><div class="line">            super(MySession, self).__init__(initial <span class="keyword">or</span> ())</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span><span class="params">(self, key, value)</span>:</span></div><div class="line">            super(MySession, self).__setitem__(key, value)</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, item)</span>:</span></div><div class="line">            <span class="keyword">return</span> super(MySession, self).__getitem__(item)</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span><span class="params">(self, key)</span>:</span></div><div class="line">            super(MySession, self).__delitem__(key)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MySessionInterface</span><span class="params">(SessionInterface)</span>:</span></div><div class="line">        session_class = MySession</div><div class="line">        container = {}</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">            <span class="keyword">import</span> redis</div><div class="line">            self.redis = redis.Redis()</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_generate_sid</span><span class="params">(self)</span>:</span></div><div class="line">            <span class="keyword">return</span> str(uuid.uuid4())</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_get_signer</span><span class="params">(self, app)</span>:</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> app.secret_key:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">            <span class="keyword">return</span> Signer(app.secret_key, salt=<span class="string">&apos;flask-session&apos;</span>,</div><div class="line">                          key_derivation=<span class="string">&apos;hmac&apos;</span>)</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">open_session</span><span class="params">(self, app, request)</span>:</span></div><div class="line">            <span class="string">&quot;&quot;&quot;</span></div><div class="line">            &#x7A0B;&#x5E8F;&#x521A;&#x542F;&#x52A8;&#x65F6;&#x6267;&#x884C;&#xFF0C;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;session&#x5BF9;&#x8C61;</div><div class="line">            &quot;&quot;&quot;</div><div class="line">            sid = request.cookies.get(app.session_cookie_name)</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> sid:</div><div class="line">                sid = self._generate_sid()</div><div class="line">                <span class="keyword">return</span> self.session_class(sid=sid)</div><div class="line"></div><div class="line">            signer = self._get_signer(app)</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                sid_as_bytes = signer.unsign(sid)</div><div class="line">                sid = sid_as_bytes.decode()</div><div class="line">            <span class="keyword">except</span> BadSignature:</div><div class="line">                sid = self._generate_sid()</div><div class="line">                <span class="keyword">return</span> self.session_class(sid=sid)</div><div class="line"></div><div class="line">            <span class="comment"># session&#x4FDD;&#x5B58;&#x5728;redis&#x4E2D;</span></div><div class="line">            <span class="comment"># val = self.redis.get(sid)</span></div><div class="line">            <span class="comment"># session&#x4FDD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;</span></div><div class="line">            val = self.container.get(sid)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    data = json.loads(val)</div><div class="line">                    <span class="keyword">return</span> self.session_class(data, sid=sid)</div><div class="line">                <span class="keyword">except</span>:</div><div class="line">                    <span class="keyword">return</span> self.session_class(sid=sid)</div><div class="line">            <span class="keyword">return</span> self.session_class(sid=sid)</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">save_session</span><span class="params">(self, app, session, response)</span>:</span></div><div class="line">            <span class="string">&quot;&quot;&quot;</span></div><div class="line">            &#x7A0B;&#x5E8F;&#x7ED3;&#x675F;&#x524D;&#x6267;&#x884C;&#xFF0C;&#x53EF;&#x4EE5;&#x4FDD;&#x5B58;session&#x4E2D;&#x6240;&#x6709;&#x7684;&#x503C;</div><div class="line">            &#x5982;&#xFF1A;</div><div class="line">                &#x4FDD;&#x5B58;&#x5230;resit</div><div class="line">                &#x5199;&#x5165;&#x5230;&#x7528;&#x6237;cookie</div><div class="line">            &quot;&quot;&quot;</div><div class="line">            domain = self.get_cookie_domain(app)</div><div class="line">            path = self.get_cookie_path(app)</div><div class="line">            httponly = self.get_cookie_httponly(app)</div><div class="line">            secure = self.get_cookie_secure(app)</div><div class="line">            expires = self.get_expiration_time(app, session)</div><div class="line"></div><div class="line">            val = json.dumps(dict(session))</div><div class="line"></div><div class="line">            <span class="comment"># session&#x4FDD;&#x5B58;&#x5728;redis&#x4E2D;</span></div><div class="line">            <span class="comment"># self.redis.setex(name=session.sid, value=val, time=app.permanent_session_lifetime)</span></div><div class="line">            <span class="comment"># session&#x4FDD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;</span></div><div class="line">            self.container.setdefault(session.sid, val)</div><div class="line"></div><div class="line">            session_id = self._get_signer(app).sign(want_bytes(session.sid))</div><div class="line"></div><div class="line">            response.set_cookie(app.session_cookie_name, session_id,</div><div class="line">                                expires=expires, httponly=httponly,</div><div class="line">                                domain=domain, path=path, secure=secure)</div></pre></td></tr></table></figure>
+<p>&#x7B2C;&#x4E09;&#x65B9;session</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment">#pip3 install redis</span></div><div class="line"><span class="comment">#pip3 install flask-session</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, session, redirect</div><div class="line"><span class="keyword">from</span> flask.ext.session <span class="keyword">import</span> Session</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line">app.secret_key = <span class="string">&apos;asdfasdfasd&apos;</span></div><div class="line"></div><div class="line">app.config[<span class="string">&apos;SESSION_TYPE&apos;</span>] = <span class="string">&apos;redis&apos;</span></div><div class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> Redis</div><div class="line">app.config[<span class="string">&apos;SESSION_REDIS&apos;</span>] = Redis(host=<span class="string">&apos;192.168.0.94&apos;</span>,port=<span class="string">&apos;6379&apos;</span>)</div><div class="line">Session(app)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/login&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    session[<span class="string">&apos;username&apos;</span>] = <span class="string">&apos;alex&apos;</span></div><div class="line">    <span class="keyword">return</span> redirect(<span class="string">&apos;/index&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/index&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    name = session[<span class="string">&apos;username&apos;</span>]</div><div class="line">    <span class="keyword">return</span> name</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x84DD;&#x56FE;"><a href="#&#x84DD;&#x56FE;" class="headerlink" title="&#x84DD;&#x56FE;"></a>&#x84DD;&#x56FE;</h2><p>&#x84DD;&#x56FE;&#x7528;&#x4E8E;&#x4E3A;&#x5E94;&#x7528;&#x63D0;&#x4F9B;&#x76EE;&#x5F55;&#x5212;&#x5206;&#xFF1A;</p>
+<ul>
+<li>&#x6784;&#x9020;&#x7A0B;&#x5E8F;&#x76EE;&#x5F55;<ul>
+<li>&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x9020;&#xFF0C;&#x6765;&#x56DE;&#x5BFC;&#x5165;</li>
+<li>&#x84DD;&#x56FE;<ul>
+<li>&#x6279;&#x91CF;url&#x524D;&#x7F00;</li>
+<li>&#x81EA;&#x5B9A;&#x6A21;&#x677F;&#x8DEF;&#x5F84;&#x3001;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</li>
+<li>&#x8BF7;&#x6C42;&#x6269;&#x5C55;<ul>
+<li>&#x9488;&#x5BF9;app&#xFF0C;&#x6240;&#x6709;&#x84DD;&#x56FE;&#x751F;&#x6548;</li>
+<li>&#x9488;&#x5BF9;&#x67D0;&#x4E2A;&#x84DD;&#x56FE;&#x505A;&#xFF1A;&#x7528;&#x6237;&#x9A8C;&#x8BC1;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5C0F;&#x578B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF1A;<a href="python-flask/1.zip">&#x793A;&#x4F8B;</a></li>
+<li>&#x5927;&#x578B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF1A;<a href="python-flask/2.zip">&#x793A;&#x4F8B;</a></li>
+<li>&#x84DD;&#x56FE;&#x5BF9;&#x8C61;&#x540D;&#x79F0;&#x548C;&#x51FD;&#x6570;&#x540D;&#x79F0;&#x4E0D;&#x8981;&#x91CD;&#x590D;</li>
+</ul>
+<p>&#x5176;&#x4ED6;&#xFF1A;</p>
+<ul>
+<li>&#x84DD;&#x56FE;URL&#x524D;&#x7F00;&#xFF1A;xxx = Blueprint(&#x2018;account&#x2019;, <strong>name</strong>,url_prefix=&#x2019;/xxx&#x2019;)</li>
+<li>&#x84DD;&#x56FE;&#x6A21;&#x677F;&#x76EE;&#x5F55;&#x4F18;&#x5148;&#x8DEF;&#x5F84;&#xFF1A;xxx = Blueprint(&#x2018;account&#x2019;, <strong>name</strong>,template_folder=&#x2019;tpl&#x2019;)</li>
+<li>&#x84DD;&#x56FE;&#x5B50;&#x57DF;&#x540D;&#xFF1A;xxx = Blueprint(&#x2018;account&#x2019;, <strong>name</strong>,subdomain=&#x2019;admin&#x2019;)<ul>
+<li>&#x524D;&#x63D0;&#x9700;&#x8981;&#x7ED9;&#x914D;&#x7F6E;SERVER_NAME&#xFF1A; app.config[&#x2018;SERVER_NAME&#x2019;] = &#x2018;wupeiqi.com:5000&#x2019;</li>
+<li>&#x8BBF;&#x95EE;&#x65F6;&#xFF1A;admin.wupeiqi.com:5000/login.html</li>
+</ul>
+</li>
+</ul>
+<h2 id="message"><a href="#message" class="headerlink" title="message"></a>message</h2><p>message&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;Session&#x5B9E;&#x73B0;&#x7684;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x6570;&#x636E;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5176;&#x7279;&#x70B9;&#x662F;&#xFF1A;&#x4F7F;&#x7528;&#x4E00;&#x6B21;&#x5C31;&#x5220;&#x9664;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, flash, redirect, render_template, request, get_flashed_messages</div><div class="line"></div><div class="line">        app = Flask(__name__)</div><div class="line">        app.secret_key = <span class="string">&apos;some_secret&apos;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">        @app.route(&apos;/&apos;)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">index1</span><span class="params">()</span>:</span></div><div class="line">            messages = get_flashed_messages()</div><div class="line">            print(messages)</div><div class="line">            <span class="keyword">return</span> <span class="string">&quot;Index1&quot;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">        @app.route(&apos;/set&apos;)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">index2</span><span class="params">()</span>:</span></div><div class="line">            v = request.args.get(<span class="string">&apos;p&apos;</span>)</div><div class="line">            flash(v)</div><div class="line">            <span class="keyword">return</span> <span class="string">&apos;ok&apos;</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</div><div class="line">            app.run()</div></pre></td></tr></table></figure>
+<p>&#x5E94;&#x7528;&#xFF1A;&#x5BF9;&#x4E34;&#x65F6;&#x6570;&#x636E;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x6BD4;&#x5982;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> flash</div><div class="line">flash(<span class="string">&quot;msgxxxx&quot;</span>,category=<span class="string">&quot;m1&quot;</span>)</div><div class="line">data = get_flashed_messages(category_filter=[<span class="string">&apos;m1&apos;</span>])</div></pre></td></tr></table></figure>
+<h2 id="&#x4E2D;&#x95F4;&#x4EF6;"><a href="#&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E2D;&#x95F4;&#x4EF6;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, flash, redirect, render_template, request</div><div class="line"> </div><div class="line">app = Flask(__name__)</div><div class="line">app.secret_key = <span class="string">&apos;some_secret&apos;</span></div><div class="line"> </div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">&apos;index.html&apos;</span>)</div><div class="line"> </div><div class="line"><span class="meta">@app.route(&apos;/set&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index2</span><span class="params">()</span>:</span></div><div class="line">    v = request.args.get(<span class="string">&apos;p&apos;</span>)</div><div class="line">    flash(v)</div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;ok&apos;</span></div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiddleWare</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,wsgi_app)</span>:</span></div><div class="line">        self.wsgi_app = wsgi_app</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&apos;before&apos;</span>)</div><div class="line">        <span class="keyword">return</span> self.wsgi_app(*args, **kwargs)</div><div class="line">        print(<span class="string">&apos;after&apos;</span>)</div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</div><div class="line">    app.wsgi_app = MiddleWare(app.wsgi_app)</div><div class="line">    app.run(port=<span class="number">9999</span>)</div></pre></td></tr></table></figure>
+<h2 id="&#x8BF7;&#x6C42;&#x6269;&#x5C55;"><a href="#&#x8BF7;&#x6C42;&#x6269;&#x5C55;" class="headerlink" title="&#x8BF7;&#x6C42;&#x6269;&#x5C55;"></a>&#x8BF7;&#x6C42;&#x6269;&#x5C55;</h2><ul>
+<li>@app.after_request &#x7C7B;&#x4F3C;django&#x7684;process_request &#x5E38;&#x7528;<ul>
+<li>&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5199;&#x767B;&#x5F55;&#x9A8C;&#x8BC1;</li>
+<li>&#x7528;request.path&#x8BBE;&#x7F6E;&#x767D;&#x540D;&#x5355;</li>
+</ul>
+</li>
+<li>@app.after_request &#x7C7B;&#x4F3C;django&#x7684;process_response &#x5E38;&#x7528;<ul>
+<li>after_request&#x8BF7;&#x6C42;&#x62E6;&#x622A;&#x540E;after_request&#x8FD8;&#x4F1A;&#x6267;&#x884C;</li>
+</ul>
+</li>
+<li>@app.errorhandler(code) &#x5B9A;&#x5236;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</li>
+<li>@app.template_global() @app.template_filter() &#x5B9A;&#x5236;&#x6A21;&#x677F;&#x4E2D;&#x7528;&#x7684;&#x65B9;&#x6CD5;</li>
+<li>@app.before_first_request &#x7B2C;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#x6267;&#x884C;&#x7684;&#x51FD;&#x6570;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, Request, render_template</div><div class="line"></div><div class="line">app = Flask(__name__, template_folder=<span class="string">&apos;templates&apos;</span>)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.before_first_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_first_request1</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">&apos;before_first_request1&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.before_first_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_first_request2</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">&apos;before_first_request2&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.before_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_request1</span><span class="params">(*args,**kwargs)</span>:</span></div><div class="line">    Request.nnn = <span class="number">123</span></div><div class="line">    print(<span class="string">&apos;before_request1&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.before_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_request2</span><span class="params">(*args,**kwargs)</span>:</span></div><div class="line">    print(<span class="string">&apos;before_request2&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.after_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">after_request1</span><span class="params">(response)</span>:</span></div><div class="line">    print(<span class="string">&apos;before_request1&apos;</span>, response)</div><div class="line">    <span class="keyword">return</span> response</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.after_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">after_request2</span><span class="params">(response)</span>:</span></div><div class="line">    print(<span class="string">&apos;before_request2&apos;</span>, response)</div><div class="line">    <span class="keyword">return</span> response</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.errorhandler(404)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(error)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;This page does not exist&apos;</span>, <span class="number">404</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.template_global()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sb</span><span class="params">(a1, a2)</span>:</span></div><div class="line">    <span class="keyword">return</span> a1 + a2</div><div class="line"><span class="comment"># {{sb(1,2)}}</span></div><div class="line"></div><div class="line"><span class="meta">@app.template_filter()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">db</span><span class="params">(a1, a2, a3)</span>:</span></div><div class="line">    <span class="keyword">return</span> a1 + a2 + a3</div><div class="line"><span class="comment"># {{ 1|db(2,3)}}</span></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">&apos;hello.html&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;"><a href="#&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;" class="headerlink" title="&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;"></a>&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;</h2><ul>
+<li>ThreadLocal</li>
+<li>&#x6E90;&#x7801;&#xFF08;request&#xFF09;<ul>
+<li>&#x5355;&#x8FDB;&#x7A0B;&#x5355;&#x7EBF;&#x7A0B;&#xFF0C;&#x57FA;&#x4E8E;&#x5168;&#x5C40;&#x53D8;&#x91CF;</li>
+<li>&#x5355;&#x8FDB;&#x7A0B;&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;threading.local&#x5BF9;&#x8C61;</li>
+<li>&#x5355;&#x8FDB;&#x7A0B;&#x5355;&#x7EBF;&#x7A0B;&#xFF08;&#x591A;&#x4E2A;&#x534F;&#x7A0B;&#xFF09;&#xFF0C;threading.local&#x5BF9;&#x8C61;&#x505A;&#x4E0D;&#x5230;</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> threading</div><div class="line"></div><div class="line">local_values = threading.local()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(num)</span>:</span></div><div class="line">    local_values.name = num</div><div class="line">    <span class="keyword">import</span> time</div><div class="line">    time.sleep(<span class="number">1</span>)</div><div class="line">    print(local_values.name,threading.current_thread().name)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</div><div class="line">    th = threading.Thread(target=func, args=(i,),name=<span class="string">&apos;&#x7EBF;&#x7A0B;%s&apos;</span> %i)</div><div class="line">    th.start()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="keyword">from</span> greenlet <span class="keyword">import</span> getcurrent <span class="keyword">as</span> get_ident</div><div class="line"><span class="keyword">except</span> ImportError:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">from</span> thread <span class="keyword">import</span> get_ident</div><div class="line">    <span class="keyword">except</span> ImportError:</div><div class="line">        <span class="keyword">from</span> _thread <span class="keyword">import</span> get_ident</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Local</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.storage = {}</div><div class="line">        self.get_ident = get_ident</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, k, v)</span>:</span></div><div class="line">        ident = self.get_ident()</div><div class="line">        origin = self.storage.get(ident)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> origin:</div><div class="line">            origin = {k:v}</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            origin[k] = v</div><div class="line">        self.storage[ident] = origin</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, k)</span>:</span></div><div class="line">        ident = get_ident()</div><div class="line">        origin = self.storage.get(ident)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> origin:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">return</span> origin.get(k, <span class="keyword">None</span>)</div><div class="line"></div><div class="line">local_values = Local()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(num)</span>:</span></div><div class="line">    local_values.set(<span class="string">&apos;name&apos;</span>, num)</div><div class="line">    <span class="keyword">import</span> time</div><div class="line">    time.sleep(<span class="number">1</span>)</div><div class="line">    print(local_values.get(<span class="string">&apos;name&apos;</span>),threading.current_thread().name)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</div><div class="line">    th = threading.Thread(target=func, args=(i,),name=<span class="string">&apos;&#x7EBF;&#x7A0B;%s&apos;</span> %i)</div><div class="line">    th.start()</div></pre></td></tr></table></figure>
+<p>others</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="keyword">from</span> greenlet <span class="keyword">import</span> getcurrent <span class="keyword">as</span> get_ident</div><div class="line"><span class="keyword">except</span> ImportError:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">from</span> thread <span class="keyword">import</span> get_ident</div><div class="line">    <span class="keyword">except</span> ImportError:</div><div class="line">        <span class="keyword">from</span> _thread <span class="keyword">import</span> get_ident</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Local</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        object.__setattr__(self, <span class="string">&apos;__storage__&apos;</span>,{})</div><div class="line">        object.__setattr__(self, <span class="string">&apos;__ident_func__&apos;</span>,get_ident)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        ident = self.__ident_func__()</div><div class="line">        storage = self.__storage__</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            storage[ident][key] = value</div><div class="line">        <span class="keyword">except</span> KeyError:</div><div class="line">            storage[ident] = {key:value}</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, item)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> self.__storage__[self.__indet_func__()][item]</div><div class="line">        <span class="keyword">except</span> KeyError:</div><div class="line">            <span class="keyword">raise</span> AttributeError(item)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delattr__</span><span class="params">(self, item)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">del</span> self.__storage__[self.__ident_func__()][item]</div><div class="line">        <span class="keyword">except</span> KeyError:</div><div class="line">            <span class="keyword">raise</span> AttributeError(item)</div><div class="line"></div><div class="line">local_values = Local()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(num)</span>:</span></div><div class="line">    local_values.name = num</div><div class="line">    <span class="keyword">import</span> time</div><div class="line">    time.sleep(<span class="number">1</span>)</div><div class="line">    print(local_values.name,threading.current_thread().name)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</div><div class="line">    th = threading.Thread(target=func, args=(i,),name=<span class="string">&apos;&#x7EBF;&#x7A0B;%s&apos;</span> %i)</div><div class="line">    th.start()</div></pre></td></tr></table></figure>
+<h3 id="&#x4E0A;&#x4E0B;&#x6587;"><a href="#&#x4E0A;&#x4E0B;&#x6587;" class="headerlink" title="&#x4E0A;&#x4E0B;&#x6587;"></a>&#x4E0A;&#x4E0B;&#x6587;</h3><ul>
+<li>threading.Local&#x5BF9;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x4FDD;&#x5B58;&#x81EA;&#x5DF1;&#x7684;&#x503C;&#xFF0C;&#x800C;flask&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;Local&#x5BF9;&#x8C61;&#x652F;&#x6301;&#x534F;&#x7A0B;&#x3001;&#x7EBF;&#x7A0B;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5230;&#x5355;&#x72EC;&#x7684;&#x7A7A;&#x95F4;</li>
+<li>&#x9996;&#x5148;&#x5C06;&#x8BF7;&#x6C42;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;environ&#x5C01;&#x88C5;&#x5230;&#x4E86;RequestContext&#x5BF9;&#x8C61;&#xFF08;Request&#x3001;Session&#xFF09;</li>
+<li>ctx&#x518D;&#x901A;&#x8FC7;LocalStack&#x5BF9;&#x8C61;&#x5C06;RequestContext&#x5BF9;&#x8C61;&#x653E;&#x5230;Local&#x4E2D;&#xFF08;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x3001;&#x534F;&#x7A0B;&#x72EC;&#x7ACB;&#x7A7A;&#x95F4;&#x5B58;&#x50A8;&#xFF09;</li>
+<li>&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x5C31;&#x53EF;&#x4EE5;&#x8C03;&#x7528;request&#x3001;session<ul>
+<li>&#x8C03;&#x7528;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#xFF08;request&#x3001;session&#xFF09;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6267;&#x884C;Localproxy&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;</li>
+<li>localproxy&#x53C8;&#x8C03;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF08;_lookup_req_object&#xFF09;</li>
+<li>&#x518D;&#x901A;&#x8FC7;LocalStack&#x53BB;Local&#x91CC;&#x9762;&#x628A;RequestContext&#x62FF;&#x51FA;&#x6765;&#xFF08;&#x901A;&#x8FC7;top&#x62FF;&#x5217;&#x8868;&#x949F;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#xFF09;</li>
+<li>&#x7136;&#x540E;&#x518D;&#x53BB;RequestContext&#x4E2D;&#x83B7;&#x53D6;request&#x6216;&#x8005;session</li>
+</ul>
+</li>
+<li>&#x6700;&#x540E;&#x901A;&#x8FC7;&#x8C03;&#x7528;LocalStack&#x7684;pop&#x65B9;&#x6CD5;&#x5C06;&#x6570;&#x636E;&#x5728;Local&#x4E2D;&#x79FB;&#x9664;</li>
+</ul>
+<p><img src="/2018/08/22/python-flask/1.png" alt=""></p>
+<h3 id="&#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;"><a href="#&#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;" class="headerlink" title="&#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;"></a>&#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;</h3><ul>
+<li>&#x6267;&#x884C;app.<strong>call</strong>&#x65B9;&#x6CD5;</li>
+<li>&#x6267;&#x884C;app.wsgi_app&#x65B9;&#x6CD5;</li>
+<li>ctx = self.request_context(environ)<ul>
+<li>&#x5C06;&#x8BF7;&#x6C42;&#x76F8;&#x5173;&#x7684;environ&#x5C01;&#x88C5;&#x5230;&#x4E86;RequestContext&#x5BF9;&#x8C61;&#x4E2D;</li>
+<li>&#x518D;&#x5C06;&#x5BF9;&#x8C61;&#x5C01;&#x88C5;&#x5230;Local&#x4E2D;&#xFF08;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x3001;&#x534F;&#x7A0B;&#x72EC;&#x7ACB;&#x7A7A;&#x95F4;&#x5B58;&#x50A8;&#xFF09;</li>
+<li>ctx.app &#x5F53;&#x524D;app&#x540D;&#x79F0;</li>
+<li>ctx.request Request&#x5BF9;&#x8C61;&#xFF08;&#x5C01;&#x88C5;&#x8BF7;&#x6C42;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#xFF09;</li>
+<li>ctx.session &#x7A7A;</li>
+</ul>
+</li>
+<li>ctx.push()<ul>
+<li>&#x5C06;ctx&#x901A;&#x8FC7;LocalStack&#x6DFB;&#x52A0;&#x5230;Local&#x4E2D; </li>
+<li>_request_ctx_stack.local = {&#x2018;&#x552F;&#x4E00;id&#x2019;:{&#x2018;stack&#x2019;:[ctx,]}</li>
+<li>ctx.session &#x6709;&#x503C;&#x4E86;</li>
+</ul>
+</li>
+<li>&#x6267;&#x884C;&#x89C6;&#x56FE;&#x51FD;&#x6570;&#xFF08;&#x5982;&#x6253;&#x5370;request&#xFF09;<ul>
+<li>request&#x662F;LocalProxy&#x5BF9;&#x8C61;</li>
+<li>&#x6267;&#x884C;LocalProxy&#x76F8;&#x5E94;&#x7684;&#x5BF9;&#x8C61;&#xFF08;<strong>str</strong>&#xFF09;<ul>
+<li>LocalProxy&#x4E2D;&#x7684;partial(_lookup_req_object,&#x2019;request&#x2019;)&#x81EA;&#x52A8;&#x4F20;&#x9012;request&#x53C2;&#x6570;</li>
+<li>&#x76EE;&#x6807;&#x662F;&#x53BB;local&#x4E2D;&#x83B7;&#x53D6;ctx&#xFF0C;&#x7136;&#x540E;&#x5728;ctx&#x91CC;&#x9762;&#x83B7;&#x53D6;request</li>
+</ul>
+</li>
+<li>str(LocalProxy._get_current_object)</li>
+<li>&#x8C03;&#x7528;&#x504F;&#x51FD;&#x6570;</li>
+<li>ctx.request</li>
+</ul>
+</li>
+<li>&#x79FB;&#x9664;&#x8BF7;&#x6C42;&#x6570;&#x636E;</li>
+</ul>
+<h3 id="&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;"><a href="#&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;" class="headerlink" title="&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;"></a>&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;</h3><ul>
+<li>from flask import request,session,g,current_app</li>
+<li>ctx.push&#x4E2D;<ul>
+<li>app_ctx &#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;AppContext(self)&#x5BF9;&#x8C61;</li>
+<li>app_ctx.app = &#x5F53;&#x524D;app&#x5BF9;&#x8C61;</li>
+<li>app_ctx.g = &#x5BF9;&#x8C61;&#xFF08;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x5468;&#x671F;&#x4E2D;&#x8981;&#x5B58;&#x50A8;&#x7684;&#x503C;&#xFF09;<ul>
+<li>&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x5468;&#x671F;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x5728;&#x8BF7;&#x6C42;&#x5468;&#x671F;&#x4E2D;&#x4F20;&#x9012;&#x503C;&#x7684;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;</li>
+</ul>
+</li>
+<li>app_ctx.push&#x5230;&#x4E00;&#x4E2A;LocalStack()&#x4E2D;</li>
+<li>_app_ctx_stack.local = {&#x2018;&#x552F;&#x4E00;id&#x2019;:{&#x2018;stack&#x2019;:[app_ctx,]}</li>
+</ul>
+</li>
+<li>&#x591A;&#x7EBF;&#x7A0B;&#x662F;&#x5982;&#x4F55;&#x4F53;&#x73B0;&#x7684;</li>
+<li>flask&#x7684;local&#x4FDD;&#x5B58;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x5217;&#x8868;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x6808;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x7528;&#x6808;<ul>
+<li>&#x5982;&#x679C;&#x662F;web&#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x6808;&#x4E2D;&#x6C38;&#x8FDC;&#x53EA;&#x4FDD;&#x5B58;&#x4E00;&#x6761;&#x6570;&#x636E;</li>
+<li>&#x5199;&#x811A;&#x672C;&#x83B7;&#x53D6;app&#x4FE1;&#x606F;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x80FD;&#x5B58;&#x5728;app&#x4E0A;&#x4E0B;&#x6587;&#x5D4C;&#x5957;&#x5173;&#x7CFB;</li>
+</ul>
+</li>
+<li>web&#x8BBF;&#x95EE;&#x591A;app&#x5E94;&#x7528;&#x65F6;&#xFF0C;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7684;<ul>
+<li>&#x4F7F;&#x7528;&#x79BB;&#x7EBF;&#x811A;&#x672C;&#x6267;&#x884C;flask&#x7684;&#x65F6;&#x5019;&#x5C31;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x591A;app&#x5806;&#x6808;&#xFF08;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#xFF09;</li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x591A;app&#x5E94;&#x7528;"><a href="#&#x591A;app&#x5E94;&#x7528;" class="headerlink" title="&#x591A;app&#x5E94;&#x7528;"></a>&#x591A;app&#x5E94;&#x7528;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> werkzeug.wsgi <span class="keyword">import</span> DispatcherMiddleware</div><div class="line"><span class="keyword">from</span> werkzeug.serving <span class="keyword">import</span> run_simple</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</div><div class="line"></div><div class="line"></div><div class="line">app1 = Flask(<span class="string">&apos;app01&apos;</span>)</div><div class="line">app2 = Flask(<span class="string">&apos;app02&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">@app1.route(&apos;/index1&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;index1&apos;</span></div><div class="line"></div><div class="line"><span class="meta">@app2.route(&apos;/index2&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index2</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;index2&apos;</span></div><div class="line"></div><div class="line">app = DispatcherMiddleware(app1,{</div><div class="line">    <span class="string">&apos;/sec&apos;</span> : app2,</div><div class="line">})</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    run_simple(<span class="string">&apos;localhost&apos;</span>, <span class="number">5000</span>, app,)</div></pre></td></tr></table></figure>
+<h3 id="&#x79BB;&#x7EBF;&#x811A;&#x672C;"><a href="#&#x79BB;&#x7EBF;&#x811A;&#x672C;" class="headerlink" title="&#x79BB;&#x7EBF;&#x811A;&#x672C;"></a>&#x79BB;&#x7EBF;&#x811A;&#x672C;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,current_app,_app_ctx_stack</div><div class="line"></div><div class="line">app = Flask(<span class="string">&apos;app01&apos;</span>)</div><div class="line">app2 = Flask(<span class="string">&apos;app02&apos;</span>)</div><div class="line"></div><div class="line"><span class="keyword">with</span> app.app_context():</div><div class="line">    print(current_app.name)</div><div class="line">    print(_app_ctx_stack._local.__storage__)</div><div class="line">    <span class="keyword">with</span> app2.app_context():</div><div class="line">        print(current_app.name)</div><div class="line">        print(_app_ctx_stack._local.__storage__)</div></pre></td></tr></table></figure>
+<h2 id="&#x4FE1;&#x53F7;"><a href="#&#x4FE1;&#x53F7;" class="headerlink" title="&#x4FE1;&#x53F7;"></a>&#x4FE1;&#x53F7;</h2><ul>
+<li>before_first_request</li>
+<li>&#x89E6;&#x53D1;request_started&#x4FE1;&#x53F7;</li>
+<li>before_request</li>
+<li>&#x5982;&#x679C;&#x6709;&#x6A21;&#x677F;&#x6E32;&#x67D3;<ul>
+<li>&#x89E6;&#x53D1;before_render_template&#x4FE1;&#x53F7;</li>
+<li>render</li>
+<li>&#x89E6;&#x53D1;template_rendered&#x4FE1;&#x53F7;</li>
+</ul>
+</li>
+<li>after_request</li>
+<li>session.save_session</li>
+<li>&#x89E6;&#x53D1;request_finished&#x4FE1;&#x53F7;</li>
+<li>&#x5982;&#x679C;&#x51FA;&#x73B0;&#x5F02;&#x5E38;<ul>
+<li>&#x89E6;&#x53D1;got_request_exception&#x4FE1;&#x53F7;</li>
+</ul>
+</li>
+<li>&#x89E6;&#x53D1;request_tearing_down&#x4FE1;&#x53F7;</li>
+</ul>
+<p>Flask&#x6846;&#x67B6;&#x4E2D;&#x7684;&#x4FE1;&#x53F7;&#x57FA;&#x4E8E;blinker&#xFF0C;&#x5176;&#x4E3B;&#x8981;&#x5C31;&#x662F;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x662F;&#x5728;flask&#x8BF7;&#x6C42;&#x8FC7;&#x7A0B;&#x4E2D;&#x5B9A;&#x5236;&#x4E00;&#x4E9B;&#x7528;&#x6237;&#x884C;&#x4E3A;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install blinker</div></pre></td></tr></table></figure>
+<h3 id="&#x5185;&#x7F6E;&#x4FE1;&#x53F7;"><a href="#&#x5185;&#x7F6E;&#x4FE1;&#x53F7;" class="headerlink" title="&#x5185;&#x7F6E;&#x4FE1;&#x53F7;"></a>&#x5185;&#x7F6E;&#x4FE1;&#x53F7;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">request_started = _signals.signal(<span class="string">&apos;request-started&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x5230;&#x6765;&#x524D;&#x6267;&#x884C;</span></div><div class="line">request_finished = _signals.signal(<span class="string">&apos;request-finished&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;</span></div><div class="line"> </div><div class="line">before_render_template = _signals.signal(<span class="string">&apos;before-render-template&apos;</span>)</div><div class="line"><span class="comment"># &#x6A21;&#x677F;&#x6E32;&#x67D3;&#x524D;&#x6267;&#x884C;</span></div><div class="line">template_rendered = _signals.signal(<span class="string">&apos;template-rendered&apos;</span>)</div><div class="line"><span class="comment"># &#x6A21;&#x677F;&#x6E32;&#x67D3;&#x540E;&#x6267;&#x884C;</span></div><div class="line"></div><div class="line">got_request_exception = _signals.signal(<span class="string">&apos;got-request-exception&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x6267;&#x884C;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x65F6;&#x6267;&#x884C;</span></div><div class="line"></div><div class="line">request_tearing_down = _signals.signal(<span class="string">&apos;request-tearing-down&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x81EA;&#x52A8;&#x6267;&#x884C;&#xFF08;&#x65E0;&#x8BBA;&#x6210;&#x529F;&#x4E0E;&#x5426;&#xFF09;</span></div><div class="line">appcontext_tearing_down = _signals.signal(<span class="string">&apos;appcontext-tearing-down&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x81EA;&#x52A8;&#x6267;&#x884C;&#xFF08;&#x65E0;&#x8BBA;&#x6210;&#x529F;&#x4E0E;&#x5426;&#xFF09;</span></div><div class="line"></div><div class="line">appcontext_pushed = _signals.signal(<span class="string">&apos;appcontext-pushed&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;push&#x65F6;&#x6267;&#x884C;</span></div><div class="line">appcontext_popped = _signals.signal(<span class="string">&apos;appcontext-popped&apos;</span>)</div><div class="line"><span class="comment"># &#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;pop&#x65F6;&#x6267;&#x884C;</span></div><div class="line">message_flashed = _signals.signal(<span class="string">&apos;message-flashed&apos;</span>)</div><div class="line"><span class="comment"># &#x8C03;&#x7528;flash&#x5728;&#x5176;&#x4E2D;&#x6DFB;&#x52A0;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x89E6;&#x53D1;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,signals</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">    print(<span class="string">&apos;&#x89E6;&#x53D1;&#x4FE1;&#x53F7;&apos;</span>,args,kwargs)</div><div class="line"></div><div class="line">signals.request_started.connect(func)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;index&apos;</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, current_app, flash, render_template</div><div class="line"><span class="keyword">from</span> flask.signals <span class="keyword">import</span> _signals</div><div class="line"> </div><div class="line">app = Flask(import_name=__name__)</div><div class="line"> </div><div class="line"><span class="comment"># &#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;</span></div><div class="line">xxxxx = _signals.signal(<span class="string">&apos;xxxxx&apos;</span>)</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(sender, *args, **kwargs)</span>:</span></div><div class="line">    print(sender)</div><div class="line"> </div><div class="line"><span class="comment"># &#x81EA;&#x5B9A;&#x4E49;&#x4FE1;&#x53F7;&#x4E2D;&#x6CE8;&#x518C;&#x51FD;&#x6570;</span></div><div class="line">xxxxx.connect(func)</div><div class="line"> </div><div class="line"><span class="meta">@app.route(&quot;/x&quot;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment"># &#x89E6;&#x53D1;&#x4FE1;&#x53F7;</span></div><div class="line">    xxxxx.send(<span class="string">&apos;123123&apos;</span>, k1=<span class="string">&apos;v1&apos;</span>)</div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;Index&apos;</span></div><div class="line"> </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/flask/" rel="tag"># flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/22/python-object/" rel="next" title="python面向对象">
+                <i class="fa fa-chevron-left"></i> python面向对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/23/network-wireshark/" rel="prev" title="网络抓包以及如何简单分析">
+                网络抓包以及如何简单分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的web框架"><span class="nav-number">2.</span> <span class="nav-text">常见的web框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web框架本质"><span class="nav-number">3.</span> <span class="nav-text">Web框架本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask"><span class="nav-number">4.</span> <span class="nav-text">Flask</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">4.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由系统"><span class="nav-number">4.3.</span> <span class="nav-text">路由系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册路由原理"><span class="nav-number">4.3.1.</span> <span class="nav-text">注册路由原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定制正则路由匹配"><span class="nav-number">4.3.2.</span> <span class="nav-text">自定制正则路由匹配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板"><span class="nav-number">4.4.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板的使用"><span class="nav-number">4.4.1.</span> <span class="nav-text">模板的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义模板方法"><span class="nav-number">4.4.2.</span> <span class="nav-text">自定义模板方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求和响应"><span class="nav-number">4.5.</span> <span class="nav-text">请求和响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">4.6.</span> <span class="nav-text">Session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用-1"><span class="nav-number">4.6.1.</span> <span class="nav-text">基本使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#蓝图"><span class="nav-number">4.7.</span> <span class="nav-text">蓝图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#message"><span class="nav-number">4.8.</span> <span class="nav-text">message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件"><span class="nav-number">4.9.</span> <span class="nav-text">中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求扩展"><span class="nav-number">4.10.</span> <span class="nav-text">请求扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文管理"><span class="nav-number">4.11.</span> <span class="nav-text">上下文管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文"><span class="nav-number">4.11.1.</span> <span class="nav-text">上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求上下文"><span class="nav-number">4.11.2.</span> <span class="nav-text">请求上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用上下文"><span class="nav-number">4.11.3.</span> <span class="nav-text">应用上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多app应用"><span class="nav-number">4.11.4.</span> <span class="nav-text">多app应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离线脚本"><span class="nav-number">4.11.5.</span> <span class="nav-text">离线脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号"><span class="nav-number">4.12.</span> <span class="nav-text">信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置信号"><span class="nav-number">4.12.1.</span> <span class="nav-text">内置信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义信号"><span class="nav-number">4.12.2.</span> <span class="nav-text">自定义信号</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

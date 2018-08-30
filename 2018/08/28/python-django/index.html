@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,django," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;Python&amp;#x7684;WEB&amp;#x6846;&amp;#x67B6;&amp;#x6709;Django&amp;#x3001;Tornado&amp;#x3001;Flask &amp;#x7B49;&amp;#x591A;&amp;#x79CD;&amp;#xFF0C;Django&amp;#x76F8;&amp;#x8F83;&amp;#x4E0E;&amp;#x5176;&amp;#x4ED6;WEB&amp;#x6846;&amp;#x67B6;&amp;#x5176;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django框架基础">
+<meta property="og:url" content="http://c.isme.pub/2018/08/28/python-django/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;Python&amp;#x7684;WEB&amp;#x6846;&amp;#x67B6;&amp;#x6709;Django&amp;#x3001;Tornado&amp;#x3001;Flask &amp;#x7B49;&amp;#x591A;&amp;#x79CD;&amp;#xFF0C;Django&amp;#x76F8;&amp;#x8F83;&amp;#x4E0E;&amp;#x5176;&amp;#x4ED6;WEB&amp;#x6846;&amp;#x67B6;&amp;#x5176;&amp;#x">
+<meta property="og:updated_time" content="2018-08-28T10:14:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django框架基础">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;Python&amp;#x7684;WEB&amp;#x6846;&amp;#x67B6;&amp;#x6709;Django&amp;#x3001;Tornado&amp;#x3001;Flask &amp;#x7B49;&amp;#x591A;&amp;#x79CD;&amp;#xFF0C;Django&amp;#x76F8;&amp;#x8F83;&amp;#x4E0E;&amp;#x5176;&amp;#x4ED6;WEB&amp;#x6846;&amp;#x67B6;&amp;#x5176;&amp;#x">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/28/python-django/"/>
+
+
+
+
+
+  <title>Django框架基础 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/28/python-django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django框架基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T18:14:46+08:00">
+                2018-08-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-28T18:14:46+08:00">
+                2018-08-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/django/" itemprop="url" rel="index">
+                    <span itemprop="name">django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Python&#x7684;WEB&#x6846;&#x67B6;&#x6709;Django&#x3001;Tornado&#x3001;Flask &#x7B49;&#x591A;&#x79CD;&#xFF0C;Django&#x76F8;&#x8F83;&#x4E0E;&#x5176;&#x4ED6;WEB&#x6846;&#x67B6;&#x5176;&#x4F18;&#x52BF;&#x4E3A;&#xFF1A;&#x5927;&#x800C;&#x5168;&#xFF0C;&#x6846;&#x67B6;&#x672C;&#x8EAB;&#x96C6;&#x6210;&#x4E86;ORM&#x3001;&#x6A21;&#x578B;&#x7ED1;&#x5B9A;&#x3001;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x3001;&#x7F13;&#x5B58;&#x3001;Session&#x7B49;&#x8BF8;&#x591A;&#x529F;&#x80FD;&#x3002;</p>
+<a id="more"></a>
+<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><p>http&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x201D;post&#x201D;,&#x201D;get&#x201D;,&#x201D;put&#x201D;,&#x201D;patch&#x201D;,&#x201D;delete&#x201D;,&#x201D;head&#x201D;,&#x201D;options&#x201D;,&#x201D;trace&#x201D;.</p>
+<p>&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;,&#x670D;&#x52A1;&#x7AEF;&#x4F9D;&#x636E;method&#x7684;&#x4E0D;&#x540C;&#x4F1A;&#x89E6;&#x53D1;&#x4E0D;&#x540C;&#x7684;&#x89C6;&#x56FE;&#x51FD;&#x6570;.</p>
+<ul>
+<li>&#x5BF9;&#x4E8E;from&#x8868;&#x5355;&#x6765;&#x8BF4;,&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x53EA;&#x6709;get&#x548C;post&#x4E24;&#x79CD;&#x65B9;&#x6CD5;</li>
+<li>&#x53E6;&#x5916;&#x7684;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Ajax&#x65B9;&#x6CD5;&#x6765;&#x63D0;&#x4EA4;</li>
+</ul>
+<h2 id="Django&#x7684;&#x8BF7;&#x6C42;&#x751F;&#x547D;&#x5468;&#x671F;"><a href="#Django&#x7684;&#x8BF7;&#x6C42;&#x751F;&#x547D;&#x5468;&#x671F;" class="headerlink" title="Django&#x7684;&#x8BF7;&#x6C42;&#x751F;&#x547D;&#x5468;&#x671F;"></a>Django&#x7684;&#x8BF7;&#x6C42;&#x751F;&#x547D;&#x5468;&#x671F;</h2><p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x77E5;&#x9053;HTTP&#x8BF7;&#x6C42;&#x53CA;&#x670D;&#x52A1;&#x7AEF;&#x54CD;&#x5E94;&#x4E2D;&#x4F20;&#x8F93;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5728;Django&#x4E2D;,&#x5F53;&#x6211;&#x4EEC;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x7684;url&#x65F6;,&#x4F1A;&#x901A;&#x8FC7;&#x8DEF;&#x7531;&#x5339;&#x914D;&#x8FDB;&#x5165;&#x76F8;&#x5E94;&#x7684;html&#x7F51;&#x9875;&#x4E2D;.</p>
+<ul>
+<li>&#x5F53;&#x7528;&#x6237;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x8F93;&#x5165;url&#x65F6;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x751F;&#x6210;&#x8BF7;&#x6C42;&#x5934;&#x548C;&#x8BF7;&#x6C42;&#x4F53;&#x53D1;&#x7ED9;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x5305;&#x542B;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x52A8;&#x4F5C;(method)</li>
+<li>&#x8BF7;&#x6C42;&#x7ECF;&#x8FC7;Django&#x4E2D;&#x7684;wsgi,&#x518D;&#x7ECF;&#x8FC7;Django&#x7684;&#x4E2D;&#x95F4;&#x4EF6;,&#x6700;&#x540E;url&#x5230;&#x8FC7;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8868;,&#x5728;&#x8DEF;&#x7531;&#x4E2D;&#x4E00;&#x6761;&#x4E00;&#x6761;&#x8FDB;&#x884C;&#x5339;&#x914D;,<ul>
+<li>&#x4E2D;&#x95F4;&#x4EF6;&#xFF1A;&#x62E6;&#x622A;&#x4E00;&#x90E8;&#x5206;&#x8BF7;&#x6C42;&#xFF1B;&#x6BD4;&#x5982;&#x9A8C;&#x8BC1;session, &#x6CA1;&#x6709;&#x767B;&#x5F55;&#x7684;&#x8BF7;&#x6C42;&#x4E00;&#x4E9B;&#x9875;&#x9762;&#xFF0C;&#x8DF3;&#x8F6C;&#x81F3;&#x767B;&#x5F55;&#x9875;&#xFF0C;&#x518D;&#x5230; urls&#xFF0C;&#x5206;&#x53D1;&#x8BF7;&#x6C42;</li>
+<li>&#x4E00;&#x65E6;&#x5176;&#x4E2D;&#x4E00;&#x6761;&#x5339;&#x914D;&#x6210;&#x529F;&#x5C31;&#x6267;&#x884C;&#x5BF9;&#x5E94;&#x7684;&#x89C6;&#x56FE;&#x51FD;&#x6570;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x8DEF;&#x7531;&#x5C31;&#x4E0D;&#x518D;&#x7EE7;&#x7EED;&#x5339;&#x914D;&#x4E86;.</li>
+</ul>
+</li>
+<li>&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x6839;&#x636E;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x67E5;&#x8BE2;&#x76F8;&#x5E94;&#x7684;&#x6570;&#x636E;&#x548C;&#x6A21;&#x677F;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED9;Django&#xFF0C;&#x7136;&#x540E;Django&#x628A;&#x5BA2;&#x6237;&#x7AEF;&#x60F3;&#x8981;&#x7684;&#x6570;&#x636E;&#x6E32;&#x67D3;&#x5230;&#x6A21;&#x677F;&#x4E2D;&#xFF0C;&#x505A;&#x4E3A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x8FD4;&#x56DE;&#x7ED9;&#x5BA2;&#x6237;&#x7AEF;.<ul>
+<li>&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;CBV(dispatch&#x53CD;&#x5C04;)&#x548C;FBV&#x7684;get&#x8BF7;&#x6C42;</li>
+</ul>
+</li>
+<li>&#x5BA2;&#x6237;&#x7AEF;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x6536;&#x5230;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x7ECF;&#x8FC7;&#x89E3;&#x6790;&#x540E;&#x663E;&#x793A;&#x7ED9;&#x7528;&#x6237;.<ul>
+<li>&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x5230;&#x670D;&#x52A1;&#x7AEF;&#x7684;url&#x4E2D;&#x8FD8;&#x5FC5;&#x987B;&#x8981;&#x5305;&#x542B;&#x6240;&#x8981;&#x8BF7;&#x6C42;&#x7684;&#x6570;&#x636E;&#x4FE1;&#x606F;&#x7B49;&#x5185;&#x5BB9;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x57FA;&#x672C;&#x547D;&#x4EE4;"><a href="#&#x57FA;&#x672C;&#x547D;&#x4EE4;" class="headerlink" title="&#x57FA;&#x672C;&#x547D;&#x4EE4;"></a>&#x57FA;&#x672C;&#x547D;&#x4EE4;</h2><ul>
+<li>&#x521B;&#x5EFA;&#x9879;&#x76EE;&#xFF1A;django-admin startproject sitename</li>
+<li>&#x542F;&#x52A8;&#xFF1A;python manage.py runserver 0.0.0.0</li>
+<li>&#x521B;&#x5EFA;app&#xFF1A;python manage.py startapp appname</li>
+<li>&#x540C;&#x6B65;&#x6570;&#x636E;&#x5E93;&#xFF1A;python manage.py syncdb</li>
+<li>&#x751F;&#x6210;&#x6570;&#x636E;&#x5E93;&#x7ED3;&#x6784;&#x53D8;&#x52A8;&#xFF1A;python manage.py makemigrations</li>
+<li>&#x6267;&#x884C;&#x6570;&#x636E;&#x5E93;&#x7ED3;&#x6784;&#x53D8;&#x52A8;&#xFF1A;python manage.py migrate</li>
+<li>&#x521B;&#x5EFA;&#x7BA1;&#x7406;&#x5458;&#x7528;&#x6237;&#xFF1A;python manage.py createsuperuser</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x9879;&#x76EE;</span></div><div class="line">django-admin startproject sitename</div><div class="line"><span class="comment"># &#x521B;&#x5EFA;app</span></div><div class="line">python manage.py startapp base</div><div class="line"><span class="comment"># &#x542F;&#x52A8;&#x670D;&#x52A1;</span></div><div class="line">python manage.py runserver 0.0.0.0:8090</div><div class="line"></div><div class="line">python manage.py flush</div><div class="line"><span class="comment"># &#x751F;&#x6210;&#x6570;&#x636E;&#x5E93;&#x7ED3;&#x6784;&#x53D8;&#x52A8;</span></div><div class="line">python manage.py makemigrations</div><div class="line"><span class="comment"># &#x6267;&#x884C;&#x6570;&#x636E;&#x5E93;&#x7ED3;&#x6784;&#x53D8;&#x52A8;</span></div><div class="line">python manage.py migrate </div><div class="line">python manage.py makemigrations base</div><div class="line">python manage.py migrate base</div><div class="line"><span class="comment"># &#x663E;&#x793A;&#x8981;&#x6267;&#x884C;&#x7684;sql</span></div><div class="line">python manage.py sqlall</div><div class="line"><span class="comment"># &#x53EA;&#x589E;&#x52A0;&#xFF0C;&#x4E0D;&#x4FEE;&#x6539;&#x3001;&#x5220;&#x9664;</span></div><div class="line">python manage.py syncdb</div><div class="line"></div><div class="line"><span class="comment"># i180</span></div><div class="line">python manage.py makemessages -t zh_hans</div><div class="line">python manage.py makemessages -t zh_cn</div><div class="line">python manage.py makemessages <span class="_">-l</span> zh-hans</div><div class="line">python manage.py makemessages <span class="_">-l</span> en_us</div><div class="line">python manage.py makemessages <span class="_">-l</span> zh_hans <span class="_">-d</span> djangojs</div><div class="line">python manage.py makemessages <span class="_">-l</span> zh_hans</div><div class="line">python manage.py compilemessages</div><div class="line">python manage.py shell</div><div class="line"><span class="comment"># &#x8BA1;&#x5212;&#x4EFB;&#x52A1;</span></div><div class="line">python manage.py crontab show</div><div class="line">python manage.py crontab add</div><div class="line">python manage.py crontab remove</div><div class="line"></div><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x7BA1;&#x7406;&#x5458;&#x7528;&#x6237;</span></div><div class="line">python manage.py createsuperuser</div></pre></td></tr></table></figure>
+<h2 id="render&#x3001;redirect&#x3001;HttpResponse"><a href="#render&#x3001;redirect&#x3001;HttpResponse" class="headerlink" title="render&#x3001;redirect&#x3001;HttpResponse"></a>render&#x3001;redirect&#x3001;HttpResponse</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> HttpResponse, render, redirect</div><div class="line"></div><div class="line"><span class="keyword">return</span> HttpResponse(<span class="string">&apos;ok&apos;</span>)</div><div class="line"><span class="keyword">return</span> render(request,<span class="string">&apos;index.html&apos;</span>,{<span class="string">&quot;name&quot;</span>: <span class="string">&quot;monicx&quot;</span>, <span class="string">&quot;hobby&quot;</span>: [<span class="string">&quot;reading&quot;</span>, <span class="string">&quot;blog&quot;</span>]})</div><div class="line"><span class="keyword">return</span> redirect(<span class="string">&apos;/index&apos;</span>)</div><div class="line"><span class="keyword">return</span> render_to_response(<span class="string">&apos;Account/Login.html&apos;</span>,data,context_instance=RequestContext(request))</div></pre></td></tr></table></figure>
+<ul>
+<li>render &#x6A21;&#x677F;&#x6E32;&#x67D3;&#xFF0C;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x81EA;&#x52A8;&#x4F7F;&#x7528;RequestContext<ul>
+<li>request</li>
+<li>&#x5F85;&#x6E32;&#x67D3;&#x7684;html&#x6A21;&#x677F;&#x6587;&#x4EF6;</li>
+<li>&#x4FDD;&#x5B58;&#x5177;&#x4F53;&#x6570;&#x636E;&#x7684;&#x5B57;&#x5178;&#x53C2;&#x6570;</li>
+</ul>
+</li>
+<li>redirect &#x63A5;&#x53D7;&#x4E00;&#x4E2A;URL&#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x8BA9;&#x6D4F;&#x89C8;&#x5668;&#x8DF3;&#x8F6C;&#x53BB;&#x6307;&#x5B9A;&#x7684;URL</li>
+<li>HttpResponse &#x5185;&#x90E8;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7136;&#x540E;&#x53D1;&#x9001;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;</li>
+<li>render_to_response &#x4E0E;render&#x7C7B;&#x4F3C;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x5904;&#x7406;RequestContext</li>
+<li>HttpRequest &#x8868;&#x793A;&#x6765;&#x81EA;&#x67D0;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;HTTP&#x8BF7;&#x6C42;&#x3002;HttpRequest&#x5BF9;&#x8C61;&#x662F;Django&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x7684;</li>
+<li>reverse &#x53CD;&#x5411;&#x89E3;&#x6790;url</li>
+</ul>
+<h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># radio select&#x5355;&#x9009;</div><div class="line">request.POST.get(&apos;x&apos;)</div><div class="line"># checkbox select&#x591A;&#x9009;multiple</div><div class="line">request.POST.getlist(&apos;x&apos;)</div><div class="line"># input&#xFF08;type=file&#xFF09;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;</div><div class="line">&lt;form action=&quot;/login&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">    &lt;input type=&quot;file&quot; name=&quot;x&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">obj = request.FILES.get(&apos;x&apos;)</div><div class="line">f = open(obj.name,mode=&apos;wb&apos;)</div><div class="line">for i in obj.chunks():</div><div class="line">	f.write(i)</div><div class="line">f.close()</div></pre></td></tr></table></figure>
+<h2 id="fbv&#x548C;cbv"><a href="#fbv&#x548C;cbv" class="headerlink" title="fbv&#x548C;cbv"></a>fbv&#x548C;cbv</h2><ul>
+<li>fbv&#xFF1A;function base view</li>
+<li>cbv&#xFF1A;class base view</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x5F53;&#x670D;&#x52A1;&#x7AEF;&#x4F7F;&#x7528;cbv&#x6A21;&#x5F0F;&#x7684;&#x65F6;&#x5019;,&#x7528;&#x6237;&#x53D1;&#x7ED9;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x5305;&#x542B;url&#x548C;method,&#x8FD9;&#x4E24;&#x4E2A;&#x4FE1;&#x606F;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;</span></div><div class="line"><span class="comment"># &#x670D;&#x52A1;&#x7AEF;&#x901A;&#x8FC7;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8868;&#x5339;&#x914D;&#x6210;&#x529F;&#x540E;&#x4F1A;&#x81EA;&#x52A8;&#x53BB;&#x627E;dispatch&#x65B9;&#x6CD5;,&#x7136;&#x540E;Django&#x4F1A;&#x901A;&#x8FC7;dispatch&#x53CD;&#x5C04;&#x7684;&#x65B9;&#x5F0F;&#x627E;&#x5230;&#x7C7B;&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#x5E76;&#x6267;&#x884C;</span></div><div class="line"><span class="comment"># &#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x4E4B;&#x540E;,&#x4F1A;&#x628A;&#x5BA2;&#x6237;&#x7AEF;&#x60F3;&#x8981;&#x7684;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#x7ED9;dispatch&#x65B9;&#x6CD5;,&#x7531;dispatch&#x65B9;&#x6CD5;&#x628A;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#x7ECF;&#x5BA2;&#x6237;&#x7AEF;</span></div><div class="line"><span class="comment"># &#x53EF;&#x4EE5;&#x7528;dispatch&#x6765;&#x5728;&#x8BF7;&#x6C42;&#x524D;&#x548C;&#x8BF7;&#x6C42;&#x540E;&#x5904;&#x7406;&#x4E00;&#x4E9B;&#x6570;&#x636E;</span></div><div class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> view</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span><span class="params">(View)</span>:</span></div><div class="line">	<span class="comment"># &#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x6765;&#x8BA9;&#x4E0D;&#x540C;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E0D;&#x540C;method</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span><span class="params">(self, request, *args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&quot;before&quot;</span>)</div><div class="line">        result = super(Index,self).dispatch(request, *args, **kwargs)</div><div class="line">        print(<span class="string">&quot;after&quot;</span>)</div><div class="line">        <span class="keyword">return</span> result</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, request)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<h1 id="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse_lazy</div><div class="line"></div><div class="line"><span class="comment"># &#x6A21;&#x677F;&#x914D;&#x7F6E;</span></div><div class="line">TEMPLATES = [</div><div class="line">    {</div><div class="line">        <span class="string">&apos;BACKEND&apos;</span>: <span class="string">&apos;django.template.backends.django.DjangoTemplates&apos;</span>,</div><div class="line">        <span class="string">&apos;DIRS&apos;</span>: [os.path.join(BASE_DIR, <span class="string">&apos;templates&apos;</span>)],</div><div class="line">        <span class="comment"># &#x5F00;&#x542F;&#x52A0;&#x8F7D;app&#x72EC;&#x7ACB;&#x6A21;&#x677F;&#xFF0C;&#x5BFB;&#x627E;&#x987A;&#x5E8F;&#xFF1A;app&#x7684;templates&#x76EE;&#x5F55; -&gt; &#x9879;&#x76EE;&#x7684;templates&#x76EE;&#x5F55;</span></div><div class="line">        <span class="string">&apos;APP_DIRS&apos;</span>: <span class="keyword">True</span>,</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment"># &#x767B;&#x5F55;&#x76F8;&#x5173;url&#x914D;&#x7F6E;</span></div><div class="line">LOGIN_REDIRECT_URL = reverse_lazy(<span class="string">&apos;home:index&apos;</span>)</div><div class="line">LOGIN_URL = reverse_lazy(<span class="string">&quot;users:login&quot;</span>)</div><div class="line">LOGOUT_REDIRECT_URL = reverse_lazy(<span class="string">&quot;users:login&quot;</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;</span></div><div class="line"><span class="comment"># &#x7531;&#x4E8E;Django&#x5185;&#x90E8;&#x8FDE;&#x63A5;MySQL&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x662F;MySQLdb&#x6A21;&#x5757;&#xFF0C;&#x800C;python3&#x4E2D;&#x8FD8;&#x65E0;&#x6B64;&#x6A21;&#x5757;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4F7F;&#x7528;pymysql&#x6765;&#x4EE3;&#x66FF; </span></div><div class="line"><span class="comment"># &#x5982;&#x4E0B;&#x8BBE;&#x7F6E;&#x653E;&#x7F6E;&#x7684;&#x4E0E;project&#x540C;&#x540D;&#x7684;&#x914D;&#x7F6E;&#x7684; __init__.py&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x6216;&#x8005;&#x653E;&#x5728;&#x914D;&#x7F6E;&#x4E2D;&#x7684;__init__.py&#x4E2D;</span></div><div class="line"></div><div class="line"><span class="comment"># import pymysql</span></div><div class="line"><span class="comment"># pymysql.install_as_MySQLdb()</span></div><div class="line">&#x3000;</div><div class="line">DATABASES = {</div><div class="line">    <span class="comment"># &apos;default&apos;: {</span></div><div class="line">    <span class="comment">#     &apos;ENGINE&apos;: &apos;django.db.backends.sqlite3&apos;,</span></div><div class="line">    <span class="comment">#     &apos;NAME&apos;: os.path.join(BASE_DIR, &apos;db.sqlite3&apos;),</span></div><div class="line">    <span class="comment"># },</span></div><div class="line">    <span class="string">&apos;default&apos;</span>: {</div><div class="line">        <span class="string">&apos;ENGINE&apos;</span>: <span class="string">&apos;django.db.backends.mysql&apos;</span>,</div><div class="line">        <span class="string">&apos;NAME&apos;</span>: <span class="string">&apos;kseva&apos;</span>,</div><div class="line">        <span class="string">&apos;USER&apos;</span>: <span class="string">&apos;root&apos;</span>,</div><div class="line">        <span class="string">&apos;PASSWORD&apos;</span>: <span class="string">&apos;ufRRgdfu3ar1&apos;</span>,</div><div class="line">        <span class="string">&quot;HOST&quot;</span>: <span class="string">&apos;127.0.0.1&apos;</span>,</div><div class="line">        <span class="string">&quot;PORT&quot;</span>: <span class="number">33060</span>,</div><div class="line">        <span class="string">&quot;CHARSET&quot;</span>: <span class="string">&apos;utf8&apos;</span>,</div><div class="line">        <span class="string">&quot;COLLATION&quot;</span>: <span class="string">&apos;utf8_general_ci&apos;</span>,</div><div class="line">        <span class="string">&quot;TEST&quot;</span>: {}</div><div class="line">    },</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># i18n&#x8BED;&#x8A00;&#x914D;&#x7F6E;</span></div><div class="line">LANGUAGE_CODE = <span class="string">&apos;en-us&apos;</span></div><div class="line"><span class="comment"># LANGUAGE_CODE = &apos;zh-hans&apos;</span></div><div class="line"></div><div class="line"><span class="comment">#TIME_ZONE = &apos;UTC&apos;</span></div><div class="line">TIME_ZONE = <span class="string">&apos;Asia/Shanghai&apos;</span></div><div class="line"></div><div class="line">USE_I18N = <span class="keyword">True</span></div><div class="line"></div><div class="line">USE_L10N = <span class="keyword">True</span></div><div class="line"></div><div class="line">USE_TZ = <span class="keyword">True</span></div><div class="line"></div><div class="line">LANGUAGES = (</div><div class="line">    (<span class="string">&apos;en&apos;</span>, (<span class="string">&apos;English&apos;</span>)),</div><div class="line">    (<span class="string">&apos;zh-hans&apos;</span>, (<span class="string">&apos;&#x4E2D;&#x6587;&#x7B80;&#x4F53;&apos;</span>)),</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># i18n&#x76EE;&#x5F55;app&#x76EE;&#x5F55;&#x914D;&#x7F6E;</span></div><div class="line">LOCALE_PATHS = [os.path.join(BASE_DIR, <span class="string">&apos;i18n&apos;</span>), ]</div><div class="line"></div><div class="line"><span class="comment"># &#x9759;&#x6001;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x914D;&#x7F6E;</span></div><div class="line">STATIC_URL = <span class="string">&apos;/static/&apos;</span></div><div class="line">STATICFILES_DIRS = (</div><div class="line">    os.path.join(BASE_DIR, <span class="string">&apos;static&apos;</span>),</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># &#x90AE;&#x4EF6;&#x914D;&#x7F6E;</span></div><div class="line"><span class="comment"># EMAIL_BACKEND = &apos;django.core.mail.backends.smtp.EmailBackend&apos;</span></div><div class="line">EMAIL_USE_TLS = <span class="keyword">False</span></div><div class="line"><span class="comment"># EMAIL_USE_SSL = True</span></div><div class="line">EMAIL_HOST = <span class="string">&apos;smtp.163.com&apos;</span></div><div class="line">EMAIL_PORT = <span class="number">25</span></div><div class="line">EMAIL_HOST_USER = <span class="string">&apos;kissingworld@163.com&apos;</span></div><div class="line">EMAIL_HOST_PASSWORD = <span class="string">&apos;6502570qq&apos;</span></div><div class="line">DEFAULT_FROM_EMAIL = <span class="string">&apos;[kseva]&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x7528;&#x6237;&#x5220;&#x9664;&#x76EE;&#x5F55;&#x914D;&#x7F6E;</span></div><div class="line">MEDIA_URL = <span class="string">&apos;/media/&apos;</span></div><div class="line">MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">&apos;media&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x8BA1;&#x5212;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;</span></div><div class="line">CRONJOBS = [</div><div class="line">    (<span class="string">&apos;* * * * *&apos;</span>, <span class="string">&apos;home.cron.test&apos;</span>,<span class="string">&apos;&gt;&gt;/tmp/test.log&apos;</span>)</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment"># &#x9A8C;&#x8BC1;&#x7801;&#x914D;&#x7F6E;</span></div><div class="line">CAPTCHA_IMAGE_SIZE = (<span class="number">80</span>, <span class="number">33</span>)</div><div class="line">CAPTCHA_FOREGROUND_COLOR = <span class="string">&apos;#001100&apos;</span></div><div class="line">CAPTCHA_NOISE_FUNCTIONS = (<span class="string">&apos;captcha.helpers.noise_dots&apos;</span>,)</div><div class="line"></div><div class="line"><span class="comment"># bootstrap3&#x914D;&#x7F6E;</span></div><div class="line"><span class="comment"># Django bootstrap3 setting, more see http://django-bootstrap3.readthedocs.io/en/latest/settings.html</span></div><div class="line">BOOTSTRAP3 = {</div><div class="line">    <span class="string">&apos;horizontal_label_class&apos;</span>: <span class="string">&apos;col-md-2&apos;</span>,</div><div class="line">    <span class="comment"># Field class to use in horizontal forms</span></div><div class="line">    <span class="string">&apos;horizontal_field_class&apos;</span>: <span class="string">&apos;col-md-9&apos;</span>,</div><div class="line">    <span class="comment"># Set placeholder attributes to label if no placeholder is provided</span></div><div class="line">    <span class="string">&apos;set_placeholder&apos;</span>: <span class="keyword">True</span>,</div><div class="line">    <span class="string">&apos;success_css_class&apos;</span>: <span class="string">&apos;&apos;</span>,</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># restful&#x914D;&#x7F6E;</span></div><div class="line">REST_FRAMEWORK = {</div><div class="line">    <span class="string">&apos;DEFAULT_AUTHENTICATION_CLASSES&apos;</span>: (</div><div class="line">        <span class="string">&apos;rest_framework.authentication.BasicAuthentication&apos;</span>,</div><div class="line">        <span class="string">&apos;rest_framework.authentication.SessionAuthentication&apos;</span>,</div><div class="line">        <span class="string">&apos;rest_framework.authentication.TokenAuthentication&apos;</span>,</div><div class="line">    )</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;"><a href="#&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;" class="headerlink" title="&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;"></a>&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;</h1><h2 id="&#x5355;&#x4E00;&#x8DEF;&#x7531;&#x5BF9;&#x5E94;"><a href="#&#x5355;&#x4E00;&#x8DEF;&#x7531;&#x5BF9;&#x5E94;" class="headerlink" title="&#x5355;&#x4E00;&#x8DEF;&#x7531;&#x5BF9;&#x5E94;"></a>&#x5355;&#x4E00;&#x8DEF;&#x7531;&#x5BF9;&#x5E94;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">url(<span class="string">r&apos;^index$&apos;</span>, views.index),</div></pre></td></tr></table></figure>
+<h2 id="&#x57FA;&#x4E8E;&#x6B63;&#x5219;&#x7684;&#x8DEF;&#x7531;"><a href="#&#x57FA;&#x4E8E;&#x6B63;&#x5219;&#x7684;&#x8DEF;&#x7531;" class="headerlink" title="&#x57FA;&#x4E8E;&#x6B63;&#x5219;&#x7684;&#x8DEF;&#x7531;"></a>&#x57FA;&#x4E8E;&#x6B63;&#x5219;&#x7684;&#x8DEF;&#x7531;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url(<span class="string">r&apos;^index/(\d*)&apos;</span>, views.index),</div><div class="line">url(<span class="string">r&apos;^manage/(?P&lt;name&gt;\w*)/(?P&lt;id&gt;\d*)&apos;</span>, views.manage),</div></pre></td></tr></table></figure>
+<h2 id="&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;"><a href="#&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;" class="headerlink" title="&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;"></a>&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">url(<span class="string">r&apos;^manage/(?P&lt;name&gt;\w*)&apos;</span>, views.manage,{<span class="string">&apos;id&apos;</span>:<span class="number">333</span>}),</div></pre></td></tr></table></figure>
+<h2 id="&#x4E3A;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8BBE;&#x7F6E;&#x540D;&#x79F0;"><a href="#&#x4E3A;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8BBE;&#x7F6E;&#x540D;&#x79F0;" class="headerlink" title="&#x4E3A;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8BBE;&#x7F6E;&#x540D;&#x79F0;"></a>&#x4E3A;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#x8BBE;&#x7F6E;&#x540D;&#x79F0;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url(<span class="string">r&apos;^home&apos;</span>, views.home, name=<span class="string">&apos;h1&apos;</span>),</div><div class="line">url(<span class="string">r&apos;^index/(\d*)&apos;</span>, views.index, name=<span class="string">&apos;h2&apos;</span>),</div></pre></td></tr></table></figure>
+<p>&#x8BBE;&#x7F6E;&#x540D;&#x79F0;&#x4E4B;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;&#x8C03;&#x7528;&#xFF0C;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x6A21;&#x677F;&#x4E2D;&#x4F7F;&#x7528;&#x751F;&#x6210;URL </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">{% url &apos;h2&apos; 2012 %}</div></pre></td></tr></table></figure>
+<ul>
+<li>&#x4F7F;&#x7528;request.path_info&#x83B7;&#x53D6;&#x5F53;&#x524D;url</li>
+<li>&#x51FD;&#x6570;&#x4E2D;&#x4F7F;&#x7528;&#x751F;&#x6210;URL </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">reverse(&apos;h2&apos;, args=(2012,)) &#x8DEF;&#x5F84;:django.urls.reverse</div></pre></td></tr></table></figure>
+<ul>
+<li>Model&#x4E2D;&#x4F7F;&#x7528;&#x83B7;&#x53D6;URL &#x81EA;&#x5B9A;&#x4E49;get_absolute_url() &#x65B9;&#x6CD5;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># x</span></div><div class="line">url(<span class="string">r&apos;/index/&apos;</span>,name=<span class="string">&apos;index&apos;</span>)</div><div class="line">{% url <span class="string">&apos;index&apos;</span> %}</div><div class="line">reverse(<span class="string">&apos;index&apos;</span>)</div><div class="line"><span class="comment"># xx</span></div><div class="line">url(<span class="string">r&apos;/index/(\d+)/(\d+)&apos;</span>,name=<span class="string">&apos;index&apos;</span>)</div><div class="line">{% url <span class="string">&apos;index&apos;</span> <span class="number">1</span> <span class="number">10</span> %}</div><div class="line">reverse(<span class="string">&apos;index&apos;</span>,args=(<span class="number">1</span>,<span class="number">2</span>,))</div><div class="line"><span class="comment"># xxx</span></div><div class="line">url(<span class="string">r&apos;/index/(?P&lt;nid&gt;\d+)/(?P&lt;uid&gt;\d+)&apos;</span>,name=<span class="string">&apos;index&apos;</span>)</div><div class="line">{% url <span class="string">&apos;index&apos;</span> nid=<span class="number">1</span> uid=<span class="number">10</span> %}</div><div class="line">reverse(<span class="string">&apos;index&apos;</span>,kwargs={<span class="string">&quot;nid&quot;</span>:<span class="number">1</span>,<span class="string">&quot;uid&quot;</span>:<span class="number">2</span>})</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewType</span><span class="params">(models.Model)</span>:</span></div><div class="line">    caption = models.CharField(max_length=<span class="number">16</span>)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_absolute_url</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line">        &#x4E3A;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x751F;&#x6210;&#x4E00;&#x4E2A;URL</div><div class="line">        &#x5E94;&#x7528;&#xFF1A;&#x5728;&#x5BF9;&#x8C61;&#x5217;&#x8868;&#x4E2D;&#x751F;&#x6210;&#x67E5;&#x770B;&#x8BE6;&#x7EC6;&#x7684;URL&#xFF0C;&#x4F7F;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#xFF01;&#xFF01;&#xFF01;</div><div class="line">        :return:</div><div class="line">        &quot;&quot;&quot;</div><div class="line">        <span class="comment"># return &apos;/%s/%s&apos; % (self._meta.db_table, self.id)</span></div><div class="line">        <span class="comment"># &#x6216;</span></div><div class="line">        <span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse</div><div class="line">        <span class="keyword">return</span> reverse(<span class="string">&apos;NewType.Detail&apos;</span>, kwargs={<span class="string">&apos;nid&apos;</span>: self.id})</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;&#x5339;&#x914D;&#x6210;&#x529F;&#x7684;URL&#x4FE1;&#x606F;&#xFF1A;request.resolver_match</p>
+</blockquote>
+<h2 id="&#x6839;&#x636E;app&#x5BF9;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF08;&#x8DEF;&#x7531;&#x5206;&#x53D1;&#xFF09;"><a href="#&#x6839;&#x636E;app&#x5BF9;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF08;&#x8DEF;&#x7531;&#x5206;&#x53D1;&#xFF09;" class="headerlink" title="&#x6839;&#x636E;app&#x5BF9;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF08;&#x8DEF;&#x7531;&#x5206;&#x53D1;&#xFF09;"></a>&#x6839;&#x636E;app&#x5BF9;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF08;&#x8DEF;&#x7531;&#x5206;&#x53D1;&#xFF09;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">url(<span class="string">r&apos;^web/&apos;</span>,include(<span class="string">&apos;web.urls&apos;</span>)),</div></pre></td></tr></table></figure>
+<h2 id="&#x547D;&#x540D;&#x7A7A;&#x95F4;"><a href="#&#x547D;&#x540D;&#x7A7A;&#x95F4;" class="headerlink" title="&#x547D;&#x540D;&#x7A7A;&#x95F4;"></a>&#x547D;&#x540D;&#x7A7A;&#x95F4;</h2><h3 id="project-urls-py"><a href="#project-urls-py" class="headerlink" title="project.urls.py"></a>project.urls.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url,include</div><div class="line"> </div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r&apos;^a/&apos;</span>, include(<span class="string">&apos;app01.urls&apos;</span>, namespace=<span class="string">&apos;author-polls&apos;</span>)),</div><div class="line">    url(<span class="string">r&apos;^b/&apos;</span>, include(<span class="string">&apos;app01.urls&apos;</span>, namespace=<span class="string">&apos;publisher-polls&apos;</span>)),</div><div class="line">]</div></pre></td></tr></table></figure>
+<h3 id="app01-urls-py"><a href="#app01-urls-py" class="headerlink" title="app01.urls.py"></a>app01.urls.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</div><div class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</div><div class="line"> </div><div class="line">app_name = <span class="string">&apos;app01&apos;</span></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r&apos;^(?P&lt;pk&gt;\d+)/$&apos;</span>, views.detail, name=<span class="string">&apos;detail&apos;</span>)</div><div class="line">]</div></pre></td></tr></table></figure>
+<h3 id="app01-views-py"><a href="#app01-views-py" class="headerlink" title="app01.views.py"></a>app01.views.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">detail</span><span class="params">(request, pk)</span>:</span></div><div class="line">    print(request.resolver_match)</div><div class="line">    <span class="keyword">return</span> HttpResponse(pk)</div></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0A;&#x5B9A;&#x4E49;&#x5E26;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;url&#x4E4B;&#x540E;&#xFF0C;&#x4F7F;&#x7528;name&#x751F;&#x6210;URL&#x65F6;&#x5019;&#xFF0C;&#x5E94;&#x8BE5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">v = reverse(<span class="string">&apos;app01:detail&apos;</span>, kwargs={<span class="string">&apos;pk&apos;</span>:<span class="number">11</span>})</div><div class="line">{% url <span class="string">&apos;app01:detail&apos;</span> pk=<span class="number">12</span> pp=<span class="number">99</span> %}</div></pre></td></tr></table></figure>
+<p>django&#x4E2D;&#x7684;&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;&#x548C;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x7684;&#x6846;&#x67B6;&#x6709;&#x6240;&#x4E0D;&#x540C;&#xFF0C;&#x5728;django&#x4E2D;&#x6BCF;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x7684;url&#x90FD;&#x8981;&#x6709;&#x4E00;&#x6761;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#xFF0C;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x5C06;&#x8BF7;&#x6C42;&#x4EA4;&#x7ED9;&#x5BF9;&#x4E00;&#x4E2A;&#x7684;view&#x4E2D;&#x7684;&#x51FD;&#x6570;&#x53BB;&#x5904;&#x7406;&#x3002;&#x5176;&#x4ED6;&#x5927;&#x90E8;&#x5206;&#x7684;Web&#x6846;&#x67B6;&#x5219;&#x662F;&#x5BF9;&#x4E00;&#x7C7B;&#x7684;url&#x8BF7;&#x6C42;&#x505A;&#x4E00;&#x6761;&#x8DEF;&#x7531;&#x6620;&#x5C04;&#xFF0C;&#x4ECE;&#x800C;&#x662F;&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;&#x53D8;&#x5F97;&#x7B80;&#x6D01;&#x3002;</p>
+<blockquote>
+<p>&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x673A;&#x5236;&#xFF0C;&#x4E3A;django&#x5F00;&#x53D1;&#x4E00;&#x5957;&#x52A8;&#x6001;&#x7684;&#x8DEF;&#x7531;&#x7CFB;&#x7EDF;Demo&#xFF1A; <a href="python-django/django_dynamic_router.rar">&#x70B9;&#x51FB;&#x4E0B;&#x8F7D;</a></p>
+</blockquote>
+<h2 id="path&#x3001;re-path&#x3001;url&#x533A;&#x522B;"><a href="#path&#x3001;re-path&#x3001;url&#x533A;&#x522B;" class="headerlink" title="path&#x3001;re_path&#x3001;url&#x533A;&#x522B;"></a>path&#x3001;re_path&#x3001;url&#x533A;&#x522B;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x8DEF;&#x7531;&#x914D;&#x7F6E;&#xFF0C;&#x652F;&#x6301;&lt;int:a&gt;&lt;str:link&gt;&#x8F6C;&#x6362;&#x5668;</span></div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</div><div class="line"><span class="comment"># &#x652F;&#x6301;&#x6B63;&#x5219;&#x5339;&#x914D;</span></div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> re_path</div><div class="line"><span class="comment"># &#x662F;re_path&#x7684;&#x522B;&#x540D;</span></div><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</div></pre></td></tr></table></figure>
+<h2 id="&#x8DEF;&#x7531;&#x914D;&#x7F6E;"><a href="#&#x8DEF;&#x7531;&#x914D;&#x7F6E;" class="headerlink" title="&#x8DEF;&#x7531;&#x914D;&#x7F6E;"></a>&#x8DEF;&#x7531;&#x914D;&#x7F6E;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># &#x4E3B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x8DEF;&#x7531;&#x914D;&#x7F6E;</span></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</div><div class="line"><span class="keyword">from</span> django.views.i18n <span class="keyword">import</span> JavaScriptCatalog</div><div class="line"><span class="keyword">from</span> rest_framework.authtoken.views <span class="keyword">import</span> obtain_auth_token</div><div class="line"><span class="keyword">from</span> home.views <span class="keyword">import</span> IndexView</div><div class="line"></div><div class="line"><span class="comment"># &#x6839;&#x636E;app&#x5BF9;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x5206;&#x7C7B;</span></div><div class="line"><span class="comment"># include&#x914D;&#x7F6E;&#x4F1A;&#x53BB;&#x5BF9;&#x5E94;&#x7684;app&#x7684;urls&#x4E2D;&#x52A0;&#x8F7D;app&#x81EA;&#x5DF1;&#x7684;&#x8DEF;&#x7531;&#xFF08;&#x8DEF;&#x7531;&#x5206;&#x53D1;&#xFF09;</span></div><div class="line"><span class="comment"># &#x6B64;&#x5904;&#x7684;&#x8DEF;&#x7531;&#x662F;app&#x8DEF;&#x7531;&#x7684;&#x8DEF;&#x7531;&#x524D;&#x7F00;</span></div><div class="line">urlpatterns = [</div><div class="line">    path(<span class="string">&apos;&apos;</span>, IndexView.as_view()),</div><div class="line">    path(<span class="string">&apos;admin/&apos;</span>, admin.site.urls),</div><div class="line">    <span class="comment"># namespace&#x8BBE;&#x7F6E;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;include&#x505A;&#x8DEF;&#x7531;&#x5206;&#x53D1;</span></div><div class="line">    path(<span class="string">&apos;base/&apos;</span>, include(<span class="string">&apos;base.urls&apos;</span>, namespace=<span class="string">&apos;base&apos;</span>)),</div><div class="line">    path(<span class="string">&apos;configs/&apos;</span>, include(<span class="string">&apos;configs.urls&apos;</span>)),</div><div class="line">    <span class="comment"># &#x9A8C;&#x8BC1;&#x7801;&#x914D;&#x7F6E;</span></div><div class="line">    path(<span class="string">&apos;captcha/&apos;</span>, include(<span class="string">&apos;captcha.urls&apos;</span>)),</div><div class="line">    <span class="comment"># js&#x4E2D;i18n&#x914D;&#x7F6E;</span></div><div class="line">    path(<span class="string">&apos;jsi18n/&apos;</span>, JavaScriptCatalog.as_view(), name=<span class="string">&apos;javascript-catalog&apos;</span>),</div><div class="line">    <span class="comment"># restful-api&#x8DEF;&#x7531;&#x914D;&#x7F6E;</span></div><div class="line">    path(<span class="string">&apos;api-token-auth/&apos;</span>, obtain_auth_token),</div><div class="line">]</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># base</span></div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</div><div class="line"><span class="keyword">from</span> .views.menu <span class="keyword">import</span> MenuView</div><div class="line"></div><div class="line"><span class="comment"># &#x5BF9;app&#x8DEF;&#x7531;&#x8BBE;&#x7F6E;&#x547D;&#x540D;&#x7A7A;&#x95F4;</span></div><div class="line">app_name = <span class="string">&quot;base&quot;</span></div><div class="line">urlpatterns = [</div><div class="line">    <span class="comment"># &#x5BF9;&#x5B50;&#x8DEF;&#x7531;&#x8BBE;&#x7F6E;&#x6620;&#x5C04;&#x540D;&#x79F0;{% url &apos;base:menu&apos; %}</span></div><div class="line">    path(<span class="string">&apos;menu/&apos;</span>, MenuView.as_view(), name=<span class="string">&quot;menu&quot;</span>),</div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, re_path</div><div class="line"><span class="keyword">from</span> .views <span class="keyword">import</span> *</div><div class="line"></div><div class="line">app_name = <span class="string">&quot;configs&quot;</span></div><div class="line">urlpatterns = [</div><div class="line">    path(<span class="string">&apos;&apos;</span>, AppView.as_view(), name=<span class="string">&quot;index&quot;</span>),</div><div class="line">    <span class="comment"># &#x6B63;&#x5219;&#x8DEF;&#x7531;&#x914D;&#x7F6E;</span></div><div class="line">    re_path(<span class="string">&apos;^app/$&apos;</span>, AppView.as_view(), name=<span class="string">&quot;app&quot;</span>),</div><div class="line">    re_path(<span class="string">&apos;^app/create/$&apos;</span>, AppCreateView.as_view(), name=<span class="string">&quot;create&quot;</span>),</div><div class="line">    re_path(<span class="string">&apos;^app/(?P&lt;pk&gt;[0-9a-zA-Z\-]+)/edit/$&apos;</span>, AppEditView.as_view(), name=<span class="string">&quot;edit&quot;</span>),</div><div class="line">    re_path(<span class="string">&apos;^app/(?P&lt;pk&gt;[0-9a-zA-Z\-]+)/config/$&apos;</span>, ConfigView.as_view(), name=<span class="string">&quot;config&quot;</span>),</div><div class="line">]</div></pre></td></tr></table></figure>
+<h1 id="&#x6A21;&#x677F;"><a href="#&#x6A21;&#x677F;" class="headerlink" title="&#x6A21;&#x677F;"></a>&#x6A21;&#x677F;</h1><h2 id="&#x6A21;&#x7248;&#x7684;&#x6267;&#x884C;"><a href="#&#x6A21;&#x7248;&#x7684;&#x6267;&#x884C;" class="headerlink" title="&#x6A21;&#x7248;&#x7684;&#x6267;&#x884C;"></a>&#x6A21;&#x7248;&#x7684;&#x6267;&#x884C;</h2><p>&#x6A21;&#x7248;&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#xFF0C;&#x5BF9;&#x4E8E;&#x6A21;&#x7248;&#xFF0C;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x8BFB;&#x53D6;&#x6A21;&#x7248;&#xFF08;&#x5176;&#x4E2D;&#x5D4C;&#x5957;&#x7740;&#x6A21;&#x7248;&#x6807;&#x7B7E;&#xFF09;&#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x5C06; Model &#x4E2D;&#x83B7;&#x53D6;&#x7684;&#x6570;&#x636E;&#x63D2;&#x5165;&#x5230;&#x6A21;&#x7248;&#x4E2D;&#xFF0C;&#x6700;&#x540E;&#x5C06;&#x4FE1;&#x606F;&#x8FD4;&#x56DE;&#x7ED9;&#x7528;&#x6237;&#x3002;</p>
+<h2 id="&#x6A21;&#x7248;&#x8BED;&#x8A00;"><a href="#&#x6A21;&#x7248;&#x8BED;&#x8A00;" class="headerlink" title="&#x6A21;&#x7248;&#x8BED;&#x8A00;"></a>&#x6A21;&#x7248;&#x8BED;&#x8A00;</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># &#x6A21;&#x677F;&#x4E2D;&#x4E5F;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x8BE5;&#x8BED;&#x8A00;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x5C55;&#x793A;</div><div class="line"></div><div class="line">{{ item }}</div><div class="line">{% for item in item_list %}</div><div class="line">	&lt;a&gt;{{ item }}&lt;/a&gt;</div><div class="line">{% endfor %}</div><div class="line">&#x3000;&#x3000;forloop.counter</div><div class="line">&#x3000;&#x3000;forloop.first</div><div class="line">&#x3000;&#x3000;forloop.last </div><div class="line">{% if ordered_warranty %} {% else %} {% endif %}</div><div class="line"># &#x6BCD;&#x677F;&#xFF1A;</div><div class="line">{% block title %}{% endblock %}</div><div class="line">{% for k,v in user_dict.items %} {% endfor %}</div><div class="line"># &#x5B50;&#x677F;&#xFF1A;</div><div class="line">{% extends &quot;base.html&quot; %}</div><div class="line">{% block title %}{% endblock %}</div><div class="line"># &#x5E2E;&#x52A9;&#x65B9;&#x6CD5;&#xFF1A;</div><div class="line">{{ item.event_start|date:&quot;Y-m-d H:i:s&quot;}}</div><div class="line">{{ bio|truncatewords:&quot;30&quot; }}</div><div class="line">{{ my_list|first|upper }}</div><div class="line">{{ name|lower }}</div></pre></td></tr></table></figure>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;simple-tag"><a href="#&#x81EA;&#x5B9A;&#x4E49;simple-tag" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;simple_tag"></a>&#x81EA;&#x5B9A;&#x4E49;simple_tag</h2><ul>
+<li>&#x5728;app&#x4E2D;&#x521B;&#x5EFA;templatetags&#x6A21;&#x5757;</li>
+<li>&#x521B;&#x5EFA;&#x4EFB;&#x610F; .py &#x6587;&#x4EF6;</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># xx.py</span></div><div class="line"><span class="keyword">from</span> django <span class="keyword">import</span> template</div><div class="line"><span class="keyword">from</span> django.utils.safestring <span class="keyword">import</span> mark_safe</div><div class="line">   </div><div class="line">register = template.Library()</div><div class="line">   </div><div class="line"><span class="meta">@register.simple_tag</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_simple_time</span><span class="params">(v1,v2,v3)</span>:</span></div><div class="line">    <span class="keyword">return</span>  v1 + v2 + v3</div><div class="line">   </div><div class="line"><span class="meta">@register.simple_tag</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_input</span><span class="params">(id,arg)</span>:</span></div><div class="line">    result = <span class="string">&quot;&lt;input type=&apos;text&apos; id=&apos;%s&apos; class=&apos;%s&apos; /&gt;&quot;</span> %(id,arg,)</div><div class="line">    <span class="keyword">return</span> mark_safe(result)</div><div class="line"></div><div class="line"><span class="comment"># &#x5728;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;simple_tag&#x7684;html&#x6587;&#x4EF6;&#x4E2D;&#x5BFC;&#x5165;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x7684; xx.py &#x6587;&#x4EF6;&#x540D;</span></div><div class="line">{% load xx %}</div><div class="line"></div><div class="line"><span class="comment"># &#x4F7F;&#x7528;simple_tag</span></div><div class="line">{% my_simple_time <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>%}</div><div class="line">{% my_input <span class="string">&apos;id_username&apos;</span> <span class="string">&apos;hide&apos;</span>%}</div></pre></td></tr></table></figure>
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p><a href="http://c.isme.pub/2018/08/29/python-django-model/">Django&#x6846;&#x67B6;Model</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x7684;query_set</span></div><div class="line">models.User.objects.all()</div><div class="line"><span class="comment"># &#x8FD4;&#x56DE;&#x5B57;&#x5178;&#x7684;query_set</span></div><div class="line">models.User.objects.all().values(<span class="string">&apos;username&apos;</span>,<span class="string">&apos;passwd&apos;</span>)</div><div class="line"><span class="comment"># &#x8FD4;&#x56DE;&#x5143;&#x7EC4;&#x7684;query_set</span></div><div class="line">models.User.objects.all().values_list(<span class="string">&apos;username&apos;</span>,<span class="string">&apos;passwd&apos;</span>)</div></pre></td></tr></table></figure>
+<h1 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h1><p><a href="http://c.isme.pub/2018/08/29/python-django-form/">Django&#x6846;&#x67B6;Form</a></p>
+<h1 id="&#x4E2D;&#x95F4;&#x4EF6;"><a href="#&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E2D;&#x95F4;&#x4EF6;</h1><p>django &#x4E2D;&#x7684;&#x4E2D;&#x95F4;&#x4EF6;&#xFF08;middleware&#xFF09;&#xFF0C;&#x5728;django&#x4E2D;&#xFF0C;&#x4E2D;&#x95F4;&#x4EF6;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x5728;&#x8BF7;&#x6C42;&#x5230;&#x6765;&#x548C;&#x7ED3;&#x675F;&#x540E;&#xFF0C;django&#x4F1A;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;&#x89C4;&#x5219;&#x5728;&#x5408;&#x9002;&#x7684;&#x65F6;&#x673A;&#x6267;&#x884C;&#x4E2D;&#x95F4;&#x4EF6;&#x4E2D;&#x76F8;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x5728;django&#x9879;&#x76EE;&#x7684;settings&#x6A21;&#x5757;&#x4E2D;&#xFF0C;&#x6709;&#x4E00;&#x4E2A; MIDDLEWARE_CLASSES &#x53D8;&#x91CF;&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x4E2D;&#x95F4;&#x4EF6;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">MIDDLEWARE = [</div><div class="line">    <span class="string">&apos;django.middleware.security.SecurityMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.contrib.sessions.middleware.SessionMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.middleware.common.CommonMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.middleware.csrf.CsrfViewMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.contrib.auth.middleware.AuthenticationMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.contrib.messages.middleware.MessageMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.middleware.clickjacking.XFrameOptionsMiddleware&apos;</span>,</div><div class="line">    <span class="string">&apos;django.middleware.locale.LocaleMiddleware&apos;</span>,</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>&#x4E0E;mange.py&#x5728;&#x540C;&#x4E00;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x5939; wupeiqi/middleware&#x4E0B;&#x7684;auth.py&#x6587;&#x4EF6;&#x4E2D;&#x7684;Authentication&#x7C7B;</p>
+<p>&#x4E2D;&#x95F4;&#x4EF6;&#x4E2D;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x56DB;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5206;&#x522B;&#x662F;&#xFF1A;</p>
+<ul>
+<li>process_request(self,request)</li>
+<li>process_view(self, request, callback, callback_args, callback_kwargs)</li>
+<li>process_template_response(self,request,response)</li>
+<li>process_exception(self, request, exception)</li>
+<li>process_response(self, request, response)</li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x53EF;&#x4EE5;&#x662F;None&#x548C;HttpResonse&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x662F;None&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x6309;&#x7167;django&#x5B9A;&#x4E49;&#x7684;&#x89C4;&#x5219;&#x5411;&#x4E0B;&#x6267;&#x884C;&#xFF0C;&#x5982;&#x679C;&#x662F;HttpResonse&#x5BF9;&#x8C61;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x5C06;&#x8BE5;&#x5BF9;&#x8C61;&#x8FD4;&#x56DE;&#x7ED9;&#x7528;&#x6237;&#x3002;</p>
+<h1 id="&#x6269;&#x5C55;"><a href="#&#x6269;&#x5C55;" class="headerlink" title="&#x6269;&#x5C55;"></a>&#x6269;&#x5C55;</h1><h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x4E0A;&#x4F20;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x4E0A;&#x4F20;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x4E0A;&#x4F20;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x4E0A;&#x4F20;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_file</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&quot;POST&quot;</span>:</div><div class="line">        obj = request.FILES.get(<span class="string">&apos;fafafa&apos;</span>)</div><div class="line">        f = open(obj.name, <span class="string">&apos;wb&apos;</span>)</div><div class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> obj.chunks():</div><div class="line">            f.write(chunk)</div><div class="line">        f.close()</div><div class="line">    <span class="keyword">return</span> render(request, <span class="string">&apos;file.html&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="Form&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5B9E;&#x4F8B;"><a href="#Form&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5B9E;&#x4F8B;" class="headerlink" title="Form&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5B9E;&#x4F8B;"></a>Form&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5B9E;&#x4F8B;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileForm</span><span class="params">(forms.Form)</span>:</span></div><div class="line">    ExcelFile = forms.FileField()</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UploadFile</span><span class="params">(models.Model)</span>:</span></div><div class="line">    userid = models.CharField(max_length = <span class="number">30</span>)</div><div class="line">    file = models.FileField(upload_to = <span class="string">&apos;./upload/&apos;</span>)</div><div class="line">    date = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">UploadFile</span><span class="params">(request)</span>:</span></div><div class="line">    uf = AssetForm.FileForm(request.POST,request.FILES)</div><div class="line">    <span class="keyword">if</span> uf.is_valid():</div><div class="line">            upload = models.UploadFile()</div><div class="line">            upload.userid = <span class="number">1</span></div><div class="line">            upload.file = uf.cleaned_data[<span class="string">&apos;ExcelFile&apos;</span>]</div><div class="line">            upload.save()</div><div class="line">            </div><div class="line">            <span class="keyword">print</span> upload.file</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/python-celery/" rel="next" title="python-celery">
+                <i class="fa fa-chevron-left"></i> python-celery
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/29/python-django-model/" rel="prev" title="Django框架Model">
+                Django框架Model <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">2.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django的请求生命周期"><span class="nav-number">2.1.</span> <span class="nav-text">Django的请求生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.2.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#render、redirect、HttpResponse"><span class="nav-number">2.3.</span> <span class="nav-text">render、redirect、HttpResponse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request"><span class="nav-number">2.4.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fbv和cbv"><span class="nav-number">2.5.</span> <span class="nav-text">fbv和cbv</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由系统"><span class="nav-number">4.</span> <span class="nav-text">路由系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单一路由对应"><span class="nav-number">4.1.</span> <span class="nav-text">单一路由对应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于正则的路由"><span class="nav-number">4.2.</span> <span class="nav-text">基于正则的路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加额外的参数"><span class="nav-number">4.3.</span> <span class="nav-text">添加额外的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为路由映射设置名称"><span class="nav-number">4.4.</span> <span class="nav-text">为路由映射设置名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据app对路由规则进行分类（路由分发）"><span class="nav-number">4.5.</span> <span class="nav-text">根据app对路由规则进行分类（路由分发）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间"><span class="nav-number">4.6.</span> <span class="nav-text">命名空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#project-urls-py"><span class="nav-number">4.6.1.</span> <span class="nav-text">project.urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app01-urls-py"><span class="nav-number">4.6.2.</span> <span class="nav-text">app01.urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app01-views-py"><span class="nav-number">4.6.3.</span> <span class="nav-text">app01.views.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path、re-path、url区别"><span class="nav-number">4.7.</span> <span class="nav-text">path、re_path、url区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由配置"><span class="nav-number">4.8.</span> <span class="nav-text">路由配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板"><span class="nav-number">5.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模版的执行"><span class="nav-number">5.1.</span> <span class="nav-text">模版的执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版语言"><span class="nav-number">5.2.</span> <span class="nav-text">模版语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义simple-tag"><span class="nav-number">5.3.</span> <span class="nav-text">自定义simple_tag</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model"><span class="nav-number">6.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Form"><span class="nav-number">7.</span> <span class="nav-text">Form</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中间件"><span class="nav-number">8.</span> <span class="nav-text">中间件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">9.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义上传"><span class="nav-number">9.1.</span> <span class="nav-text">自定义上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form上传文件实例"><span class="nav-number">9.2.</span> <span class="nav-text">Form上传文件实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

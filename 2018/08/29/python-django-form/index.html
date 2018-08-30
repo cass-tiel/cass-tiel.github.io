@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,django," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;Form&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+Django&amp;#x7684;Form&amp;#x4E3B;&amp;#x8981;&amp;#x5177;&amp;#x6709;&amp;#x4E00;&amp;#x4E0B;&amp;#x51E0;&amp;#x5927;&amp;#x529F;&amp;#x80FD;&amp;#xFF1A;
+
+&amp;#x751F;&amp;#x6210;HTML&amp;#x68">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django框架Form">
+<meta property="og:url" content="http://c.isme.pub/2018/08/29/python-django-form/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;Form&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+Django&amp;#x7684;Form&amp;#x4E3B;&amp;#x8981;&amp;#x5177;&amp;#x6709;&amp;#x4E00;&amp;#x4E0B;&amp;#x51E0;&amp;#x5927;&amp;#x529F;&amp;#x80FD;&amp;#xFF1A;
+
+&amp;#x751F;&amp;#x6210;HTML&amp;#x68">
+<meta property="og:updated_time" content="2018-08-29T05:43:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django框架Form">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;Form&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+Django&amp;#x7684;Form&amp;#x4E3B;&amp;#x8981;&amp;#x5177;&amp;#x6709;&amp;#x4E00;&amp;#x4E0B;&amp;#x51E0;&amp;#x5927;&amp;#x529F;&amp;#x80FD;&amp;#xFF1A;
+
+&amp;#x751F;&amp;#x6210;HTML&amp;#x68">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/29/python-django-form/"/>
+
+
+
+
+
+  <title>Django框架Form | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/29/python-django-form/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django框架Form</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T13:43:41+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-29T13:43:41+08:00">
+                2018-08-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/django/" itemprop="url" rel="index">
+                    <span itemprop="name">django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Django&#x6846;&#x67B6;Form&#x77E5;&#x8BC6;&#x70B9;</p>
+<p>Django&#x7684;Form&#x4E3B;&#x8981;&#x5177;&#x6709;&#x4E00;&#x4E0B;&#x51E0;&#x5927;&#x529F;&#x80FD;&#xFF1A;</p>
+<ul>
+<li>&#x751F;&#x6210;HTML&#x6807;&#x7B7E;</li>
+<li>&#x9A8C;&#x8BC1;&#x7528;&#x6237;&#x6570;&#x636E;&#xFF08;&#x663E;&#x793A;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF09;</li>
+<li>HTML Form&#x63D0;&#x4EA4;&#x4FDD;&#x7559;&#x4E0A;&#x6B21;&#x63D0;&#x4EA4;&#x6570;&#x636E;</li>
+<li>&#x521D;&#x59CB;&#x5316;&#x9875;&#x9762;&#x663E;&#x793A;&#x5185;&#x5BB9;</li>
+</ul>
+<p>&#x521B;&#x5EFA;Form&#x7C7B;&#x65F6;&#xFF0C;&#x4E3B;&#x8981;&#x6D89;&#x53CA;&#x5230; &#x3010;&#x5B57;&#x6BB5;&#x3011; &#x548C; &#x3010;&#x63D2;&#x4EF6;&#x3011;&#xFF0C;&#x5B57;&#x6BB5;&#x7528;&#x4E8E;&#x5BF9;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x7684;&#x9A8C;&#x8BC1;&#xFF0C;&#x63D2;&#x4EF6;&#x7528;&#x4E8E;&#x81EA;&#x52A8;&#x751F;&#x6210;HTML;</p>
+<a id="more"></a>
+<h1 id="&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a href="#&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="headerlink" title="&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>&#x57FA;&#x672C;&#x4F7F;&#x7528;</h1><h2 id="&#x521B;&#x5EFA;Form&#x7C7B;"><a href="#&#x521B;&#x5EFA;Form&#x7C7B;" class="headerlink" title="&#x521B;&#x5EFA;Form&#x7C7B;"></a>&#x521B;&#x5EFA;Form&#x7C7B;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.forms <span class="keyword">import</span> Form</div><div class="line"><span class="keyword">from</span> django.forms <span class="keyword">import</span> widgets</div><div class="line"><span class="keyword">from</span> django.forms <span class="keyword">import</span> fields</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span><span class="params">(Form)</span>:</span></div><div class="line">    user = fields.CharField(</div><div class="line">        widget=widgets.TextInput(attrs={<span class="string">&apos;id&apos;</span>: <span class="string">&apos;i1&apos;</span>, <span class="string">&apos;class&apos;</span>: <span class="string">&apos;c1&apos;</span>})</div><div class="line">    )</div><div class="line"> </div><div class="line">    gender = fields.ChoiceField(</div><div class="line">        choices=((<span class="number">1</span>, <span class="string">&apos;&#x7537;&apos;</span>), (<span class="number">2</span>, <span class="string">&apos;&#x5973;&apos;</span>),),</div><div class="line">        initial=<span class="number">2</span>,</div><div class="line">        widget=widgets.RadioSelect</div><div class="line">    )</div><div class="line"> </div><div class="line">    city = fields.CharField(</div><div class="line">        initial=<span class="number">2</span>,</div><div class="line">        widget=widgets.Select(choices=((<span class="number">1</span>,<span class="string">&apos;&#x4E0A;&#x6D77;&apos;</span>),(<span class="number">2</span>,<span class="string">&apos;&#x5317;&#x4EAC;&apos;</span>),))</div><div class="line">    )</div><div class="line"> </div><div class="line">    pwd = fields.CharField(</div><div class="line">        widget=widgets.PasswordInput(attrs={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;c1&apos;</span>}, render_value=<span class="keyword">True</span>)</div><div class="line">    )</div></pre></td></tr></table></figure>
+<h2 id="View&#x51FD;&#x6570;&#x5904;&#x7406;"><a href="#View&#x51FD;&#x6570;&#x5904;&#x7406;" class="headerlink" title="View&#x51FD;&#x6570;&#x5904;&#x7406;"></a>View&#x51FD;&#x6570;&#x5904;&#x7406;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, redirect</div><div class="line"><span class="keyword">from</span> .forms <span class="keyword">import</span> MyForm</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&quot;GET&quot;</span>:</div><div class="line">        obj = MyForm()</div><div class="line">        <span class="keyword">return</span> render(request, <span class="string">&apos;index.html&apos;</span>, {<span class="string">&apos;form&apos;</span>: obj})</div><div class="line">    <span class="keyword">elif</span> request.method == <span class="string">&quot;POST&quot;</span>:</div><div class="line">        obj = MyForm(request.POST, request.FILES)</div><div class="line">        <span class="keyword">if</span> obj.is_valid():</div><div class="line">            values = obj.clean()</div><div class="line">            print(values)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            errors = obj.errors</div><div class="line">            print(errors)</div><div class="line">        <span class="keyword">return</span> render(request, <span class="string">&apos;index.html&apos;</span>, {<span class="string">&apos;form&apos;</span>: obj})</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> redirect(<span class="string">&apos;http://www.google.com&apos;</span>)</div></pre></td></tr></table></figure>
+<h2 id="&#x751F;&#x6210;HTML"><a href="#&#x751F;&#x6210;HTML" class="headerlink" title="&#x751F;&#x6210;HTML"></a>&#x751F;&#x6210;HTML</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ form.user }} {{ form.user.errors }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ form.gender }} {{ form.gender.errors }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ form.city }} {{ form.city.errors }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ form.pwd }} {{ form.pwd.errors }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x5176;&#x4ED6;&#x6807;&#x7B7E;&#x6709;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></div><div class="line">    {% csrf_token %}</div><div class="line">         {{ form.xxoo.label }}</div><div class="line">         {{ form.xxoo.id_for_label }}</div><div class="line">         {{ form.xxoo.label_tag }}</div><div class="line">         {{ form.xxoo.errors }}</div><div class="line">         <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ form.user }} {{ form.user.errors }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="&#x5185;&#x7F6E;&#x5B57;&#x6BB5;"><a href="#&#x5185;&#x7F6E;&#x5B57;&#x6BB5;" class="headerlink" title="&#x5185;&#x7F6E;&#x5B57;&#x6BB5;"></a>&#x5185;&#x7F6E;&#x5B57;&#x6BB5;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div></pre></td><td class="code"><pre><div class="line">Field</div><div class="line">    required=<span class="keyword">True</span>,               &#x662F;&#x5426;&#x5141;&#x8BB8;&#x4E3A;&#x7A7A;</div><div class="line">    widget=<span class="keyword">None</span>,                 HTML&#x63D2;&#x4EF6;</div><div class="line">    label=<span class="keyword">None</span>,                  &#x7528;&#x4E8E;&#x751F;&#x6210;Label&#x6807;&#x7B7E;&#x6216;&#x663E;&#x793A;&#x5185;&#x5BB9;</div><div class="line">    initial=<span class="keyword">None</span>,                &#x521D;&#x59CB;&#x503C;</div><div class="line">    help_text=<span class="string">&apos;&apos;</span>,                &#x5E2E;&#x52A9;&#x4FE1;&#x606F;(&#x5728;&#x6807;&#x7B7E;&#x65C1;&#x8FB9;&#x663E;&#x793A;)</div><div class="line">    error_messages=<span class="keyword">None</span>,         &#x9519;&#x8BEF;&#x4FE1;&#x606F; {<span class="string">&apos;required&apos;</span>: <span class="string">&apos;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&apos;</span>, <span class="string">&apos;invalid&apos;</span>: <span class="string">&apos;&#x683C;&#x5F0F;&#x9519;&#x8BEF;&apos;</span>}</div><div class="line">    show_hidden_initial=<span class="keyword">False</span>,   &#x662F;&#x5426;&#x5728;&#x5F53;&#x524D;&#x63D2;&#x4EF6;&#x540E;&#x9762;&#x518D;&#x52A0;&#x4E00;&#x4E2A;&#x9690;&#x85CF;&#x7684;&#x4E14;&#x5177;&#x6709;&#x9ED8;&#x8BA4;&#x503C;&#x7684;&#x63D2;&#x4EF6;&#xFF08;&#x53EF;&#x7528;&#x4E8E;&#x68C0;&#x9A8C;&#x4E24;&#x6B21;&#x8F93;&#x5165;&#x662F;&#x5426;&#x4E00;&#x76F4;&#xFF09;</div><div class="line">    validators=[],               &#x81EA;&#x5B9A;&#x4E49;&#x9A8C;&#x8BC1;&#x89C4;&#x5219;</div><div class="line">    localize=<span class="keyword">False</span>,              &#x662F;&#x5426;&#x652F;&#x6301;&#x672C;&#x5730;&#x5316;</div><div class="line">    disabled=<span class="keyword">False</span>,              &#x662F;&#x5426;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;</div><div class="line">    label_suffix=<span class="keyword">None</span>            Label&#x5185;&#x5BB9;&#x540E;&#x7F00;</div><div class="line"> </div><div class="line"> </div><div class="line">CharField(Field)</div><div class="line">    max_length=<span class="keyword">None</span>,             &#x6700;&#x5927;&#x957F;&#x5EA6;</div><div class="line">    min_length=<span class="keyword">None</span>,             &#x6700;&#x5C0F;&#x957F;&#x5EA6;</div><div class="line">    strip=<span class="keyword">True</span>                   &#x662F;&#x5426;&#x79FB;&#x9664;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7A7A;&#x767D;</div><div class="line"> </div><div class="line">IntegerField(Field)</div><div class="line">    max_value=<span class="keyword">None</span>,              &#x6700;&#x5927;&#x503C;</div><div class="line">    min_value=<span class="keyword">None</span>,              &#x6700;&#x5C0F;&#x503C;</div><div class="line"> </div><div class="line">FloatField(IntegerField)</div><div class="line">    ...</div><div class="line"> </div><div class="line">DecimalField(IntegerField)</div><div class="line">    max_value=<span class="keyword">None</span>,              &#x6700;&#x5927;&#x503C;</div><div class="line">    min_value=<span class="keyword">None</span>,              &#x6700;&#x5C0F;&#x503C;</div><div class="line">    max_digits=<span class="keyword">None</span>,             &#x603B;&#x957F;&#x5EA6;</div><div class="line">    decimal_places=<span class="keyword">None</span>,         &#x5C0F;&#x6570;&#x4F4D;&#x957F;&#x5EA6;</div><div class="line"> </div><div class="line">BaseTemporalField(Field)</div><div class="line">    input_formats=<span class="keyword">None</span>          &#x65F6;&#x95F4;&#x683C;&#x5F0F;&#x5316;   </div><div class="line"> </div><div class="line">DateField(BaseTemporalField)    &#x683C;&#x5F0F;&#xFF1A;<span class="number">2015</span><span class="number">-09</span><span class="number">-01</span></div><div class="line">TimeField(BaseTemporalField)    &#x683C;&#x5F0F;&#xFF1A;<span class="number">11</span>:<span class="number">12</span></div><div class="line">DateTimeField(BaseTemporalField)&#x683C;&#x5F0F;&#xFF1A;<span class="number">2015</span><span class="number">-09</span><span class="number">-01</span> <span class="number">11</span>:<span class="number">12</span></div><div class="line"> </div><div class="line">DurationField(Field)            &#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF1A;%d %H:%M:%S.%f</div><div class="line">    ...</div><div class="line"> </div><div class="line">RegexField(CharField)</div><div class="line">    regex,                      &#x81EA;&#x5B9A;&#x5236;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</div><div class="line">    max_length=<span class="keyword">None</span>,            &#x6700;&#x5927;&#x957F;&#x5EA6;</div><div class="line">    min_length=<span class="keyword">None</span>,            &#x6700;&#x5C0F;&#x957F;&#x5EA6;</div><div class="line">    error_message=<span class="keyword">None</span>,         &#x5FFD;&#x7565;&#xFF0C;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x4F7F;&#x7528; error_messages={<span class="string">&apos;invalid&apos;</span>: <span class="string">&apos;...&apos;</span>}</div><div class="line"> </div><div class="line">EmailField(CharField)      </div><div class="line">    ...</div><div class="line"> </div><div class="line">FileField(Field)</div><div class="line">    allow_empty_file=<span class="keyword">False</span>     &#x662F;&#x5426;&#x5141;&#x8BB8;&#x7A7A;&#x6587;&#x4EF6;</div><div class="line"> </div><div class="line">ImageField(FileField)      </div><div class="line">    ...</div><div class="line">    &#x6CE8;&#xFF1A;&#x9700;&#x8981;PIL&#x6A21;&#x5757;&#xFF0C;pip3 install Pillow</div><div class="line">    &#x4EE5;&#x4E0A;&#x4E24;&#x4E2A;&#x5B57;&#x5178;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E24;&#x70B9;&#xFF1A;</div><div class="line">        - form&#x8868;&#x5355;&#x4E2D; enctype=<span class="string">&quot;multipart/form-data&quot;</span></div><div class="line">        - view&#x51FD;&#x6570;&#x4E2D; obj = MyForm(request.POST, request.FILES)</div><div class="line"> </div><div class="line">URLField(Field)</div><div class="line">    ...</div><div class="line"> </div><div class="line"> </div><div class="line">BooleanField(Field)  </div><div class="line">    ...</div><div class="line"> </div><div class="line">NullBooleanField(BooleanField)</div><div class="line">    ...</div><div class="line"> </div><div class="line">ChoiceField(Field)</div><div class="line">    ...</div><div class="line">    choices=(),                &#x9009;&#x9879;&#xFF0C;&#x5982;&#xFF1A;choices = ((<span class="number">0</span>,<span class="string">&apos;&#x4E0A;&#x6D77;&apos;</span>),(<span class="number">1</span>,<span class="string">&apos;&#x5317;&#x4EAC;&apos;</span>),)</div><div class="line">    required=<span class="keyword">True</span>,             &#x662F;&#x5426;&#x5FC5;&#x586B;</div><div class="line">    widget=<span class="keyword">None</span>,               &#x63D2;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;select&#x63D2;&#x4EF6;</div><div class="line">    label=<span class="keyword">None</span>,                Label&#x5185;&#x5BB9;</div><div class="line">    initial=<span class="keyword">None</span>,              &#x521D;&#x59CB;&#x503C;</div><div class="line">    help_text=<span class="string">&apos;&apos;</span>,              &#x5E2E;&#x52A9;&#x63D0;&#x793A;</div><div class="line"> </div><div class="line"> </div><div class="line">ModelChoiceField(ChoiceField)</div><div class="line">    ...                        django.forms.models.ModelChoiceField</div><div class="line">    queryset,                  <span class="comment"># &#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;</span></div><div class="line">    empty_label=<span class="string">&quot;---------&quot;</span>,   <span class="comment"># &#x9ED8;&#x8BA4;&#x7A7A;&#x663E;&#x793A;&#x5185;&#x5BB9;</span></div><div class="line">    to_field_name=<span class="keyword">None</span>,        <span class="comment"># HTML&#x4E2D;value&#x7684;&#x503C;&#x5BF9;&#x5E94;&#x7684;&#x5B57;&#x6BB5;</span></div><div class="line">    limit_choices_to=<span class="keyword">None</span>      <span class="comment"># ModelForm&#x4E2D;&#x5BF9;queryset&#x4E8C;&#x6B21;&#x7B5B;&#x9009;</span></div><div class="line">     </div><div class="line">ModelMultipleChoiceField(ModelChoiceField)</div><div class="line">    ...                        django.forms.models.ModelMultipleChoiceField</div><div class="line"> </div><div class="line"> </div><div class="line">     </div><div class="line">TypedChoiceField(ChoiceField)</div><div class="line">    coerce = <span class="keyword">lambda</span> val: val   &#x5BF9;&#x9009;&#x4E2D;&#x7684;&#x503C;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x8F6C;&#x6362;</div><div class="line">    empty_value= <span class="string">&apos;&apos;</span>            &#x7A7A;&#x503C;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</div><div class="line"> </div><div class="line">MultipleChoiceField(ChoiceField)</div><div class="line">    ...</div><div class="line"> </div><div class="line">TypedMultipleChoiceField(MultipleChoiceField)</div><div class="line">    coerce = <span class="keyword">lambda</span> val: val   &#x5BF9;&#x9009;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x503C;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x8F6C;&#x6362;</div><div class="line">    empty_value= <span class="string">&apos;&apos;</span>            &#x7A7A;&#x503C;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</div><div class="line"> </div><div class="line">ComboField(Field)</div><div class="line">    fields=()                  &#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x9A8C;&#x8BC1;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;&#x5373;&#x9A8C;&#x8BC1;&#x6700;&#x5927;&#x957F;&#x5EA6;<span class="number">20</span>&#xFF0C;&#x53C8;&#x9A8C;&#x8BC1;&#x90AE;&#x7BB1;&#x683C;&#x5F0F;</div><div class="line">                               fields.ComboField(fields=[fields.CharField(max_length=<span class="number">20</span>), fields.EmailField(),])</div><div class="line"> </div><div class="line">MultiValueField(Field)</div><div class="line">    PS: &#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5B50;&#x7C7B;&#x4E2D;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x805A;&#x5408;&#x591A;&#x4E2A;&#x5B57;&#x5178;&#x53BB;&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8981;&#x914D;&#x5408;MultiWidget&#x4F7F;&#x7528;</div><div class="line"> </div><div class="line">SplitDateTimeField(MultiValueField)</div><div class="line">    input_date_formats=<span class="keyword">None</span>,   &#x683C;&#x5F0F;&#x5217;&#x8868;&#xFF1A;[<span class="string">&apos;%Y--%m--%d&apos;</span>, <span class="string">&apos;%m%d/%Y&apos;</span>, <span class="string">&apos;%m/%d/%y&apos;</span>]</div><div class="line">    input_time_formats=<span class="keyword">None</span>    &#x683C;&#x5F0F;&#x5217;&#x8868;&#xFF1A;[<span class="string">&apos;%H:%M:%S&apos;</span>, <span class="string">&apos;%H:%M:%S.%f&apos;</span>, <span class="string">&apos;%H:%M&apos;</span>]</div><div class="line"> </div><div class="line">FilePathField(ChoiceField)     &#x6587;&#x4EF6;&#x9009;&#x9879;&#xFF0C;&#x76EE;&#x5F55;&#x4E0B;&#x6587;&#x4EF6;&#x663E;&#x793A;&#x5728;&#x9875;&#x9762;&#x4E2D;</div><div class="line">    path,                      &#x6587;&#x4EF6;&#x5939;&#x8DEF;&#x5F84;</div><div class="line">    match=<span class="keyword">None</span>,                &#x6B63;&#x5219;&#x5339;&#x914D;</div><div class="line">    recursive=<span class="keyword">False</span>,           &#x9012;&#x5F52;&#x4E0B;&#x9762;&#x7684;&#x6587;&#x4EF6;&#x5939;</div><div class="line">    allow_files=<span class="keyword">True</span>,          &#x5141;&#x8BB8;&#x6587;&#x4EF6;</div><div class="line">    allow_folders=<span class="keyword">False</span>,       &#x5141;&#x8BB8;&#x6587;&#x4EF6;&#x5939;</div><div class="line">    required=<span class="keyword">True</span>,</div><div class="line">    widget=<span class="keyword">None</span>,</div><div class="line">    label=<span class="keyword">None</span>,</div><div class="line">    initial=<span class="keyword">None</span>,</div><div class="line">    help_text=<span class="string">&apos;&apos;</span></div><div class="line"> </div><div class="line">GenericIPAddressField</div><div class="line">    protocol=<span class="string">&apos;both&apos;</span>,           both,ipv4,ipv6&#x652F;&#x6301;&#x7684;IP&#x683C;&#x5F0F;</div><div class="line">    unpack_ipv4=<span class="keyword">False</span>          &#x89E3;&#x6790;ipv4&#x5730;&#x5740;&#xFF0C;&#x5982;&#x679C;&#x662F;::ffff:<span class="number">192.0</span><span class="number">.2</span><span class="number">.1</span>&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x89E3;&#x6790;&#x4E3A;<span class="number">192.0</span><span class="number">.2</span><span class="number">.1</span>&#xFF0C; PS&#xFF1A;protocol&#x5FC5;&#x987B;&#x4E3A;both&#x624D;&#x80FD;&#x542F;&#x7528;</div><div class="line"> </div><div class="line">SlugField(CharField)           &#x6570;&#x5B57;&#xFF0C;&#x5B57;&#x6BCD;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x51CF;&#x53F7;&#xFF08;&#x8FDE;&#x5B57;&#x7B26;&#xFF09;</div><div class="line">    ...</div><div class="line"> </div><div class="line">UUIDField(CharField)           uuid&#x7C7B;&#x578B;</div><div class="line">    ...</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x6CE8;&#xFF1A;UUID&#x662F;&#x6839;&#x636E;MAC&#x4EE5;&#x53CA;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x7B49;&#x521B;&#x5EFA;&#x7684;&#x4E0D;&#x91CD;&#x590D;&#x7684;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> uuid</div><div class="line"></div><div class="line"><span class="comment"># make a UUID based on the host ID and current time</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>uuid.uuid1()    <span class="comment"># doctest: +SKIP</span></div><div class="line">UUID(<span class="string">&apos;a8098c1a-f86e-11da-bd1a-00112444be1e&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># make a UUID using an MD5 hash of a namespace UUID and a name</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>uuid.uuid3(uuid.NAMESPACE_DNS, <span class="string">&apos;python.org&apos;</span>)</div><div class="line">UUID(<span class="string">&apos;6fa459ea-ee8a-3ca4-894e-db77e160355e&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># make a random UUID</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>uuid.uuid4()    <span class="comment"># doctest: +SKIP</span></div><div class="line">UUID(<span class="string">&apos;16fd2706-8baf-433b-82eb-8c7fada847da&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># make a UUID using a SHA-1 hash of a namespace UUID and a name</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>uuid.uuid5(uuid.NAMESPACE_DNS, <span class="string">&apos;python.org&apos;</span>)</div><div class="line">UUID(<span class="string">&apos;886313e1-3b8a-5372-9b90-0c9aee199e5d&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># make a UUID from a string of hex digits (braces and hyphens ignored)</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = uuid.UUID(<span class="string">&apos;{00010203-0405-0607-0809-0a0b0c0d0e0f}&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># convert a UUID to a string of hex digits in standard form</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>str(x)</div><div class="line"><span class="string">&apos;00010203-0405-0607-0809-0a0b0c0d0e0f&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># get the raw 16 bytes of the UUID</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x.bytes</div><div class="line"><span class="string">b&apos;\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f&apos;</span></div><div class="line"></div><div class="line"><span class="comment"># make a UUID from a 16-byte string</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>uuid.UUID(bytes=x.bytes)</div><div class="line">UUID(<span class="string">&apos;00010203-0405-0607-0809-0a0b0c0d0e0f&apos;</span>)</div></pre></td></tr></table></figure>
+<h1 id="&#x5185;&#x7F6E;&#x63D2;&#x4EF6;"><a href="#&#x5185;&#x7F6E;&#x63D2;&#x4EF6;" class="headerlink" title="&#x5185;&#x7F6E;&#x63D2;&#x4EF6;"></a>&#x5185;&#x7F6E;&#x63D2;&#x4EF6;</h1><ul>
+<li>TextInput(Input)</li>
+<li>NumberInput(TextInput)</li>
+<li>EmailInput(TextInput)</li>
+<li>URLInput(TextInput)</li>
+<li>PasswordInput(TextInput)</li>
+<li>HiddenInput(TextInput)</li>
+<li>Textarea(Widget)</li>
+<li>DateInput(DateTimeBaseInput)</li>
+<li>DateTimeInput(DateTimeBaseInput)</li>
+<li>TimeInput(DateTimeBaseInput)</li>
+<li>CheckboxInput</li>
+<li>Select</li>
+<li>NullBooleanSelect</li>
+<li>SelectMultiple</li>
+<li>RadioSelect</li>
+<li>CheckboxSelectMultiple</li>
+<li>FileInput</li>
+<li>ClearableFileInput</li>
+<li>MultipleHiddenInput</li>
+<li>SplitDateTimeWidget</li>
+<li>SplitHiddenDateTimeWidget</li>
+<li>SelectDateWidget* </li>
+</ul>
+<h1 id="&#x5E38;&#x7528;&#x9009;&#x62E9;&#x63D2;&#x4EF6;"><a href="#&#x5E38;&#x7528;&#x9009;&#x62E9;&#x63D2;&#x4EF6;" class="headerlink" title="&#x5E38;&#x7528;&#x9009;&#x62E9;&#x63D2;&#x4EF6;"></a>&#x5E38;&#x7528;&#x9009;&#x62E9;&#x63D2;&#x4EF6;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x5355;radio&#xFF0C;&#x503C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line"><span class="comment"># user = fields.CharField(</span></div><div class="line"><span class="comment">#     initial=2,</span></div><div class="line"><span class="comment">#     widget=widgets.RadioSelect(choices=((1,&apos;&#x4E0A;&#x6D77;&apos;),(2,&apos;&#x5317;&#x4EAC;&apos;),))</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x5355;radio&#xFF0C;&#x503C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line"><span class="comment"># user = fields.ChoiceField(</span></div><div class="line"><span class="comment">#     choices=((1, &apos;&#x4E0A;&#x6D77;&apos;), (2, &apos;&#x5317;&#x4EAC;&apos;),),</span></div><div class="line"><span class="comment">#     initial=2,</span></div><div class="line"><span class="comment">#     widget=widgets.RadioSelect</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x5355;select&#xFF0C;&#x503C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line"><span class="comment"># user = fields.CharField(</span></div><div class="line"><span class="comment">#     initial=2,</span></div><div class="line"><span class="comment">#     widget=widgets.Select(choices=((1,&apos;&#x4E0A;&#x6D77;&apos;),(2,&apos;&#x5317;&#x4EAC;&apos;),))</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x5355;select&#xFF0C;&#x503C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line"><span class="comment"># user = fields.ChoiceField(</span></div><div class="line"><span class="comment">#     choices=((1, &apos;&#x4E0A;&#x6D77;&apos;), (2, &apos;&#x5317;&#x4EAC;&apos;),),</span></div><div class="line"><span class="comment">#     initial=2,</span></div><div class="line"><span class="comment">#     widget=widgets.Select</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x591A;&#x9009;select&#xFF0C;&#x503C;&#x4E3A;&#x5217;&#x8868;</span></div><div class="line"><span class="comment"># user = fields.MultipleChoiceField(</span></div><div class="line"><span class="comment">#     choices=((1,&apos;&#x4E0A;&#x6D77;&apos;),(2,&apos;&#x5317;&#x4EAC;&apos;),),</span></div><div class="line"><span class="comment">#     initial=[1,],</span></div><div class="line"><span class="comment">#     widget=widgets.SelectMultiple</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment"># &#x5355;checkbox</span></div><div class="line"><span class="comment"># user = fields.CharField(</span></div><div class="line"><span class="comment">#     widget=widgets.CheckboxInput()</span></div><div class="line"><span class="comment"># )</span></div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment"># &#x591A;&#x9009;checkbox,&#x503C;&#x4E3A;&#x5217;&#x8868;</span></div><div class="line"><span class="comment"># user = fields.MultipleChoiceField(</span></div><div class="line"><span class="comment">#     initial=[2, ],</span></div><div class="line"><span class="comment">#     choices=((1, &apos;&#x4E0A;&#x6D77;&apos;), (2, &apos;&#x5317;&#x4EAC;&apos;),),</span></div><div class="line"><span class="comment">#     widget=widgets.CheckboxSelectMultiple</span></div><div class="line"><span class="comment"># )</span></div></pre></td></tr></table></figure>
+<h1 id="ModelForm&#x7EC4;&#x4EF6;"><a href="#ModelForm&#x7EC4;&#x4EF6;" class="headerlink" title="ModelForm&#x7EC4;&#x4EF6;"></a>ModelForm&#x7EC4;&#x4EF6;</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">a.  class Meta:</div><div class="line">        model,                           # &#x5BF9;&#x5E94;Model&#x7684;</div><div class="line">        fields=None,                     # &#x5B57;&#x6BB5;</div><div class="line">        exclude=None,                    # &#x6392;&#x9664;&#x5B57;&#x6BB5;</div><div class="line">        labels=None,                     # &#x63D0;&#x793A;&#x4FE1;&#x606F;</div><div class="line">        help_texts=None,                 # &#x5E2E;&#x52A9;&#x63D0;&#x793A;&#x4FE1;&#x606F;</div><div class="line">        widgets=None,                    # &#x81EA;&#x5B9A;&#x4E49;&#x63D2;&#x4EF6;</div><div class="line">        error_messages=None,             # &#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF08;&#x6574;&#x4F53;&#x9519;&#x8BEF;&#x4FE1;&#x606F;from django.core.exceptions import NON_FIELD_ERRORS&#xFF09;</div><div class="line">        field_classes=None               # &#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;&#x7C7B; &#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;&#xFF09;</div><div class="line">        localized_fields=(&apos;birth_date&apos;,) # &#x672C;&#x5730;&#x5316;&#xFF0C;&#x5982;&#xFF1A;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x65F6;&#x533A;&#x663E;&#x793A;&#x6570;&#x636E;</div><div class="line">        &#x5982;&#xFF1A;</div><div class="line">            &#x6570;&#x636E;&#x5E93;&#x4E2D;</div><div class="line">                2016-12-27 04:10:57</div><div class="line">            setting&#x4E2D;&#x7684;&#x914D;&#x7F6E;</div><div class="line">                TIME_ZONE = &apos;Asia/Shanghai&apos;</div><div class="line">                USE_TZ = True</div><div class="line">            &#x5219;&#x663E;&#x793A;&#xFF1A;</div><div class="line">                2016-12-27 12:10:57</div><div class="line">b. &#x9A8C;&#x8BC1;&#x6267;&#x884C;&#x8FC7;&#x7A0B;</div><div class="line">    is_valid -&gt; full_clean -&gt; &#x94A9;&#x5B50; -&gt; &#x6574;&#x4F53;&#x9519;&#x8BEF;</div><div class="line"></div><div class="line">c. &#x5B57;&#x5178;&#x5B57;&#x6BB5;&#x9A8C;&#x8BC1;</div><div class="line">    def clean_&#x5B57;&#x6BB5;&#x540D;(self):</div><div class="line">        # &#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x5F02;&#x5E38;</div><div class="line">        # from django.core.exceptions import ValidationError</div><div class="line">        return &quot;&#x65B0;&#x503C;&quot;</div><div class="line">d. &#x7528;&#x4E8E;&#x9A8C;&#x8BC1;</div><div class="line">    model_form_obj = XXOOModelForm()</div><div class="line">    model_form_obj.is_valid()</div><div class="line">    model_form_obj.errors.as_json()</div><div class="line">    model_form_obj.clean()</div><div class="line">    model_form_obj.cleaned_data</div><div class="line">e. &#x7528;&#x4E8E;&#x521B;&#x5EFA;</div><div class="line">    model_form_obj = XXOOModelForm(request.POST)</div><div class="line">    #### &#x9875;&#x9762;&#x663E;&#x793A;&#xFF0C;&#x5E76;&#x63D0;&#x4EA4; #####</div><div class="line">    # &#x9ED8;&#x8BA4;&#x4FDD;&#x5B58;&#x591A;&#x5BF9;&#x591A;</div><div class="line">        obj = form.save(commit=True)</div><div class="line">    # &#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#xFF0C;&#x5185;&#x90E8;&#x5B9A;&#x4E49; save_m2m&#xFF08;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x591A;&#x5BF9;&#x591A;&#xFF09;</div><div class="line">        obj = form.save(commit=False)</div><div class="line">        obj.save()      # &#x4FDD;&#x5B58;&#x5355;&#x8868;&#x4FE1;&#x606F;</div><div class="line">        obj.save_m2m()  # &#x4FDD;&#x5B58;&#x5173;&#x8054;&#x591A;&#x5BF9;&#x591A;&#x4FE1;&#x606F;</div><div class="line"></div><div class="line">f. &#x7528;&#x4E8E;&#x66F4;&#x65B0;&#x548C;&#x521D;&#x59CB;&#x5316;</div><div class="line">    obj = model.tb.objects.get(id=1)</div><div class="line">    model_form_obj = XXOOModelForm(request.POST,instance=obj)</div><div class="line">    ...</div><div class="line"></div><div class="line">    PS: &#x5355;&#x7EAF;&#x521D;&#x59CB;&#x5316;</div><div class="line">        model_form_obj = XXOOModelForm(initial={...})</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/29/python-django-model/" rel="next" title="Django框架Model">
+                <i class="fa fa-chevron-left"></i> Django框架Model
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/30/python-this/" rel="prev" title="Python之禅">
+                Python之禅 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Form类"><span class="nav-number">2.1.</span> <span class="nav-text">创建Form类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View函数处理"><span class="nav-number">2.2.</span> <span class="nav-text">View函数处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成HTML"><span class="nav-number">2.3.</span> <span class="nav-text">生成HTML</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内置字段"><span class="nav-number">3.</span> <span class="nav-text">内置字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内置插件"><span class="nav-number">4.</span> <span class="nav-text">内置插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用选择插件"><span class="nav-number">5.</span> <span class="nav-text">常用选择插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ModelForm组件"><span class="nav-number">6.</span> <span class="nav-text">ModelForm组件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

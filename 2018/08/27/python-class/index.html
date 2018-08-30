@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x4E00;&amp;#x4E9B;&amp;#x7C7B;&amp;#x3001;&amp;#x9762;&amp;#x5411;&amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;
+&amp;#x7C7B;&amp;#x7684;&amp;#x5185;&amp;#x7F6E;&amp;#x65B9;&amp;#x6CD5;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python类">
+<meta property="og:url" content="http://c.isme.pub/2018/08/27/python-class/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x4E00;&amp;#x4E9B;&amp;#x7C7B;&amp;#x3001;&amp;#x9762;&amp;#x5411;&amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;
+&amp;#x7C7B;&amp;#x7684;&amp;#x5185;&amp;#x7F6E;&amp;#x65B9;&amp;#x6CD5;">
+<meta property="og:updated_time" content="2018-08-27T03:23:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python类">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+&amp;#x4E00;&amp;#x4E9B;&amp;#x7C7B;&amp;#x3001;&amp;#x9762;&amp;#x5411;&amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;
+&amp;#x7C7B;&amp;#x7684;&amp;#x5185;&amp;#x7F6E;&amp;#x65B9;&amp;#x6CD5;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/27/python-class/"/>
+
+
+
+
+
+  <title>python类 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/27/python-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T11:23:56+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-27T11:23:56+08:00">
+                2018-08-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><ul>
+<li>&#x4E00;&#x4E9B;&#x7C7B;&#x3001;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</li>
+<li>&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;</li>
+</ul>
+<a id="more"></a>
+<h1 id="&#x6269;&#x5C55;"><a href="#&#x6269;&#x5C55;" class="headerlink" title="&#x6269;&#x5C55;"></a>&#x6269;&#x5C55;</h1><p>&#x901A;&#x8FC7;importlib&#x548C;&#x53CD;&#x5C04;&#x5B9E;&#x73B0;&#x7528;&#x591A;&#x4E2A;&#x8DEF;&#x5F84;&#x52A0;&#x8F7D;&#x7C7B;&#x5E76;&#x6267;&#x884C;&#xFF0C;&#x53EF;&#x6269;&#x5C55;&#x6027;&#x5F3A;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">###########</span></div><div class="line">MSG_LIST = [</div><div class="line">    <span class="string">&apos;utils.message.email.Email&apos;</span>,</div><div class="line">    <span class="string">&apos;utils.message.msg.Msg&apos;</span>,</div><div class="line">]</div><div class="line"><span class="comment">###########</span></div><div class="line"><span class="keyword">import</span> settings</div><div class="line"><span class="keyword">import</span> importlib</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_msg</span><span class="params">(msg)</span>:</span></div><div class="line">    <span class="keyword">for</span> path <span class="keyword">in</span> settings.MSG_LIST:</div><div class="line">        m, c = path.rsplit(<span class="string">&apos;.&apos;</span>, maxsplit=<span class="number">1</span>)</div><div class="line">        md = importlib.import_module(m)</div><div class="line">        obj = getattr(md, c)()</div><div class="line">        obj.send(msg)</div></pre></td></tr></table></figure>
+<p>&#x7528;&#x88C5;&#x9970;&#x5668;&#x88C5;&#x9970;&#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x628A;&#x88C5;&#x9970;&#x5668;&#x653E;&#x5728;&#x8DEF;&#x7531;&#x4E0B;&#x9762;&#xFF0C;&#x6B64;&#x65F6;&#x5982;&#x679C;&#x6CA1;&#x8BBE;&#x7F6E;endpoint&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;endpoint&#x662F;&#x88C5;&#x9970;&#x5668;&#x91CC;&#x9762;&#x7684;inner&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x662F;endpoint&#x4E0D;&#x80FD;&#x51B2;&#x7A81;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x6B64;&#x65F6;&#x4F1A;&#x62A5;&#x9519;</p>
+<ul>
+<li>&#x53EF;&#x4EE5;&#x6240;&#x6709;&#x8DEF;&#x7531;&#x8BBE;&#x7F6E;endpoint&#x6765;&#x89E3;&#x51B3;</li>
+<li>&#x53EF;&#x4EE5;&#x7ED9;&#x88C5;&#x9970;&#x5668;&#x52A0;@wraps()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_login</span><span class="params">(func)</span>:</span></div><div class="line">	<span class="comment"># &#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x8BBE;&#x7F6E;&#x51FD;&#x6570;&#x7684;&#x5143;&#x4FE1;&#x606F;</span></div><div class="line"><span class="meta">    @wraps(func)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&quot;after&quot;</span>)</div><div class="line">        res = func(*args, **kwargs)</div><div class="line">        print(<span class="string">&quot;sss&quot;</span>)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line">    <span class="keyword">return</span> inner</div></pre></td></tr></table></figure>
+<h1 id="&#x504F;&#x51FD;&#x6570;"><a href="#&#x504F;&#x51FD;&#x6570;" class="headerlink" title="&#x504F;&#x51FD;&#x6570;"></a>&#x504F;&#x51FD;&#x6570;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> functools</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a1,a2)</span>:</span></div><div class="line">    print(a1,a2)</div><div class="line">    </div><div class="line">new_func = functools.partial(func,<span class="number">666</span>)</div><div class="line"></div><div class="line">new_func(<span class="number">999</span>)</div></pre></td></tr></table></figure>
+<h1 id="&#x9762;&#x5411;&#x5BF9;&#x8C61;"><a href="#&#x9762;&#x5411;&#x5BF9;&#x8C61;" class="headerlink" title="&#x9762;&#x5411;&#x5BF9;&#x8C61;"></a>&#x9762;&#x5411;&#x5BF9;&#x8C61;</h1><p>&#x5F53;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x4E2D;&#x591A;&#x6709;<strong>&#x51FD;&#x6570;</strong>&#x5B9E;&#x73B0;&#x65F6;&#xFF0C;&#x5BF9;&#x8C61;&#x505A;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x6267;&#x884C;&#x5176;&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num)</span>:</span></div><div class="line">        self.num = num</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></div><div class="line">        data = self.num + other.num</div><div class="line">        <span class="keyword">return</span> Foo(data)</div><div class="line">    </div><div class="line">obj1 = Foo(<span class="number">11</span>)</div><div class="line">obj2 = Foo(<span class="number">22</span>)</div><div class="line"></div><div class="line">v = obj1 + obj2</div></pre></td></tr></table></figure>
+<h1 id="&#x51FD;&#x6570;&#x5217;&#x8868;"><a href="#&#x51FD;&#x6570;&#x5217;&#x8868;" class="headerlink" title="&#x51FD;&#x6570;&#x5217;&#x8868;"></a>&#x51FD;&#x6570;&#x5217;&#x8868;</h1><p>&#x62FC;&#x63A5;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x503C;&#x3001;&#x7C7B;&#x4F3C;&#x94FE;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</div><div class="line"></div><div class="line">v1 = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>]</div><div class="line">v2 = [<span class="number">44</span>,<span class="number">55</span>,<span class="number">66</span>]</div><div class="line"></div><div class="line">v = chain(v1,v2)</div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> v:</div><div class="line">    print(item)</div><div class="line"></div><div class="line"><span class="comment">########$</span></div><div class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> x + <span class="number">1</span></div><div class="line"></div><div class="line">func1_list = [f1, <span class="keyword">lambda</span> x:x<span class="number">-1</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> x + <span class="number">10</span></div><div class="line"></div><div class="line">new_func_list = chain([f2,],func1_list)</div><div class="line"></div><div class="line"><span class="keyword">for</span> func <span class="keyword">in</span> new_func_list:</div><div class="line">    print(func)</div></pre></td></tr></table></figure>
+<h1 id="&#x79C1;&#x6709;&#x5B57;&#x6BB5;"><a href="#&#x79C1;&#x6709;&#x5B57;&#x6BB5;" class="headerlink" title="&#x79C1;&#x6709;&#x5B57;&#x6BB5;"></a>&#x79C1;&#x6709;&#x5B57;&#x6BB5;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.name = <span class="string">&quot;xxx&quot;</span></div><div class="line">        self.__age = <span class="number">18</span></div><div class="line">        </div><div class="line">obj = Foo()</div><div class="line">print(obj.name)</div><div class="line">print(obj._Foo__age)</div><div class="line"></div><div class="line"><span class="comment"># &#x5982;&#x679C;&#x5199;&#x4E86;__setattr__&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x6CD5;</span></div><div class="line">object.__setattr__(self, <span class="string">&apos;_Foo__age&apos;</span>,<span class="number">20</span>)</div></pre></td></tr></table></figure>
+<h1 id="with"><a href="#with" class="headerlink" title="with"></a>with</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">with</span> Foo() <span class="keyword">as</span> obj:</div><div class="line"><span class="comment"># &#x81EA;&#x52A8;&#x8C03;&#x7528;&#x7C7B;&#x4E2D;&#x7684;__enter__&#x65B9;&#x6CD5;&#xFF0C;obj&#x5C31;&#x662F;__enter__&#x7684;&#x8FD4;&#x56DE;&#x503C;</span></div><div class="line"><span class="comment"># &#x5F53;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x81EA;&#x52A8;&#x8C03;&#x7528;&#x7C7B;&#x7684;__exit__&#x65B9;&#x6CD5;</span></div></pre></td></tr></table></figure>
+<h1 id="all"><a href="#all" class="headerlink" title="all"></a>all</h1><p>&#x4E00;&#x4E2A;py&#x6587;&#x4EF6;&#x5982;&#x679C;&#x6709;all&#xFF0C;&#x5C31;&#x53EA;&#x80FD;&#x5BFC;&#x5165;&#x91CC;&#x9762;&#x6307;&#x5B9A;&#x7684;&#x65B9;&#x6CD5;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__all__ = [<span class="string">&apos;abc&apos;</span>]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x9700;&#x8981;&#x5355;&#x72EC;&#x6574;&#x7406;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;&#x8BE6;&#x89E3;<br>&#x81EA;&#x5B9A;&#x4E49;&#x6808;&#x3001;&#x5806;</p>
+</blockquote>
+<h1 id="&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;"><a href="#&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;" class="headerlink" title="&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;"></a>&#x7C7B;&#x7684;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">__str__ print(obj)&#x7684;&#x65F6;&#x5019;&#x6267;&#x884C;</div><div class="line">__repr__ &#x6CA1;&#x6709;str&#x627E;repr</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@implements_bool</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LocalProxy</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    __slots__ = (<span class="string">&apos;__local&apos;</span>, <span class="string">&apos;__dict__&apos;</span>, <span class="string">&apos;__name__&apos;</span>, <span class="string">&apos;__wrapped__&apos;</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, local, name=None)</span>:</span></div><div class="line">        object.__setattr__(self, <span class="string">&apos;_LocalProxy__local&apos;</span>, local)</div><div class="line">        object.__setattr__(self, <span class="string">&apos;__name__&apos;</span>, name)</div><div class="line">        <span class="keyword">if</span> callable(local) <span class="keyword">and</span> <span class="keyword">not</span> hasattr(local, <span class="string">&apos;__release_local__&apos;</span>):</div><div class="line">            <span class="comment"># &quot;local&quot; is a callable that is not an instance of Local or</span></div><div class="line">            <span class="comment"># LocalManager: mark it as a wrapped function.</span></div><div class="line">            object.__setattr__(self, <span class="string">&apos;__wrapped__&apos;</span>, local)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_current_object</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;Return the current object.  This is useful if you want the real</span></div><div class="line">        object behind the proxy at a time for performance reasons or because</div><div class="line">        you want to pass the object into a different context.</div><div class="line">        &quot;&quot;&quot;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self.__local, <span class="string">&apos;__release_local__&apos;</span>):</div><div class="line">            <span class="keyword">return</span> self.__local()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> getattr(self.__local, self.__name__)</div><div class="line">        <span class="keyword">except</span> AttributeError:</div><div class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&apos;no object bound to %s&apos;</span> % self.__name__)</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__dict__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> self._get_current_object().__dict__</div><div class="line">        <span class="keyword">except</span> RuntimeError:</div><div class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">&apos;__dict__&apos;</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            obj = self._get_current_object()</div><div class="line">        <span class="keyword">except</span> RuntimeError:</div><div class="line">            <span class="keyword">return</span> <span class="string">&apos;&lt;%s unbound&gt;&apos;</span> % self.__class__.__name__</div><div class="line">        <span class="keyword">return</span> repr(obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> bool(self._get_current_object())</div><div class="line">        <span class="keyword">except</span> RuntimeError:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__unicode__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> unicode(self._get_current_object())  <span class="comment"># noqa</span></div><div class="line">        <span class="keyword">except</span> RuntimeError:</div><div class="line">            <span class="keyword">return</span> repr(self)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__dir__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> dir(self._get_current_object())</div><div class="line">        <span class="keyword">except</span> RuntimeError:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">if</span> name == <span class="string">&apos;__members__&apos;</span>:</div><div class="line">            <span class="keyword">return</span> dir(self._get_current_object())</div><div class="line">        <span class="keyword">return</span> getattr(self._get_current_object(), name)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        self._get_current_object()[key] = value</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">del</span> self._get_current_object()[key]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> PY2:</div><div class="line">        __getslice__ = <span class="keyword">lambda</span> x, i, j: x._get_current_object()[i:j]</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__setslice__</span><span class="params">(self, i, j, seq)</span>:</span></div><div class="line">            self._get_current_object()[i:j] = seq</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__delslice__</span><span class="params">(self, i, j)</span>:</span></div><div class="line">            <span class="keyword">del</span> self._get_current_object()[i:j]</div><div class="line"></div><div class="line">    __setattr__ = <span class="keyword">lambda</span> x, n, v: setattr(x._get_current_object(), n, v)</div><div class="line">    __delattr__ = <span class="keyword">lambda</span> x, n: delattr(x._get_current_object(), n)</div><div class="line">    __str__ = <span class="keyword">lambda</span> x: str(x._get_current_object())</div><div class="line">    __lt__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &lt; o</div><div class="line">    __le__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &lt;= o</div><div class="line">    __eq__ = <span class="keyword">lambda</span> x, o: x._get_current_object() == o</div><div class="line">    __ne__ = <span class="keyword">lambda</span> x, o: x._get_current_object() != o</div><div class="line">    __gt__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &gt; o</div><div class="line">    __ge__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &gt;= o</div><div class="line">    __cmp__ = <span class="keyword">lambda</span> x, o: cmp(x._get_current_object(), o)  <span class="comment"># noqa</span></div><div class="line">    __hash__ = <span class="keyword">lambda</span> x: hash(x._get_current_object())</div><div class="line">    __call__ = <span class="keyword">lambda</span> x, *a, **kw: x._get_current_object()(*a, **kw)</div><div class="line">    __len__ = <span class="keyword">lambda</span> x: len(x._get_current_object())</div><div class="line">    __getitem__ = <span class="keyword">lambda</span> x, i: x._get_current_object()[i]</div><div class="line">    __iter__ = <span class="keyword">lambda</span> x: iter(x._get_current_object())</div><div class="line">    __contains__ = <span class="keyword">lambda</span> x, i: i <span class="keyword">in</span> x._get_current_object()</div><div class="line">    __add__ = <span class="keyword">lambda</span> x, o: x._get_current_object() + o</div><div class="line">    __sub__ = <span class="keyword">lambda</span> x, o: x._get_current_object() - o</div><div class="line">    __mul__ = <span class="keyword">lambda</span> x, o: x._get_current_object() * o</div><div class="line">    __floordiv__ = <span class="keyword">lambda</span> x, o: x._get_current_object() // o</div><div class="line">    __mod__ = <span class="keyword">lambda</span> x, o: x._get_current_object() % o</div><div class="line">    __divmod__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__divmod__(o)</div><div class="line">    __pow__ = <span class="keyword">lambda</span> x, o: x._get_current_object() ** o</div><div class="line">    __lshift__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &lt;&lt; o</div><div class="line">    __rshift__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &gt;&gt; o</div><div class="line">    __and__ = <span class="keyword">lambda</span> x, o: x._get_current_object() &amp; o</div><div class="line">    __xor__ = <span class="keyword">lambda</span> x, o: x._get_current_object() ^ o</div><div class="line">    __or__ = <span class="keyword">lambda</span> x, o: x._get_current_object() | o</div><div class="line">    __div__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__div__(o)</div><div class="line">    __truediv__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__truediv__(o)</div><div class="line">    __neg__ = <span class="keyword">lambda</span> x: -(x._get_current_object())</div><div class="line">    __pos__ = <span class="keyword">lambda</span> x: +(x._get_current_object())</div><div class="line">    __abs__ = <span class="keyword">lambda</span> x: abs(x._get_current_object())</div><div class="line">    __invert__ = <span class="keyword">lambda</span> x: ~(x._get_current_object())</div><div class="line">    __complex__ = <span class="keyword">lambda</span> x: complex(x._get_current_object())</div><div class="line">    __int__ = <span class="keyword">lambda</span> x: int(x._get_current_object())</div><div class="line">    __long__ = <span class="keyword">lambda</span> x: long(x._get_current_object())  <span class="comment"># noqa</span></div><div class="line">    __float__ = <span class="keyword">lambda</span> x: float(x._get_current_object())</div><div class="line">    __oct__ = <span class="keyword">lambda</span> x: oct(x._get_current_object())</div><div class="line">    __hex__ = <span class="keyword">lambda</span> x: hex(x._get_current_object())</div><div class="line">    __index__ = <span class="keyword">lambda</span> x: x._get_current_object().__index__()</div><div class="line">    __coerce__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__coerce__(x, o)</div><div class="line">    __enter__ = <span class="keyword">lambda</span> x: x._get_current_object().__enter__()</div><div class="line">    __exit__ = <span class="keyword">lambda</span> x, *a, **kw: x._get_current_object().__exit__(*a, **kw)</div><div class="line">    __radd__ = <span class="keyword">lambda</span> x, o: o + x._get_current_object()</div><div class="line">    __rsub__ = <span class="keyword">lambda</span> x, o: o - x._get_current_object()</div><div class="line">    __rmul__ = <span class="keyword">lambda</span> x, o: o * x._get_current_object()</div><div class="line">    __rdiv__ = <span class="keyword">lambda</span> x, o: o / x._get_current_object()</div><div class="line">    <span class="keyword">if</span> PY2:</div><div class="line">        __rtruediv__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__rtruediv__(o)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        __rtruediv__ = __rdiv__</div><div class="line">    __rfloordiv__ = <span class="keyword">lambda</span> x, o: o // x._get_current_object()</div><div class="line">    __rmod__ = <span class="keyword">lambda</span> x, o: o % x._get_current_object()</div><div class="line">    __rdivmod__ = <span class="keyword">lambda</span> x, o: x._get_current_object().__rdivmod__(o)</div><div class="line">    __copy__ = <span class="keyword">lambda</span> x: copy.copy(x._get_current_object())</div><div class="line">    __deepcopy__ = <span class="keyword">lambda</span> x, memo: copy.deepcopy(x._get_current_object(), memo)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/25/python-dbutils/" rel="next" title="python-数据库连接池">
+                <i class="fa fa-chevron-left"></i> python-数据库连接池
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/python-flask-extend/" rel="prev" title="Flask框架扩展">
+                Flask框架扩展 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">2.</span> <span class="nav-text">扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#偏函数"><span class="nav-number">3.</span> <span class="nav-text">偏函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象"><span class="nav-number">4.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数列表"><span class="nav-number">5.</span> <span class="nav-text">函数列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#私有字段"><span class="nav-number">6.</span> <span class="nav-text">私有字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#with"><span class="nav-number">7.</span> <span class="nav-text">with</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#all"><span class="nav-number">8.</span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的内置方法"><span class="nav-number">9.</span> <span class="nav-text">类的内置方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

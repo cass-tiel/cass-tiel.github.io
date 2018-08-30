@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,uwsgi," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x8FD0;&amp;#x884C;&amp;#x4F9D;&amp;#x8D56;wsgi&amp;#xFF08;&amp;#x672C;&amp;#x8D28;&amp;#x63D0;&amp;#x4F9B;socket&amp;#x670D;&amp;#x52A1;&amp;#x7AEF;&amp;#xFF09;&amp;#xFF0C;&amp;#x4F17;&amp;#x591A;&amp;#x6A21;&amp;#x5757;&amp;#x5B9E;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uwsgi部署">
+<meta property="og:url" content="http://c.isme.pub/2018/08/27/python-uwsgi/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x8FD0;&amp;#x884C;&amp;#x4F9D;&amp;#x8D56;wsgi&amp;#xFF08;&amp;#x672C;&amp;#x8D28;&amp;#x63D0;&amp;#x4F9B;socket&amp;#x670D;&amp;#x52A1;&amp;#x7AEF;&amp;#xFF09;&amp;#xFF0C;&amp;#x4F17;&amp;#x591A;&amp;#x6A21;&amp;#x5757;&amp;#x5B9E;">
+<meta property="og:updated_time" content="2018-08-27T04:09:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="uwsgi部署">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x8FD0;&amp;#x884C;&amp;#x4F9D;&amp;#x8D56;wsgi&amp;#xFF08;&amp;#x672C;&amp;#x8D28;&amp;#x63D0;&amp;#x4F9B;socket&amp;#x670D;&amp;#x52A1;&amp;#x7AEF;&amp;#xFF09;&amp;#xFF0C;&amp;#x4F17;&amp;#x591A;&amp;#x6A21;&amp;#x5757;&amp;#x5B9E;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/27/python-uwsgi/"/>
+
+
+
+
+
+  <title>uwsgi部署 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/27/python-uwsgi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">uwsgi部署</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T12:09:47+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-27T12:09:47+08:00">
+                2018-08-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/uwsgi/" itemprop="url" rel="index">
+                    <span itemprop="name">uwsgi</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Django&#x6846;&#x67B6;&#x8FD0;&#x884C;&#x4F9D;&#x8D56;wsgi&#xFF08;&#x672C;&#x8D28;&#x63D0;&#x4F9B;socket&#x670D;&#x52A1;&#x7AEF;&#xFF09;&#xFF0C;&#x4F17;&#x591A;&#x6A21;&#x5757;&#x5B9E;&#x73B0;&#x4E86;wsgi&#x89C4;&#x8303;&#xFF0C;&#x800C;django&#x6846;&#x67B6;&#x4E2D;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;wsigiref&#x6A21;&#x5757;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x4ED6;&#x7531;&#x4E8E;&#x6027;&#x80FD;&#x6BD4;&#x8F83;&#x4F4E;&#xFF0C;&#x6240;&#x4EE5;&#x7528;&#x4E8E;&#x672C;&#x5730;&#x5F00;&#x53D1;&#x548C;&#x6D4B;&#x8BD5;&#xFF0C;&#x800C;&#x7EBF;&#x4E0A;&#x90E8;&#x7F72;&#x65F6;&#x9700;&#x8981;&#x4F7F;&#x7528;uwsgi&#x6765;&#x4EE3;&#x66FF;&#x3002;</p>
+<a id="more"></a>
+<h1 id="uwsgi"><a href="#uwsgi" class="headerlink" title="uwsgi"></a>uwsgi</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x9700;&#x8981;&#x5148;&#x5B89;&#x88C5;&#xFF1A;yum install python-devel</span></div><div class="line">pip3 install uwsgi</div></pre></td></tr></table></figure>
+<h2 id="&#x5355;&#x6587;&#x4EF6;&#x4F7F;&#x7528;"><a href="#&#x5355;&#x6587;&#x4EF6;&#x4F7F;&#x7528;" class="headerlink" title="&#x5355;&#x6587;&#x4EF6;&#x4F7F;&#x7528;"></a>&#x5355;&#x6587;&#x4EF6;&#x4F7F;&#x7528;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></div><div class="line">    start_response(<span class="string">&apos;200 OK&apos;</span>, [(<span class="string">&apos;Content-Type&apos;</span>,<span class="string">&apos;text/html&apos;</span>)])</div><div class="line">    <span class="keyword">return</span> [<span class="string">b&quot;Hello World&quot;</span>]</div></pre></td></tr></table></figure>
+<p>&#x542F;&#x52A8;Web&#x670D;&#x52A1;&#x5668;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uwsgi --http :9001 --wsgi-file app.py</div><div class="line"><span class="comment"># &#x6216;</span></div><div class="line">uwsgi --http :9002 --wsgi-file foobar.py --master --processes 4</div></pre></td></tr></table></figure>
+<blockquote>
+<p>PS: flask&#x9700;&#x8981;&#x518D;&#x52A0; &#x2013;callable app</p>
+</blockquote>
+<h2 id="django&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;uwsgi"><a href="#django&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;uwsgi" class="headerlink" title="django&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;uwsgi"></a>django&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;uwsgi</h2><p>&#x5C06;&#x5F00;&#x53D1;&#x597D;&#x7684;django&#x7A0B;&#x5E8F;&#x62F7;&#x8D1D;&#x5230;&#x670D;&#x52A1;&#x5668;&#x76EE;&#x5F55;&#x3010;&#x540C;&#x793A;&#x4F8B;&#x4E00;&#x3011;&#xFF0C;&#x5373;&#xFF1A;/data/oldboy &#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x542F;&#x52A8;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uwsgi --http :9005 --chdir /data/xxx/ --wsgi-file xxx/wsgi.py --master --processes 4</div></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;"><a href="#&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;" class="headerlink" title="&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;"></a>&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;</h2><h3 id="&#x521B;&#x5EFA;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-oldboy-ini"><a href="#&#x521B;&#x5EFA;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-oldboy-ini" class="headerlink" title="&#x521B;&#x5EFA;&#x914D;&#x7F6E;&#x6587;&#x4EF6; oldboy.ini"></a>&#x521B;&#x5EFA;&#x914D;&#x7F6E;&#x6587;&#x4EF6; oldboy.ini</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[uwsgi]</div><div class="line">http = 0.0.0.0:9005</div><div class="line"><span class="built_in">chdir</span> = /data/xxx/</div><div class="line">wsgi-file = xxx/wsgi.py</div><div class="line">processes = 4</div><div class="line">static-map = /static=/data/xxx/allstatic</div></pre></td></tr></table></figure>
+<h3 id="&#x6839;&#x636E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;uwsgi"><a href="#&#x6839;&#x636E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;uwsgi" class="headerlink" title="&#x6839;&#x636E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;uwsgi"></a>&#x6839;&#x636E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;uwsgi</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uwsigi --ini  xxx.ini</div></pre></td></tr></table></figure>
+<blockquote>
+<p>PS: &#x5982;&#x679C;&#x6709;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4E0A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x8DEF;&#x5F84;&#x914D;&#x7F6E;&#xFF1A; virtualenv = /env/xxx_venv</p>
+</blockquote>
+<p>&#x6B64;&#x65F6;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x627E;&#x4E0D;&#x5230;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
+<p>&#x60F3;&#x8981;uwsgi&#x5904;&#x7406;&#x9759;&#x6001;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5C06;django&#x7684;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x6536;&#x96C6;&#x5230;&#x5236;&#x5B9A;&#x76EE;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8BBE;&#x7F6E;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x3002;</p>
+<ul>
+<li>&#x6536;&#x96C6;django&#x9759;&#x6001;&#x6587;&#x4EF6;<ul>
+<li>&#x5728;django&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#xFF1A;STATIC_ROOT = os.path.join(BASE_DIR,&#x201D;allstatic&#x201D;)</li>
+<li>&#x6267;&#x884C; python3 manage.py collectstatic &#x547D;&#x4EE4;&#xFF0C;&#x81F3;&#x6B64;django&#x9879;&#x76EE;&#x6240;&#x6709;&#x76F8;&#x5173;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x90FD;&#x4F1A;&#x6536;&#x96C6;&#x5230;&#x5236;&#x5B9A;&#x76EE;&#x5F55;&#x3002;</li>
+</ul>
+</li>
+<li>&#x8BBE;&#x7F6E;uwsgi&#x9759;&#x6001;&#x6587;&#x4EF6;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;<ul>
+<li>uwsgi &#x2013;http :9005 &#x2013;chdir /data/xxx/ &#x2013;wsgi-file xxx/wsgi.py &#x2013;master &#x2013;processes 4 &#x2013;static-map /static=/data/xxx/allstatic</li>
+</ul>
+</li>
+</ul>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p>&#x5229;&#x7528;Nginx&#x505A;&#x53CD;&#x5411;&#x4EE3;&#x7406;&#x3001;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x4EE5;&#x53CA;&#x5904;&#x7406;&#x9759;&#x6001;&#x6587;&#x4EF6;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">user root;</div><div class="line">worker_processes 4;</div><div class="line"></div><div class="line">error_log /var/<span class="built_in">log</span>/nginx/error.log;</div><div class="line">pid /var/run/nginx.pid;</div><div class="line"></div><div class="line">events {</div><div class="line">    worker_connections  1024;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">http {</div><div class="line">    log_format  main  <span class="string">&apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span></div><div class="line">                      <span class="string">&apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span></div><div class="line">                      <span class="string">&apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;</span>;</div><div class="line"></div><div class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log  main;</div><div class="line"></div><div class="line">    sendfile            on;</div><div class="line">    tcp_nopush          on;</div><div class="line">    tcp_nodelay         on;</div><div class="line">    keepalive_timeout   65;</div><div class="line"></div><div class="line">    include             /etc/nginx/mime.types;</div><div class="line">    default_type        application/octet-stream;</div><div class="line"></div><div class="line">    upstream django {</div><div class="line">        server 127.0.0.1:8001; </div><div class="line">        <span class="comment"># server 192.1.123.1; </span></div><div class="line">    }</div><div class="line">    server {</div><div class="line">        listen      80;</div><div class="line"></div><div class="line">        charset     utf-8;</div><div class="line"></div><div class="line">        <span class="comment"># max upload size</span></div><div class="line">        client_max_body_size 75M;</div><div class="line"></div><div class="line">        location /static {</div><div class="line">            <span class="built_in">alias</span>  /data/oldboy/allstatic; </div><div class="line">        }</div><div class="line"></div><div class="line">        location / {</div><div class="line">            uwsgi_pass  django;</div><div class="line">            include     uwsgi_params;</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x786E;&#x4FDD;nginx&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x4E0B;&#x6709;uwsgi_params&#x6587;&#x4EF6;&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;</p>
+</blockquote>
+<h3 id="&#x914D;&#x7F6E;uwsgi"><a href="#&#x914D;&#x7F6E;uwsgi" class="headerlink" title="&#x914D;&#x7F6E;uwsgi"></a>&#x914D;&#x7F6E;uwsgi</h3><p>&#x4E3A;&#x4E86;&#x786E;&#x4FDD;&#x8BA9;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#x5747;&#x901A;&#x8FC7;80&#x7AEF;&#x53E3;&#x6765;&#x8BBF;&#x95EE;&#x7F51;&#x7AD9;&#xFF0C;&#x5C06;uwsgi&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[uwsgi]</div><div class="line">socket = 127.0.0.1:9005</div><div class="line"><span class="built_in">chdir</span> = /data/xxx/</div><div class="line">wsgi-file = xxx/wsgi.py</div><div class="line">processes = 4</div><div class="line">logto = /tmp/xxx.log</div></pre></td></tr></table></figure>
+<h3 id="&#x542F;&#x52A8;uwsgi&#x548C;nginx"><a href="#&#x542F;&#x52A8;uwsgi&#x548C;nginx" class="headerlink" title="&#x542F;&#x52A8;uwsgi&#x548C;nginx"></a>&#x542F;&#x52A8;uwsgi&#x548C;nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uwsgi --ini /data/oldboy/oldboy.ini &amp;</div><div class="line"> </div><div class="line">/etc/init.d/nginx start</div></pre></td></tr></table></figure>
+<h2 id="supervisor"><a href="#supervisor" class="headerlink" title="supervisor"></a>supervisor</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">[program:xxx]</div><div class="line"><span class="built_in">command</span>=/usr/<span class="built_in">local</span>/bin/uwsgi /data/oldboy/xxx.ini ;&#x547D;&#x4EE4;</div><div class="line">priority=999                ; &#x4F18;&#x5148;&#x7EA7;&#xFF08;&#x8D8A;&#x5C0F;&#x8D8A;&#x4F18;&#x5148;&#xFF09;</div><div class="line">autostart=<span class="literal">true</span>              ; supervisord&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x8BE5;&#x7A0B;&#x5E8F;&#x4E5F;&#x542F;&#x52A8;</div><div class="line">autorestart=<span class="literal">true</span>            ; &#x5F02;&#x5E38;&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x542F;&#x52A8;</div><div class="line">startsecs=10                ; &#x542F;&#x52A8;&#x540E;&#x6301;&#x7EED;10s&#x540E;&#x672A;&#x53D1;&#x751F;&#x5F02;&#x5E38;&#xFF0C;&#x624D;&#x8868;&#x793A;&#x542F;&#x52A8;&#x6210;&#x529F;</div><div class="line">startretries=3              ; &#x5F02;&#x5E38;&#x540E;&#xFF0C;&#x81EA;&#x52A8;&#x91CD;&#x542F;&#x6B21;&#x6570;</div><div class="line">exitcodes=0,2               ; <span class="built_in">exit</span>&#x5F02;&#x5E38;&#x629B;&#x51FA;&#x7684;&#x662F;0&#x3001;2&#x65F6;&#x624D;&#x8BA4;&#x4E3A;&#x662F;&#x5F02;&#x5E38;</div><div class="line">stopsignal=QUIT             ; &#x6740;&#x8FDB;&#x7A0B;&#x7684;&#x4FE1;&#x53F7;</div><div class="line">stopwaitsecs=10             ; &#x5411;&#x8FDB;&#x7A0B;&#x53D1;&#x51FA;stopsignal&#x540E;&#x7B49;&#x5F85;OS&#x5411;supervisord&#x8FD4;&#x56DE;SIGCHILD &#x7684;&#x65F6;&#x95F4;&#x3002;&#x82E5;&#x8D85;&#x65F6;&#x5219;supervisord&#x5C06;&#x4F7F;&#x7528;SIGKILL&#x6740;&#x8FDB;&#x7A0B; </div><div class="line">user=chrism                 ; &#x8BBE;&#x7F6E;&#x542F;&#x52A8;&#x8BE5;&#x7A0B;&#x5E8F;&#x7684;&#x7528;&#x6237;</div><div class="line">log_stdout=<span class="literal">true</span>             ; &#x5982;&#x679C;&#x4E3A;True&#xFF0C;&#x5219;&#x8BB0;&#x5F55;&#x7A0B;&#x5E8F;&#x65E5;&#x5FD7;</div><div class="line">log_stderr=<span class="literal">false</span>            ; &#x5982;&#x679C;&#x4E3A;True&#xFF0C;&#x5219;&#x8BB0;&#x5F55;&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;&#x65E5;&#x5FD7;</div><div class="line">logfile=/var/<span class="built_in">log</span>/cat.log    ; &#x7A0B;&#x5E8F;&#x65E5;&#x5FD7;&#x8DEF;&#x5F84;</div><div class="line">logfile_maxbytes=1MB        ; &#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x6700;&#x5927;&#x5927;&#x5C0F;</div><div class="line">logfile_backups=10          ; &#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x6700;&#x5927;&#x6570;&#x91CF;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/uwsgi/" rel="tag"># uwsgi</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/python-flask-extend/" rel="next" title="Flask框架扩展">
+                <i class="fa fa-chevron-left"></i> Flask框架扩展
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/python-celery/" rel="prev" title="python-celery">
+                python-celery <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uwsgi"><span class="nav-number">2.</span> <span class="nav-text">uwsgi</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单文件使用"><span class="nav-number">2.1.</span> <span class="nav-text">单文件使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#django程序使用uwsgi"><span class="nav-number">2.2.</span> <span class="nav-text">django程序使用uwsgi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用配置文件启动"><span class="nav-number">2.3.</span> <span class="nav-text">使用配置文件启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建配置文件-oldboy-ini"><span class="nav-number">2.3.1.</span> <span class="nav-text">创建配置文件 oldboy.ini</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据配置文件启动uwsgi"><span class="nav-number">2.3.2.</span> <span class="nav-text">根据配置文件启动uwsgi</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">2.4.</span> <span class="nav-text">nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置uwsgi"><span class="nav-number">2.4.1.</span> <span class="nav-text">配置uwsgi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动uwsgi和nginx"><span class="nav-number">2.4.2.</span> <span class="nav-text">启动uwsgi和nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#supervisor"><span class="nav-number">2.5.</span> <span class="nav-text">supervisor</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

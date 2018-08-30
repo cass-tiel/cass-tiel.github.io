@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,django," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x4E2D;Model&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+
+db first
+&amp;#x81EA;&amp;#x5DF1;&amp;#x518D;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5148;&amp;#x521B;&amp;#x5EFA;&amp;#x8868;&amp;#x7ED3;&amp;#x6784;&amp;#xFF0C;&amp;#x7136;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django框架Model">
+<meta property="og:url" content="http://c.isme.pub/2018/08/29/python-django-model/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x4E2D;Model&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+
+db first
+&amp;#x81EA;&amp;#x5DF1;&amp;#x518D;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5148;&amp;#x521B;&amp;#x5EFA;&amp;#x8868;&amp;#x7ED3;&amp;#x6784;&amp;#xFF0C;&amp;#x7136;&amp;#">
+<meta property="og:updated_time" content="2018-08-29T05:43:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django框架Model">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;Django&amp;#x6846;&amp;#x67B6;&amp;#x4E2D;Model&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;
+
+db first
+&amp;#x81EA;&amp;#x5DF1;&amp;#x518D;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5148;&amp;#x521B;&amp;#x5EFA;&amp;#x8868;&amp;#x7ED3;&amp;#x6784;&amp;#xFF0C;&amp;#x7136;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/29/python-django-model/"/>
+
+
+
+
+
+  <title>Django框架Model | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/29/python-django-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django框架Model</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T13:43:02+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-29T13:43:02+08:00">
+                2018-08-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/django/" itemprop="url" rel="index">
+                    <span itemprop="name">django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><p>Django&#x6846;&#x67B6;&#x4E2D;Model&#x77E5;&#x8BC6;&#x70B9;</p>
+<ul>
+<li>db first<ul>
+<li>&#x81EA;&#x5DF1;&#x518D;&#x6570;&#x636E;&#x5E93;&#x5148;&#x521B;&#x5EFA;&#x8868;&#x7ED3;&#x6784;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5728;&#x672C;&#x5730;&#x751F;&#x6210;&#x7C7B;</li>
+</ul>
+</li>
+<li>code first<ul>
+<li>&#x5148;&#x5199;&#x6570;&#x636E;&#x91CF;&#x5BF9;&#x5E94;&#x7C7B;&#xFF0C;&#x7136;&#x540E;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x901A;&#x8FC7;&#x7C7B;&#x751F;&#x6210;&#x6570;&#x636E;&#x5E93;</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="&#x5B57;&#x6BB5;"><a href="#&#x5B57;&#x6BB5;" class="headerlink" title="&#x5B57;&#x6BB5;"></a>&#x5B57;&#x6BB5;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line">AutoField(Field)</div><div class="line">    - int&#x81EA;&#x589E;&#x5217;&#xFF0C;&#x5FC5;&#x987B;&#x586B;&#x5165;&#x53C2;&#x6570; primary_key=<span class="keyword">True</span></div><div class="line"></div><div class="line">BigAutoField(AutoField)</div><div class="line">    - bigint&#x81EA;&#x589E;&#x5217;&#xFF0C;&#x5FC5;&#x987B;&#x586B;&#x5165;&#x53C2;&#x6570; primary_key=<span class="keyword">True</span></div><div class="line"></div><div class="line">    &#x6CE8;&#xFF1A;&#x5F53;model&#x4E2D;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x81EA;&#x589E;&#x5217;&#xFF0C;&#x5219;&#x81EA;&#x52A8;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5217;&#x540D;&#x4E3A;id&#x7684;&#x5217;</div><div class="line">    <span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></div><div class="line">        <span class="comment"># &#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5217;&#x540D;&#x4E3A;id&#x7684;&#x4E14;&#x4E3A;&#x81EA;&#x589E;&#x7684;&#x6574;&#x6570;&#x5217;</span></div><div class="line">        username = models.CharField(max_length=<span class="number">32</span>)</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Group</span><span class="params">(models.Model)</span>:</span></div><div class="line">        <span class="comment"># &#x81EA;&#x5B9A;&#x4E49;&#x81EA;&#x589E;&#x5217;</span></div><div class="line">        nid = models.AutoField(primary_key=<span class="keyword">True</span>)</div><div class="line">        name = models.CharField(max_length=<span class="number">32</span>)</div><div class="line"></div><div class="line">SmallIntegerField(IntegerField):</div><div class="line">    - &#x5C0F;&#x6574;&#x6570; <span class="number">-32768</span> &#xFF5E; <span class="number">32767</span></div><div class="line"></div><div class="line">PositiveSmallIntegerField(PositiveIntegerRelDbTypeMixin, IntegerField)</div><div class="line">    - &#x6B63;&#x5C0F;&#x6574;&#x6570; <span class="number">0</span> &#xFF5E; <span class="number">32767</span></div><div class="line">IntegerField(Field)</div><div class="line">    - &#x6574;&#x6570;&#x5217;(&#x6709;&#x7B26;&#x53F7;&#x7684;) <span class="number">-2147483648</span> &#xFF5E; <span class="number">2147483647</span></div><div class="line"></div><div class="line">PositiveIntegerField(PositiveIntegerRelDbTypeMixin, IntegerField)</div><div class="line">    - &#x6B63;&#x6574;&#x6570; <span class="number">0</span> &#xFF5E; <span class="number">2147483647</span></div><div class="line"></div><div class="line">BigIntegerField(IntegerField):</div><div class="line">    - &#x957F;&#x6574;&#x578B;(&#x6709;&#x7B26;&#x53F7;&#x7684;) <span class="number">-9223372036854775808</span> &#xFF5E; <span class="number">9223372036854775807</span></div><div class="line"></div><div class="line">BooleanField(Field)</div><div class="line">    - &#x5E03;&#x5C14;&#x503C;&#x7C7B;&#x578B;</div><div class="line"></div><div class="line">NullBooleanField(Field):</div><div class="line">    - &#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;&#x7684;&#x5E03;&#x5C14;&#x503C;</div><div class="line"></div><div class="line">CharField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x7C7B;&#x578B;</div><div class="line">    - &#x5FC5;&#x987B;&#x63D0;&#x4F9B;max_length&#x53C2;&#x6570;&#xFF0C; max_length&#x8868;&#x793A;&#x5B57;&#x7B26;&#x957F;&#x5EA6;</div><div class="line"></div><div class="line">TextField(Field)</div><div class="line">    - &#x6587;&#x672C;&#x7C7B;&#x578B;</div><div class="line"></div><div class="line">EmailField(CharField)&#xFF1A;</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x9A8C;&#x8BC1;&#x673A;&#x5236;</div><div class="line"></div><div class="line">IPAddressField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x9A8C;&#x8BC1; IPV4 &#x673A;&#x5236;</div><div class="line"></div><div class="line">GenericIPAddressField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x9A8C;&#x8BC1; Ipv4&#x548C;Ipv6</div><div class="line">    - &#x53C2;&#x6570;&#xFF1A;</div><div class="line">        protocol&#xFF0C;&#x7528;&#x4E8E;&#x6307;&#x5B9A;Ipv4&#x6216;Ipv6&#xFF0C; <span class="string">&apos;both&apos;</span>,<span class="string">&quot;ipv4&quot;</span>,<span class="string">&quot;ipv6&quot;</span></div><div class="line">        unpack_ipv4&#xFF0C; &#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E3A;<span class="keyword">True</span>&#xFF0C;&#x5219;&#x8F93;&#x5165;::ffff:<span class="number">192.0</span><span class="number">.2</span><span class="number">.1</span>&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x89E3;&#x6790;&#x4E3A;<span class="number">192.0</span><span class="number">.2</span><span class="number">.1</span>&#xFF0C;&#x5F00;&#x542F;&#x523A;&#x529F;&#x80FD;&#xFF0C;&#x9700;&#x8981;protocol=<span class="string">&quot;both&quot;</span></div><div class="line"></div><div class="line">URLField(CharField)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x9A8C;&#x8BC1; URL</div><div class="line"></div><div class="line">SlugField(CharField)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x9A8C;&#x8BC1;&#x652F;&#x6301; &#x5B57;&#x6BCD;&#x3001;&#x6570;&#x5B57;&#x3001;&#x4E0B;&#x5212;&#x7EBF;&#x3001;&#x8FDE;&#x63A5;&#x7B26;&#xFF08;&#x51CF;&#x53F7;&#xFF09;</div><div class="line"></div><div class="line">CommaSeparatedIntegerField(CharField)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;&#x683C;&#x5F0F;&#x5FC5;&#x987B;&#x4E3A;&#x9017;&#x53F7;&#x5206;&#x5272;&#x7684;&#x6570;&#x5B57;</div><div class="line"></div><div class="line">UUIDField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x5BF9;UUID&#x683C;&#x5F0F;&#x7684;&#x9A8C;&#x8BC1;</div><div class="line"></div><div class="line">FilePathField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#xFF0C;Django Admin&#x4EE5;&#x53CA;ModelForm&#x4E2D;&#x63D0;&#x4F9B;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x6587;&#x4EF6;&#x7684;&#x529F;&#x80FD;</div><div class="line">    - &#x53C2;&#x6570;&#xFF1A;</div><div class="line">            path,                      &#x6587;&#x4EF6;&#x5939;&#x8DEF;&#x5F84;</div><div class="line">            match=<span class="keyword">None</span>,                &#x6B63;&#x5219;&#x5339;&#x914D;</div><div class="line">            recursive=<span class="keyword">False</span>,           &#x9012;&#x5F52;&#x4E0B;&#x9762;&#x7684;&#x6587;&#x4EF6;&#x5939;</div><div class="line">            allow_files=<span class="keyword">True</span>,          &#x5141;&#x8BB8;&#x6587;&#x4EF6;</div><div class="line">            allow_folders=<span class="keyword">False</span>,       &#x5141;&#x8BB8;&#x6587;&#x4EF6;&#x5939;</div><div class="line"></div><div class="line">FileField(Field)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8DEF;&#x5F84;&#x4FDD;&#x5B58;&#x5728;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x5230;&#x6307;&#x5B9A;&#x76EE;&#x5F55;</div><div class="line">    - &#x53C2;&#x6570;&#xFF1A;</div><div class="line">        upload_to = <span class="string">&quot;&quot;</span>      &#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7684;&#x4FDD;&#x5B58;&#x8DEF;&#x5F84;</div><div class="line">        storage = <span class="keyword">None</span>      &#x5B58;&#x50A8;&#x7EC4;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;django.core.files.storage.FileSystemStorage</div><div class="line"></div><div class="line">ImageField(FileField)</div><div class="line">    - &#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8DEF;&#x5F84;&#x4FDD;&#x5B58;&#x5728;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x5230;&#x6307;&#x5B9A;&#x76EE;&#x5F55;</div><div class="line">    - &#x53C2;&#x6570;&#xFF1A;</div><div class="line">        upload_to = <span class="string">&quot;&quot;</span>      &#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7684;&#x4FDD;&#x5B58;&#x8DEF;&#x5F84;</div><div class="line">        storage = <span class="keyword">None</span>      &#x5B58;&#x50A8;&#x7EC4;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;django.core.files.storage.FileSystemStorage</div><div class="line">        width_field=<span class="keyword">None</span>,   &#x4E0A;&#x4F20;&#x56FE;&#x7247;&#x7684;&#x9AD8;&#x5EA6;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x540D;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;</div><div class="line">        height_field=<span class="keyword">None</span>   &#x4E0A;&#x4F20;&#x56FE;&#x7247;&#x7684;&#x5BBD;&#x5EA6;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x540D;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;</div><div class="line"></div><div class="line">DateTimeField(DateField)</div><div class="line">    - &#x65E5;&#x671F;+&#x65F6;&#x95F4;&#x683C;&#x5F0F; YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]</div><div class="line"></div><div class="line">DateField(DateTimeCheckMixin, Field)</div><div class="line">    - &#x65E5;&#x671F;&#x683C;&#x5F0F;      YYYY-MM-DD</div><div class="line"></div><div class="line">TimeField(DateTimeCheckMixin, Field)</div><div class="line">    - &#x65F6;&#x95F4;&#x683C;&#x5F0F;      HH:MM[:ss[.uuuuuu]]</div><div class="line"></div><div class="line">DurationField(Field)</div><div class="line">    - &#x957F;&#x6574;&#x6570;&#xFF0C;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6309;&#x7167;bigint&#x5B58;&#x50A8;&#xFF0C;ORM&#x4E2D;&#x83B7;&#x53D6;&#x7684;&#x503C;&#x4E3A;datetime.timedelta&#x7C7B;&#x578B;</div><div class="line"></div><div class="line">FloatField(Field)</div><div class="line">    - &#x6D6E;&#x70B9;&#x578B;</div><div class="line"></div><div class="line">DecimalField(Field)</div><div class="line">    - <span class="number">10</span>&#x8FDB;&#x5236;&#x5C0F;&#x6570;</div><div class="line">    - &#x53C2;&#x6570;&#xFF1A;</div><div class="line">        max_digits&#xFF0C;&#x5C0F;&#x6570;&#x603B;&#x957F;&#x5EA6;</div><div class="line">        decimal_places&#xFF0C;&#x5C0F;&#x6570;&#x4F4D;&#x957F;&#x5EA6;</div><div class="line"></div><div class="line">BinaryField(Field)</div><div class="line">    - &#x4E8C;&#x8FDB;&#x5236;&#x7C7B;&#x578B;</div></pre></td></tr></table></figure>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#x5B57;&#x6BB5;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#x5B57;&#x6BB5;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#x5B57;&#x6BB5;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x65E0;&#x7B26;&#x53F7;&#x6574;&#x6570;&#x5B57;&#x6BB5;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsignedIntegerField</span><span class="params">(models.IntegerField)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">db_type</span><span class="params">(self, connection)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;integer UNSIGNED&apos;</span></div><div class="line"></div><div class="line">PS: &#x8FD4;&#x56DE;&#x503C;&#x4E3A;&#x5B57;&#x6BB5;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#xFF0C;Django&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x7684;&#x503C;&#x4E3A;&#xFF1A;</div><div class="line">    <span class="string">&apos;AutoField&apos;</span>: <span class="string">&apos;integer AUTO_INCREMENT&apos;</span>,</div><div class="line">    <span class="string">&apos;BigAutoField&apos;</span>: <span class="string">&apos;bigint AUTO_INCREMENT&apos;</span>,</div><div class="line">    <span class="string">&apos;BinaryField&apos;</span>: <span class="string">&apos;longblob&apos;</span>,</div><div class="line">    <span class="string">&apos;BooleanField&apos;</span>: <span class="string">&apos;bool&apos;</span>,</div><div class="line">    <span class="string">&apos;CharField&apos;</span>: <span class="string">&apos;varchar(%(max_length)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;CommaSeparatedIntegerField&apos;</span>: <span class="string">&apos;varchar(%(max_length)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;DateField&apos;</span>: <span class="string">&apos;date&apos;</span>,</div><div class="line">    <span class="string">&apos;DateTimeField&apos;</span>: <span class="string">&apos;datetime&apos;</span>,</div><div class="line">    <span class="string">&apos;DecimalField&apos;</span>: <span class="string">&apos;numeric(%(max_digits)s, %(decimal_places)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;DurationField&apos;</span>: <span class="string">&apos;bigint&apos;</span>,</div><div class="line">    <span class="string">&apos;FileField&apos;</span>: <span class="string">&apos;varchar(%(max_length)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;FilePathField&apos;</span>: <span class="string">&apos;varchar(%(max_length)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;FloatField&apos;</span>: <span class="string">&apos;double precision&apos;</span>,</div><div class="line">    <span class="string">&apos;IntegerField&apos;</span>: <span class="string">&apos;integer&apos;</span>,</div><div class="line">    <span class="string">&apos;BigIntegerField&apos;</span>: <span class="string">&apos;bigint&apos;</span>,</div><div class="line">    <span class="string">&apos;IPAddressField&apos;</span>: <span class="string">&apos;char(15)&apos;</span>,</div><div class="line">    <span class="string">&apos;GenericIPAddressField&apos;</span>: <span class="string">&apos;char(39)&apos;</span>,</div><div class="line">    <span class="string">&apos;NullBooleanField&apos;</span>: <span class="string">&apos;bool&apos;</span>,</div><div class="line">    <span class="string">&apos;OneToOneField&apos;</span>: <span class="string">&apos;integer&apos;</span>,</div><div class="line">    <span class="string">&apos;PositiveIntegerField&apos;</span>: <span class="string">&apos;integer UNSIGNED&apos;</span>,</div><div class="line">    <span class="string">&apos;PositiveSmallIntegerField&apos;</span>: <span class="string">&apos;smallint UNSIGNED&apos;</span>,</div><div class="line">    <span class="string">&apos;SlugField&apos;</span>: <span class="string">&apos;varchar(%(max_length)s)&apos;</span>,</div><div class="line">    <span class="string">&apos;SmallIntegerField&apos;</span>: <span class="string">&apos;smallint&apos;</span>,</div><div class="line">    <span class="string">&apos;TextField&apos;</span>: <span class="string">&apos;longtext&apos;</span>,</div><div class="line">    <span class="string">&apos;TimeField&apos;</span>: <span class="string">&apos;time&apos;</span>,</div><div class="line">    <span class="string">&apos;UUIDField&apos;</span>: <span class="string">&apos;char(32)&apos;</span>,</div></pre></td></tr></table></figure>
+<h2 id="&#x89E6;&#x53D1;Model&#x4E2D;&#x7684;&#x9A8C;&#x8BC1;&#x548C;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;"><a href="#&#x89E6;&#x53D1;Model&#x4E2D;&#x7684;&#x9A8C;&#x8BC1;&#x548C;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;" class="headerlink" title="&#x89E6;&#x53D1;Model&#x4E2D;&#x7684;&#x9A8C;&#x8BC1;&#x548C;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;"></a>&#x89E6;&#x53D1;Model&#x4E2D;&#x7684;&#x9A8C;&#x8BC1;&#x548C;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">a. Django Admin&#x4E2D;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x4F1A;&#x4F18;&#x5148;&#x6839;&#x636E;Admiin&#x5185;&#x90E8;&#x7684;ModelForm&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x63D0;&#x793A;&#xFF0C;</div><div class="line">&#x5982;&#x679C;&#x90FD;&#x6210;&#x529F;&#xFF0C;&#x624D;&#x6765;&#x68C0;&#x67E5;Model&#x7684;&#x5B57;&#x6BB5;&#x5E76;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</div><div class="line">b. &#x4F7F;&#x7528;ModelForm</div><div class="line">c. &#x8C03;&#x7528;Model&#x5BF9;&#x8C61;&#x7684; clean_fields &#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#xFF1A;</div><div class="line">    <span class="comment"># models.py</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></div><div class="line">        nid = models.AutoField(primary_key=<span class="keyword">True</span>)</div><div class="line">        username = models.CharField(max_length=<span class="number">32</span>)</div><div class="line"></div><div class="line">        email = models.EmailField(error_messages={<span class="string">&apos;invalid&apos;</span>: <span class="string">&apos;&#x683C;&#x5F0F;&#x9519;&#x4E86;.&apos;</span>})</div><div class="line"></div><div class="line">    <span class="comment"># views.py</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></div><div class="line">        obj = models.UserInfo(username=<span class="string">&apos;11234&apos;</span>, email=<span class="string">&apos;uu&apos;</span>)</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            print(obj.clean_fields())</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            print(e)</div><div class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">&apos;ok&apos;</span>)</div><div class="line"></div><div class="line"><span class="comment"># Model&#x7684;clean&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x94A9;&#x5B50;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x5B9A;&#x5236;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#xFF1A;&#x4E0A;&#x8FF0;&#x7684;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x3002;</span></div></pre></td></tr></table></figure>
+<h2 id="admin&#x4E2D;&#x4FEE;&#x6539;&#x9519;&#x8BEF;&#x63D0;&#x793A;"><a href="#admin&#x4E2D;&#x4FEE;&#x6539;&#x9519;&#x8BEF;&#x63D0;&#x793A;" class="headerlink" title="admin&#x4E2D;&#x4FEE;&#x6539;&#x9519;&#x8BEF;&#x63D0;&#x793A;"></a>admin&#x4E2D;&#x4FEE;&#x6539;&#x9519;&#x8BEF;&#x63D0;&#x793A;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># admin.py</span></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> model_club <span class="keyword">import</span> models</div><div class="line"><span class="keyword">from</span> django <span class="keyword">import</span> forms</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfoForm</span><span class="params">(forms.ModelForm)</span>:</span></div><div class="line">    age = forms.IntegerField(initial=<span class="number">1</span>, error_messages={<span class="string">&apos;required&apos;</span>: <span class="string">&apos;&#x8BF7;&#x8F93;&#x5165;&#x6570;&#x503C;.&apos;</span>, <span class="string">&apos;invalid&apos;</span>: <span class="string">&apos;&#x5E74;&#x9F84;&#x5FC5;&#x987B;&#x4E3A;&#x6570;&#x503C;.&apos;</span>})</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        model = models.UserInfo</div><div class="line">        <span class="comment"># fields = (&apos;username&apos;,)</span></div><div class="line">        fields = <span class="string">&quot;__all__&quot;</span></div><div class="line">        exclude = [<span class="string">&apos;title&apos;</span>]</div><div class="line">        labels = { <span class="string">&apos;name&apos;</span>:<span class="string">&apos;Writer&apos;</span>, }</div><div class="line">        help_texts = {<span class="string">&apos;name&apos;</span>:<span class="string">&apos;some useful help text.&apos;</span>,}</div><div class="line">        error_messages={ <span class="string">&apos;name&apos;</span>:{<span class="string">&apos;max_length&apos;</span>:<span class="string">&quot;this writer name is too long&quot;</span>} }</div><div class="line">        widgets={<span class="string">&apos;name&apos;</span>:Textarea(attrs={<span class="string">&apos;cols&apos;</span>:<span class="number">80</span>,<span class="string">&apos;rows&apos;</span>:<span class="number">20</span>})}</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfoAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></div><div class="line">    form = UserInfoForm</div><div class="line"></div><div class="line">admin.site.register(models.UserInfo, UserInfoAdmin)</div></pre></td></tr></table></figure>
+<h1 id="&#x5B57;&#x6BB5;&#x53C2;&#x6570;"><a href="#&#x5B57;&#x6BB5;&#x53C2;&#x6570;" class="headerlink" title="&#x5B57;&#x6BB5;&#x53C2;&#x6570;"></a>&#x5B57;&#x6BB5;&#x53C2;&#x6570;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">null                &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;</div><div class="line">db_column           &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x7684;&#x5217;&#x540D;</div><div class="line">default             &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</div><div class="line">primary_key         &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x4E3A;&#x4E3B;&#x952E;</div><div class="line">db_index            &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;</div><div class="line">unique              &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x552F;&#x4E00;&#x7D22;&#x5F15;</div><div class="line">unique_for_date     &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x3010;&#x65E5;&#x671F;&#x3011;&#x90E8;&#x5206;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x552F;&#x4E00;&#x7D22;&#x5F15;</div><div class="line">unique_for_month    &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x3010;&#x6708;&#x3011;&#x90E8;&#x5206;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x552F;&#x4E00;&#x7D22;&#x5F15;</div><div class="line">unique_for_year     &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5B57;&#x6BB5;&#x3010;&#x5E74;&#x3011;&#x90E8;&#x5206;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x552F;&#x4E00;&#x7D22;&#x5F15;</div><div class="line"></div><div class="line">verbose_name        Admin&#x4E2D;&#x663E;&#x793A;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#x79F0;</div><div class="line">blank               Admin&#x4E2D;&#x662F;&#x5426;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x8F93;&#x5165;&#x4E3A;&#x7A7A;</div><div class="line">editable            Admin&#x4E2D;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;</div><div class="line">help_text           Admin&#x4E2D;&#x8BE5;&#x5B57;&#x6BB5;&#x7684;&#x63D0;&#x793A;&#x4FE1;&#x606F;</div><div class="line">choices             Admin&#x4E2D;&#x663E;&#x793A;&#x9009;&#x62E9;&#x6846;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x7528;&#x4E0D;&#x53D8;&#x52A8;&#x7684;&#x6570;&#x636E;&#x653E;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x8DE8;&#x8868;&#x64CD;&#x4F5C;</div><div class="line">                    &#x5982;&#xFF1A;gf = models.IntegerField(choices=[(<span class="number">0</span>, <span class="string">&apos;&#x4F55;&#x7A57;&apos;</span>),(<span class="number">1</span>, <span class="string">&apos;&#x5927;&#x8868;&#x59D0;&apos;</span>),],default=<span class="number">1</span>)</div><div class="line"></div><div class="line">error_messages      &#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF08;&#x5B57;&#x5178;&#x7C7B;&#x578B;&#xFF09;&#xFF0C;&#x4ECE;&#x800C;&#x5B9A;&#x5236;&#x60F3;&#x8981;&#x663E;&#x793A;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF1B;</div><div class="line">                    &#x5B57;&#x5178;&#x5065;&#xFF1A;null, blank, invalid, invalid_choice, unique, <span class="keyword">and</span> unique_for_date</div><div class="line">                    &#x5982;&#xFF1A;{<span class="string">&apos;null&apos;</span>: <span class="string">&quot;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&quot;</span>, <span class="string">&apos;invalid&apos;</span>: <span class="string">&apos;&#x683C;&#x5F0F;&#x9519;&#x8BEF;&apos;</span>}</div><div class="line"></div><div class="line">validators          &#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#x9A8C;&#x8BC1;&#xFF08;&#x5217;&#x8868;&#x7C7B;&#x578B;&#xFF09;&#xFF0C;&#x4ECE;&#x800C;&#x5B9A;&#x5236;&#x60F3;&#x8981;&#x7684;&#x9A8C;&#x8BC1;&#x89C4;&#x5219;</div><div class="line">                    <span class="keyword">from</span> django.core.validators <span class="keyword">import</span> RegexValidator</div><div class="line">                    <span class="keyword">from</span> django.core.validators <span class="keyword">import</span> EmailValidator,URLValidator,DecimalValidator,\</div><div class="line">                    MaxLengthValidator,MinLengthValidator,MaxValueValidator,MinValueValidator</div><div class="line">                    &#x5982;&#xFF1A;</div><div class="line">                        test = models.CharField(</div><div class="line">                            max_length=<span class="number">32</span>,</div><div class="line">                            error_messages={</div><div class="line">                                <span class="string">&apos;c1&apos;</span>: <span class="string">&apos;&#x4F18;&#x5148;&#x9519;&#x4FE1;&#x606F;1&apos;</span>,</div><div class="line">                                <span class="string">&apos;c2&apos;</span>: <span class="string">&apos;&#x4F18;&#x5148;&#x9519;&#x4FE1;&#x606F;2&apos;</span>,</div><div class="line">                                <span class="string">&apos;c3&apos;</span>: <span class="string">&apos;&#x4F18;&#x5148;&#x9519;&#x4FE1;&#x606F;3&apos;</span>,</div><div class="line">                            },</div><div class="line">                            validators=[</div><div class="line">                                RegexValidator(regex=<span class="string">&apos;root_\d+&apos;</span>, message=<span class="string">&apos;&#x9519;&#x8BEF;&#x4E86;&apos;</span>, code=<span class="string">&apos;c1&apos;</span>),</div><div class="line">                                RegexValidator(regex=<span class="string">&apos;root_112233\d+&apos;</span>, message=<span class="string">&apos;&#x53C8;&#x9519;&#x8BEF;&#x4E86;&apos;</span>, code=<span class="string">&apos;c2&apos;</span>),</div><div class="line">                                EmailValidator(message=<span class="string">&apos;&#x53C8;&#x9519;&#x8BEF;&#x4E86;&apos;</span>, code=<span class="string">&apos;c3&apos;</span>), ]</div><div class="line">                        )</div></pre></td></tr></table></figure>
+<h1 id="&#x5143;&#x4FE1;&#x606F;"><a href="#&#x5143;&#x4FE1;&#x606F;" class="headerlink" title="&#x5143;&#x4FE1;&#x606F;"></a>&#x5143;&#x4FE1;&#x606F;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></div><div class="line">    nid = models.AutoField(primary_key=<span class="keyword">True</span>)</div><div class="line">    username = models.CharField(max_length=<span class="number">32</span>)</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        <span class="comment"># &#x6570;&#x636E;&#x5E93;&#x4E2D;&#x751F;&#x6210;&#x7684;&#x8868;&#x540D;&#x79F0; &#x9ED8;&#x8BA4; app&#x540D;&#x79F0; + &#x4E0B;&#x5212;&#x7EBF; + &#x7C7B;&#x540D;</span></div><div class="line">        db_table = <span class="string">&quot;table_name&quot;</span></div><div class="line"></div><div class="line">        <span class="comment"># &#x8054;&#x5408;&#x7D22;&#x5F15;</span></div><div class="line">        index_together = [</div><div class="line">            (<span class="string">&quot;pub_date&quot;</span>, <span class="string">&quot;deadline&quot;</span>),</div><div class="line">        ]</div><div class="line"></div><div class="line">        <span class="comment"># &#x8054;&#x5408;&#x552F;&#x4E00;&#x7D22;&#x5F15;</span></div><div class="line">        unique_together = ((<span class="string">&quot;driver&quot;</span>, <span class="string">&quot;restaurant&quot;</span>),)</div><div class="line"></div><div class="line">        <span class="comment"># admin&#x4E2D;&#x663E;&#x793A;&#x7684;&#x8868;&#x540D;&#x79F0;</span></div><div class="line">        verbose_name</div><div class="line"></div><div class="line">        <span class="comment"># verbose_name&#x52A0;s</span></div><div class="line">        verbose_name_plural</div></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x66F4;&#x591A;&#xFF1A;<a href="https://docs.djangoproject.com/en/1.10/ref/models/options/" target="_blank" rel="external">https://docs.djangoproject.com/en/1.10/ref/models/options/</a></p>
+</blockquote>
+<h1 id="&#x591A;&#x8868;&#x5173;&#x7CFB;"><a href="#&#x591A;&#x8868;&#x5173;&#x7CFB;" class="headerlink" title="&#x591A;&#x8868;&#x5173;&#x7CFB;"></a>&#x591A;&#x8868;&#x5173;&#x7CFB;</h1><ul>
+<li>&#x4E00;&#x5BF9;&#x591A;&#xFF1A;models.ForeignKey(&#x5176;&#x4ED6;&#x8868;)</li>
+<li>&#x591A;&#x5BF9;&#x591A;&#xFF1A;models.ManyToManyField(&#x5176;&#x4ED6;&#x8868;)</li>
+<li>&#x4E00;&#x5BF9;&#x4E00;&#xFF1A;models.OneToOneField(&#x5176;&#x4ED6;&#x8868;)</li>
+</ul>
+<h2 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF1A;"><a href="#&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF1A;" class="headerlink" title="&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF1A;"></a>&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF1A;</h2><ul>
+<li>&#x4E00;&#x5BF9;&#x591A;&#xFF1A;&#x5F53;&#x4E00;&#x5F20;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x884C;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x5355;&#x9009;&#x7684;&#x4E0B;&#x62C9;&#x6846;&#xFF08;&#x53EF;&#x4EE5;&#x88AB;&#x91CD;&#x590D;&#x9009;&#x62E9;&#xFF09;<ul>
+<li>&#x4F8B;&#x5982;&#xFF1A;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x4FE1;&#x606F;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x3010;&#x666E;&#x901A;&#x7528;&#x6237;&#x3011;&#x3010;&#x91D1;&#x724C;&#x7528;&#x6237;&#x3011;&#x3010;&#x94C2;&#x91D1;&#x7528;&#x6237;&#x3011;&#x7B49;&#x3002;</li>
+</ul>
+</li>
+<li>&#x591A;&#x5BF9;&#x591A;&#xFF1A;&#x5728;&#x67D0;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x884C;&#x6570;&#x636E;&#x662F;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x591A;&#x9009;&#x7684;&#x4E0B;&#x62C9;&#x6846;<ul>
+<li>&#x4F8B;&#x5982;&#xFF1A;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x4FE1;&#x606F;&#xFF0C;&#x9700;&#x8981;&#x4E3A;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x591A;&#x4E2A;&#x7231;&#x597D;</li>
+</ul>
+</li>
+<li>&#x4E00;&#x5BF9;&#x4E00;&#xFF1A;&#x5728;&#x67D0;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x884C;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x5355;&#x9009;&#x7684;&#x4E0B;&#x62C9;&#x6846;&#xFF08;&#x4E0B;&#x62C9;&#x6846;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x88AB;&#x7528;&#x8FC7;&#x4E00;&#x6B21;&#x5C31;&#x6D88;&#x5931;&#x4E86;<ul>
+<li>&#x4F8B;&#x5982;&#xFF1A;&#x539F;&#x6709;&#x542B;10&#x5217;&#x6570;&#x636E;&#x7684;&#x4E00;&#x5F20;&#x8868;&#x4FDD;&#x5B58;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF0C;&#x7ECF;&#x8FC7;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x4E4B;&#x540E;&#xFF0C;10&#x5217;&#x65E0;&#x6CD5;&#x6EE1;&#x8DB3;&#x9700;&#x6C42;&#xFF0C;&#x9700;&#x8981;&#x4E3A;&#x539F;&#x6765;&#x7684;&#x8868;&#x518D;&#x6DFB;&#x52A0;5&#x5217;&#x6570;&#x636E;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x591A;&#x8868;&#x5173;&#x7CFB;&#x5B57;&#x6BB5;"><a href="#&#x591A;&#x8868;&#x5173;&#x7CFB;&#x5B57;&#x6BB5;" class="headerlink" title="&#x591A;&#x8868;&#x5173;&#x7CFB;&#x5B57;&#x6BB5;"></a>&#x591A;&#x8868;&#x5173;&#x7CFB;&#x5B57;&#x6BB5;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">ForeignKey(ForeignObject) <span class="comment"># ForeignObject(RelatedField)</span></div><div class="line">    to,                         <span class="comment"># &#x8981;&#x8FDB;&#x884C;&#x5173;&#x8054;&#x7684;&#x8868;&#x540D;</span></div><div class="line">    to_field=<span class="keyword">None</span>,              <span class="comment"># &#x8981;&#x5173;&#x8054;&#x7684;&#x8868;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#x79F0;</span></div><div class="line">    on_delete=<span class="keyword">None</span>,             <span class="comment"># &#x5F53;&#x5220;&#x9664;&#x5173;&#x8054;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x8868;&#x4E0E;&#x5176;&#x5173;&#x8054;&#x7684;&#x884C;&#x7684;&#x884C;&#x4E3A;</span></div><div class="line">                                    - models.CASCADE&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;&#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x4E5F;&#x5220;&#x9664;</div><div class="line">                                    - models.DO_NOTHING&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;&#x5F15;&#x53D1;&#x9519;&#x8BEF;IntegrityError</div><div class="line">                                    - models.PROTECT&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;&#x5F15;&#x53D1;&#x9519;&#x8BEF;ProtectedError</div><div class="line">                                    - models.SET_NULL&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;&#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;null&#xFF08;&#x524D;&#x63D0;FK&#x5B57;&#x6BB5;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x4E3A;&#x53EF;&#x7A7A;&#xFF09;</div><div class="line">                                    - models.SET_DEFAULT&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;&#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x503C;&#xFF08;&#x524D;&#x63D0;FK&#x5B57;&#x6BB5;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x503C;&#xFF09;</div><div class="line">                                    - models.SET&#xFF0C;&#x5220;&#x9664;&#x5173;&#x8054;&#x6570;&#x636E;&#xFF0C;</div><div class="line">                                                  a. &#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x503C;&#xFF0C;&#x8BBE;&#x7F6E;&#xFF1A;models.SET(&#x503C;)</div><div class="line">                                                  b. &#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x53EF;&#x6267;&#x884C;&#x5BF9;&#x8C61;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8BBE;&#x7F6E;&#xFF1A;models.SET(&#x53EF;&#x6267;&#x884C;&#x5BF9;&#x8C61;)</div><div class="line"></div><div class="line">                                                    <span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></div><div class="line">                                                        <span class="keyword">return</span> <span class="number">10</span></div><div class="line"></div><div class="line">                                                    <span class="class"><span class="keyword">class</span> <span class="title">MyModel</span><span class="params">(models.Model)</span>:</span></div><div class="line">                                                        user = models.ForeignKey(</div><div class="line">                                                            to=<span class="string">&quot;User&quot;</span>,</div><div class="line">                                                            to_field=<span class="string">&quot;id&quot;</span></div><div class="line">                                                            on_delete=models.SET(func),)</div><div class="line">    related_name=<span class="keyword">None</span>,          <span class="comment"># &#x53CD;&#x5411;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x7528;&#x4E8E;&#x4EE3;&#x66FF; &#x3010;&#x8868;&#x540D;_set&#x3011; &#x5982;&#xFF1A; obj.&#x8868;&#x540D;_set.all()</span></div><div class="line">    related_query_name=<span class="keyword">None</span>,    <span class="comment"># &#x53CD;&#x5411;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x8FDE;&#x63A5;&#x524D;&#x7F00;&#xFF0C;&#x7528;&#x4E8E;&#x66FF;&#x6362;&#x3010;&#x8868;&#x540D;&#x3011;     &#x5982;&#xFF1A; models.UserGroup.objects.filter(&#x8868;&#x540D;__&#x5B57;&#x6BB5;&#x540D;=1).values(&apos;&#x8868;&#x540D;__&#x5B57;&#x6BB5;&#x540D;&apos;)</span></div><div class="line">    limit_choices_to=<span class="keyword">None</span>,      <span class="comment"># &#x5728;Admin&#x6216;ModelForm&#x4E2D;&#x663E;&#x793A;&#x5173;&#x8054;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x63D0;&#x4F9B;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</span></div><div class="line">                                <span class="comment"># &#x5982;&#xFF1A;</span></div><div class="line">                                        - limit_choices_to={<span class="string">&apos;nid__gt&apos;</span>: <span class="number">5</span>}</div><div class="line">                                        - limit_choices_to=<span class="keyword">lambda</span> : {<span class="string">&apos;nid__gt&apos;</span>: <span class="number">5</span>}</div><div class="line"></div><div class="line">                                        <span class="keyword">from</span> django.db.models <span class="keyword">import</span> Q</div><div class="line">                                        - limit_choices_to=Q(nid__gt=<span class="number">10</span>)</div><div class="line">                                        - limit_choices_to=Q(nid=<span class="number">8</span>) | Q(nid__gt=<span class="number">10</span>)</div><div class="line">                                        - limit_choices_to=<span class="keyword">lambda</span> : Q(Q(nid=<span class="number">8</span>) | Q(nid__gt=<span class="number">10</span>)) &amp; Q(caption=<span class="string">&apos;root&apos;</span>)</div><div class="line">    db_constraint=<span class="keyword">True</span>          <span class="comment"># &#x662F;&#x5426;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA;&#x5916;&#x952E;&#x7EA6;&#x675F;</span></div><div class="line">    parent_link=<span class="keyword">False</span>           <span class="comment"># &#x5728;Admin&#x4E2D;&#x662F;&#x5426;&#x663E;&#x793A;&#x5173;&#x8054;&#x6570;&#x636E;</span></div><div class="line"></div><div class="line"></div><div class="line">OneToOneField(ForeignKey)</div><div class="line">    to,                         <span class="comment"># &#x8981;&#x8FDB;&#x884C;&#x5173;&#x8054;&#x7684;&#x8868;&#x540D;</span></div><div class="line">    to_field=<span class="keyword">None</span>               <span class="comment"># &#x8981;&#x5173;&#x8054;&#x7684;&#x8868;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#x79F0;</span></div><div class="line">    on_delete=<span class="keyword">None</span>,             <span class="comment"># &#x5F53;&#x5220;&#x9664;&#x5173;&#x8054;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x8868;&#x4E0E;&#x5176;&#x5173;&#x8054;&#x7684;&#x884C;&#x7684;&#x884C;&#x4E3A;</span></div><div class="line"></div><div class="line">                                <span class="comment">###### &#x5BF9;&#x4E8E;&#x4E00;&#x5BF9;&#x4E00; ######</span></div><div class="line">                                <span class="comment"># 1. &#x4E00;&#x5BF9;&#x4E00;&#x5176;&#x5B9E;&#x5C31;&#x662F; &#x4E00;&#x5BF9;&#x591A; + &#x552F;&#x4E00;&#x7D22;&#x5F15;</span></div><div class="line">                                <span class="comment"># 2.&#x5F53;&#x4E24;&#x4E2A;&#x7C7B;&#x4E4B;&#x95F4;&#x6709;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E00;&#x5BF9;&#x4E00;&#x5B57;&#x6BB5;</span></div><div class="line">                                <span class="comment"># &#x5982;&#x4E0B;&#x4F1A;&#x5728;A&#x8868;&#x4E2D;&#x989D;&#x5916;&#x589E;&#x52A0;&#x4E00;&#x4E2A;c_ptr_id&#x5217;&#x4E14;&#x552F;&#x4E00;&#xFF1A;</span></div><div class="line">                                        <span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(models.Model)</span>:</span></div><div class="line">                                            nid = models.AutoField(primary_key=<span class="keyword">True</span>)</div><div class="line">                                            part = models.CharField(max_length=<span class="number">12</span>)</div><div class="line"></div><div class="line">                                        <span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(C)</span>:</span></div><div class="line">                                            id = models.AutoField(primary_key=<span class="keyword">True</span>)</div><div class="line">                                            code = models.CharField(max_length=<span class="number">1</span>)</div><div class="line"></div><div class="line">ManyToManyField(RelatedField)</div><div class="line">    to,                         <span class="comment"># &#x8981;&#x8FDB;&#x884C;&#x5173;&#x8054;&#x7684;&#x8868;&#x540D;</span></div><div class="line">    related_name=<span class="keyword">None</span>,          <span class="comment"># &#x53CD;&#x5411;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x7528;&#x4E8E;&#x4EE3;&#x66FF; &#x3010;&#x8868;&#x540D;_set&#x3011; &#x5982;&#xFF1A; obj.&#x8868;&#x540D;_set.all()</span></div><div class="line">    related_query_name=<span class="keyword">None</span>,    <span class="comment"># &#x53CD;&#x5411;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x8FDE;&#x63A5;&#x524D;&#x7F00;&#xFF0C;&#x7528;&#x4E8E;&#x66FF;&#x6362;&#x3010;&#x8868;&#x540D;&#x3011;     &#x5982;&#xFF1A; models.UserGroup.objects.filter(&#x8868;&#x540D;__&#x5B57;&#x6BB5;&#x540D;=1).values(&apos;&#x8868;&#x540D;__&#x5B57;&#x6BB5;&#x540D;&apos;)</span></div><div class="line">    limit_choices_to=<span class="keyword">None</span>,      <span class="comment"># &#x5728;Admin&#x6216;ModelForm&#x4E2D;&#x663E;&#x793A;&#x5173;&#x8054;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x63D0;&#x4F9B;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</span></div><div class="line">                                <span class="comment"># &#x5982;&#xFF1A;</span></div><div class="line">                                        - limit_choices_to={<span class="string">&apos;nid__gt&apos;</span>: <span class="number">5</span>}</div><div class="line">                                        - limit_choices_to=<span class="keyword">lambda</span> : {<span class="string">&apos;nid__gt&apos;</span>: <span class="number">5</span>}</div><div class="line"></div><div class="line">                                        <span class="keyword">from</span> django.db.models <span class="keyword">import</span> Q</div><div class="line">                                        - limit_choices_to=Q(nid__gt=<span class="number">10</span>)</div><div class="line">                                        - limit_choices_to=Q(nid=<span class="number">8</span>) | Q(nid__gt=<span class="number">10</span>)</div><div class="line">                                        - limit_choices_to=<span class="keyword">lambda</span> : Q(Q(nid=<span class="number">8</span>) | Q(nid__gt=<span class="number">10</span>)) &amp; Q(caption=<span class="string">&apos;root&apos;</span>)</div><div class="line">    symmetrical=<span class="keyword">None</span>,           <span class="comment"># &#x4EC5;&#x7528;&#x4E8E;&#x591A;&#x5BF9;&#x591A;&#x81EA;&#x5173;&#x8054;&#x65F6;&#xFF0C;symmetrical&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x5185;&#x90E8;&#x662F;&#x5426;&#x521B;&#x5EFA;&#x53CD;&#x5411;&#x64CD;&#x4F5C;&#x7684;&#x5B57;&#x6BB5;</span></div><div class="line">                                <span class="comment"># &#x505A;&#x5982;&#x4E0B;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4E0D;&#x540C;&#x7684;symmetrical&#x4F1A;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x53EF;&#x9009;&#x5B57;&#x6BB5;</span></div><div class="line">                                    models.BB.objects.filter(...)</div><div class="line"></div><div class="line">                                    <span class="comment"># &#x53EF;&#x9009;&#x5B57;&#x6BB5;&#x6709;&#xFF1A;code, id, m1</span></div><div class="line">                                        <span class="class"><span class="keyword">class</span> <span class="title">BB</span><span class="params">(models.Model)</span>:</span></div><div class="line"></div><div class="line">                                        code = models.CharField(max_length=<span class="number">12</span>)</div><div class="line">                                        m1 = models.ManyToManyField(<span class="string">&apos;self&apos;</span>,symmetrical=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">                                    <span class="comment"># &#x53EF;&#x9009;&#x5B57;&#x6BB5;&#x6709;: bb, code, id, m1</span></div><div class="line">                                        <span class="class"><span class="keyword">class</span> <span class="title">BB</span><span class="params">(models.Model)</span>:</span></div><div class="line"></div><div class="line">                                        code = models.CharField(max_length=<span class="number">12</span>)</div><div class="line">                                        m1 = models.ManyToManyField(<span class="string">&apos;self&apos;</span>,symmetrical=<span class="keyword">False</span>)</div><div class="line"></div><div class="line">    through=<span class="keyword">None</span>,               <span class="comment"># &#x81EA;&#x5B9A;&#x4E49;&#x7B2C;&#x4E09;&#x5F20;&#x8868;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x5B57;&#x6BB5;&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x5173;&#x7CFB;&#x8868;</span></div><div class="line">    through_fields=<span class="keyword">None</span>,        <span class="comment"># &#x81EA;&#x5B9A;&#x4E49;&#x7B2C;&#x4E09;&#x5F20;&#x8868;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x5B57;&#x6BB5;&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x5173;&#x7CFB;&#x8868;&#x4E2D;&#x90A3;&#x4E9B;&#x5B57;&#x6BB5;&#x505A;&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;&#x8868;</span></div><div class="line">                                    <span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"></div><div class="line">                                    <span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(models.Model)</span>:</span></div><div class="line">                                        name = models.CharField(max_length=<span class="number">50</span>)</div><div class="line"></div><div class="line">                                    <span class="class"><span class="keyword">class</span> <span class="title">Group</span><span class="params">(models.Model)</span>:</span></div><div class="line">                                        name = models.CharField(max_length=<span class="number">128</span>)</div><div class="line">                                        members = models.ManyToManyField(</div><div class="line">                                            Person,</div><div class="line">                                            through=<span class="string">&apos;Membership&apos;</span>,</div><div class="line">                                            through_fields=(<span class="string">&apos;group&apos;</span>, <span class="string">&apos;person&apos;</span>),</div><div class="line">                                        )</div><div class="line"></div><div class="line">                                    <span class="class"><span class="keyword">class</span> <span class="title">Membership</span><span class="params">(models.Model)</span>:</span></div><div class="line">                                        group = models.ForeignKey(Group, on_delete=models.CASCADE)</div><div class="line">                                        person = models.ForeignKey(Person, on_delete=models.CASCADE)</div><div class="line">                                        inviter = models.ForeignKey(</div><div class="line">                                            Person,</div><div class="line">                                            on_delete=models.CASCADE,</div><div class="line">                                            related_name=<span class="string">&quot;membership_invites&quot;</span>,</div><div class="line">                                        )</div><div class="line">                                        invite_reason = models.CharField(max_length=<span class="number">64</span>)</div><div class="line">    db_constraint=<span class="keyword">True</span>,         <span class="comment"># &#x662F;&#x5426;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA;&#x5916;&#x952E;&#x7EA6;&#x675F;</span></div><div class="line">    db_table=<span class="keyword">None</span>,              <span class="comment"># &#x9ED8;&#x8BA4;&#x521B;&#x5EFA;&#x7B2C;&#x4E09;&#x5F20;&#x8868;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x8868;&#x7684;&#x540D;&#x79F0;</span></div></pre></td></tr></table></figure>
+<h1 id="ORM&#x64CD;&#x4F5C;"><a href="#ORM&#x64CD;&#x4F5C;" class="headerlink" title="ORM&#x64CD;&#x4F5C;"></a>ORM&#x64CD;&#x4F5C;</h1><h2 id="&#x57FA;&#x672C;&#x64CD;&#x4F5C;"><a href="#&#x57FA;&#x672C;&#x64CD;&#x4F5C;" class="headerlink" title="&#x57FA;&#x672C;&#x64CD;&#x4F5C;"></a>&#x57FA;&#x672C;&#x64CD;&#x4F5C;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x589E;</span></div><div class="line"><span class="comment"># models.Tb1.objects.create(c1=&apos;xx&apos;, c2=&apos;oo&apos;)  &#x589E;&#x52A0;&#x4E00;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x5B57;&#x5178;&#x7C7B;&#x578B;&#x6570;&#x636E; **kwargs</span></div><div class="line"></div><div class="line"><span class="comment"># obj = models.Tb1(c1=&apos;xx&apos;, c2=&apos;oo&apos;)</span></div><div class="line"><span class="comment"># obj.save()</span></div><div class="line"></div><div class="line"><span class="comment"># &#x67E5;</span></div><div class="line"><span class="comment"># models.Tb1.objects.get(id=123)         # &#x83B7;&#x53D6;&#x5355;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x62A5;&#x9519;&#xFF08;&#x4E0D;&#x5EFA;&#x8BAE;&#xFF09;</span></div><div class="line"><span class="comment"># models.Tb1.objects.all()               # &#x83B7;&#x53D6;&#x5168;&#x90E8;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;) # &#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;</span></div><div class="line"><span class="comment"># models.Tb1.objects.exclude(name=&apos;seven&apos;) # &#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5220;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;).delete() # &#x5220;&#x9664;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x6539;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;).update(gender=&apos;0&apos;)  # &#x5C06;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;&#x66F4;&#x65B0;&#xFF0C;&#x5747;&#x652F;&#x6301; **kwargs</span></div><div class="line"><span class="comment"># obj = models.Tb1.objects.get(id=1)</span></div><div class="line"><span class="comment"># obj.c1 = &apos;111&apos;</span></div><div class="line"><span class="comment"># obj.save()                                                 # &#x4FEE;&#x6539;&#x5355;&#x6761;&#x6570;&#x636E;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a>&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</h2><p>&#x5229;&#x7528;&#x53CC;&#x4E0B;&#x5212;&#x7EBF;&#x5C06;&#x5B57;&#x6BB5;&#x548C;&#x5BF9;&#x5E94;&#x7684;&#x64CD;&#x4F5C;&#x8FDE;&#x63A5;&#x8D77;&#x6765;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x83B7;&#x53D6;&#x4E2A;&#x6570;</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;).count()</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5927;&#x4E8E;&#xFF0C;&#x5C0F;&#x4E8E;</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__gt=1)              # &#x83B7;&#x53D6;id&#x5927;&#x4E8E;1&#x7684;&#x503C;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__gte=1)              # &#x83B7;&#x53D6;id&#x5927;&#x4E8E;&#x7B49;&#x4E8E;1&#x7684;&#x503C;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__lt=10)             # &#x83B7;&#x53D6;id&#x5C0F;&#x4E8E;10&#x7684;&#x503C;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__lte=10)             # &#x83B7;&#x53D6;id&#x5C0F;&#x4E8E;10&#x7684;&#x503C;</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__lt=10, id__gt=1)   # &#x83B7;&#x53D6;id&#x5927;&#x4E8E;1 &#x4E14; &#x5C0F;&#x4E8E;10&#x7684;&#x503C;</span></div><div class="line"></div><div class="line"><span class="comment"># in</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__in=[11, 22, 33])   # &#x83B7;&#x53D6;id&#x7B49;&#x4E8E;11&#x3001;22&#x3001;33&#x7684;&#x6570;&#x636E;</span></div><div class="line"><span class="comment"># models.Tb1.objects.exclude(id__in=[11, 22, 33])  # not in</span></div><div class="line"></div><div class="line"><span class="comment"># isnull</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__isnull=True)</span></div><div class="line"></div><div class="line"><span class="comment"># contains</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name__contains=&quot;ven&quot;)</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name__icontains=&quot;ven&quot;) # icontains&#x5927;&#x5C0F;&#x5199;&#x4E0D;&#x654F;&#x611F;</span></div><div class="line"><span class="comment"># models.Tb1.objects.exclude(name__icontains=&quot;ven&quot;)</span></div><div class="line"></div><div class="line"><span class="comment"># range</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(id__range=[1, 2])   # &#x8303;&#x56F4;bettwen and</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5176;&#x4ED6;&#x7C7B;&#x4F3C;</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># startswith&#xFF0C;istartswith, endswith, iendswith,</span></div><div class="line"></div><div class="line"><span class="comment"># order by</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;).order_by(&apos;id&apos;)    # asc</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(name=&apos;seven&apos;).order_by(&apos;-id&apos;)   # desc</span></div><div class="line"></div><div class="line"><span class="comment"># group by</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># from django.db.models import Count, Min, Max, Sum</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(c1=1).values(&apos;id&apos;).annotate(c=Count(&apos;num&apos;))</span></div><div class="line"><span class="comment"># SELECT &quot;app01_tb1&quot;.&quot;id&quot;, COUNT(&quot;app01_tb1&quot;.&quot;num&quot;) AS &quot;c&quot; FROM &quot;app01_tb1&quot; WHERE &quot;app01_tb1&quot;.&quot;c1&quot; = 1 GROUP BY &quot;app01_tb1&quot;.&quot;id&quot;</span></div><div class="line"></div><div class="line"><span class="comment"># limit &#x3001;offset</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.all()[10:20]</span></div><div class="line"></div><div class="line"><span class="comment"># regex&#x6B63;&#x5219;&#x5339;&#x914D;&#xFF0C;iregex &#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.get(title__regex=r&apos;^(An?|The) +&apos;)</span></div><div class="line"><span class="comment"># Entry.objects.get(title__iregex=r&apos;^(an?|the) +&apos;)</span></div><div class="line"></div><div class="line"><span class="comment"># date</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__date=datetime.date(2005, 1, 1))</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__date__gt=datetime.date(2005, 1, 1))</span></div><div class="line"></div><div class="line"><span class="comment"># year</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__year=2005)</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__year__gte=2005)</span></div><div class="line"></div><div class="line"><span class="comment"># month</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__month=12)</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__month__gte=6)</span></div><div class="line"></div><div class="line"><span class="comment"># day</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__day=3)</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__day__gte=3)</span></div><div class="line"></div><div class="line"><span class="comment"># week_day</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__week_day=2)</span></div><div class="line"><span class="comment"># Entry.objects.filter(pub_date__week_day__gte=2)</span></div><div class="line"></div><div class="line"><span class="comment"># hour</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__hour=23)</span></div><div class="line"><span class="comment"># Event.objects.filter(time__hour=5)</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__hour__gte=12)</span></div><div class="line"></div><div class="line"><span class="comment"># minute</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__minute=29)</span></div><div class="line"><span class="comment"># Event.objects.filter(time__minute=46)</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__minute__gte=29)</span></div><div class="line"></div><div class="line"><span class="comment"># second</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__second=31)</span></div><div class="line"><span class="comment"># Event.objects.filter(time__second=2)</span></div><div class="line"><span class="comment"># Event.objects.filter(timestamp__second__gte=31)</span></div></pre></td></tr></table></figure>
+<h2 id="&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;"><a href="#&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;" class="headerlink" title="&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;"></a>&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># extra</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># extra(self, select=None, where=None, params=None, tables=None, order_by=None, select_params=None)</span></div><div class="line"><span class="comment">#    Entry.objects.extra(select={&apos;new_id&apos;: &quot;select col from sometable where othercol &gt; %s&quot;}, select_params=(1,))</span></div><div class="line"><span class="comment">#    Entry.objects.extra(where=[&apos;headline=%s&apos;], params=[&apos;Lennon&apos;])</span></div><div class="line"><span class="comment">#    Entry.objects.extra(where=[&quot;foo=&apos;a&apos; OR bar = &apos;a&apos;&quot;, &quot;baz = &apos;a&apos;&quot;])</span></div><div class="line"><span class="comment">#    Entry.objects.extra(select={&apos;new_id&apos;: &quot;select id from tb where id &gt; %s&quot;}, select_params=(1,), order_by=[&apos;-nid&apos;])</span></div><div class="line"></div><div class="line"><span class="comment"># F</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># from django.db.models import F</span></div><div class="line"><span class="comment"># models.Tb1.objects.update(num=F(&apos;num&apos;)+1)</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Q</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># &#x65B9;&#x5F0F;&#x4E00;&#xFF1A;</span></div><div class="line"><span class="comment"># Q(nid__gt=10)</span></div><div class="line"><span class="comment"># Q(nid=8) | Q(nid__gt=10)</span></div><div class="line"><span class="comment"># Q(Q(nid=8) | Q(nid__gt=10)) &amp; Q(caption=&apos;root&apos;)</span></div><div class="line"></div><div class="line"><span class="comment"># &#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;</span></div><div class="line"><span class="comment"># con = Q()</span></div><div class="line"><span class="comment"># q1 = Q()</span></div><div class="line"><span class="comment"># q1.connector = &apos;OR&apos;</span></div><div class="line"><span class="comment"># q1.children.append((&apos;id&apos;, 1))</span></div><div class="line"><span class="comment"># q1.children.append((&apos;id&apos;, 10))</span></div><div class="line"><span class="comment"># q1.children.append((&apos;id&apos;, 9))</span></div><div class="line"><span class="comment"># q2 = Q()</span></div><div class="line"><span class="comment"># q2.connector = &apos;OR&apos;</span></div><div class="line"><span class="comment"># q2.children.append((&apos;c1&apos;, 1))</span></div><div class="line"><span class="comment"># q2.children.append((&apos;c1&apos;, 10))</span></div><div class="line"><span class="comment"># q2.children.append((&apos;c1&apos;, 9))</span></div><div class="line"><span class="comment"># con.add(q1, &apos;AND&apos;)</span></div><div class="line"><span class="comment"># con.add(q2, &apos;AND&apos;)</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># models.Tb1.objects.filter(con)</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># &#x6267;&#x884C;&#x539F;&#x751F;SQL</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># from django.db import connection, connections</span></div><div class="line"><span class="comment"># cursor = connection.cursor()  # cursor = connections[&apos;default&apos;].cursor()</span></div><div class="line"><span class="comment"># cursor.execute(&quot;&quot;&quot;SELECT * from auth_user where id = %s&quot;&quot;&quot;, [1])</span></div><div class="line"><span class="comment"># row = cursor.fetchone()</span></div></pre></td></tr></table></figure>
+<h2 id="&#x8FDE;&#x8868;&#x64CD;&#x4F5C;"><a href="#&#x8FDE;&#x8868;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDE;&#x8868;&#x64CD;&#x4F5C;"></a>&#x8FDE;&#x8868;&#x64CD;&#x4F5C;</h2><p>&#x5229;&#x7528;&#x53CC;&#x4E0B;&#x5212;&#x7EBF;&#x548C;_set&#x5C06;&#x8868;&#x4E4B;&#x95F4;&#x7684;&#x64CD;&#x4F5C;&#x8FDE;&#x63A5;&#x8D77;&#x6765;</p>
+<p>&#x8868;&#x7ED3;&#x6784;&#x5B9E;&#x4F8B;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserProfile</span><span class="params">(models.Model)</span>:</span></div><div class="line">    user_info = models.OneToOneField(<span class="string">&apos;UserInfo&apos;</span>)</div><div class="line">    username = models.CharField(max_length=<span class="number">64</span>)</div><div class="line">    password = models.CharField(max_length=<span class="number">64</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__unicode__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.username</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></div><div class="line">    user_type_choice = (</div><div class="line">        (<span class="number">0</span>, <span class="string">u&apos;&#x666E;&#x901A;&#x7528;&#x6237;&apos;</span>),</div><div class="line">        (<span class="number">1</span>, <span class="string">u&apos;&#x9AD8;&#x7EA7;&#x7528;&#x6237;&apos;</span>),</div><div class="line">    )</div><div class="line">    user_type = models.IntegerField(choices=user_type_choice)</div><div class="line">    name = models.CharField(max_length=<span class="number">32</span>)</div><div class="line">    email = models.CharField(max_length=<span class="number">32</span>)</div><div class="line">    address = models.CharField(max_length=<span class="number">128</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__unicode__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.name</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserGroup</span><span class="params">(models.Model)</span>:</span></div><div class="line"></div><div class="line">    caption = models.CharField(max_length=<span class="number">64</span>)</div><div class="line"></div><div class="line">    user_info = models.ManyToManyField(<span class="string">&apos;UserInfo&apos;</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__unicode__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.caption</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Host</span><span class="params">(models.Model)</span>:</span></div><div class="line">    hostname = models.CharField(max_length=<span class="number">64</span>)</div><div class="line">    ip = models.GenericIPAddressField()</div><div class="line">    user_group = models.ForeignKey(<span class="string">&apos;UserGroup&apos;</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__unicode__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.hostname</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x4E00;&#x5BF9;&#x4E00;&#x64CD;&#x4F5C;</span></div><div class="line"></div><div class="line">user_info_obj = models.UserInfo.objects.filter(id=<span class="number">1</span>).first()</div><div class="line"><span class="keyword">print</span> user_info_obj.user_type</div><div class="line"><span class="keyword">print</span> user_info_obj.get_user_type_display()</div><div class="line"><span class="keyword">print</span> user_info_obj.userprofile.password</div><div class="line"> </div><div class="line">user_info_obj = models.UserInfo.objects.filter(id=<span class="number">1</span>).values(<span class="string">&apos;email&apos;</span>, <span class="string">&apos;userprofile__username&apos;</span>).first()</div><div class="line"><span class="keyword">print</span> user_info_obj.keys()</div><div class="line"><span class="keyword">print</span> user_info_obj.values()</div><div class="line"></div><div class="line"><span class="comment">##### </span></div><div class="line"><span class="comment"># &#x4E00;&#x5BF9;&#x591A; &#x7C7B;&#x4F3C;&#x4E00;&#x5BF9;&#x4E00;</span></div><div class="line"><span class="comment"># &#x641C;&#x7D22;&#x6761;&#x4EF6;&#x4F7F;&#x7528; __ &#x8FDE;&#x63A5;</span></div><div class="line"><span class="comment"># &#x83B7;&#x53D6;&#x503C;&#x65F6;&#x4F7F;&#x7528; .    &#x8FDE;&#x63A5;</span></div><div class="line">user_info_obj = models.UserInfo.objects.get(name=<span class="string">u&apos;&#x6B66;&#x6C9B;&#x9F50;&apos;</span>)</div><div class="line">user_info_objs = models.UserInfo.objects.all()</div><div class="line"> </div><div class="line">group_obj = models.UserGroup.objects.get(caption=<span class="string">&apos;CEO&apos;</span>)</div><div class="line">group_objs = models.UserGroup.objects.all()</div><div class="line"> </div><div class="line"><span class="comment"># &#x6DFB;&#x52A0;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#group_obj.user_info.add(user_info_obj)</span></div><div class="line"><span class="comment">#group_obj.user_info.add(*user_info_objs)</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x5220;&#x9664;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#group_obj.user_info.remove(user_info_obj)</span></div><div class="line"><span class="comment">#group_obj.user_info.remove(*user_info_objs)</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x6DFB;&#x52A0;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#user_info_obj.usergroup_set.add(group_obj)</span></div><div class="line"><span class="comment">#user_info_obj.usergroup_set.add(*group_objs)</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x5220;&#x9664;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#user_info_obj.usergroup_set.remove(group_obj)</span></div><div class="line"><span class="comment">#user_info_obj.usergroup_set.remove(*group_objs)</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x83B7;&#x53D6;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#print group_obj.user_info.all()</span></div><div class="line"><span class="comment">#print group_obj.user_info.all().filter(id=1)</span></div><div class="line"> </div><div class="line"><span class="comment"># &#x83B7;&#x53D6;&#x6570;&#x636E;</span></div><div class="line"><span class="comment">#print user_info_obj.usergroup_set.all()</span></div><div class="line"><span class="comment">#print user_info_obj.usergroup_set.all().filter(caption=&apos;CEO&apos;)</span></div><div class="line"><span class="comment">#print user_info_obj.usergroup_set.all().filter(caption=&apos;DBA&apos;)</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5176;&#x4ED6;&#x64CD;&#x4F5C;"><a href="#&#x5176;&#x4ED6;&#x64CD;&#x4F5C;" class="headerlink" title="&#x5176;&#x4ED6;&#x64CD;&#x4F5C;"></a>&#x5176;&#x4ED6;&#x64CD;&#x4F5C;</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div></pre></td><td class="code"><pre><div class="line">##################################################################</div><div class="line"># PUBLIC METHODS THAT ALTER ATTRIBUTES AND RETURN A NEW QUERYSET #</div><div class="line">##################################################################</div><div class="line"></div><div class="line">def all(self)</div><div class="line">    # &#x83B7;&#x53D6;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">def filter(self, *args, **kwargs)</div><div class="line">    # &#x6761;&#x4EF6;&#x67E5;&#x8BE2;</div><div class="line">    # &#x6761;&#x4EF6;&#x53EF;&#x4EE5;&#x662F;&#xFF1A;&#x53C2;&#x6570;&#xFF0C;&#x5B57;&#x5178;&#xFF0C;Q</div><div class="line"></div><div class="line">def exclude(self, *args, **kwargs)</div><div class="line">    # &#x6761;&#x4EF6;&#x67E5;&#x8BE2;</div><div class="line">    # &#x6761;&#x4EF6;&#x53EF;&#x4EE5;&#x662F;&#xFF1A;&#x53C2;&#x6570;&#xFF0C;&#x5B57;&#x5178;&#xFF0C;Q</div><div class="line"></div><div class="line">def select_related(self, *fields)</div><div class="line">     &#x6027;&#x80FD;&#x76F8;&#x5173;&#xFF1A;&#x8868;&#x4E4B;&#x95F4;&#x8FDB;&#x884C;join&#x8FDE;&#x8868;&#x64CD;&#x4F5C;&#xFF0C;&#x4E00;&#x6B21;&#x6027;&#x83B7;&#x53D6;&#x5173;&#x8054;&#x7684;&#x6570;&#x636E;&#x3002;</div><div class="line">     model.tb.objects.all().select_related()</div><div class="line">     model.tb.objects.all().select_related(&apos;&#x5916;&#x952E;&#x5B57;&#x6BB5;&apos;)</div><div class="line">     model.tb.objects.all().select_related(&apos;&#x5916;&#x952E;&#x5B57;&#x6BB5;__&#x5916;&#x952E;&#x5B57;&#x6BB5;&apos;)</div><div class="line"></div><div class="line">def prefetch_related(self, *lookups)</div><div class="line">    &#x6027;&#x80FD;&#x76F8;&#x5173;&#xFF1A;&#x591A;&#x8868;&#x8FDE;&#x8868;&#x64CD;&#x4F5C;&#x65F6;&#x901F;&#x5EA6;&#x4F1A;&#x6162;&#xFF0C;&#x4F7F;&#x7528;&#x5176;&#x6267;&#x884C;&#x591A;&#x6B21;SQL&#x67E5;&#x8BE2;&#x5728;Python&#x4EE3;&#x7801;&#x4E2D;&#x5B9E;&#x73B0;&#x8FDE;&#x8868;&#x64CD;&#x4F5C;&#x3002;</div><div class="line">            # &#x83B7;&#x53D6;&#x6240;&#x6709;&#x7528;&#x6237;&#x8868;</div><div class="line">            # &#x83B7;&#x53D6;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x8868;where id in (&#x7528;&#x6237;&#x8868;&#x4E2D;&#x7684;&#x67E5;&#x5230;&#x7684;&#x6240;&#x6709;&#x7528;&#x6237;ID)</div><div class="line">            models.UserInfo.objects.prefetch_related(&apos;&#x5916;&#x952E;&#x5B57;&#x6BB5;&apos;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">            from django.db.models import Count, Case, When, IntegerField</div><div class="line">            Article.objects.annotate(</div><div class="line">                numviews=Count(Case(</div><div class="line">                    When(readership__what_time__lt=treshold, then=1),</div><div class="line">                    output_field=CharField(),</div><div class="line">                ))</div><div class="line">            )</div><div class="line"></div><div class="line">            students = Student.objects.all().annotate(num_excused_absences=models.Sum(</div><div class="line">                models.Case(</div><div class="line">                    models.When(absence__type=&apos;Excused&apos;, then=1),</div><div class="line">                default=0,</div><div class="line">                output_field=models.IntegerField()</div><div class="line">            )))</div><div class="line"></div><div class="line">def annotate(self, *args, **kwargs)</div><div class="line">    # &#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x805A;&#x5408;group by&#x67E5;&#x8BE2;</div><div class="line"></div><div class="line">    from django.db.models import Count, Avg, Max, Min, Sum</div><div class="line"></div><div class="line">    v = models.UserInfo.objects.values(&apos;u_id&apos;).annotate(uid=Count(&apos;u_id&apos;))</div><div class="line">    # SELECT u_id, COUNT(ui) AS `uid` FROM UserInfo GROUP BY u_id</div><div class="line"></div><div class="line">    v = models.UserInfo.objects.values(&apos;u_id&apos;).annotate(uid=Count(&apos;u_id&apos;)).filter(uid__gt=1)</div><div class="line">    # SELECT u_id, COUNT(ui_id) AS `uid` FROM UserInfo GROUP BY u_id having count(u_id) &gt; 1</div><div class="line"></div><div class="line">    v = models.UserInfo.objects.values(&apos;u_id&apos;).annotate(uid=Count(&apos;u_id&apos;,distinct=True)).filter(uid__gt=1)</div><div class="line">    # SELECT u_id, COUNT( DISTINCT ui_id) AS `uid` FROM UserInfo GROUP BY u_id having count(u_id) &gt; 1</div><div class="line"></div><div class="line">def distinct(self, *field_names)</div><div class="line">    # &#x7528;&#x4E8E;distinct&#x53BB;&#x91CD;</div><div class="line">    models.UserInfo.objects.values(&apos;nid&apos;).distinct()</div><div class="line">    # select distinct nid from userinfo</div><div class="line"></div><div class="line">    &#x6CE8;&#xFF1A;&#x53EA;&#x6709;&#x5728;PostgreSQL&#x4E2D;&#x624D;&#x80FD;&#x4F7F;&#x7528;distinct&#x8FDB;&#x884C;&#x53BB;&#x91CD;</div><div class="line"></div><div class="line">def order_by(self, *field_names)</div><div class="line">    # &#x7528;&#x4E8E;&#x6392;&#x5E8F;</div><div class="line">    models.UserInfo.objects.all().order_by(&apos;-id&apos;,&apos;age&apos;)</div><div class="line"></div><div class="line">def extra(self, select=None, where=None, params=None, tables=None, order_by=None, select_params=None)</div><div class="line">    # &#x6784;&#x9020;&#x989D;&#x5916;&#x7684;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x6216;&#x8005;&#x6620;&#x5C04;&#xFF0C;&#x5982;&#xFF1A;&#x5B50;&#x67E5;&#x8BE2;</div><div class="line"></div><div class="line">    Entry.objects.extra(select={&apos;new_id&apos;: &quot;select col from sometable where othercol &gt; %s&quot;}, select_params=(1,))</div><div class="line">    Entry.objects.extra(where=[&apos;headline=%s&apos;], params=[&apos;Lennon&apos;])</div><div class="line">    Entry.objects.extra(where=[&quot;foo=&apos;a&apos; OR bar = &apos;a&apos;&quot;, &quot;baz = &apos;a&apos;&quot;])</div><div class="line">    Entry.objects.extra(select={&apos;new_id&apos;: &quot;select id from tb where id &gt; %s&quot;}, select_params=(1,), order_by=[&apos;-nid&apos;])</div><div class="line"></div><div class="line"> def reverse(self):</div><div class="line">    # &#x5012;&#x5E8F;</div><div class="line">    models.UserInfo.objects.all().order_by(&apos;-nid&apos;).reverse()</div><div class="line">    # &#x6CE8;&#xFF1A;&#x5982;&#x679C;&#x5B58;&#x5728;order_by&#xFF0C;reverse&#x5219;&#x662F;&#x5012;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x591A;&#x4E2A;&#x6392;&#x5E8F;&#x5219;&#x4E00;&#x4E00;&#x5012;&#x5E8F;</div><div class="line"></div><div class="line"></div><div class="line"> def defer(self, *fields):</div><div class="line">    models.UserInfo.objects.defer(&apos;username&apos;,&apos;id&apos;)</div><div class="line">    &#x6216;</div><div class="line">    models.UserInfo.objects.filter(...).defer(&apos;username&apos;,&apos;id&apos;)</div><div class="line">    #&#x6620;&#x5C04;&#x4E2D;&#x6392;&#x9664;&#x67D0;&#x5217;&#x6570;&#x636E;</div><div class="line"></div><div class="line"> def only(self, *fields):</div><div class="line">    #&#x4EC5;&#x53D6;&#x67D0;&#x4E2A;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;</div><div class="line">     models.UserInfo.objects.only(&apos;username&apos;,&apos;id&apos;)</div><div class="line">     &#x6216;</div><div class="line">     models.UserInfo.objects.filter(...).only(&apos;username&apos;,&apos;id&apos;)</div><div class="line"></div><div class="line"> def using(self, alias):</div><div class="line">     &#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53C2;&#x6570;&#x4E3A;&#x522B;&#x540D;&#xFF08;setting&#x4E2D;&#x7684;&#x8BBE;&#x7F6E;&#xFF09;</div><div class="line"></div><div class="line"></div><div class="line">##################################################</div><div class="line"># PUBLIC METHODS THAT RETURN A QUERYSET SUBCLASS #</div><div class="line">##################################################</div><div class="line"></div><div class="line">def raw(self, raw_query, params=None, translations=None, using=None):</div><div class="line">    # &#x6267;&#x884C;&#x539F;&#x751F;SQL</div><div class="line">    models.UserInfo.objects.raw(&apos;select * from userinfo&apos;)</div><div class="line"></div><div class="line">    # &#x5982;&#x679C;SQL&#x662F;&#x5176;&#x4ED6;&#x8868;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x5C06;&#x540D;&#x5B57;&#x8BBE;&#x7F6E;&#x4E3A;&#x5F53;&#x524D;UserInfo&#x5BF9;&#x8C61;&#x7684;&#x4E3B;&#x952E;&#x5217;&#x540D;</div><div class="line">    models.UserInfo.objects.raw(&apos;select id as nid from &#x5176;&#x4ED6;&#x8868;&apos;)</div><div class="line"></div><div class="line">    # &#x4E3A;&#x539F;&#x751F;SQL&#x8BBE;&#x7F6E;&#x53C2;&#x6570;</div><div class="line">    models.UserInfo.objects.raw(&apos;select id as nid from userinfo where nid&gt;%s&apos;, params=[12,])</div><div class="line"></div><div class="line">    # &#x5C06;&#x83B7;&#x53D6;&#x7684;&#x5230;&#x5217;&#x540D;&#x8F6C;&#x6362;&#x4E3A;&#x6307;&#x5B9A;&#x5217;&#x540D;</div><div class="line">    name_map = {&apos;first&apos;: &apos;first_name&apos;, &apos;last&apos;: &apos;last_name&apos;, &apos;bd&apos;: &apos;birth_date&apos;, &apos;pk&apos;: &apos;id&apos;}</div><div class="line">    Person.objects.raw(&apos;SELECT * FROM some_other_table&apos;, translations=name_map)</div><div class="line"></div><div class="line">    # &#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;</div><div class="line">    models.UserInfo.objects.raw(&apos;select * from userinfo&apos;, using=&quot;default&quot;)</div><div class="line"></div><div class="line">    ################### &#x539F;&#x751F;SQL ###################</div><div class="line">    from django.db import connection, connections</div><div class="line">    cursor = connection.cursor()  # cursor = connections[&apos;default&apos;].cursor()</div><div class="line">    cursor.execute(&quot;&quot;&quot;SELECT * from auth_user where id = %s&quot;&quot;&quot;, [1])</div><div class="line">    row = cursor.fetchone() # fetchall()/fetchmany(..)</div><div class="line"></div><div class="line"></div><div class="line">def values(self, *fields):</div><div class="line">    # &#x83B7;&#x53D6;&#x6BCF;&#x884C;&#x6570;&#x636E;&#x4E3A;&#x5B57;&#x5178;&#x683C;&#x5F0F;</div><div class="line"></div><div class="line">def values_list(self, *fields, **kwargs):</div><div class="line">    # &#x83B7;&#x53D6;&#x6BCF;&#x884C;&#x6570;&#x636E;&#x4E3A;&#x5143;&#x7956;</div><div class="line"></div><div class="line">def dates(self, field_name, kind, order=&apos;ASC&apos;):</div><div class="line">    # &#x6839;&#x636E;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x67D0;&#x4E00;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x53BB;&#x91CD;&#x67E5;&#x627E;&#x5E76;&#x622A;&#x53D6;&#x6307;&#x5B9A;&#x5185;&#x5BB9;</div><div class="line">    # kind&#x53EA;&#x80FD;&#x662F;&#xFF1A;&quot;year&quot;&#xFF08;&#x5E74;&#xFF09;, &quot;month&quot;&#xFF08;&#x5E74;-&#x6708;&#xFF09;, &quot;day&quot;&#xFF08;&#x5E74;-&#x6708;-&#x65E5;&#xFF09;</div><div class="line">    # order&#x53EA;&#x80FD;&#x662F;&#xFF1A;&quot;ASC&quot;  &quot;DESC&quot;</div><div class="line">    # &#x5E76;&#x83B7;&#x53D6;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x65F6;&#x95F4;</div><div class="line">        - year : &#x5E74;-01-01</div><div class="line">        - month: &#x5E74;-&#x6708;-01</div><div class="line">        - day  : &#x5E74;-&#x6708;-&#x65E5;</div><div class="line"></div><div class="line">    models.DatePlus.objects.dates(&apos;ctime&apos;,&apos;day&apos;,&apos;DESC&apos;)</div><div class="line"></div><div class="line">def datetimes(self, field_name, kind, order=&apos;ASC&apos;, tzinfo=None):</div><div class="line">    # &#x6839;&#x636E;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x67D0;&#x4E00;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x53BB;&#x91CD;&#x67E5;&#x627E;&#x5E76;&#x622A;&#x53D6;&#x6307;&#x5B9A;&#x5185;&#x5BB9;&#xFF0C;&#x5C06;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x6307;&#x5B9A;&#x65F6;&#x533A;&#x65F6;&#x95F4;</div><div class="line">    # kind&#x53EA;&#x80FD;&#x662F; &quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;</div><div class="line">    # order&#x53EA;&#x80FD;&#x662F;&#xFF1A;&quot;ASC&quot;  &quot;DESC&quot;</div><div class="line">    # tzinfo&#x65F6;&#x533A;&#x5BF9;&#x8C61;</div><div class="line">    models.DDD.objects.datetimes(&apos;ctime&apos;,&apos;hour&apos;,tzinfo=pytz.UTC)</div><div class="line">    models.DDD.objects.datetimes(&apos;ctime&apos;,&apos;hour&apos;,tzinfo=pytz.timezone(&apos;Asia/Shanghai&apos;))</div><div class="line"></div><div class="line">    &quot;&quot;&quot;</div><div class="line">    pip3 install pytz</div><div class="line">    import pytz</div><div class="line">    pytz.all_timezones</div><div class="line">    pytz.timezone(&#x2018;Asia/Shanghai&#x2019;)</div><div class="line">    &quot;&quot;&quot;</div><div class="line"></div><div class="line">def none(self):</div><div class="line">    # &#x7A7A;QuerySet&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">####################################</div><div class="line"># METHODS THAT DO DATABASE QUERIES #</div><div class="line">####################################</div><div class="line"></div><div class="line">def aggregate(self, *args, **kwargs):</div><div class="line">   # &#x805A;&#x5408;&#x51FD;&#x6570;&#xFF0C;&#x83B7;&#x53D6;&#x5B57;&#x5178;&#x7C7B;&#x578B;&#x805A;&#x5408;&#x7ED3;&#x679C;</div><div class="line">   from django.db.models import Count, Avg, Max, Min, Sum</div><div class="line">   result = models.UserInfo.objects.aggregate(k=Count(&apos;u_id&apos;, distinct=True), n=Count(&apos;nid&apos;))</div><div class="line">   ===&gt; {&apos;k&apos;: 3, &apos;n&apos;: 4}</div><div class="line"></div><div class="line">def count(self):</div><div class="line">   # &#x83B7;&#x53D6;&#x4E2A;&#x6570;</div><div class="line"></div><div class="line">def get(self, *args, **kwargs):</div><div class="line">   # &#x83B7;&#x53D6;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">def create(self, **kwargs):</div><div class="line">   # &#x521B;&#x5EFA;&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">def bulk_create(self, objs, batch_size=None):</div><div class="line">    # &#x6279;&#x91CF;&#x63D2;&#x5165;</div><div class="line">    # batch_size&#x8868;&#x793A;&#x4E00;&#x6B21;&#x63D2;&#x5165;&#x7684;&#x4E2A;&#x6570;</div><div class="line">    objs = [</div><div class="line">        models.DDD(name=&apos;r11&apos;),</div><div class="line">        models.DDD(name=&apos;r22&apos;)</div><div class="line">    ]</div><div class="line">    models.DDD.objects.bulk_create(objs, 10)</div><div class="line"></div><div class="line">def get_or_create(self, defaults=None, **kwargs):</div><div class="line">    # &#x5982;&#x679C;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x83B7;&#x53D6;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x521B;&#x5EFA;</div><div class="line">    # defaults &#x6307;&#x5B9A;&#x521B;&#x5EFA;&#x65F6;&#xFF0C;&#x5176;&#x4ED6;&#x5B57;&#x6BB5;&#x7684;&#x503C;</div><div class="line">    obj, created = models.UserInfo.objects.get_or_create(username=&apos;root1&apos;, defaults={&apos;email&apos;: &apos;1111111&apos;,&apos;u_id&apos;: 2, &apos;t_id&apos;: 2})</div><div class="line"></div><div class="line">def update_or_create(self, defaults=None, **kwargs):</div><div class="line">    # &#x5982;&#x679C;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x66F4;&#x65B0;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x521B;&#x5EFA;</div><div class="line">    # defaults &#x6307;&#x5B9A;&#x521B;&#x5EFA;&#x65F6;&#x6216;&#x66F4;&#x65B0;&#x65F6;&#x7684;&#x5176;&#x4ED6;&#x5B57;&#x6BB5;</div><div class="line">    obj, created = models.UserInfo.objects.update_or_create(username=&apos;root1&apos;, defaults={&apos;email&apos;: &apos;1111111&apos;,&apos;u_id&apos;: 2, &apos;t_id&apos;: 1})</div><div class="line"></div><div class="line">def first(self):</div><div class="line">   # &#x83B7;&#x53D6;&#x7B2C;&#x4E00;&#x4E2A;</div><div class="line"></div><div class="line">def last(self):</div><div class="line">   # &#x83B7;&#x53D6;&#x6700;&#x540E;&#x4E00;&#x4E2A;</div><div class="line"></div><div class="line">def in_bulk(self, id_list=None):</div><div class="line">   # &#x6839;&#x636E;&#x4E3B;&#x952E;ID&#x8FDB;&#x884C;&#x67E5;&#x627E;</div><div class="line">   id_list = [11,21,31]</div><div class="line">   models.DDD.objects.in_bulk(id_list)</div><div class="line"></div><div class="line">def delete(self):</div><div class="line">   # &#x5220;&#x9664;</div><div class="line"></div><div class="line">def update(self, **kwargs):</div><div class="line">    # &#x66F4;&#x65B0;</div><div class="line"></div><div class="line">def exists(self):</div><div class="line">   # &#x662F;&#x5426;&#x6709;&#x7ED3;&#x679C;</div></pre></td></tr></table></figure>
+<h1 id="&#x5176;&#x4ED6;"><a href="#&#x5176;&#x4ED6;" class="headerlink" title="&#x5176;&#x4ED6;"></a>&#x5176;&#x4ED6;</h1><h2 id="Django&#x539F;&#x751F;SQL&#x83B7;&#x53D6;cursor&#x5B57;&#x5178;"><a href="#Django&#x539F;&#x751F;SQL&#x83B7;&#x53D6;cursor&#x5B57;&#x5178;" class="headerlink" title="Django&#x539F;&#x751F;SQL&#x83B7;&#x53D6;cursor&#x5B57;&#x5178;"></a>Django&#x539F;&#x751F;SQL&#x83B7;&#x53D6;cursor&#x5B57;&#x5178;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> connection, connections</div><div class="line"></div><div class="line">connection.connect()</div><div class="line">conn = connection.connection</div><div class="line">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)</div><div class="line">cursor.execute(<span class="string">&quot;&quot;&quot;SELECT * from app01_userinfo&quot;&quot;&quot;</span>)</div><div class="line">row = cursor.fetchone()</div><div class="line">connection.close()</div></pre></td></tr></table></figure>
+<h2 id="&#x6570;&#x5B57;&#x81EA;&#x589E;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x65B0;"><a href="#&#x6570;&#x5B57;&#x81EA;&#x589E;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x65B0;" class="headerlink" title="&#x6570;&#x5B57;&#x81EA;&#x589E;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x65B0;"></a>&#x6570;&#x5B57;&#x81EA;&#x589E;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x65B0;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x6570;&#x5B57;&#x81EA;&#x589E;</span></div><div class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> F</div><div class="line">models.UserInfo.objects.update(num=F(<span class="string">&apos;num&apos;</span>) + <span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x65B0;</span></div><div class="line"><span class="keyword">from</span> django.db.models.functions <span class="keyword">import</span> Concat</div><div class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Value</div><div class="line"></div><div class="line">models.UserInfo.objects.update(name=Concat(<span class="string">&apos;name&apos;</span>, <span class="string">&apos;pwd&apos;</span>))</div><div class="line">models.UserInfo.objects.update(name=Concat(<span class="string">&apos;name&apos;</span>, Value(<span class="string">&apos;666&apos;</span>)))</div></pre></td></tr></table></figure>
+<h2 id="ORM&#x51FD;&#x6570;&#x76F8;&#x5173;"><a href="#ORM&#x51FD;&#x6570;&#x76F8;&#x5173;" class="headerlink" title="ORM&#x51FD;&#x6570;&#x76F8;&#x5173;"></a>ORM&#x51FD;&#x6570;&#x76F8;&#x5173;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ########### &#x57FA;&#x7840;&#x51FD;&#x6570; ###########</span></div><div class="line"></div><div class="line"><span class="comment"># 1. Concat&#xFF0C;&#x7528;&#x4E8E;&#x505A;&#x7C7B;&#x578B;&#x8F6C;&#x6362;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Cast(&apos;pwd&apos;, FloatField()))</span></div><div class="line"></div><div class="line"><span class="comment"># 2. Coalesce&#xFF0C;&#x4ECE;&#x524D;&#x5411;&#x540E;&#xFF0C;&#x67E5;&#x8BE2;&#x7B2C;&#x4E00;&#x4E2A;&#x4E0D;&#x4E3A;&#x7A7A;&#x7684;&#x503C;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Coalesce(&apos;name&apos;, &apos;pwd&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Coalesce(Value(&apos;666&apos;),&apos;name&apos;, &apos;pwd&apos;))</span></div><div class="line"></div><div class="line"><span class="comment"># 3. Concat&#xFF0C;&#x62FC;&#x63A5;</span></div><div class="line"><span class="comment"># models.UserInfo.objects.update(name=Concat(&apos;name&apos;, &apos;pwd&apos;))</span></div><div class="line"><span class="comment"># models.UserInfo.objects.update(name=Concat(&apos;name&apos;, Value(&apos;666&apos;)))</span></div><div class="line"><span class="comment"># models.UserInfo.objects.update(name=Concat(&apos;name&apos;, Value(&apos;666&apos;),Value(&apos;999&apos;)))</span></div><div class="line"></div><div class="line"><span class="comment"># 4.ConcatPair&#xFF0C;&#x62FC;&#x63A5;&#xFF08;&#x4EC5;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF09;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=ConcatPair(&apos;name&apos;, &apos;pwd&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=ConcatPair(&apos;name&apos;, Value(&apos;666&apos;)))</span></div><div class="line"></div><div class="line"><span class="comment"># 5.Greatest&#xFF0C;&#x83B7;&#x53D6;&#x6BD4;&#x8F83;&#x5927;&#x7684;&#x503C;;least &#x83B7;&#x53D6;&#x6BD4;&#x8F83;&#x5C0F;&#x7684;&#x503C;;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Greatest(&apos;id&apos;, &apos;pwd&apos;,output_field=FloatField()))</span></div><div class="line"></div><div class="line"><span class="comment"># 6.Length&#xFF0C;&#x83B7;&#x53D6;&#x957F;&#x5EA6;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Length(&apos;name&apos;))</span></div><div class="line"></div><div class="line"><span class="comment"># 7. Lower,Upper,&#x53D8;&#x5927;&#x5C0F;&#x5199;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Lower(&apos;name&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Upper(&apos;name&apos;))</span></div><div class="line"></div><div class="line"><span class="comment"># 8. Now&#xFF0C;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Now())</span></div><div class="line"></div><div class="line"><span class="comment"># 9. substr&#xFF0C;&#x5B50;&#x5E8F;&#x5217;</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=Substr(&apos;name&apos;,1,2))</span></div><div class="line"></div><div class="line"><span class="comment"># ########### &#x65F6;&#x95F4;&#x7C7B;&#x51FD;&#x6570; ###########</span></div><div class="line"><span class="comment"># 1. &#x65F6;&#x95F4;&#x622A;&#x53D6;&#xFF0C;&#x4E0D;&#x4FDD;&#x7559;&#x5176;&#x4ED6;&#xFF1A;Extract, ExtractDay, ExtractHour, ExtractMinute, ExtractMonth,ExtractSecond, ExtractWeekDay, ExtractYear,</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.ExtractYear(&apos;ctime&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.ExtractMonth(&apos;ctime&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.ExtractDay(&apos;ctime&apos;))</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.Extract(&apos;ctime&apos;, &apos;year&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.Extract(&apos;ctime&apos;, &apos;month&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.Extract(&apos;ctime&apos;, &apos;year_month&apos;))</span></div><div class="line"><span class="string">&quot;&quot;&quot;</span></div><div class="line">MICROSECOND</div><div class="line">SECOND</div><div class="line">MINUTE</div><div class="line">HOUR</div><div class="line">DAY</div><div class="line">WEEK</div><div class="line">MONTH</div><div class="line">QUARTER</div><div class="line">YEAR</div><div class="line">SECOND_MICROSECOND</div><div class="line">MINUTE_MICROSECOND</div><div class="line">MINUTE_SECOND</div><div class="line">HOUR_MICROSECOND</div><div class="line">HOUR_SECOND</div><div class="line">HOUR_MINUTE</div><div class="line">DAY_MICROSECOND</div><div class="line">DAY_SECOND</div><div class="line">DAY_MINUTE</div><div class="line">DAY_HOUR</div><div class="line">YEAR_MONTH</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line"><span class="comment"># 2. &#x65F6;&#x95F4;&#x622A;&#x56FE;&#xFF0C;&#x4FDD;&#x7559;&#x5176;&#x4ED6;&#xFF1A;Trunc, TruncDate, TruncDay,TruncHour, TruncMinute, TruncMonth, TruncSecond, TruncYear</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.TruncHour(&apos;ctime&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.TruncDate(&apos;ctime&apos;))</span></div><div class="line"><span class="comment"># v = models.UserInfo.objects.annotate(c=functions.Trunc(&apos;ctime&apos;,&apos;year&apos;))</span></div></pre></td></tr></table></figure>
+<h2 id="ORM&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;"><a href="#ORM&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;" class="headerlink" title="ORM&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;"></a>ORM&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.db.models.functions.base <span class="keyword">import</span> Func</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomeFunc</span><span class="params">(Func)</span>:</span></div><div class="line">    function = <span class="string">&apos;DATE_FORMAT&apos;</span></div><div class="line">    template = <span class="string">&apos;%(function)s(%(expressions)s,%(format)s)&apos;</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, expression, **extra)</span>:</span></div><div class="line">        expressions = [expression]</div><div class="line">        super(CustomeFunc, self).__init__(*expressions, **extra)</div><div class="line"></div><div class="line">v = models.UserInfo.objects.annotate(c=CustomeFunc(<span class="string">&apos;ctime&apos;</span>,format=<span class="string">&quot;&apos;%%Y-%%m&apos;&quot;</span>))</div></pre></td></tr></table></figure>
+<h1 id="&#x5176;&#x4ED6;-1"><a href="#&#x5176;&#x4ED6;-1" class="headerlink" title="&#x5176;&#x4ED6;"></a>&#x5176;&#x4ED6;</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Env</span><span class="params">(models.Model)</span>:</span></div><div class="line">    id = models.CharField(primary_key=<span class="keyword">True</span>, max_length=<span class="number">36</span>, default=uuid.uuid4)</div><div class="line">    name = models.CharField(max_length=<span class="number">20</span>)</div><div class="line">    keys = models.CharField(max_length=<span class="number">20</span>, unique=<span class="keyword">True</span>)</div><div class="line">    context = models.CharField(max_length=<span class="number">100</span>)</div><div class="line">    status = models.BooleanField(default=<span class="keyword">True</span>)</div><div class="line">    create_at = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.name</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        ordering = [<span class="string">&apos;create_at&apos;</span>, ]</div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">currentID</span><span class="params">(cls, env)</span>:</span></div><div class="line">        p = cls.objects.filter(keys=env)</div><div class="line">        <span class="keyword">return</span> p[<span class="number">0</span>].id <span class="keyword">if</span> p <span class="keyword">else</span> <span class="string">&apos;&apos;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getEnv</span><span class="params">(cls)</span>:</span></div><div class="line">        p = cls.objects.values()</div><div class="line">        <span class="keyword">return</span> list(p)</div><div class="line"></div><div class="line"><span class="comment">############### </span></div><div class="line"></div><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse</div><div class="line"><span class="keyword">import</span> uuid</div><div class="line"><span class="keyword">from</span> base.models <span class="keyword">import</span> Env</div><div class="line"><span class="keyword">from</span> django.utils.translation <span class="keyword">import</span> ugettext_lazy <span class="keyword">as</span> _</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span><span class="params">(models.Model)</span>:</span></div><div class="line">    id = models.CharField(primary_key=<span class="keyword">True</span>, max_length=<span class="number">36</span>, default=uuid.uuid4)</div><div class="line">    name = models.CharField(max_length=<span class="number">30</span>, verbose_name=_(<span class="string">&quot;Name&quot;</span>))</div><div class="line">    <span class="comment"># blank=True &#x5728;admin&#x540E;&#x53F0;&#x7F16;&#x8F91;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;</span></div><div class="line">    description = models.CharField(max_length=<span class="number">100</span>, blank=<span class="keyword">True</span>, verbose_name=_(<span class="string">&quot;Description&quot;</span>))</div><div class="line">    config_path = models.CharField(max_length=<span class="number">50</span>, verbose_name=_(<span class="string">&quot;Config_path&quot;</span>))</div><div class="line">    md5 = models.CharField(max_length=<span class="number">50</span>, blank=<span class="keyword">True</span>)</div><div class="line">    status = models.BooleanField(default=<span class="keyword">True</span>, verbose_name=_(<span class="string">&quot;Status&quot;</span>))</div><div class="line">    create_at = models.DateTimeField(auto_now=<span class="keyword">True</span>, verbose_name=_(<span class="string">&quot;Create_at&quot;</span>))</div><div class="line">    env_id = models.CharField(max_length=<span class="number">36</span>, default=<span class="string">&apos;&apos;</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># print&#x663E;&#x793A;&#x7684;&#x4FE1;&#x606F;</span></div><div class="line">        <span class="keyword">return</span> self.name</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        <span class="comment"># &#x6392;&#x5E8F;&#x5B57;&#x6BB5;</span></div><div class="line">        ordering = [<span class="string">&apos;create_at&apos;</span>, ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_absolute_url</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> reverse(<span class="string">&apos;configs:create&apos;</span>, kwargs={<span class="string">&apos;id&apos;</span>: self.pk})</div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search_value</span><span class="params">(cls, q, env)</span>:</span></div><div class="line">        env_id = Env.currentID(env)</div><div class="line">        limit = q.get(<span class="string">&apos;limit&apos;</span>, <span class="number">0</span>)</div><div class="line">        offset = q.get(<span class="string">&apos;offset&apos;</span>, <span class="number">0</span>)</div><div class="line">        order = q.get(<span class="string">&apos;order&apos;</span>, <span class="string">&apos;&apos;</span>)</div><div class="line">        search = q.get(<span class="string">&apos;search&apos;</span>, <span class="string">&apos;&apos;</span>)</div><div class="line">        p = cls.objects.filter(env_id=env_id, name__startswith=search).values()</div><div class="line">        <span class="keyword">return</span> p.count(), p[offset:offset+limit]</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> configs <span class="keyword">import</span> models</div><div class="line"></div><div class="line"><span class="comment"># admin&#x540E;&#x53F0;&#x6570;&#x636E;&#x7BA1;&#x7406;&#x754C;&#x9762;&#x5B9A;&#x5236;</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></div><div class="line">    <span class="comment"># &#x9875;&#x9762;&#x663E;&#x793A;&#x7684;&#x5B57;&#x6BB5;</span></div><div class="line">    list_display = (<span class="string">&apos;name&apos;</span>, <span class="string">&apos;description&apos;</span>, <span class="string">&apos;config_path&apos;</span>, <span class="string">&apos;md5&apos;</span>, <span class="string">&apos;status&apos;</span>)</div><div class="line">    <span class="comment"># &#x641C;&#x7D22;&#x5B57;&#x6BB5;</span></div><div class="line">    search_fields = (<span class="string">&apos;name&apos;</span>,)</div><div class="line">    <span class="comment"># &#x8FC7;&#x6EE4;&#x5B57;&#x6BB5;</span></div><div class="line">    list_filter = (<span class="string">&apos;name&apos;</span>, <span class="string">&apos;status&apos;</span>)</div><div class="line">    <span class="comment"># &#x6392;&#x5E8F;&#x5B57;&#x6BB5;</span></div><div class="line">    ordering = (<span class="string">&apos;name&apos;</span>,)</div><div class="line">    <span class="comment"># &#x53EF;&#x7F16;&#x8F91;&#x7684;&#x5B57;&#x6BB5;&#x540D;</span></div><div class="line">    fields = (<span class="string">&apos;name&apos;</span>,  <span class="string">&apos;description&apos;</span>, <span class="string">&apos;config_path&apos;</span>, <span class="string">&apos;md5&apos;</span>, <span class="string">&apos;status&apos;</span>)</div><div class="line">    <span class="comment"># many to many &#x5B57;&#x6BB5;&#x591A;&#x9009;</span></div><div class="line">    <span class="comment"># filter_horizontal = (&apos;url&apos;,)</span></div><div class="line">    date_hierarchy = <span class="string">&apos;create_at&apos;</span></div><div class="line"></div><div class="line">admin.site.register(models.App, AppAdmin)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/28/python-django/" rel="next" title="Django框架基础">
+                <i class="fa fa-chevron-left"></i> Django框架基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/29/python-django-form/" rel="prev" title="Django框架Form">
+                Django框架Form <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字段"><span class="nav-number">2.</span> <span class="nav-text">字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义无符号整数字段"><span class="nav-number">2.1.</span> <span class="nav-text">自定义无符号整数字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发Model中的验证和错误提示有两种方式"><span class="nav-number">2.2.</span> <span class="nav-text">触发Model中的验证和错误提示有两种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#admin中修改错误提示"><span class="nav-number">2.3.</span> <span class="nav-text">admin中修改错误提示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字段参数"><span class="nav-number">3.</span> <span class="nav-text">字段参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元信息"><span class="nav-number">4.</span> <span class="nav-text">元信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多表关系"><span class="nav-number">5.</span> <span class="nav-text">多表关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景："><span class="nav-number">5.1.</span> <span class="nav-text">应用场景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表关系字段"><span class="nav-number">5.2.</span> <span class="nav-text">多表关系字段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORM操作"><span class="nav-number">6.</span> <span class="nav-text">ORM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">6.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶操作"><span class="nav-number">6.2.</span> <span class="nav-text">进阶操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级操作"><span class="nav-number">6.3.</span> <span class="nav-text">高级操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连表操作"><span class="nav-number">6.4.</span> <span class="nav-text">连表操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他操作"><span class="nav-number">6.5.</span> <span class="nav-text">其他操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django原生SQL获取cursor字典"><span class="nav-number">7.1.</span> <span class="nav-text">Django原生SQL获取cursor字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字自增、字符串更新"><span class="nav-number">7.2.</span> <span class="nav-text">数字自增、字符串更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM函数相关"><span class="nav-number">7.3.</span> <span class="nav-text">ORM函数相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM自定义函数"><span class="nav-number">7.4.</span> <span class="nav-text">ORM自定义函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他-1"><span class="nav-number">8.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

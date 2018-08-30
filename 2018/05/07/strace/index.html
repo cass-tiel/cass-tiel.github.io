@@ -204,12 +204,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            分类
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -230,16 +240,6 @@
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -429,12 +429,15 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root@dev:~<span class="comment"># strace -p 15427  </span></div><div class="line">Process 15427 attached - interrupt to quit  </div><div class="line">futex(0x402f4900, FUTEX_WAIT, 2, NULL   </div><div class="line">Process 15427 detached</div></pre></td></tr></table></figure>
 <ul>
-<li><p>&#x55EF;&#xFF0C;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#x9762;&#xFF0C;&#x5B83;&#x5728;&#x8C03;&#x7528;futex()&#x7684;&#x65F6;&#x5019;&#x6302;&#x8D77;&#x4E86;&#x3002;</p>
-</li>
-<li><figure class="highlight plain"><figcaption><span>-p```&#x975E;&#x5E38;&#x6709;&#x7528;&#xFF0C;&#x5B83;&#x51CF;&#x5C11;&#x4E86;&#x5F88;&#x591A;&#x731C;&#x6D4B;&#x5DE5;&#x4F5C;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#x5E94;&#x7528;&#x3002;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## &#x662F;&#x8C01;&#x5077;&#x8D70;&#x4E86;&#x65F6;&#x95F4;&#xFF1F;</div><div class="line"></div><div class="line">&gt; &#x4F60;&#x53EF;&#x4EE5;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;app&#xFF0C;&#x6253;&#x5F00;profiling&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x7CBE;&#x786E;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x4F46;&#x662F;&#x901A;&#x5E38;&#x5229;&#x7528;strace&#x9644;&#x7740;(attach&#xFF09;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x4EE5;&#x5FEB;&#x901F;&#x5730;&#x770B;&#x4E00;&#x4E0B;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x82B1;&#x8D39;&#x5728;&#x54EA;&#x91CC;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x4E0B;&#x662F;&#x5426;90%&#x7684;CPU&#x7528;&#x5728;&#x771F;&#x6B63;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x6216;&#x8005;&#x7528;&#x5728;&#x5176;&#x5B83;&#x65B9;&#x9762;&#x4E86;&#x3002;</div><div class="line"></div><div class="line">``` bash</div><div class="line">root@dev:~# strace -c -p 11084  </div><div class="line">Process 11084 attached - interrupt to quit  </div><div class="line">Process 11084 detached  </div><div class="line">% time     seconds  usecs/call     calls    errors syscall  </div><div class="line">------ ----------- ----------- --------- --------- ----------------  </div><div class="line"> 94.59    0.001014          48        21           select  </div><div class="line">  2.89    0.000031           1        21           getppid  </div><div class="line">  2.52    0.000027           1        21           time  </div><div class="line">------ ----------- ----------- --------- --------- ----------------  </div><div class="line">100.00    0.001072                    63           total  </div><div class="line">root@dev:~#</div></pre></td></tr></table></figure>
-</li>
-<li><p>&#x5728;&#x6267;&#x884C;strace -c -p&#x547D;&#x4EE4;&#x4EE5;&#x540E;&#xFF0C;&#x7B49;&#x5230;&#x4F60;&#x5173;&#x6CE8;&#x7684;&#x65F6;&#x95F4;&#x5230;&#x4E86;&#x540E;&#xFF0C;&#x6309;ctrl-c&#x9000;&#x51FA;&#xFF0C;strace&#x4F1A;&#x5217;&#x51FA;&#x5982;&#x4E0A;&#x7684;profiling&#x6570;&#x636E;&#x3002;</p>
-</li>
+<li>&#x55EF;&#xFF0C;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#x9762;&#xFF0C;&#x5B83;&#x5728;&#x8C03;&#x7528;futex()&#x7684;&#x65F6;&#x5019;&#x6302;&#x8D77;&#x4E86;&#x3002;</li>
+<li>strace -p&#x975E;&#x5E38;&#x6709;&#x7528;&#xFF0C;&#x5B83;&#x51CF;&#x5C11;&#x4E86;&#x5F88;&#x591A;&#x731C;&#x6D4B;&#x5DE5;&#x4F5C;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#x5E94;&#x7528;&#x3002;</li>
+</ul>
+<h2 id="&#x662F;&#x8C01;&#x5077;&#x8D70;&#x4E86;&#x65F6;&#x95F4;&#xFF1F;"><a href="#&#x662F;&#x8C01;&#x5077;&#x8D70;&#x4E86;&#x65F6;&#x95F4;&#xFF1F;" class="headerlink" title="&#x662F;&#x8C01;&#x5077;&#x8D70;&#x4E86;&#x65F6;&#x95F4;&#xFF1F;"></a>&#x662F;&#x8C01;&#x5077;&#x8D70;&#x4E86;&#x65F6;&#x95F4;&#xFF1F;</h2><blockquote>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;app&#xFF0C;&#x6253;&#x5F00;profiling&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x7CBE;&#x786E;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x4F46;&#x662F;&#x901A;&#x5E38;&#x5229;&#x7528;strace&#x9644;&#x7740;(attach&#xFF09;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x4EE5;&#x5FEB;&#x901F;&#x5730;&#x770B;&#x4E00;&#x4E0B;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x82B1;&#x8D39;&#x5728;&#x54EA;&#x91CC;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x4E0B;&#x662F;&#x5426;90%&#x7684;CPU&#x7528;&#x5728;&#x771F;&#x6B63;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x6216;&#x8005;&#x7528;&#x5728;&#x5176;&#x5B83;&#x65B9;&#x9762;&#x4E86;&#x3002;</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">root@dev:~<span class="comment"># strace -c -p 11084  </span></div><div class="line">Process 11084 attached - interrupt to quit  </div><div class="line">Process 11084 detached  </div><div class="line">% time     seconds  usecs/call     calls    errors syscall  </div><div class="line">------ ----------- ----------- --------- --------- ----------------  </div><div class="line"> 94.59    0.001014          48        21           select  </div><div class="line">  2.89    0.000031           1        21           getppid  </div><div class="line">  2.52    0.000027           1        21           time  </div><div class="line">------ ----------- ----------- --------- --------- ----------------  </div><div class="line">100.00    0.001072                    63           total  </div><div class="line">root@dev:~<span class="comment">#</span></div></pre></td></tr></table></figure>
+<ul>
+<li>&#x5728;&#x6267;&#x884C;strace -c -p&#x547D;&#x4EE4;&#x4EE5;&#x540E;&#xFF0C;&#x7B49;&#x5230;&#x4F60;&#x5173;&#x6CE8;&#x7684;&#x65F6;&#x95F4;&#x5230;&#x4E86;&#x540E;&#xFF0C;&#x6309;ctrl-c&#x9000;&#x51FA;&#xFF0C;strace&#x4F1A;&#x5217;&#x51FA;&#x5982;&#x4E0A;&#x7684;profiling&#x6570;&#x636E;&#x3002;</li>
 <li>&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x7A0B;&#x5E8F;&#x82B1;&#x4E86;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x65F6;&#x95F4;&#x5728;&#x7B49;&#x5F85;select()&#x3002;&#x5B83;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;slect()&#x8C03;&#x7528;&#x8FD9;&#x4EF6;&#x8C03;&#x7528;getpid()&#x548C;time()&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5178;&#x578B;&#x7684;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x3002;</li>
 </ul>
 <blockquote>
@@ -609,7 +612,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-count">123</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -620,7 +623,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -631,7 +634,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">82</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -679,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是strace"><span class="nav-number">2.</span> <span class="nav-text">什么是strace?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其实它可以做的更多："><span class="nav-number">2.1.</span> <span class="nav-text">其实它可以做的更多：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么使用它"><span class="nav-number">3.</span> <span class="nav-text">怎么使用它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#找出程序在startup的时候读取的哪个config文件？"><span class="nav-number">3.1.</span> <span class="nav-text">找出程序在startup的时候读取的哪个config文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么这个程序没有打开我的文件？"><span class="nav-number">3.2.</span> <span class="nav-text">为什么这个程序没有打开我的文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#某个进程现在在做什么"><span class="nav-number">3.3.</span> <span class="nav-text">某个进程现在在做什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-无法连接到服务器"><span class="nav-number">3.4.</span> <span class="nav-text">为什么 无法连接到服务器?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发生了什么？"><span class="nav-number">4.</span> <span class="nav-text">发生了什么？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是strace"><span class="nav-number">2.</span> <span class="nav-text">什么是strace?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其实它可以做的更多："><span class="nav-number">2.1.</span> <span class="nav-text">其实它可以做的更多：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么使用它"><span class="nav-number">3.</span> <span class="nav-text">怎么使用它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#找出程序在startup的时候读取的哪个config文件？"><span class="nav-number">3.1.</span> <span class="nav-text">找出程序在startup的时候读取的哪个config文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么这个程序没有打开我的文件？"><span class="nav-number">3.2.</span> <span class="nav-text">为什么这个程序没有打开我的文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#某个进程现在在做什么"><span class="nav-number">3.3.</span> <span class="nav-text">某个进程现在在做什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是谁偷走了时间？"><span class="nav-number">3.4.</span> <span class="nav-text">是谁偷走了时间？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-无法连接到服务器"><span class="nav-number">3.5.</span> <span class="nav-text">为什么 无法连接到服务器?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发生了什么？"><span class="nav-number">4.</span> <span class="nav-text">发生了什么？</span></a></li></ol></div>
             
 
           </div>

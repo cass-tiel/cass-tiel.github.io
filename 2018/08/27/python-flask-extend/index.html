@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="Oz2csyXWKu" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,flask," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6458;&amp;#x8981;
+flask-session
+metaclass
+WTForms    
+flask-SQLAchemy
+flask-script
+flask-migrate
+flask-restful
+&amp;#x7B49;&amp;#x2026;    http://flask.pocoo.org/extensions/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask框架扩展">
+<meta property="og:url" content="http://c.isme.pub/2018/08/27/python-flask-extend/index.html">
+<meta property="og:site_name" content="Casstiel">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;
+flask-session
+metaclass
+WTForms    
+flask-SQLAchemy
+flask-script
+flask-migrate
+flask-restful
+&amp;#x7B49;&amp;#x2026;    http://flask.pocoo.org/extensions/">
+<meta property="og:updated_time" content="2018-08-27T03:27:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask框架扩展">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;
+flask-session
+metaclass
+WTForms    
+flask-SQLAchemy
+flask-script
+flask-migrate
+flask-restful
+&amp;#x7B49;&amp;#x2026;    http://flask.pocoo.org/extensions/">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://c.isme.pub/2018/08/27/python-flask-extend/"/>
+
+
+
+
+
+  <title>Flask框架扩展 | Casstiel</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fbfcc29af2c51d3c6b19428ad2c49df2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Casstiel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">普罗米修斯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://c.isme.pub/2018/08/27/python-flask-extend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Casstiel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Casstiel">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask框架扩展</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T11:27:58+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-27T11:27:58+08:00">
+                2018-08-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6458;&#x8981;"><a href="#&#x6458;&#x8981;" class="headerlink" title="&#x6458;&#x8981;"></a>&#x6458;&#x8981;</h1><ul>
+<li>flask-session</li>
+<li>metaclass</li>
+<li>WTForms    </li>
+<li>flask-SQLAchemy</li>
+<li>flask-script</li>
+<li>flask-migrate</li>
+<li>flask-restful</li>
+<li>&#x7B49;&#x2026;    <a href="http://flask.pocoo.org/extensions/" target="_blank" rel="external">http://flask.pocoo.org/extensions/</a></li>
+</ul>
+<a id="more"></a>
+<h1 id="Flask-Session"><a href="#Flask-Session" class="headerlink" title="Flask-Session"></a>Flask-Session</h1><h2 id="flask&#x4E2D;session&#x5904;&#x7406;&#x673A;&#x5236;"><a href="#flask&#x4E2D;session&#x5904;&#x7406;&#x673A;&#x5236;" class="headerlink" title="flask&#x4E2D;session&#x5904;&#x7406;&#x673A;&#x5236;"></a>flask&#x4E2D;session&#x5904;&#x7406;&#x673A;&#x5236;</h2><ul>
+<li>&#x8BF7;&#x6C42;&#x8FDB;&#x6765;&#x4E4B;&#x540E;&#x5148;&#x770B;&#x7528;&#x6237;&#x6709;&#x6CA1;&#x6709;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;<ul>
+<li>&#x6709;&#x7684;&#x8BDD;&#x53BB;&#x83B7;&#x53D6;&#x539F;&#x6765;&#x7684;&#x4E2A;&#x4EBA;&#x6570;&#x636E;</li>
+<li>&#x6CA1;&#x6709;&#x7684;&#x8BDD;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7A7A;&#x5BB9;&#x5668;&#xFF08;&#x5185;&#x5B58;&#x5BF9;&#x8C61;&#xFF0C;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;{&#x653E;&#x7F6E;&#x6570;&#x636E;&#x7684;&#x5BB9;&#x5668;}&#xFF09;</li>
+</ul>
+</li>
+<li>&#x89C6;&#x56FE;&#xFF1A;&#x64CD;&#x4F5C;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;</li>
+<li>&#x76F8;&#x5E94;&#xFF1A;&#x5185;&#x5B58;&#x5BF9;&#x8C61;<ul>
+<li>&#x5C06;&#x6570;&#x636E;&#x4FDD;&#x5B58;&#x5230;&#x6570;&#x636E;&#x5E93;</li>
+<li>&#x5C06;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;&#x5199;&#x5728;&#x7528;&#x6237;cookie&#x4E2D;</li>
+</ul>
+</li>
+<li>obj = SecureCookieSessionInterface()</li>
+<li>obj = open_session(self, request) = SecureCookieSession()</li>
+<li>self.session = SecureCookieSession()</li>
+<li>open_session()<ul>
+<li>&#x53BB;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x7684;cookie&#x4E2D;&#x83B7;&#x53D6;&#x539F;&#x6765;&#x7ED9;&#x4F60;&#x7684;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53BB;cookie&#x4E2D;&#x83B7;&#x53D6;key&#x4E3A;session&#x7684;&#x503C;</li>
+<li>&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x7A7A;&#x5B57;&#x5178;</li>
+</ul>
+</li>
+<li>&#x6B64;&#x65F6;Local&#x7684;ctx&#x4E2D;&#x6709;&#x4E86;session&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x7A7A;&#x5B57;&#x5178;</li>
+</ul>
+<h2 id="&#x7B2C;&#x4E09;&#x65B9;session"><a href="#&#x7B2C;&#x4E09;&#x65B9;session" class="headerlink" title="&#x7B2C;&#x4E09;&#x65B9;session"></a>&#x7B2C;&#x4E09;&#x65B9;session</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#pip3 install redis</span></div><div class="line"><span class="comment">#pip3 install flask-session</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, session, redirect</div><div class="line"><span class="keyword">from</span> flask.ext.session <span class="keyword">import</span> Session</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line">app.secret_key = <span class="string">&apos;asdfasdfasd&apos;</span></div><div class="line"></div><div class="line">app.config[<span class="string">&apos;SESSION_TYPE&apos;</span>] = <span class="string">&apos;redis&apos;</span></div><div class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> Redis</div><div class="line">app.config[<span class="string">&apos;SESSION_REDIS&apos;</span>] = Redis(host=<span class="string">&apos;192.168.0.94&apos;</span>,port=<span class="string">&apos;6379&apos;</span>)</div><div class="line">Session(app)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/login&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    session[<span class="string">&apos;username&apos;</span>] = <span class="string">&apos;alex&apos;</span></div><div class="line">    <span class="keyword">return</span> redirect(<span class="string">&apos;/index&apos;</span>)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/index&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    name = session[<span class="string">&apos;username&apos;</span>]</div><div class="line">    <span class="keyword">return</span> name</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask_session <span class="keyword">import</span> RedisSessionInterface</div><div class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> Redis</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">conn = Redis(host=<span class="string">&apos;192.168.0.94&apos;</span>,port=<span class="string">&apos;6379&apos;</span>)</div><div class="line">app.session_interface = RedisSessionInterface(conn,key_prefix=<span class="string">&apos;xx&apos;</span>)</div></pre></td></tr></table></figure>
+<h1 id="MetaClass"><a href="#MetaClass" class="headerlink" title="MetaClass"></a>MetaClass</h1><p>&#x7528;&#x6765;&#x6267;&#x884C;&#x5F53;&#x524D;&#x7C7B;&#x7531;&#x8C01;&#x6765;&#x521B;&#x5EFA;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;type</p>
+<ul>
+<li>class Foo(metaclass=type) &#x7531;type&#x521B;&#x5EFA;&#x7C7B;</li>
+<li>class Foo(type) &#x7EE7;&#x627F;type</li>
+</ul>
+<h2 id="&#x4F7F;&#x7528;"><a href="#&#x4F7F;&#x7528;" class="headerlink" title="&#x4F7F;&#x7528;"></a>&#x4F7F;&#x7528;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(metaclass=type)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo1</span><span class="params">(object)</span>:</span></div><div class="line">    __metaclass__ = type</div><div class="line">    </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span><span class="params">(Foo)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<h2 id="&#x793A;&#x4F8B;1"><a href="#&#x793A;&#x4F8B;1" class="headerlink" title="&#x793A;&#x4F8B;1"></a>&#x793A;&#x4F8B;1</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyType</span><span class="params">(type)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,*args,**kwargs)</span>:</span></div><div class="line">        print(<span class="string">&quot;init&quot;</span>)</div><div class="line">        super(MyType,self).__init__(*args,**kwargs)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        print(<span class="string">&quot;call&quot;</span>)</div><div class="line">        <span class="comment"># call&#x672C;&#x8D28;&#xFF1A;&#x8C03;&#x7528;&#x7C7B;&#x7684;__new__&#x653E;&#x5927;&#xFF0C;&#x518D;&#x8C03;&#x7528;__init__&#x65B9;&#x6CD5;</span></div><div class="line">        <span class="keyword">return</span> super(MyType,self).__call__(*args,**kwargs)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(metaclass=MyType)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span><span class="params">(Foo)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line">obj = Bar()</div></pre></td></tr></table></figure>
+<h2 id="&#x793A;&#x4F8B;2"><a href="#&#x793A;&#x4F8B;2" class="headerlink" title="&#x793A;&#x4F8B;2"></a>&#x793A;&#x4F8B;2</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyType</span><span class="params">(type)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        super(MyType, self).__init__(*args, **kwargs)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(cls, *args, **kwargs)</span>:</span></div><div class="line">        v = dir(cls)</div><div class="line">        obj = super(MyType, cls).__call__(*args, **kwargs)</div><div class="line">        <span class="keyword">return</span> obj</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(MyType<span class="params">(<span class="string">&apos;Base&apos;</span>, <span class="params">(object,)</span>, {})</span>)</span>:</span></div><div class="line">    user = <span class="string">&apos;xxxxxx&apos;</span></div><div class="line">    age = <span class="number">18</span></div><div class="line"></div><div class="line"></div><div class="line">obj = Foo()</div></pre></td></tr></table></figure>
+<h2 id="&#x793A;&#x4F8B;3"><a href="#&#x793A;&#x4F8B;3" class="headerlink" title="&#x793A;&#x4F8B;3"></a>&#x793A;&#x4F8B;3</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyType</span><span class="params">(type)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        super(MyType, self).__init__(*args, **kwargs)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(cls, *args, **kwargs)</span>:</span></div><div class="line">        v = dir(cls)</div><div class="line">        obj = super(MyType, cls).__call__(*args, **kwargs)</div><div class="line">        <span class="keyword">return</span> obj</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">with_metaclass</span><span class="params">(MyType,base)</span>:</span></div><div class="line">    <span class="keyword">return</span> MyType(<span class="string">&apos;Base&apos;</span>, (base,), {})</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(with_metaclass<span class="params">(MyType,object)</span>)</span>:</span></div><div class="line">    user = <span class="string">&apos;xxxxxx&apos;</span></div><div class="line">    age = <span class="number">18</span></div><div class="line"></div><div class="line"></div><div class="line">obj = Foo()</div></pre></td></tr></table></figure>
+<h2 id="&#x5B9E;&#x4F8B;&#x5316;&#x6D41;&#x7A0B;&#x5206;&#x6790;"><a href="#&#x5B9E;&#x4F8B;&#x5316;&#x6D41;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="&#x5B9E;&#x4F8B;&#x5316;&#x6D41;&#x7A0B;&#x5206;&#x6790;"></a>&#x5B9E;&#x4F8B;&#x5316;&#x6D41;&#x7A0B;&#x5206;&#x6790;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x6E90;&#x7801;&#x6D41;&#x7A0B;</span></div><div class="line">    <span class="number">1.</span> &#x6267;&#x884C;type&#x7684; __call__ &#x65B9;&#x6CD5;&#xFF0C;&#x8BFB;&#x53D6;&#x5B57;&#x6BB5;&#x5230;&#x9759;&#x6001;&#x5B57;&#x6BB5; cls._unbound_fields &#x4E2D;&#xFF1B; meta&#x7C7B;&#x8BFB;&#x53D6;&#x5230;cls._wtforms_meta&#x4E2D;</div><div class="line">    <span class="number">2.</span> &#x6267;&#x884C;&#x6784;&#x9020;&#x65B9;&#x6CD5;</div><div class="line">        </div><div class="line">        a. &#x5FAA;&#x73AF;cls._unbound_fields&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x5B57;&#x6BB5;&#x7684;bind&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x8FD4;&#x56DE;&#x503C;&#x6DFB;&#x52A0;&#x5230; self._fields[name] &#x4E2D;&#x3002;</div><div class="line">            &#x5373;&#xFF1A;</div><div class="line">                _fields = {</div><div class="line">                    name: wtforms.fields.core.StringField(),</div><div class="line">                }</div><div class="line">                </div><div class="line">            PS&#xFF1A;&#x7531;&#x4E8E;&#x5B57;&#x6BB5;&#x4E2D;&#x7684;__new__&#x65B9;&#x6CD5;&#xFF0C;&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#xFF1A;name = simple.StringField(label=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&apos;</span>)&#xFF0C;&#x521B;&#x5EFA;&#x7684;&#x662F;UnboundField(cls, *args, **kwargs)&#xFF0C;&#x5F53;&#x6267;&#x884C;&#x5B8C;bind&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x53D8;&#x6210;&#x6267;&#x884C; wtforms.fields.core.StringField()</div><div class="line">        </div><div class="line">        b. &#x5FAA;&#x73AF;_fields&#xFF0C;&#x4E3A;&#x5BF9;&#x8C61;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;</div><div class="line">            <span class="keyword">for</span> name, field <span class="keyword">in</span> iteritems(self._fields):</div><div class="line">                <span class="comment"># Set all the fields to attributes so that they obscure the class</span></div><div class="line">                <span class="comment"># attributes with the same names.</span></div><div class="line">                setattr(self, name, field)</div><div class="line">        c. &#x6267;&#x884C;process&#xFF0C;&#x4E3A;&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x503C;&#xFF1A;self.process(formdata, obj, data=data, **kwargs)</div><div class="line">            &#x4F18;&#x5148;&#x7EA7;&#xFF1A;obj,data,formdata;</div><div class="line">            </div><div class="line">            &#x518D;&#x5FAA;&#x73AF;&#x6267;&#x884C;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;process&#x65B9;&#x6CD5;&#xFF0C;&#x4E3A;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x503C;&#xFF1A;</div><div class="line">            <span class="keyword">for</span> name, field, <span class="keyword">in</span> iteritems(self._fields):</div><div class="line">                <span class="keyword">if</span> obj <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> hasattr(obj, name):</div><div class="line">                    field.process(formdata, getattr(obj, name))</div><div class="line">                <span class="keyword">elif</span> name <span class="keyword">in</span> kwargs:</div><div class="line">                    field.process(formdata, kwargs[name])</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    field.process(formdata)</div><div class="line">            </div><div class="line">            &#x6267;&#x884C;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;process&#x65B9;&#x6CD5;&#xFF0C;&#x4E3A;&#x5B57;&#x6BB5;&#x7684;data&#x548C;&#x5B57;&#x6BB5;&#x7684;raw_data&#x8D4B;&#x503C;</div><div class="line">            <span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(self, formdata, data=unset_value)</span>:</span></div><div class="line">                self.process_errors = []</div><div class="line">                <span class="keyword">if</span> data <span class="keyword">is</span> unset_value:</div><div class="line">                    <span class="keyword">try</span>:</div><div class="line">                        data = self.default()</div><div class="line">                    <span class="keyword">except</span> TypeError:</div><div class="line">                        data = self.default</div><div class="line">        </div><div class="line">                self.object_data = data</div><div class="line">        </div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    self.process_data(data)</div><div class="line">                <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</div><div class="line">                    self.process_errors.append(e.args[<span class="number">0</span>])</div><div class="line">        </div><div class="line">                <span class="keyword">if</span> formdata:</div><div class="line">                    <span class="keyword">try</span>:</div><div class="line">                        <span class="keyword">if</span> self.name <span class="keyword">in</span> formdata:</div><div class="line">                            self.raw_data = formdata.getlist(self.name)</div><div class="line">                        <span class="keyword">else</span>:</div><div class="line">                            self.raw_data = []</div><div class="line">                        self.process_formdata(self.raw_data)</div><div class="line">                    <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</div><div class="line">                        self.process_errors.append(e.args[<span class="number">0</span>])</div><div class="line">        </div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    <span class="keyword">for</span> filter <span class="keyword">in</span> self.filters:</div><div class="line">                        self.data = filter(self.data)</div><div class="line">                <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</div><div class="line">                    self.process_errors.append(e.args[<span class="number">0</span>])</div><div class="line">                </div><div class="line">        d. &#x9875;&#x9762;&#x4E0A;&#x6267;&#x884C;print(form.name) &#x65F6;&#xFF0C;&#x6253;&#x5370;&#x6807;&#x7B7E;</div><div class="line">            </div><div class="line">            &#x56E0;&#x4E3A;&#x6267;&#x884C;&#x4E86;&#xFF1A;</div><div class="line">                &#x5B57;&#x6BB5;&#x7684; __str__ &#x65B9;&#x6CD5;</div><div class="line">                &#x5B57;&#x7B26;&#x7684; __call__ &#x65B9;&#x6CD5;</div><div class="line">                self.meta.render_field(self, kwargs)</div><div class="line">                    <span class="function"><span class="keyword">def</span> <span class="title">render_field</span><span class="params">(self, field, render_kw)</span>:</span></div><div class="line">                        other_kw = getattr(field, <span class="string">&apos;render_kw&apos;</span>, <span class="keyword">None</span>)</div><div class="line">                        <span class="keyword">if</span> other_kw <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                            render_kw = dict(other_kw, **render_kw)</div><div class="line">                        <span class="keyword">return</span> field.widget(field, **render_kw)</div><div class="line">                &#x6267;&#x884C;&#x5B57;&#x6BB5;&#x7684;&#x63D2;&#x4EF6;&#x5BF9;&#x8C61;&#x7684; __call__ &#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;&#x6807;&#x7B7E;&#x5B57;&#x7B26;&#x4E32;</div></pre></td></tr></table></figure>
+<h2 id="&#x9A8C;&#x8BC1;&#x6D41;&#x7A0B;&#x5206;&#x6790;"><a href="#&#x9A8C;&#x8BC1;&#x6D41;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="&#x9A8C;&#x8BC1;&#x6D41;&#x7A0B;&#x5206;&#x6790;"></a>&#x9A8C;&#x8BC1;&#x6D41;&#x7A0B;&#x5206;&#x6790;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">a. &#x6267;&#x884C;form&#x7684;validate&#x65B9;&#x6CD5;&#xFF0C;&#x83B7;&#x53D6;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate</span><span class="params">(self)</span>:</span></div><div class="line">        extra = {}</div><div class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> self._fields:</div><div class="line">            inline = getattr(self.__class__, <span class="string">&apos;validate_%s&apos;</span> % name, <span class="keyword">None</span>)</div><div class="line">            <span class="keyword">if</span> inline <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                extra[name] = [inline]</div><div class="line"></div><div class="line">        <span class="keyword">return</span> super(Form, self).validate(extra)</div><div class="line">b. &#x5FAA;&#x73AF;&#x6BCF;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x6267;&#x884C;&#x5B57;&#x6BB5;&#x7684; validate &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x6821;&#x9A8C;(&#x53C2;&#x6570;&#x4F20;&#x9012;&#x4E86;&#x94A9;&#x5B50;&#x51FD;&#x6570;)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate</span><span class="params">(self, extra_validators=None)</span>:</span></div><div class="line">        self._errors = <span class="keyword">None</span></div><div class="line">        success = <span class="keyword">True</span></div><div class="line">        <span class="keyword">for</span> name, field <span class="keyword">in</span> iteritems(self._fields):</div><div class="line">            <span class="keyword">if</span> extra_validators <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> name <span class="keyword">in</span> extra_validators:</div><div class="line">                extra = extra_validators[name]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                extra = tuple()</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> field.validate(self, extra):</div><div class="line">                success = <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> success</div><div class="line">c. &#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x8FDB;&#x884C;&#x9A8C;&#x8BC1;&#x65F6;&#x5019;</div><div class="line">    &#x5B57;&#x6BB5;&#x7684;pre_validate &#x3010;&#x9884;&#x7559;&#x7684;&#x6269;&#x5C55;&#x3011;</div><div class="line">    &#x5B57;&#x6BB5;&#x7684;_run_validation_chain&#xFF0C;&#x5BF9;&#x6B63;&#x5219;&#x548C;&#x5B57;&#x6BB5;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x6821;&#x9A8C;</div><div class="line">    &#x5B57;&#x6BB5;&#x7684;post_validate&#x3010;&#x9884;&#x7559;&#x7684;&#x6269;&#x5C55;&#x3011;</div></pre></td></tr></table></figure>
+<h1 id="wtforms"><a href="#wtforms" class="headerlink" title="wtforms"></a>wtforms</h1><p>WTForms&#x662F;&#x4E00;&#x4E2A;&#x652F;&#x6301;&#x591A;&#x4E2A;web&#x6846;&#x67B6;&#x7684;form&#x7EC4;&#x4EF6;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x5BF9;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x9A8C;&#x8BC1;&#x3002;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install wtforms</div></pre></td></tr></table></figure>
+<h2 id="&#x7528;&#x6237;&#x767B;&#x5F55;&#x6CE8;&#x518C;&#x793A;&#x4F8B;"><a href="#&#x7528;&#x6237;&#x767B;&#x5F55;&#x6CE8;&#x518C;&#x793A;&#x4F8B;" class="headerlink" title="&#x7528;&#x6237;&#x767B;&#x5F55;&#x6CE8;&#x518C;&#x793A;&#x4F8B;"></a>&#x7528;&#x6237;&#x767B;&#x5F55;&#x6CE8;&#x518C;&#x793A;&#x4F8B;</h2><h3 id="&#x7528;&#x6237;&#x767B;&#x5F55;"><a href="#&#x7528;&#x6237;&#x767B;&#x5F55;" class="headerlink" title="&#x7528;&#x6237;&#x767B;&#x5F55;"></a>&#x7528;&#x6237;&#x767B;&#x5F55;</h3><p>&#x5F53;&#x7528;&#x6237;&#x767B;&#x5F55;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x5BF9;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;&#x8FDB;&#x884C;&#x591A;&#x79CD;&#x683C;&#x5F0F;&#x6821;&#x9A8C;&#x3002;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x7528;&#x6237;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&#xFF1B;&#x7528;&#x6237;&#x957F;&#x5EA6;&#x5FC5;&#x987B;&#x5927;&#x4E8E;6&#xFF1B;</li>
+<li>&#x5BC6;&#x7801;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&#xFF1B;&#x5BC6;&#x7801;&#x957F;&#x5EA6;&#x5FC5;&#x987B;&#x5927;&#x4E8E;12&#xFF1B;&#x5BC6;&#x7801;&#x5FC5;&#x987B;&#x5305;&#x542B; &#x5B57;&#x6BCD;&#x3001;&#x6570;&#x5B57;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x7B49;&#xFF08;&#x81EA;&#x5B9A;&#x4E49;&#x6B63;&#x5219;&#xFF09;&#xFF1B;</li>
+</ul>
+<p>app.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request, redirect</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> Form</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> core</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> html5</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> simple</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> validators</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> widgets</div><div class="line"></div><div class="line">app = Flask(__name__, template_folder=<span class="string">&apos;templates&apos;</span>)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginForm</span><span class="params">(Form)</span>:</span></div><div class="line">    name = simple.StringField(</div><div class="line">        label=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired(message=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&apos;</span>),</div><div class="line">            validators.Length(min=<span class="number">6</span>, max=<span class="number">18</span>, message=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&#x957F;&#x5EA6;&#x5FC5;&#x987B;&#x5927;&#x4E8E;%(min)d&#x4E14;&#x5C0F;&#x4E8E;%(max)d&apos;</span>)</div><div class="line">        ],</div><div class="line">        widget=widgets.TextInput(),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>}</div><div class="line"></div><div class="line">    )</div><div class="line">    pwd = simple.PasswordField(</div><div class="line">        label=<span class="string">&apos;&#x5BC6;&#x7801;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired(message=<span class="string">&apos;&#x5BC6;&#x7801;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&apos;</span>),</div><div class="line">            validators.Length(min=<span class="number">8</span>, message=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&#x957F;&#x5EA6;&#x5FC5;&#x987B;&#x5927;&#x4E8E;%(min)d&apos;</span>),</div><div class="line">            validators.Regexp(regex=<span class="string">&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&amp;])[A-Za-z\d$@$!%*?&amp;]{8,}&quot;</span>,</div><div class="line">                              message=<span class="string">&apos;&#x5BC6;&#x7801;&#x81F3;&#x5C11;8&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x81F3;&#x5C11;1&#x4E2A;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#xFF0C;1&#x4E2A;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#xFF0C;1&#x4E2A;&#x6570;&#x5B57;&#x548C;1&#x4E2A;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&apos;</span>)</div><div class="line"></div><div class="line">        ],</div><div class="line">        widget=widgets.PasswordInput(),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>}</div><div class="line">    )</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/login&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&apos;GET&apos;</span>:</div><div class="line">        form = LoginForm()</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">&apos;login.html&apos;</span>, form=form)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        form = LoginForm(formdata=request.form)</div><div class="line">        <span class="keyword">if</span> form.validate():</div><div class="line">            print(<span class="string">&apos;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x901A;&#x8FC7;&#x683C;&#x5F0F;&#x9A8C;&#x8BC1;&#xFF0C;&#x63D0;&#x4EA4;&#x7684;&#x503C;&#x4E3A;&#xFF1A;&apos;</span>, form.data)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            print(form.errors)</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">&apos;login.html&apos;</span>, form=form)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<p>login.html</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Title&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;&#x767B;&#x5F55;&lt;/h1&gt;</div><div class="line">&lt;form method=&quot;post&quot;&gt;</div><div class="line">    &lt;!--&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;--&gt;</div><div class="line">    &lt;p&gt;{{form.name.label}} {{form.name}} {{form.name.errors[0] }}&lt;/p&gt;</div><div class="line"></div><div class="line">    &lt;!--&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;--&gt;</div><div class="line">    &lt;p&gt;{{form.pwd.label}} {{form.pwd}} {{form.pwd.errors[0] }}&lt;/p&gt;</div><div class="line">    &lt;input type=&quot;submit&quot; value=&quot;&#x63D0;&#x4EA4;&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h3 id="&#x7528;&#x6237;&#x6CE8;&#x518C;"><a href="#&#x7528;&#x6237;&#x6CE8;&#x518C;" class="headerlink" title="&#x7528;&#x6237;&#x6CE8;&#x518C;"></a>&#x7528;&#x6237;&#x6CE8;&#x518C;</h3><p>&#x6CE8;&#x518C;&#x9875;&#x9762;&#x9700;&#x8981;&#x8BA9;&#x7528;&#x6237;&#x8F93;&#x5165;&#xFF1A;&#x7528;&#x6237;&#x540D;&#x3001;&#x5BC6;&#x7801;&#x3001;&#x5BC6;&#x7801;&#x91CD;&#x590D;&#x3001;&#x6027;&#x522B;&#x3001;&#x7231;&#x597D;&#x7B49;&#x3002;</p>
+<p>app.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request, redirect</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> Form</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> core</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> html5</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> simple</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> validators</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> widgets</div><div class="line"></div><div class="line">app = Flask(__name__, template_folder=<span class="string">&apos;templates&apos;</span>)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegisterForm</span><span class="params">(Form)</span>:</span></div><div class="line">    name = simple.StringField(</div><div class="line">        label=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired()</div><div class="line">        ],</div><div class="line">        widget=widgets.TextInput(),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>},</div><div class="line">        default=<span class="string">&apos;alex&apos;</span></div><div class="line">    )</div><div class="line"></div><div class="line">    pwd = simple.PasswordField(</div><div class="line">        label=<span class="string">&apos;&#x5BC6;&#x7801;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired(message=<span class="string">&apos;&#x5BC6;&#x7801;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&apos;</span>)</div><div class="line">        ],</div><div class="line">        widget=widgets.PasswordInput(),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>}</div><div class="line">    )</div><div class="line"></div><div class="line">    pwd_confirm = simple.PasswordField(</div><div class="line">        label=<span class="string">&apos;&#x91CD;&#x590D;&#x5BC6;&#x7801;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired(message=<span class="string">&apos;&#x91CD;&#x590D;&#x5BC6;&#x7801;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&apos;</span>),</div><div class="line">            validators.EqualTo(<span class="string">&apos;pwd&apos;</span>, message=<span class="string">&quot;&#x4E24;&#x6B21;&#x5BC6;&#x7801;&#x8F93;&#x5165;&#x4E0D;&#x4E00;&#x81F4;&quot;</span>)</div><div class="line">        ],</div><div class="line">        widget=widgets.PasswordInput(),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>}</div><div class="line">    )</div><div class="line"></div><div class="line">    email = html5.EmailField(</div><div class="line">        label=<span class="string">&apos;&#x90AE;&#x7BB1;&apos;</span>,</div><div class="line">        validators=[</div><div class="line">            validators.DataRequired(message=<span class="string">&apos;&#x90AE;&#x7BB1;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;.&apos;</span>),</div><div class="line">            validators.Email(message=<span class="string">&apos;&#x90AE;&#x7BB1;&#x683C;&#x5F0F;&#x9519;&#x8BEF;&apos;</span>)</div><div class="line">        ],</div><div class="line">        widget=widgets.TextInput(input_type=<span class="string">&apos;email&apos;</span>),</div><div class="line">        render_kw={<span class="string">&apos;class&apos;</span>: <span class="string">&apos;form-control&apos;</span>}</div><div class="line">    )</div><div class="line"></div><div class="line">    gender = core.RadioField(</div><div class="line">        label=<span class="string">&apos;&#x6027;&#x522B;&apos;</span>,</div><div class="line">        choices=(</div><div class="line">            (<span class="number">1</span>, <span class="string">&apos;&#x7537;&apos;</span>),</div><div class="line">            (<span class="number">2</span>, <span class="string">&apos;&#x5973;&apos;</span>),</div><div class="line">        ),</div><div class="line">        coerce=int</div><div class="line">    )</div><div class="line">    city = core.SelectField(</div><div class="line">        label=<span class="string">&apos;&#x57CE;&#x5E02;&apos;</span>,</div><div class="line">        choices=(</div><div class="line">            (<span class="string">&apos;bj&apos;</span>, <span class="string">&apos;&#x5317;&#x4EAC;&apos;</span>),</div><div class="line">            (<span class="string">&apos;sh&apos;</span>, <span class="string">&apos;&#x4E0A;&#x6D77;&apos;</span>),</div><div class="line">        )</div><div class="line">    )</div><div class="line"></div><div class="line">    hobby = core.SelectMultipleField(</div><div class="line">        label=<span class="string">&apos;&#x7231;&#x597D;&apos;</span>,</div><div class="line">        choices=(</div><div class="line">            (<span class="number">1</span>, <span class="string">&apos;&#x7BEE;&#x7403;&apos;</span>),</div><div class="line">            (<span class="number">2</span>, <span class="string">&apos;&#x8DB3;&#x7403;&apos;</span>),</div><div class="line">        ),</div><div class="line">        coerce=int</div><div class="line">    )</div><div class="line"></div><div class="line">    favor = core.SelectMultipleField(</div><div class="line">        label=<span class="string">&apos;&#x559C;&#x597D;&apos;</span>,</div><div class="line">        choices=(</div><div class="line">            (<span class="number">1</span>, <span class="string">&apos;&#x7BEE;&#x7403;&apos;</span>),</div><div class="line">            (<span class="number">2</span>, <span class="string">&apos;&#x8DB3;&#x7403;&apos;</span>),</div><div class="line">        ),</div><div class="line">        widget=widgets.ListWidget(prefix_label=<span class="keyword">False</span>),</div><div class="line">        option_widget=widgets.CheckboxInput(),</div><div class="line">        coerce=int,</div><div class="line">        default=[<span class="number">1</span>, <span class="number">2</span>]</div><div class="line">    )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        super(RegisterForm, self).__init__(*args, **kwargs)</div><div class="line">        self.favor.choices = ((<span class="number">1</span>, <span class="string">&apos;&#x7BEE;&#x7403;&apos;</span>), (<span class="number">2</span>, <span class="string">&apos;&#x8DB3;&#x7403;&apos;</span>), (<span class="number">3</span>, <span class="string">&apos;&#x7FBD;&#x6BDB;&#x7403;&apos;</span>))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate_pwd_confirm</span><span class="params">(self, field)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line">        &#x81EA;&#x5B9A;&#x4E49;pwd_confirm&#x5B57;&#x6BB5;&#x89C4;&#x5219;&#xFF0C;&#x4F8B;&#xFF1A;&#x4E0E;pwd&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x4E00;&#x81F4;</div><div class="line">        :param field: </div><div class="line">        :return: </div><div class="line">        &quot;&quot;&quot;</div><div class="line">        <span class="comment"># &#x6700;&#x5F00;&#x59CB;&#x521D;&#x59CB;&#x5316;&#x65F6;&#xFF0C;self.data&#x4E2D;&#x5DF2;&#x7ECF;&#x6709;&#x6240;&#x6709;&#x7684;&#x503C;</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> field.data != self.data[<span class="string">&apos;pwd&apos;</span>]:</div><div class="line">            <span class="comment"># raise validators.ValidationError(&quot;&#x5BC6;&#x7801;&#x4E0D;&#x4E00;&#x81F4;&quot;) # &#x7EE7;&#x7EED;&#x540E;&#x7EED;&#x9A8C;&#x8BC1;</span></div><div class="line">            <span class="keyword">raise</span> validators.StopValidation(<span class="string">&quot;&#x5BC6;&#x7801;&#x4E0D;&#x4E00;&#x81F4;&quot;</span>)  <span class="comment"># &#x4E0D;&#x518D;&#x7EE7;&#x7EED;&#x540E;&#x7EED;&#x9A8C;&#x8BC1;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/register&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&apos;GET&apos;</span>:</div><div class="line">        form = RegisterForm(data={<span class="string">&apos;gender&apos;</span>: <span class="number">1</span>})</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">&apos;register.html&apos;</span>, form=form)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        form = RegisterForm(formdata=request.form)</div><div class="line">        <span class="keyword">if</span> form.validate():</div><div class="line">            print(<span class="string">&apos;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x901A;&#x8FC7;&#x683C;&#x5F0F;&#x9A8C;&#x8BC1;&#xFF0C;&#x63D0;&#x4EA4;&#x7684;&#x503C;&#x4E3A;&#xFF1A;&apos;</span>, form.data)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            print(form.errors)</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">&apos;register.html&apos;</span>, form=form)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<p>register.html</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Title&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;&#x7528;&#x6237;&#x6CE8;&#x518C;&lt;/h1&gt;</div><div class="line">&lt;form method=&quot;post&quot; novalidate style=&quot;padding:0  50px&quot;&gt;</div><div class="line">    {% for item in form %}</div><div class="line">    &lt;p&gt;{{item.label}}: {{item}} {{item.errors[0] }}&lt;/p&gt;</div><div class="line">    {% endfor %}</div><div class="line">    &lt;input type=&quot;submit&quot; value=&quot;&#x63D0;&#x4EA4;&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="python-flask-extend/flask-wtforms-example.zip">&#x793A;&#x4F8B;</a></p>
+</blockquote>
+<h3 id="meta"><a href="#meta" class="headerlink" title="meta"></a>meta</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request, redirect, session</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> Form</div><div class="line"><span class="keyword">from</span> wtforms.csrf.core <span class="keyword">import</span> CSRF</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> core</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> html5</div><div class="line"><span class="keyword">from</span> wtforms.fields <span class="keyword">import</span> simple</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> validators</div><div class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> widgets</div><div class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</div><div class="line"></div><div class="line">app = Flask(__name__, template_folder=<span class="string">&apos;templates&apos;</span>)</div><div class="line">app.debug = <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCSRF</span><span class="params">(CSRF)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line">    Generate a CSRF token based on the user&apos;s IP. I am probably not very</div><div class="line">    secure, so don&apos;t use me.</div><div class="line">    &quot;&quot;&quot;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup_form</span><span class="params">(self, form)</span>:</span></div><div class="line">        self.csrf_context = form.meta.csrf_context()</div><div class="line">        self.csrf_secret = form.meta.csrf_secret</div><div class="line">        <span class="keyword">return</span> super(MyCSRF, self).setup_form(form)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generate_csrf_token</span><span class="params">(self, csrf_token)</span>:</span></div><div class="line">        gid = self.csrf_secret + self.csrf_context</div><div class="line">        token = md5(gid.encode(<span class="string">&apos;utf-8&apos;</span>)).hexdigest()</div><div class="line">        <span class="keyword">return</span> token</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate_csrf_token</span><span class="params">(self, form, field)</span>:</span></div><div class="line">        print(field.data, field.current_token)</div><div class="line">        <span class="keyword">if</span> field.data != field.current_token:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&apos;Invalid CSRF&apos;</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestForm</span><span class="params">(Form)</span>:</span></div><div class="line">    name = html5.EmailField(label=<span class="string">&apos;&#x7528;&#x6237;&#x540D;&apos;</span>)</div><div class="line">    pwd = simple.StringField(label=<span class="string">&apos;&#x5BC6;&#x7801;&apos;</span>)</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        <span class="comment"># -- CSRF</span></div><div class="line">        <span class="comment"># &#x662F;&#x5426;&#x81EA;&#x52A8;&#x751F;&#x6210;CSRF&#x6807;&#x7B7E;</span></div><div class="line">        csrf = <span class="keyword">True</span></div><div class="line">        <span class="comment"># &#x751F;&#x6210;CSRF&#x6807;&#x7B7E;name</span></div><div class="line">        csrf_field_name = <span class="string">&apos;csrf_token&apos;</span></div><div class="line"></div><div class="line">        <span class="comment"># &#x81EA;&#x52A8;&#x751F;&#x6210;&#x6807;&#x7B7E;&#x7684;&#x503C;&#xFF0C;&#x52A0;&#x5BC6;&#x7528;&#x7684;csrf_secret</span></div><div class="line">        csrf_secret = <span class="string">&apos;xxxxxx&apos;</span></div><div class="line">        <span class="comment"># &#x81EA;&#x52A8;&#x751F;&#x6210;&#x6807;&#x7B7E;&#x7684;&#x503C;&#xFF0C;&#x52A0;&#x5BC6;&#x7528;&#x7684;csrf_context</span></div><div class="line">        csrf_context = <span class="keyword">lambda</span> x: request.url</div><div class="line">        <span class="comment"># &#x751F;&#x6210;&#x548C;&#x6BD4;&#x8F83;csrf&#x6807;&#x7B7E;</span></div><div class="line">        csrf_class = MyCSRF</div><div class="line"></div><div class="line">        <span class="comment"># -- i18n</span></div><div class="line">        <span class="comment"># &#x662F;&#x5426;&#x652F;&#x6301;&#x672C;&#x5730;&#x5316;</span></div><div class="line">        <span class="comment"># locales = False</span></div><div class="line">        locales = (<span class="string">&apos;zh&apos;</span>, <span class="string">&apos;en&apos;</span>)</div><div class="line">        <span class="comment"># &#x662F;&#x5426;&#x5BF9;&#x672C;&#x5730;&#x5316;&#x8FDB;&#x884C;&#x7F13;&#x5B58;</span></div><div class="line">        cache_translations = <span class="keyword">True</span></div><div class="line">        <span class="comment"># &#x4FDD;&#x5B58;&#x672C;&#x5730;&#x5316;&#x7F13;&#x5B58;&#x4FE1;&#x606F;&#x7684;&#x5B57;&#x6BB5;</span></div><div class="line">        translations_cache = {}</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/index/&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">&apos;GET&apos;</span>:</div><div class="line">        form = TestForm()</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        form = TestForm(formdata=request.form)</div><div class="line">        <span class="keyword">if</span> form.validate():</div><div class="line">            print(form)</div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">&apos;index.html&apos;</span>, form=form)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    app.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x6E90;&#x7801;&#x6D41;&#x7A0B;"><a href="#&#x6E90;&#x7801;&#x6D41;&#x7A0B;" class="headerlink" title="&#x6E90;&#x7801;&#x6D41;&#x7A0B;"></a>&#x6E90;&#x7801;&#x6D41;&#x7A0B;</h2><ul>
+<li>&#x89E3;&#x91CA;&#xFF1A;metaclass</li>
+<li>&#x5B9E;&#x4F8B; form = LoginForm()</li>
+<li>&#x9A8C;&#x8BC1; form.validate()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseForm</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewBase</span><span class="params">(BaseForm,metaclass=FormMeta)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Form</span><span class="params">(NewBase)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginForm</span><span class="params">(Form)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<h1 id="Flask-SQLAchemy"><a href="#Flask-SQLAchemy" class="headerlink" title="Flask-SQLAchemy"></a>Flask-SQLAchemy</h1><ul>
+<li>Flask&#x548C;SQLAchemy&#x7684;&#x7BA1;&#x7406;&#x8005;</li>
+<li>&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x7684;&#x7BA1;&#x7406;</li>
+<li>db = SQLAlchemy()<ul>
+<li>&#x5305;&#x542B;&#x914D;&#x7F6E;</li>
+<li>&#x5305;&#x542B;ORM&#x57FA;&#x7C7B;</li>
+<li>&#x5305;&#x542B;create_all</li>
+<li>engine</li>
+<li>&#x521B;&#x5EFA;&#x8FDE;&#x63A5;</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>&#x4EE3;&#x7801;&#x5F85;&#x7EED;</p>
+</blockquote>
+<h1 id="Flask-Script"><a href="#Flask-Script" class="headerlink" title="Flask-Script"></a>Flask-Script</h1><p>&#x7528;&#x4E8E;&#x5B9E;&#x73B0;django&#x7684;python manage.py runserver</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install flask-script</div></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;-1"><a href="#&#x4F7F;&#x7528;-1" class="headerlink" title="&#x4F7F;&#x7528;"></a>&#x4F7F;&#x7528;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,signals,session</div><div class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">manager = Manager(app)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;index&apos;</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    manager.run()</div></pre></td></tr></table></figure>
+<h2 id="&#x8FD0;&#x884C;"><a href="#&#x8FD0;&#x884C;" class="headerlink" title="&#x8FD0;&#x884C;"></a>&#x8FD0;&#x884C;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python manager.py runserver</div></pre></td></tr></table></figure>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x547D;&#x4EE4;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x547D;&#x4EE4;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x547D;&#x4EE4;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x547D;&#x4EE4;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,signals,session</div><div class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">manager = Manager(app)</div><div class="line"></div><div class="line"><span class="meta">@manager.command</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">custom</span><span class="params">(arg)</span>:</span></div><div class="line">    print(arg)</div><div class="line"></div><div class="line"><span class="meta">@manager.option(&apos;-n&apos;, &apos;--name&apos;, dest=&apos;name&apos;)</span></div><div class="line"><span class="meta">@manager.option(&apos;-u&apos;, &apos;--url&apos;, dest=&apos;url&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmd</span><span class="params">(name,url)</span>:</span></div><div class="line">    print(name,url)</div><div class="line"></div><div class="line"><span class="meta">@app.route(&apos;/&apos;)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">&apos;index&apos;</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">&apos;__main__&apos;</span>:</div><div class="line">    manager.run()</div></pre></td></tr></table></figure>
+<h1 id="Flask-Migrate"><a href="#Flask-Migrate" class="headerlink" title="Flask-Migrate"></a>Flask-Migrate</h1><p>&#x7528;&#x4E8E;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</div><div class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager</div><div class="line"><span class="keyword">from</span> flask_migrate <span class="keyword">import</span> Migrate,MigrateCommand</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line">manager = Manager(app)</div><div class="line">migrate = Migrate(app, db)</div><div class="line">manager.add_command(<span class="string">&apos;db&apos;</span>,MigrateCommand)</div></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;-2"><a href="#&#x4F7F;&#x7528;-2" class="headerlink" title="&#x4F7F;&#x7528;"></a>&#x4F7F;&#x7528;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python manager.py db init</div><div class="line">python manager.py db migrate</div><div class="line">python manager.py db upgrade</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/flask/" rel="tag"># flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/python-class/" rel="next" title="python类">
+                <i class="fa fa-chevron-left"></i> python类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/python-uwsgi/" rel="prev" title="uwsgi部署">
+                uwsgi部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Ni8xMzk5OA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="Casstiel" />
+          <p class="site-author-name" itemprop="name">Casstiel</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ooppwwqq0" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-Session"><span class="nav-number">2.</span> <span class="nav-text">Flask-Session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flask中session处理机制"><span class="nav-number">2.1.</span> <span class="nav-text">flask中session处理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方session"><span class="nav-number">2.2.</span> <span class="nav-text">第三方session</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MetaClass"><span class="nav-number">3.</span> <span class="nav-text">MetaClass</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例1"><span class="nav-number">3.2.</span> <span class="nav-text">示例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例2"><span class="nav-number">3.3.</span> <span class="nav-text">示例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例3"><span class="nav-number">3.4.</span> <span class="nav-text">示例3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化流程分析"><span class="nav-number">3.5.</span> <span class="nav-text">实例化流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证流程分析"><span class="nav-number">3.6.</span> <span class="nav-text">验证流程分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wtforms"><span class="nav-number">4.</span> <span class="nav-text">wtforms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户登录注册示例"><span class="nav-number">4.1.</span> <span class="nav-text">用户登录注册示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户登录"><span class="nav-number">4.1.1.</span> <span class="nav-text">用户登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户注册"><span class="nav-number">4.1.2.</span> <span class="nav-text">用户注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#meta"><span class="nav-number">4.1.3.</span> <span class="nav-text">meta</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码流程"><span class="nav-number">4.2.</span> <span class="nav-text">源码流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-SQLAchemy"><span class="nav-number">5.</span> <span class="nav-text">Flask-SQLAchemy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-Script"><span class="nav-number">6.</span> <span class="nav-text">Flask-Script</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-1"><span class="nav-number">6.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">6.2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义命令"><span class="nav-number">6.3.</span> <span class="nav-text">自定义命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-Migrate"><span class="nav-number">7.</span> <span class="nav-text">Flask-Migrate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-2"><span class="nav-number">7.1.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casstiel</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
